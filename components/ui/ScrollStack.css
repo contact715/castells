@@ -1,0 +1,27 @@
+
+.scroll-stack-wrapper {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.scroll-stack-card {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  transform-origin: center top;
+  will-change: transform, filter;
+  /* Default spacing between cards in flow */
+  margin-bottom: 4rem; 
+  /* Ensure it sits above background elements */
+  z-index: 10;
+}
+
+/* Spacer at the bottom to allow the last card to be scrolled away properly if needed */
+.scroll-stack-buffer {
+  height: 20vh;
+  width: 100%;
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Castells Agency | Dominate Your Market</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts: Playfair Display (Headings) & Satoshi (Body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet">
+
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Satoshi', 'sans-serif'],
+              display: ['Playfair Display', 'serif'],
+            },
+            colors: {
+              ivory: 'rgb(var(--color-ivory) / <alpha-value>)', 
+              surface: 'rgb(var(--color-surface) / <alpha-value>)',
+              'text-primary': 'rgb(var(--color-text-primary) / <alpha-value>)',
+              'text-secondary': 'rgb(var(--color-text-secondary) / <alpha-value>)',
+              coral: '#E08576',
+              'coral-dark': '#D67060',
+            },
+            backgroundImage: {
+              'coral-gradient': 'linear-gradient(90deg, #E08576 0%, #D67060 100%)',
+              'noise': "url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.65%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22 opacity=%220.05%22/%3E%3C/svg%3E')",
+            },
+            boxShadow: {
+              'soft': '0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04)',
+              'medium': '0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -1px rgba(0, 0, 0, 0.04)',
+              'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.04)',
+              'glow': '0 0 30px rgba(224, 133, 118, 0.3)',
+            },
+            borderRadius: {
+              'xl': '12px',
+              '2xl': '16px',
+              '3xl': '24px',
+            },
+            animation: {
+              'float': 'float 6s ease-in-out infinite',
+              'marquee': 'marquee 40s linear infinite',
+              'rippling': 'rippling var(--ripple-duration, 600ms) ease-out',
+              'cell-ripple': 'cell-ripple var(--duration, 200ms) ease-out none 1 var(--delay, 0ms)',
+              'spotlight': 'spotlight 2s ease .75s 1 forwards',
+            },
+            keyframes: {
+              float: {
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-10px)' },
+              },
+              marquee: {
+                '0%': { transform: 'translateX(0%)' },
+                '100%': { transform: 'translateX(-100%)' },
+              },
+              rippling: {
+                '0%': { opacity: '1' },
+                '100%': { transform: 'scale(2)', opacity: '0' },
+              },
+              'cell-ripple': {
+                '0%': { opacity: '0.4' },
+                '50%': { opacity: '0.8' },
+                '100%': { opacity: '0.4' },
+              },
+              spotlight: {
+                "0%": {
+                  opacity: 0,
+                  transform: "translate(-72%, -62%) scale(0.5)",
+                },
+                "100%": {
+                  opacity: 1,
+                  transform: "translate(-50%,-40%) scale(1)",
+                },
+              }
+            }
+          },
+        },
+      }
+    </script>
+    <style>
+      :root {
+        /* Brand Guidelines v2.0 - Ivory Theme */
+        --color-ivory: 235 236 231; /* #EBECE7 */
+        --color-surface: 255 255 255; /* #ffffff */
+        --color-text-primary: 0 0 0; /* #000000 */
+        --color-text-secondary: 85 85 85; /* #555555 */
+      }
+
+      .dark {
+        /* Brand Guidelines v2.0 - Dark Theme */
+        --color-ivory: 25 25 25; /* #191919 */
+        --color-surface: 42 42 42; /* #2a2a2a */
+        --color-text-primary: 255 255 255; /* #ffffff */
+        --color-text-secondary: 204 204 204; /* #cccccc */
+      }
+
+      body {
+        background-color: rgb(var(--color-ivory));
+        color: rgb(var(--color-text-primary));
+        overflow-x: hidden;
+        width: 100%;
+        min-height: 100%;
+        transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
+        font-feature-settings: "ss01", "ss03";
+      }
+
+      /* View Transition Animation */
+      ::view-transition-old(root),
+      ::view-transition-new(root) {
+        animation: none;
+        mix-blend-mode: normal;
+      }
+
+      /* Noise Overlay */
+      .bg-noise {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: 50;
+        opacity: 0.3;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
+      }
+      
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgb(var(--color-ivory)); 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #E08576; 
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #D67060; 
+      }
+
+      /* Lenis Recommended CSS */
+      html.lenis, html.lenis body {
+        height: auto;
+      }
+      .lenis.lenis-smooth {
+        scroll-behavior: auto !important;
+      }
+      .lenis.lenis-smooth [data-lenis-prevent] {
+        overscroll-behavior: contain;
+      }
+      .lenis.lenis-stopped {
+        overflow: hidden;
+      }
+      .lenis.lenis-scrolling iframe {
+        pointer-events: none;
+      }
+
+      /* Card Swap Styles */
+      .card-swap-container {
+        position: relative;
+        perspective: 1000px;
+        overflow: visible;
+      }
+
+      .swap-card {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform-style: preserve-3d;
+        will-change: transform;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.30.0",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.554.0",
+    "gsap": "https://aistudiocdn.com/gsap@3.12.5",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "framer-motion": "https://aistudiocdn.com/framer-motion@^12.0.0",
+    "clsx": "https://aistudiocdn.com/clsx@^2.1.1",
+    "tailwind-merge": "https://aistudiocdn.com/tailwind-merge@^3.4.0",
+    "lenis": "https://unpkg.com/lenis@1.1.18/dist/lenis.mjs",
+    "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+    "gsap/": "https://aistudiocdn.com/gsap@^3.13.0/",
+    "ogl": "https://esm.sh/ogl@1.0.11"
+  }
+}
+</script>
+</head>
+  <body>
+    <div class="bg-noise"></div>
+    <div id="root"></div>
+  </body>
+</html>
