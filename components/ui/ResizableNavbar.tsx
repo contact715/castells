@@ -53,22 +53,19 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   return (
     <motion.div
       layout
-      initial={{ width: "calc(100% - 3rem)", maxWidth: "1400px", y: 24, borderRadius: "12px" }}
+      initial={{ width: "95%", maxWidth: "1400px", y: 24, borderRadius: "12px" }}
       animate={{
-        width: visible ? "auto" : "calc(100% - 3rem)",
-        maxWidth: visible ? "1200px" : "1400px",
+        width: "95%",
+        maxWidth: visible ? "1050px" : "1400px",
         y: visible ? 12 : 24,
         borderRadius: "12px",
-        paddingRight: visible ? "8px" : "24px",
-        paddingLeft: visible ? "8px" : "24px",
+        paddingRight: visible ? "12px" : "24px",
+        paddingLeft: visible ? "12px" : "24px",
       }}
       transition={{
         type: "spring",
         stiffness: 200,
         damping: 25,
-      }}
-      style={{
-         minWidth: visible ? "850px" : "auto",
       }}
       className={cn(
         "pointer-events-auto hidden lg:flex relative items-center justify-between bg-ivory/90 dark:bg-black/90 backdrop-blur-md border border-black/5 dark:border-white/10 shadow-sm py-2",
@@ -157,9 +154,9 @@ export const MobileNavMenu = ({
             className
           )}
         >
-           <div className="py-4 flex flex-col gap-4">
-              {children}
-           </div>
+          <div className="py-4 flex flex-col gap-4">
+            {children}
+          </div>
         </motion.div>
       )}
     </AnimatePresence>

@@ -1,22 +1,32 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import NavBar from './components/NavBar';
-import Hero from './components/Hero';
-import Services from './components/Services';
-import Work from './components/Work';
 import Footer from './components/Footer';
-import WhyChoose from './components/WhyChoose';
-import Industries from './components/Industries';
-import Team from './components/Team';
-import CTA from './components/CTA';
-import Testimonials from './components/Testimonials';
-import Process from './components/Process';
-import FAQ from './components/FAQ';
-import Blog from './components/Blog';
-import AILab from './components/AILab';
-import CaseStudyDetail from './components/CaseStudyDetail';
-import AboutPage from './components/AboutPage';
-import CareersPage from './components/CareersPage';
+
+// Lazy load components for performance
+const Hero = React.lazy(() => import('./components/Hero'));
+const Services = React.lazy(() => import('./components/Services'));
+const Work = React.lazy(() => import('./components/Work'));
+const WhyChoose = React.lazy(() => import('./components/WhyChoose'));
+const Industries = React.lazy(() => import('./components/Industries'));
+const TrustedBy = React.lazy(() => import('./components/TrustedBy'));
+const Team = React.lazy(() => import('./components/Team'));
+const CTA = React.lazy(() => import('./components/CTA'));
+const Testimonials = React.lazy(() => import('./components/Testimonials'));
+const Process = React.lazy(() => import('./components/Process'));
+const FAQ = React.lazy(() => import('./components/FAQ'));
+const Blog = React.lazy(() => import('./components/Blog'));
+const AILab = React.lazy(() => import('./components/AILab'));
+const CaseStudyDetail = React.lazy(() => import('./components/CaseStudyDetail'));
+const AboutPage = React.lazy(() => import('./components/AboutPage'));
+const CareersPage = React.lazy(() => import('./components/CareersPage'));
+
+// Loading fallback
+const PageLoader = () => (
+  <div className="min-h-screen flex items-center justify-center bg-ivory dark:bg-black">
+    <div className="w-8 h-8 border-2 border-coral border-t-transparent rounded-full animate-spin"></div>
+  </div>
+);
 
 export type PageView = 'home' | 'case-study' | 'about' | 'careers' | 'blog' | 'contact';
 
@@ -38,41 +48,44 @@ function App() {
     <div className="bg-ivory min-h-screen text-text-primary selection:bg-coral selection:text-white font-sans relative">
       <div className="relative z-10">
         <NavBar onNavigate={navigateTo} />
-        
+
         <main>
-          {currentPage === 'home' && (
-            <>
-              <Hero />
-              <Work onNavigate={navigateTo} />
-              <WhyChoose />
-              <Process />
-              <Industries />
-              <Services />
-              <AILab />
-              <Testimonials />
-              <Team />
-              <FAQ />
-              <Blog />
-              <CTA />
-            </>
-          )}
+          <Suspense fallback={<PageLoader />}>
+            {currentPage === 'home' && (
+              <>
+                <Hero />
+                <TrustedBy />
+                <Work onNavigate={navigateTo} />
+                <Industries />
+                <WhyChoose />
+                <Services />
+                <Process />
+                <AILab />
+                <Testimonials />
+                <Team />
+                <FAQ />
+                <Blog />
+                <CTA />
+              </>
+            )}
 
-          {currentPage === 'case-study' && (
-            <CaseStudyDetail 
-              onBack={() => navigateTo('home')} 
-              project={selectedProject}
-            />
-          )}
+            {currentPage === 'case-study' && (
+              <CaseStudyDetail
+                onBack={() => navigateTo('home')}
+                project={selectedProject}
+              />
+            )}
 
-          {currentPage === 'about' && (
-            <AboutPage onBack={() => navigateTo('home')} />
-          )}
+            {currentPage === 'about' && (
+              <AboutPage onBack={() => navigateTo('home')} />
+            )}
 
-          {currentPage === 'careers' && (
-            <CareersPage onBack={() => navigateTo('home')} />
-          )}
+            {currentPage === 'careers' && (
+              <CareersPage onBack={() => navigateTo('home')} />
+            )}
+          </Suspense>
         </main>
-        
+
         <Footer onNavigate={navigateTo} />
       </div>
     </div>

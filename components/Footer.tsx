@@ -72,141 +72,244 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           </div>
         </div>
 
-        {/* Middle Section: Links Grid - Hierarchical 5 Columns */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 xl:gap-12 mb-24 items-start">
+        {/* MEGA FOOTER LAYOUT */}
+        <div className="flex flex-col gap-24 mb-24">
 
-          {/* Column 1: Services (Design & Dev) */}
-          <div className="flex flex-col gap-8">
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Branding & Design</h3>
-              <div className="flex flex-col gap-2 text-white/70 text-sm">
-                <a href="#" className="hover:text-white transition-colors">Brand Identity</a>
-                <a href="#" className="hover:text-white transition-colors">Brand Guidelines</a>
-                <a href="#" className="hover:text-white transition-colors">Logobook</a>
-                <a href="#" className="hover:text-white transition-colors">UI/UX Design</a>
-                <a href="#" className="hover:text-white transition-colors">Print & Packaging</a>
+          {/* ROW 1: SERVICES DOMAIN */}
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-white mb-12 border-b border-white/10 pb-4">Services Domain</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-start">
+
+              {/* Column 1: Branding & Design */}
+              <div className="flex flex-col gap-8">
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-coral mb-4">Identity</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">Logo Design</a>
+                    <a href="#" className="hover:text-white transition-colors">Brand Guidelines</a>
+                    <a href="#" className="hover:text-white transition-colors">Visual Systems</a>
+                    <a href="#" className="hover:text-white transition-colors">Rebranding</a>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-coral mb-4">Experience</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">UI/UX Design</a>
+                    <a href="#" className="hover:text-white transition-colors">Prototyping</a>
+                    <a href="#" className="hover:text-white transition-colors">Print Collateral</a>
+                    <a href="#" className="hover:text-white transition-colors">Packaging</a>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Development</h3>
-              <div className="flex flex-col gap-2 text-white/70 text-sm">
-                <a href="#" className="hover:text-white transition-colors">Web Development</a>
-                <a href="#" className="hover:text-white transition-colors">Mobile Apps</a>
-                <a href="#" className="hover:text-white transition-colors">E-commerce</a>
-                <a href="#" className="hover:text-white transition-colors">Web Applications</a>
-                <a href="#" className="hover:text-white transition-colors">Landing Pages</a>
+
+              {/* Column 2: Development */}
+              <div className="flex flex-col gap-8">
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-coral mb-4">Web</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">Custom Development</a>
+                    <a href="#" className="hover:text-white transition-colors">Landing Pages</a>
+                    <a href="#" className="hover:text-white transition-colors">CMS Integration</a>
+                    <a href="#" className="hover:text-white transition-colors">Webflow / Framer</a>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-coral mb-4">Product</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">Web Applications</a>
+                    <a href="#" className="hover:text-white transition-colors">Mobile Apps (iOS/Android)</a>
+                    <a href="#" className="hover:text-white transition-colors">SaaS Platforms</a>
+                    <a href="#" className="hover:text-white transition-colors">E-commerce (Shopify/Woo)</a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Column 3: Growth Marketing */}
+              <div className="flex flex-col gap-8">
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-coral mb-4">Paid Media</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">Google Ads (PPC)</a>
+                    <a href="#" className="hover:text-white transition-colors">Meta Ads (FB/IG)</a>
+                    <a href="#" className="hover:text-white transition-colors">YouTube Video Ads</a>
+                    <a href="#" className="hover:text-white transition-colors">TikTok Ads</a>
+                    <a href="#" className="hover:text-white transition-colors">LinkedIn B2B</a>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-coral mb-4">Organic</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">SEO Strategy</a>
+                    <a href="#" className="hover:text-white transition-colors">Content Marketing</a>
+                    <a href="#" className="hover:text-white transition-colors">Local Map Packs</a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Column 4: Automation & Data */}
+              <div className="flex flex-col gap-8">
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-coral mb-4">Systems</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">CRM Implementation</a>
+                    <a href="#" className="hover:text-white transition-colors">Workflow Automation</a>
+                    <a href="#" className="hover:text-white transition-colors">Zapier / Make Integrations</a>
+                    <a href="#" className="hover:text-white transition-colors">Chatbots & AI Agents</a>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-coral mb-4">Intelligence</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">Business Intelligence (BI)</a>
+                    <a href="#" className="hover:text-white transition-colors">Advanced Tracking (GTM)</a>
+                    <a href="#" className="hover:text-white transition-colors">Attribution Modeling</a>
+                    <a href="#" className="hover:text-white transition-colors">Reporting Dashboards</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Column 2: Services (Growth & Auto) */}
-          <div className="flex flex-col gap-8">
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Advertising & SEO</h3>
-              <div className="flex flex-col gap-2 text-white/70 text-sm">
-                <a href="#" className="hover:text-white transition-colors">Google Ads (PPC)</a>
-                <a href="#" className="hover:text-white transition-colors">SEO & Content</a>
-                <a href="#" className="hover:text-white transition-colors">Meta Ads</a>
-                <a href="#" className="hover:text-white transition-colors">YouTube Ads</a>
-                <a href="#" className="hover:text-white transition-colors">TikTok & Social</a>
+          {/* ROW 2: INDUSTRIES DOMAIN */}
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-white mb-12 border-b border-white/10 pb-4">Industries Domain</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-start">
+
+              {/* Column 1: Construction */}
+              <div className="flex flex-col gap-8">
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4">General</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">ADU & Additions</a>
+                    <a href="#" className="hover:text-white transition-colors">Custom Home Building</a>
+                    <a href="#" className="hover:text-white transition-colors">Concrete & Paving</a>
+                    <a href="#" className="hover:text-white transition-colors">Remodeling (Kitchen/Bath)</a>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4">Specialty</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">Roofing Services</a>
+                    <a href="#" className="hover:text-white transition-colors">Fencing & Gates</a>
+                    <a href="#" className="hover:text-white transition-colors">Flooring & Tile</a>
+                    <a href="#" className="hover:text-white transition-colors">Windows & Doors</a>
+                  </div>
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Automation</h3>
-              <div className="flex flex-col gap-2 text-white/70 text-sm">
-                <a href="#" className="hover:text-white transition-colors">CRM & Pipelines</a>
-                <a href="#" className="hover:text-white transition-colors">Business Intelligence</a>
-                <a href="#" className="hover:text-white transition-colors">Workflow Automation</a>
-                <a href="#" className="hover:text-white transition-colors">Advanced Tracking</a>
-                <a href="#" className="hover:text-white transition-colors">Field Ops</a>
+
+              {/* Column 2: Home Services */}
+              <div className="flex flex-col gap-8">
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4">Systems</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">HVAC & Air Quality</a>
+                    <a href="#" className="hover:text-white transition-colors">Solar Energy & Battery</a>
+                    <a href="#" className="hover:text-white transition-colors">Plumbing Services</a>
+                    <a href="#" className="hover:text-white transition-colors">Electrical Services</a>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4">Aesthetics</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">Interior/Exterior Painting</a>
+                    <a href="#" className="hover:text-white transition-colors">Landscaping & Hardscaping</a>
+                    <a href="#" className="hover:text-white transition-colors">Pools & Spas</a>
+                    <a href="#" className="hover:text-white transition-colors">Garage Cabinets</a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Column 3: Automotive */}
+              <div className="flex flex-col gap-8">
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4">Protection</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">Paint Protection Film (PPF)</a>
+                    <a href="#" className="hover:text-white transition-colors">Vinyl Wraps</a>
+                    <a href="#" className="hover:text-white transition-colors">Ceramic Coating</a>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4">Care & Style</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">Auto Detailing</a>
+                    <a href="#" className="hover:text-white transition-colors">Window Tinting</a>
+                    <a href="#" className="hover:text-white transition-colors">Performance Parts</a>
+                  </div>
+                </div>
+              </div>
+
+              {/* Column 4: Professional */}
+              <div className="flex flex-col gap-8">
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4">Finance & Law</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">Insurance Agencies</a>
+                    <a href="#" className="hover:text-white transition-colors">Financial Planning</a>
+                    <a href="#" className="hover:text-white transition-colors">Law Firms</a>
+                    <a href="#" className="hover:text-white transition-colors">Accounting / CPA</a>
+                  </div>
+                </div>
+                <div>
+                  <h4 className="text-xs font-bold uppercase tracking-widest text-white/50 mb-4">Consulting</h4>
+                  <div className="flex flex-col gap-2 text-white/70 text-sm">
+                    <a href="#" className="hover:text-white transition-colors">Business Coaching</a>
+                    <a href="#" className="hover:text-white transition-colors">Real Estate</a>
+                    <a href="#" className="hover:text-white transition-colors">Medical Practices</a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Column 3: Industries (Build) */}
-          <div className="flex flex-col gap-8">
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Construction</h3>
-              <div className="flex flex-col gap-2 text-white/70 text-sm">
-                <a href="#" className="hover:text-white transition-colors">ADU & Additions</a>
-                <a href="#" className="hover:text-white transition-colors">Bathroom Remodeling</a>
-                <a href="#" className="hover:text-white transition-colors">Roofing Services</a>
-                <a href="#" className="hover:text-white transition-colors">Kitchen Remodeling</a>
-                <a href="#" className="hover:text-white transition-colors">Concrete & Paving</a>
-                <a href="#" className="hover:text-white transition-colors">Fencing & Gates</a>
+          {/* ROW 3: AGENCY ECOSYSTEM */}
+          <div>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-white mb-12 border-b border-white/10 pb-4">Agency Ecosystem</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-start">
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Resources</h4>
+                <div className="flex flex-col gap-2 text-white/70 text-sm">
+                  <a href="#" className="hover:text-coral transition-colors flex items-center gap-2">
+                    Agency Blog <span className="text-[10px] bg-white/10 px-1.5 py-0.5 rounded text-white/60">New</span>
+                  </a>
+                  <a href="#" className="hover:text-coral transition-colors">Case Studies</a>
+                  <a href="#" className="hover:text-coral transition-colors">Whitepapers</a>
+                  <a href="#" className="hover:text-coral transition-colors">Playbooks</a>
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Home Services</h3>
-              <div className="flex flex-col gap-2 text-white/70 text-sm">
-                <a href="#" className="hover:text-white transition-colors">HVAC Systems</a>
-                <a href="#" className="hover:text-white transition-colors">Flooring & Tile</a>
-                <a href="#" className="hover:text-white transition-colors">Int/Ext Painting</a>
-                <a href="#" className="hover:text-white transition-colors">Plumbing</a>
-                <a href="#" className="hover:text-white transition-colors">Electrical</a>
-                <a href="#" className="hover:text-white transition-colors">Solar Energy</a>
-                <a href="#" className="hover:text-white transition-colors">Landscaping</a>
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Tools</h4>
+                <div className="flex flex-col gap-2 text-white/70 text-sm">
+                  <a href="#" className="hover:text-coral transition-colors">ROI Calculator</a>
+                  <a href="#" className="hover:text-coral transition-colors">Competitor Audit</a>
+                  <a href="#" className="hover:text-coral transition-colors">Keyword Planner</a>
+                </div>
               </div>
-            </div>
-          </div>
-
-          {/* Column 4: Industries (Specialized) */}
-          <div className="flex flex-col gap-8">
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Automotive</h3>
-              <div className="flex flex-col gap-2 text-white/70 text-sm">
-                <a href="#" className="hover:text-white transition-colors">Paint Protection</a>
-                <a href="#" className="hover:text-white transition-colors">Vinyl Wraps</a>
-                <a href="#" className="hover:text-white transition-colors">Window Tinting</a>
-                <a href="#" className="hover:text-white transition-colors">Auto Detailing</a>
-                <a href="#" className="hover:text-white transition-colors">Ceramic Coating</a>
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Company</h4>
+                <div className="flex flex-col gap-2 text-white/70 text-sm">
+                  <a href="#about" onClick={(e) => handleNav(e, 'about')} className="hover:text-white transition-colors">About Us</a>
+                  <a href="#careers" onClick={(e) => handleNav(e, 'careers')} className="hover:text-white transition-colors">Careers</a>
+                  <a href="#" className="hover:text-white transition-colors">Partner Program</a>
+                  <a href="#contact" onClick={(e) => handleNav(e, 'contact')} className="hover:text-white transition-colors">Contact</a>
+                </div>
               </div>
-            </div>
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Professional</h3>
-              <div className="flex flex-col gap-2 text-white/70 text-sm">
-                <a href="#" className="hover:text-white transition-colors">Insurance Agencies</a>
-                <a href="#" className="hover:text-white transition-colors">Legal Services</a>
-                <a href="#" className="hover:text-white transition-colors">Business Consulting</a>
-                <a href="#" className="hover:text-white transition-colors">Financial Planning</a>
-              </div>
-            </div>
-          </div>
-
-          {/* Column 5: Company & Connect */}
-          <div className="flex flex-col gap-8">
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Company</h3>
-              <div className="flex flex-col gap-2 text-white/70 text-sm">
-                <a href="#about" onClick={(e) => handleNav(e, 'about')} className="hover:text-white transition-colors">About Agency</a>
-                <a href="#work" onClick={(e) => handleNav(e, 'home')} className="hover:text-white transition-colors">Selected Work</a>
-                <a href="#careers" onClick={(e) => handleNav(e, 'careers')} className="hover:text-white transition-colors">Careers</a>
-                <a href="#contact" className="hover:text-white transition-colors">Contact Us</a>
-                <a href="#" className="hover:text-white transition-colors">Partner Program</a>
-              </div>
-            </div>
-
-            <div>
-              <h3 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Connect</h3>
-              <div className="flex flex-col gap-3 mb-6">
-                <a href="#" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group text-sm">
-                  <Linkedin className="w-4 h-4" /> <span>LinkedIn</span>
-                </a>
-                <a href="#" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group text-sm">
-                  <Instagram className="w-4 h-4" /> <span>Instagram</span>
-                </a>
-                <a href="#" className="flex items-center gap-2 text-white/70 hover:text-white transition-colors group text-sm">
-                  <Twitter className="w-4 h-4" /> <span>Twitter</span>
-                </a>
-              </div>
-
-              <div className="flex flex-col gap-2 text-white/50 text-xs">
-                <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-                <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-                <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+              <div>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-white/30 mb-4">Connect</h4>
+                <div className="flex gap-4 mb-6">
+                  <a href="#" className="text-white/40 hover:text-white transition-colors"><Linkedin className="w-5 h-5" /></a>
+                  <a href="#" className="text-white/40 hover:text-white transition-colors"><Instagram className="w-5 h-5" /></a>
+                  <a href="#" className="text-white/40 hover:text-white transition-colors"><Twitter className="w-5 h-5" /></a>
+                </div>
+                <div className="flex flex-col gap-1 text-white/30 text-xs">
+                  <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
+                  <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+                  <a href="#" className="hover:text-white transition-colors">Cookie Policy</a>
+                </div>
               </div>
             </div>
           </div>
+
         </div>
 
         {/* Bottom Section */}

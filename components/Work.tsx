@@ -198,96 +198,61 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
   );
 };
 
-// Redesigned Card for Stacking - "File Folder" Aesthetic
+// Redesigned Card for Stacking - "Immersive Overlay" Aesthetic
 const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => void }> = ({ project, index, onClick }) => {
   return (
     <div
       onClick={onClick}
-      className="w-full h-[600px] bg-white dark:bg-[#111] rounded-[32px] overflow-hidden shadow-[0_4px_24px_-1px_rgba(0,0,0,0.1)] hover:shadow-[0_20px_60px_-10px_rgba(0,0,0,0.2)] dark:shadow-[0_20px_60px_-10px_rgba(255,255,255,0.05)] flex flex-col md:flex-row group cursor-pointer relative transition-all duration-500"
+      className="w-full h-[600px] rounded-[32px] overflow-hidden shadow-2xl border border-white/10 relative group cursor-pointer transition-all duration-500 hover:scale-[1.02]"
     >
-      {/* Left: Image / Visual */}
-      <div className="w-full md:w-[45%] h-64 md:h-full relative overflow-hidden bg-black">
-        <div className="absolute inset-0 bg-coral/10 group-hover:bg-transparent transition-colors duration-500 z-10" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent z-10 opacity-60" />
-
+      {/* Full Background Image */}
+      <div className="absolute inset-0 bg-black">
         <img
           src={project.image}
           alt={project.client}
-          className="w-full h-full object-cover transform scale-100 group-hover:scale-110 transition-transform duration-[1.2s] ease-out"
+          className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
         />
-
-        {/* Floating Tags over Image */}
-        <div className="absolute top-6 left-6 z-20 flex flex-wrap gap-2">
-          <span className="bg-white/90 dark:bg-black/90 backdrop-blur-md px-3 py-1.5 rounded-full border border-black/5 text-[10px] font-bold uppercase tracking-widest flex items-center gap-2">
-            {project.year}
-          </span>
-        </div>
-
-        <div className="absolute bottom-6 left-6 z-20 text-white">
-          <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-widest mb-1 opacity-80">
-            <MapPin className="w-3 h-3" /> {project.location}
-          </div>
-        </div>
+        {/* Gradient Overlay for Text Readability */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90" />
       </div>
 
-      {/* Right: Content - "Dossier Style" */}
-      <div className="w-full md:w-[55%] p-8 md:p-12 flex flex-col relative bg-white dark:bg-[#111]">
+      {/* Content Overlay */}
+      <div className="absolute inset-0 p-10 md:p-14 flex flex-col justify-between z-10">
 
-        {/* Header Row */}
-        <div className="flex justify-between items-start mb-8 pb-8 border-b border-black/5 dark:border-white/5">
-          <div>
-            <div className="flex items-center gap-2 text-coral mb-2 text-xs font-bold uppercase tracking-widest">
-              <span className="w-1.5 h-1.5 rounded-full bg-coral" />
-              {project.industry}
-            </div>
-            <h3 className="font-display text-4xl md:text-5xl font-medium text-text-primary leading-[0.9] group-hover:text-coral transition-colors duration-300">
-              {project.client}
-            </h3>
+        {/* Top Row */}
+        <div className="flex justify-between items-start">
+          <div className="bg-white/10 backdrop-blur-md border border-white/10 px-4 py-2 rounded-full text-white text-xs font-bold uppercase tracking-widest">
+            {project.year} — {project.industry}
           </div>
-          <div className="w-12 h-12 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center group-hover:bg-coral group-hover:border-coral group-hover:text-white transition-all duration-300 shrink-0">
+          <div className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-all duration-300">
             <ArrowUpRight className="w-5 h-5" />
           </div>
         </div>
 
-        {/* Metrics Highlight */}
-        <div className="grid grid-cols-2 gap-8 mb-8">
-          <div className="relative pl-4 border-l-2 border-coral/30">
-            <div className="flex items-center gap-2 text-coral mb-1">
-              <TrendingUp className="w-4 h-4" />
-              <span className="text-3xl md:text-4xl font-display font-bold">{project.metric}</span>
+        {/* Bottom Content */}
+        <div>
+          <div className="mb-8">
+            <h3 className="font-display text-6xl md:text-8xl font-medium text-white mb-4 tracking-tight leading-none">
+              {project.client}
+            </h3>
+            <p className="text-white/70 text-lg md:text-xl font-light max-w-2xl leading-relaxed">
+              {project.description}
+            </p>
+          </div>
+
+          {/* Metrics Row */}
+          <div className="flex gap-12 pt-8 border-t border-white/10">
+            <div>
+              <div className="text-4xl md:text-5xl font-display font-bold text-white mb-1">{project.metric}</div>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-white/50">{project.metricLabel}</div>
             </div>
-            <div className="text-[10px] font-bold uppercase tracking-widest text-text-secondary opacity-70">
-              {project.metricLabel}
+            <div>
+              <div className="text-4xl md:text-5xl font-display font-bold text-white mb-1">{project.secondaryMetric}</div>
+              <div className="text-[10px] font-bold uppercase tracking-widest text-white/50">{project.secondaryLabel}</div>
             </div>
           </div>
-          <div className="relative pl-4 border-l-2 border-black/5 dark:border-white/5">
-            <div className="flex items-center gap-2 text-text-primary mb-1">
-              <span className="text-3xl md:text-4xl font-display font-bold">{project.secondaryMetric}</span>
-            </div>
-            <div className="text-[10px] font-bold uppercase tracking-widest text-text-secondary opacity-70">
-              {project.secondaryLabel}
-            </div>
-          </div>
         </div>
 
-        {/* Description */}
-        <p className="text-text-secondary text-base leading-relaxed mb-auto font-light pr-8">
-          {project.description}
-        </p>
-
-        {/* Footer Tags */}
-        <div className="mt-8 flex flex-wrap gap-2">
-          {project.services.map((tag) => (
-            <span key={tag} className="px-3 py-1.5 bg-ivory dark:bg-white/5 rounded-lg text-[10px] font-bold uppercase tracking-widest text-text-secondary border border-black/5 dark:border-white/5">
-              {tag}
-            </span>
-          ))}
-        </div>
-
-        {/* Index Number Watermark */}
-        <div className="absolute top-8 right-8 text-8xl font-display font-bold text-black/[0.03] dark:text-white/[0.03] pointer-events-none select-none">
-          0{index + 1}
-        </div>
       </div>
     </div>
   );
