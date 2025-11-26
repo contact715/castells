@@ -1,7 +1,19 @@
 import { GoogleGenAI, Type, Schema } from "@google/genai";
 import { GeneratedConcept } from "../types";
 
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Lazy initialization to prevent crash when API key is missing
+let ai: GoogleGenAI | null = null;
+
+const getAI = (): GoogleGenAI => {
+  if (!ai) {
+    const apiKey = process.env.API_KEY || process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      throw new Error("Gemini API key is not configured");
+    }
+    ai = new GoogleGenAI({ apiKey });
+  }
+  return ai;
+};
 
 const conceptSchema: Schema = {
   type: Type.OBJECT,
@@ -16,9 +28,10 @@ const conceptSchema: Schema = {
 
 export const generateCreativeConcept = async (brandInput: string): Promise<GeneratedConcept> => {
   try {
+    const aiClient = getAI();
     const model = "gemini-2.5-flash";
     
-    const response = await ai.models.generateContent({
+    const response = await aiClient.models.generateContent({
       model,
       contents: `You are a visionary creative director at a futurist marketing agency called 'Zero Gravity'. 
       The user will provide a brand or product idea. 

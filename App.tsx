@@ -4,7 +4,7 @@ import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 
 // Lazy load components for performance
-const Hero = React.lazy(() => import('./components/Hero'));
+import Hero from './components/Hero';
 const Services = React.lazy(() => import('./components/Services'));
 const Work = React.lazy(() => import('./components/Work'));
 const WhyChoose = React.lazy(() => import('./components/WhyChoose'));
