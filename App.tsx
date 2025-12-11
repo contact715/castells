@@ -1,26 +1,36 @@
-
 import React, { useState, useEffect, Suspense } from 'react';
-import { LazyMotion, domMax } from "framer-motion";
-import NavBar from './components/NavBar';
-import Footer from './components/Footer';
+import { LazyMotion, domAnimation } from "framer-motion";
+import NavBar from './components/layout/NavBar';
+import Footer from './components/layout/Footer';
+
+import SEO from './components/ui/SEO';
+import SmoothScroll from './components/effects/SmoothScroll';
 
 // Lazy load components for performance
-import Hero from './components/Hero';
-const Services = React.lazy(() => import('./components/Services'));
-const Work = React.lazy(() => import('./components/Work'));
-const WhyChoose = React.lazy(() => import('./components/WhyChoose'));
-const Industries = React.lazy(() => import('./components/Industries'));
-const TrustedBy = React.lazy(() => import('./components/TrustedBy'));
-const Team = React.lazy(() => import('./components/Team'));
-const CTA = React.lazy(() => import('./components/CTA'));
-const Testimonials = React.lazy(() => import('./components/Testimonials'));
-const Process = React.lazy(() => import('./components/Process'));
-const FAQ = React.lazy(() => import('./components/FAQ'));
-const Blog = React.lazy(() => import('./components/Blog'));
-const AILab = React.lazy(() => import('./components/AILab'));
-const CaseStudyDetail = React.lazy(() => import('./components/CaseStudyDetail'));
-const AboutPage = React.lazy(() => import('./components/AboutPage'));
-const CareersPage = React.lazy(() => import('./components/CareersPage'));
+import Hero from './components/sections/Hero';
+const Services = React.lazy(() => import('./components/sections/Services'));
+const Work = React.lazy(() => import('./components/sections/Work'));
+const WhyChoose = React.lazy(() => import('./components/sections/WhyChoose'));
+const Industries = React.lazy(() => import('./components/sections/Industries'));
+
+const Team = React.lazy(() => import('./components/sections/Team'));
+
+const CTA = React.lazy(() => import('./components/sections/CTA'));
+const CasesGrid = React.lazy(() => import('./components/sections/CasesGrid'));
+const Process = React.lazy(() => import('./components/sections/Process'));
+const FAQ = React.lazy(() => import('./components/sections/FAQ'));
+const Blog = React.lazy(() => import('./components/sections/Blog'));
+
+const CaseStudyDetail = React.lazy(() => import('./components/pages/CaseStudyDetail'));
+const WorkPage = React.lazy(() => import('./components/pages/WorkPage'));
+const AboutPage = React.lazy(() => import('./components/pages/AboutPage'));
+const CareersPage = React.lazy(() => import('./components/pages/CareersPage'));
+const NotFound = React.lazy(() => import('./components/pages/NotFound'));
+const ContactPage = React.lazy(() => import('./components/pages/ContactPage'));
+const TeamPage = React.lazy(() => import('./components/pages/TeamPage'));
+const BlogPage = React.lazy(() => import('./components/pages/BlogPage'));
+const ServicePage = React.lazy(() => import('./components/pages/ServicePage'));
+const IndustryPage = React.lazy(() => import('./components/pages/IndustryPage'));
 
 // Loading fallback
 const PageLoader = () => (
@@ -29,7 +39,7 @@ const PageLoader = () => (
   </div>
 );
 
-export type PageView = 'home' | 'case-study' | 'about' | 'careers' | 'blog' | 'contact';
+export type PageView = 'home' | 'case-study' | 'work' | 'about' | 'careers' | 'blog' | 'contact' | 'not-found' | 'team' | 'service' | 'industry';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<PageView>('home');
@@ -46,52 +56,107 @@ function App() {
   };
 
   return (
-    <LazyMotion features={domMax}>
-      <div className="bg-ivory min-h-screen text-text-primary selection:bg-coral selection:text-white font-sans relative">
-        <div className="relative z-10">
-          <NavBar onNavigate={navigateTo} />
+    <div className="bg-ivory min-h-screen text-text-primary selection:bg-coral selection:text-white font-sans relative">
+      <SEO />
+      <div className="relative z-10">
+        <LazyMotion features={domAnimation}>
+          {currentPage !== 'not-found' && <NavBar onNavigate={navigateTo} />}
 
           <main>
             <Suspense fallback={<PageLoader />}>
               {currentPage === 'home' && (
                 <>
+                  <SmoothScroll />
                   <Hero />
-                  <TrustedBy />
+
                   <Work onNavigate={navigateTo} />
                   <Industries />
                   <WhyChoose />
                   <Services />
                   <Process />
-                  <AILab />
-                  <Testimonials />
+
                   <Team />
+
                   <FAQ />
                   <Blog />
-                  <CTA />
                 </>
               )}
 
               {currentPage === 'case-study' && (
                 <CaseStudyDetail
                   onBack={() => navigateTo('home')}
+                  onNavigate={navigateTo}
                   project={selectedProject}
                 />
               )}
 
+              {currentPage === 'work' && (
+                <WorkPage
+                  onBack={() => navigateTo('home')}
+                  onNavigate={navigateTo}
+                />
+              )}
+
               {currentPage === 'about' && (
-                <AboutPage onBack={() => navigateTo('home')} />
+                <AboutPage
+                  onBack={() => navigateTo('home')}
+                  onNavigate={navigateTo}
+                />
               )}
 
               {currentPage === 'careers' && (
-                <CareersPage onBack={() => navigateTo('home')} />
+                <CareersPage
+                  onBack={() => navigateTo('home')}
+                  onNavigate={navigateTo}
+                />
+              )}
+
+              {currentPage === 'contact' && (
+                <ContactPage onNavigate={navigateTo} />
+              )}
+
+              {currentPage === 'team' && (
+                <TeamPage
+                  onBack={() => navigateTo('home')}
+                  onNavigate={navigateTo}
+                />
+              )}
+
+              {currentPage === 'blog' && (
+                <BlogPage
+                  onBack={() => navigateTo('home')}
+                  onNavigate={navigateTo}
+                />
+              )}
+
+              {currentPage === 'service' && (
+                <ServicePage
+                  onBack={() => navigateTo('home')}
+                  onNavigate={navigateTo}
+                  serviceName={selectedProject?.name}
+                  serviceId={selectedProject?.id}
+                />
+              )}
+
+              {currentPage === 'industry' && (
+                <IndustryPage
+                  onBack={() => navigateTo('home')}
+                  onNavigate={navigateTo}
+                  industryName={selectedProject?.name}
+                  industryId={selectedProject?.id}
+                />
+              )}
+
+              {currentPage === 'not-found' && (
+                <NotFound />
               )}
             </Suspense>
           </main>
 
-          <Footer onNavigate={navigateTo} />
-        </div>
+          {currentPage !== 'not-found' && <Footer onNavigate={navigateTo} />}
+        </LazyMotion>
       </div>
-    </LazyMotion>
+    </div>
   );
 }
 

@@ -1,8 +1,8 @@
 
 import React, { useState, useRef } from "react";
-import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
+import { m as motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { cn } from "../../lib/utils";
-import { Menu as MenuIcon, X } from "lucide-react";
+import { Menu as MenuIcon, X, ChevronDown } from "lucide-react";
 
 interface NavbarProps {
   children?: React.ReactNode;
@@ -53,14 +53,14 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   return (
     <motion.div
       layout
-      initial={{ width: "95%", maxWidth: "1400px", y: 24, borderRadius: "12px" }}
+      initial={{ width: "100%", maxWidth: "100%", y: 0, borderRadius: "0px" }}
       animate={{
-        width: "95%",
-        maxWidth: visible ? "1050px" : "1400px",
-        y: visible ? 12 : 24,
-        borderRadius: "12px",
-        paddingRight: visible ? "12px" : "24px",
-        paddingLeft: visible ? "12px" : "24px",
+        width: "100%",
+        maxWidth: "100%",
+        y: 0,
+        borderRadius: "0px",
+        paddingRight: "0px",
+        paddingLeft: "0px",
       }}
       transition={{
         type: "spring",
@@ -68,12 +68,13 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         damping: 25,
       }}
       className={cn(
-        "pointer-events-auto hidden lg:flex relative items-center justify-between bg-ivory/90 dark:bg-black/90 backdrop-blur-md border border-black/5 dark:border-white/10 shadow-sm py-2",
-        visible && "shadow-lg",
+        "pointer-events-auto hidden lg:block relative bg-ivory dark:bg-black border-b border-black/5 dark:border-white/10 py-4 overflow-visible z-50",
         className
       )}
     >
-      {children}
+      <div className="container mx-auto flex items-center justify-between px-6">
+        {children}
+      </div>
     </motion.div>
   );
 };
@@ -160,5 +161,59 @@ export const MobileNavMenu = ({
         </motion.div>
       )}
     </AnimatePresence>
+  );
+};
+
+export const MobileAccordion = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: string;
+}) => {
+  return <div className={cn("flex flex-col gap-2", className)}>{children}</div>;
+};
+
+export const MobileAccordionItem = ({
+  title,
+  children,
+  isOpen,
+  onToggle,
+}: {
+  title: string;
+  children: React.ReactNode;
+  isOpen: boolean;
+  onToggle: () => void;
+}) => {
+  return (
+    <div className="border border-black/5 dark:border-white/5 rounded-xl overflow-hidden bg-white/50 dark:bg-white/5">
+      <button
+        onClick={onToggle}
+        className="flex items-center justify-between w-full p-4 text-left font-display font-bold text-lg text-text-primary hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+      >
+        {title}
+        <ChevronDown
+          className={cn(
+            "w-5 h-5 text-text-secondary transition-transform duration-300",
+            isOpen ? "rotate-180" : "rotate-0"
+          )}
+        />
+      </button>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <div className="p-4 pt-0 flex flex-col gap-3 border-t border-black/5 dark:border-white/5 bg-black/5 dark:bg-black/20">
+              {children}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };

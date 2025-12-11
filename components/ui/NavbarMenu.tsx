@@ -1,6 +1,6 @@
 
 import React from "react";
-import { motion } from "framer-motion";
+import { m as motion } from "framer-motion";
 import { cn } from "../../lib/utils";
 import { PageView } from "../../App";
 
@@ -13,27 +13,39 @@ const transition = {
   restSpeed: 0.001,
 };
 
+import { ChevronDown } from "lucide-react";
+
 export const MenuItem = ({
   setActive,
   active,
   item,
   children,
-  icon: Icon
 }: {
   setActive: (item: string) => void;
   active: string | null;
   item: string;
   children?: React.ReactNode;
-  icon?: React.ElementType;
 }) => {
   return (
     <div onMouseEnter={() => setActive(item)} className="relative group/menu-item">
       <motion.div
         transition={{ duration: 0.3 }}
-        className="cursor-pointer text-text-primary hover:text-coral transition-colors font-bold uppercase tracking-widest text-xs flex items-center gap-1.5 px-3 py-2"
+        className={cn(
+          "cursor-pointer transition-all font-medium text-sm flex items-center gap-1 px-3 py-2",
+          active === item
+            ? "text-black dark:text-white"
+            : "text-text-secondary hover:text-black dark:hover:text-white"
+        )}
       >
-        {Icon && <Icon className="w-3.5 h-3.5" />}
         {item}
+        {children && (
+          <ChevronDown
+            className={cn(
+              "w-4 h-4 transition-transform duration-300",
+              active === item ? "rotate-180" : "rotate-0"
+            )}
+          />
+        )}
       </motion.div>
       {active !== null && (
         <motion.div
@@ -46,7 +58,7 @@ export const MenuItem = ({
               <motion.div
                 transition={transition}
                 layoutId="active" // layoutId ensures smooth animation
-                className="bg-white dark:bg-black backdrop-blur-sm rounded-2xl overflow-hidden border border-black/10 dark:border-white/10 shadow-xl"
+                className="bg-white dark:bg-black backdrop-blur-sm rounded-3xl overflow-hidden border border-black/10 dark:border-white/10 shadow-xl"
               >
                 <motion.div
                   layout // layout ensures smooth animation
@@ -76,7 +88,7 @@ export const Menu = ({
     <nav
       onMouseLeave={() => setActive(null)} // resets the state
       className={cn(
-        "relative rounded-full border border-black/10 dark:border-white/10 bg-ivory/80 dark:bg-black/80 backdrop-blur-md shadow-sm flex justify-center px-4 py-2 space-x-2",
+        "relative flex justify-center px-4 py-2 space-x-4",
         className
       )}
     >
@@ -99,8 +111,8 @@ export const ProductItem = ({
   onClick?: (e: React.MouseEvent) => void;
 }) => {
   return (
-    <a 
-      href={href} 
+    <a
+      href={href}
       onClick={onClick}
       className="flex space-x-4 group/product min-w-[300px] p-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
     >
@@ -126,24 +138,27 @@ export const ProductItem = ({
   );
 };
 
-export const HoveredLink = ({ 
-  children, 
+export const HoveredLink = ({
+  children,
   href,
   onClick,
-  icon: Icon
-}: { 
+  icon: Icon,
+  className
+}: {
   children?: React.ReactNode;
   href: string;
   onClick?: (e: React.MouseEvent) => void;
   icon?: React.ElementType;
+  className?: string;
+  key?: React.Key;
 }) => {
   return (
     <a
       href={href}
       onClick={onClick}
-      className="text-text-secondary hover:text-coral transition-colors text-sm font-medium flex items-center gap-2 group"
+      className={cn("text-text-secondary hover:text-coral transition-colors text-base font-medium flex items-center gap-2 group", className)}
     >
-      {Icon && <Icon className="w-4 h-4 opacity-50 group-hover:opacity-100 transition-opacity" />}
+      {Icon && <Icon className="w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity" />}
       {children}
     </a>
   );
