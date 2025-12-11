@@ -23,115 +23,139 @@ const Hero: React.FC = () => {
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
 
     return () => observer.disconnect();
-  }, []);
+    const Hero = () => {
+      const containerRef = useRef<HTMLDivElement>(null);
+      const { scrollY } = useScroll();
 
-  return (
-    <div className="pt-32 pb-20 relative overflow-hidden min-h-[90vh] flex flex-col justify-center bg-transparent">
-      {/* Background Ripple Layer */}
-      {/* No Z-index negative here to avoid click capture issues in some stacking contexts. 
-          DOM order ensures it's behind the content because it's first. 
-          The content container below will have pointer-events-none to let clicks pass through to this background. */}
-      <div className="absolute inset-0 w-full h-full pointer-events-auto">
-        <BackgroundRippleEffect
-          rows={30}
-          cols={60}
-          cellSize={50}
-          fillColor={isDark ? "rgba(255, 255, 255, 0.04)" : "rgba(224, 133, 118, 0.3)"}
-          borderColor={isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(224, 133, 118, 0.6)"}
-          maskImage="radial-gradient(ellipse at 50% 0%, black 10%, transparent 70%)"
-        />
-        {/* Very subtle noise texture overlay for grain. Pointer events none so it doesn't block the ripple clicks. */}
-        <div className="absolute inset-0 bg-noise opacity-[0.05] mix-blend-soft-light pointer-events-none" />
-      </div>
+      const y1 = useTransform(scrollY, [0, 500], [0, 200]);
+      const y2 = useTransform(scrollY, [0, 500], [0, -150]);
+      const opacity = useTransform(scrollY, [0, 300], [1, 0]);
 
-      {/* Main Container - pointer-events-none allows clicks to pass through empty spaces to the background */}
-      <div className="container mx-auto px-6 relative z-10 pointer-events-none">
+      return (
+        <section ref={containerRef} className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
 
-        {/* Main Hero Content - Centered Layout */}
-        <div className="flex flex-col items-center justify-center text-center mb-20 max-w-5xl mx-auto pointer-events-none">
-
-          {/* Animated Headline */}
-          <h1 className="font-display text-6xl md:text-8xl lg:text-[7rem] font-light leading-[1.05] tracking-tight text-text-primary mb-8">
-            <ScrollFloat as="span" containerClassName="block pointer-events-auto">We dominate</ScrollFloat>
-            <span className="text-coral italic relative inline-block pointer-events-auto">
-              <ScrollFloat as="span">local markets</ScrollFloat>
-              {/* Subtle underline accent */}
-              <motion.svg
-                initial={{ scaleX: 0 }}
-                animate={{ scaleX: 1 }}
-                transition={{ delay: 0.8, duration: 0.8, ease: "circOut" }}
-                className="absolute left-0 -bottom-2 w-full h-3 text-coral/20 -z-10"
-                viewBox="0 0 100 10"
-                preserveAspectRatio="none"
-              >
-                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" strokeWidth="4" fill="none" />
-              </motion.svg>
-            </span>
-          </h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
-            className="text-xl md:text-2xl text-text-secondary leading-relaxed max-w-2xl font-normal mb-12"
-          >
-            We help contractors and service providers dominate their local markets through data-driven strategies.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.8, duration: 0.8 }}
-            className="flex flex-wrap justify-center gap-4 mb-24"
-          >
-            <RippleButton
-              href="#audit"
-              className="bg-black dark:bg-white text-white dark:text-black px-8 py-3.5 rounded-xl font-bold text-sm uppercase tracking-widest border-none h-auto shadow-none hover:shadow-xl transition-all hover:-translate-y-0.5 pointer-events-auto"
-              rippleColor="#E08576"
-            >
-              Start Your Project
-            </RippleButton>
-            <RippleButton
-              href="#contact"
-              className="bg-white dark:bg-black border border-black/10 dark:border-white/10 text-text-primary px-8 py-3.5 rounded-xl font-bold text-sm uppercase tracking-widest h-auto hover:bg-black/5 dark:hover:bg-white/10 transition-all shadow-none hover:shadow-md pointer-events-auto"
-              rippleColor="#E08576"
-            >
-              <span className="flex items-center gap-2">
-                How We Work <ArrowRight className="w-4 h-4" />
-              </span>
-            </RippleButton>
-          </motion.div>
-
-          {/* Stats Strip - Centered below content */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 w-full pointer-events-auto">
-            {[
-              { value: 500, suffix: '+', label: 'Projects Completed' },
-              { value: 50, prefix: '$', suffix: 'M+', label: 'Revenue Generated' },
-              { value: 320, suffix: '%', label: 'Average Client ROI' },
-              { value: 12, suffix: '+', label: 'Years Experience' }
-            ].map((stat, idx) => (
-              <motion.div
-                key={idx}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.2 + (idx * 0.1), duration: 0.6 }}
-                className="bg-transparent p-6 rounded-2xl border border-black/10 dark:border-white/10 hover:border-coral/50 transition-all duration-300 group hover:-translate-y-1"
-              >
-                <div className="font-display text-4xl md:text-5xl font-light text-text-primary mb-2 group-hover:text-coral transition-colors duration-300 tracking-tight">
-                  <Counter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
-                </div>
-                <div className="text-[10px] font-bold text-text-secondary uppercase tracking-widest border-t border-black/5 dark:border-white/10 pt-3 mt-2 group-hover:border-coral/30 transition-colors">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
+          {/* Background Elements */}
+          <div className="absolute inset-0 z-0">
+            <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_50%_50%,rgba(224,133,118,0.08),transparent_70%)]" />
+            <div className="absolute -top-[20%] -right-[10%] w-[600px] h-[600px] rounded-full bg-coral/5 blur-3xl animate-float" />
+            <div className="absolute top-[40%] -left-[10%] w-[400px] h-[400px] rounded-full bg-blue-500/5 blur-3xl animate-float" style={{ animationDelay: '2s' }} />
           </div>
 
-        </div>
-      </div>
-    </div>
-  );
-};
+          <div className="container mx-auto px-6 relative z-10">
+            <div className="max-w-5xl mx-auto text-center">
 
-export default Hero;
+              {/* Badge */}
+              <m.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white dark:bg-white/5 border border-black/5 shadow-sm mb-8 hover:shadow-md transition-shadow cursor-default"
+              >
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-coral opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-coral"></span>
+                </span>
+                <span className="text-sm font-medium text-text-secondary tracking-wide">
+                  Accepting New Clients for Q4 2024
+                </span>
+              </m.div>
+
+              {/* Headline */}
+              <m.h1
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+                className="font-display text-6xl md:text-8xl lg:text-9xl font-medium leading-[0.9] tracking-tight mb-8 text-text-primary"
+              >
+                Dominate Your <br />
+                <span className="relative inline-block">
+                  <span className="relative z-10 italic text-coral">Market</span>
+                  <m.span
+                    initial={{ width: 0 }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: 1, delay: 0.8, ease: "circOut" }}
+                    className="absolute bottom-2 left-0 h-[0.15em] bg-coral/20 -z-10 rounded-full"
+                  />
+                </span>
+              </m.h1>
+
+              {/* Subheadline */}
+              <m.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                className="text-xl md:text-2xl text-text-secondary font-light max-w-2xl mx-auto mb-12 leading-relaxed"
+              >
+                We build high-velocity growth engines for ambitious brands.
+                Data-driven strategy meets world-class creative execution.
+              </m.p>
+
+              {/* CTA Buttons */}
+              <m.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
+                className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-20"
+              >
+                <button className="group relative px-8 py-4 bg-black text-white rounded-full font-bold tracking-wide overflow-hidden transition-transform hover:scale-105 active:scale-95">
+                  <span className="relative z-10 flex items-center gap-2">
+                    Get Your Audit
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </span>
+                  <div className="absolute inset-0 bg-coral transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-500 ease-out" />
+                </button>
+
+                <button className="group px-8 py-4 bg-transparent border border-black/10 rounded-full font-bold tracking-wide hover:bg-black/5 transition-colors flex items-center gap-2">
+                  <Play className="w-4 h-4 fill-current" />
+                  View Case Studies
+                </button>
+              </m.div>
+
+              {/* Stats */}
+              <m.div
+                style={{ opacity }}
+                className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 border-t border-black/5 pt-12"
+              >
+                {[
+                  { value: 150, suffix: "M+", label: "Revenue Generated", prefix: "$" },
+                  { value: 45, suffix: "%", label: "Avg. ROI Increase", prefix: "+" },
+                  { value: 85, suffix: "+", label: "Active Clients", prefix: "" },
+                  { value: 24, suffix: "/7", label: "Support & Monitoring", prefix: "" },
+                ].map((stat, index) => (
+                  <m.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.4 + (index * 0.1) }}
+                    className="text-center"
+                  >
+                    <div className="text-3xl md:text-4xl font-display font-bold text-text-primary mb-1">
+                      <Counter value={stat.value} prefix={stat.prefix} suffix={stat.suffix} />
+                    </div>
+                    <div className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+                      {stat.label}
+                    </div>
+                  </m.div>
+                ))}
+              </m.div>
+
+            </div>
+          </div>
+
+          {/* Parallax Elements */}
+          <m.div style={{ y: y1 }} className="absolute top-[20%] left-[5%] w-24 h-24 hidden lg:block opacity-20 pointer-events-none">
+            <svg viewBox="0 0 100 100" className="w-full h-full animate-spin-slow">
+              <path d="M50 0 L100 50 L50 100 L0 50 Z" fill="currentColor" />
+            </svg>
+          </m.div>
+
+          <m.div style={{ y: y2 }} className="absolute bottom-[20%] right-[5%] w-32 h-32 hidden lg:block opacity-10 pointer-events-none">
+            <div className="w-full h-full border-2 border-current rounded-full" />
+          </m.div>
+
+        </section>
+      );
+    };
+
+    export default Hero;

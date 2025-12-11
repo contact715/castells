@@ -294,8 +294,20 @@ const ProcessScroll: React.FC = () => {
     const currentStep = PROCESS_STEPS[activeStep];
 
     return (
-        // Tall container to create scroll space (300vh = 3 screens worth of scroll)
-        <div ref={containerRef} className="relative h-[300vh]">
+        // Tall container to create scroll space (400vh = 4 screens worth of scroll)
+        // We use 400vh to give enough room for 4 distinct snap points
+        <div ref={containerRef} className="relative h-[400vh]">
+
+            {/* Snap Points - Invisible anchors that force the scroll to stop */}
+            <div className="absolute inset-0 pointer-events-none">
+                {PROCESS_STEPS.map((_, idx) => (
+                    <div
+                        key={idx}
+                        className="h-screen w-full scroll-snap-align-start scroll-snap-stop-always"
+                        style={{ top: `${idx * 100}vh` }}
+                    />
+                ))}
+            </div>
 
             {/* Sticky Wrapper - Pins content to viewport */}
             <div className="sticky top-0 h-screen flex flex-col bg-ivory overflow-hidden">

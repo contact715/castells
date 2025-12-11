@@ -1,5 +1,6 @@
 
 import React, { useState, useEffect, Suspense } from 'react';
+import { LazyMotion, domMax } from "framer-motion";
 import NavBar from './components/NavBar';
 import Footer from './components/Footer';
 
@@ -45,50 +46,52 @@ function App() {
   };
 
   return (
-    <div className="bg-ivory min-h-screen text-text-primary selection:bg-coral selection:text-white font-sans relative">
-      <div className="relative z-10">
-        <NavBar onNavigate={navigateTo} />
+    <LazyMotion features={domMax}>
+      <div className="bg-ivory min-h-screen text-text-primary selection:bg-coral selection:text-white font-sans relative">
+        <div className="relative z-10">
+          <NavBar onNavigate={navigateTo} />
 
-        <main>
-          <Suspense fallback={<PageLoader />}>
-            {currentPage === 'home' && (
-              <>
-                <Hero />
-                <TrustedBy />
-                <Work onNavigate={navigateTo} />
-                <Industries />
-                <WhyChoose />
-                <Services />
-                <Process />
-                <AILab />
-                <Testimonials />
-                <Team />
-                <FAQ />
-                <Blog />
-                <CTA />
-              </>
-            )}
+          <main>
+            <Suspense fallback={<PageLoader />}>
+              {currentPage === 'home' && (
+                <>
+                  <Hero />
+                  <TrustedBy />
+                  <Work onNavigate={navigateTo} />
+                  <Industries />
+                  <WhyChoose />
+                  <Services />
+                  <Process />
+                  <AILab />
+                  <Testimonials />
+                  <Team />
+                  <FAQ />
+                  <Blog />
+                  <CTA />
+                </>
+              )}
 
-            {currentPage === 'case-study' && (
-              <CaseStudyDetail
-                onBack={() => navigateTo('home')}
-                project={selectedProject}
-              />
-            )}
+              {currentPage === 'case-study' && (
+                <CaseStudyDetail
+                  onBack={() => navigateTo('home')}
+                  project={selectedProject}
+                />
+              )}
 
-            {currentPage === 'about' && (
-              <AboutPage onBack={() => navigateTo('home')} />
-            )}
+              {currentPage === 'about' && (
+                <AboutPage onBack={() => navigateTo('home')} />
+              )}
 
-            {currentPage === 'careers' && (
-              <CareersPage onBack={() => navigateTo('home')} />
-            )}
-          </Suspense>
-        </main>
+              {currentPage === 'careers' && (
+                <CareersPage onBack={() => navigateTo('home')} />
+              )}
+            </Suspense>
+          </main>
 
-        <Footer onNavigate={navigateTo} />
+          <Footer onNavigate={navigateTo} />
+        </div>
       </div>
-    </div>
+    </LazyMotion>
   );
 }
 
