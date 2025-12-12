@@ -18,7 +18,7 @@ export default {
         surface: '#FFFFFF',
       },
       fontFamily: {
-        display: ['Playfair Display', 'serif'],
+        display: ['Newsreader', 'serif'],
         sans: ['Satoshi', 'sans-serif'],
       },
     },
