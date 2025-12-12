@@ -62,7 +62,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
   };
 
   return (
-    <div className="bg-ivory min-h-screen pt-32 pb-20">
+    <div className="bg-ivory dark:bg-[#191919] text-text-primary min-h-screen pt-32 pb-20">
       <SEO title={`${data.client} Case Study | Castells Agency`} description={data.description} />
       <div className="container mx-auto px-6">
 
@@ -129,7 +129,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
           <div className="lg:w-[70%] relative">
 
             {/* Reading Progress Line */}
-            <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-black/5 rounded-full hidden lg:block">
+            <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-black/5 dark:bg-white/10 rounded-full hidden lg:block">
               <motion.div
                 className="w-full bg-coral rounded-full origin-top"
                 style={{ height: `${scrollProgress}%` }}
@@ -147,8 +147,8 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               </section>
 
               {/* Results */}
-              <section id="results" className="bg-white rounded-2xl p-8 border border-black/5">
-                <h2 className="font-display text-2xl font-bold mb-6 flex items-center gap-3">
+              <section id="results" className="bg-surface rounded-2xl p-8 border border-black/5 dark:border-white/10">
+                <h2 className="font-display text-2xl font-bold mb-6 flex items-center gap-3 text-text-primary">
                   <span className="w-8 h-8 rounded-lg bg-coral/10 flex items-center justify-center">
                     <TrendingUp className="w-4 h-4 text-coral" />
                   </span>
@@ -156,7 +156,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {data.results?.map((res: any, idx: number) => (
-                    <div key={idx} className="bg-ivory/50 rounded-xl p-5">
+                    <div key={idx} className="bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-xl p-5">
                       <div className="font-display text-3xl font-bold text-text-primary mb-1">
                         {res.value}
                       </div>
@@ -170,9 +170,9 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               </section>
 
               {/* Challenge */}
-              <section id="challenge" className="bg-white rounded-2xl p-8 border border-black/5">
-                <h2 className="font-display text-2xl font-bold mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center">
+              <section id="challenge" className="bg-surface rounded-2xl p-8 border border-black/5 dark:border-white/10">
+                <h2 className="font-display text-2xl font-bold mb-4 flex items-center gap-3 text-text-primary">
+                  <span className="w-8 h-8 rounded-lg bg-black/5 dark:bg-white/10 flex items-center justify-center">
                     <Target className="w-4 h-4 text-text-secondary" />
                   </span>
                   The Challenge
@@ -183,8 +183,8 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               </section>
 
               {/* Solution */}
-              <section id="solution" className="bg-white rounded-2xl p-8 border border-black/5">
-                <h2 className="font-display text-2xl font-bold mb-4 flex items-center gap-3">
+              <section id="solution" className="bg-surface rounded-2xl p-8 border border-black/5 dark:border-white/10">
+                <h2 className="font-display text-2xl font-bold mb-4 flex items-center gap-3 text-text-primary">
                   <span className="w-8 h-8 rounded-lg bg-coral/10 flex items-center justify-center">
                     <CheckCircle2 className="w-4 h-4 text-coral" />
                   </span>
@@ -194,7 +194,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                   {data.solution}
                 </p>
                 {data.keyFeatures && (
-                  <div className="bg-ivory/50 rounded-xl p-5">
+                  <div className="bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-xl p-5">
                     <h3 className="font-bold text-xs uppercase tracking-widest text-text-secondary mb-4">Key Deliverables</h3>
                     <ul className="space-y-3">
                       {data.keyFeatures.map((item: string, i: number) => (
@@ -242,14 +242,14 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
             <div className="lg:sticky lg:top-32 space-y-4">
 
               {/* TOC */}
-              <div className="bg-white rounded-2xl p-5 border border-black/5">
+              <div className="bg-surface rounded-2xl p-5 border border-black/5 dark:border-white/10">
                 <h3 className="font-bold text-[10px] uppercase tracking-widest text-text-secondary mb-3">On this page</h3>
                 <div className="space-y-1">
                   {tableOfContents.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className="w-full text-left px-3 py-2 rounded-lg hover:bg-black hover:text-white transition-all text-text-primary text-sm font-medium"
+                      className="w-full text-left px-3 py-2 rounded-lg hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all text-text-primary text-sm font-medium"
                     >
                       {item.label}
                     </button>
@@ -258,7 +258,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               </div>
 
               {/* Author */}
-              <div className="bg-white rounded-2xl p-5 border border-black/5">
+              <div className="bg-surface rounded-2xl p-5 border border-black/5 dark:border-white/10">
                 <h3 className="font-bold text-[10px] uppercase tracking-widest text-text-secondary mb-3">Written by</h3>
                 <div className="flex items-center gap-3">
                   <img
@@ -274,7 +274,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               </div>
 
               {/* Why Us */}
-              <div className="bg-white rounded-2xl p-5 border border-black/5">
+              <div className="bg-surface rounded-2xl p-5 border border-black/5 dark:border-white/10">
                 <h3 className="font-bold text-[10px] uppercase tracking-widest text-text-secondary mb-3">Why Castells</h3>
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
