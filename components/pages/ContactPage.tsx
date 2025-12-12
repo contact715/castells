@@ -43,7 +43,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
     ];
 
     return (
-        <div className="min-h-screen bg-ivory dark:bg-stone-950 text-black dark:text-white pt-32 pb-20 font-sans selection:bg-coral selection:text-white transition-colors duration-500">
+        <div className="min-h-screen bg-ivory dark:bg-[#191919] text-text-primary pt-32 pb-20 font-sans selection:bg-coral selection:text-white transition-colors duration-500">
             <div className="container mx-auto px-6">
 
                 {/* Header */}
@@ -56,7 +56,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             ]}
                         />
                     </div>
-                    <h1 className="font-display text-5xl md:text-7xl font-bold text-black dark:text-white leading-[1.1] max-w-3xl">
+                    <h1 className="font-display text-5xl md:text-7xl font-bold text-text-primary leading-[1.1] max-w-3xl">
                         Let's make something <span className="text-coral italic">great</span> together
                     </h1>
                 </div>
@@ -118,10 +118,10 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                             onChange={e => setFormState({ ...formState, topic: e.target.value })}
                                         >
                                             <option value="" disabled>Project inquiry</option>
-                                            <option value="web-design" className="bg-ivory dark:bg-stone-950">Web Design & Development</option>
-                                            <option value="marketing" className="bg-ivory dark:bg-stone-950">Digital Marketing</option>
-                                            <option value="branding" className="bg-ivory dark:bg-stone-950">Branding & Identity</option>
-                                            <option value="other" className="bg-ivory dark:bg-stone-950">Other</option>
+                                            <option value="web-design" className="bg-ivory dark:bg-[#191919]">Web Design & Development</option>
+                                            <option value="marketing" className="bg-ivory dark:bg-[#191919]">Digital Marketing</option>
+                                            <option value="branding" className="bg-ivory dark:bg-[#191919]">Branding & Identity</option>
+                                            <option value="other" className="bg-ivory dark:bg-[#191919]">Other</option>
                                         </select>
                                         <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-black/40 dark:text-white/40">
                                             <ArrowRight className="w-4 h-4 rotate-90" />
@@ -170,7 +170,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         {/* Contact Methods Grid */}
                         <div className="grid grid-cols-1 gap-6">
                             {/* Let's Talk Card */}
-                            <div className="bg-white rounded-[32px] p-10 border border-black/5 shadow-sm hover:shadow-md transition-all duration-300">
+                            <div className="bg-surface rounded-[32px] p-10 border border-black/5 dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-300">
                                 <h3 className="font-display text-xl font-bold mb-2 text-text-primary flex items-center gap-3">
                                     <Phone className="w-5 h-5 text-coral" /> Let's talk
                                 </h3>
@@ -214,7 +214,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             </div>
 
                             {/* Drop a Message Card */}
-                            <div className="bg-white rounded-[32px] p-10 border border-black/5 shadow-sm hover:shadow-md transition-all duration-300">
+                            <div className="bg-surface rounded-[32px] p-10 border border-black/5 dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-300">
                                 <h3 className="font-display text-xl font-bold mb-2 text-text-primary flex items-center gap-3">
                                     <Mail className="w-5 h-5 text-coral" /> Drop a message
                                 </h3>
@@ -256,7 +256,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 {/* Testimonials Section */}
                 <div className="mb-32">
                     <p className="text-xs font-bold uppercase tracking-widest text-coral mb-6">Testimonials</p>
-                    <h2 className="font-display text-3xl md:text-4xl font-bold text-black dark:text-white mb-12">What people say</h2>
+                    <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-12">What people say</h2>
 
                     <div className="relative group">
                         {/* Navigation Arrows (Absolute) */}
@@ -284,7 +284,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             </div>
 
                             {/* Quote Card */}
-                            <div className="lg:col-span-8 bg-white dark:bg-white/5 rounded-3xl p-8 md:p-12 flex flex-col justify-between border border-black/5 dark:border-white/5 relative overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
+                            <div className="lg:col-span-8 bg-surface rounded-3xl p-8 md:p-12 flex flex-col justify-between border border-black/5 dark:border-white/10 relative overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
                                 <div>
                                     {/* Quote Icon */}
                                     <div className="text-coral text-5xl font-serif leading-none mb-8">“</div>
@@ -327,15 +327,15 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 {/* Bottom Grid (Moved) */}
                 <div className="mb-32">
                     <p className="text-xs font-bold uppercase tracking-widest text-coral mb-6">Discover</p>
-                    <h2 className="font-display text-3xl md:text-4xl font-bold text-black dark:text-white mb-12">Explore our world</h2>
+                    <h2 className="font-display text-3xl md:text-4xl font-bold text-text-primary mb-12">Explore our world</h2>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <a href="#about" className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/5 group cursor-pointer">
+                        <a href="#about" className="bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/10 group cursor-pointer">
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
                                     <Users className="w-6 h-6 stroke-[1.5]" />
                                 </div>
-                                <h3 className="font-display font-bold text-2xl text-black dark:text-white leading-tight">
+                                <h3 className="font-display font-bold text-2xl text-text-primary leading-tight">
                                     Who we are
                                 </h3>
                             </div>
@@ -347,12 +347,12 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             </div>
                         </a>
 
-                        <a href="#work" className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/5 group cursor-pointer">
+                        <a href="#work" className="bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/10 group cursor-pointer">
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
                                     <Briefcase className="w-6 h-6 stroke-[1.5]" />
                                 </div>
-                                <h3 className="font-display font-bold text-2xl text-black dark:text-white leading-tight">
+                                <h3 className="font-display font-bold text-2xl text-text-primary leading-tight">
                                     Impactful solutions
                                 </h3>
                             </div>
@@ -364,12 +364,12 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             </div>
                         </a>
 
-                        <a href="#blog" className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/5 group cursor-pointer">
+                        <a href="#blog" className="bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/10 group cursor-pointer">
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
                                     <FileText className="w-6 h-6 stroke-[1.5]" />
                                 </div>
-                                <h3 className="font-display font-bold text-2xl text-black dark:text-white leading-tight">
+                                <h3 className="font-display font-bold text-2xl text-text-primary leading-tight">
                                     Keep up with the latest
                                 </h3>
                             </div>
