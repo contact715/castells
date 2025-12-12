@@ -102,7 +102,7 @@ const ProcessScroll: React.FC = () => {
                                 key={step.id}
                                 onClick={() => setActiveStep(idx)}
                                 className={`relative px-6 py-3 rounded-xl flex items-center gap-2 text-sm font-bold uppercase tracking-widest transition-all duration-300 outline-none ${isActive
-                                        ? 'text-white shadow-md'
+                                        ? 'text-white dark:text-black shadow-md'
                                         : 'text-text-secondary hover:text-text-primary hover:bg-gray-100 dark:hover:bg-neutral-800'
                                     }`}
                             >
@@ -118,7 +118,7 @@ const ProcessScroll: React.FC = () => {
                                             ? 'bg-coral text-white'
                                             : idx < activeStep
                                                 ? 'bg-coral/20 text-coral'
-                                                : 'bg-black/10 text-text-secondary'
+                                                : 'bg-black/10 dark:bg-white/10 text-text-secondary'
                                         }`}>
                                         {idx + 1}
                                     </span>
@@ -146,7 +146,7 @@ const ProcessScroll: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
-                    className="bg-white rounded-[2rem] p-8 md:p-12 border border-black/5"
+                    className="bg-surface rounded-[2rem] p-8 md:p-12 border border-black/5 dark:border-white/10 shadow-sm"
                 >
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
                         {/* Left: Icon + Title + Description */}
@@ -177,7 +177,7 @@ const ProcessScroll: React.FC = () => {
                         </div>
 
                         {/* Right: Deliverables */}
-                        <div className="bg-[#F4F4F2] rounded-2xl p-8">
+                        <div className="bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-2xl p-8">
                             <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary mb-6">
                                 What You Get
                             </h4>
@@ -201,7 +201,7 @@ const ProcessScroll: React.FC = () => {
                             </div>
 
                             {/* Timeline indicator */}
-                            <div className="mt-8 pt-6 border-t border-black/10">
+                            <div className="mt-8 pt-6 border-t border-black/10 dark:border-white/10">
                                 <div className="flex items-center justify-between">
                                     <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
                                         Timeline
