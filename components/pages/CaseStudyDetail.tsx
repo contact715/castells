@@ -210,22 +210,22 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
 
               {/* Testimonial */}
               {data.testimonial && (
-                <section className="bg-black text-white rounded-2xl p-8 md:p-10 relative overflow-hidden">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-coral/20 rounded-full blur-3xl" />
+                <section className="bg-surface rounded-2xl p-8 md:p-10 relative overflow-hidden border border-black/5 dark:border-white/10">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-coral/10 rounded-full blur-3xl" />
                   <div className="relative z-10">
                     <div className="text-coral text-5xl font-serif leading-none mb-4">"</div>
-                    <blockquote className="font-display text-xl md:text-2xl font-medium leading-relaxed mb-6">
+                    <blockquote className="font-display text-xl md:text-2xl font-medium leading-relaxed mb-6 text-text-primary">
                       {data.testimonial.quote}
                     </blockquote>
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white font-bold text-sm">
+                      <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center text-text-primary font-bold text-sm">
                         {data.testimonial.author.charAt(0)}
                       </div>
                       <div>
-                        <cite className="not-italic font-bold text-white text-sm block">
+                        <cite className="not-italic font-bold text-text-primary text-sm block">
                           {data.testimonial.author}
                         </cite>
-                        <span className="text-white/60 text-xs">
+                        <span className="text-text-secondary text-xs">
                           {data.testimonial.role}
                         </span>
                       </div>
@@ -299,13 +299,12 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               </div>
 
               {/* CTA */}
-              <div className="bg-black text-white rounded-2xl p-5">
-                <p className="font-display text-lg font-bold mb-1">Ready to grow?</p>
-                <p className="text-white/60 text-xs mb-4">Get a free strategy audit</p>
+              <div className="bg-surface rounded-2xl p-5 border border-black/5 dark:border-white/10">
+                <p className="font-display text-lg font-bold mb-1 text-text-primary">Ready to grow?</p>
+                <p className="text-text-secondary text-xs mb-4">Get a free strategy audit</p>
                 <Button
                   onClick={() => onNavigate('contact')}
                   size="md"
-                  variant="secondary"
                   className="w-full"
                 >
                   Get Free Audit
