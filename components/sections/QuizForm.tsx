@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Check, ChevronRight, Loader2 } from 'lucide-react';
 import { cn } from '../../lib/utils';
-import { RippleButton } from '../ui/RippleButton';
+import { Button } from '../ui/Button';
+import { Input } from '../ui/Input';
 
 type QuizData = {
     goal: string;
@@ -190,50 +191,47 @@ const QuizForm: React.FC = () => {
                         ) : (
                             <form onSubmit={handleSubmit} className="space-y-6">
                                 <div className="space-y-4">
-                                    <div className="space-y-2">
-                                        <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Full Name</label>
-                                        <input
-                                            required
-                                            name="name"
-                                            value={formData.name}
-                                            onChange={handleInputChange}
-                                            type="text"
-                                            className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-white/20 focus:outline-none focus:border-white transition-all text-lg font-light rounded-none"
-                                            placeholder="John Doe"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Work Email</label>
-                                        <input
-                                            required
-                                            name="email"
-                                            value={formData.email}
-                                            onChange={handleInputChange}
-                                            type="email"
-                                            className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-white/20 focus:outline-none focus:border-white transition-all text-lg font-light rounded-none"
-                                            placeholder="john@company.com"
-                                        />
-                                    </div>
-                                    <div className="space-y-2">
-                                        <label className="text-[10px] font-bold uppercase tracking-widest text-white/40">Company Website</label>
-                                        <input
-                                            required
-                                            name="website"
-                                            value={formData.website}
-                                            onChange={handleInputChange}
-                                            type="url"
-                                            className="w-full bg-transparent border-b border-white/20 py-3 text-white placeholder-white/20 focus:outline-none focus:border-white transition-all text-lg font-light rounded-none"
-                                            placeholder="https://company.com"
-                                        />
-                                    </div>
+                                    <Input
+                                        required
+                                        name="name"
+                                        value={formData.name}
+                                        onChange={handleInputChange}
+                                        type="text"
+                                        variant="minimal"
+                                        size="lg"
+                                        label="Full Name"
+                                        placeholder="John Doe"
+                                    />
+                                    <Input
+                                        required
+                                        name="email"
+                                        value={formData.email}
+                                        onChange={handleInputChange}
+                                        type="email"
+                                        variant="minimal"
+                                        size="lg"
+                                        label="Work Email"
+                                        placeholder="john@company.com"
+                                    />
+                                    <Input
+                                        name="website"
+                                        value={formData.website}
+                                        onChange={handleInputChange}
+                                        type="url"
+                                        variant="minimal"
+                                        size="lg"
+                                        label="Company Website"
+                                        placeholder="https://company.com"
+                                    />
                                 </div>
 
                                 <div className="pt-4">
-                                    <RippleButton
+                                    <Button
                                         type="submit"
+                                        size="lg"
+                                        variant="secondary"
+                                        className="w-full"
                                         disabled={status === 'submitting'}
-                                        className="w-full bg-white text-black py-4 rounded-xl font-bold text-sm tracking-widest uppercase shadow-none hover:bg-white/90 border-none transition-all duration-300"
-                                        rippleColor={status === 'submitting' ? 'transparent' : '#000'}
                                     >
                                         {status === 'submitting' ? (
                                             <Loader2 className="w-5 h-5 animate-spin mx-auto" />
@@ -242,7 +240,7 @@ const QuizForm: React.FC = () => {
                                                 Get Your Roadmap <ArrowRight className="w-4 h-4" />
                                             </span>
                                         )}
-                                    </RippleButton>
+                                    </Button>
                                 </div>
 
                                 <p className="text-center text-[10px] text-white/30">

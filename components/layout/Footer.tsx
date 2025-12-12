@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { ArrowUpRight, Instagram, Linkedin, Twitter, ArrowRight } from 'lucide-react';
-import { RippleButton } from '../ui/RippleButton';
+import { Button } from '../ui/Button';
 import ScrollFloat from '../effects/ScrollFloat';
 import { PageView } from '../../App';
 
@@ -30,24 +30,24 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <div>
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
-                <span className="text-xs font-bold uppercase tracking-widest text-coral">
+                <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
                   Q2 2025 — Limited Availability
                 </span>
               </div>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight text-black max-w-xl">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight text-text-primary max-w-xl">
                 Ready to<br />
-                <span className="text-coral italic">Dominate?</span>
+                <span className="text-text-secondary">Dominate?</span>
               </h2>
             </div>
 
             {/* Right Column: CTA + Contact */}
             <div className="flex flex-col justify-end items-start lg:items-end gap-8">
-              <RippleButton
+              <Button
                 href="#audit"
-                className="bg-black text-white px-8 py-4 rounded-xl text-sm font-bold uppercase tracking-widest hover:bg-black/90 transition-all shadow-lg"
+                size="lg"
               >
                 Start Your Growth Audit
-              </RippleButton>
+              </Button>
 
               <div className="flex items-center gap-6 text-text-secondary text-sm font-medium">
                 <a href="mailto:hello@castells.agency" className="flex items-center gap-2 hover:text-coral transition-colors group">
@@ -216,7 +216,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* Bottom Section */}
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-black/10">
           <div className="flex items-center gap-2 mb-4 md:mb-0">
-            <img src="/castells-logo.png" alt="Castells Logo" className="w-10 h-10 object-contain" />
+            <img src="/castells-logo.png" alt="Castells Logo" className="w-10 h-10 object-contain" loading="lazy" />
             <span className="font-display font-bold text-xl tracking-tight text-black">Castells.</span>
           </div>
           <p className="text-xs text-text-secondary uppercase tracking-widest">

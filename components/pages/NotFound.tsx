@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { RippleButton } from '../ui/RippleButton';
+import { Button } from '../ui/Button';
 import { motion } from 'framer-motion';
 
 const NotFound: React.FC = () => {
@@ -44,9 +44,9 @@ const NotFound: React.FC = () => {
 
             {/* Layer 3: Interactive UI (Button) - Always visible */}
             <div className="relative z-30 mt-[40vh] md:mt-[50vh]">
-                <RippleButton href="/" className="bg-white text-black px-8 py-3 rounded-xl font-bold uppercase tracking-widest hover:scale-105 transition-transform shadow-[0_0_20px_rgba(255,255,255,0.2)]" rippleColor="#000">
+                <Button href="/" size="md" variant="secondary" className="shadow-[0_0_20px_rgba(255,255,255,0.2)]">
                     Return Home
-                </RippleButton>
+                </Button>
             </div>
 
             {/* Custom Cursor Elements */}

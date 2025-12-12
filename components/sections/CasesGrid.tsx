@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { m as motion } from 'framer-motion';
-import { RippleButton } from '../ui/RippleButton';
+import { Button } from '../ui/Button';
 import { PageView } from '../../App';
 import { CASE_STUDIES, CaseStudy } from '../../constants';
 
@@ -57,12 +57,13 @@ const CasesGrid: React.FC<CasesGridProps> = ({ onNavigate }) => {
                         </h2>
                     </div>
 
-                    <RippleButton
+                    <Button
                         onClick={() => onNavigate?.('work')}
-                        className="bg-black dark:bg-white text-white dark:text-black rounded-xl px-6 py-2.5 font-bold text-xs uppercase tracking-widest shadow-lg hover:shadow-xl transition-all self-start lg:self-end"
+                        size="sm"
+                        className="self-start lg:self-end"
                     >
                         View All Cases
-                    </RippleButton>
+                    </Button>
                 </div>
 
                 {/* Staggered Grid */}

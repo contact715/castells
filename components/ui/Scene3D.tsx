@@ -29,8 +29,10 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     return { hasError: true }
   }
 
-  componentDidCatch(error: any, errorInfo: any) {
-    console.error("3D Scene Error:", error, errorInfo)
+  componentDidCatch(error: unknown, errorInfo: unknown) {
+    if (process.env.NODE_ENV === 'development') {
+      console.error("3D Scene Error:", error, errorInfo)
+    }
   }
 
   render() {

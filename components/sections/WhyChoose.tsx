@@ -1,7 +1,8 @@
 import React from 'react';
 import { Shield, Target, Users, ArrowRight, Zap, Clock, TrendingUp } from 'lucide-react';
 import { Section, SectionContainer } from '../ui/Section';
-import { RippleButton } from '../ui/RippleButton';
+import { Button } from '../ui/Button';
+import { Badge } from '../ui/Badge';
 
 const REASONS = [
     {
@@ -65,12 +66,7 @@ const WhyChoose: React.FC = () => {
                     {/* Left: Header + CTA */}
                     <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
                         <div className="mb-8">
-                            <div className="flex items-center gap-2 mb-3">
-                                <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
-                                <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-                                    Why Us
-                                </span>
-                            </div>
+                            <Badge className="mb-3">Why Us</Badge>
                             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight mb-4">
                                 The Unfair<br />
                                 <span className="text-text-secondary">Advantage</span>
@@ -81,10 +77,10 @@ const WhyChoose: React.FC = () => {
                         </div>
 
                         <div className="flex flex-col items-start gap-4">
-                            <RippleButton className="bg-black text-white px-6 py-2.5 rounded-xl font-bold uppercase tracking-widest text-xs inline-flex items-center gap-2 group">
+                            <Button size="md" className="inline-flex items-center gap-2 group">
                                 See Our Results
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </RippleButton>
+                            </Button>
                         </div>
                     </div>
 

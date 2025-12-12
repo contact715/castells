@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { ArrowUpRight, TrendingUp, MapPin, Layers } from 'lucide-react';
-import { RippleButton } from '../ui/RippleButton';
+import { Button } from '../ui/Button';
+import { Badge } from '../ui/Badge';
 import ScrollFloat from '../effects/ScrollFloat';
 import { PageView } from '../../App';
 import ScrollStack, { ScrollStackItem } from '../ui/ScrollStack';
@@ -22,12 +23,7 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
 
           {/* Left: Badge + Title (Sticky) */}
           <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
-              <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-                Selected Works 2023-2025
-              </span>
-            </div>
+            <Badge className="mb-3">Selected Works 2023-2025</Badge>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight">
               Proven<br />
               <span className="text-text-secondary">Dominance.</span>
@@ -39,12 +35,13 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
             <p className="text-lg text-text-secondary leading-relaxed mb-6">
               We track every click, call, and conversion. Our portfolio isn't just a gallery of pretty pictures — it's a ledger of market conquests.
             </p>
-            <RippleButton
+            <Button
               onClick={() => onNavigate?.('work')}
-              className="bg-black text-white dark:bg-white dark:text-black rounded-xl px-6 py-2.5 font-bold text-xs uppercase tracking-widest shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all self-start"
+              size="md"
+              className="self-start"
             >
               View Full Archive
-            </RippleButton>
+            </Button>
             <div className="flex items-center gap-2 mt-6 text-xs font-bold uppercase tracking-widest text-text-secondary">
               <Layers className="w-4 h-4" />
               Scroll to explore stack
@@ -75,12 +72,12 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
 
       {/* Bottom CTA Button */}
       <div className="container mx-auto px-6 pb-32 pt-12 flex justify-center">
-        <RippleButton
+        <Button
           onClick={() => onNavigate?.('work')}
-          className="bg-black text-white dark:bg-white dark:text-black rounded-xl px-6 py-2.5 font-bold text-xs uppercase tracking-widest shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
+          size="md"
         >
           View Full Archive
-        </RippleButton>
+        </Button>
       </div>
     </section>
   );
@@ -111,6 +108,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
             src={project.image}
             alt={project.client}
             className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
+            loading="lazy"
           />
         )}
 

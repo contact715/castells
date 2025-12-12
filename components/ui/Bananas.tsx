@@ -9,7 +9,10 @@ const Banana: React.FC<{ index: number; z: number; speed: number }> = ({ index, 
     const { viewport, camera } = useThree()
     const { width, height } = viewport.getCurrentViewport(camera, [0, 0, -z])
 
-    const { nodes, materials } = useGLTF('/banana-v1-transformed.glb') as any
+    const { nodes, materials } = useGLTF('/banana-v1-transformed.glb') as {
+        nodes: { banana_high: THREE.Mesh };
+        materials: { skin: THREE.MeshStandardMaterial };
+    }
 
     const [data] = useState({
         y: THREE.MathUtils.randFloatSpread(height * 2),

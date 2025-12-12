@@ -1,13 +1,16 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect, Suspense, useCallback } from 'react';
 import { LazyMotion, domAnimation } from "framer-motion";
 import NavBar from './components/layout/NavBar';
 import Footer from './components/layout/Footer';
 
 import SEO from './components/ui/SEO';
+import SchemaMarkup from './components/ui/SchemaMarkup';
+import ErrorBoundary from './components/ui/ErrorBoundary';
 import SmoothScroll from './components/effects/SmoothScroll';
+import { NavigationData } from './types';
 
 // Lazy load components for performance
-import Hero from './components/sections/Hero';
+const Hero = React.lazy(() => import('./components/sections/Hero'));
 const Services = React.lazy(() => import('./components/sections/Services'));
 const Work = React.lazy(() => import('./components/sections/Work'));
 const WhyChoose = React.lazy(() => import('./components/sections/WhyChoose'));
@@ -43,27 +46,40 @@ export type PageView = 'home' | 'case-study' | 'work' | 'about' | 'careers' | 'b
 
 function App() {
   const [currentPage, setCurrentPage] = useState<PageView>('home');
-  const [selectedProject, setSelectedProject] = useState<any>(null);
+  const [selectedProject, setSelectedProject] = useState<NavigationData | null>(null);
 
   // Scroll to top on page change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
-  const navigateTo = (page: PageView, data?: any) => {
+  const navigateTo = useCallback((page: PageView, data?: NavigationData) => {
     if (data) setSelectedProject(data);
     setCurrentPage(page);
-  };
+  }, []);
 
   return (
-    <div className="bg-ivory min-h-screen text-text-primary selection:bg-coral selection:text-white font-sans relative">
-      <SEO />
-      <div className="relative z-10">
-        <LazyMotion features={domAnimation}>
-          {currentPage !== 'not-found' && <NavBar onNavigate={navigateTo} />}
+    <ErrorBoundary>
+      <div className="bg-ivory min-h-screen text-text-primary selection:bg-coral selection:text-white font-sans relative">
+        <SEO />
+        <SchemaMarkup type="Organization" />
+        <SchemaMarkup type="WebSite" />
+        
+        {/* Skip to main content for accessibility */}
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-coral focus:text-white focus:rounded-lg focus:font-bold"
+          aria-label="Skip to main content"
+        >
+          Skip to main content
+        </a>
+        
+        <div className="relative z-10">
+          <LazyMotion features={domAnimation}>
+            {currentPage !== 'not-found' && <NavBar onNavigate={navigateTo} />}
 
-          <main>
-            <Suspense fallback={<PageLoader />}>
+            <main id="main-content" role="main">
+              <Suspense fallback={<PageLoader />}>
               {currentPage === 'home' && (
                 <>
                   <SmoothScroll />
@@ -153,10 +169,11 @@ function App() {
             </Suspense>
           </main>
 
-          {currentPage !== 'not-found' && <Footer onNavigate={navigateTo} />}
-        </LazyMotion>
+            {currentPage !== 'not-found' && <Footer onNavigate={navigateTo} />}
+          </LazyMotion>
+        </div>
       </div>
-    </div>
+    </ErrorBoundary>
   );
 }
 

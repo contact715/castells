@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Phone, MessageCircle, Send, Mail, ArrowRight, CheckCircle2, Users, Briefcase, FileText, Play, ChevronLeft, ChevronRight } from 'lucide-react';
-import { RippleButton } from '../ui/RippleButton';
+import { Button } from '../ui/Button';
+import { Input } from '../ui/Input';
 import { cn } from '../../lib/utils';
 
 import { Breadcrumbs } from '../ui/Breadcrumbs';
@@ -71,31 +72,23 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     >
                         <form onSubmit={handleSubmit} className="space-y-6">
                             <div className="space-y-4">
-                                <div className="space-y-1.5">
-                                    <label htmlFor="name" className="text-xs font-bold uppercase tracking-wider text-text-secondary ml-1">Name *</label>
-                                    <input
-                                        type="text"
-                                        id="name"
-                                        required
-                                        className="w-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-base focus:outline-none focus:border-coral dark:focus:border-coral focus:bg-white dark:focus:bg-white/10 transition-all placeholder:text-black/20 dark:placeholder:text-white/20"
-                                        placeholder="Your full name"
-                                        value={formState.name}
-                                        onChange={e => setFormState({ ...formState, name: e.target.value })}
-                                    />
-                                </div>
+                                <Input
+                                    type="text"
+                                    label="Name"
+                                    required
+                                    placeholder="Your full name"
+                                    value={formState.name}
+                                    onChange={e => setFormState({ ...formState, name: e.target.value })}
+                                />
 
-                                <div className="space-y-1.5">
-                                    <label htmlFor="email" className="text-xs font-bold uppercase tracking-wider text-text-secondary ml-1">Email *</label>
-                                    <input
-                                        type="email"
-                                        id="email"
-                                        required
-                                        className="w-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-base focus:outline-none focus:border-coral dark:focus:border-coral focus:bg-white dark:focus:bg-white/10 transition-all placeholder:text-black/20 dark:placeholder:text-white/20"
-                                        placeholder="Your email"
-                                        value={formState.email}
-                                        onChange={e => setFormState({ ...formState, email: e.target.value })}
-                                    />
-                                </div>
+                                <Input
+                                    type="email"
+                                    label="Email"
+                                    required
+                                    placeholder="Your email"
+                                    value={formState.email}
+                                    onChange={e => setFormState({ ...formState, email: e.target.value })}
+                                />
 
                                 <div className="space-y-1.5">
                                     <label htmlFor="phone" className="text-xs font-bold uppercase tracking-wider text-text-secondary ml-1">Phone (optional)</label>
@@ -103,13 +96,14 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                         <div className="w-20 bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl flex items-center justify-center text-text-secondary font-medium text-sm">
                                             🇺🇸 +1
                                         </div>
-                                        <input
+                                        <Input
                                             type="tel"
                                             id="phone"
-                                            className="flex-1 bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-base focus:outline-none focus:border-coral dark:focus:border-coral focus:bg-white dark:focus:bg-white/10 transition-all placeholder:text-black/20 dark:placeholder:text-white/20"
                                             placeholder="(555) 000-0000"
                                             value={formState.phone}
                                             onChange={e => setFormState({ ...formState, phone: e.target.value })}
+                                            className="flex-1"
+                                            label=""
                                         />
                                     </div>
                                 </div>
@@ -150,14 +144,14 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             </div>
 
                             <div className="pt-2">
-                                <RippleButton
+                                <Button
                                     type="submit"
-                                    className="w-full py-4 bg-black text-white dark:bg-white dark:text-black font-bold text-base rounded-xl transition-all shadow-lg hover:shadow-xl"
-                                    rippleColor="#E08576"
+                                    size="lg"
+                                    className="w-full"
                                     disabled={isSubmitting || isSuccess}
                                 >
                                     {isSubmitting ? 'Sending...' : isSuccess ? 'Message Sent!' : "Send Request"}
-                                </RippleButton>
+                                </Button>
                                 <p className="text-[10px] text-text-secondary mt-3 text-center">
                                     By clicking "Send Request", you consent to our Privacy Policy.
                                 </p>

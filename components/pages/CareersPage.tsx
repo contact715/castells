@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
-import { RippleButton } from '../ui/RippleButton';
+import { Button } from '../ui/Button';
 
 import { Breadcrumbs } from '../ui/Breadcrumbs';
 import { PageView } from '../../App';
@@ -71,9 +71,9 @@ const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
         <div className="mt-20 p-12 bg-black text-white rounded-3xl text-center">
           <h3 className="font-display text-3xl font-medium mb-4">Don't see your role?</h3>
           <p className="text-white/60 mb-8">We are always looking for top talent. Send us your portfolio.</p>
-          <RippleButton className="bg-white text-black px-8 py-3 rounded-xl font-bold uppercase tracking-widest" rippleColor="#000">
+          <Button size="md" variant="secondary">
             Email Recruiting
-          </RippleButton>
+          </Button>
         </div>
 
       </div>

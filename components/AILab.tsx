@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { Sparkles, Loader2, ArrowRight } from 'lucide-react';
 import { generateCreativeConcept } from '../services/geminiService';
 import { GeneratedConcept, LoadingState } from '../types';
-import { RippleButton } from './ui/RippleButton';
+import { Button } from './ui/Button';
+import { Input } from './ui/Input';
 import { Highlighter } from './ui/Highlighter';
 import ScrollFloat from './effects/ScrollFloat';
 
@@ -52,26 +53,27 @@ const AILab: React.FC = () => {
                     </div>
 
                     <form onSubmit={handleGenerate} className="relative mb-16 group">
-                        <input
+                        <Input
                             type="text"
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="e.g., An architectural firm specializing in sustainable skyscrapers..."
-                            className="w-full bg-white dark:bg-black border border-black/10 dark:border-white/10 rounded-2xl py-8 px-8 text-text-primary placeholder-gray-400 text-xl focus:outline-none focus:border-coral focus:ring-4 focus:ring-coral/10 transition-all shadow-none hover:shadow-lg"
+                            size="lg"
+                            className="pr-32"
                         />
                         <div className="absolute right-3 top-3 bottom-3">
-                            <RippleButton
+                            <Button
                                 type="submit"
+                                size="md"
                                 disabled={status === LoadingState.LOADING || !input}
-                                className="bg-black text-white dark:bg-white dark:text-black rounded-xl px-8 font-bold disabled:opacity-50 h-full border-none"
-                                rippleColor="#E08576"
+                                className="h-full border-none disabled:opacity-50"
                             >
                                 {status === LoadingState.LOADING ? (
                                     <Loader2 className="animate-spin" />
                                 ) : (
                                     <ArrowRight />
                                 )}
-                            </RippleButton>
+                            </Button>
                         </div>
                     </form>
 

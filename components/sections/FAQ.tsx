@@ -4,6 +4,8 @@ import { Highlighter } from '../ui/Highlighter';
 import ScrollFloat from '../effects/ScrollFloat';
 import { ArrowRight, Plus, Minus } from 'lucide-react';
 import { SectionHeader } from '../ui/Section';
+import { Button } from '../ui/Button';
+import { Badge } from '../ui/Badge';
 
 const FAQS = [
   {
@@ -39,12 +41,7 @@ const FAQ: React.FC = () => {
           {/* Left Column: Header & CTA */}
           <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
             <div className="mb-8">
-              <div className="flex items-center gap-2 mb-3">
-                <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
-                <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-                  FAQ
-                </span>
-              </div>
+              <Badge className="mb-3">FAQ</Badge>
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight mb-4">
                 Common<br />
                 <span className="text-text-secondary">Queries</span>
@@ -58,12 +55,13 @@ const FAQ: React.FC = () => {
               <p className="text-sm font-bold uppercase tracking-widest text-text-primary">
                 Have another question?
               </p>
-              <a
+              <Button
                 href="#contact"
-                className="group inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-black text-white font-bold text-sm uppercase tracking-widest hover:bg-black/80 transition-colors duration-300"
+                size="md"
+                className="inline-flex items-center gap-2 group"
               >
                 Contact Us <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-              </a>
+              </Button>
             </div>
           </div>
 

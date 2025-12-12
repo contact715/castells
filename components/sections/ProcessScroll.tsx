@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Search, PenTool, Rocket, BarChart3, ArrowRight, Send, Video, CheckCircle2 } from 'lucide-react';
 import { m as motion, AnimatePresence } from 'framer-motion';
-import { RippleButton } from '../ui/RippleButton';
+import { Button } from '../ui/Button';
 
 interface ProcessStep {
     id: string;
@@ -171,9 +171,9 @@ const ProcessScroll: React.FC = () => {
                                 {PROCESS_STEPS[activeStep].description}
                             </p>
 
-                            <RippleButton className="bg-black text-white px-6 py-3 rounded-xl font-bold uppercase tracking-widest text-xs inline-flex items-center gap-2">
+                            <Button size="md" className="inline-flex items-center gap-2">
                                 Start Now <ArrowRight className="w-4 h-4" />
-                            </RippleButton>
+                            </Button>
                         </div>
 
                         {/* Right: Deliverables */}

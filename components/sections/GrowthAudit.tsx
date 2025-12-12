@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { m as motion } from 'framer-motion';
 import { ArrowRight, Check, ShieldCheck, Clock } from 'lucide-react';
+import { Input } from '../ui/Input';
 import { cn } from '../../lib/utils';
-import { RippleButton } from '../ui/RippleButton';
 
 const GrowthAudit: React.FC = () => {
     const [step, setStep] = useState(1);
@@ -129,16 +129,14 @@ const GrowthAudit: React.FC = () => {
 
                                 {step === 2 && (
                                     <div className="flex flex-col gap-6">
-                                        <div className="space-y-2">
-                                            <label className="text-sm font-bold uppercase tracking-widest text-text-secondary">Website URL</label>
-                                            <input
-                                                type="text"
-                                                placeholder="example.com"
-                                                value={formData.website}
-                                                onChange={(e) => updateField('website', e.target.value)}
-                                                className="w-full bg-ivory border border-black/10 rounded-xl px-4 py-3 text-text-primary placeholder:text-text-secondary/40 focus:outline-none focus:border-coral transition-colors"
-                                            />
-                                        </div>
+                                        <Input
+                                            type="text"
+                                            label="Website URL"
+                                            variant="dark"
+                                            placeholder="example.com"
+                                            value={formData.website}
+                                            onChange={(e) => updateField('website', e.target.value)}
+                                        />
                                         <div className="space-y-2">
                                             <label className="text-sm font-bold uppercase tracking-widest text-text-secondary">Monthly Revenue</label>
                                             <div className="grid grid-cols-1 gap-2">
@@ -164,26 +162,22 @@ const GrowthAudit: React.FC = () => {
 
                                 {step === 3 && (
                                     <div className="flex flex-col gap-6">
-                                        <div className="space-y-2">
-                                            <label className="text-sm font-bold uppercase tracking-widest text-text-secondary">Your Name</label>
-                                            <input
-                                                type="text"
-                                                placeholder="John Doe"
-                                                value={formData.name}
-                                                onChange={(e) => updateField('name', e.target.value)}
-                                                className="w-full bg-ivory border border-black/10 rounded-xl px-4 py-3 text-text-primary placeholder:text-text-secondary/40 focus:outline-none focus:border-coral transition-colors"
-                                            />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <label className="text-sm font-bold uppercase tracking-widest text-text-secondary">Work Email</label>
-                                            <input
-                                                type="email"
-                                                placeholder="john@company.com"
-                                                value={formData.email}
-                                                onChange={(e) => updateField('email', e.target.value)}
-                                                className="w-full bg-ivory border border-black/10 rounded-xl px-4 py-3 text-text-primary placeholder:text-text-secondary/40 focus:outline-none focus:border-coral transition-colors"
-                                            />
-                                        </div>
+                                        <Input
+                                            type="text"
+                                            label="Your Name"
+                                            variant="dark"
+                                            placeholder="John Doe"
+                                            value={formData.name}
+                                            onChange={(e) => updateField('name', e.target.value)}
+                                        />
+                                        <Input
+                                            type="email"
+                                            label="Work Email"
+                                            variant="dark"
+                                            placeholder="john@company.com"
+                                            value={formData.email}
+                                            onChange={(e) => updateField('email', e.target.value)}
+                                        />
                                     </div>
                                 )}
 

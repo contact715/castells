@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { m as motion } from 'framer-motion';
-import { RippleButton } from '../ui/RippleButton';
+import { Button } from '../ui/Button';
 import { Marquee } from '../ui/Marquee';
 import '../ui/Marquee.css';
 
@@ -47,14 +47,14 @@ const Hero: React.FC = () => {
                             From MVP to scalable results people actually want. We design, build, and optimize campaigns for contractors, service providers, and local businesses.
                         </p>
                         <div className="flex gap-4">
-                            <RippleButton
+                            <Button
                                 href="#audit"
-                                className="bg-black dark:bg-white text-white dark:text-black px-6 py-2.5 rounded-xl font-bold text-xs uppercase tracking-widest inline-flex items-center gap-2 group"
-                                rippleColor="#E08576"
+                                size="md"
+                                className="inline-flex items-center gap-2 group"
                             >
                                 Contact us
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                            </RippleButton>
+                            </Button>
                         </div>
                     </div>
                 </div>

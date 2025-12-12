@@ -1,5 +1,6 @@
 import React from 'react';
 import { VelocityScroll } from '../effects/ScrollBasedVelocity';
+import { Badge } from '../ui/Badge';
 import { cn } from '../../lib/utils';
 
 const TESTIMONIALS = [
@@ -129,12 +130,7 @@ const Testimonials: React.FC = () => {
 
       <div className="container mx-auto px-6 mb-20 relative z-10">
         <div className="max-w-3xl">
-          <div className="flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
-            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-              Testimonials
-            </span>
-          </div>
+          <Badge className="mb-3">Testimonials</Badge>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium mb-8 leading-tight tracking-tight text-text-primary">
             Loved by founders<br />
             <span className="text-text-secondary">worldwide</span>

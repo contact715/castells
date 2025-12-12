@@ -50,7 +50,9 @@ export const generateCreativeConcept = async (brandInput: string): Promise<Gener
     
     return JSON.parse(text) as GeneratedConcept;
   } catch (error) {
-    console.error("Gemini API Error:", error);
+    if (process.env.NODE_ENV === 'development') {
+      console.error("Gemini API Error:", error);
+    }
     throw error;
   }
 };

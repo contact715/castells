@@ -2,6 +2,7 @@
 import React from 'react';
 import { Linkedin } from 'lucide-react';
 import { m as motion } from 'framer-motion';
+import { Badge } from '../ui/Badge';
 
 const TEAM = [
   {
@@ -82,12 +83,7 @@ const Team: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-12">
           {/* Left: Badge + Title */}
           <div>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
-              <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-                Our Team
-              </span>
-            </div>
+            <Badge className="mb-3">Our Team</Badge>
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-text-primary dark:text-white leading-tight tracking-tight">
               Meet the<br />
               <span className="text-text-secondary">Minds</span>

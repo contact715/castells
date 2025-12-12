@@ -1,4 +1,5 @@
 import React from 'react';
+import { Badge } from './Badge';
 import { cn } from '../../lib/utils';
 
 interface SectionProps extends React.HTMLAttributes<HTMLElement> {
@@ -52,14 +53,8 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
     return (
         <div className={cn("mb-16 md:mb-24", centered && "text-center max-w-4xl mx-auto", className)}>
             {badge && (
-                <div className={cn(
-                    "flex items-center gap-2 mb-3",
-                    centered && "justify-center"
-                )}>
-                    <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
-                    <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-                        {badge}
-                    </span>
+                <div className={cn("mb-3", centered && "flex justify-center")}>
+                    <Badge variant="pulse">{badge}</Badge>
                 </div>
             )}
 

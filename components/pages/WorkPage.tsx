@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { Section, SectionContainer, SectionHeader } from '../ui/Section';
-import { RippleButton } from '../ui/RippleButton';
 import { CASE_STUDIES, WORK_CATEGORIES } from '../../constants';
 import { cn } from '../../lib/utils';
 import { PageView } from '../../App';

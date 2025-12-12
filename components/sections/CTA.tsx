@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
+import { Badge } from '../ui/Badge';
 import { ArrowRight, Loader2, Check } from 'lucide-react';
-import { RippleButton } from '../ui/RippleButton';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import ScrollFloat from '../effects/ScrollFloat';
 import QuizForm from './QuizForm';
@@ -26,12 +26,7 @@ const CTA: React.FC = () => {
 
                     {/* Left: Text Content */}
                     <div className="max-w-xl sticky top-24">
-                        <div className="flex items-center gap-2 mb-3">
-                            <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
-                            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-                                Limited Availability: Q2 2025
-                            </span>
-                        </div>
+                        <Badge className="mb-3">Limited Availability: Q2 2025</Badge>
 
                         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium mb-8 leading-none tracking-tight">
                             Ready to<br />

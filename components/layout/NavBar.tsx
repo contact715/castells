@@ -10,17 +10,18 @@ import {
     Book, Layers, Code, ShoppingCart
 } from 'lucide-react';
 import AnimatedThemeToggler from '../ui/AnimatedThemeToggler';
-import { RippleButton } from '../ui/RippleButton';
+import { Button } from '../ui/Button';
 import { PageView } from '../../App';
+import { NavigationData } from '../../types';
 import { Menu, MenuItem, HoveredLink, ProductItem } from '../ui/NavbarMenu';
 import { Navbar, NavBody, MobileNav, MobileNavHeader, MobileNavToggle, MobileNavMenu, MobileAccordion, MobileAccordionItem } from '../ui/ResizableNavbar';
 import { CASE_STUDIES } from '../../constants';
 
 interface NavBarProps {
-    onNavigate?: (page: PageView) => void;
+    onNavigate?: (page: PageView, data?: NavigationData) => void;
 }
 
-const CategoryCard = ({ title, icon: Icon, href }: { title: string, icon: any, href: string }) => (
+const CategoryCard = ({ title, icon: Icon, href }: { title: string, icon: React.ElementType, href: string }) => (
     <a href={href} className="flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-coral/10 hover:text-coral transition-all group text-center h-full">
         <div className="bg-white dark:bg-black p-3 rounded-xl shadow-sm group-hover:scale-110 transition-transform">
             <Icon className="w-6 h-6 text-text-primary group-hover:text-coral transition-colors" />
@@ -30,7 +31,7 @@ const CategoryCard = ({ title, icon: Icon, href }: { title: string, icon: any, h
 );
 
 // --- CASES MENU (Featured Case Studies) ---
-const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: any) => void }) => {
+const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: NavigationData) => void }) => {
     // Take first 3 case studies as featured
     const featuredCases = CASE_STUDIES.slice(0, 3);
 
@@ -42,12 +43,12 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: any) =
                     <h3 className="font-display text-xl font-bold text-text-primary mb-1">Featured Work</h3>
                     <p className="text-xs text-text-secondary">Explore {CASE_STUDIES.length}+ case studies & success stories.</p>
                 </div>
-                <RippleButton
+                <Button
                     onClick={() => onNavigate?.('work')}
-                    className="px-6 py-2.5 text-xs h-auto bg-black text-white dark:bg-white dark:text-black shadow-lg hover:scale-105 transition-transform"
+                    size="sm"
                 >
                     View All Cases
-                </RippleButton>
+                </Button>
             </div>
 
             {/* Featured Cases Grid */}
@@ -55,7 +56,7 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: any) =
                 {featuredCases.map((caseStudy) => (
                     <div
                         key={caseStudy.id}
-                        onClick={() => onNavigate?.('case-study', caseStudy)}
+                        onClick={() => onNavigate?.('case-study', caseStudy as any)}
                         className="group cursor-pointer rounded-2xl overflow-hidden relative h-[200px] border border-black/5 dark:border-white/10"
                     >
                         {/* Background Image */}
@@ -63,6 +64,7 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: any) =
                             src={caseStudy.image}
                             alt={caseStudy.client}
                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            loading="lazy"
                         />
                         {/* Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
@@ -156,12 +158,12 @@ const CompanyMenu = ({ onNavigate }: { onNavigate?: (page: PageView) => void }) 
                         <p className="text-xs text-text-secondary">We are always hiring.</p>
                     </div>
                 </div>
-                <RippleButton
+                <Button
                     onClick={() => onNavigate?.('careers')}
-                    className="px-6 py-2.5 text-xs h-auto bg-black text-white dark:bg-white dark:text-black"
+                    size="sm"
                 >
                     View Careers
-                </RippleButton>
+                </Button>
             </div>
         </div>
     );
@@ -224,7 +226,7 @@ const SERVICES_DATA = [
 ];
 
 // --- SERVICES MENU ---
-const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: any) => void }) => {
+const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: NavigationData) => void }) => {
     const [activeCategory, setActiveCategory] = useState(SERVICES_DATA[0].id);
 
     const handleItemClick = (item: { label: string }) => {
@@ -283,12 +285,12 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: any
                         <p className="text-xs text-text-secondary">We build tailored growth engines.</p>
                     </div>
                 </div>
-                <RippleButton
+                <Button
                     onClick={() => onNavigate?.('contact')}
-                    className="px-6 py-2.5 text-xs h-auto bg-black text-white dark:bg-white dark:text-black"
+                    size="sm"
                 >
                     Book Strategy Call
-                </RippleButton>
+                </Button>
             </div>
         </div>
     );
@@ -353,7 +355,7 @@ const INDUSTRIES_DATA = [
 ];
 
 // --- INDUSTRIES MENU ---
-const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: any) => void }) => {
+const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: NavigationData) => void }) => {
     const [activeCategory, setActiveCategory] = useState(INDUSTRIES_DATA[0].id);
 
     const handleItemClick = (item: { label: string }) => {
@@ -412,12 +414,12 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: a
                         <p className="text-xs text-text-secondary">We adapt our strategies to any market.</p>
                     </div>
                 </div>
-                <RippleButton
+                <Button
                     onClick={() => onNavigate?.('contact')}
-                    className="px-6 py-2.5 text-xs h-auto bg-black text-white dark:bg-white dark:text-black"
+                    size="sm"
                 >
                     Book Strategy Call
-                </RippleButton>
+                </Button>
             </div>
         </div>
     );
@@ -505,13 +507,13 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
 
                     <div className="flex items-center gap-3">
                         <AnimatedThemeToggler className="w-8 h-8 flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 rounded-full" />
-                        <RippleButton
+                        <Button
                             href="#audit"
-                            className="hidden lg:flex bg-black dark:bg-white dark:text-black text-white px-6 py-2.5 rounded-xl text-xs font-bold uppercase tracking-widest border border-transparent hover:scale-105 transition-transform shadow-md"
-                            rippleColor="#E08576"
+                            size="sm"
+                            className="hidden lg:flex"
                         >
                             Get Audit
-                        </RippleButton>
+                        </Button>
                     </div>
                 </div>
             </NavBody>
@@ -621,13 +623,14 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                         <a href="#blog" onClick={(e) => { e.preventDefault(); onNavigate?.('blog'); setMobileMenuOpen(false); }} className="block p-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-display text-xl font-bold text-text-primary">Insights</a>
                     </div>
                     <div className="pt-4 border-t border-black/5 dark:border-white/5">
-                        <RippleButton
+                        <Button
                             href="#audit"
-                            className="block w-full bg-black text-white dark:bg-white dark:text-black py-2.5 rounded-xl font-bold text-center uppercase tracking-widest text-xs"
+                            size="sm"
+                            className="w-full"
                             onClick={() => setMobileMenuOpen(false)}
                         >
                             Get Free Audit
-                        </RippleButton>
+                        </Button>
                     </div>
                 </MobileNavMenu>
             </MobileNav>

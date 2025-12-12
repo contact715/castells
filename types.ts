@@ -28,3 +28,10 @@ export interface GeneratedConcept {
   description: string;
   visualCues: string;
 }
+
+// Type for navigation data (project, service, industry)
+export interface NavigationData {
+  id?: string;
+  name?: string;
+  [key: string]: unknown;
+}

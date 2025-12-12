@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { m as motion } from 'framer-motion';
 import { CheckCircle2, ExternalLink, Calendar, Building2, Zap, Target, TrendingUp } from 'lucide-react';
-import { RippleButton } from '../ui/RippleButton';
+import { Button } from '../ui/Button';
 import SEO from '../ui/SEO';
 import { Breadcrumbs } from '../ui/Breadcrumbs';
 
@@ -101,9 +101,9 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               <div className="bg-white/10 backdrop-blur-md border border-white/10 px-4 py-2 rounded-xl text-white text-xs font-bold uppercase tracking-widest">
                 {data.year} — {data.industry}
               </div>
-              <RippleButton className="bg-white/10 backdrop-blur-md border border-white/10 text-white px-4 py-2 rounded-xl text-xs font-bold uppercase tracking-widest flex items-center gap-2 hover:bg-white hover:text-black transition-all">
+              <Button size="sm" variant="outline-white" className="backdrop-blur-md flex items-center gap-2">
                 View Live <ExternalLink className="w-3 h-3" />
-              </RippleButton>
+              </Button>
             </div>
 
             {/* Bottom Content */}
@@ -302,12 +302,14 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               <div className="bg-black text-white rounded-2xl p-5">
                 <p className="font-display text-lg font-bold mb-1">Ready to grow?</p>
                 <p className="text-white/60 text-xs mb-4">Get a free strategy audit</p>
-                <RippleButton
+                <Button
                   onClick={() => onNavigate('contact')}
-                  className="w-full bg-white text-black py-3 rounded-xl font-bold uppercase tracking-widest text-xs"
+                  size="md"
+                  variant="secondary"
+                  className="w-full"
                 >
                   Get Free Audit
-                </RippleButton>
+                </Button>
               </div>
 
             </div>

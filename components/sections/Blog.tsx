@@ -1,7 +1,8 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { m as motion } from 'framer-motion';
-import { RippleButton } from '../ui/RippleButton';
+import { Button } from '../ui/Button';
+import { Badge } from '../ui/Badge';
 
 interface BlogPost {
     id: number;
@@ -70,24 +71,20 @@ const Blog: React.FC = () => {
                 {/* Header */}
                 <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
                     <div className="max-w-2xl">
-                        <div className="flex items-center gap-2 mb-3">
-                            <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
-                            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-                                Blogs & Insights
-                            </span>
-                        </div>
+                        <Badge className="mb-3">Blogs & Insights</Badge>
                         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-text-primary dark:text-white leading-tight tracking-tight">
                             Latest insights and<br />
                             <span className="text-text-secondary">industry trends</span>
                         </h2>
                     </div>
 
-                    <RippleButton
+                    <Button
                         href="#"
-                        className="bg-black dark:bg-white text-white dark:text-black rounded-xl px-6 py-3 font-bold text-sm uppercase tracking-widest self-start lg:self-end"
+                        size="md"
+                        className="self-start lg:self-end"
                     >
                         View All
-                    </RippleButton>
+                    </Button>
                 </div>
 
                 {/* Grid - 2x2 layout */}
@@ -111,6 +108,7 @@ const Blog: React.FC = () => {
                                     src={post.image}
                                     alt={post.title}
                                     className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-110"
+                                    loading="lazy"
                                 />
                             </div>
 

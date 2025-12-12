@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, Clock } from 'lucide-react';
-import { RippleButton } from '../ui/RippleButton';
+import { Button } from '../ui/Button';
 
 interface Insight {
     id: number;
@@ -122,10 +122,10 @@ const InsightsList: React.FC = () => {
 
             {/* View All Button */}
             <div className="pt-8 flex justify-center">
-                <RippleButton className="bg-black text-white px-10 py-4 rounded-xl font-bold uppercase tracking-widest text-sm inline-flex items-center gap-3 group">
+                <Button size="lg" className="inline-flex items-center gap-3 group">
                     View All Articles
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </RippleButton>
+                </Button>
             </div>
         </div>
     );
