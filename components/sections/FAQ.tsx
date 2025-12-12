@@ -77,13 +77,13 @@ const FAQ: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    className={`border-b border-black/10 ${idx === 0 ? 'border-t' : ''}`}
+                    className={`border-b border-black/10 dark:border-white/10 ${idx === 0 ? 'border-t' : ''}`}
                   >
                     <button
                       onClick={() => setOpenIndex(isOpen ? null : idx)}
                       className="w-full py-8 flex items-start justify-between gap-6 text-left group"
                     >
-                      <h3 className="font-display font-bold text-2xl md:text-3xl text-text-primary group-hover:text-black transition-colors">
+                      <h3 className="font-display font-bold text-2xl md:text-3xl text-text-primary group-hover:text-text-primary transition-colors">
                         {faq.question}
                       </h3>
                       <span className="flex-shrink-0 mt-1">

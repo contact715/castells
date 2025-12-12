@@ -73,7 +73,7 @@ const PARTNER_LOGOS = [
 
 const TrustedBy: React.FC = () => {
     return (
-        <section className="bg-ivory dark:bg-black border-t border-black/5 dark:border-white/5 py-16">
+        <section className="bg-ivory dark:bg-[#191919] border-t border-black/5 dark:border-white/5 py-16">
             <div className="container mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0 }}

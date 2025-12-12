@@ -23,7 +23,7 @@ interface NavBarProps {
 
 const CategoryCard = ({ title, icon: Icon, href }: { title: string, icon: React.ElementType, href: string }) => (
     <a href={href} className="flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-coral/10 hover:text-coral transition-all group text-center h-full">
-        <div className="bg-white dark:bg-black p-3 rounded-xl shadow-sm group-hover:scale-110 transition-transform">
+        <div className="bg-white dark:bg-[#191919] p-3 rounded-xl shadow-sm group-hover:scale-110 transition-transform">
             <Icon className="w-6 h-6 text-text-primary group-hover:text-coral transition-colors" />
         </div>
         <span className="text-xs font-bold uppercase tracking-wide text-text-primary group-hover:text-coral">{title}</span>

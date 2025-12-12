@@ -94,7 +94,7 @@ export const transitions = {
 export const colors = {
   background: {
     light: 'bg-ivory',
-    dark: 'dark:bg-black',
+    dark: 'dark:bg-[#191919]',
     surface: 'bg-white dark:bg-surface',
   },
   text: {

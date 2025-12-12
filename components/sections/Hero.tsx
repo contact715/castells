@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
                         </span>
                         <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight text-text-primary mb-0">
                             We dominate<br />
-                            <span className="text-text-secondary">local markets</span>
+                            <span className="text-coral italic">local markets</span>
                         </h1>
                     </div>
 

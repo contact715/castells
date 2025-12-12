@@ -39,7 +39,7 @@ const CasesGrid: React.FC<CasesGridProps> = ({ onNavigate }) => {
     const cases = CASE_STUDIES.slice(0, 4);
 
     return (
-        <section id="cases" className="py-24 bg-ivory dark:bg-black border-t border-black/5 dark:border-white/5">
+        <section id="cases" className="py-24 bg-ivory dark:bg-[#191919] border-t border-black/5 dark:border-white/5">
             <div className="container mx-auto px-6">
 
                 {/* Header */}
@@ -138,12 +138,12 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseItem, onClick }) => {
                 </span>
 
                 {/* Title */}
-                <h3 className="font-display text-lg md:text-xl font-medium text-text-primary dark:text-white mb-3 leading-snug group-hover:text-black transition-colors">
+                <h3 className="font-display text-lg md:text-xl font-medium text-text-primary dark:text-white mb-3 leading-snug group-hover:text-text-primary transition-colors">
                     {caseItem.client} — {caseItem.description?.slice(0, 60)}...
                 </h3>
 
                 {/* View Link */}
-                <div className="flex items-center gap-2 text-sm font-medium text-text-secondary dark:text-white/60 group-hover:text-black transition-colors">
+                <div className="flex items-center gap-2 text-sm font-medium text-text-secondary dark:text-white/60 group-hover:text-text-primary transition-colors">
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     <span>View Case</span>
                 </div>

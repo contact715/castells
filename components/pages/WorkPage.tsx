@@ -21,7 +21,7 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
         : CASE_STUDIES.filter(p => p.category === activeCategory);
 
     return (
-        <div className="bg-ivory dark:bg-black min-h-screen pt-32 pb-20">
+        <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-32 pb-20">
             <SectionContainer>
 
                 {/* Header & Navigation */}

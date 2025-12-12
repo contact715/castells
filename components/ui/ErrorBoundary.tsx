@@ -46,7 +46,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       const isDev = import.meta.env?.DEV;
 
       return (
-        <div className="min-h-screen flex items-center justify-center bg-ivory dark:bg-black p-6">
+        <div className="min-h-screen flex items-center justify-center bg-ivory dark:bg-[#191919] p-6">
           <div className="max-w-md w-full text-center">
             <h1 className="font-display text-4xl font-bold text-text-primary mb-4">
               Something went wrong

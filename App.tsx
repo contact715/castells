@@ -37,7 +37,7 @@ const IndustryPage = React.lazy(() => import('./components/pages/IndustryPage'))
 
 // Loading fallback
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-ivory dark:bg-black">
+  <div className="min-h-screen flex items-center justify-center bg-ivory dark:bg-[#191919]">
     <div className="w-8 h-8 border-2 border-coral border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
@@ -60,7 +60,7 @@ function App() {
 
   return (
     <ErrorBoundary>
-      <div className="bg-ivory min-h-screen text-text-primary selection:bg-coral selection:text-white font-sans relative">
+      <div className="bg-ivory dark:bg-[#191919] min-h-screen text-text-primary selection:bg-coral selection:text-white font-sans relative">
         <SEO />
         <SchemaMarkup type="Organization" />
         <SchemaMarkup type="WebSite" />

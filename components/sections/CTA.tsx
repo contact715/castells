@@ -18,7 +18,7 @@ const CTA: React.FC = () => {
     };
 
     return (
-        <section id="audit" className="py-32 bg-ivory text-black relative">
+        <section id="audit" className="py-32 bg-ivory dark:bg-[#191919] text-text-primary relative">
             <div className="container mx-auto px-6 relative z-10">
 
                 {/* Main Layout Grid */}
@@ -37,14 +37,14 @@ const CTA: React.FC = () => {
                             {/* Feature Points */}
                             <div className="flex flex-col gap-3">
                                 <div className="flex items-center gap-4 group">
-                                    <div className="w-8 h-8 rounded-full border border-black/10 flex items-center justify-center text-coral group-hover:bg-coral group-hover:text-white transition-colors">
+                                    <div className="w-8 h-8 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center text-coral group-hover:bg-coral group-hover:text-white transition-colors">
                                         <span className="text-xs font-bold">01</span>
                                     </div>
                                     <span className="text-sm font-bold text-text-primary tracking-wide">No credit card required</span>
                                 </div>
-                                <div className="w-px h-6 bg-black/5 ml-4"></div>
+                                <div className="w-px h-6 bg-black/5 dark:bg-white/10 ml-4"></div>
                                 <div className="flex items-center gap-4 group">
-                                    <div className="w-8 h-8 rounded-full border border-black/10 flex items-center justify-center text-coral group-hover:bg-coral group-hover:text-white transition-colors">
+                                    <div className="w-8 h-8 rounded-full border border-black/10 dark:border-white/10 flex items-center justify-center text-coral group-hover:bg-coral group-hover:text-white transition-colors">
                                         <span className="text-xs font-bold">02</span>
                                     </div>
                                     <span className="text-sm font-bold text-text-primary tracking-wide">Response in 24 hours</span>

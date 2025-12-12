@@ -65,7 +65,7 @@ const cardVariants = {
 
 const Blog: React.FC = () => {
     return (
-        <section id="blog" className="py-20 bg-ivory dark:bg-black border-t border-black/5 dark:border-white/5">
+        <section id="blog" className="py-20 bg-ivory dark:bg-[#191919] border-t border-black/5 dark:border-white/5">
             <div className="container mx-auto px-6">
 
                 {/* Header */}

@@ -76,7 +76,7 @@ const cardVariants = {
 
 const Team: React.FC = () => {
   return (
-    <section id="team" className="py-20 bg-ivory dark:bg-black border-t border-black/5 dark:border-white/5 relative overflow-hidden">
+    <section id="team" className="py-20 bg-ivory dark:bg-[#191919] border-t border-black/5 dark:border-white/5 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
 
         {/* Section Header - Two Column Layout */}

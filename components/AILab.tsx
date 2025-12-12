@@ -85,7 +85,7 @@ const AILab: React.FC = () => {
 
                     {/* Result Card - Solid Opaque */}
                     {status === LoadingState.SUCCESS && concept && (
-                        <div className="bg-white dark:bg-black border border-black/5 dark:border-white/10 rounded-3xl p-8 md:p-16 shadow-none hover:shadow-2xl transition-all duration-500 animate-float">
+                        <div className="bg-white dark:bg-[#191919] border border-black/5 dark:border-white/10 rounded-3xl p-8 md:p-16 shadow-none hover:shadow-2xl transition-all duration-500 animate-float">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                                 <div>
                                     <h3 className="text-xs text-coral font-bold tracking-widest uppercase mb-3">Brand Concept</h3>

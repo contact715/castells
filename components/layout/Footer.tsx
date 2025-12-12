@@ -18,7 +18,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   };
 
   return (
-    <footer className="relative bg-ivory text-black overflow-hidden border-t border-black/5">
+    <footer className="relative bg-ivory dark:bg-[#191919] text-text-primary overflow-hidden border-t border-black/5 dark:border-white/10">
 
       <div className="container mx-auto px-6 py-24 relative z-10">
 
@@ -69,109 +69,118 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           {/* ROW 1: SERVICES DOMAIN */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-widest text-black mb-12 border-b border-black/10 pb-4">Services Domain</h3>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-text-primary mb-12 border-b border-black/10 dark:border-white/10 pb-4">
+              Services Domain
+            </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-start">
 
               {/* Column 1: Branding & Design */}
               <div className="flex flex-col gap-2 text-text-secondary text-sm">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-coral mb-4">Branding & Design</h4>
-                <a href="#services" className="hover:text-black transition-colors">Brand Identity</a>
-                <a href="#services" className="hover:text-black transition-colors">Brand Guidelines</a>
-                <a href="#services" className="hover:text-black transition-colors">Logobook</a>
-                <a href="#services" className="hover:text-black transition-colors">UI/UX Design</a>
-                <a href="#services" className="hover:text-black transition-colors">Print & Packaging</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">Brand Identity</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">Brand Guidelines</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">Logobook</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">UI/UX Design</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">Print & Packaging</a>
               </div>
 
               {/* Column 2: Development */}
               <div className="flex flex-col gap-2 text-text-secondary text-sm">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-coral mb-4">Development</h4>
-                <a href="#services" className="hover:text-black transition-colors">Web Development</a>
-                <a href="#services" className="hover:text-black transition-colors">Mobile Apps</a>
-                <a href="#services" className="hover:text-black transition-colors">E-commerce</a>
-                <a href="#services" className="hover:text-black transition-colors">Web Applications</a>
-                <a href="#services" className="hover:text-black transition-colors">Landing Pages</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">Web Development</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">Mobile Apps</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">E-commerce</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">Web Applications</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">Landing Pages</a>
               </div>
 
               {/* Column 3: Advertising & SEO */}
               <div className="flex flex-col gap-2 text-text-secondary text-sm">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-coral mb-4">Advertising & SEO</h4>
-                <a href="#services" className="hover:text-black transition-colors">Google Ads (PPC)</a>
-                <a href="#services" className="hover:text-black transition-colors">SEO & Content</a>
-                <a href="#services" className="hover:text-black transition-colors">Meta Ads (FB/IG)</a>
-                <a href="#services" className="hover:text-black transition-colors">YouTube Ads</a>
-                <a href="#services" className="hover:text-black transition-colors">TikTok & Social</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">Google Ads (PPC)</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">SEO & Content</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">Meta Ads (FB/IG)</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">YouTube Ads</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">TikTok & Social</a>
               </div>
 
               {/* Column 4: Automation & Analytics */}
               <div className="flex flex-col gap-2 text-text-secondary text-sm">
                 <h4 className="text-xs font-bold uppercase tracking-widest text-coral mb-4">Automation & Analytics</h4>
-                <a href="#services" className="hover:text-black transition-colors">CRM & Pipelines</a>
-                <a href="#services" className="hover:text-black transition-colors">Business Intelligence</a>
-                <a href="#services" className="hover:text-black transition-colors">Workflow Automation</a>
-                <a href="#services" className="hover:text-black transition-colors">Advanced Tracking</a>
-                <a href="#services" className="hover:text-black transition-colors">Field Ops</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">CRM & Pipelines</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">Business Intelligence</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">Workflow Automation</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">Advanced Tracking</a>
+                <a href="#services" className="hover:text-text-primary transition-colors">Field Ops</a>
               </div>
             </div>
           </div>
 
           {/* ROW 2: INDUSTRIES DOMAIN */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-widest text-black mb-12 border-b border-black/10 pb-4">Industries Domain</h3>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-text-primary mb-12 border-b border-black/10 dark:border-white/10 pb-4">
+              Industries Domain
+            </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-start">
 
               {/* Column 1: Construction */}
               <div className="flex flex-col gap-2 text-text-secondary text-sm">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-black/50 mb-4">Construction</h4>
-                <a href="#industries" className="hover:text-black transition-colors">ADU & Additions</a>
-                <a href="#industries" className="hover:text-black transition-colors">Bathroom Remodeling</a>
-                <a href="#industries" className="hover:text-black transition-colors">Roofing Services</a>
-                <a href="#industries" className="hover:text-black transition-colors">Kitchen Remodeling</a>
-                <a href="#industries" className="hover:text-black transition-colors">Concrete & Paving</a>
-                <a href="#industries" className="hover:text-black transition-colors">Fencing & Gates</a>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary mb-4">Construction</h4>
+                <a href="#industries" className="hover:text-text-primary transition-colors">ADU & Additions</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Bathroom Remodeling</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Roofing Services</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Kitchen Remodeling</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Concrete & Paving</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Fencing & Gates</a>
               </div>
 
               {/* Column 2: Home Services */}
               <div className="flex flex-col gap-2 text-text-secondary text-sm">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-black/50 mb-4">Home Services</h4>
-                <a href="#industries" className="hover:text-black transition-colors">HVAC Systems</a>
-                <a href="#industries" className="hover:text-black transition-colors">Flooring & Tile</a>
-                <a href="#industries" className="hover:text-black transition-colors">Int/Ext Painting</a>
-                <a href="#industries" className="hover:text-black transition-colors">Plumbing</a>
-                <a href="#industries" className="hover:text-black transition-colors">Electrical</a>
-                <a href="#industries" className="hover:text-black transition-colors">Solar Energy</a>
-                <a href="#industries" className="hover:text-black transition-colors">Landscaping</a>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary mb-4">Home Services</h4>
+                <a href="#industries" className="hover:text-text-primary transition-colors">HVAC Systems</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Flooring & Tile</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Int/Ext Painting</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Plumbing</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Electrical</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Solar Energy</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Landscaping</a>
               </div>
 
               {/* Column 3: Automotive */}
               <div className="flex flex-col gap-2 text-text-secondary text-sm">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-black/50 mb-4">Automotive</h4>
-                <a href="#industries" className="hover:text-black transition-colors">Paint Protection (PPF)</a>
-                <a href="#industries" className="hover:text-black transition-colors">Vinyl Wraps</a>
-                <a href="#industries" className="hover:text-black transition-colors">Window Tinting</a>
-                <a href="#industries" className="hover:text-black transition-colors">Auto Detailing</a>
-                <a href="#industries" className="hover:text-black transition-colors">Ceramic Coating</a>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary mb-4">Automotive</h4>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Paint Protection (PPF)</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Vinyl Wraps</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Window Tinting</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Auto Detailing</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Ceramic Coating</a>
               </div>
 
               {/* Column 4: Professional */}
               <div className="flex flex-col gap-2 text-text-secondary text-sm">
-                <h4 className="text-xs font-bold uppercase tracking-widest text-black/50 mb-4">Professional</h4>
-                <a href="#industries" className="hover:text-black transition-colors">Insurance Agencies</a>
-                <a href="#industries" className="hover:text-black transition-colors">Legal Services</a>
-                <a href="#industries" className="hover:text-black transition-colors">Business Consulting</a>
-                <a href="#industries" className="hover:text-black transition-colors">Financial Planning</a>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary mb-4">Professional</h4>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Insurance Agencies</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Legal Services</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Business Consulting</a>
+                <a href="#industries" className="hover:text-text-primary transition-colors">Financial Planning</a>
               </div>
             </div>
           </div>
 
           {/* ROW 3: AGENCY ECOSYSTEM */}
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-widest text-black mb-12 border-b border-black/10 pb-4">Agency Ecosystem</h3>
+            <h3 className="text-sm font-bold uppercase tracking-widest text-text-primary mb-12 border-b border-black/10 dark:border-white/10 pb-4">
+              Agency Ecosystem
+            </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-12 items-start">
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-widest text-black/30 mb-4">Resources</h4>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary opacity-70 mb-4">Resources</h4>
                 <div className="flex flex-col gap-2 text-text-secondary text-sm">
                   <a href="#" className="hover:text-coral transition-colors flex items-center gap-2">
-                    Agency Blog <span className="text-[10px] bg-black/5 px-1.5 py-0.5 rounded text-black/60">New</span>
+                    Agency Blog{" "}
+                    <span className="text-[10px] bg-black/5 dark:bg-white/10 px-1.5 py-0.5 rounded text-text-secondary">
+                      New
+                    </span>
                   </a>
                   <a href="#" className="hover:text-coral transition-colors">Case Studies</a>
                   <a href="#" className="hover:text-coral transition-colors">Whitepapers</a>
@@ -179,7 +188,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 </div>
               </div>
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-widest text-black/30 mb-4">Tools</h4>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary opacity-70 mb-4">Tools</h4>
                 <div className="flex flex-col gap-2 text-text-secondary text-sm">
                   <a href="#" className="hover:text-coral transition-colors">ROI Calculator</a>
                   <a href="#" className="hover:text-coral transition-colors">Competitor Audit</a>
@@ -187,25 +196,25 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 </div>
               </div>
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-widest text-black/30 mb-4">Company</h4>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary opacity-70 mb-4">Company</h4>
                 <div className="flex flex-col gap-2 text-text-secondary text-sm">
-                  <a href="#about" onClick={(e) => handleNav(e, 'about')} className="hover:text-black transition-colors">About Us</a>
-                  <a href="#careers" onClick={(e) => handleNav(e, 'careers')} className="hover:text-black transition-colors">Careers</a>
-                  <a href="#" className="hover:text-black transition-colors">Partner Program</a>
-                  <a href="#contact" onClick={(e) => handleNav(e, 'contact')} className="hover:text-black transition-colors">Contact</a>
+                  <a href="#about" onClick={(e) => handleNav(e, 'about')} className="hover:text-text-primary transition-colors">About Us</a>
+                  <a href="#careers" onClick={(e) => handleNav(e, 'careers')} className="hover:text-text-primary transition-colors">Careers</a>
+                  <a href="#" className="hover:text-text-primary transition-colors">Partner Program</a>
+                  <a href="#contact" onClick={(e) => handleNav(e, 'contact')} className="hover:text-text-primary transition-colors">Contact</a>
                 </div>
               </div>
               <div>
-                <h4 className="text-xs font-bold uppercase tracking-widest text-black/30 mb-4">Connect</h4>
+                <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary opacity-70 mb-4">Connect</h4>
                 <div className="flex gap-4 mb-6">
-                  <a href="#" className="text-black/40 hover:text-black transition-colors"><Linkedin className="w-5 h-5" /></a>
-                  <a href="#" className="text-black/40 hover:text-black transition-colors"><Instagram className="w-5 h-5" /></a>
-                  <a href="#" className="text-black/40 hover:text-black transition-colors"><Twitter className="w-5 h-5" /></a>
+                  <a href="#" className="text-text-secondary hover:text-text-primary transition-colors"><Linkedin className="w-5 h-5" /></a>
+                  <a href="#" className="text-text-secondary hover:text-text-primary transition-colors"><Instagram className="w-5 h-5" /></a>
+                  <a href="#" className="text-text-secondary hover:text-text-primary transition-colors"><Twitter className="w-5 h-5" /></a>
                 </div>
-                <div className="flex flex-col gap-1 text-black/30 text-xs">
-                  <a href="#" className="hover:text-black transition-colors">Privacy Policy</a>
-                  <a href="#" className="hover:text-black transition-colors">Terms of Service</a>
-                  <a href="#" className="hover:text-black transition-colors">Cookie Policy</a>
+                <div className="flex flex-col gap-1 text-text-secondary opacity-70 text-xs">
+                  <a href="#" className="hover:text-text-primary transition-colors">Privacy Policy</a>
+                  <a href="#" className="hover:text-text-primary transition-colors">Terms of Service</a>
+                  <a href="#" className="hover:text-text-primary transition-colors">Cookie Policy</a>
                 </div>
               </div>
             </div>
@@ -214,10 +223,10 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         </div>
 
         {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-black/10">
+        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-black/10 dark:border-white/10">
           <div className="flex items-center gap-2 mb-4 md:mb-0">
             <img src="/castells-logo.png" alt="Castells Logo" className="w-10 h-10 object-contain" loading="lazy" />
-            <span className="font-display font-bold text-xl tracking-tight text-black">Castells.</span>
+            <span className="font-display font-bold text-xl tracking-tight text-text-primary">Castells.</span>
           </div>
           <p className="text-xs text-text-secondary uppercase tracking-widest">
             © {new Date().getFullYear()} Castells Agency Inc.
