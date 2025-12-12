@@ -130,12 +130,12 @@ const Industries: React.FC = () => {
                     <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 relative z-20">
                       <item.icon className="w-6 h-6 stroke-[1.5]" />
                     </div>
-                    <h3 className="font-display font-bold text-2xl text-black dark:text-white leading-tight relative z-20">
+                    <h3 className="font-display font-bold text-2xl text-black dark:text-white leading-tight relative z-20 drop-shadow-[0_1px_1px_rgba(255,255,255,0.65)] dark:drop-shadow-[0_1px_1px_rgba(0,0,0,0.65)]">
                       {item.name}
                     </h3>
                   </div>
 
-                  <p className="text-text-secondary text-sm leading-relaxed relative z-20">
+                  <p className="text-text-secondary text-sm leading-relaxed relative z-20 drop-shadow-[0_1px_1px_rgba(255,255,255,0.55)] dark:drop-shadow-[0_1px_1px_rgba(0,0,0,0.55)]">
                     {item.desc}
                   </p>
 
@@ -162,11 +162,9 @@ const Industries: React.FC = () => {
                           src={item.image}
                           alt=""
                           aria-hidden="true"
-                          className="absolute inset-0 w-full h-full object-cover opacity-25"
+                          className="absolute inset-0 w-full h-full object-cover opacity-55"
                           loading="lazy"
                         />
-                        {/* Readability wash */}
-                        <div className="absolute inset-0 bg-white/70 dark:bg-[#2A2A2A]/65" />
                       </>
                     )}
 
