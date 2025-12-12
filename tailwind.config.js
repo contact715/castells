@@ -17,6 +17,10 @@ export default {
         'coral-dark': '#D67060',
         surface: '#FFFFFF',
       },
+      fontWeight: {
+        // Make headings that use `font-medium` visibly bolder
+        medium: '600',
+      },
       fontFamily: {
         display: ['Newsreader', 'serif'],
         sans: ['Satoshi', 'sans-serif'],
