@@ -10,7 +10,6 @@ import {
 import { Highlighter } from '../ui/Highlighter';
 import { cn } from '../../lib/utils';
 import { Section, SectionContainer, SectionHeader } from '../ui/Section';
-import { ImageRevealCard } from '../ui/ImageRevealCard';
 
 const CATEGORIES = [
   { id: 'construction', label: 'Construction', icon: Hammer },
@@ -155,17 +154,26 @@ const Industries: React.FC = () => {
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
                   className={spanClass}
                 >
-                  {item.image ? (
-                    <ImageRevealCard revealImage={item.image}>
-                      <div className="p-8 h-full flex flex-col items-start relative">
-                        <CardContent />
-                      </div>
-                    </ImageRevealCard>
-                  ) : (
-                    <div className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/5 relative">
+                  <div className="relative overflow-hidden bg-surface border border-black/5 dark:border-white/10 rounded-[2rem] h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    {item.image && (
+                      <>
+                        {/* Always-visible image background (no hover reveal effect) */}
+                        <img
+                          src={item.image}
+                          alt=""
+                          aria-hidden="true"
+                          className="absolute inset-0 w-full h-full object-cover opacity-25"
+                          loading="lazy"
+                        />
+                        {/* Readability wash */}
+                        <div className="absolute inset-0 bg-white/70 dark:bg-[#2A2A2A]/65" />
+                      </>
+                    )}
+
+                    <div className="p-8 h-full flex flex-col items-start relative z-20">
                       <CardContent />
                     </div>
-                  )}
+                  </div>
                 </motion.div>
               );
             })}
