@@ -7,7 +7,7 @@ import {
     Hammer, Activity, Building2, Sparkles, Palette, Terminal, Scale, Flag, Mail, Factory, BarChart3, ArrowRight,
     Shield, Smartphone, ShoppingBag, Video, MousePointer2, Database, BarChart, Settings, Wrench, PaintBucket,
     HardHat, Truck, Stethoscope, Landmark, Coins, Droplets, LayoutGrid, Frame, Ruler, ShieldCheck, Sun, ArrowUpRight, MapPin,
-    Book, Layers, Code, ShoppingCart
+    Book, Layers, Code, ShoppingCart, Calendar, Phone, Send
 } from 'lucide-react';
 import AnimatedThemeToggler from '../ui/AnimatedThemeToggler';
 import { Button } from '../ui/Button';
@@ -16,12 +16,15 @@ import { NavigationData } from '../../types';
 import { Menu, MenuItem, HoveredLink, ProductItem } from '../ui/NavbarMenu';
 import { Navbar, NavBody, MobileNav, MobileNavHeader, MobileNavToggle, MobileNavMenu, MobileAccordion, MobileAccordionItem } from '../ui/ResizableNavbar';
 import { CASE_STUDIES } from '../../constants';
+import { INDUSTRY_CATEGORIES, type IndustryCategory, type IndustryItem } from '../../data/industries';
+import { SERVICE_CATEGORIES, type ServiceCategory, type ServiceItem } from '../../data/services';
+import { ContactButtons } from '../ui/ContactButtons';
 
 interface NavBarProps {
     onNavigate?: (page: PageView, data?: NavigationData) => void;
 }
 
-const CategoryCard = ({ title, icon: Icon, href }: { title: string, icon: React.ElementType, href: string }) => (
+const CategoryCard = ({ title, icon: Icon, href }: { title: string, icon: React.ComponentType<{ className?: string }>, href: string }) => (
     <a href={href} className="flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-coral/10 hover:text-coral transition-all group text-center h-full">
         <div className="bg-white dark:bg-black p-3 rounded-xl shadow-sm group-hover:scale-110 transition-transform">
             <Icon className="w-6 h-6 text-text-primary group-hover:text-coral transition-colors" />
@@ -54,9 +57,13 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Naviga
             {/* Featured Cases Grid */}
             <div className="grid grid-cols-3 gap-4">
                 {featuredCases.map((caseStudy) => (
-                    <div
+                    <a
                         key={caseStudy.id}
-                        onClick={() => onNavigate?.('case-study', caseStudy as any)}
+                        href={`/case-studies/${encodeURIComponent(caseStudy.id)}`}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            onNavigate?.('case-study', caseStudy as any);
+                        }}
                         className="group cursor-pointer rounded-2xl overflow-hidden relative h-[200px] border border-black/5 dark:border-white/10"
                     >
                         {/* Background Image */}
@@ -84,12 +91,13 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Naviga
                                 <span className="text-white/50 text-[10px] uppercase">{caseStudy.metricLabel}</span>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 ))}
             </div>
         </div>
     );
 };
+
 
 // --- COMPANY DATA & COMPONENT ---
 const COMPANY_DATA = [
@@ -98,9 +106,9 @@ const COMPANY_DATA = [
         label: 'About',
         icon: Flag,
         items: [
-            { label: 'Our Story', icon: Flag, href: '#about', page: 'about' as PageView },
-            { label: 'Leadership', icon: Users, href: '#team', page: 'team' as PageView },
-            { label: 'Careers', icon: Briefcase, href: '#careers', page: 'careers' as PageView },
+            { label: 'Our Story', icon: Flag, href: '/about', page: 'about' as PageView },
+            { label: 'Leadership', icon: Users, href: '/team', page: 'team' as PageView },
+            { label: 'Careers', icon: Briefcase, href: '/careers', page: 'careers' as PageView },
         ]
     },
     {
@@ -108,14 +116,14 @@ const COMPANY_DATA = [
         label: 'Connect',
         icon: MessageSquare,
         items: [
-            { label: 'Blog & Insights', icon: FileText, href: '#blog', page: 'blog' as PageView },
-            { label: 'Contact Us', icon: Mail, href: '#contact', page: 'contact' as PageView },
+            { label: 'Blog & Insights', icon: FileText, href: '/blog', page: 'blog' as PageView },
+            { label: 'Contact Us', icon: Mail, href: '/contact', page: 'contact' as PageView },
             { label: 'Press', icon: Megaphone, href: '#press' },
         ]
     }
 ];
 
-const CompanyMenu = ({ onNavigate }: { onNavigate?: (page: PageView) => void }) => {
+const CompanyMenu = ({ onNavigate }: { onNavigate?: import('../../types').NavigateFn }) => {
     // Flatten items from all categories
     const allItems = COMPANY_DATA.flatMap(category => category.items);
 
@@ -148,82 +156,32 @@ const CompanyMenu = ({ onNavigate }: { onNavigate?: (page: PageView) => void }) 
                 ))}
             </div>
 
-            <div className="pt-3 border-t border-black/5 flex justify-between items-center bg-black/5 rounded-xl p-3">
-                <div className="flex items-center gap-3">
-                    <div className="bg-coral/10 p-2 rounded-full text-coral">
-                        <Users className="w-5 h-5" />
+            <div className="pt-3 border-t border-black/5 bg-black/5 rounded-xl p-3">
+                <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3 min-w-0">
+                        <div className="bg-coral/10 p-2 rounded-full text-coral shrink-0">
+                            <Phone className="w-5 h-5" />
+                        </div>
+                        <div className="min-w-0">
+                            <h5 className="font-bold text-sm text-text-primary truncate">Contact us</h5>
+                            <p className="text-xs text-text-secondary truncate">Pick the fastest channel.</p>
+                        </div>
                     </div>
-                    <div>
-                        <h5 className="font-bold text-sm text-text-primary">Join the team?</h5>
-                        <p className="text-xs text-text-secondary">We are always hiring.</p>
-                    </div>
+
+                    <ContactButtons />
                 </div>
-                <Button
-                    onClick={() => onNavigate?.('careers')}
-                    size="sm"
-                >
-                    View Careers
-                </Button>
             </div>
         </div>
     );
 };
 
 // --- SERVICES DATA & COMPONENT ---
-const SERVICES_DATA = [
-    {
-        id: 'branding',
-        label: 'Branding',
-        icon: Palette,
-        items: [
-            { label: 'Brand Identity', icon: Palette, href: '#services' },
-            { label: 'Brand Guidelines', icon: Book, href: '#services' },
-            { label: 'Logobook', icon: Layers, href: '#services' },
-            { label: 'UI/UX Design', icon: Layout, href: '#services' },
-            { label: 'Print & Packaging', icon: FileText, href: '#services' },
-            { label: 'Enterprise Solutions', icon: ArrowUpRight, href: '#services' },
-        ]
-    },
-    {
-        id: 'development',
-        label: 'Development',
-        icon: Code,
-        items: [
-            { label: 'Web Development', icon: Globe, href: '#services' },
-            { label: 'Mobile Apps', icon: Smartphone, href: '#services' },
-            { label: 'E-commerce', icon: ShoppingCart, href: '#services' },
-            { label: 'Web Applications', icon: Code, href: '#services' },
-            { label: 'Landing Pages', icon: Layout, href: '#services' },
-            { label: 'Enterprise Solutions', icon: ArrowUpRight, href: '#services' },
-        ]
-    },
-    {
-        id: 'advertising',
-        label: 'Advertising',
-        icon: Megaphone,
-        items: [
-            { label: 'Google Ads (PPC)', icon: Search, href: '#services' },
-            { label: 'SEO & Content', icon: LineChart, href: '#services' },
-            { label: 'Meta Ads', icon: Megaphone, href: '#services' },
-            { label: 'YouTube Ads', icon: Video, href: '#services' },
-            { label: 'TikTok & Social', icon: Smartphone, href: '#services' },
-            { label: 'Enterprise Solutions', icon: ArrowUpRight, href: '#services' },
-        ]
-    },
-    {
-        id: 'automation',
-        label: 'Automation',
-        icon: Cpu,
-        items: [
-            { label: 'CRM & Pipelines', icon: MessageSquare, href: '#services' },
-            { label: 'Business Intelligence', icon: BarChart, href: '#services' },
-            { label: 'Workflow Automation', icon: Cpu, href: '#services' },
-            { label: 'Advanced Tracking', icon: Terminal, href: '#services' },
-            { label: 'Field Ops', icon: Shield, href: '#services' },
-            { label: 'Enterprise Solutions', icon: ArrowUpRight, href: '#services' },
-        ]
-    }
-];
+const SERVICES_DATA = SERVICE_CATEGORIES.map((category) => ({
+    id: category.id,
+    label: category.label,
+    icon: category.icon,
+    items: category.items.map((item) => ({ label: item.name, icon: item.icon, slug: item.slug })),
+}));
 
 // --- SERVICES MENU ---
 const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: NavigationData) => void }) => {
@@ -235,9 +193,9 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
         }
     };
 
-    const handleItemClick = (item: { label: string }) => {
+    const handleItemClick = (item: { label: string; slug: string }) => {
         if (onNavigate) {
-            onNavigate('service', { name: item.label, id: item.label.toLowerCase().replace(/\s+/g, '-') });
+            onNavigate('service', { name: item.label, id: item.slug });
         }
     };
 
@@ -251,14 +209,18 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                         onMouseEnter={() => setActiveCategory(category.id)}
                         onClick={() => handleCategoryClick(category)}
                         className={`
-                            flex-1 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap text-center flex items-center justify-center gap-2 cursor-pointer
+                            flex-1 min-w-0 overflow-hidden px-2 xl:px-3 py-3 rounded-xl text-[11px] xl:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap text-center flex items-center justify-center gap-2 cursor-pointer
                             ${activeCategory === category.id
                                 ? 'bg-black text-white dark:bg-white dark:text-black shadow-sm'
                                 : 'text-text-secondary hover:bg-black/5 dark:hover:bg-white/5 hover:text-text-primary'}
                         `}
                     >
-                        {category.icon && <category.icon className={`w-4 h-4 ${activeCategory === category.id ? 'text-white dark:text-black' : ''}`} />}
-                        {category.label}
+                        {category.icon && (
+                            <category.icon
+                                className={`w-4 h-4 shrink-0 ${activeCategory === category.id ? 'text-white dark:text-black' : ''}`}
+                            />
+                        )}
+                        <span className="min-w-0 max-w-full truncate">{category.label}</span>
                     </button>
                 ))}
             </div>
@@ -269,6 +231,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                     {SERVICES_DATA.find(c => c.id === activeCategory)?.items.map((item) => (
                         <a
                             key={item.label}
+                            href={`/services/${encodeURIComponent(item.slug)}`}
                             onClick={(e) => {
                                 e.preventDefault();
                                 handleItemClick(item);
@@ -282,119 +245,67 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                     ))}
                 </div>
             </div>
-            <div className="pt-3 border-t border-black/5 flex justify-between items-center bg-black/5 rounded-xl p-3">
-                <div className="flex items-center gap-3">
-                    <div className="bg-coral/10 p-2 rounded-full text-coral">
-                        <Sparkles className="w-5 h-5" />
+            <div className="pt-3 border-t border-black/5 bg-black/5 rounded-xl p-3">
+                <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3 min-w-0">
+                        <div className="bg-coral/10 p-2 rounded-full text-coral shrink-0">
+                            <Sparkles className="w-5 h-5" />
+                        </div>
+                        <div className="min-w-0">
+                            <h5 className="font-bold text-sm text-text-primary truncate">Need a custom solution?</h5>
+                            <p className="text-xs text-text-secondary truncate">We build tailored growth engines.</p>
+                        </div>
                     </div>
-                    <div>
-                        <h5 className="font-bold text-sm text-text-primary">Need a custom solution?</h5>
-                        <p className="text-xs text-text-secondary">We build tailored growth engines.</p>
-                    </div>
+                    <ContactButtons />
                 </div>
-                <Button
-                    onClick={() => onNavigate?.('contact')}
-                    size="sm"
-                >
-                    Book Strategy Call
-                </Button>
             </div>
         </div>
     );
 };
 
-// --- INDUSTRIES DATA & COMPONENT ---
-const INDUSTRIES_DATA = [
-    {
-        id: 'construction',
-        label: 'Construction',
-        icon: Hammer,
-        items: [
-            { label: 'ADU & Additions', icon: Home, href: '#industries' },
-            { label: 'Bathroom Remodeling', icon: Droplets, href: '#industries' },
-            { label: 'Roofing Services', icon: ShieldCheck, href: '#industries' },
-            { label: 'Kitchen Remodeling', icon: LayoutGrid, href: '#industries' },
-            { label: 'Concrete & Paving', icon: Frame, href: '#industries' },
-            { label: 'Fencing & Gates', icon: Ruler, href: '#industries' },
-            { label: "Don't see your niche?", icon: MessageSquare, href: '#contact' },
-        ]
-    },
-    {
-        id: 'home_services',
-        label: 'Home Services',
-        icon: Home,
-        items: [
-            { label: 'HVAC Systems', icon: Zap, href: '#industries' },
-            { label: 'Flooring & Tile', icon: LayoutGrid, href: '#industries' },
-            { label: 'Int/Ext Painting', icon: PaintBucket, href: '#industries' },
-            { label: 'Plumbing', icon: Droplets, href: '#industries' },
-            { label: 'Electrical', icon: Zap, href: '#industries' },
-            { label: 'Solar Energy', icon: Sun, href: '#industries' },
-            { label: 'Landscaping', icon: Sun, href: '#industries' },
-            { label: "Don't see your niche?", icon: MessageSquare, href: '#contact' },
-        ]
-    },
-    {
-        id: 'automotive',
-        label: 'Automotive',
-        icon: Car,
-        items: [
-            { label: 'Paint Protection', icon: ShieldCheck, href: '#industries' },
-            { label: 'Vinyl Wraps', icon: Palette, href: '#industries' },
-            { label: 'Window Tinting', icon: Sun, href: '#industries' },
-            { label: 'Auto Detailing', icon: Sparkles, href: '#industries' },
-            { label: 'Ceramic Coating', icon: Droplets, href: '#industries' },
-            { label: "Don't see your niche?", icon: MessageSquare, href: '#contact' },
-        ]
-    },
-    {
-        id: 'professional',
-        label: 'Professional',
-        icon: Briefcase,
-        items: [
-            { label: 'Insurance Agencies', icon: ShieldCheck, href: '#industries' },
-            { label: 'Legal Services', icon: Scale, href: '#industries' },
-            { label: 'Business Consulting', icon: FileText, href: '#industries' },
-            { label: 'Financial Planning', icon: Briefcase, href: '#industries' },
-            { label: "Don't see your niche?", icon: MessageSquare, href: '#contact' },
-        ]
-    }
-];
-
 // --- INDUSTRIES MENU ---
 const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: NavigationData) => void }) => {
-    const [activeCategory, setActiveCategory] = useState(INDUSTRIES_DATA[0].id);
+    const [activeCategory, setActiveCategory] = useState(INDUSTRY_CATEGORIES[0].id);
 
-    const handleCategoryClick = (category: { id: string; label: string }) => {
+    const handleCategoryClick = (category: IndustryCategory) => {
         if (onNavigate) {
             onNavigate('industry', { name: category.label, id: category.id });
         }
     };
 
-    const handleItemClick = (item: { label: string }) => {
-        if (onNavigate) {
-            onNavigate('industry', { name: item.label, id: item.label.toLowerCase().replace(/\s+/g, '-') });
+    const handleItemClick = (item: IndustryItem) => {
+        if (!onNavigate) return;
+
+        if (item.type === 'cta') {
+            onNavigate('contact');
+            return;
         }
+
+        onNavigate('industry', { name: item.name, id: item.slug });
     };
 
     return (
         <div className="flex flex-col gap-4">
             {/* Top: Categories */}
             <div className="flex items-center justify-between gap-1 bg-white dark:bg-neutral-900 p-1.5 rounded-2xl border border-black/5 shadow-sm w-full mb-4">
-                {INDUSTRIES_DATA.map((category) => (
+                {INDUSTRY_CATEGORIES.map((category) => (
                     <button
                         key={category.id}
                         onMouseEnter={() => setActiveCategory(category.id)}
                         onClick={() => handleCategoryClick(category)}
                         className={`
-                            flex-1 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap flex items-center justify-center gap-2 cursor-pointer
+                            flex-1 min-w-0 overflow-hidden px-2 xl:px-3 py-3 rounded-xl text-[11px] xl:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap flex items-center justify-center gap-2 cursor-pointer
                             ${activeCategory === category.id
                                 ? 'bg-black text-white dark:bg-white dark:text-black shadow-sm'
                                 : 'text-text-secondary hover:bg-black/5 dark:hover:bg-white/5 hover:text-text-primary'}
                         `}
                     >
-                        {category.icon && <category.icon className={`w-4 h-4 ${activeCategory === category.id ? 'text-white dark:text-black' : ''}`} />}
-                        {category.label}
+                        {category.icon && (
+                            <category.icon
+                                className={`w-4 h-4 shrink-0 ${activeCategory === category.id ? 'text-white dark:text-black' : ''}`}
+                            />
+                        )}
+                        <span className="min-w-0 max-w-full truncate">{category.label}</span>
                     </button>
                 ))}
             </div>
@@ -402,9 +313,14 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
             {/* Bottom: Items */}
             <div>
                 <div className="grid grid-cols-2 gap-x-4 gap-y-2">
-                    {INDUSTRIES_DATA.find(c => c.id === activeCategory)?.items.map((item) => (
+                    {INDUSTRY_CATEGORIES.find(c => c.id === activeCategory)?.items.map((item) => (
                         <a
-                            key={item.label}
+                            key={item.name}
+                            href={
+                                item.type === 'cta'
+                                    ? item.href
+                                    : `/industries/${encodeURIComponent(item.slug)}`
+                            }
                             onClick={(e) => {
                                 e.preventDefault();
                                 handleItemClick(item);
@@ -412,28 +328,25 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                             className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
                         >
                             <item.icon className="w-4 h-4 text-text-secondary group-hover:text-current" />
-                            <span className="flex-1 text-sm font-medium">{item.label}</span>
+                            <span className="flex-1 text-sm font-medium">{item.name}</span>
                             <ArrowUpRight className="w-4 h-4 opacity-20 group-hover:opacity-100 transition-opacity" />
                         </a>
                     ))}
                 </div>
             </div>
-            <div className="pt-3 border-t border-black/5 flex justify-between items-center bg-black/5 rounded-xl p-3">
-                <div className="flex items-center gap-3">
-                    <div className="bg-coral/10 p-2 rounded-full text-coral">
-                        <Activity className="w-5 h-5" />
+            <div className="pt-3 border-t border-black/5 bg-black/5 rounded-xl p-3">
+                <div className="flex items-center justify-between gap-4">
+                    <div className="flex items-center gap-3 min-w-0">
+                        <div className="bg-coral/10 p-2 rounded-full text-coral shrink-0">
+                            <Activity className="w-5 h-5" />
+                        </div>
+                        <div className="min-w-0">
+                            <h5 className="font-bold text-sm text-text-primary truncate">Don't see your industry?</h5>
+                            <p className="text-xs text-text-secondary truncate">We adapt our strategies to any market.</p>
+                        </div>
                     </div>
-                    <div>
-                        <h5 className="font-bold text-sm text-text-primary">Don't see your industry?</h5>
-                        <p className="text-xs text-text-secondary">We adapt our strategies to any market.</p>
-                    </div>
+                    <ContactButtons />
                 </div>
-                <Button
-                    onClick={() => onNavigate?.('contact')}
-                    size="sm"
-                >
-                    Book Strategy Call
-                </Button>
             </div>
         </div>
     );
@@ -482,7 +395,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                         whileHover={{ rotate: 180 }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
                     />
-                    <span className="font-display text-2xl font-bold text-black dark:text-white tracking-tight transition-colors">caste//s</span>
+                    <span className="font-display text-3xl font-bold text-black dark:text-white tracking-tight transition-colors">caste//s</span>
                 </motion.div>
 
                 <div className="flex items-center gap-6">
@@ -554,9 +467,13 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                     <div className="flex items-center gap-3">
                         <AnimatedThemeToggler className="w-8 h-8 flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 rounded-full" />
                         <Button
-                            href="#audit"
+                            href="/contact"
                             size="sm"
                             className="hidden lg:flex"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                onNavigate?.('contact');
+                            }}
                         >
                             Get Audit
                         </Button>
@@ -642,7 +559,6 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">HVAC</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Solar</a>
-                                            <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Plumbing</a>
                                         </div>
                                     </div>
                                     <div className="space-y-2">
@@ -658,6 +574,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Legal</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Finance</a>
+                                            <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Real Estate</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Medical</a>
                                         </div>
                                     </div>
@@ -670,10 +587,14 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                     </div>
                     <div className="pt-4 border-t border-black/5 dark:border-white/5">
                         <Button
-                            href="#audit"
+                            href="/contact"
                             size="sm"
                             className="w-full"
-                            onClick={() => setMobileMenuOpen(false)}
+                            onClick={(e) => {
+                                e.preventDefault();
+                                onNavigate?.('contact');
+                                setMobileMenuOpen(false);
+                            }}
                         >
                             Get Free Audit
                         </Button>

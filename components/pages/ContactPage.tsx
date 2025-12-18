@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Phone, MessageCircle, Send, Mail, ArrowRight, CheckCircle2, Users, Briefcase, FileText, Play, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Calendar, Phone, MessageCircle, Send, Mail, ArrowRight, CheckCircle2, Users, Briefcase, FileText, Play } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { cn } from '../../lib/utils';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import { PageHeader } from '../ui/PageHeader';
-import { PageView } from '../../App';
+import type { NavigateFn } from '../../types';
 
 interface ContactPageProps {
-    onNavigate?: (page: PageView) => void;
+    onNavigate?: NavigateFn;
 }
 
 const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
@@ -32,7 +32,13 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
         setIsSuccess(true);
         setFormState({ name: '', email: '', phone: '', topic: 'web-design', message: '' });
 
-        setTimeout(() => setIsSuccess(false), 5000);
+        // Navigate to thank you page after successful submission
+        if (onNavigate) {
+            setTimeout(() => {
+                // Pass type as 'contact' for contact form submissions
+                onNavigate('thank-you', { name: 'contact' });
+            }, 500);
+        }
     };
 
     const contactMethods = [
@@ -43,7 +49,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
     ];
 
     return (
-        <div className="min-h-screen bg-ivory dark:bg-stone-950 text-black dark:text-white pt-32 pb-20 font-sans selection:bg-coral selection:text-white transition-colors duration-500">
+        <div className="min-h-screen bg-ivory pt-32 pb-20 font-sans selection:bg-coral selection:text-white transition-colors duration-500">
             <div className="container mx-auto px-6">
 
                 {/* Header */}
@@ -54,105 +60,140 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     ]}
                     badge="Get in Touch"
                     title="Let's make something great together"
+                    description="Ready to dominate your market? Schedule a free strategy session and let's discuss how we can help you achieve your goals."
                     onNavigate={onNavigate}
                 />
 
-                <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 mb-32 items-start">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mb-32">
 
-                    {/* Left Column: Form (Fixed/Sticky) */}
+                    {/* Left Column: Form */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="lg:w-[60%] lg:sticky lg:top-32"
+                        className="lg:col-span-7 lg:sticky lg:top-32 h-fit"
                     >
-                        <form onSubmit={handleSubmit} className="space-y-6">
-                            <div className="space-y-4">
-                                <Input
-                                    type="text"
-                                    label="Name"
-                                    required
-                                    placeholder="Your full name"
-                                    value={formState.name}
-                                    onChange={e => setFormState({ ...formState, name: e.target.value })}
-                                />
+                        <div className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-10 border border-black/5 dark:border-white/5 shadow-sm">
+                            {/* Form Header */}
+                            <div className="mb-8">
+                                <h3 className="font-display text-2xl font-semibold text-text-primary mb-2">
+                                    Start a project
+                                </h3>
+                                <p className="text-text-secondary text-sm">
+                                    Fill out the form and we'll get back to you within 24 hours.
+                                </p>
+                            </div>
 
-                                <Input
-                                    type="email"
-                                    label="Email"
-                                    required
-                                    placeholder="Your email"
-                                    value={formState.email}
-                                    onChange={e => setFormState({ ...formState, email: e.target.value })}
-                                />
+                            <form onSubmit={handleSubmit} className="space-y-5">
+                                {/* Name & Email Row */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <Input
+                                        type="text"
+                                        label="Name"
+                                        required
+                                        placeholder="Your full name"
+                                        value={formState.name}
+                                        onChange={e => setFormState({ ...formState, name: e.target.value })}
+                                    />
+                                    <Input
+                                        type="email"
+                                        label="Email"
+                                        required
+                                        placeholder="Your email"
+                                        value={formState.email}
+                                        onChange={e => setFormState({ ...formState, email: e.target.value })}
+                                    />
+                                </div>
 
-                                <div className="space-y-1.5">
-                                    <label htmlFor="phone" className="text-xs font-bold uppercase tracking-wider text-text-secondary ml-1">Phone (optional)</label>
-                                    <div className="flex gap-3">
-                                        <div className="w-20 bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl flex items-center justify-center text-text-secondary font-medium text-sm">
-                                            🇺🇸 +1
+                                {/* Phone & Topic Row */}
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    <div className="space-y-1.5">
+                                        <label htmlFor="phone" className="text-xs font-bold uppercase tracking-wider text-text-secondary ml-1">Phone (optional)</label>
+                                        <div className="flex gap-2">
+                                            <div className="w-16 bg-ivory dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl flex items-center justify-center text-text-secondary font-medium text-xs">
+                                                🇺🇸 +1
+                                            </div>
+                                            <input
+                                                type="tel"
+                                                id="phone"
+                                                placeholder="(555) 000-0000"
+                                                value={formState.phone}
+                                                onChange={e => setFormState({ ...formState, phone: e.target.value })}
+                                                className="flex-1 bg-ivory dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-coral transition-all placeholder:text-text-secondary/50"
+                                            />
                                         </div>
-                                        <Input
-                                            type="tel"
-                                            id="phone"
-                                            placeholder="(555) 000-0000"
-                                            value={formState.phone}
-                                            onChange={e => setFormState({ ...formState, phone: e.target.value })}
-                                            className="flex-1"
-                                            label=""
-                                        />
+                                    </div>
+
+                                    <div className="space-y-1.5">
+                                        <label htmlFor="topic" className="text-xs font-bold uppercase tracking-wider text-text-secondary ml-1">Service</label>
+                                        <div className="relative">
+                                            <select
+                                                id="topic"
+                                                className="w-full bg-ivory dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-coral transition-all appearance-none cursor-pointer text-text-primary"
+                                                value={formState.topic}
+                                                onChange={e => setFormState({ ...formState, topic: e.target.value })}
+                                            >
+                                                <option value="web-design">Web Design & Development</option>
+                                                <option value="marketing">Digital Marketing</option>
+                                                <option value="branding">Branding & Identity</option>
+                                                <option value="automation">Automation & Analytics</option>
+                                                <option value="other">Other</option>
+                                            </select>
+                                            <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-text-secondary/50">
+                                                <ArrowRight className="w-4 h-4 rotate-90" />
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
 
+                                {/* Message */}
                                 <div className="space-y-1.5">
-                                    <label htmlFor="topic" className="text-xs font-bold uppercase tracking-wider text-text-secondary ml-1">Let's talk about</label>
-                                    <div className="relative">
-                                        <select
-                                            id="topic"
-                                            className="w-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-base focus:outline-none focus:border-coral dark:focus:border-coral focus:bg-white dark:focus:bg-white/10 transition-all appearance-none cursor-pointer text-black dark:text-white"
-                                            value={formState.topic}
-                                            onChange={e => setFormState({ ...formState, topic: e.target.value })}
-                                        >
-                                            <option value="" disabled>Project inquiry</option>
-                                            <option value="web-design" className="bg-ivory dark:bg-stone-950">Web Design & Development</option>
-                                            <option value="marketing" className="bg-ivory dark:bg-stone-950">Digital Marketing</option>
-                                            <option value="branding" className="bg-ivory dark:bg-stone-950">Branding & Identity</option>
-                                            <option value="other" className="bg-ivory dark:bg-stone-950">Other</option>
-                                        </select>
-                                        <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-black/40 dark:text-white/40">
-                                            <ArrowRight className="w-4 h-4 rotate-90" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="space-y-1.5">
-                                    <label htmlFor="message" className="text-xs font-bold uppercase tracking-wider text-text-secondary ml-1">What do you have in mind? *</label>
+                                    <label htmlFor="message" className="text-xs font-bold uppercase tracking-wider text-text-secondary ml-1">Project details *</label>
                                     <textarea
                                         id="message"
                                         required
-                                        rows={3}
-                                        className="w-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-base focus:outline-none focus:border-coral dark:focus:border-coral focus:bg-white dark:focus:bg-white/10 transition-all placeholder:text-black/20 dark:placeholder:text-white/20 resize-none"
-                                        placeholder="Briefly describe your idea or challenge..."
+                                        rows={4}
+                                        className="w-full bg-ivory dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-coral transition-all placeholder:text-text-secondary/50 resize-none"
+                                        placeholder="Tell us about your project, goals, and timeline..."
                                         value={formState.message}
                                         onChange={e => setFormState({ ...formState, message: e.target.value })}
                                     />
                                 </div>
-                            </div>
 
-                            <div className="pt-2">
-                                <Button
-                                    type="submit"
-                                    size="lg"
-                                    className="w-full"
-                                    disabled={isSubmitting || isSuccess}
-                                >
-                                    {isSubmitting ? 'Sending...' : isSuccess ? 'Message Sent!' : "Send Request"}
-                                </Button>
-                                <p className="text-[10px] text-text-secondary mt-3 text-center">
-                                    By clicking "Send Request", you consent to our Privacy Policy.
-                                </p>
-                            </div>
-                        </form>
+                                {/* Submit */}
+                                <div className="pt-4">
+                                    <Button
+                                        type="submit"
+                                        size="lg"
+                                        className="w-full group"
+                                        disabled={isSubmitting || isSuccess}
+                                    >
+                                        {isSubmitting ? 'Sending...' : isSuccess ? (
+                                            <>
+                                                <CheckCircle2 className="w-4 h-4 mr-2" />
+                                                Message Sent!
+                                            </>
+                                        ) : (
+                                            <>
+                                                Send Request
+                                                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                                            </>
+                                        )}
+                                    </Button>
+                                    <p className="text-[10px] text-text-secondary mt-4 text-center">
+                                        By clicking \"Send Request\", you consent to our{' '}
+                                        <button
+                                            type="button"
+                                            onClick={() => onNavigate?.('privacy-policy')}
+                                            className="text-coral hover:underline cursor-pointer"
+                                        >
+                                            Privacy Policy
+                                        </button>
+                                        .
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
                     </motion.div>
 
                     {/* Right Column: Content (Scrollable) */}
@@ -160,7 +201,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="lg:w-[40%] space-y-12"
+                        className="lg:col-span-5 space-y-6"
                     >
                         {/* Contact Methods Grid */}
                         <div className="grid grid-cols-1 gap-6">
@@ -169,7 +210,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.5 }}
-                                className="bg-white rounded-[32px] p-10 border border-black/5 shadow-sm hover:shadow-md transition-all duration-300"
+                                className="bg-white dark:bg-surface rounded-[32px] p-10 border border-black/5 dark:border-white/5 shadow-sm hover:shadow-md transition-all duration-300"
                             >
                                 <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
                                     <Phone className="w-5 h-5 text-coral" /> Let's talk
@@ -226,7 +267,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5, duration: 0.5 }}
-                                className="bg-white rounded-[32px] p-10 border border-black/5 shadow-sm hover:shadow-md transition-all duration-300"
+                                className="bg-white dark:bg-surface rounded-[32px] p-10 border border-black/5 dark:border-white/5 shadow-sm hover:shadow-md transition-all duration-300"
                             >
                                 <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
                                     <Mail className="w-5 h-5 text-coral" /> Drop a message
@@ -264,7 +305,12 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
                 {/* Testimonials Section */}
                 <div className="mb-32">
-                    <p className="text-xs font-bold uppercase tracking-widest text-coral mb-6">Testimonials</p>
+                    <div className="flex items-center gap-2 mb-4">
+                        <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+                        <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+                            Testimonials
+                        </span>
+                    </div>
                     <AnimatedHeading
                         as="h2"
                         className="font-display text-3xl md:text-4xl font-semibold text-black dark:text-white mb-12"
@@ -273,75 +319,96 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         What people say
                     </AnimatedHeading>
 
-                    <div className="relative group">
-                        {/* Navigation Arrows (Absolute) */}
-                        <button className="absolute -left-12 top-1/2 -translate-y-1/2 p-2 text-black/20 dark:text-white/20 hover:text-coral transition-colors hidden xl:block">
-                            <ChevronLeft className="w-8 h-8" />
-                        </button>
-                        <button className="absolute -right-12 top-1/2 -translate-y-1/2 p-2 text-black/20 dark:text-white/20 hover:text-coral transition-colors hidden xl:block">
-                            <ChevronRight className="w-8 h-8" />
-                        </button>
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
+                        {/* Visual / Video Preview */}
+                        <div className="lg:col-span-4 relative min-h-[360px] rounded-[2rem] overflow-hidden border border-black/5 dark:border-white/10 group/image">
+                            <img
+                                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80"
+                                alt="Client testimonial"
+                                className="absolute inset-0 w-full h-full object-cover grayscale group-hover/image:grayscale-0 transition-all duration-500"
+                                loading="lazy"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
 
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-                            {/* Image Card */}
-                            <div className="lg:col-span-4 relative aspect-[3/4] lg:aspect-auto lg:h-full min-h-[400px] rounded-3xl overflow-hidden group/image cursor-pointer">
-                                <img
-                                    src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80"
-                                    alt="Client"
-                                    className="absolute inset-0 w-full h-full object-cover grayscale group-hover/image:grayscale-0 transition-all duration-500"
-                                />
-                                <div className="absolute inset-0 bg-black/10 group-hover/image:bg-transparent transition-colors" />
-
-                                {/* Play Button */}
-                                <div className="absolute bottom-6 right-6 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg group-hover/image:scale-110 transition-transform">
-                                    <Play className="w-5 h-5 text-black fill-current ml-1" />
-                                </div>
+                            {/* Play Button */}
+                            <div className="absolute bottom-6 right-6 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg group-hover/image:scale-110 transition-transform">
+                                <Play className="w-5 h-5 text-black fill-current ml-1" />
                             </div>
 
-                            {/* Quote Card */}
-                            <div className="lg:col-span-8 bg-white dark:bg-white/5 rounded-3xl p-8 md:p-12 flex flex-col justify-between border border-black/5 dark:border-white/5 relative overflow-hidden shadow-sm hover:shadow-md transition-all duration-300">
-                                <div>
-                                    {/* Quote Icon */}
-                                    <div className="text-coral text-5xl font-serif leading-none mb-8">“</div>
+                            {/* Badge */}
+                            <div className="absolute top-6 left-6">
+                                <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-bold uppercase tracking-widest">
+                                    5.0 rating · Clutch
+                                </div>
+                            </div>
+                        </div>
 
-                                    <p className="text-xl md:text-3xl font-light leading-relaxed text-text-primary dark:text-white/90 mb-12">
-                                        Castells Agency's ability to turn ideas into solutions was outstanding.
-                                    </p>
+                        {/* Quote */}
+                        <div className="lg:col-span-8 bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 flex flex-col justify-between border border-black/5 dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
+                            {/* Subtle background */}
+                            <div className="absolute inset-0 pointer-events-none">
+                                <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-coral/10 blur-3xl" />
+                            </div>
 
-                                    <div className="mb-8">
-                                        <h4 className="font-semibold text-text-primary dark:text-white text-lg mb-1">Sunil Chauhan</h4>
+                            <div className="relative">
+                                {/* Quote Icon */}
+                                <div className="text-coral text-5xl font-serif leading-none mb-8">“</div>
+
+                                <p className="text-xl md:text-3xl font-light leading-relaxed text-text-primary dark:text-white/90 mb-10">
+                                    Castells Agency&apos;s ability to turn ideas into solutions was outstanding.
+                                </p>
+
+                                <div className="flex items-center justify-between flex-wrap gap-4">
+                                    <div>
+                                        <h4 className="font-semibold text-text-primary dark:text-white text-lg mb-1">
+                                            Sunil Chauhan
+                                        </h4>
                                         <div className="flex items-center gap-2 text-text-secondary dark:text-white/40 text-xs uppercase tracking-wider font-medium">
                                             <span>Executive at</span>
                                             <span className="text-text-primary dark:text-white/60">Twister Digital</span>
                                         </div>
                                     </div>
-                                </div>
-
-                                {/* Footer Link */}
-                                <div className="pt-8 border-t border-black/5 dark:border-white/10 flex items-center justify-between group/link cursor-pointer">
-                                    <div className="flex items-center gap-3">
-                                        <div className="w-6 h-6 rounded-full bg-coral flex items-center justify-center text-white font-bold text-[10px]">C</div>
-                                        <span className="text-text-primary dark:text-white font-medium text-sm group-hover/link:text-coral transition-colors">Read on Clutch</span>
+                                    <div className="flex items-center gap-2">
+                                        <span className="px-3 py-1.5 rounded-full bg-black/5 dark:bg-white/10 text-text-secondary dark:text-white/60 text-[10px] font-bold uppercase tracking-widest">
+                                            Project delivered
+                                        </span>
+                                        <span className="px-3 py-1.5 rounded-full bg-black/5 dark:bg-white/10 text-text-secondary dark:text-white/60 text-[10px] font-bold uppercase tracking-widest">
+                                            Fast turnaround
+                                        </span>
                                     </div>
-                                    <ArrowRight className="w-5 h-5 text-text-secondary/50 dark:text-white/40 group-hover/link:text-coral transition-colors -rotate-45" />
                                 </div>
                             </div>
-                        </div>
 
-                        {/* Pagination Dots */}
-                        <div className="flex justify-center gap-3 mt-8">
-                            <button className="w-2.5 h-2.5 rounded-full bg-black dark:bg-white transition-colors" />
-                            <button className="w-2.5 h-2.5 rounded-full bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40 transition-colors" />
-                            <button className="w-2.5 h-2.5 rounded-full bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40 transition-colors" />
-                            <button className="w-2.5 h-2.5 rounded-full bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40 transition-colors" />
-                            <button className="w-2.5 h-2.5 rounded-full bg-black/20 dark:bg-white/20 hover:bg-black/40 dark:hover:bg-white/40 transition-colors" />
+                            {/* Footer Link (hover like menu) */}
+                            <a
+                                href="https://clutch.co"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="mt-10 p-3 -mx-3 rounded-xl flex items-center justify-between group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer"
+                                aria-label="Read this review on Clutch"
+                            >
+                                <div className="flex items-center gap-3">
+                                    <div className="w-6 h-6 rounded-full bg-coral flex items-center justify-center text-white font-bold text-[10px]">
+                                        C
+                                    </div>
+                                    <span className="font-medium text-sm text-text-primary dark:text-white group-hover:text-white dark:group-hover:text-black transition-colors">
+                                        Read on Clutch
+                                    </span>
+                                </div>
+                                <ArrowRight className="w-5 h-5 text-text-secondary/50 dark:text-white/40 group-hover:text-white dark:group-hover:text-black transition-colors -rotate-45" />
+                            </a>
                         </div>
                     </div>
                 </div>
 
                 {/* Bottom Grid (Moved) */}
                 <div className="mb-32">
-                    <p className="text-xs font-bold uppercase tracking-widest text-coral mb-6">Discover</p>
+                    <div className="flex items-center gap-2 mb-4">
+                        <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+                        <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+                            Discover
+                        </span>
+                    </div>
                     <AnimatedHeading
                         as="h2"
                         className="font-display text-3xl md:text-4xl font-semibold text-black dark:text-white mb-12"
@@ -355,22 +422,23 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.3, duration: 0.5 }}
-                            href="#about"
-                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/5 group cursor-pointer"
+                            href="/about"
+                            onClick={(e) => { e.preventDefault(); onNavigate?.('about'); }}
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start border border-black/5 dark:border-white/10 transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:shadow-xl hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
+                                <div className="w-12 h-12 rounded-xl bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">
                                     <Users className="w-6 h-6 stroke-[1.5]" />
                                 </div>
-                                <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight">
+                                <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight group-hover:text-white dark:group-hover:text-black transition-colors">
                                     Who we are
                                 </h3>
                             </div>
-                            <p className="text-text-secondary text-sm leading-relaxed mb-6">
+                            <p className="text-text-secondary dark:text-white/60 text-sm leading-relaxed mb-6 group-hover:text-white/80 dark:group-hover:text-black/70 transition-colors">
                                 Learn more about who we are and what drives us.
                             </p>
-                            <div className="flex items-center gap-2 text-text-secondary text-xs font-bold uppercase tracking-wider group-hover:text-coral transition-colors mt-auto">
-                                About us <ArrowRight className="w-3 h-3" />
+                            <div className="flex items-center gap-2 text-text-secondary dark:text-white/60 text-xs font-bold uppercase tracking-wider group-hover:text-white dark:group-hover:text-black transition-colors mt-auto">
+                                About us <ArrowRight className="w-3 h-3 -rotate-45" />
                             </div>
                         </motion.a>
 
@@ -378,22 +446,23 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.4, duration: 0.5 }}
-                            href="#work"
-                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/5 group cursor-pointer"
+                            href="/work"
+                            onClick={(e) => { e.preventDefault(); onNavigate?.('work'); }}
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start border border-black/5 dark:border-white/10 transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:shadow-xl hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
+                                <div className="w-12 h-12 rounded-xl bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">
                                     <Briefcase className="w-6 h-6 stroke-[1.5]" />
                                 </div>
-                                <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight">
+                                <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight group-hover:text-white dark:group-hover:text-black transition-colors">
                                     Impactful solutions
                                 </h3>
                             </div>
-                            <p className="text-text-secondary text-sm leading-relaxed mb-6">
+                            <p className="text-text-secondary dark:text-white/60 text-sm leading-relaxed mb-6 group-hover:text-white/80 dark:group-hover:text-black/70 transition-colors">
                                 Discover our impactful projects.
                             </p>
-                            <div className="flex items-center gap-2 text-text-secondary text-xs font-bold uppercase tracking-wider group-hover:text-coral transition-colors mt-auto">
-                                Our works <ArrowRight className="w-3 h-3" />
+                            <div className="flex items-center gap-2 text-text-secondary dark:text-white/60 text-xs font-bold uppercase tracking-wider group-hover:text-white dark:group-hover:text-black transition-colors mt-auto">
+                                Our works <ArrowRight className="w-3 h-3 -rotate-45" />
                             </div>
                         </motion.a>
 
@@ -401,22 +470,23 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: 0.5, duration: 0.5 }}
-                            href="#blog"
-                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/5 group cursor-pointer"
+                            href="/blog"
+                            onClick={(e) => { e.preventDefault(); onNavigate?.('blog'); }}
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start border border-black/5 dark:border-white/10 transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:shadow-xl hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
+                                <div className="w-12 h-12 rounded-xl bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">
                                     <FileText className="w-6 h-6 stroke-[1.5]" />
                                 </div>
-                                <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight">
+                                <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight group-hover:text-white dark:group-hover:text-black transition-colors">
                                     Keep up with the latest
                                 </h3>
                             </div>
-                            <p className="text-text-secondary text-sm leading-relaxed mb-6">
+                            <p className="text-text-secondary dark:text-white/60 text-sm leading-relaxed mb-6 group-hover:text-white/80 dark:group-hover:text-black/70 transition-colors">
                                 Explore our blog for the latest insights and ideas from our team.
                             </p>
-                            <div className="flex items-center gap-2 text-text-secondary text-xs font-bold uppercase tracking-wider group-hover:text-coral transition-colors mt-auto">
-                                Read blog <ArrowRight className="w-3 h-3" />
+                            <div className="flex items-center gap-2 text-text-secondary dark:text-white/60 text-xs font-bold uppercase tracking-wider group-hover:text-white dark:group-hover:text-black transition-colors mt-auto">
+                                Read blog <ArrowRight className="w-3 h-3 -rotate-45" />
                             </div>
                         </motion.a>
                     </div>

@@ -17,6 +17,17 @@
   margin-bottom: 4rem; 
   /* Ensure it sits above background elements */
   z-index: 10;
+  /* Fix for rounded corners during scale transforms */
+  isolation: isolate;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  /* Apply rounded corners at wrapper level to prevent clipping issues */
+  border-radius: 32px;
+  overflow: hidden;
 }
 
 /* Spacer at the bottom to allow the last card to be scrolled away properly if needed */

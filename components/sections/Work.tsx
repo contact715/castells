@@ -4,12 +4,12 @@ import { ArrowUpRight, TrendingUp, MapPin, Layers } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import ScrollFloat from '../effects/ScrollFloat';
-import { PageView } from '../../App';
 import ScrollStack, { ScrollStackItem } from '../ui/ScrollStack';
 import AnimatedHeading from '../ui/AnimatedHeading';
+import type { NavigateFn } from '../../types';
 
 interface WorkProps {
-  onNavigate?: (page: PageView, data?: any) => void;
+  onNavigate?: NavigateFn;
 }
 
 import { CASE_STUDIES, CaseStudy } from '../../constants';
@@ -68,7 +68,7 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
               <StackCard
                 project={project}
                 index={idx}
-                onClick={() => onNavigate?.('case-study', project)}
+                onClick={() => onNavigate?.('case-study', { id: project.id, name: project.client })}
               />
             </ScrollStackItem>
           ))}
@@ -76,7 +76,7 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
       </div>
 
       {/* Bottom CTA Button */}
-      <div className="container mx-auto px-6 pb-32 pt-12 flex justify-center">
+      <div className="container mx-auto px-6 pb-24 pt-8 flex justify-center">
         <Button
           onClick={() => onNavigate?.('work')}
           size="md"
@@ -91,9 +91,13 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
 // Redesigned Card for Stacking - "Immersive Overlay" Aesthetic
 const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => void }> = ({ project, index, onClick }) => {
   return (
-    <div
-      onClick={onClick}
-      className="w-full h-[600px] rounded-[32px] overflow-hidden shadow-2xl border border-white/10 relative group cursor-pointer transition-all duration-500 hover:scale-[1.02]"
+    <a
+      href={`/case-studies/${encodeURIComponent(project.id)}`}
+      onClick={(e) => {
+        e.preventDefault();
+        onClick();
+      }}
+      className="w-full h-[600px] rounded-[32px] overflow-hidden shadow-2xl border border-white/10 relative group cursor-pointer transition-transform duration-500 hover:scale-[1.02] transform-gpu isolate block"
     >
       {/* Full Background Media */}
       <div className="absolute inset-0 bg-black">
@@ -159,7 +163,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
         </div>
 
       </div>
-    </div>
+    </a>
   );
 };
 

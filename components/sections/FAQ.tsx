@@ -83,7 +83,7 @@ const FAQ: React.FC = () => {
                       onClick={() => setOpenIndex(isOpen ? null : idx)}
                       className="w-full py-8 flex items-start justify-between gap-6 text-left group"
                     >
-                      <h3 className="font-display font-semibold text-2xl md:text-3xl text-text-primary group-hover:text-black transition-colors">
+                      <h3 className={`font-display font-semibold text-2xl md:text-3xl transition-colors group-hover:text-coral ${isOpen ? 'text-coral' : 'text-text-primary'}`}>
                         {faq.question}
                       </h3>
                       <span className="flex-shrink-0 mt-1">

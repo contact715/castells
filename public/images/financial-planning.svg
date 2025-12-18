@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B0B0B"/>
+      <stop offset="1" stop-color="#1A1A1A"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="280" y1="700" x2="1180" y2="200" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF6B5B" stop-opacity="0.10"/>
+      <stop offset="0.55" stop-color="#FF6B5B" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#FF6B5B" stop-opacity="0.12"/>
+    </linearGradient>
+    <filter id="glow" x="-200" y="-200" width="2000" height="1300" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.55 0" result="glow"/>
+      <feBlend in="SourceGraphic" in2="glow" mode="screen"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <!-- Subtle grid -->
+  <g opacity="0.08" stroke="#FFFFFF">
+    <path d="M0 120H1600"/>
+    <path d="M0 240H1600"/>
+    <path d="M0 360H1600"/>
+    <path d="M0 480H1600"/>
+    <path d="M0 600H1600"/>
+    <path d="M0 720H1600"/>
+    <path d="M200 0V900"/>
+    <path d="M400 0V900"/>
+    <path d="M600 0V900"/>
+    <path d="M800 0V900"/>
+    <path d="M1000 0V900"/>
+    <path d="M1200 0V900"/>
+    <path d="M1400 0V900"/>
+  </g>
+
+  <!-- Accent sweep -->
+  <path d="M220 760C460 620 620 640 780 520C960 384 1060 300 1380 260" stroke="url(#accent)" stroke-width="42" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- Chart card -->
+  <g filter="url(#glow)">
+    <rect x="430" y="250" width="760" height="440" rx="44" fill="#0F0F0F" stroke="#FFFFFF" stroke-opacity="0.14"/>
+    <rect x="470" y="300" width="220" height="20" rx="10" fill="#FF6B5B" fill-opacity="0.25"/>
+    <rect x="705" y="300" width="180" height="20" rx="10" fill="#FFFFFF" fill-opacity="0.10"/>
+    <rect x="895" y="300" width="255" height="20" rx="10" fill="#FFFFFF" fill-opacity="0.06"/>
+
+    <!-- Bars -->
+    <g>
+      <rect x="520" y="560" width="64" height="90" rx="18" fill="#FFFFFF" fill-opacity="0.10"/>
+      <rect x="620" y="520" width="64" height="130" rx="18" fill="#FFFFFF" fill-opacity="0.12"/>
+      <rect x="720" y="470" width="64" height="180" rx="18" fill="#FF6B5B" fill-opacity="0.45"/>
+      <rect x="820" y="505" width="64" height="145" rx="18" fill="#FFFFFF" fill-opacity="0.12"/>
+      <rect x="920" y="440" width="64" height="210" rx="18" fill="#FF6B5B" fill-opacity="0.30"/>
+      <rect x="1020" y="485" width="64" height="165" rx="18" fill="#FFFFFF" fill-opacity="0.10"/>
+    </g>
+
+    <!-- Trend line -->
+    <path d="M520 540C595 520 640 515 720 470C805 420 875 450 920 440C995 420 1030 445 1084 405" stroke="#FF6B5B" stroke-opacity="0.75" stroke-width="6" stroke-linecap="round"/>
+    <circle cx="720" cy="470" r="7" fill="#FF6B5B"/>
+    <circle cx="920" cy="440" r="7" fill="#FF6B5B" fill-opacity="0.9"/>
+    <circle cx="1084" cy="405" r="7" fill="#FF6B5B" fill-opacity="0.7"/>
+  </g>
+
+  <!-- Coin stack -->
+  <g opacity="0.95" filter="url(#glow)">
+    <ellipse cx="290" cy="690" rx="120" ry="26" fill="#FFFFFF" fill-opacity="0.06" stroke="#FFFFFF" stroke-opacity="0.10"/>
+    <ellipse cx="290" cy="648" rx="106" ry="22" fill="#FFFFFF" fill-opacity="0.05" stroke="#FFFFFF" stroke-opacity="0.10"/>
+    <ellipse cx="290" cy="612" rx="92" ry="20" fill="#FF6B5B" fill-opacity="0.12" stroke="#FF6B5B" stroke-opacity="0.25"/>
+    <path d="M290 585C260 585 236 573 236 558C236 543 260 531 290 531C320 531 344 543 344 558C344 573 320 585 290 585Z" fill="#FF6B5B" fill-opacity="0.10" stroke="#FF6B5B" stroke-opacity="0.22"/>
+    <path d="M270 558H310" stroke="#FF6B5B" stroke-opacity="0.55" stroke-width="6" stroke-linecap="round"/>
+    <path d="M290 538V578" stroke="#FF6B5B" stroke-opacity="0.35" stroke-width="6" stroke-linecap="round"/>
+  </g>
+
+  <!-- Minimal label chip -->
+  <g opacity="0.82">
+    <rect x="112" y="108" width="520" height="72" rx="24" fill="#FFFFFF" fill-opacity="0.05" stroke="#FFFFFF" stroke-opacity="0.10"/>
+    <path d="M156 156C156 138.327 170.327 124 188 124H204C221.673 124 236 138.327 236 156V164C236 181.673 221.673 196 204 196H188C170.327 196 156 181.673 156 164V156Z" fill="#FF6B5B" fill-opacity="0.10" stroke="#FF6B5B" stroke-opacity="0.25"/>
+    <path d="M170 156H222" stroke="#FF6B5B" stroke-opacity="0.45" stroke-width="10" stroke-linecap="round"/>
+    <path d="M284 132H600" stroke="#FF6B5B" stroke-opacity="0.20" stroke-width="10" stroke-linecap="round"/>
+    <path d="M284 156H520" stroke="#FFFFFF" stroke-opacity="0.16" stroke-width="10" stroke-linecap="round"/>
+  </g>
+</svg>
+

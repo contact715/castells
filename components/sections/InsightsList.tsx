@@ -95,7 +95,7 @@ const InsightsList: React.FC = () => {
                             </div>
 
                             {/* Title */}
-                            <h[1-4] className={`font-display text-xl md:text-2xl font-bold leading-tight mb-2 transition-colors ${hoveredId === insight.id ? 'text-white' : 'text-text-primary'
+                            <h3 className={`font-display text-xl md:text-2xl font-bold leading-tight mb-2 transition-colors ${hoveredId === insight.id ? 'text-white' : 'text-text-primary'
                                 }`}>
                                 {insight.title}
                             </h3>

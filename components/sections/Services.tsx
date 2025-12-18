@@ -1,93 +1,39 @@
 
 import React, { useState } from 'react';
 import { m as motion, AnimatePresence } from 'framer-motion';
-import {
-  Megaphone, Globe, Search, Cpu, BarChart, Terminal,
-  Layout, Video, MessageSquare, Shield, ArrowUpRight,
-  Palette, Book, Layers, Smartphone,
-  Code, ShoppingCart, LineChart, FileText
-} from 'lucide-react';
 import { Highlighter } from '../ui/Highlighter';
 import { VelocityScroll } from '../effects/ScrollBasedVelocity';
 import { cn } from '../../lib/utils';
 import { Section, SectionContainer, SectionHeader } from '../ui/Section';
 import AnimatedHeading from '../ui/AnimatedHeading';
-
-const SERVICES_DATA = {
-  branding: [
-    { name: 'Brand Identity', desc: 'Complete visual systems: Logo, Typography, and Color Theory.', icon: Palette },
-    { name: 'Brand Guidelines', desc: 'Comprehensive rulebooks to ensure consistency across all channels.', icon: Book },
-    { name: 'Logobook', desc: 'Strategic logo variations for every digital and print application.', icon: Layers },
-    { name: 'UI/UX Design', desc: 'User-centric interfaces for web and mobile products.', icon: Layout },
-    { name: 'Print & Packaging', desc: 'Business cards, brochures, and physical collateral design.', icon: FileText },
-    { name: 'Enterprise Solutions', desc: 'We build bespoke strategies for complex needs.', icon: ArrowUpRight },
-  ],
-  development: [
-    { name: 'Web Development', desc: 'High-performance websites built on React, Next.js, and modern stacks.', icon: Globe },
-    { name: 'Mobile Apps', desc: 'Native and cross-platform mobile applications (iOS & Android).', icon: Smartphone },
-    { name: 'E-commerce', desc: 'Scalable online stores on Shopify Plus or custom WooCommerce builds.', icon: ShoppingCart },
-    { name: 'Web Applications', desc: 'Complex SaaS platforms and internal business tools.', icon: Code },
-    { name: 'Landing Pages', desc: 'High-converting sales pages integrated with your CRM.', icon: Layout },
-    { name: 'Enterprise Solutions', desc: 'We build bespoke strategies for complex needs.', icon: ArrowUpRight },
-  ],
-  automation: [
-    { name: 'CRM & Pipelines', desc: 'Architecting GoHighLevel, HubSpot, and Kommo for sales velocity.', icon: MessageSquare },
-    { name: 'Business Intelligence', desc: 'Real-time dashboards (Looker/PowerBI) to visualize ROI.', icon: BarChart },
-    { name: 'Workflow Automation', desc: 'Connecting Monday.com, Slack, and billing via Zapier/Make.', icon: Cpu },
-    { name: 'Advanced Tracking', desc: 'Server-side tagging (GTM) and attribution modeling.', icon: Terminal },
-    { name: 'Field Ops', desc: 'Streamlining HouseCall Pro and field service workflows.', icon: Shield },
-    { name: 'Enterprise Solutions', desc: 'We build bespoke strategies for complex needs.', icon: ArrowUpRight },
-  ],
-  advertising: [
-    { name: 'Google Ads (PPC)', desc: 'Capture high-intent search traffic with precision keyword targeting.', icon: Search },
-    { name: 'SEO & Content', desc: 'Dominating organic search results and local map packs.', icon: LineChart },
-    { name: 'Meta Ads', desc: 'Scale revenue with advanced audience segmentation on FB & Instagram.', icon: Megaphone },
-    { name: 'YouTube Ads', desc: 'Build authority and retarget users with high-quality video campaigns.', icon: Video },
-    { name: 'TikTok & Social', desc: 'Tap into viral organic reach and younger demographics.', icon: Smartphone },
-    { name: 'Enterprise Solutions', desc: 'We build bespoke strategies for complex needs.', icon: ArrowUpRight },
-  ],
-};
-
-const SERVICE_CATEGORIES = [
-  { id: 'branding', label: 'Branding & Design', icon: Palette },
-  { id: 'development', label: 'Development', icon: Code },
-  { id: 'automation', label: 'Automation & Analytics', icon: Cpu },
-  { id: 'advertising', label: 'Advertising & SEO', icon: Megaphone },
-];
+import { SERVICE_CATEGORIES, type ServiceCategoryId } from '../../data/services';
 
 const Services: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<keyof typeof SERVICES_DATA>('branding');
+  const [activeTab, setActiveTab] = useState<ServiceCategoryId>('branding');
 
   return (
     <Section id="services">
       <SectionContainer>
 
-        {/* Header Section - Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-16">
-          {/* Left: Badge + Title */}
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
-              <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-                Our Expertise
-              </span>
-            </div>
-            <AnimatedHeading
-              as="h2"
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
-              delay={0.1}
-            >
-              Full-Stack Solutions For<br />
-              <span className="text-text-secondary">Modern Growth</span>
-            </AnimatedHeading>
+        {/* Header Section */}
+        <div className="max-w-3xl mb-16">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
+            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+              Our Expertise
+            </span>
           </div>
-
-          {/* Right: Description */}
-          <div className="flex flex-col justify-end">
-            <p className="text-lg text-text-secondary leading-relaxed max-w-lg">
-              From lead generation to conversion optimization, we build the infrastructure your business needs to dominate.
-            </p>
-          </div>
+          <AnimatedHeading
+            as="h2"
+            className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-6"
+            delay={0.1}
+          >
+            Full-Stack Solutions For<br />
+            <span className="text-text-secondary">Modern Growth</span>
+          </AnimatedHeading>
+          <p className="text-lg text-text-secondary leading-relaxed">
+            From lead generation to conversion optimization, we build the infrastructure your business needs to dominate.
+          </p>
         </div>
 
         {/* Styled Tabs - Moved below header for cleaner layout */}
@@ -98,7 +44,7 @@ const Services: React.FC = () => {
               return (
                 <button
                   key={cat.id}
-                  onClick={() => setActiveTab(cat.id as keyof typeof SERVICES_DATA)}
+                  onClick={() => setActiveTab(cat.id)}
                   className={cn(
                     "relative px-6 py-3 rounded-xl flex items-center gap-2 text-sm font-bold uppercase tracking-widest transition-all duration-300 outline-none",
                     isActive
@@ -125,7 +71,7 @@ const Services: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
-            {SERVICES_DATA[activeTab].map((service, idx) => {
+            {SERVICE_CATEGORIES.find((c) => c.id === activeTab)?.items.map((service, idx) => {
               const spanClass = "col-span-1";
 
               return (
@@ -148,7 +94,7 @@ const Services: React.FC = () => {
                     </div>
 
                     <p className="text-text-secondary text-sm leading-relaxed">
-                      {service.desc}
+                      {service.description}
                     </p>
                   </div>
                 </motion.div>

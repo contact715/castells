@@ -1,106 +1,49 @@
 
 import React, { useState } from 'react';
 import { m as motion, AnimatePresence } from 'framer-motion';
-import {
-  Hammer, Home, Car, Briefcase,
-  ArrowUpRight, Zap, Droplets, PaintBucket,
-  Sun, Ruler, ShieldCheck, LayoutGrid,
-  Palette, Sparkles, Scale, FileText, Frame, MessageSquare
-} from 'lucide-react';
-import { Highlighter } from '../ui/Highlighter';
+import { ArrowUpRight } from 'lucide-react';
 import { cn } from '../../lib/utils';
-import { Section, SectionContainer, SectionHeader } from '../ui/Section';
-import { ImageRevealCard } from '../ui/ImageRevealCard';
+import { Section, SectionContainer } from '../ui/Section';
 import AnimatedHeading from '../ui/AnimatedHeading';
-
-const CATEGORIES = [
-  { id: 'construction', label: 'Construction', icon: Hammer },
-  { id: 'home', label: 'Home Services', icon: Home },
-  { id: 'auto', label: 'Automotive', icon: Car },
-  { id: 'pro', label: 'Professional', icon: Briefcase },
-];
-
-const INDUSTRIES_DATA: Record<string, { name: string; desc: string; icon: React.ElementType; image?: string; href?: string }[]> = {
-  construction: [
-    { name: 'ADU & Additions', desc: 'High-ticket lead generation for large-scale residential projects.', icon: Home, image: '/images/adu-additions.png' },
-    { name: 'Bathroom Remodeling', desc: 'Capture homeowners ready to invest in luxury upgrades.', icon: Droplets, image: '/images/bathroom-remodel.png' },
-    { name: 'Roofing Services', desc: 'Emergency repair and full replacement leads that convert.', icon: ShieldCheck, image: '/images/roofing-services.png' },
-    { name: 'Kitchen Remodeling', desc: 'Targeting high-value renovation projects with precision.', icon: LayoutGrid, image: '/images/kitchen-remodeling.png' },
-    { name: 'Concrete & Paving', desc: 'Commercial and residential paving leads for your crew.', icon: Frame, image: '/images/concrete-paving.png' },
-    { name: 'Fencing & Gates', desc: 'Secure more contracts for perimeter and security installations.', icon: Ruler, image: '/images/fencing-gates.png' },
-    { name: "Don't see your niche?", desc: 'Leave a request. We build custom strategies for unique markets.', icon: MessageSquare, image: '/images/concrete-paving.png', href: '#contact' },
-  ],
-  home: [
-    { name: 'HVAC Systems', desc: 'Seasonal campaigns to keep your technicians booked year-round.', icon: Zap, image: '/images/hvac-systems.png' },
-    { name: 'Flooring & Tile', desc: 'Connect with clients looking for premium material installations.', icon: LayoutGrid, image: '/images/flooring-tile.png' },
-    { name: 'Int/Ext Painting', desc: 'Fill your schedule with whole-home and commercial painting jobs.', icon: PaintBucket, image: '/images/painting-services.png' },
-    { name: 'Plumbing', desc: 'Emergency service calls and high-value repiping projects.', icon: Droplets, image: '/images/plumbing-services.png' },
-    { name: 'Electrical', desc: 'Panel upgrades, lighting, and smart home installation leads.', icon: Zap, image: '/images/electrical-services.png' },
-    { name: 'Solar Energy', desc: 'Qualified appointments for residential and commercial solar.', icon: Sun, image: '/images/solar-energy.png' },
-    { name: 'Landscaping', desc: 'Recurring maintenance contracts and high-end design projects.', icon: Sun, image: '/images/landscaping-services.png' },
-    { name: "Don't see your niche?", desc: 'Leave a request. We build custom strategies for unique markets.', icon: MessageSquare, image: '/images/concrete-paving.png', href: '#contact' },
-  ],
-  auto: [
-    { name: 'Paint Protection', desc: 'Attract car enthusiasts seeking premium PPF installations.', icon: ShieldCheck, image: '/images/paint-protection.png' },
-    { name: 'Vinyl Wraps', desc: 'Leads for color change wraps and commercial fleet branding.', icon: Palette, image: '/images/vinyl-wraps.png' },
-    { name: 'Window Tinting', desc: 'Volume-based campaigns to drive daily shop traffic.', icon: Sun, image: '/images/window-tinting.png' },
-    { name: 'Auto Detailing', desc: 'High-end detailing and ceramic coating packages.', icon: Sparkles, image: '/images/auto-detailing.png' },
-    { name: 'Ceramic Coating', desc: 'Educated customers looking for long-term vehicle protection.', icon: Droplets, image: '/images/ceramic-coating.png' },
-    { name: "Don't see your niche?", desc: 'Leave a request. We build custom strategies for unique markets.', icon: MessageSquare, image: '/images/concrete-paving.png', href: '#contact' },
-  ],
-  pro: [
-    { name: 'Insurance Agencies', desc: 'Exclusive leads for auto, home, and life insurance policies.', icon: ShieldCheck, image: '/images/insurance-agencies.png' },
-    { name: 'Legal Services', desc: 'High-intent clients for personal injury, family, and estate law.', icon: Scale, image: '/images/legal-services.png' },
-    { name: 'Business Consulting', desc: 'Connect with B2B clients needing strategic growth advice.', icon: FileText, image: '/images/business-consulting.png' },
-    { name: 'Financial Planning', desc: 'Qualified prospects for wealth management and retirement planning.', icon: Briefcase, image: '/images/landscaping-services.png' },
-    { name: "Don't see your niche?", desc: 'Leave a request. We build custom strategies for unique markets.', icon: MessageSquare, image: '/images/concrete-paving.png', href: '#contact' },
-  ]
-};
+import { INDUSTRY_CATEGORIES, type IndustryCategoryId } from '../../data/industries';
 
 const Industries: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<keyof typeof INDUSTRIES_DATA>('construction');
+  const [activeTab, setActiveTab] = useState<IndustryCategoryId>('construction');
 
   return (
     <Section id="industries">
       <SectionContainer>
 
-        {/* Header Section - Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-16">
-          {/* Left: Badge + Title */}
-          <div>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
-              <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-                Sector Expertise
-              </span>
-            </div>
-            <AnimatedHeading
-              as="h2"
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
-              delay={0.1}
-            >
-              Industries We<br />
-              <span className="text-text-secondary">Dominate</span>
-            </AnimatedHeading>
+        {/* Header Section */}
+        <div className="max-w-3xl mb-16">
+          <div className="flex items-center gap-2 mb-4">
+            <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+              Sector Expertise
+            </span>
           </div>
-
-          {/* Right: Description */}
-          <div className="flex flex-col justify-end">
-            <p className="text-lg text-text-secondary leading-relaxed max-w-lg">
-              We don't dabble. We specialize in high-ticket service industries where trust and authority drive revenue.
-            </p>
-          </div>
+          <AnimatedHeading
+            as="h2"
+            className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-6"
+            delay={0.1}
+          >
+            Industries We<br />
+            <span className="text-text-secondary">Dominate</span>
+          </AnimatedHeading>
+          <p className="text-lg text-text-secondary leading-relaxed">
+            We don't dabble. We specialize in high-ticket service industries where trust and authority drive revenue.
+          </p>
         </div>
 
         {/* Styled Tabs */}
         <div className="flex justify-start mb-16">
           <div className="bg-surface p-1.5 rounded-2xl border border-black/5 shadow-none inline-flex flex-wrap gap-1">
-            {CATEGORIES.map((cat) => {
+            {INDUSTRY_CATEGORIES.map((cat) => {
               const isActive = activeTab === cat.id;
               return (
                 <button
                   key={cat.id}
-                  onClick={() => setActiveTab(cat.id as keyof typeof INDUSTRIES_DATA)}
+                  onClick={() => setActiveTab(cat.id)}
                   className={cn(
                     "relative px-6 py-3 rounded-xl flex items-center gap-2 text-sm font-bold uppercase tracking-widest transition-all duration-300 outline-none",
                     isActive
@@ -127,29 +70,8 @@ const Industries: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <AnimatePresence mode="popLayout">
-            {INDUSTRIES_DATA[activeTab].map((item, idx) => {
-              const spanClass = "col-span-1";
-
-              const CardContent = () => (
-                <>
-                  <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 relative z-20">
-                      <item.icon className="w-6 h-6 stroke-[1.5]" />
-                    </div>
-                    <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight relative z-20">
-                      {item.name}
-                    </h3>
-                  </div>
-
-                  <p className="text-text-secondary text-sm leading-relaxed relative z-20">
-                    {item.desc}
-                  </p>
-
-                  {item.href && (
-                    <a href={item.href} className="absolute inset-0 z-30" aria-label={item.name}></a>
-                  )}
-                </>
-              );
+            {INDUSTRY_CATEGORIES.find((c) => c.id === activeTab)?.items.map((item, idx) => {
+              const isContactCard = item.type === 'cta';
 
               return (
                 <motion.div
@@ -158,19 +80,86 @@ const Industries: React.FC = () => {
                   animate={{ opacity: 1, scale: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
-                  className={spanClass}
+                  className="col-span-1"
                 >
-                  {item.image ? (
-                    <ImageRevealCard revealImage={item.image}>
-                      <div className="p-8 h-full flex flex-col items-start relative">
-                        <CardContent />
+                  <div className={cn(
+                    "group relative rounded-2xl overflow-hidden h-full min-h-[220px] cursor-pointer transition-all duration-500",
+                    isContactCard 
+                      ? "bg-surface hover:shadow-xl hover:-translate-y-1" 
+                      : "hover:shadow-xl hover:-translate-y-1"
+                  )}>
+                    {/* Background Image */}
+                    {item.type === 'industry' && item.image && !isContactCard && (
+                      <div className="absolute inset-0">
+                        <img 
+                          src={item.image} 
+                          alt={item.name}
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          loading="lazy"
+                        />
+                        {/* Dark Overlay */}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30" />
                       </div>
-                    </ImageRevealCard>
-                  ) : (
-                    <div className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/5 relative">
-                      <CardContent />
+                    )}
+
+                    {/* Content */}
+                    <div className={cn(
+                      "relative h-full p-6 flex flex-col justify-end",
+                      isContactCard && "items-center justify-center text-center"
+                    )}>
+                      {/* Icon */}
+                      <div className={cn(
+                        "w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-300",
+                        isContactCard 
+                          ? "bg-coral/10 group-hover:bg-coral" 
+                          : "bg-white/20 backdrop-blur-sm group-hover:bg-coral"
+                      )}>
+                        <item.icon className={cn(
+                          "w-5 h-5 transition-colors duration-300",
+                          isContactCard 
+                            ? "text-coral group-hover:text-white" 
+                            : "text-white"
+                        )} />
+                      </div>
+
+                      {/* Title */}
+                      <h3 className={cn(
+                        "font-display font-semibold text-xl mb-2 transition-colors duration-300",
+                        isContactCard 
+                          ? "text-text-primary group-hover:text-coral" 
+                          : "text-white group-hover:text-coral"
+                      )}>
+                        {item.name}
+                      </h3>
+
+                      {/* Description */}
+                      <p className={cn(
+                        "text-sm leading-relaxed",
+                        isContactCard ? "text-text-secondary" : "text-white/70"
+                      )}>
+                        {item.description}
+                      </p>
+
+                      {/* Arrow for non-contact cards */}
+                      {!isContactCard && (
+                        <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                          <ArrowUpRight className="w-4 h-4 text-white" />
+                        </div>
+                      )}
                     </div>
-                  )}
+
+                    {/* Border effect (match Team CTA card) */}
+                    {isContactCard && (
+                      <div className="absolute inset-0 rounded-2xl border border-black/5 dark:border-white/10 group-hover:border-coral/50 transition-colors duration-300 pointer-events-none" />
+                    )}
+
+                    {/* Link overlay */}
+                    <a
+                      href={item.type === 'cta' ? item.href : `/industries/${item.slug}`}
+                      className="absolute inset-0 z-10"
+                      aria-label={item.name}
+                    />
+                  </div>
                 </motion.div>
               );
             })}

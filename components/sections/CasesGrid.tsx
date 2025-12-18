@@ -2,11 +2,11 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { m as motion } from 'framer-motion';
 import { Button } from '../ui/Button';
-import { PageView } from '../../App';
 import { CASE_STUDIES, CaseStudy } from '../../constants';
+import type { NavigateFn } from '../../types';
 
 interface CasesGridProps {
-    onNavigate?: (page: PageView, data?: any) => void;
+    onNavigate?: NavigateFn;
 }
 
 const containerVariants = {
@@ -26,7 +26,7 @@ const cardVariants = {
         y: 0,
         transition: {
             duration: 0.7,
-            ease: [0.22, 1, 0.36, 1],
+            ease: [0.22, 1, 0.36, 1] as const,
         }
     },
 };
@@ -83,7 +83,7 @@ const CasesGrid: React.FC<CasesGridProps> = ({ onNavigate }) => {
                         >
                             <CaseCard
                                 caseItem={caseItem}
-                                onClick={() => onNavigate?.('case-study', caseItem)}
+                                onClick={() => onNavigate?.('case-study', { id: caseItem.id, name: caseItem.client })}
                             />
                         </motion.div>
                     ))}
@@ -97,7 +97,7 @@ const CasesGrid: React.FC<CasesGridProps> = ({ onNavigate }) => {
                         >
                             <CaseCard
                                 caseItem={caseItem}
-                                onClick={() => onNavigate?.('case-study', caseItem)}
+                                onClick={() => onNavigate?.('case-study', { id: caseItem.id, name: caseItem.client })}
                             />
                         </motion.div>
                     ))}
@@ -115,9 +115,13 @@ interface CaseCardProps {
 
 const CaseCard: React.FC<CaseCardProps> = ({ caseItem, onClick }) => {
     return (
-        <div
-            onClick={onClick}
-            className="group cursor-pointer"
+        <a
+            href={`/case-studies/${encodeURIComponent(caseItem.id)}`}
+            onClick={(e) => {
+                e.preventDefault();
+                onClick();
+            }}
+            className="group cursor-pointer block"
         >
             {/* Image */}
             <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mb-4">
@@ -138,17 +142,17 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseItem, onClick }) => {
                 </span>
 
                 {/* Title */}
-                <h3 className="font-display text-lg md:text-xl font-semibold text-text-primary dark:text-white mb-3 leading-snug group-hover:text-black transition-colors">
+                <h3 className="font-display text-lg md:text-xl font-semibold text-text-primary dark:text-white mb-3 leading-snug group-hover:text-coral transition-colors">
                     {caseItem.client} — {caseItem.description?.slice(0, 60)}...
                 </h3>
 
                 {/* View Link */}
-                <div className="flex items-center gap-2 text-sm font-medium text-text-secondary dark:text-white/60 group-hover:text-black transition-colors">
+                <div className="flex items-center gap-2 text-sm font-medium text-text-secondary dark:text-white/60 group-hover:text-coral transition-colors">
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     <span>View Case</span>
                 </div>
             </div>
-        </div>
+        </a>
     );
 };
 

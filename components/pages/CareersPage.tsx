@@ -3,12 +3,12 @@ import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { motion } from 'framer-motion';
 import { PageHeader } from '../ui/PageHeader';
-import { PageView } from '../../App';
+import type { NavigateFn } from '../../types';
 import AnimatedHeading from '../ui/AnimatedHeading';
 
 interface CareersPageProps {
   onBack: () => void;
-  onNavigate: (page: PageView, data?: any) => void;
+  onNavigate: NavigateFn;
 }
 
 const OPENINGS = [
@@ -22,7 +22,7 @@ import SEO from '../ui/SEO';
 
 const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
   return (
-    <div className="bg-ivory min-h-screen pt-32 pb-20 animate-in fade-in duration-500">
+    <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-32 pb-20 animate-in fade-in duration-500">
       <SEO title="Careers | Castells Agency" description="Join the elite. We hire owners, not employees." />
       <div className="container mx-auto px-6">
 
@@ -44,13 +44,13 @@ const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 + i * 0.1, duration: 0.5 }}
-              className="group bg-white p-8 rounded-2xl border border-black/5 hover:border-coral/50 transition-all duration-300 hover:shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between cursor-pointer"
+              className="group bg-white dark:bg-surface p-8 rounded-2xl border border-black/5 dark:border-white/10 hover:border-coral/50 dark:hover:border-coral/40 transition-all duration-300 hover:shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between cursor-pointer"
             >
               <div>
                 <h3 className="font-display text-2xl font-semibold text-text-primary group-hover:text-coral transition-colors">{job.title}</h3>
-                <div className="flex gap-4 mt-2 text-xs font-bold uppercase tracking-widest text-text-secondary">
+                <div className="flex gap-4 mt-2 text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-white/60">
                   <span>{job.dept}</span>
-                  <span className="w-px h-3 bg-black/20 self-center" />
+                  <span className="w-px h-3 bg-black/20 dark:bg-white/20 self-center" />
                   <span>{job.loc}</span>
                   <span className="w-px h-3 bg-black/20 self-center" />
                   <span>{job.type}</span>
@@ -69,16 +69,16 @@ const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.6 }}
-          className="mt-20 p-12 bg-white border border-black/5 rounded-3xl text-center shadow-lg"
+          className="mt-20 p-12 bg-white dark:bg-surface border border-black/5 dark:border-white/10 rounded-3xl text-center shadow-lg"
         >
           <AnimatedHeading
             as="h3"
-            className="font-display text-3xl font-semibold mb-4 text-text-primary"
+            className="font-display text-3xl font-semibold mb-4 text-text-primary dark:text-white"
             delay={1.1}
           >
             Don't see your role?
           </AnimatedHeading>
-          <p className="text-text-secondary mb-8">We are always looking for top talent. Send us your portfolio.</p>
+          <p className="text-text-secondary dark:text-white/70 mb-8">We are always looking for top talent. Send us your portfolio.</p>
           <Button size="md" variant="secondary">
             Email Recruiting
           </Button>

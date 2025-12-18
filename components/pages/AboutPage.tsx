@@ -8,11 +8,11 @@ import Team from '../sections/Team';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import ScrollTimeline, { ScrollTimelineEntry } from '../ui/ScrollTimeline';
 import { PageHeader } from '../ui/PageHeader';
-import { PageView } from '../../App';
+import type { NavigateFn } from '../../types';
 
 interface AboutPageProps {
   onBack: () => void;
-  onNavigate: (page: PageView, data?: any) => void;
+  onNavigate: NavigateFn;
 }
 
 import SEO from '../ui/SEO';
@@ -126,7 +126,7 @@ const TIMELINE_ENTRIES: ScrollTimelineEntry[] = [
 
 const AboutPage: React.FC<AboutPageProps> = ({ onBack, onNavigate }) => {
   return (
-    <div className="bg-ivory min-h-screen pt-32 pb-20 animate-in fade-in duration-500">
+    <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-32 pb-20 animate-in fade-in duration-500">
       <SEO title="About Us | Castells Agency" description="We are the Anti-Agency. Obsessed with revenue, not vanity metrics." />
       <div className="container mx-auto px-6">
 
@@ -156,11 +156,11 @@ const AboutPage: React.FC<AboutPageProps> = ({ onBack, onNavigate }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
-                className="bg-white p-10 rounded-2xl border border-black/5 hover:border-coral/50 transition-all duration-300 hover:shadow-lg"
+                className="bg-white dark:bg-surface p-10 rounded-2xl border border-black/5 dark:border-white/10 hover:border-coral/50 dark:hover:border-coral/40 transition-all duration-300 hover:shadow-lg"
               >
                 <Icon className="w-10 h-10 text-coral mb-6" />
-                <h3 className="font-display text-2xl font-semibold mb-4">{value.title}</h3>
-                <p className="text-text-secondary">{value.desc}</p>
+                <h3 className="font-display text-2xl font-semibold mb-4 text-text-primary dark:text-white">{value.title}</h3>
+                <p className="text-text-secondary dark:text-white/70">{value.desc}</p>
               </motion.div>
             );
           })}
@@ -179,7 +179,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onBack, onNavigate }) => {
         <div className="grid grid-cols-12 gap-4 mb-32 h-[600px]">
           <div className="col-span-8 h-full rounded-3xl overflow-hidden relative group">
             <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Office" />
-            <div className="absolute bottom-6 left-6 bg-white px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest">Global HQ — Santa Monica</div>
+            <div className="absolute bottom-6 left-6 bg-white dark:bg-surface px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest text-text-primary dark:text-white border border-black/5 dark:border-white/10">Global HQ — Santa Monica</div>
           </div>
           <div className="col-span-4 flex flex-col gap-4 h-full">
             <div className="h-1/2 rounded-3xl overflow-hidden relative group">
@@ -193,7 +193,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ onBack, onNavigate }) => {
 
         {/* Reuse Team Component */}
         <div className="mb-20">
-          <Team />
+          <Team onNavigate={onNavigate} />
         </div>
 
       </div>

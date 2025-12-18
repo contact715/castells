@@ -1,19 +1,22 @@
-
 import React, { useState, useEffect } from 'react';
 import { m as motion } from 'framer-motion';
-import { CheckCircle2, ExternalLink, Calendar, Building2, Zap, Target, TrendingUp } from 'lucide-react';
+import { ArrowLeft, Calendar, Building2, TrendingUp, Target, CheckCircle2, ExternalLink, Zap, MapPin } from 'lucide-react';
 import { Button } from '../ui/Button';
 import SEO from '../ui/SEO';
-import { PageHeader } from '../ui/PageHeader';
+import { Breadcrumbs } from '../ui/Breadcrumbs';
+import { CASE_STUDIES } from '../../constants';
+import type { CaseStudy } from '../../constants';
+import type { NavigateFn } from '../../types';
 
 interface CaseStudyDetailProps {
   onBack: () => void;
-  onNavigate: (page: any) => void;
-  project?: any;
+  onNavigate: NavigateFn;
+  project?: Partial<CaseStudy>;
 }
 
 const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, project }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState('overview');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,7 +28,46 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const data = project || {
+  // Track active section on scroll
+  useEffect(() => {
+    const sections = tableOfContents.map(item => item.id);
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observers: IntersectionObserver[] = [];
+    
+    sections.forEach(sectionId => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+        observer.observe(element);
+        observers.push(observer);
+      }
+    });
+
+    return () => {
+      observers.forEach(observer => observer.disconnect());
+    };
+  }, []);
+
+  // Find case study from constants or use project data
+  const caseStudyId = project?.id != null ? String(project.id) : undefined;
+  const caseStudy = caseStudyId
+    ? CASE_STUDIES.find(cs => cs.id === caseStudyId)
+    : null;
+  
+  const data = caseStudy || project || {
     client: 'Apex Architecture',
     industry: 'Construction',
     year: '2024',
@@ -65,57 +107,72 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
     <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-32 pb-20">
       <SEO title={`${data.client} Case Study | Castells Agency`} description={data.description} />
       <div className="container mx-auto px-6">
+        {/* Breadcrumbs */}
+        <div className="mb-12">
+          <Breadcrumbs
+            items={[
+              { label: 'Home', action: () => onNavigate('home') },
+              { label: 'Work', action: () => onNavigate('work') },
+              { label: data.client, active: true }
+            ]}
+          />
+        </div>
 
-        {/* Header */}
-        <PageHeader
-          breadcrumbs={[
-            { label: 'Home', action: () => onNavigate('home') },
-            { label: 'Work', action: () => onNavigate('work') },
-            { label: data.client, active: true }
-          ]}
-          badge="Case Study"
-          title={data.client}
-          description={data.description}
-          onNavigate={onNavigate}
-        />
-
-        {/* HERO IMAGE - Full Width, Card Style */}
+        {/* Hero Image with Meta Info */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="relative w-full h-[400px] rounded-[2rem] overflow-hidden mb-12 group cursor-pointer"
+          className="relative w-full h-[500px] rounded-[2rem] overflow-hidden mb-12 group"
         >
-          {/* Background */}
           <div className="absolute inset-0 bg-black">
             <img
               src={data.image}
               alt={data.client}
-              className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
+              className="w-full h-full object-cover opacity-90 group-hover:opacity-70 transition-opacity duration-700"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
           </div>
-
+          
           {/* Content Overlay */}
           <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between z-10">
-            {/* Top Row */}
-            <div className="flex justify-between items-start">
-              <div className="bg-white/10 backdrop-blur-md border border-white/10 px-4 py-2 rounded-xl text-white text-xs font-bold uppercase tracking-widest">
-                {data.year} — {data.industry}
-              </div>
-              <Button size="sm" variant="outline-white" className="backdrop-blur-md flex items-center gap-2">
-                View Live <ExternalLink className="w-3 h-3" />
-              </Button>
+            {/* Top: Badge */}
+            <div className="flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
+              <span className="font-bold uppercase tracking-widest text-white text-xs">
+                Case Study
+              </span>
             </div>
 
-            {/* Bottom Content */}
+            {/* Bottom: Title, Description and Meta */}
             <div>
-              <h1 className="font-display text-4xl md:text-6xl font-semibold text-white mb-3 tracking-tight leading-none">
+              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4 leading-[1.1] tracking-tight">
                 {data.client}
               </h1>
+              <p className="text-lg text-white/90 mb-6 max-w-3xl leading-relaxed">
+                {data.description}
+              </p>
+              
+              {/* Meta Information */}
+              <div className="flex flex-wrap items-center gap-4 text-sm text-white/80 mb-4">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4" />
+                  <span>{data.year}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Building2 className="w-4 h-4" />
+                  <span>{data.industry}</span>
+                </div>
+                {data.location && (
+                  <div className="flex items-center gap-2">
+                    <MapPin className="w-4 h-4" />
+                    <span>{data.location}</span>
+                  </div>
+                )}
+              </div>
               <div className="flex flex-wrap gap-2">
                 {data.services?.map((s: string) => (
-                  <span key={s} className="px-3 py-1.5 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl text-white/80 text-xs font-medium">
+                  <span key={s} className="px-4 py-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl text-white text-xs font-bold uppercase tracking-widest">
                     {s}
                   </span>
                 ))}
@@ -124,12 +181,10 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
           </div>
         </motion.div>
 
-        {/* TWO COLUMN LAYOUT: 70/30 */}
+        {/* Two Column Layout */}
         <div className="flex flex-col lg:flex-row gap-12">
-
-          {/* LEFT COLUMN: Main Content (70%) */}
+          {/* Left Column: Main Content (70%) */}
           <div className="lg:w-[70%] relative">
-
             {/* Reading Progress Line */}
             <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-black/5 dark:bg-white/10 rounded-full hidden lg:block">
               <motion.div
@@ -139,32 +194,32 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
             </div>
 
             {/* Content */}
-            <div className="lg:pl-8 space-y-12">
-
+            <div className="lg:pl-8 space-y-8">
               {/* Overview */}
               <section id="overview">
-                <p className="text-xl text-text-secondary leading-relaxed">
-                  {data.description}
-                </p>
+                <div className="prose prose-lg dark:prose-invert max-w-none">
+                  <p className="text-xl text-text-secondary dark:text-white/80 leading-relaxed">
+                    {data.description}
+                  </p>
+                </div>
               </section>
 
               {/* Results */}
-              <section id="results" className="bg-white dark:bg-white rounded-2xl p-8 border border-black/5 dark:border-white/10">
-                <h2 className="font-display text-2xl font-semibold mb-6 flex items-center gap-3 text-text-primary dark:text-black">
-                  <span className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center">
-                    <TrendingUp className="w-4 h-4 text-coral" />
-                  </span>
+              <section id="results" className="space-y-4">
+                <h2 className="font-display text-3xl font-semibold text-text-primary dark:text-white leading-tight">
                   Results
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {data.results?.map((res: any, idx: number) => (
-                    <div key={idx} className="bg-ivory/50 dark:bg-white/80 rounded-xl p-5">
-                      <div className="font-display text-3xl font-bold text-text-primary dark:text-black mb-1">
+                    <div key={idx} className="bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-[2rem] p-6">
+                      <div className="font-display text-3xl font-bold text-text-primary dark:text-white mb-2">
                         {res.value}
                       </div>
-                      <div className="text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-black/60 flex items-center gap-2">
+                      <div className="text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-white/60 mb-1">
                         {res.label}
-                        <span className="text-coral bg-coral/10 dark:bg-coral/20 px-1.5 py-0.5 rounded text-[10px]">{res.growth}</span>
+                      </div>
+                      <div className="text-coral text-sm font-semibold">
+                        {res.growth}
                       </div>
                     </div>
                   ))}
@@ -172,37 +227,31 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               </section>
 
               {/* Challenge */}
-              <section id="challenge" className="bg-white dark:bg-white rounded-2xl p-8 border border-black/5 dark:border-white/10">
-                <h2 className="font-display text-2xl font-semibold mb-4 flex items-center gap-3 text-text-primary dark:text-black">
-                  <span className="w-8 h-8 rounded-lg bg-black/5 dark:bg-black/10 flex items-center justify-center">
-                    <Target className="w-4 h-4 text-text-secondary dark:text-black/60" />
-                  </span>
+              <section id="challenge" className="space-y-4">
+                <h2 className="font-display text-3xl font-semibold text-text-primary dark:text-white leading-tight">
                   The Challenge
                 </h2>
-                <p className="text-text-secondary dark:text-black/70 leading-relaxed">
+                <p className="text-lg text-text-secondary dark:text-white/70 leading-relaxed">
                   {data.challenge}
                 </p>
               </section>
 
               {/* Solution */}
-              <section id="solution" className="bg-white dark:bg-white rounded-2xl p-8 border border-black/5 dark:border-white/10">
-                <h2 className="font-display text-2xl font-semibold mb-4 flex items-center gap-3 text-text-primary dark:text-black">
-                  <span className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center">
-                    <CheckCircle2 className="w-4 h-4 text-coral" />
-                  </span>
+              <section id="solution" className="space-y-4">
+                <h2 className="font-display text-3xl font-semibold text-text-primary dark:text-white leading-tight">
                   The Solution
                 </h2>
-                <p className="text-text-secondary dark:text-black/70 leading-relaxed mb-6">
+                <p className="text-lg text-text-secondary dark:text-white/70 leading-relaxed mb-6">
                   {data.solution}
                 </p>
                 {data.keyFeatures && (
-                  <div className="bg-ivory/50 dark:bg-white/80 rounded-xl p-5">
-                    <h3 className="font-semibold text-xs uppercase tracking-widest text-text-secondary dark:text-black/60 mb-4">Key Deliverables</h3>
+                  <div className="bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-[2rem] p-6">
+                    <h3 className="font-display text-lg font-semibold text-text-primary dark:text-white mb-4">Key Deliverables</h3>
                     <ul className="space-y-3">
                       {data.keyFeatures.map((item: string, i: number) => (
-                        <li key={i} className="flex items-center gap-3 text-text-primary dark:text-black text-sm font-medium">
-                          <CheckCircle2 className="w-4 h-4 text-coral flex-shrink-0" />
-                          {item}
+                        <li key={i} className="flex items-center gap-3 text-text-primary dark:text-white">
+                          <CheckCircle2 className="w-5 h-5 text-coral flex-shrink-0" />
+                          <span>{item}</span>
                         </li>
                       ))}
                     </ul>
@@ -212,46 +261,57 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
 
               {/* Testimonial */}
               {data.testimonial && (
-                <section className="bg-white dark:bg-white border border-black/5 dark:border-white/10 text-text-primary dark:text-black rounded-2xl p-8 md:p-10 relative overflow-hidden shadow-lg">
-                  <div className="absolute top-0 right-0 w-32 h-32 bg-coral/20 rounded-full blur-3xl" />
-                  <div className="relative z-10">
-                    <div className="text-coral text-5xl font-serif leading-none mb-4">"</div>
-                    <blockquote className="font-display text-xl md:text-2xl font-medium leading-relaxed mb-6 text-text-primary dark:text-black">
-                      {data.testimonial.quote}
-                    </blockquote>
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center text-coral font-bold text-sm">
-                        {data.testimonial.author.charAt(0)}
-                      </div>
-                      <div>
-                        <cite className="not-italic font-bold text-text-primary dark:text-black text-sm block">
-                          {data.testimonial.author}
-                        </cite>
-                        <span className="text-text-secondary dark:text-black/60 text-xs">
-                          {data.testimonial.role}
-                        </span>
-                      </div>
+                <div className="pt-8 border-t border-black/10 dark:border-white/10">
+                  <div className="text-coral text-5xl font-serif leading-none mb-4">"</div>
+                  <blockquote className="font-display text-xl md:text-2xl font-medium leading-relaxed mb-6 text-text-primary dark:text-white">
+                    {data.testimonial.quote}
+                  </blockquote>
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center text-coral font-bold text-lg">
+                      {data.testimonial.author.charAt(0)}
+                    </div>
+                    <div>
+                      <cite className="not-italic font-bold text-text-primary dark:text-white text-sm block">
+                        {data.testimonial.author}
+                      </cite>
+                      <span className="text-text-secondary dark:text-white/60 text-xs">
+                        {data.testimonial.role}
+                      </span>
                     </div>
                   </div>
-                </section>
+                </div>
               )}
-
             </div>
           </div>
 
-          {/* RIGHT COLUMN: Sticky Sidebar (30%) */}
+          {/* Right Column: Sidebar (30%) */}
           <div className="lg:w-[30%]">
-            <div className="lg:sticky lg:top-32 space-y-4">
+            <div className="sticky top-32 space-y-6">
+              {/* Back Button */}
+              <Button
+                onClick={onBack}
+                variant="primary"
+                className="w-full"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Work
+              </Button>
 
               {/* TOC */}
-              <div className="bg-white rounded-2xl p-5 border border-black/5">
-                <h3 className="font-semibold text-[10px] uppercase tracking-widest text-text-secondary mb-3">On this page</h3>
-                <div className="space-y-1">
+              <div className="bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-[2rem] p-6">
+                <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white mb-4">
+                  On this page
+                </h3>
+                <div className="space-y-2">
                   {tableOfContents.map((item) => (
                     <button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className="w-full text-left px-3 py-2 rounded-lg hover:bg-black hover:text-white transition-all text-text-primary text-sm font-medium"
+                      className={`w-full text-left px-4 py-2 rounded-xl transition-all text-sm font-medium ${
+                        activeSection === item.id
+                          ? 'bg-coral text-white'
+                          : 'text-text-primary dark:text-white hover:bg-black/5 dark:hover:bg-white/10'
+                      }`}
                     >
                       {item.label}
                     </button>
@@ -259,64 +319,73 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                 </div>
               </div>
 
-              {/* Author */}
-              <div className="bg-white dark:bg-white rounded-2xl p-5 border border-black/5 dark:border-white/10">
-                <h3 className="font-semibold text-[10px] uppercase tracking-widest text-text-secondary dark:text-black/60 mb-3">Written by</h3>
-                <div className="flex items-center gap-3">
-                  <img
-                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80"
-                    alt="Author"
-                    className="w-12 h-12 rounded-full object-cover"
-                  />
-                  <div>
-                    <p className="font-bold text-text-primary dark:text-black text-sm">Dmitry Castells</p>
-                    <p className="text-text-secondary dark:text-black/60 text-xs">Founder & CEO</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Why Us */}
-              <div className="bg-white dark:bg-white rounded-2xl p-5 border border-black/5 dark:border-white/10">
-                <h3 className="font-semibold text-[10px] uppercase tracking-widest text-text-secondary dark:text-black/60 mb-3">Why Castells</h3>
-                <div className="space-y-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center">
+              {/* Why Castells */}
+              <div className="bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-[2rem] p-6">
+                <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white mb-4">
+                  Why Castells
+                </h3>
+                <div className="space-y-4">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center flex-shrink-0">
                       <Target className="w-4 h-4 text-coral" />
                     </div>
-                    <span className="text-sm font-medium text-text-primary dark:text-black">Revenue-First Approach</span>
+                    <div>
+                      <div className="font-semibold text-sm text-text-primary dark:text-white mb-1">
+                        Revenue-First Approach
+                      </div>
+                      <div className="text-xs text-text-secondary dark:text-white/60">
+                        We optimize exclusively for revenue and ROAS, not vanity metrics.
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center flex-shrink-0">
                       <Zap className="w-4 h-4 text-coral" />
                     </div>
-                    <span className="text-sm font-medium text-text-primary dark:text-black">Fast Execution</span>
+                    <div>
+                      <div className="font-semibold text-sm text-text-primary dark:text-white mb-1">
+                        Fast Execution
+                      </div>
+                      <div className="text-xs text-text-secondary dark:text-white/60">
+                        Campaigns live within 14 days. Speed to market matters.
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center">
+                  <div className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center flex-shrink-0">
                       <TrendingUp className="w-4 h-4 text-coral" />
                     </div>
-                    <span className="text-sm font-medium text-text-primary dark:text-black">200+ Projects</span>
+                    <div>
+                      <div className="font-semibold text-sm text-text-primary dark:text-white mb-1">
+                        200+ Projects
+                      </div>
+                      <div className="text-xs text-text-secondary dark:text-white/60">
+                        Proven track record across industries and markets.
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
               {/* CTA */}
-              <div className="bg-white dark:bg-white border border-black/5 dark:border-white/10 text-text-primary dark:text-black rounded-2xl p-5 shadow-lg">
-                <p className="font-display text-lg font-bold mb-1 text-text-primary dark:text-black">Ready to grow?</p>
-                <p className="text-text-secondary dark:text-black/60 text-xs mb-4">Get a free strategy audit</p>
+              <div className="bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-[2rem] p-6">
+                <h3 className="font-display text-lg font-semibold text-text-primary dark:text-white mb-2">
+                  Ready to grow?
+                </h3>
+                <p className="text-text-secondary dark:text-white/60 text-sm mb-4">
+                  Get a free strategy audit
+                </p>
                 <Button
                   onClick={() => onNavigate('contact')}
                   size="md"
-                  variant="secondary"
+                  variant="primary"
                   className="w-full"
                 >
                   Get Free Audit
                 </Button>
               </div>
-
             </div>
           </div>
-
         </div>
       </div>
     </div>

@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="900" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B0B0B"/>
+      <stop offset="1" stop-color="#1A1A1A"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="420" y1="250" x2="1220" y2="720" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FF6B5B" stop-opacity="0.95"/>
+      <stop offset="1" stop-color="#FF6B5B" stop-opacity="0.15"/>
+    </linearGradient>
+    <filter id="glow" x="0" y="0" width="1600" height="900" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="18" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.55 0" result="glow"/>
+      <feBlend in="SourceGraphic" in2="glow" mode="screen"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1600" height="900" fill="url(#bg)"/>
+
+  <!-- Subtle grid -->
+  <g opacity="0.08" stroke="#FFFFFF">
+    <path d="M0 120H1600"/>
+    <path d="M0 240H1600"/>
+    <path d="M0 360H1600"/>
+    <path d="M0 480H1600"/>
+    <path d="M0 600H1600"/>
+    <path d="M0 720H1600"/>
+    <path d="M200 0V900"/>
+    <path d="M400 0V900"/>
+    <path d="M600 0V900"/>
+    <path d="M800 0V900"/>
+    <path d="M1000 0V900"/>
+    <path d="M1200 0V900"/>
+    <path d="M1400 0V900"/>
+  </g>
+
+  <!-- Accent orb -->
+  <circle cx="1280" cy="260" r="220" fill="url(#accent)" filter="url(#glow)"/>
+
+  <!-- House silhouette -->
+  <g filter="url(#glow)">
+    <path d="M520 540L800 320L1080 540V720C1080 764.183 1044.18 800 1000 800H600C555.817 800 520 764.183 520 720V540Z" fill="#111111" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="2"/>
+    <path d="M690 800V610C690 587.909 707.909 570 730 570H870C892.091 570 910 587.909 910 610V800" fill="#0F0F0F" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="2"/>
+    <path d="M760 680H840" stroke="#FF6B5B" stroke-opacity="0.55" stroke-width="6" stroke-linecap="round"/>
+    <path d="M760 620H840" stroke="#FF6B5B" stroke-opacity="0.35" stroke-width="6" stroke-linecap="round"/>
+    <path d="M610 585H690" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="6" stroke-linecap="round"/>
+    <path d="M910 585H990" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="6" stroke-linecap="round"/>
+
+    <!-- Roof highlight -->
+    <path d="M520 540L800 320L1080 540" stroke="#FF6B5B" stroke-opacity="0.25" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+
+  <!-- Key mark -->
+  <g opacity="0.9">
+    <circle cx="360" cy="620" r="44" fill="#FF6B5B" fill-opacity="0.15" stroke="#FF6B5B" stroke-opacity="0.35"/>
+    <circle cx="360" cy="620" r="14" fill="#FF6B5B" fill-opacity="0.35"/>
+    <path d="M404 620H520" stroke="#FF6B5B" stroke-opacity="0.55" stroke-width="10" stroke-linecap="round"/>
+    <path d="M500 620V660" stroke="#FF6B5B" stroke-opacity="0.55" stroke-width="10" stroke-linecap="round"/>
+    <path d="M470 620V648" stroke="#FF6B5B" stroke-opacity="0.35" stroke-width="10" stroke-linecap="round"/>
+  </g>
+
+  <!-- Label chip (subtle) -->
+  <g opacity="0.85">
+    <rect x="112" y="108" width="420" height="72" rx="24" fill="#FFFFFF" fill-opacity="0.05" stroke="#FFFFFF" stroke-opacity="0.10"/>
+    <path d="M156 144L184 120L212 144V174C212 182.837 204.837 190 196 190H172C163.163 190 156 182.837 156 174V144Z" fill="#FFFFFF" fill-opacity="0.06" stroke="#FF6B5B" stroke-opacity="0.35"/>
+    <path d="M260 156H492" stroke="#FFFFFF" stroke-opacity="0.18" stroke-width="10" stroke-linecap="round"/>
+    <path d="M260 132H440" stroke="#FF6B5B" stroke-opacity="0.22" stroke-width="10" stroke-linecap="round"/>
+  </g>
+</svg>
+

@@ -29,9 +29,32 @@ export interface GeneratedConcept {
   visualCues: string;
 }
 
+export type PageView =
+  | 'home'
+  | 'case-study'
+  | 'work'
+  | 'about'
+  | 'careers'
+  | 'blog'
+  | 'blog-post'
+  | 'contact'
+  | 'not-found'
+  | 'team'
+  | 'service'
+  | 'industry'
+  | 'services'
+  | 'industries'
+  | 'company'
+  | 'thank-you'
+  | 'privacy-policy'
+  | 'terms'
+  | 'cookie-policy';
+
 // Type for navigation data (project, service, industry)
 export interface NavigationData {
-  id?: string;
+  id?: string | number;
   name?: string;
   [key: string]: unknown;
 }
+
+export type NavigateFn = (page: PageView, data?: NavigationData) => void;

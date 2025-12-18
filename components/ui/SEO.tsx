@@ -7,6 +7,7 @@ interface SEOProps {
     canonical?: string;
     image?: string;
     type?: string;
+    robots?: string;
 }
 
 const SEO: React.FC<SEOProps> = ({
@@ -14,11 +15,14 @@ const SEO: React.FC<SEOProps> = ({
     description = 'We help contractors and service providers dominate their local markets through data-driven strategies.',
     canonical,
     image = 'https://castells.agency/castells-logo.png',
-    type = 'website'
+    type = 'website',
+    robots = 'index, follow'
 }) => {
     const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
     const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
-    const fullCanonical = canonical || (typeof window !== 'undefined' ? window.location.href : siteUrl);
+    const fullCanonical = canonical
+        ? (canonical.startsWith('http') ? canonical : `${siteUrl}${canonical.startsWith('/') ? '' : '/'}${canonical}`)
+        : (typeof window !== 'undefined' ? window.location.href : siteUrl);
 
     return (
         <Helmet>
@@ -44,7 +48,7 @@ const SEO: React.FC<SEOProps> = ({
             
             {/* Additional SEO */}
             <meta name="author" content="Castells Agency" />
-            <meta name="robots" content="index, follow" />
+            <meta name="robots" content={robots} />
             <link rel="canonical" href={fullCanonical} />
         </Helmet>
     );

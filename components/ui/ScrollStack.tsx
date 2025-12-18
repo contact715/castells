@@ -91,11 +91,11 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
             const blur = (1 - progress) * blurAmount;
             const brightness = 1 - ((1 - progress) * 0.2); // Darken slightly
 
-            card.style.transform = `scale(${scale})`;
+            card.style.transform = `scale(${scale}) translateZ(0)`;
             card.style.filter = `blur(${blur}px) brightness(${brightness})`;
         } else {
             // Last card doesn't scale down
-            card.style.transform = 'scale(1)';
+            card.style.transform = 'scale(1) translateZ(0)';
             card.style.filter = 'none';
         }
       });

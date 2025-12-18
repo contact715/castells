@@ -1,9 +1,10 @@
 
 import React from 'react';
-import { Linkedin } from 'lucide-react';
+import { Linkedin, ArrowUpRight } from 'lucide-react';
 import { m as motion } from 'framer-motion';
 import { Badge } from '../ui/Badge';
 import AnimatedHeading from '../ui/AnimatedHeading';
+import { PageView } from '../../App';
 
 const TEAM = [
   {
@@ -70,37 +71,34 @@ const cardVariants = {
     y: 0,
     transition: {
       duration: 0.5,
-      ease: [0.22, 1, 0.36, 1],
+      ease: [0.22, 1, 0.36, 1] as const,
     }
   },
 };
 
-const Team: React.FC = () => {
+interface TeamProps {
+  onNavigate?: import('../../types').NavigateFn;
+}
+
+const Team: React.FC<TeamProps> = ({ onNavigate }) => {
   return (
     <section id="team" className="py-20 bg-ivory dark:bg-[#191919] border-t border-black/5 dark:border-white/5 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
 
-        {/* Section Header - Two Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 mb-12">
-          {/* Left: Badge + Title */}
-          <div>
-            <Badge className="mb-3">Our Team</Badge>
-            <AnimatedHeading
-              as="h2"
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary dark:text-white leading-tight tracking-tight"
-              delay={0.1}
-            >
-              Meet the<br />
-              <span className="text-text-secondary">Minds</span>
-            </AnimatedHeading>
-          </div>
-
-          {/* Right: Description */}
-          <div className="flex flex-col justify-end">
-            <p className="text-lg text-text-secondary leading-relaxed max-w-lg">
-              The people behind the millions. We don't outsource. We execute.
-            </p>
-          </div>
+        {/* Section Header */}
+        <div className="max-w-3xl mb-12">
+          <Badge className="mb-4">Our Team</Badge>
+          <AnimatedHeading
+            as="h2"
+            className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary dark:text-white leading-tight tracking-tight mb-6"
+            delay={0.1}
+          >
+            Meet the<br />
+            <span className="text-text-secondary">Minds</span>
+          </AnimatedHeading>
+          <p className="text-lg text-text-secondary leading-relaxed">
+            The people behind the millions. We don't outsource. We execute.
+          </p>
         </div>
 
         {/* Team Grid */}
@@ -150,26 +148,45 @@ const Team: React.FC = () => {
           ))}
 
           {/* Join Team CTA Card */}
-          <motion.a
-            href="#careers"
+          <motion.div
             variants={cardVariants}
-            className="group relative aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-br from-coral/10 to-coral/5 dark:from-coral/20 dark:to-coral/10 border-2 border-dashed border-coral/30 dark:border-coral/40 hover:border-coral dark:hover:border-coral transition-all flex flex-col items-center justify-center text-center p-6 cursor-pointer"
+            onClick={() => onNavigate?.('careers')}
+            className="group relative aspect-[3/4] rounded-xl overflow-hidden bg-surface cursor-pointer"
           >
-            {/* Plus Icon */}
-            <div className="w-14 h-14 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-4 group-hover:bg-coral/20 dark:group-hover:bg-coral/30 transition-colors">
-              <svg className="w-7 h-7 text-coral" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
+            {/* Background Pattern */}
+            <div className="absolute inset-0 opacity-30">
+              <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+                <defs>
+                  <pattern id="teamGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <circle cx="1" cy="1" r="0.5" fill="#E08576" opacity="0.3" />
+                  </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#teamGrid)" />
               </svg>
             </div>
 
-            {/* Text */}
-            <h3 className="font-display text-lg font-semibold text-text-primary dark:text-white mb-1">
-              Join Our Team
-            </h3>
-            <p className="text-xs text-text-secondary dark:text-white/70">
-              Want to work with us? Get in touch!
-            </p>
-          </motion.a>
+            {/* Gradient Overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-coral/20 via-transparent to-transparent group-hover:from-coral/30 transition-all duration-500" />
+
+            {/* Content */}
+            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
+              {/* Icon */}
+              <div className="w-16 h-16 rounded-2xl bg-coral flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                <ArrowUpRight className="w-7 h-7 text-white group-hover:rotate-45 transition-transform duration-300" />
+              </div>
+
+              {/* Text */}
+              <h3 className="font-display text-xl font-semibold text-text-primary mb-2">
+                Join Our Team
+              </h3>
+              <p className="text-sm text-text-secondary leading-relaxed">
+                We're always looking for talented people
+              </p>
+            </div>
+
+            {/* Border Effect */}
+            <div className="absolute inset-0 rounded-xl border border-black/5 dark:border-white/10 group-hover:border-coral/50 transition-colors duration-300" />
+          </motion.div>
         </motion.div>
 
       </div>

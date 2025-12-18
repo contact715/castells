@@ -8,7 +8,9 @@ import SchemaMarkup from './components/ui/SchemaMarkup';
 import ErrorBoundary from './components/ui/ErrorBoundary';
 import SmoothScroll from './components/effects/SmoothScroll';
 import { LayoutPreloader } from './components/ui/layout-preloader';
-import { NavigationData } from './types';
+import type { NavigationData, PageView } from './types';
+export type { PageView } from './types';
+import { pathnameFromRoute, routeFromPathname } from './lib/routes';
 
 // Lazy load components for performance
 const Hero = React.lazy(() => import('./components/sections/Hero'));
@@ -33,11 +35,17 @@ const NotFound = React.lazy(() => import('./components/pages/NotFound'));
 const ContactPage = React.lazy(() => import('./components/pages/ContactPage'));
 const TeamPage = React.lazy(() => import('./components/pages/TeamPage'));
 const BlogPage = React.lazy(() => import('./components/pages/BlogPage'));
+const BlogPostDetail = React.lazy(() => import('./components/pages/BlogPostDetail'));
 const ServicePage = React.lazy(() => import('./components/pages/ServicePage'));
 const IndustryPage = React.lazy(() => import('./components/pages/IndustryPage'));
 const AllServicesPage = React.lazy(() => import('./components/pages/AllServicesPage'));
 const AllIndustriesPage = React.lazy(() => import('./components/pages/AllIndustriesPage'));
 const CompanyPage = React.lazy(() => import('./components/pages/CompanyPage'));
+const ThankYouPage = React.lazy(() => import('./components/pages/ThankYouPage'));
+// NOTE: keep explicit extensions here to satisfy TS bundler resolution in some setups
+const PrivacyPolicyPage = React.lazy(() => import('./components/pages/PrivacyPolicyPage.tsx'));
+const TermsOfServicePage = React.lazy(() => import('./components/pages/TermsOfServicePage.tsx'));
+const CookiePolicyPage = React.lazy(() => import('./components/pages/CookiePolicyPage.tsx'));
 
 // Loading fallback
 const PageLoader = () => (
@@ -46,11 +54,10 @@ const PageLoader = () => (
   </div>
 );
 
-export type PageView = 'home' | 'case-study' | 'work' | 'about' | 'careers' | 'blog' | 'contact' | 'not-found' | 'team' | 'service' | 'industry' | 'services' | 'industries' | 'company';
-
 function App() {
-  const [currentPage, setCurrentPage] = useState<PageView>('home');
-  const [selectedProject, setSelectedProject] = useState<NavigationData | null>(null);
+  const initialRoute = routeFromPathname(window.location.pathname);
+  const [currentPage, setCurrentPage] = useState<PageView>(initialRoute.page);
+  const [selectedProject, setSelectedProject] = useState<NavigationData | null>(initialRoute.data ?? null);
   const [isPreloaderComplete, setIsPreloaderComplete] = useState(false);
 
   // Scroll to top on page change
@@ -69,6 +76,23 @@ function App() {
   const navigateTo = useCallback((page: PageView, data?: NavigationData) => {
     if (data) setSelectedProject(data);
     setCurrentPage(page);
+
+    const nextPath = pathnameFromRoute(page, data);
+    if (nextPath && window.location.pathname !== nextPath) {
+      window.history.pushState({}, '', nextPath);
+    }
+  }, []);
+
+  // Sync Back/Forward with currentPage
+  useEffect(() => {
+    const onPopState = () => {
+      const route = routeFromPathname(window.location.pathname);
+      setCurrentPage(route.page);
+      setSelectedProject(route.data ?? null);
+    };
+
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
   const handlePreloaderComplete = useCallback(() => {
@@ -99,7 +123,7 @@ function App() {
         
         <div className="relative z-10">
           <LazyMotion features={domAnimation}>
-            {currentPage !== 'not-found' && <NavBar onNavigate={navigateTo} />}
+            {currentPage !== 'not-found' && currentPage !== 'thank-you' && <NavBar onNavigate={navigateTo} />}
 
             <main id="main-content" role="main">
               <Suspense fallback={<PageLoader />}>
@@ -114,10 +138,10 @@ function App() {
                   <Services />
                   <Process />
 
-                  <Team />
+                  <Team onNavigate={navigateTo} />
 
                   <FAQ />
-                  <Blog />
+                  <Blog onNavigate={navigateTo} />
                 </>
               )}
 
@@ -125,7 +149,7 @@ function App() {
                 <CaseStudyDetail
                   onBack={() => navigateTo('home')}
                   onNavigate={navigateTo}
-                  project={selectedProject}
+                  project={selectedProject?.id != null ? { id: String(selectedProject.id) } : undefined}
                 />
               )}
 
@@ -162,9 +186,20 @@ function App() {
               )}
 
               {currentPage === 'blog' && (
-                <BlogPage
-                  onBack={() => navigateTo('home')}
+                <BlogPage onNavigate={navigateTo} />
+              )}
+
+              {currentPage === 'blog-post' && (
+                <BlogPostDetail
+                  onBack={() => navigateTo('blog')}
                   onNavigate={navigateTo}
+                  postId={
+                    typeof selectedProject?.id === 'number'
+                      ? selectedProject.id
+                      : selectedProject?.id
+                        ? Number(selectedProject.id)
+                        : undefined
+                  }
                 />
               )}
 
@@ -173,7 +208,7 @@ function App() {
                   onBack={() => navigateTo('home')}
                   onNavigate={navigateTo}
                   serviceName={selectedProject?.name}
-                  serviceId={selectedProject?.id}
+                  serviceId={selectedProject?.id ? String(selectedProject.id) : undefined}
                 />
               )}
 
@@ -182,7 +217,7 @@ function App() {
                   onBack={() => navigateTo('home')}
                   onNavigate={navigateTo}
                   industryName={selectedProject?.name}
-                  industryId={selectedProject?.id}
+                  industryId={selectedProject?.id ? String(selectedProject.id) : undefined}
                 />
               )}
 
@@ -207,13 +242,32 @@ function App() {
                 />
               )}
 
+              {currentPage === 'privacy-policy' && (
+                <PrivacyPolicyPage onNavigate={navigateTo} />
+              )}
+
+              {currentPage === 'terms' && (
+                <TermsOfServicePage onNavigate={navigateTo} />
+              )}
+
+              {currentPage === 'cookie-policy' && (
+                <CookiePolicyPage onNavigate={navigateTo} />
+              )}
+
+              {currentPage === 'thank-you' && (
+                <ThankYouPage
+                  onNavigate={navigateTo}
+                  type={selectedProject?.name as 'contact' | 'newsletter' | 'booking' | 'general'}
+                />
+              )}
+
               {currentPage === 'not-found' && (
-                <NotFound />
+                <NotFound onNavigate={navigateTo} />
               )}
             </Suspense>
           </main>
 
-            {currentPage !== 'not-found' && <Footer onNavigate={navigateTo} />}
+            {currentPage !== 'not-found' && currentPage !== 'thank-you' && <Footer onNavigate={navigateTo} />}
           </LazyMotion>
         </div>
       </div>

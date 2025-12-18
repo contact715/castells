@@ -4,6 +4,7 @@ import { m as motion } from 'framer-motion';
 import { Button } from '../ui/Button';
 import { Marquee } from '../ui/Marquee';
 import AnimatedHeading from '../ui/AnimatedHeading';
+import { ContactButtons } from '../ui/ContactButtons';
 import '../ui/Marquee.css';
 
 const TESTIMONIAL_AVATARS = [
@@ -89,7 +90,7 @@ const Hero: React.FC = () => {
                         <p className="text-lg md:text-xl text-text-secondary leading-relaxed mb-8">
                             From MVP to scalable results people actually want. We design, build, and optimize campaigns for contractors, service providers, and local businesses.
                         </p>
-                        <div className="flex gap-4">
+                        <div className="flex gap-4 items-center">
                             <Button
                                 href="#audit"
                                 size="md"
@@ -98,6 +99,7 @@ const Hero: React.FC = () => {
                                 Contact us
                                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                             </Button>
+                            <ContactButtons defaultExpanded={null} />
                         </div>
                     </div>
                 </div>
@@ -148,23 +150,16 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Video Section - Contained Width */}
-            <div className="container mx-auto pb-20">
-                <div className="relative w-full aspect-[21/9] rounded-[2rem] overflow-hidden shadow-2xl bg-black">
+            <div className="container mx-auto px-6 pb-20">
+                <div className="relative w-full aspect-video rounded-[2rem] overflow-hidden shadow-2xl bg-black">
                     <iframe
                         ref={iframeRef}
                         src="https://player.vimeo.com/video/1101673750?h=7ccdfe1d0c&autoplay=1&muted=1&loop=1&controls=1&background=0&responsive=1&byline=0&title=0"
-                        className="absolute inset-0 w-full h-full"
+                        className="absolute inset-0 w-full h-full border-0"
                         frameBorder="0"
                         referrerPolicy="strict-origin-when-cross-origin"
                         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
                         allowFullScreen
-                        style={{ 
-                            position: 'absolute', 
-                            top: 0,
-                            left: 0,
-                            width: '100%', 
-                            height: '100%'
-                        }}
                         title="vimeo-player"
                     />
                     {/* Sound Toggle Button */}

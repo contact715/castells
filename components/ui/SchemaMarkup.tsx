@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface SchemaMarkupProps {
-  type?: 'Organization' | 'WebSite' | 'Service' | 'Article';
+  type?: 'Organization' | 'WebSite' | 'Service' | 'Article' | 'BreadcrumbList';
   data?: Record<string, unknown>;
 }
 
@@ -72,11 +72,13 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
           '@type': 'Article',
           headline: data?.headline || '',
           description: data?.description || '',
-          author: {
+          image: data?.image || `${baseUrl}/castells-logo.png`,
+          datePublished: data?.datePublished || new Date().toISOString().split('T')[0],
+          author: data?.author || {
             '@type': 'Organization',
             name: 'Castells Agency'
           },
-          publisher: {
+          publisher: data?.publisher || {
             '@type': 'Organization',
             name: 'Castells Agency',
             logo: {
@@ -85,6 +87,19 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
             }
           },
           ...data
+        };
+      
+      case 'BreadcrumbList':
+        const items = (data?.itemListElement as Array<{ name: string; item: string }>) || [];
+        return {
+          '@context': 'https://schema.org',
+          '@type': 'BreadcrumbList',
+          itemListElement: items.map((item, index) => ({
+            '@type': 'ListItem',
+            position: index + 1,
+            name: item.name,
+            item: item.item.startsWith('http') ? item.item : `${baseUrl}${item.item.startsWith('/') ? '' : '/'}${item.item}`
+          }))
         };
       
       default:
@@ -101,5 +116,6 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
 };
 
 export default SchemaMarkup;
+
 
 
