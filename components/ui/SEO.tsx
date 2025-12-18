@@ -16,7 +16,7 @@ const SEO: React.FC<SEOProps> = ({
     canonical,
     image = 'https://castells.agency/castells-logo.png',
     type = 'website',
-    robots = 'index, follow'
+    robots = 'noindex, nofollow'
 }) => {
     const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
     const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
