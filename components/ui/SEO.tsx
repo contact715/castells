@@ -14,7 +14,7 @@ const SEO: React.FC<SEOProps> = ({
     title = 'Castells Agency | Dominate Your Market',
     description = 'We help contractors and service providers dominate their local markets through data-driven strategies.',
     canonical,
-    image = 'https://castells.agency/castells-logo.png',
+    image = 'https://castells.agency/og-image.svg',
     type = 'website',
     robots = 'noindex, nofollow'
 }) => {

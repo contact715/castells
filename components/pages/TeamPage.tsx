@@ -2,6 +2,7 @@ import React from 'react';
 import { PageView } from '../../App';
 import { PageHeader } from '../ui/PageHeader';
 import AnimatedHeading from '../ui/AnimatedHeading';
+import SEO from '../ui/SEO';
 import type { NavigateFn } from '../../types';
 
 interface TeamPageProps {
@@ -11,7 +12,13 @@ interface TeamPageProps {
 
 const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
     return (
-        <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-32 pb-20">
+        <>
+            <SEO 
+                title="Our Team | Castells Agency" 
+                description="Meet the talented professionals behind our agency's success. The experts driving revenue growth for our clients."
+                canonical="/team"
+            />
+            <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-32 pb-20">
             <div className="container mx-auto px-6">
                 {/* Header */}
                 <PageHeader
@@ -34,6 +41,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

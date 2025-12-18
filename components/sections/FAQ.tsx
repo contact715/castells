@@ -6,6 +6,7 @@ import { ArrowRight, Plus, Minus } from 'lucide-react';
 import { SectionHeader } from '../ui/Section';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
+import SchemaMarkup from '../ui/SchemaMarkup';
 
 const FAQS = [
   {
@@ -35,6 +36,15 @@ const FAQ: React.FC = () => {
 
   return (
     <section className="py-24 md:py-32 bg-ivory relative border-t border-black/5">
+      <SchemaMarkup 
+        type="FAQPage" 
+        data={{
+          mainEntity: FAQS.map(faq => ({
+            question: faq.question,
+            answer: faq.answer
+          }))
+        }}
+      />
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-24">
 

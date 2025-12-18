@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface SchemaMarkupProps {
-  type?: 'Organization' | 'WebSite' | 'Service' | 'Article' | 'BreadcrumbList';
+  type?: 'Organization' | 'WebSite' | 'Service' | 'Article' | 'BreadcrumbList' | 'FAQPage';
   data?: Record<string, unknown>;
 }
 
@@ -99,6 +99,21 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
             position: index + 1,
             name: item.name,
             item: item.item.startsWith('http') ? item.item : `${baseUrl}${item.item.startsWith('/') ? '' : '/'}${item.item}`
+          }))
+        };
+      
+      case 'FAQPage':
+        const faqs = (data?.mainEntity as Array<{ question: string; answer: string }>) || [];
+        return {
+          '@context': 'https://schema.org',
+          '@type': 'FAQPage',
+          mainEntity: faqs.map(faq => ({
+            '@type': 'Question',
+            name: faq.question,
+            acceptedAnswer: {
+              '@type': 'Answer',
+              text: faq.answer
+            }
           }))
         };
       

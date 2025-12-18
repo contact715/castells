@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Search, Grid3x3, List, Code, BarChart, Zap, Scale, Globe, Terminal, Users, TrendingUp, Palette } from 'lucide-react';
 import { PageView } from '../../App';
 import { PageHeader } from '../ui/PageHeader';
+import SEO from '../ui/SEO';
 import { NavigationData } from '../../types';
 
 interface BlogPost {
@@ -141,7 +142,13 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
     });
 
     return (
-        <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-32 pb-20">
+        <>
+            <SEO 
+                title="Blog & Insights | Castells Agency" 
+                description="Explore our latest insights, strategies, and case studies on digital marketing, growth, automation, and revenue optimization."
+                canonical="/blog"
+            />
+            <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-32 pb-20">
             <div className="container mx-auto px-6">
                 {/* Header */}
                 <PageHeader
@@ -381,6 +388,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                 </div>
             </div>
         </div>
+        </>
     );
 };
 

@@ -6,6 +6,7 @@ import { Button } from '../ui/Button';
 import { Breadcrumbs } from '../ui/Breadcrumbs';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import Counter from '../ui/Counter';
+import SEO from '../ui/SEO';
 import {
   Users, Flag, Briefcase, ArrowRight, ArrowUpRight,
   FileText, Mail, Newspaper, Target, Award, Heart,
@@ -80,7 +81,13 @@ const BLOG_POSTS = [
 
 const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
   return (
-    <div className="min-h-screen bg-ivory dark:bg-[#191919]">
+    <>
+      <SEO 
+        title="Company | Castells Agency" 
+        description="The Anti-Agency. 12+ years in business, 500+ projects delivered, $50M+ revenue generated. Revenue-obsessed digital marketing agency."
+        canonical="/company"
+      />
+      <div className="min-h-screen bg-ivory dark:bg-[#191919]">
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 md:pb-32 overflow-hidden">
@@ -552,6 +559,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
       </section>
 
     </div>
+    </>
   );
 };
 

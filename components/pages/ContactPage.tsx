@@ -6,6 +6,7 @@ import { Input } from '../ui/Input';
 import { cn } from '../../lib/utils';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import { PageHeader } from '../ui/PageHeader';
+import SEO from '../ui/SEO';
 import type { NavigateFn } from '../../types';
 
 interface ContactPageProps {
@@ -49,7 +50,13 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
     ];
 
     return (
-        <div className="min-h-screen bg-ivory pt-32 pb-20 font-sans selection:bg-coral selection:text-white transition-colors duration-500">
+        <>
+            <SEO 
+                title="Contact Us | Castells Agency" 
+                description="Ready to dominate your market? Schedule a free strategy session and let's discuss how we can help you achieve your goals."
+                canonical="/contact"
+            />
+            <div className="min-h-screen bg-ivory pt-32 pb-20 font-sans selection:bg-coral selection:text-white transition-colors duration-500">
             <div className="container mx-auto px-6">
 
                 {/* Header */}
@@ -494,6 +501,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
             </div>
         </div>
+        </>
     );
 };
 
