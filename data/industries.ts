@@ -277,3 +277,4 @@ export const findIndustryBySlug = (slug: string) => {
   return undefined;
 };
 
+

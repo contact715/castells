@@ -380,3 +380,4 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
 export default AllIndustriesPage;
 
 
+
