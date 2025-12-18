@@ -120,13 +120,13 @@ const LaunchVisual = () => (
         </div>
 
         <div className="space-y-4">
-            <div className="bg-black text-white p-4 rounded-xl shadow-xl transform hover:scale-105 transition-transform duration-300">
+            <div className="bg-white border border-black/5 text-text-primary p-4 rounded-xl shadow-xl transform hover:scale-105 transition-transform duration-300">
                 <div className="flex justify-between items-start mb-2">
                     <div className="flex items-center gap-2">
                         <Zap className="w-4 h-4 text-yellow-400" />
                         <span className="text-xs font-bold uppercase tracking-widest">High Intent</span>
                     </div>
-                    <span className="text-xs text-white/50">Just now</span>
+                    <span className="text-xs text-text-secondary">Just now</span>
                 </div>
                 <div className="text-sm font-medium">New Lead: "Enterprise Plan Inquiry"</div>
             </div>
@@ -293,7 +293,7 @@ const ProcessTabs: React.FC = () => {
                                 <div className="h-px w-12 bg-coral/30" />
                             </div>
 
-                            <h3 className="font-display text-4xl md:text-5xl font-bold mb-6 text-text-primary leading-tight">
+                            <h3 className="font-display text-4xl md:text-5xl font-semibold mb-6 text-text-primary leading-tight">
                                 {PROCESS_STEPS[activeTab].title}
                             </h3>
 

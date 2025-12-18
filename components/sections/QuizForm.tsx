@@ -116,7 +116,7 @@ const QuizForm: React.FC = () => {
                 <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mb-6 text-white border border-white/20">
                     <Check className="w-8 h-8" />
                 </div>
-                <h3 className="text-3xl font-display font-medium mb-4 text-white">Application Received</h3>
+                <h3 className="text-3xl font-display font-semibold mb-4 text-white">Application Received</h3>
                 <p className="text-white/60 max-w-xs leading-relaxed">
                     We've received your audit request. Our strategists are analyzing your market data and will contact you shortly.
                 </p>
@@ -161,7 +161,7 @@ const QuizForm: React.FC = () => {
                             <span className="text-coral text-xs font-bold uppercase tracking-widest mb-2 block">
                                 Step {currentStep + 1} of {STEPS.length}
                             </span>
-                            <h3 className="text-2xl md:text-3xl font-display font-medium text-white leading-tight">
+                            <h3 className="text-2xl md:text-3xl font-display font-semibold text-white leading-tight">
                                 {STEPS[currentStep].question}
                             </h3>
                         </div>

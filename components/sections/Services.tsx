@@ -11,6 +11,7 @@ import { Highlighter } from '../ui/Highlighter';
 import { VelocityScroll } from '../effects/ScrollBasedVelocity';
 import { cn } from '../../lib/utils';
 import { Section, SectionContainer, SectionHeader } from '../ui/Section';
+import AnimatedHeading from '../ui/AnimatedHeading';
 
 const SERVICES_DATA = {
   branding: [
@@ -71,10 +72,14 @@ const Services: React.FC = () => {
                 Our Expertise
               </span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight">
+            <AnimatedHeading
+              as="h2"
+              className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
+              delay={0.1}
+            >
               Full-Stack Solutions For<br />
               <span className="text-text-secondary">Modern Growth</span>
-            </h2>
+            </AnimatedHeading>
           </div>
 
           {/* Right: Description */}
@@ -109,7 +114,7 @@ const Services: React.FC = () => {
                     />
                   )}
                   <span className="relative z-10 flex items-center gap-2">
-                    <cat.icon className={cn("w-4 h-4", isActive ? "text-coral" : "currentColor")} />
+                    <cat.icon className={cn("w-4 h-4", isActive ? "text-white dark:text-black" : "currentColor")} />
                     <span className={isActive ? "text-white dark:text-black" : ""}>{cat.label}</span>
                   </span>
                 </button>
@@ -137,7 +142,7 @@ const Services: React.FC = () => {
                       <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
                         <service.icon className="w-6 h-6 stroke-[1.5]" />
                       </div>
-                      <h3 className="font-display font-bold text-2xl text-black dark:text-white leading-tight">
+                      <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight">
                         {service.name}
                       </h3>
                     </div>

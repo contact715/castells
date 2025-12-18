@@ -1,6 +1,7 @@
 import React from 'react';
 import { Badge } from './Badge';
 import { cn } from '../../lib/utils';
+import AnimatedHeading from './AnimatedHeading';
 
 interface SectionProps extends React.HTMLAttributes<HTMLElement> {
     className?: string;
@@ -58,9 +59,13 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
                 </div>
             )}
 
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-[1.1] tracking-tight text-text-primary">
+            <AnimatedHeading
+                as="h2"
+                className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-tight text-text-primary"
+                delay={0.1}
+            >
                 {title}
-            </h2>
+            </AnimatedHeading>
 
             {children}
         </div>

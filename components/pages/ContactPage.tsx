@@ -4,8 +4,8 @@ import { Calendar, Phone, MessageCircle, Send, Mail, ArrowRight, CheckCircle2, U
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { cn } from '../../lib/utils';
-
-import { Breadcrumbs } from '../ui/Breadcrumbs';
+import AnimatedHeading from '../ui/AnimatedHeading';
+import { PageHeader } from '../ui/PageHeader';
 import { PageView } from '../../App';
 
 interface ContactPageProps {
@@ -47,19 +47,15 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
             <div className="container mx-auto px-6">
 
                 {/* Header */}
-                <div className="mb-20">
-                    <div className="mb-8">
-                        <Breadcrumbs
-                            items={[
-                                { label: 'Home', action: () => onNavigate?.('home') },
-                                { label: 'Contact us', active: true }
-                            ]}
-                        />
-                    </div>
-                    <h1 className="font-display text-5xl md:text-7xl font-bold text-black dark:text-white leading-[1.1] max-w-3xl">
-                        Let's make something <span className="text-coral italic">great</span> together
-                    </h1>
-                </div>
+                <PageHeader
+                    breadcrumbs={[
+                        { label: 'Home', action: () => onNavigate?.('home') },
+                        { label: 'Contact us', active: true }
+                    ]}
+                    badge="Get in Touch"
+                    title="Let's make something great together"
+                    onNavigate={onNavigate}
+                />
 
                 <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 mb-32 items-start">
 
@@ -167,19 +163,26 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         className="lg:w-[40%] space-y-12"
                     >
                         {/* Contact Methods Grid */}
-                        {/* Contact Methods Grid */}
                         <div className="grid grid-cols-1 gap-6">
                             {/* Let's Talk Card */}
-                            <div className="bg-white rounded-[32px] p-10 border border-black/5 shadow-sm hover:shadow-md transition-all duration-300">
-                                <h3 className="font-display text-xl font-bold mb-2 text-text-primary flex items-center gap-3">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.3, duration: 0.5 }}
+                                className="bg-white rounded-[32px] p-10 border border-black/5 shadow-sm hover:shadow-md transition-all duration-300"
+                            >
+                                <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
                                     <Phone className="w-5 h-5 text-coral" /> Let's talk
                                 </h3>
                                 <p className="text-text-secondary text-sm mb-10">Pick what works best for you.</p>
 
                                 <div className="space-y-6">
                                     {contactMethods.map((method, index) => (
-                                        <a
+                                        <motion.a
                                             key={index}
+                                            initial={{ opacity: 0, x: -20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: 0.4 + index * 0.1, duration: 0.4 }}
                                             href={method.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
@@ -194,10 +197,15 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                                 </span>
                                             </div>
                                             <ArrowRight className="w-4 h-4 text-text-secondary/50 group-hover:text-white dark:group-hover:text-black transition-colors" />
-                                        </a>
+                                        </motion.a>
                                     ))}
                                     {/* Discord */}
-                                    <div className="flex items-center justify-between p-3 -mx-3 rounded-xl group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer">
+                                    <motion.div
+                                        initial={{ opacity: 0, x: -20 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ delay: 0.8, duration: 0.4 }}
+                                        className="flex items-center justify-between p-3 -mx-3 rounded-xl group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer"
+                                    >
                                         <div className="flex items-center gap-4">
                                             <div className="text-text-secondary group-hover:text-white dark:group-hover:text-black transition-colors">
                                                 <MessageCircle className="w-5 h-5" />
@@ -209,45 +217,46 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                         <span className="text-xs text-text-secondary group-hover:text-white/70 dark:group-hover:text-black/70 flex items-center gap-2 transition-colors">
                                             castells_agency <span className="opacity-50">❐</span>
                                         </span>
-                                    </div>
+                                    </motion.div>
                                 </div>
-                            </div>
+                            </motion.div>
 
                             {/* Drop a Message Card */}
-                            <div className="bg-white rounded-[32px] p-10 border border-black/5 shadow-sm hover:shadow-md transition-all duration-300">
-                                <h3 className="font-display text-xl font-bold mb-2 text-text-primary flex items-center gap-3">
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.5, duration: 0.5 }}
+                                className="bg-white rounded-[32px] p-10 border border-black/5 shadow-sm hover:shadow-md transition-all duration-300"
+                            >
+                                <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
                                     <Mail className="w-5 h-5 text-coral" /> Drop a message
                                 </h3>
                                 <p className="text-text-secondary text-sm mb-10">We'll get back soon.</p>
 
                                 <div className="space-y-6">
-                                    <a href="mailto:hello@castells.studio" className="flex items-center justify-between p-3 -mx-3 rounded-xl group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer">
-                                        <div className="flex items-center gap-4">
-                                            <span className="text-coral group-hover:text-white dark:group-hover:text-black text-lg transition-colors">@</span>
-                                            <span className="font-medium text-base text-text-primary group-hover:text-white dark:group-hover:text-black transition-colors">General Purpose</span>
-                                        </div>
-                                        <ArrowRight className="w-4 h-4 text-text-secondary/50 group-hover:text-white dark:group-hover:text-black transition-colors" />
-                                    </a>
-                                    <a href="mailto:partners@castells.studio" className="flex items-center justify-between p-3 -mx-3 rounded-xl group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer">
-                                        <div className="flex items-center gap-4">
-                                            <span className="text-coral group-hover:text-white dark:group-hover:text-black text-lg transition-colors">@</span>
-                                            <span className="font-medium text-base text-text-primary group-hover:text-white dark:group-hover:text-black transition-colors">Partnership</span>
-                                        </div>
-                                        <ArrowRight className="w-4 h-4 text-text-secondary/50 group-hover:text-white dark:group-hover:text-black transition-colors" />
-                                    </a>
-                                    <a href="mailto:careers@castells.studio" className="flex items-center justify-between p-3 -mx-3 rounded-xl group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer">
-                                        <div className="flex items-center gap-4">
-                                            <span className="text-coral group-hover:text-white dark:group-hover:text-black text-lg transition-colors">@</span>
-                                            <span className="font-medium text-base text-text-primary group-hover:text-white dark:group-hover:text-black transition-colors">Careers</span>
-                                        </div>
-                                        <ArrowRight className="w-4 h-4 text-text-secondary/50 group-hover:text-white dark:group-hover:text-black transition-colors" />
-                                    </a>
+                                    {[
+                                        { email: 'hello@castells.studio', label: 'General Purpose' },
+                                        { email: 'partners@castells.studio', label: 'Partnership' },
+                                        { email: 'careers@castells.studio', label: 'Careers' }
+                                    ].map((item, index) => (
+                                        <motion.a
+                                            key={item.email}
+                                            initial={{ opacity: 0, x: -20 }}
+                                            animate={{ opacity: 1, x: 0 }}
+                                            transition={{ delay: 0.6 + index * 0.1, duration: 0.4 }}
+                                            href={`mailto:${item.email}`}
+                                            className="flex items-center justify-between p-3 -mx-3 rounded-xl group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer"
+                                        >
+                                            <div className="flex items-center gap-4">
+                                                <span className="text-coral group-hover:text-white dark:group-hover:text-black text-lg transition-colors">@</span>
+                                                <span className="font-medium text-base text-text-primary group-hover:text-white dark:group-hover:text-black transition-colors">{item.label}</span>
+                                            </div>
+                                            <ArrowRight className="w-4 h-4 text-text-secondary/50 group-hover:text-white dark:group-hover:text-black transition-colors" />
+                                        </motion.a>
+                                    ))}
                                 </div>
-                            </div>
+                            </motion.div>
                         </div>
-
-                        {/* Bottom Grid */}
-
                     </motion.div>
                 </div>
 
@@ -256,7 +265,13 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 {/* Testimonials Section */}
                 <div className="mb-32">
                     <p className="text-xs font-bold uppercase tracking-widest text-coral mb-6">Testimonials</p>
-                    <h2 className="font-display text-3xl md:text-4xl font-bold text-black dark:text-white mb-12">What people say</h2>
+                    <AnimatedHeading
+                        as="h2"
+                        className="font-display text-3xl md:text-4xl font-semibold text-black dark:text-white mb-12"
+                        delay={0.2}
+                    >
+                        What people say
+                    </AnimatedHeading>
 
                     <div className="relative group">
                         {/* Navigation Arrows (Absolute) */}
@@ -294,7 +309,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                     </p>
 
                                     <div className="mb-8">
-                                        <h4 className="font-bold text-text-primary dark:text-white text-lg mb-1">Sunil Chauhan</h4>
+                                        <h4 className="font-semibold text-text-primary dark:text-white text-lg mb-1">Sunil Chauhan</h4>
                                         <div className="flex items-center gap-2 text-text-secondary dark:text-white/40 text-xs uppercase tracking-wider font-medium">
                                             <span>Executive at</span>
                                             <span className="text-text-primary dark:text-white/60">Twister Digital</span>
@@ -327,15 +342,27 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 {/* Bottom Grid (Moved) */}
                 <div className="mb-32">
                     <p className="text-xs font-bold uppercase tracking-widest text-coral mb-6">Discover</p>
-                    <h2 className="font-display text-3xl md:text-4xl font-bold text-black dark:text-white mb-12">Explore our world</h2>
+                    <AnimatedHeading
+                        as="h2"
+                        className="font-display text-3xl md:text-4xl font-semibold text-black dark:text-white mb-12"
+                        delay={0.2}
+                    >
+                        Explore our world
+                    </AnimatedHeading>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <a href="#about" className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/5 group cursor-pointer">
+                        <motion.a
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.3, duration: 0.5 }}
+                            href="#about"
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/5 group cursor-pointer"
+                        >
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
                                     <Users className="w-6 h-6 stroke-[1.5]" />
                                 </div>
-                                <h3 className="font-display font-bold text-2xl text-black dark:text-white leading-tight">
+                                <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight">
                                     Who we are
                                 </h3>
                             </div>
@@ -345,14 +372,20 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             <div className="flex items-center gap-2 text-text-secondary text-xs font-bold uppercase tracking-wider group-hover:text-coral transition-colors mt-auto">
                                 About us <ArrowRight className="w-3 h-3" />
                             </div>
-                        </a>
+                        </motion.a>
 
-                        <a href="#work" className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/5 group cursor-pointer">
+                        <motion.a
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4, duration: 0.5 }}
+                            href="#work"
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/5 group cursor-pointer"
+                        >
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
                                     <Briefcase className="w-6 h-6 stroke-[1.5]" />
                                 </div>
-                                <h3 className="font-display font-bold text-2xl text-black dark:text-white leading-tight">
+                                <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight">
                                     Impactful solutions
                                 </h3>
                             </div>
@@ -362,14 +395,20 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             <div className="flex items-center gap-2 text-text-secondary text-xs font-bold uppercase tracking-wider group-hover:text-coral transition-colors mt-auto">
                                 Our works <ArrowRight className="w-3 h-3" />
                             </div>
-                        </a>
+                        </motion.a>
 
-                        <a href="#blog" className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/5 group cursor-pointer">
+                        <motion.a
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5, duration: 0.5 }}
+                            href="#blog"
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/5 group cursor-pointer"
+                        >
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
                                     <FileText className="w-6 h-6 stroke-[1.5]" />
                                 </div>
-                                <h3 className="font-display font-bold text-2xl text-black dark:text-white leading-tight">
+                                <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight">
                                     Keep up with the latest
                                 </h3>
                             </div>
@@ -379,12 +418,12 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             <div className="flex items-center gap-2 text-text-secondary text-xs font-bold uppercase tracking-wider group-hover:text-coral transition-colors mt-auto">
                                 Read blog <ArrowRight className="w-3 h-3" />
                             </div>
-                        </a>
+                        </motion.a>
                     </div>
                 </div>
 
-            </div >
-        </div >
+            </div>
+        </div>
     );
 };
 

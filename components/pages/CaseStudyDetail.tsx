@@ -4,7 +4,7 @@ import { m as motion } from 'framer-motion';
 import { CheckCircle2, ExternalLink, Calendar, Building2, Zap, Target, TrendingUp } from 'lucide-react';
 import { Button } from '../ui/Button';
 import SEO from '../ui/SEO';
-import { Breadcrumbs } from '../ui/Breadcrumbs';
+import { PageHeader } from '../ui/PageHeader';
 
 interface CaseStudyDetailProps {
   onBack: () => void;
@@ -62,20 +62,22 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
   };
 
   return (
-    <div className="bg-ivory min-h-screen pt-32 pb-20">
+    <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-32 pb-20">
       <SEO title={`${data.client} Case Study | Castells Agency`} description={data.description} />
       <div className="container mx-auto px-6">
 
-        {/* Breadcrumbs */}
-        <div className="mb-8">
-          <Breadcrumbs
-            items={[
-              { label: 'Home', action: () => onNavigate('home') },
-              { label: 'Work', action: () => onNavigate('work') },
-              { label: data.client, active: true }
-            ]}
-          />
-        </div>
+        {/* Header */}
+        <PageHeader
+          breadcrumbs={[
+            { label: 'Home', action: () => onNavigate('home') },
+            { label: 'Work', action: () => onNavigate('work') },
+            { label: data.client, active: true }
+          ]}
+          badge="Case Study"
+          title={data.client}
+          description={data.description}
+          onNavigate={onNavigate}
+        />
 
         {/* HERO IMAGE - Full Width, Card Style */}
         <motion.div
@@ -108,7 +110,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
 
             {/* Bottom Content */}
             <div>
-              <h1 className="font-display text-4xl md:text-6xl font-medium text-white mb-3 tracking-tight leading-none">
+              <h1 className="font-display text-4xl md:text-6xl font-semibold text-white mb-3 tracking-tight leading-none">
                 {data.client}
               </h1>
               <div className="flex flex-wrap gap-2">
@@ -129,7 +131,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
           <div className="lg:w-[70%] relative">
 
             {/* Reading Progress Line */}
-            <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-black/5 rounded-full hidden lg:block">
+            <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-black/5 dark:bg-white/10 rounded-full hidden lg:block">
               <motion.div
                 className="w-full bg-coral rounded-full origin-top"
                 style={{ height: `${scrollProgress}%` }}
@@ -147,22 +149,22 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               </section>
 
               {/* Results */}
-              <section id="results" className="bg-white rounded-2xl p-8 border border-black/5">
-                <h2 className="font-display text-2xl font-bold mb-6 flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-lg bg-coral/10 flex items-center justify-center">
+              <section id="results" className="bg-white dark:bg-white rounded-2xl p-8 border border-black/5 dark:border-white/10">
+                <h2 className="font-display text-2xl font-semibold mb-6 flex items-center gap-3 text-text-primary dark:text-black">
+                  <span className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center">
                     <TrendingUp className="w-4 h-4 text-coral" />
                   </span>
                   Results
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {data.results?.map((res: any, idx: number) => (
-                    <div key={idx} className="bg-ivory/50 rounded-xl p-5">
-                      <div className="font-display text-3xl font-bold text-text-primary mb-1">
+                    <div key={idx} className="bg-ivory/50 dark:bg-white/80 rounded-xl p-5">
+                      <div className="font-display text-3xl font-bold text-text-primary dark:text-black mb-1">
                         {res.value}
                       </div>
-                      <div className="text-xs font-bold uppercase tracking-widest text-text-secondary flex items-center gap-2">
+                      <div className="text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-black/60 flex items-center gap-2">
                         {res.label}
-                        <span className="text-coral bg-coral/10 px-1.5 py-0.5 rounded text-[10px]">{res.growth}</span>
+                        <span className="text-coral bg-coral/10 dark:bg-coral/20 px-1.5 py-0.5 rounded text-[10px]">{res.growth}</span>
                       </div>
                     </div>
                   ))}
@@ -170,35 +172,35 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               </section>
 
               {/* Challenge */}
-              <section id="challenge" className="bg-white rounded-2xl p-8 border border-black/5">
-                <h2 className="font-display text-2xl font-bold mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-lg bg-black/5 flex items-center justify-center">
-                    <Target className="w-4 h-4 text-text-secondary" />
+              <section id="challenge" className="bg-white dark:bg-white rounded-2xl p-8 border border-black/5 dark:border-white/10">
+                <h2 className="font-display text-2xl font-semibold mb-4 flex items-center gap-3 text-text-primary dark:text-black">
+                  <span className="w-8 h-8 rounded-lg bg-black/5 dark:bg-black/10 flex items-center justify-center">
+                    <Target className="w-4 h-4 text-text-secondary dark:text-black/60" />
                   </span>
                   The Challenge
                 </h2>
-                <p className="text-text-secondary leading-relaxed">
+                <p className="text-text-secondary dark:text-black/70 leading-relaxed">
                   {data.challenge}
                 </p>
               </section>
 
               {/* Solution */}
-              <section id="solution" className="bg-white rounded-2xl p-8 border border-black/5">
-                <h2 className="font-display text-2xl font-bold mb-4 flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-lg bg-coral/10 flex items-center justify-center">
+              <section id="solution" className="bg-white dark:bg-white rounded-2xl p-8 border border-black/5 dark:border-white/10">
+                <h2 className="font-display text-2xl font-semibold mb-4 flex items-center gap-3 text-text-primary dark:text-black">
+                  <span className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center">
                     <CheckCircle2 className="w-4 h-4 text-coral" />
                   </span>
                   The Solution
                 </h2>
-                <p className="text-text-secondary leading-relaxed mb-6">
+                <p className="text-text-secondary dark:text-black/70 leading-relaxed mb-6">
                   {data.solution}
                 </p>
                 {data.keyFeatures && (
-                  <div className="bg-ivory/50 rounded-xl p-5">
-                    <h3 className="font-bold text-xs uppercase tracking-widest text-text-secondary mb-4">Key Deliverables</h3>
+                  <div className="bg-ivory/50 dark:bg-white/80 rounded-xl p-5">
+                    <h3 className="font-semibold text-xs uppercase tracking-widest text-text-secondary dark:text-black/60 mb-4">Key Deliverables</h3>
                     <ul className="space-y-3">
                       {data.keyFeatures.map((item: string, i: number) => (
-                        <li key={i} className="flex items-center gap-3 text-text-primary text-sm font-medium">
+                        <li key={i} className="flex items-center gap-3 text-text-primary dark:text-black text-sm font-medium">
                           <CheckCircle2 className="w-4 h-4 text-coral flex-shrink-0" />
                           {item}
                         </li>
@@ -210,22 +212,22 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
 
               {/* Testimonial */}
               {data.testimonial && (
-                <section className="bg-black text-white rounded-2xl p-8 md:p-10 relative overflow-hidden">
+                <section className="bg-white dark:bg-white border border-black/5 dark:border-white/10 text-text-primary dark:text-black rounded-2xl p-8 md:p-10 relative overflow-hidden shadow-lg">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-coral/20 rounded-full blur-3xl" />
                   <div className="relative z-10">
                     <div className="text-coral text-5xl font-serif leading-none mb-4">"</div>
-                    <blockquote className="font-display text-xl md:text-2xl font-medium leading-relaxed mb-6">
+                    <blockquote className="font-display text-xl md:text-2xl font-medium leading-relaxed mb-6 text-text-primary dark:text-black">
                       {data.testimonial.quote}
                     </blockquote>
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white font-bold text-sm">
+                      <div className="w-10 h-10 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center text-coral font-bold text-sm">
                         {data.testimonial.author.charAt(0)}
                       </div>
                       <div>
-                        <cite className="not-italic font-bold text-white text-sm block">
+                        <cite className="not-italic font-bold text-text-primary dark:text-black text-sm block">
                           {data.testimonial.author}
                         </cite>
-                        <span className="text-white/60 text-xs">
+                        <span className="text-text-secondary dark:text-black/60 text-xs">
                           {data.testimonial.role}
                         </span>
                       </div>
@@ -243,7 +245,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
 
               {/* TOC */}
               <div className="bg-white rounded-2xl p-5 border border-black/5">
-                <h3 className="font-bold text-[10px] uppercase tracking-widest text-text-secondary mb-3">On this page</h3>
+                <h3 className="font-semibold text-[10px] uppercase tracking-widest text-text-secondary mb-3">On this page</h3>
                 <div className="space-y-1">
                   {tableOfContents.map((item) => (
                     <button
@@ -258,8 +260,8 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               </div>
 
               {/* Author */}
-              <div className="bg-white rounded-2xl p-5 border border-black/5">
-                <h3 className="font-bold text-[10px] uppercase tracking-widest text-text-secondary mb-3">Written by</h3>
+              <div className="bg-white dark:bg-white rounded-2xl p-5 border border-black/5 dark:border-white/10">
+                <h3 className="font-semibold text-[10px] uppercase tracking-widest text-text-secondary dark:text-black/60 mb-3">Written by</h3>
                 <div className="flex items-center gap-3">
                   <img
                     src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&q=80"
@@ -267,41 +269,41 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                     className="w-12 h-12 rounded-full object-cover"
                   />
                   <div>
-                    <p className="font-bold text-text-primary text-sm">Dmitry Castells</p>
-                    <p className="text-text-secondary text-xs">Founder & CEO</p>
+                    <p className="font-bold text-text-primary dark:text-black text-sm">Dmitry Castells</p>
+                    <p className="text-text-secondary dark:text-black/60 text-xs">Founder & CEO</p>
                   </div>
                 </div>
               </div>
 
               {/* Why Us */}
-              <div className="bg-white rounded-2xl p-5 border border-black/5">
-                <h3 className="font-bold text-[10px] uppercase tracking-widest text-text-secondary mb-3">Why Castells</h3>
+              <div className="bg-white dark:bg-white rounded-2xl p-5 border border-black/5 dark:border-white/10">
+                <h3 className="font-semibold text-[10px] uppercase tracking-widest text-text-secondary dark:text-black/60 mb-3">Why Castells</h3>
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-coral/10 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center">
                       <Target className="w-4 h-4 text-coral" />
                     </div>
-                    <span className="text-sm font-medium">Revenue-First Approach</span>
+                    <span className="text-sm font-medium text-text-primary dark:text-black">Revenue-First Approach</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-coral/10 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center">
                       <Zap className="w-4 h-4 text-coral" />
                     </div>
-                    <span className="text-sm font-medium">Fast Execution</span>
+                    <span className="text-sm font-medium text-text-primary dark:text-black">Fast Execution</span>
                   </div>
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-coral/10 flex items-center justify-center">
+                    <div className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center">
                       <TrendingUp className="w-4 h-4 text-coral" />
                     </div>
-                    <span className="text-sm font-medium">200+ Projects</span>
+                    <span className="text-sm font-medium text-text-primary dark:text-black">200+ Projects</span>
                   </div>
                 </div>
               </div>
 
               {/* CTA */}
-              <div className="bg-black text-white rounded-2xl p-5">
-                <p className="font-display text-lg font-bold mb-1">Ready to grow?</p>
-                <p className="text-white/60 text-xs mb-4">Get a free strategy audit</p>
+              <div className="bg-white dark:bg-white border border-black/5 dark:border-white/10 text-text-primary dark:text-black rounded-2xl p-5 shadow-lg">
+                <p className="font-display text-lg font-bold mb-1 text-text-primary dark:text-black">Ready to grow?</p>
+                <p className="text-text-secondary dark:text-black/60 text-xs mb-4">Get a free strategy audit</p>
                 <Button
                   onClick={() => onNavigate('contact')}
                   size="md"

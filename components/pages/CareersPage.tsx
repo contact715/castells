@@ -1,10 +1,10 @@
-
 import React from 'react';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { Button } from '../ui/Button';
-
-import { Breadcrumbs } from '../ui/Breadcrumbs';
+import { motion } from 'framer-motion';
+import { PageHeader } from '../ui/PageHeader';
 import { PageView } from '../../App';
+import AnimatedHeading from '../ui/AnimatedHeading';
 
 interface CareersPageProps {
   onBack: () => void;
@@ -26,31 +26,28 @@ const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
       <SEO title="Careers | Castells Agency" description="Join the elite. We hire owners, not employees." />
       <div className="container mx-auto px-6">
 
-        <div className="mb-12">
-          <Breadcrumbs
-            items={[
-              { label: 'Home', action: () => onNavigate('home') },
-              { label: 'Careers', active: true }
-            ]}
-          />
-        </div>
-
-        <div className="max-w-4xl mb-24">
-          <span className="text-coral font-bold uppercase tracking-widest text-sm mb-4 block">Join the Elite</span>
-          <h1 className="font-display text-6xl md:text-8xl font-medium leading-none mb-8">
-            Build the Future <br /> of Growth.
-          </h1>
-          <div className="h-[1px] w-24 bg-black/10 dark:bg-white/10 mb-8" />
-          <p className="text-2xl text-text-secondary font-light max-w-2xl">
-            We don't hire employees. We hire owners. If you're obsessed with excellence and allergic to average, you belong here.
-          </p>
-        </div>
+        <PageHeader
+          breadcrumbs={[
+            { label: 'Home', action: () => onNavigate('home') },
+            { label: 'Careers', active: true }
+          ]}
+          badge="Join the Elite"
+          title="Build the Future of Growth."
+          description="We don't hire employees. We hire owners. If you're obsessed with excellence and allergic to average, you belong here."
+          onNavigate={onNavigate}
+        />
 
         <div className="grid grid-cols-1 gap-4 max-w-5xl">
           {OPENINGS.map((job, i) => (
-            <div key={i} className="group bg-white p-8 rounded-2xl border border-black/5 hover:border-coral/50 transition-all duration-300 hover:shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between cursor-pointer">
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.6 + i * 0.1, duration: 0.5 }}
+              className="group bg-white p-8 rounded-2xl border border-black/5 hover:border-coral/50 transition-all duration-300 hover:shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between cursor-pointer"
+            >
               <div>
-                <h3 className="font-display text-2xl font-bold text-text-primary group-hover:text-coral transition-colors">{job.title}</h3>
+                <h3 className="font-display text-2xl font-semibold text-text-primary group-hover:text-coral transition-colors">{job.title}</h3>
                 <div className="flex gap-4 mt-2 text-xs font-bold uppercase tracking-widest text-text-secondary">
                   <span>{job.dept}</span>
                   <span className="w-px h-3 bg-black/20 self-center" />
@@ -64,17 +61,28 @@ const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
                   Apply Now <ArrowUpRight className="w-4 h-4" />
                 </span>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        <div className="mt-20 p-12 bg-black text-white rounded-3xl text-center">
-          <h3 className="font-display text-3xl font-medium mb-4">Don't see your role?</h3>
-          <p className="text-white/60 mb-8">We are always looking for top talent. Send us your portfolio.</p>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1, duration: 0.6 }}
+          className="mt-20 p-12 bg-white border border-black/5 rounded-3xl text-center shadow-lg"
+        >
+          <AnimatedHeading
+            as="h3"
+            className="font-display text-3xl font-semibold mb-4 text-text-primary"
+            delay={1.1}
+          >
+            Don't see your role?
+          </AnimatedHeading>
+          <p className="text-text-secondary mb-8">We are always looking for top talent. Send us your portfolio.</p>
           <Button size="md" variant="secondary">
             Email Recruiting
           </Button>
-        </div>
+        </motion.div>
 
       </div>
     </div>

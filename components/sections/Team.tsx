@@ -3,6 +3,7 @@ import React from 'react';
 import { Linkedin } from 'lucide-react';
 import { m as motion } from 'framer-motion';
 import { Badge } from '../ui/Badge';
+import AnimatedHeading from '../ui/AnimatedHeading';
 
 const TEAM = [
   {
@@ -76,7 +77,7 @@ const cardVariants = {
 
 const Team: React.FC = () => {
   return (
-    <section id="team" className="py-20 bg-ivory dark:bg-black border-t border-black/5 dark:border-white/5 relative overflow-hidden">
+    <section id="team" className="py-20 bg-ivory dark:bg-[#191919] border-t border-black/5 dark:border-white/5 relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
 
         {/* Section Header - Two Column Layout */}
@@ -84,10 +85,14 @@ const Team: React.FC = () => {
           {/* Left: Badge + Title */}
           <div>
             <Badge className="mb-3">Our Team</Badge>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-text-primary dark:text-white leading-tight tracking-tight">
+            <AnimatedHeading
+              as="h2"
+              className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary dark:text-white leading-tight tracking-tight"
+              delay={0.1}
+            >
               Meet the<br />
               <span className="text-text-secondary">Minds</span>
-            </h2>
+            </AnimatedHeading>
           </div>
 
           {/* Right: Description */}
@@ -125,7 +130,7 @@ const Team: React.FC = () => {
               {/* Content - Bottom */}
               <div className="absolute bottom-0 left-0 right-0 p-4">
                 {/* Name */}
-                <h3 className="font-display text-lg font-bold text-white mb-0.5">
+                <h3 className="font-display text-lg font-semibold text-white mb-0.5">
                   {member.name}
                 </h3>
                 {/* Role */}
@@ -148,20 +153,20 @@ const Team: React.FC = () => {
           <motion.a
             href="#careers"
             variants={cardVariants}
-            className="group relative aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-br from-coral/10 to-coral/5 border-2 border-dashed border-coral/30 hover:border-coral transition-all flex flex-col items-center justify-center text-center p-6 cursor-pointer"
+            className="group relative aspect-[3/4] rounded-xl overflow-hidden bg-gradient-to-br from-coral/10 to-coral/5 dark:from-coral/20 dark:to-coral/10 border-2 border-dashed border-coral/30 dark:border-coral/40 hover:border-coral dark:hover:border-coral transition-all flex flex-col items-center justify-center text-center p-6 cursor-pointer"
           >
             {/* Plus Icon */}
-            <div className="w-14 h-14 rounded-full bg-coral/10 flex items-center justify-center mb-4 group-hover:bg-coral/20 transition-colors">
+            <div className="w-14 h-14 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-4 group-hover:bg-coral/20 dark:group-hover:bg-coral/30 transition-colors">
               <svg className="w-7 h-7 text-coral" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
               </svg>
             </div>
 
             {/* Text */}
-            <h3 className="font-display text-lg font-bold text-text-primary dark:text-white mb-1">
+            <h3 className="font-display text-lg font-semibold text-text-primary dark:text-white mb-1">
               Join Our Team
             </h3>
-            <p className="text-xs text-text-secondary dark:text-white/60">
+            <p className="text-xs text-text-secondary dark:text-white/70">
               Want to work with us? Get in touch!
             </p>
           </motion.a>

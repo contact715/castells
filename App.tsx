@@ -7,6 +7,7 @@ import SEO from './components/ui/SEO';
 import SchemaMarkup from './components/ui/SchemaMarkup';
 import ErrorBoundary from './components/ui/ErrorBoundary';
 import SmoothScroll from './components/effects/SmoothScroll';
+import { LayoutPreloader } from './components/ui/layout-preloader';
 import { NavigationData } from './types';
 
 // Lazy load components for performance
@@ -34,36 +35,58 @@ const TeamPage = React.lazy(() => import('./components/pages/TeamPage'));
 const BlogPage = React.lazy(() => import('./components/pages/BlogPage'));
 const ServicePage = React.lazy(() => import('./components/pages/ServicePage'));
 const IndustryPage = React.lazy(() => import('./components/pages/IndustryPage'));
+const AllServicesPage = React.lazy(() => import('./components/pages/AllServicesPage'));
+const AllIndustriesPage = React.lazy(() => import('./components/pages/AllIndustriesPage'));
+const CompanyPage = React.lazy(() => import('./components/pages/CompanyPage'));
 
 // Loading fallback
 const PageLoader = () => (
-  <div className="min-h-screen flex items-center justify-center bg-ivory dark:bg-black">
+  <div className="min-h-screen flex items-center justify-center bg-ivory dark:bg-[#191919]">
     <div className="w-8 h-8 border-2 border-coral border-t-transparent rounded-full animate-spin"></div>
   </div>
 );
 
-export type PageView = 'home' | 'case-study' | 'work' | 'about' | 'careers' | 'blog' | 'contact' | 'not-found' | 'team' | 'service' | 'industry';
+export type PageView = 'home' | 'case-study' | 'work' | 'about' | 'careers' | 'blog' | 'contact' | 'not-found' | 'team' | 'service' | 'industry' | 'services' | 'industries' | 'company';
 
 function App() {
   const [currentPage, setCurrentPage] = useState<PageView>('home');
   const [selectedProject, setSelectedProject] = useState<NavigationData | null>(null);
+  const [isPreloaderComplete, setIsPreloaderComplete] = useState(false);
 
   // Scroll to top on page change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
+  // Check if preloader was already shown (using sessionStorage)
+  useEffect(() => {
+    const hasSeenPreloader = sessionStorage.getItem('preloader-shown');
+    if (hasSeenPreloader) {
+      setIsPreloaderComplete(true);
+    }
+  }, []);
+
   const navigateTo = useCallback((page: PageView, data?: NavigationData) => {
     if (data) setSelectedProject(data);
     setCurrentPage(page);
   }, []);
 
+  const handlePreloaderComplete = useCallback(() => {
+    setIsPreloaderComplete(true);
+    sessionStorage.setItem('preloader-shown', 'true');
+  }, []);
+
   return (
     <ErrorBoundary>
-      <div className="bg-ivory min-h-screen text-text-primary selection:bg-coral selection:text-white font-sans relative">
+      <div className="bg-ivory dark:bg-[#191919] min-h-screen text-text-primary selection:bg-coral selection:text-white font-sans relative">
         <SEO />
         <SchemaMarkup type="Organization" />
         <SchemaMarkup type="WebSite" />
+        
+        {/* Preloader - only show on first visit */}
+        {!isPreloaderComplete && (
+          <LayoutPreloader onComplete={handlePreloaderComplete} />
+        )}
         
         {/* Skip to main content for accessibility */}
         <a
@@ -160,6 +183,27 @@ function App() {
                   onNavigate={navigateTo}
                   industryName={selectedProject?.name}
                   industryId={selectedProject?.id}
+                />
+              )}
+
+              {currentPage === 'services' && (
+                <AllServicesPage
+                  onBack={() => navigateTo('home')}
+                  onNavigate={navigateTo}
+                />
+              )}
+
+              {currentPage === 'industries' && (
+                <AllIndustriesPage
+                  onBack={() => navigateTo('home')}
+                  onNavigate={navigateTo}
+                />
+              )}
+
+              {currentPage === 'company' && (
+                <CompanyPage
+                  onBack={() => navigateTo('home')}
+                  onNavigate={navigateTo}
                 />
               )}
 

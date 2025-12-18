@@ -23,7 +23,7 @@ const NotFound: React.FC = () => {
 
             {/* Layer 1: Dim Content (Background) */}
             <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none">
-                <h1 className="font-display text-[12rem] md:text-[20rem] leading-none font-bold text-white/5">404</h1>
+                <h1 className="font-display text-[12rem] md:text-[20rem] leading-none font-semibold text-white/5">404</h1>
                 <h2 className="font-display text-3xl md:text-5xl mb-4 text-white/5 font-light">Page Not Found</h2>
             </div>
 
@@ -35,7 +35,7 @@ const NotFound: React.FC = () => {
                     WebkitMaskImage: `radial-gradient(circle 300px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
                 }}
             >
-                <h1 className="font-display text-[12rem] md:text-[20rem] leading-none font-bold text-coral drop-shadow-2xl">404</h1>
+                <h1 className="font-display text-[12rem] md:text-[20rem] leading-none font-semibold text-coral drop-shadow-2xl">404</h1>
                 <h2 className="font-display text-3xl md:text-5xl mb-4 text-white font-light">Page Not Found</h2>
                 <p className="text-lg md:text-xl text-white/90 max-w-md text-center font-sans mt-4 px-6">
                     The page you are looking for has vanished into the shadows.

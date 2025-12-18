@@ -88,19 +88,19 @@ const AILab: React.FC = () => {
                         <div className="bg-white dark:bg-black border border-black/5 dark:border-white/10 rounded-3xl p-8 md:p-16 shadow-none hover:shadow-2xl transition-all duration-500 animate-float">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                                 <div>
-                                    <h3 className="text-xs text-coral font-bold tracking-widest uppercase mb-3">Brand Concept</h3>
+                                    <h3 className="text-xs text-coral font-semibold tracking-widest uppercase mb-3">Brand Concept</h3>
                                     <h4 className="text-4xl md:text-5xl font-display text-text-primary mb-8 leading-tight">{concept.title}</h4>
 
-                                    <h3 className="text-xs text-coral font-bold tracking-widest uppercase mb-3">Tagline</h3>
+                                    <h3 className="text-xs text-coral font-semibold tracking-widest uppercase mb-3">Tagline</h3>
                                     <p className="text-2xl text-text-primary italic font-display mb-8">"{concept.tagline}"</p>
                                 </div>
                                 <div className="space-y-10">
                                     <div className="bg-ivory dark:bg-white/5 p-6 rounded-xl border border-black/5 dark:border-white/5">
-                                        <h3 className="text-xs text-coral font-bold tracking-widest uppercase mb-3">Strategic Vision</h3>
+                                        <h3 className="text-xs text-coral font-semibold tracking-widest uppercase mb-3">Strategic Vision</h3>
                                         <p className="text-text-secondary leading-relaxed text-lg">{concept.description}</p>
                                     </div>
                                     <div className="bg-ivory dark:bg-white/5 p-6 rounded-xl border border-black/5 dark:border-white/5">
-                                        <h3 className="text-xs text-coral font-bold tracking-widest uppercase mb-3">Visual Direction</h3>
+                                        <h3 className="text-xs text-coral font-semibold tracking-widest uppercase mb-3">Visual Direction</h3>
                                         <p className="text-text-secondary leading-relaxed text-lg">{concept.visualCues}</p>
                                     </div>
                                 </div>

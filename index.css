@@ -2,6 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+@keyframes noise-animation {
+  0% {
+    transform: translate(0, 0);
+  }
+  10% {
+    transform: translate(-2%, -3%);
+  }
+  20% {
+    transform: translate(-4%, 2%);
+  }
+  30% {
+    transform: translate(2%, -4%);
+  }
+  40% {
+    transform: translate(-2%, 5%);
+  }
+  50% {
+    transform: translate(-4%, 2%);
+  }
+  60% {
+    transform: translate(3%, 0);
+  }
+  70% {
+    transform: translate(0, 3%);
+  }
+  80% {
+    transform: translate(-3%, 0);
+  }
+  90% {
+    transform: translate(2%, 2%);
+  }
+  100% {
+    transform: translate(1%, 0);
+  }
+}
+
 @layer base {
   * {
     margin: 0;
@@ -17,7 +53,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'Newsreader', serif;
   }
 
   .dark {
@@ -29,20 +65,58 @@
   .text-text-primary {
     @apply text-black dark:text-white;
   }
-  
+
   .text-text-secondary {
     @apply text-[#555555] dark:text-[#CCCCCC];
   }
-  
+
   .bg-ivory {
     @apply bg-[#EBECE7] dark:bg-[#191919];
   }
-  
+
   .bg-coral {
     @apply bg-[#E08576];
   }
-  
+
   .bg-surface {
     @apply bg-white dark:bg-[#2A2A2A];
+  }
+}
+
+@theme inline {
+  @keyframes noise-animation {
+  0% {
+    transform: translate(0, 0);
+    }
+  10% {
+    transform: translate(-2%, -3%);
+    }
+  20% {
+    transform: translate(-4%, 2%);
+    }
+  30% {
+    transform: translate(2%, -4%);
+    }
+  40% {
+    transform: translate(-2%, 5%);
+    }
+  50% {
+    transform: translate(-4%, 2%);
+    }
+  60% {
+    transform: translate(3%, 0);
+    }
+  70% {
+    transform: translate(0, 3%);
+    }
+  80% {
+    transform: translate(-3%, 0);
+    }
+  90% {
+    transform: translate(2%, 2%);
+    }
+  100% {
+    transform: translate(1%, 0);
+    }
   }
 }

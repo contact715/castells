@@ -51,7 +51,7 @@ const CasesGrid: React.FC<CasesGridProps> = ({ onNavigate }) => {
                                 Case Studies
                             </span>
                         </div>
-                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-text-primary dark:text-white leading-tight tracking-tight">
+                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary dark:text-white leading-tight tracking-tight">
                             Real results that drive<br />
                             <span className="text-text-secondary">business growth.</span>
                         </h2>
@@ -138,7 +138,7 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseItem, onClick }) => {
                 </span>
 
                 {/* Title */}
-                <h3 className="font-display text-lg md:text-xl font-medium text-text-primary dark:text-white mb-3 leading-snug group-hover:text-black transition-colors">
+                <h3 className="font-display text-lg md:text-xl font-semibold text-text-primary dark:text-white mb-3 leading-snug group-hover:text-black transition-colors">
                     {caseItem.client} — {caseItem.description?.slice(0, 60)}...
                 </h3>
 

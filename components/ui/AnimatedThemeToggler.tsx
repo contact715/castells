@@ -32,6 +32,29 @@ export const AnimatedThemeToggler = ({
     }
   }, [isDark])
 
+  // Listen for system theme changes (only if no manual preference is set)
+  useEffect(() => {
+    if (!window.matchMedia) return
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    const handleChange = (e: MediaQueryListEvent) => {
+      const savedTheme = localStorage.getItem('theme')
+      // Only update if user hasn't manually set a preference
+      if (!savedTheme) {
+        const newTheme = e.matches
+        setIsDark(newTheme)
+        if (newTheme) {
+          document.documentElement.classList.add("dark")
+        } else {
+          document.documentElement.classList.remove("dark")
+        }
+      }
+    }
+
+    mediaQuery.addEventListener('change', handleChange)
+    return () => mediaQuery.removeEventListener('change', handleChange)
+  }, [])
+
   return (
     <button
       onClick={toggleTheme}

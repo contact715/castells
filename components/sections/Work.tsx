@@ -6,6 +6,7 @@ import { Badge } from '../ui/Badge';
 import ScrollFloat from '../effects/ScrollFloat';
 import { PageView } from '../../App';
 import ScrollStack, { ScrollStackItem } from '../ui/ScrollStack';
+import AnimatedHeading from '../ui/AnimatedHeading';
 
 interface WorkProps {
   onNavigate?: (page: PageView, data?: any) => void;
@@ -24,10 +25,14 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
           {/* Left: Badge + Title (Sticky) */}
           <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
             <Badge className="mb-3">Selected Works 2023-2025</Badge>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight">
+            <AnimatedHeading
+              as="h2"
+              className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
+              delay={0.1}
+            >
               Proven<br />
               <span className="text-text-secondary">Dominance.</span>
-            </h2>
+            </AnimatedHeading>
           </div>
 
           {/* Right: Description + CTA Button */}
@@ -132,7 +137,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
         {/* Bottom Content */}
         <div>
           <div className="mb-8">
-            <h3 className="font-display text-6xl md:text-8xl font-medium text-white mb-4 tracking-tight leading-none">
+            <h3 className="font-display text-6xl md:text-8xl font-semibold text-white mb-4 tracking-tight leading-none">
               {project.client}
             </h3>
             <p className="text-white/70 text-lg md:text-xl font-light max-w-2xl leading-relaxed">

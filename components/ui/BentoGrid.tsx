@@ -70,7 +70,7 @@ const BentoCard: React.FC<BentoCardProps> = ({
 
         {/* Content: Title & Desc */}
         <div>
-          <h3 className="font-display text-2xl font-bold text-text-primary mb-3 leading-tight group-hover:text-coral transition-colors duration-300">
+          <h3 className="font-display text-2xl font-semibold text-text-primary mb-3 leading-tight group-hover:text-coral transition-colors duration-300">
             {name}
           </h3>
           <p className="text-text-secondary text-base leading-relaxed font-light opacity-90">

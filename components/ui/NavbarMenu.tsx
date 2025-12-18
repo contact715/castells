@@ -20,15 +20,24 @@ export const MenuItem = ({
   active,
   item,
   children,
+  onClick,
 }: {
   setActive: (item: string) => void;
   active: string | null;
   item: string;
   children?: React.ReactNode;
+  onClick?: (e: React.MouseEvent) => void;
 }) => {
+  const handleClick = (e: React.MouseEvent) => {
+    if (onClick) {
+      onClick(e);
+    }
+  };
+
   return (
     <div onMouseEnter={() => setActive(item)} className="relative group/menu-item">
       <motion.div
+        onClick={handleClick}
         transition={{ duration: 0.3 }}
         className={cn(
           "cursor-pointer transition-all font-medium text-sm flex items-center gap-1 px-3 py-2",
@@ -58,7 +67,7 @@ export const MenuItem = ({
               <motion.div
                 transition={transition}
                 layoutId="active" // layoutId ensures smooth animation
-                className="bg-white dark:bg-black backdrop-blur-sm rounded-3xl overflow-hidden border border-black/10 dark:border-white/10 shadow-xl"
+                className="bg-white dark:bg-[#2A2A2A] backdrop-blur-sm rounded-3xl overflow-hidden border border-black/10 dark:border-white/10 shadow-xl"
               >
                 <motion.div
                   layout // layout ensures smooth animation
@@ -127,7 +136,7 @@ export const ProductItem = ({
         <div className="absolute inset-0 bg-black/0 group-hover/product:bg-black/10 transition-colors rounded-md" />
       </div>
       <div>
-        <h4 className="text-lg font-display font-bold mb-1 text-text-primary group-hover/product:text-coral transition-colors">
+        <h4 className="text-lg font-display font-semibold mb-1 text-text-primary group-hover/product:text-coral transition-colors">
           {title}
         </h4>
         <p className="text-text-secondary text-xs max-w-[10rem] leading-relaxed">

@@ -68,7 +68,7 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
         damping: 25,
       }}
       className={cn(
-        "pointer-events-auto hidden lg:block relative bg-ivory dark:bg-black border-b border-black/5 dark:border-white/10 py-4 overflow-visible z-50",
+        "pointer-events-auto hidden lg:block relative bg-ivory dark:bg-[#191919] border-b border-black/5 dark:border-white/10 py-4 overflow-visible z-50",
         className
       )}
     >
@@ -94,7 +94,7 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         damping: 25,
       }}
       className={cn(
-        "pointer-events-auto lg:hidden relative flex flex-col bg-ivory/90 dark:bg-black/90 backdrop-blur-md border border-black/5 dark:border-white/10 shadow-sm px-4 py-3",
+        "pointer-events-auto lg:hidden relative flex flex-col bg-ivory/90 dark:bg-[#191919]/90 backdrop-blur-md border border-black/5 dark:border-white/10 shadow-sm px-4 py-3",
         visible && "shadow-lg",
         className
       )}

@@ -2,6 +2,7 @@ import React from 'react';
 import { VelocityScroll } from '../effects/ScrollBasedVelocity';
 import { Badge } from '../ui/Badge';
 import { cn } from '../../lib/utils';
+import AnimatedHeading from '../ui/AnimatedHeading';
 
 const TESTIMONIALS = [
   {
@@ -107,7 +108,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({ name, role, quote, av
         {avatar}
       </div>
       <div>
-        <h4 className="text-text-primary font-medium text-sm md:text-base">{name}</h4>
+        <h4 className="text-text-primary font-semibold text-sm md:text-base">{name}</h4>
         <p className="text-text-secondary/70 text-xs md:text-sm">{role}</p>
       </div>
     </div>
@@ -131,10 +132,14 @@ const Testimonials: React.FC = () => {
       <div className="container mx-auto px-6 mb-20 relative z-10">
         <div className="max-w-3xl">
           <Badge className="mb-3">Testimonials</Badge>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium mb-8 leading-tight tracking-tight text-text-primary">
+          <AnimatedHeading
+            as="h2"
+            className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold mb-8 leading-tight tracking-tight text-text-primary"
+            delay={0.1}
+          >
             Loved by founders<br />
             <span className="text-text-secondary">worldwide</span>
-          </h2>
+          </AnimatedHeading>
         </div>
       </div>
 

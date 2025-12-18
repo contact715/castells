@@ -3,6 +3,7 @@ import { Shield, Target, Users, ArrowRight, Zap, Clock, TrendingUp } from 'lucid
 import { Section, SectionContainer } from '../ui/Section';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
+import AnimatedHeading from '../ui/AnimatedHeading';
 
 const REASONS = [
     {
@@ -67,10 +68,14 @@ const WhyChoose: React.FC = () => {
                     <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
                         <div className="mb-8">
                             <Badge className="mb-3">Why Us</Badge>
-                            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight mb-4">
+                            <AnimatedHeading
+                                as="h2"
+                                className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4"
+                                delay={0.1}
+                            >
                                 The Unfair<br />
                                 <span className="text-text-secondary">Advantage</span>
-                            </h2>
+                            </AnimatedHeading>
                             <p className="text-lg text-text-secondary leading-relaxed">
                                 Most agencies sell you hours. We sell you outcomes. Here is how we structure your dominance.
                             </p>
@@ -95,7 +100,7 @@ const WhyChoose: React.FC = () => {
                                     <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
                                         <item.icon className="w-6 h-6 stroke-[1.5]" />
                                     </div>
-                                    <h3 className="font-display font-bold text-2xl text-black dark:text-white leading-tight">
+                                    <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight">
                                         {item.title}
                                     </h3>
                                 </div>

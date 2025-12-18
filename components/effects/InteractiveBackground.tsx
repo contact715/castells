@@ -143,9 +143,9 @@ const InteractiveBackground: React.FC = () => {
         offCanvas.width = width;
         offCanvas.height = height;
 
-        // Use Playfair Display for the particle text (Brand Guideline)
+        // Use Newsreader for the particle text (Brand Guideline)
         const fontSize = Math.min(width * 0.2, 400); 
-        offCtx.font = `400 ${fontSize}px "Playfair Display", serif`;
+        offCtx.font = `400 ${fontSize}px "Newsreader", serif`;
         offCtx.fillStyle = 'white';
         offCtx.textAlign = 'center';
         offCtx.textBaseline = 'middle';

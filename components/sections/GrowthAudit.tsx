@@ -53,7 +53,7 @@ const GrowthAudit: React.FC = () => {
                                 Limited Availability: Q2 2025
                             </span>
                         </div>
-                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-text-primary mb-6 leading-tight tracking-tight">
+                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary mb-6 leading-tight tracking-tight">
                             Ready to<br />
                             <span className="text-text-secondary">Scale?</span>
                         </h2>
@@ -96,7 +96,7 @@ const GrowthAudit: React.FC = () => {
                             {step < 4 && (
                                 <div className="mb-8">
                                     <span className="text-xs font-bold uppercase tracking-widest text-text-secondary mb-2 block">Step {step} of 3</span>
-                                    <h3 className="font-display text-2xl font-medium text-text-primary">
+                                    <h3 className="font-display text-2xl font-semibold text-text-primary">
                                         {step === 1 && "What is your primary growth goal?"}
                                         {step === 2 && "Tell us about your business."}
                                         {step === 3 && "Where should we send your audit?"}
@@ -186,7 +186,7 @@ const GrowthAudit: React.FC = () => {
                                         <div className="w-20 h-20 rounded-2xl bg-green-500/10 flex items-center justify-center mb-6 text-green-500">
                                             <ShieldCheck className="w-10 h-10" />
                                         </div>
-                                        <h3 className="font-display text-3xl font-medium text-text-primary mb-4">Application Received</h3>
+                                        <h3 className="font-display text-3xl font-semibold text-text-primary mb-4">Application Received</h3>
                                         <p className="text-text-secondary mb-8 max-w-xs">
                                             Thanks, {formData.name.split(' ')[0]}. We'll review your audit request and get back to you within 24 hours.
                                         </p>

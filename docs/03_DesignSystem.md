@@ -16,12 +16,12 @@
 ## 2. Typography
 
 ### Font Families
-- **Headings (Display):** 'Playfair Display', serif
+- **Headings (Display):** 'Newsreader', serif
 - **Body (Sans):** 'Satoshi', sans-serif
 
 ### Usage
-- **H1/Hero:** Playfair Display, Large, Elegant.
-- **Section Headers:** Playfair Display.
+- **H1/Hero:** Newsreader, Large, Elegant.
+- **Section Headers:** Newsreader.
 - **Body Text:** Satoshi, Clean, Readable.
 - **UI Elements (Buttons, Nav):** Satoshi, Uppercase/Capitalized.
 

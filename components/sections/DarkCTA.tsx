@@ -50,7 +50,7 @@ const cardVariants = {
 
 const DarkCTA: React.FC = () => {
     return (
-        <section className="py-24 bg-black text-white">
+        <section className="py-24 bg-white text-black border-t border-black/5">
             <div className="container mx-auto px-6">
 
                 {/* Big Headline */}
@@ -59,9 +59,9 @@ const DarkCTA: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight mb-16 max-w-4xl"
+                    className="font-display text-3xl md:text-4xl lg:text-5xl font-bold leading-tight tracking-tight mb-16 max-w-4xl"
                 >
-                    Marketing isn't magic — <span className="text-white/50">it's strategy, data, and relentless execution that turns clicks into customers.</span>
+                    Marketing isn't magic — <span className="text-text-secondary">it's strategy, data, and relentless execution that turns clicks into customers.</span>
                 </motion.h2>
 
                 {/* Cards Grid */}
@@ -77,25 +77,25 @@ const DarkCTA: React.FC = () => {
                             key={idx}
                             href={card.href}
                             variants={cardVariants}
-                            className="group bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl p-6 md:p-8 transition-all flex flex-col justify-between min-h-[240px]"
+                            className="group bg-white border border-black/10 hover:border-coral/50 hover:shadow-lg rounded-2xl p-6 md:p-8 transition-all flex flex-col justify-between min-h-[240px]"
                         >
                             {/* Icon */}
-                            <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white/60 mb-6">
+                            <div className="w-10 h-10 rounded-xl bg-coral/10 flex items-center justify-center text-coral mb-6">
                                 <card.icon className="w-5 h-5" />
                             </div>
 
                             {/* Content */}
                             <div className="flex-1">
-                                <h3 className="font-display text-lg font-medium text-white mb-2">
+                                <h3 className="font-display text-lg font-semibold text-text-primary mb-2">
                                     {card.title}
                                 </h3>
-                                <p className="text-sm text-white/50 leading-relaxed">
+                                <p className="text-sm text-text-secondary leading-relaxed">
                                     {card.description}
                                 </p>
                             </div>
 
                             {/* Link */}
-                            <div className="flex items-center gap-2 mt-6 text-sm font-medium text-white/70 group-hover:text-white transition-colors">
+                            <div className="flex items-center gap-2 mt-6 text-sm font-medium text-text-secondary group-hover:text-coral transition-colors">
                                 <span>{card.linkText}</span>
                                 <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                             </div>

@@ -38,10 +38,10 @@ export const spacing = {
 export const typography = {
   // Headings
   heading: {
-    h1: 'font-display text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.05] tracking-tight',
-    h2: 'font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight',
-    h3: 'font-display text-2xl md:text-3xl font-medium leading-tight tracking-tight',
-    h4: 'font-display text-xl md:text-2xl font-medium leading-tight',
+    h1: 'font-display text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight',
+    h2: 'font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight',
+    h3: 'font-display text-2xl md:text-3xl font-semibold leading-tight tracking-tight',
+    h4: 'font-display text-xl md:text-2xl font-semibold leading-tight',
   },
   // Body text
   body: {
@@ -131,4 +131,5 @@ export const cardClasses = {
   default: `${colors.background.surface} ${spacing.card.md} ${borderRadius.card} ${shadows.md} ${colors.border.light} border`,
   hover: `${colors.background.surface} ${spacing.card.md} ${borderRadius.card} ${shadows.md} ${colors.border.light} border hover:${shadows.hover.md.replace('hover:', '')} hover:-translate-y-1 ${transitions.default}`,
 } as const;
+
 

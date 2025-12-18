@@ -11,6 +11,7 @@ import { Highlighter } from '../ui/Highlighter';
 import { cn } from '../../lib/utils';
 import { Section, SectionContainer, SectionHeader } from '../ui/Section';
 import { ImageRevealCard } from '../ui/ImageRevealCard';
+import AnimatedHeading from '../ui/AnimatedHeading';
 
 const CATEGORIES = [
   { id: 'construction', label: 'Construction', icon: Hammer },
@@ -73,10 +74,14 @@ const Industries: React.FC = () => {
                 Sector Expertise
               </span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight">
+            <AnimatedHeading
+              as="h2"
+              className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
+              delay={0.1}
+            >
               Industries We<br />
               <span className="text-text-secondary">Dominate</span>
-            </h2>
+            </AnimatedHeading>
           </div>
 
           {/* Right: Description */}
@@ -111,7 +116,7 @@ const Industries: React.FC = () => {
                     />
                   )}
                   <span className="relative z-10 flex items-center gap-2">
-                    <cat.icon className={cn("w-4 h-4", isActive ? "text-coral" : "currentColor")} />
+                    <cat.icon className={cn("w-4 h-4", isActive ? "text-white dark:text-black" : "currentColor")} />
                     <span className={isActive ? "text-white dark:text-black" : ""}>{cat.label}</span>
                   </span>
                 </button>
@@ -131,7 +136,7 @@ const Industries: React.FC = () => {
                     <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 relative z-20">
                       <item.icon className="w-6 h-6 stroke-[1.5]" />
                     </div>
-                    <h3 className="font-display font-bold text-2xl text-black dark:text-white leading-tight relative z-20">
+                    <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight relative z-20">
                       {item.name}
                     </h3>
                   </div>

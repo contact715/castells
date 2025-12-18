@@ -102,3 +102,4 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
 
 export default SchemaMarkup;
 
+

@@ -42,7 +42,7 @@ const FAQ: React.FC = () => {
           <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
             <div className="mb-8">
               <Badge className="mb-3">FAQ</Badge>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium leading-tight tracking-tight mb-4">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4">
                 Common<br />
                 <span className="text-text-secondary">Queries</span>
               </h2>
@@ -83,7 +83,7 @@ const FAQ: React.FC = () => {
                       onClick={() => setOpenIndex(isOpen ? null : idx)}
                       className="w-full py-8 flex items-start justify-between gap-6 text-left group"
                     >
-                      <h3 className="font-display font-bold text-2xl md:text-3xl text-text-primary group-hover:text-black transition-colors">
+                      <h3 className="font-display font-semibold text-2xl md:text-3xl text-text-primary group-hover:text-black transition-colors">
                         {faq.question}
                       </h3>
                       <span className="flex-shrink-0 mt-1">

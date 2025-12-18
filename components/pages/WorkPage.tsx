@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { AnimatePresence, type Variants } from 'framer-motion';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
-import { Section, SectionContainer, SectionHeader } from '../ui/Section';
+import { Section, SectionContainer } from '../ui/Section';
+import { PageHeader } from '../ui/PageHeader';
+import { TimelineContent } from '../ui/TimelineContent';
 import { CASE_STUDIES, WORK_CATEGORIES } from '../../constants';
 import { cn } from '../../lib/utils';
 import { PageView } from '../../App';
-
-import { Breadcrumbs } from '../ui/Breadcrumbs';
 
 interface WorkPageProps {
     onBack: () => void;
@@ -15,32 +15,45 @@ interface WorkPageProps {
 
 const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
     const [activeCategory, setActiveCategory] = useState('all');
+    const timelineRef = useRef<HTMLDivElement>(null);
 
     const filteredProjects = activeCategory === 'all'
         ? CASE_STUDIES
         : CASE_STUDIES.filter(p => p.category === activeCategory);
 
+    const revealVariants: Variants = {
+        visible: (i: number) => ({
+            y: 0,
+            opacity: 1,
+            filter: "blur(0px)",
+            transition: {
+                delay: i * 0.15,
+                duration: 0.6,
+                ease: [0.22, 1, 0.36, 1] as any,
+            },
+        }),
+        hidden: {
+            filter: "blur(10px)",
+            y: 30,
+            opacity: 0,
+        },
+    };
+
     return (
-        <div className="bg-ivory dark:bg-black min-h-screen pt-32 pb-20">
+        <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-32 pb-20" ref={timelineRef}>
             <SectionContainer>
 
                 {/* Header & Navigation */}
-                <div className="mb-12">
-                    <div className="mb-8">
-                        <Breadcrumbs
-                            items={[
-                                { label: 'Home', action: () => onNavigate('home') },
-                                { label: 'Work', active: true }
-                            ]}
-                        />
-                    </div>
-
-                    <SectionHeader
-                        badge="Our Portfolio"
-                        title="Selected Works"
-                        description="A curated collection of our most impactful campaigns and digital products."
-                    />
-                </div>
+                <PageHeader
+                    breadcrumbs={[
+                        { label: 'Home', action: () => onNavigate('home') },
+                        { label: 'Work', active: true }
+                    ]}
+                    badge="Our Portfolio"
+                    title="Selected Works"
+                    description="A curated collection of our most impactful campaigns and digital products."
+                    onNavigate={onNavigate}
+                />
 
                 {/* Filters */}
                 <div className="flex flex-wrap gap-2 mb-16 justify-center">
@@ -63,19 +76,16 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
                 {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     <AnimatePresence mode="popLayout">
-                        {filteredProjects.map((project) => (
-                            <motion.div
+                        {filteredProjects.map((project, index) => (
+                            <TimelineContent
                                 key={project.id}
-                                layout
-                                initial={{ opacity: 0, scale: 0.9 }}
-                                animate={{ opacity: 1, scale: 1 }}
-                                exit={{ opacity: 0, scale: 0.9 }}
-                                transition={{ duration: 0.4 }}
+                                as="div"
+                                animationNum={index}
+                                timelineRef={timelineRef}
+                                customVariants={revealVariants}
+                                className="group relative aspect-[4/3] rounded-[2rem] overflow-hidden cursor-pointer"
+                                onClick={() => onNavigate('case-study', project)}
                             >
-                                <div
-                                    onClick={() => onNavigate('case-study', project)}
-                                    className="group relative aspect-[4/3] rounded-[2rem] overflow-hidden cursor-pointer"
-                                >
                                     {/* Background Media */}
                                     <div className="absolute inset-0 bg-black">
                                         {project.video ? (
@@ -120,8 +130,7 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </motion.div>
+                            </TimelineContent>
                         ))}
                     </AnimatePresence>
                 </div>

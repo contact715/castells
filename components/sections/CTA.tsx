@@ -28,7 +28,7 @@ const CTA: React.FC = () => {
                     <div className="max-w-xl sticky top-24">
                         <Badge className="mb-3">Limited Availability: Q2 2025</Badge>
 
-                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium mb-8 leading-none tracking-tight">
+                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold mb-8 leading-none tracking-tight">
                             Ready to<br />
                             <span className="text-text-secondary">Scale?</span>
                         </h2>
@@ -53,9 +53,9 @@ const CTA: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Right: The Form (Matte Black Aesthetic) */}
+                    {/* Right: The Form */}
                     <div className="relative w-full">
-                        <div className="bg-[#121212] text-white p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden min-h-[600px] flex flex-col border border-white/5">
+                        <div className="bg-white border border-black/5 text-text-primary p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden min-h-[600px] flex flex-col">
                             <QuizForm />
                         </div>
                     </div>

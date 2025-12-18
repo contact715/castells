@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
-import { m as motion } from 'framer-motion';
+import { type Variants } from 'framer-motion';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
+import { TimelineContent } from '../ui/TimelineContent';
 
 interface BlogPost {
     id: number;
@@ -38,41 +39,36 @@ const BLOG_POSTS: BlogPost[] = [
     },
 ];
 
-// Staggered vertical offsets for masonry effect - smaller values for compact layout
-const staggerOffsets = [0, 40, 20, 60];
-
-const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.12,
-        },
-    },
-};
-
-const cardVariants = {
-    hidden: { opacity: 0, y: 50 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            duration: 0.6,
-            ease: [0.22, 1, 0.36, 1],
-        }
-    },
-};
-
 const Blog: React.FC = () => {
+    const timelineRef = useRef<HTMLElement>(null);
+
+    const revealVariants: Variants = {
+        visible: (i: number) => ({
+            y: 0,
+            opacity: 1,
+            filter: "blur(0px)",
+            transition: {
+                delay: i * 0.15,
+                duration: 0.6,
+                ease: [0.22, 1, 0.36, 1] as any,
+            },
+        }),
+        hidden: {
+            filter: "blur(10px)",
+            y: 30,
+            opacity: 0,
+        },
+    };
+
     return (
-        <section id="blog" className="py-20 bg-ivory dark:bg-black border-t border-black/5 dark:border-white/5">
+        <section id="blog" className="py-20 bg-ivory dark:bg-[#191919] border-t border-black/5 dark:border-white/5" ref={timelineRef}>
             <div className="container mx-auto px-6">
 
                 {/* Header */}
                 <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6 mb-12">
                     <div className="max-w-2xl">
                         <Badge className="mb-3">Blogs & Insights</Badge>
-                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-medium text-text-primary dark:text-white leading-tight tracking-tight">
+                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary dark:text-white leading-tight tracking-tight">
                             Latest insights and<br />
                             <span className="text-text-secondary">industry trends</span>
                         </h2>
@@ -88,19 +84,16 @@ const Blog: React.FC = () => {
                 </div>
 
                 {/* Grid - 2x2 layout */}
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "-50px" }}
-                    className="grid grid-cols-1 md:grid-cols-2 gap-4"
-                >
-                    {BLOG_POSTS.map((post) => (
-                        <motion.a
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    {BLOG_POSTS.map((post, index) => (
+                        <TimelineContent
                             key={post.id}
+                            as="a"
                             href="#"
-                            variants={cardVariants}
-                            className="group flex gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-black/5 dark:border-white/10 hover:bg-black hover:border-black transition-all duration-300"
+                            animationNum={index}
+                            timelineRef={timelineRef}
+                            customVariants={revealVariants}
+                            className="group flex gap-4 p-4 rounded-xl bg-white dark:bg-white/5 border border-black/5 dark:border-white/10 hover:bg-black dark:hover:bg-white/10 hover:border-black dark:hover:border-white/20 transition-all duration-300"
                         >
                             {/* Small Image */}
                             <div className="w-24 h-24 md:w-28 md:h-28 rounded-lg overflow-hidden flex-shrink-0">
@@ -114,20 +107,20 @@ const Blog: React.FC = () => {
 
                             {/* Content */}
                             <div className="flex flex-col justify-center flex-1 min-w-0">
-                                <span className="text-xs text-text-secondary group-hover:text-white/50 mb-1 transition-colors">
+                                <span className="text-xs text-text-secondary dark:text-white/60 group-hover:text-white/50 dark:group-hover:text-white/70 mb-1 transition-colors">
                                     {post.date}
                                 </span>
-                                <h3 className="font-display text-sm md:text-base font-medium text-text-primary group-hover:text-white mb-2 leading-snug transition-colors line-clamp-2">
+                                <h3 className="font-display text-sm md:text-base font-semibold text-text-primary dark:text-white group-hover:text-white dark:group-hover:text-white mb-2 leading-snug transition-colors line-clamp-2">
                                     {post.title}
                                 </h3>
-                                <div className="flex items-center gap-1 text-xs font-medium text-text-secondary group-hover:text-white transition-colors">
+                                <div className="flex items-center gap-1 text-xs font-medium text-text-secondary dark:text-white/60 group-hover:text-white dark:group-hover:text-white transition-colors">
                                     <ArrowRight className="w-3 h-3 transition-transform group-hover:translate-x-1" />
                                     <span>Read More</span>
                                 </div>
                             </div>
-                        </motion.a>
+                        </TimelineContent>
                     ))}
-                </motion.div>
+                </div>
 
             </div>
         </section>

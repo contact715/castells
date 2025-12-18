@@ -40,7 +40,7 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Naviga
             {/* Header with View All Button */}
             <div className="flex items-center justify-between">
                 <div>
-                    <h3 className="font-display text-xl font-bold text-text-primary mb-1">Featured Work</h3>
+                    <h3 className="font-display text-xl font-semibold text-text-primary mb-1">Featured Work</h3>
                     <p className="text-xs text-text-secondary">Explore {CASE_STUDIES.length}+ case studies & success stories.</p>
                 </div>
                 <Button
@@ -76,7 +76,7 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Naviga
                                     {caseStudy.industry}
                                 </span>
                             </div>
-                            <h4 className="text-white font-bold text-sm mb-1 group-hover:text-coral transition-colors">
+                            <h4 className="text-white font-semibold text-sm mb-1 group-hover:text-coral transition-colors">
                                 {caseStudy.client}
                             </h4>
                             <div className="flex items-baseline gap-1">
@@ -229,6 +229,12 @@ const SERVICES_DATA = [
 const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: NavigationData) => void }) => {
     const [activeCategory, setActiveCategory] = useState(SERVICES_DATA[0].id);
 
+    const handleCategoryClick = (category: { id: string; label: string }) => {
+        if (onNavigate) {
+            onNavigate('service', { name: category.label, id: category.id });
+        }
+    };
+
     const handleItemClick = (item: { label: string }) => {
         if (onNavigate) {
             onNavigate('service', { name: item.label, id: item.label.toLowerCase().replace(/\s+/g, '-') });
@@ -243,14 +249,15 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                     <button
                         key={category.id}
                         onMouseEnter={() => setActiveCategory(category.id)}
+                        onClick={() => handleCategoryClick(category)}
                         className={`
-                            flex-1 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap text-center flex items-center justify-center gap-2
+                            flex-1 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap text-center flex items-center justify-center gap-2 cursor-pointer
                             ${activeCategory === category.id
                                 ? 'bg-black text-white dark:bg-white dark:text-black shadow-sm'
                                 : 'text-text-secondary hover:bg-black/5 dark:hover:bg-white/5 hover:text-text-primary'}
                         `}
                     >
-                        {category.icon && <category.icon className="w-4 h-4" />}
+                        {category.icon && <category.icon className={`w-4 h-4 ${activeCategory === category.id ? 'text-white dark:text-black' : ''}`} />}
                         {category.label}
                     </button>
                 ))}
@@ -358,6 +365,12 @@ const INDUSTRIES_DATA = [
 const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: NavigationData) => void }) => {
     const [activeCategory, setActiveCategory] = useState(INDUSTRIES_DATA[0].id);
 
+    const handleCategoryClick = (category: { id: string; label: string }) => {
+        if (onNavigate) {
+            onNavigate('industry', { name: category.label, id: category.id });
+        }
+    };
+
     const handleItemClick = (item: { label: string }) => {
         if (onNavigate) {
             onNavigate('industry', { name: item.label, id: item.label.toLowerCase().replace(/\s+/g, '-') });
@@ -372,14 +385,15 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                     <button
                         key={category.id}
                         onMouseEnter={() => setActiveCategory(category.id)}
+                        onClick={() => handleCategoryClick(category)}
                         className={`
-                            flex-1 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap flex items-center justify-center gap-2
+                            flex-1 px-4 py-3 rounded-xl text-xs font-bold uppercase tracking-widest transition-all whitespace-nowrap flex items-center justify-center gap-2 cursor-pointer
                             ${activeCategory === category.id
                                 ? 'bg-black text-white dark:bg-white dark:text-black shadow-sm'
                                 : 'text-text-secondary hover:bg-black/5 dark:hover:bg-white/5 hover:text-text-primary'}
                         `}
                     >
-                        {category.icon && <category.icon className="w-4 h-4" />}
+                        {category.icon && <category.icon className={`w-4 h-4 ${activeCategory === category.id ? 'text-white dark:text-black' : ''}`} />}
                         {category.label}
                     </button>
                 ))}
@@ -475,28 +489,60 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                     <Menu setActive={setActiveTab} className="border-none shadow-none bg-transparent dark:bg-transparent backdrop-blur-none">
 
                         {/* CASES MENU */}
-                        <MenuItem setActive={setActiveTab} active={activeTab} item="Cases">
+                        <MenuItem 
+                            setActive={setActiveTab} 
+                            active={activeTab} 
+                            item="Cases"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                onNavigate?.('work');
+                            }}
+                        >
                             <div className="w-[720px] p-6">
                                 <CasesMenu onNavigate={onNavigate} />
                             </div>
                         </MenuItem>
 
                         {/* SERVICES MENU - RESTRUCTURED */}
-                        <MenuItem setActive={setActiveTab} active={activeTab} item="Services">
+                        <MenuItem 
+                            setActive={setActiveTab} 
+                            active={activeTab} 
+                            item="Services"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                onNavigate?.('services');
+                            }}
+                        >
                             <div className="w-[800px] p-4">
                                 <ServicesMenu onNavigate={onNavigate} />
                             </div>
                         </MenuItem>
 
                         {/* INDUSTRIES MENU - RESTRUCTURED */}
-                        <MenuItem setActive={setActiveTab} active={activeTab} item="Industries">
+                        <MenuItem 
+                            setActive={setActiveTab} 
+                            active={activeTab} 
+                            item="Industries"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                onNavigate?.('industries');
+                            }}
+                        >
                             <div className="w-[800px] p-4">
                                 <IndustriesMenu onNavigate={onNavigate} />
                             </div>
                         </MenuItem>
 
                         {/* COMPANY MENU */}
-                        <MenuItem setActive={setActiveTab} active={activeTab} item="Company">
+                        <MenuItem 
+                            setActive={setActiveTab} 
+                            active={activeTab} 
+                            item="Company"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                onNavigate?.('company');
+                            }}
+                        >
                             <div className="w-[600px] p-4">
                                 <CompanyMenu onNavigate={onNavigate} />
                             </div>
