@@ -97,3 +97,4 @@
 Используйте Lighthouse, WebPageTest или Chrome DevTools для измерения производительности.
 
 
+
