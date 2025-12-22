@@ -16,12 +16,72 @@ const TESTIMONIAL_AVATARS = [
 ];
 
 const CLIENT_LOGOS = [
-    'Client A',
-    'Client B',
-    'Client C',
-    'Client D',
-    'Client E',
-    'Client F',
+    {
+        name: 'Vortex',
+        logo: (
+            <svg viewBox="0 0 100 30" fill="currentColor" className="h-8 w-auto">
+                <path d="M10,15 L20,5 L30,15 L20,25 Z M35,5 H45 V25 H35 Z M50,5 H70 V10 H60 V25 H50 Z M75,5 H95 V10 H85 V25 H95 V20 H85 V15 H95 V10 H85 Z" />
+                <path d="M10 15a5 5 0 1 0 10 0a5 5 0 1 0 -10 0" className="opacity-50" />
+                <text x="35" y="22" fontFamily="sans-serif" fontWeight="bold" fontSize="18">VORTEX</text>
+            </svg>
+        )
+    },
+    {
+        name: 'Lumina',
+        logo: (
+            <svg viewBox="0 0 100 30" fill="currentColor" className="h-8 w-auto">
+                <circle cx="15" cy="15" r="8" />
+                <text x="30" y="22" fontFamily="sans-serif" fontWeight="bold" fontSize="18">LUMINA</text>
+            </svg>
+        )
+    },
+    {
+        name: 'Apex',
+        logo: (
+            <svg viewBox="0 0 100 30" fill="currentColor" className="h-8 w-auto">
+                <path d="M15 5 L5 25 L25 25 Z" />
+                <text x="30" y="22" fontFamily="sans-serif" fontWeight="bold" fontSize="18">APEX</text>
+            </svg>
+        )
+    },
+    {
+        name: 'Orbital',
+        logo: (
+            <svg viewBox="0 0 110 30" fill="currentColor" className="h-8 w-auto">
+                <ellipse cx="15" cy="15" rx="10" ry="5" transform="rotate(-45 15 15)" />
+                <circle cx="15" cy="15" r="3" />
+                <text x="32" y="22" fontFamily="sans-serif" fontWeight="bold" fontSize="18">ORBITAL</text>
+            </svg>
+        )
+    },
+    {
+        name: 'Nexus',
+        logo: (
+            <svg viewBox="0 0 100 30" fill="currentColor" className="h-8 w-auto">
+                <rect x="5" y="5" width="10" height="10" rx="2" />
+                <rect x="12" y="12" width="10" height="10" rx="2" className="opacity-70" />
+                <text x="30" y="22" fontFamily="sans-serif" fontWeight="bold" fontSize="18">NEXUS</text>
+            </svg>
+        )
+    },
+    {
+        name: 'Stratos',
+        logo: (
+            <svg viewBox="0 0 110 30" fill="currentColor" className="h-8 w-auto">
+                <path d="M5 20 Q15 5 25 20 M15 20 Q25 5 35 20" fill="none" stroke="currentColor" strokeWidth="3" />
+                <text x="40" y="22" fontFamily="sans-serif" fontWeight="bold" fontSize="18">STRATOS</text>
+            </svg>
+        )
+    },
+    {
+        name: 'Echo',
+        logo: (
+            <svg viewBox="0 0 100 30" fill="currentColor" className="h-8 w-auto">
+                <path d="M10 25 V5 L25 15 Z" />
+                <text x="30" y="22" fontFamily="sans-serif" fontWeight="bold" fontSize="18">ECHO</text>
+            </svg>
+        )
+    }
 ];
 
 const Hero: React.FC = () => {
@@ -54,7 +114,7 @@ const Hero: React.FC = () => {
             setIsMuted(!isMuted);
             if (iframeRef.current) {
                 const currentSrc = iframeRef.current.src;
-                const newSrc = isMuted 
+                const newSrc = isMuted
                     ? currentSrc.replace('&muted=1', '&muted=0')
                     : currentSrc.replace('&muted=0', '&muted=1');
                 iframeRef.current.src = newSrc;
@@ -139,19 +199,30 @@ const Hero: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Client Logos Marquee */}
-                <div className="mb-16">
-                    <Marquee className="font-display text-4xl md:text-5xl font-semibold text-black/20 dark:text-white/20" velocity={1}>
-                        {CLIENT_LOGOS.map((logo, idx) => (
-                            <span key={idx}>{logo}</span>
-                        ))}
-                    </Marquee>
+                {/* Client Logos Section */}
+                <div className="mb-20 flex flex-col md:flex-row items-center gap-8 md:gap-12 border-t border-b border-black/5 dark:border-white/5 py-12">
+                    <div className="shrink-0 max-w-sm text-center md:text-left">
+                        <p className="text-lg md:text-xl font-sans leading-relaxed text-text-primary">
+                            The world's best brands trust <br className="hidden md:block" />
+                            <span className="text-text-secondary">Castells for Market Domination.</span>
+                        </p>
+                    </div>
+
+                    <div className="flex-1 w-full overflow-hidden mask-linear-fade">
+                        <Marquee className="items-center" velocity={0.8}>
+                            {CLIENT_LOGOS.map((client, idx) => (
+                                <div key={idx} className="mx-8 opacity-40 hover:opacity-100 transition-opacity duration-300 text-black dark:text-white cursor-pointer hover:scale-105 transform">
+                                    {client.logo}
+                                </div>
+                            ))}
+                        </Marquee>
+                    </div>
                 </div>
             </div>
 
             {/* Video Section - Contained Width */}
             <div className="container mx-auto px-6 pb-20">
-                <div className="relative w-full aspect-video rounded-[2rem] overflow-hidden shadow-2xl bg-black">
+                <div className="relative w-full aspect-video rounded-[2rem] overflow-hidden bg-black">
                     <iframe
                         ref={iframeRef}
                         src="https://player.vimeo.com/video/1101673750?h=7ccdfe1d0c&autoplay=1&muted=1&loop=1&controls=1&background=0&responsive=1&byline=0&title=0"

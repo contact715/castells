@@ -7,7 +7,7 @@ import SEO from './components/ui/SEO';
 import SchemaMarkup from './components/ui/SchemaMarkup';
 import ErrorBoundary from './components/ui/ErrorBoundary';
 import SmoothScroll from './components/effects/SmoothScroll';
-import { LayoutPreloader } from './components/ui/layout-preloader';
+
 import type { NavigationData, PageView } from './types';
 export type { PageView } from './types';
 import { pathnameFromRoute, routeFromPathname } from './lib/routes';
@@ -58,20 +58,14 @@ function App() {
   const initialRoute = routeFromPathname(window.location.pathname);
   const [currentPage, setCurrentPage] = useState<PageView>(initialRoute.page);
   const [selectedProject, setSelectedProject] = useState<NavigationData | null>(initialRoute.data ?? null);
-  const [isPreloaderComplete, setIsPreloaderComplete] = useState(false);
+
 
   // Scroll to top on page change
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [currentPage]);
 
-  // Check if preloader was already shown (using sessionStorage)
-  useEffect(() => {
-    const hasSeenPreloader = sessionStorage.getItem('preloader-shown');
-    if (hasSeenPreloader) {
-      setIsPreloaderComplete(true);
-    }
-  }, []);
+
 
   const navigateTo = useCallback((page: PageView, data?: NavigationData) => {
     if (data) setSelectedProject(data);
@@ -95,10 +89,7 @@ function App() {
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
-  const handlePreloaderComplete = useCallback(() => {
-    setIsPreloaderComplete(true);
-    sessionStorage.setItem('preloader-shown', 'true');
-  }, []);
+
 
   return (
     <ErrorBoundary>
@@ -107,10 +98,7 @@ function App() {
         <SchemaMarkup type="Organization" />
         <SchemaMarkup type="WebSite" />
         
-        {/* Preloader - only show on first visit */}
-        {!isPreloaderComplete && (
-          <LayoutPreloader onComplete={handlePreloaderComplete} />
-        )}
+
         
         {/* Skip to main content for accessibility */}
         <a

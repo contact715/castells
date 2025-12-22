@@ -29,14 +29,14 @@ export type IndustryItemBase = {
 
 export type IndustryItem =
   | (IndustryItemBase & {
-      type: 'industry';
-      slug: string;
-      image?: string;
-    })
+    type: 'industry';
+    slug: string;
+    image?: string;
+  })
   | (IndustryItemBase & {
-      type: 'cta';
-      href: '/contact';
-    });
+    type: 'cta';
+    href: '/contact';
+  });
 
 export type IndustryCategory = {
   id: IndustryCategoryId;
@@ -247,7 +247,7 @@ export const INDUSTRY_CATEGORIES: IndustryCategory[] = [
         name: 'Financial Planning',
         description: 'Qualified prospects for wealth management and retirement planning.',
         icon: Briefcase,
-        image: '/images/financial-planning.svg',
+        image: '/images/financial-planning.png',
       },
       {
         type: 'industry',
@@ -255,7 +255,7 @@ export const INDUSTRY_CATEGORIES: IndustryCategory[] = [
         name: 'Real Estate',
         description: 'Lead gen for agents, brokers, and property managers ready to grow.',
         icon: Home,
-        image: '/images/real-estate.svg',
+        image: '/images/real-estate.png',
       },
       ctaItem,
     ],
