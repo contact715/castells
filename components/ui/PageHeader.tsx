@@ -66,7 +66,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
       {breadcrumbSchemaData && (
         <SchemaMarkup type="BreadcrumbList" data={breadcrumbSchemaData} />
       )}
-      <div className="mb-8">
+      <div className="mt-6 mb-8">
         <Breadcrumbs items={breadcrumbItems} />
       </div>
 
@@ -92,7 +92,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         </div>
 
         {illustration && (
-          <div className="hidden lg:block relative h-[260px] rounded-2xl overflow-hidden">
+          <div className="hidden lg:block relative h-[260px] rounded-[2rem] overflow-hidden">
             <div className="absolute inset-0">
               {illustration}
             </div>

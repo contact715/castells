@@ -9,8 +9,8 @@ interface CookiePolicyPageProps {
 
 const CookiePolicyPage: React.FC<CookiePolicyPageProps> = ({ onNavigate }) => {
   return (
-    <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-32 pb-20 selection:bg-coral selection:text-white">
-      <div className="container mx-auto px-6">
+    <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20 selection:bg-coral selection:text-white">
+      <div className="container mx-auto px-6 pt-4 md:pt-6">
         <PageHeader
           breadcrumbs={[
             { label: 'Home', action: () => onNavigate?.('home') },
@@ -28,7 +28,7 @@ const CookiePolicyPage: React.FC<CookiePolicyPageProps> = ({ onNavigate }) => {
           transition={{ duration: 0.5 }}
           className="max-w-4xl"
         >
-          <div className="bg-white dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-3xl p-8 md:p-12 space-y-10">
+          <div className="bg-white dark:bg-white/5  rounded-[2rem] p-8 md:p-12 space-y-10">
             <div className="text-sm text-text-secondary">
               <p><span className="font-semibold text-text-primary">Last updated:</span> Dec 17, 2025</p>
             </div>

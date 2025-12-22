@@ -148,8 +148,8 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                 description="Explore our latest insights, strategies, and case studies on digital marketing, growth, automation, and revenue optimization."
                 canonical="/blog"
             />
-            <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-32 pb-20">
-            <div className="container mx-auto px-6">
+            <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
+            <div className="container mx-auto px-6 pt-4 md:pt-6">
                 {/* Header */}
                 <PageHeader
                     breadcrumbs={[
@@ -172,14 +172,14 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                             </h2>
 
                             {/* Sort By */}
-                            <div className="mb-6 pb-6 border-b border-black/10 dark:border-white/10">
+                            <div className="mb-6 pb-6 -b -black/10 dark:-white/10">
                                 <label className="block text-xs font-medium text-text-secondary dark:text-white/60 mb-2">
                                     Sort by
                                 </label>
                                 <select
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
-                                    className="w-full bg-white dark:bg-surface border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-text-primary dark:text-white focus:outline-none focus:border-coral"
+                                    className="w-full bg-white dark:bg-surface  -black/10 dark:-white/10 rounded-xl px-3 py-2 text-sm text-text-primary dark:text-white focus:outline-none focus:-coral"
                                 >
                                     <option>Newest</option>
                                     <option>Alphabetically (A to Z)</option>
@@ -188,7 +188,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                             </div>
 
                             {/* Category */}
-                            <div className="mb-6 pb-6 border-b border-black/10 dark:border-white/10">
+                            <div className="mb-6 pb-6 -b -black/10 dark:-white/10">
                                 <label className="block text-xs font-medium text-text-secondary dark:text-white/60 mb-3">
                                     Category
                                 </label>
@@ -199,7 +199,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                 type="checkbox"
                                                 checked={selectedCategories.includes(cat)}
                                                 onChange={() => toggleCategory(cat)}
-                                                className="w-4 h-4 rounded border-black/20 dark:border-white/20 bg-white dark:bg-surface text-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
+                                                className="w-4 h-4 rounded -black/20 dark:-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
                                             />
                                             <span className="text-sm text-text-primary dark:text-white group-hover:text-coral transition-colors">
                                                 {cat}
@@ -210,7 +210,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                             </div>
 
                             {/* Topic */}
-                            <div className="mb-6 pb-6 border-b border-black/10 dark:border-white/10">
+                            <div className="mb-6 pb-6 -b -black/10 dark:-white/10">
                                 <label className="block text-xs font-medium text-text-secondary dark:text-white/60 mb-3">
                                     Topic
                                 </label>
@@ -221,7 +221,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                 type="checkbox"
                                                 checked={selectedTopics.includes(topic)}
                                                 onChange={() => toggleTopic(topic)}
-                                                className="w-4 h-4 rounded border-black/20 dark:border-white/20 bg-white dark:bg-surface text-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
+                                                className="w-4 h-4 rounded -black/20 dark:-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
                                             />
                                             <span className="text-sm text-text-primary dark:text-white group-hover:text-coral transition-colors">
                                                 {topic}
@@ -243,7 +243,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                 type="checkbox"
                                                 checked={selectedIndustries.includes(industry)}
                                                 onChange={() => toggleIndustry(industry)}
-                                                className="w-4 h-4 rounded border-black/20 dark:border-white/20 bg-white dark:bg-surface text-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
+                                                className="w-4 h-4 rounded -black/20 dark:-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
                                             />
                                             <span className="text-sm text-text-primary dark:text-white group-hover:text-coral transition-colors">
                                                 {industry}
@@ -267,7 +267,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                         placeholder="Search posts"
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full bg-white dark:bg-surface border border-black/10 dark:border-white/10 rounded-xl pl-10 pr-4 py-2 text-sm text-text-primary dark:text-white placeholder:text-text-secondary dark:placeholder:text-white/40 focus:outline-none focus:border-coral"
+                                        className="w-full bg-white dark:bg-surface  -black/10 dark:-white/10 rounded-xl pl-10 pr-4 py-2 text-sm text-text-primary dark:text-white placeholder:text-text-secondary dark:placeholder:text-white/40 focus:outline-none focus:-coral"
                                     />
                                 </div>
                             </div>
@@ -308,34 +308,35 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                 e.preventDefault();
                                                 onNavigate?.('blog-post', { id: post.id });
                                             }}
-                                            className="group relative overflow-hidden border border-black/5 dark:border-white/10 rounded-[2rem] p-6 h-[220px] flex flex-col justify-between hover:shadow-xl hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                                            className="group relative overflow-hidden  -black/5 dark:-white/10 rounded-[2rem] p-6 h-[220px] flex flex-col justify-between hover: hover:-translate-y-1 transition-all duration-300 cursor-pointer"
                                         >
                                             {/* Background image */}
-                                            <div className="absolute inset-0">
+                                            <div className="absolute inset-0 overflow-hidden rounded-[2rem]">
                                                 <img
                                                     src={post.image}
                                                     alt={post.title}
-                                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
                                                     loading="lazy"
+                                                    style={{ transform: 'translateZ(0)' }}
                                                 />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10" />
+                                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10 rounded-[2rem]" />
                                             </div>
 
                                             {/* Content */}
-                                            <div className="relative z-10">
-                                                <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center mb-4 group-hover:bg-coral group-hover:border-coral/40 transition-colors duration-300">
-                                                    <Icon className="w-6 h-6 text-white transition-colors" />
+                                            <div className="relative z-10 flex flex-col justify-end h-full">
+                                                <div>
+                                                    <h3 className="font-display text-lg font-semibold text-white mb-4 max-h-[2.8em] overflow-hidden group-hover:text-white transition-colors">
+                                                        {post.title}
+                                                    </h3>
+                                                    <div className="flex items-center justify-between">
+                                                        <div className="text-xs text-white/70">
+                                                            {post.date}
+                                                        </div>
+                                                        <div className="text-xs text-white font-medium group-hover:text-white">
+                                                            {post.category}
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div className="text-xs text-white/70 mb-2">
-                                                    {post.date}
-                                                </div>
-                                                <h3 className="font-display text-lg font-semibold text-white mb-2 max-h-[2.8em] overflow-hidden group-hover:text-coral transition-colors">
-                                                    {post.title}
-                                                </h3>
-                                            </div>
-
-                                            <div className="relative z-10 text-xs text-coral font-medium">
-                                                {post.category}
                                             </div>
                                         </a>
                                     );
@@ -353,10 +354,10 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                 e.preventDefault();
                                                 onNavigate?.('blog-post', { id: post.id });
                                             }}
-                                            className="group flex gap-4 bg-white dark:bg-surface border border-black/5 dark:border-white/10 rounded-xl p-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                                            className="group flex gap-4 bg-white dark:bg-surface  -black/5 dark:-white/10 rounded-xl p-4 hover: hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
                                         >
                                             {/* Thumb */}
-                                            <div className="relative w-20 h-16 rounded-lg overflow-hidden flex-shrink-0 border border-black/5 dark:border-white/10">
+                                            <div className="relative w-20 h-16 rounded-lg overflow-hidden flex-shrink-0  -black/5 dark:-white/10">
                                                 <img
                                                     src={post.image}
                                                     alt={post.title}
@@ -364,7 +365,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                     loading="lazy"
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                                                <div className="absolute bottom-1.5 left-1.5 w-8 h-8 rounded-md bg-white/10 backdrop-blur-sm border border-white/10 flex items-center justify-center">
+                                                <div className="absolute bottom-1.5 left-1.5 w-8 h-8 rounded-md bg-white/10 backdrop-blur-sm  -white/10 flex items-center justify-center">
                                                     <Icon className="w-4 h-4 text-white" />
                                                 </div>
                                             </div>

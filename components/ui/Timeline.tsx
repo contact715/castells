@@ -122,8 +122,8 @@ const TimelineEventItem: React.FC<TimelineEventItemProps> = ({ event, Icon, isEv
           />
           <div
             className={cn(
-              'relative w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center border-2 border-coral bg-white shadow-xl backdrop-blur-sm',
-              event.highlight && 'bg-coral text-white border-coral shadow-coral/50'
+              'relative w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center -2 -coral bg-white  backdrop-blur-sm',
+              event.highlight && 'bg-coral text-white -coral '
             )}
           >
             <span className="font-display font-bold text-base md:text-lg">{event.year}</span>
@@ -142,9 +142,9 @@ const TimelineEventItem: React.FC<TimelineEventItemProps> = ({ event, Icon, isEv
         }}
         whileHover={{ scale: 1.02, y: -4 }}
         className={cn(
-          'flex-1 bg-white rounded-3xl p-8 md:p-10 border border-black/5 shadow-lg hover:shadow-2xl transition-all duration-500',
+          'flex-1 bg-white rounded-[2rem] p-8 md:p-10  -black/5  hover: transition-all duration-500',
           isEven ? 'md:order-2' : 'md:order-1',
-          event.highlight && 'border-coral/30 bg-gradient-to-br from-coral/5 via-white to-white shadow-xl'
+          event.highlight && '-coral/30 bg-gradient-to-br from-coral/5 via-white to-white '
         )}
       >
         <div className="flex items-start gap-5 mb-4">
@@ -157,9 +157,9 @@ const TimelineEventItem: React.FC<TimelineEventItemProps> = ({ event, Icon, isEv
               ease: [0.34, 1.56, 0.64, 1],
             }}
             className={cn(
-              'w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center flex-shrink-0',
+              'w-12 h-12 md:w-14 md:h-14 rounded-[2rem] flex items-center justify-center flex-shrink-0',
               event.highlight
-                ? 'bg-coral text-white shadow-lg'
+                ? 'bg-coral text-white '
                 : 'bg-coral/10 text-coral'
             )}
           >

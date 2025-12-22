@@ -35,7 +35,7 @@ const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = React.useState<number | null>(0);
 
   return (
-    <section className="py-24 md:py-32 bg-ivory relative border-t border-black/5">
+    <section className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory relative">
       <SchemaMarkup 
         type="FAQPage" 
         data={{
@@ -87,7 +87,7 @@ const FAQ: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    className={`border-b border-black/10 ${idx === 0 ? 'border-t' : ''}`}
+                    className={`-b -black/10 ${idx === 0 ? '-t' : ''}`}
                   >
                     <button
                       onClick={() => setOpenIndex(isOpen ? null : idx)}

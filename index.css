@@ -59,6 +59,16 @@
   .dark {
     color-scheme: dark;
   }
+
+  /* Custom checkbox styling to match site theme */
+  input[type="checkbox"] {
+    accent-color: #E08576;
+  }
+
+  input[type="checkbox"]:checked {
+    background-color: #E08576;
+    border-color: #E08576;
+  }
 }
 
 @layer utilities {

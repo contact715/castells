@@ -1005,7 +1005,7 @@ const ProcessScroll: React.FC = () => {
     return (
         <div className="w-full">
             {/* Header */}
-            <div className="max-w-3xl mb-16">
+            <div className="max-w-3xl mb-8">
                 <div className="flex items-center gap-2 mb-4">
                     <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
                     <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
@@ -1022,8 +1022,8 @@ const ProcessScroll: React.FC = () => {
             </div>
 
             {/* Horizontal Timeline Tabs - Services Style */}
-            <div className="flex justify-start mb-16">
-                <div className="bg-surface p-1.5 rounded-2xl border border-black/5 shadow-none inline-flex flex-wrap gap-1">
+            <div className="flex justify-start mb-8 overflow-x-auto pb-2 -mx-6 px-6">
+                <div className="bg-surface p-1.5 rounded-[2rem]  -black/5  inline-flex flex-wrap sm:flex-nowrap gap-1 min-w-max">
                     {PROCESS_STEPS.map((step, idx) => {
                         const isActive = activeStep === idx;
                         return (
@@ -1031,16 +1031,16 @@ const ProcessScroll: React.FC = () => {
                                 key={step.id}
                                 onClick={() => setActiveStep(idx)}
                                 className={cn(
-                                    "relative px-6 py-3 rounded-xl flex items-center gap-2 text-sm font-bold uppercase tracking-widest transition-all duration-300 outline-none",
+                                    "relative px-4 sm:px-6 py-2.5 sm:py-3 rounded-[2rem] flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 outline-none whitespace-nowrap",
                                     isActive
-                                        ? "text-white shadow-md"
+                                        ? "text-white "
                                         : "text-text-secondary hover:text-text-primary hover:bg-gray-100 dark:hover:bg-neutral-800"
                                 )}
                             >
                                 {isActive && (
                                     <motion.div
                                         layoutId="activeProcessTab"
-                                        className="absolute inset-0 bg-black dark:bg-white rounded-xl"
+                                        className="absolute inset-0 bg-black dark:bg-white rounded-[2rem]"
                                         transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                     />
                                 )}
@@ -1071,39 +1071,39 @@ const ProcessScroll: React.FC = () => {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.3 }}
-                    className="bg-white dark:bg-[#191919] rounded-[2rem] p-8 md:p-12 border border-black/5 dark:border-white/10 shadow-lg"
+                    className="rounded-[2rem] p-6 sm:p-8 md:p-12 bg-surface dark:bg-white/5"
                 >
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
                         {/* Left: Icon + Title + Description */}
                         <div>
-                            <div className="flex items-center gap-4 mb-6">
-                                <div className="w-16 h-16 rounded-2xl bg-coral/10 dark:bg-coral/20 flex items-center justify-center shrink-0">
+                            <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
+                                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-[2rem] bg-coral/10 dark:bg-coral/20 flex items-center justify-center shrink-0">
                                     {React.createElement(PROCESS_STEPS[activeStep].icon, {
-                                        className: "w-8 h-8 text-coral"
+                                        className: "w-6 h-6 sm:w-8 sm:h-8 text-coral"
                                     })}
                                 </div>
                                 <div>
                                     <span className="text-coral text-xs font-bold uppercase tracking-widest mb-1 block">
                                         Step {activeStep + 1} of {PROCESS_STEPS.length}
                                     </span>
-                                    <h3 className="font-display text-2xl md:text-3xl font-semibold text-text-primary dark:text-white">
+                                    <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-text-primary dark:text-white">
                                         {PROCESS_STEPS[activeStep].title}
                                     </h3>
                                 </div>
                             </div>
 
-                            <p className="text-text-secondary dark:text-white/70 text-lg leading-relaxed mb-4">
+                            <p className="text-text-secondary dark:text-white/70 text-base sm:text-lg leading-relaxed mb-4">
                                 {PROCESS_STEPS[activeStep].description}
                             </p>
 
                             {PROCESS_STEPS[activeStep].longDescription && (
-                                <p className="text-text-secondary dark:text-white/60 text-base leading-relaxed mb-6">
+                                <p className="text-text-secondary dark:text-white/60 text-sm sm:text-base leading-relaxed mb-4 sm:mb-6">
                                     {PROCESS_STEPS[activeStep].longDescription}
                                 </p>
                             )}
 
                             {PROCESS_STEPS[activeStep].nextSteps && (
-                                <div className="mb-8 p-4 bg-coral/10 dark:bg-coral/20 rounded-xl border border-coral/20 dark:border-coral/30">
+                                <div className="mb-6 sm:mb-8 p-3 sm:p-4 bg-coral/10 dark:bg-coral/20 rounded-[2rem]  -coral/20 dark:-coral/30">
                                     <span className="text-xs font-bold uppercase tracking-widest text-coral mb-2 block">
                                         Next Steps
                                     </span>
@@ -1119,9 +1119,9 @@ const ProcessScroll: React.FC = () => {
                         </div>
 
                         {/* Right: Unified Card with Illustration + Info */}
-                        <div className="rounded-2xl overflow-hidden bg-white dark:bg-[#191919] border border-black/5 dark:border-white/10">
+                        <div className="rounded-[2rem] overflow-hidden bg-ivory dark:bg-[#191919]">
                             {/* Illustration Section */}
-                            <div className="relative h-[260px] border-b border-black/5 dark:border-white/10 overflow-hidden">
+                            <div className="relative h-[200px] sm:h-[260px] overflow-hidden">
                                 <AnimatePresence mode="wait">
                                     <motion.div
                                         key={PROCESS_STEPS[activeStep].id}
@@ -1137,7 +1137,7 @@ const ProcessScroll: React.FC = () => {
                                 
                                 {/* Duration Badge - Floating */}
                                 <div className="absolute top-4 left-4">
-                                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-white/90 dark:bg-black/50 backdrop-blur-sm border border-black/10 dark:border-white/20 shadow-sm">
+                                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-[2rem] bg-white/90 dark:bg-black/50 backdrop-blur-sm  -black/10 dark:-white/20 ">
                                         <span className="font-display text-base font-semibold text-text-primary dark:text-white">
                                             {PROCESS_STEPS[activeStep].duration}
                                         </span>
@@ -1146,8 +1146,8 @@ const ProcessScroll: React.FC = () => {
                             </div>
                             
                             {/* Info Section - Two Columns */}
-                            <div className="p-6">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div className="p-4 sm:p-6">
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                                     {/* What You Get */}
                                     <div>
                                         <h4 className="text-xs font-semibold uppercase tracking-widest text-text-secondary dark:text-white/60 mb-4">
@@ -1162,10 +1162,10 @@ const ProcessScroll: React.FC = () => {
                                                     transition={{ duration: 0.3, delay: idx * 0.1 }}
                                                     className="flex items-center gap-3"
                                                 >
-                                                    <div className="w-6 h-6 rounded-full bg-coral/10 dark:bg-coral/20 border border-coral/20 dark:border-coral/30 flex items-center justify-center shrink-0">
+                                                    <div className="w-6 h-6 rounded-full bg-coral/10 dark:bg-coral/20  -coral/20 dark:-coral/30 flex items-center justify-center shrink-0">
                                                         <CheckCircle2 className="w-3 h-3 text-coral" />
                                                     </div>
-                                                    <span className="font-display font-semibold text-sm text-text-primary dark:text-white">
+                                                    <span className="font-sans font-semibold text-sm text-text-primary dark:text-white">
                                                         {item}
                                                     </span>
                                                 </motion.div>
@@ -1175,7 +1175,7 @@ const ProcessScroll: React.FC = () => {
 
                                     {/* Key Metrics */}
                                     {PROCESS_STEPS[activeStep].keyMetrics && (
-                                        <div className="md:border-l md:border-black/5 md:dark:border-white/10 md:pl-6">
+                                        <div className="md:-l md:-black/5 md:dark:-white/10 md:pl-6">
                                             <h4 className="text-xs font-semibold uppercase tracking-widest text-text-secondary dark:text-white/60 mb-4">
                                                 Key Metrics
                                             </h4>

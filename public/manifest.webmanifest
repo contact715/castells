@@ -1,0 +1,18 @@
+{
+  "name": "Castells Agency",
+  "short_name": "Castells",
+  "description": "We help contractors and service providers dominate their local markets through data-driven strategies.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F4F4F2",
+  "theme_color": "#E08576",
+  "icons": [
+    {
+      "src": "/castells-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
+

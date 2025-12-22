@@ -87,7 +87,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
     })();
 
     return (
-        <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-32 pb-20">
+        <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
             <SEO
                 title={`${displayName} | Castells Agency`}
                 description={seoDescription}
@@ -104,7 +104,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                     }}
                 />
             )}
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto px-6 pt-4 md:pt-6">
                 {/* Header */}
                 <PageHeader
                     breadcrumbs={[
@@ -129,14 +129,16 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.1, duration: 0.5 }}
-                                    className="bg-white dark:bg-surface rounded-2xl p-8 border border-black/5 dark:border-white/10 hover:border-coral/50 dark:hover:border-coral/40 transition-all duration-300 hover:shadow-lg group"
+                                    className="bg-white dark:bg-surface rounded-[2rem] p-8  -black/5 dark:-white/10 hover:-coral/50 dark:hover:-coral/40 transition-all duration-300 hover: group"
                                 >
-                                    <div className="w-12 h-12 rounded-xl bg-coral/10 dark:bg-white/10 flex items-center justify-center mb-4 group-hover:bg-coral dark:group-hover:bg-white transition-colors">
-                                        <Icon className="w-6 h-6 text-coral dark:text-white group-hover:text-white dark:group-hover:text-black transition-colors" />
+                                    <div className="flex items-start gap-4 mb-4">
+                                        <div className="w-12 h-12 rounded-[2rem] bg-coral/10 dark:bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-coral dark:group-hover:bg-white transition-colors">
+                                            <Icon className="w-6 h-6 text-coral dark:text-white group-hover:text-white dark:group-hover:text-black transition-colors" />
+                                        </div>
+                                        <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white">
+                                            {service.name}
+                                        </h3>
                                     </div>
-                                    <h3 className="font-display text-xl font-semibold mb-2 text-text-primary dark:text-white">
-                                        {service.name}
-                                    </h3>
                                     <p className="text-text-secondary dark:text-white/70 text-sm leading-relaxed">
                                         {service.description}
                                     </p>
@@ -145,13 +147,13 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                         })}
                     </div>
                 ) : (
-                    <div className="bg-white dark:bg-surface rounded-2xl p-12 border border-black/5 dark:border-white/10 text-center mb-20">
+                    <div className="bg-white dark:bg-surface rounded-[2rem] p-12  -black/5 dark:-white/10 text-center mb-20">
                         <p className="text-text-secondary dark:text-white/70 text-lg">
                             No services found for this selection.
                         </p>
                         <button
                             onClick={() => onNavigate?.('services')}
-                            className="mt-6 inline-flex items-center justify-center px-6 py-3 rounded-xl border-2 border-black dark:border-white text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors font-bold uppercase tracking-widest text-xs"
+                            className="mt-6 inline-flex items-center justify-center px-6 py-3 rounded-xl -2 -black dark:-white text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors font-bold uppercase tracking-widest text-xs"
                         >
                             View all services
                         </button>
@@ -190,16 +192,17 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                                     initial={{ opacity: 0, y: 16 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.05 * i, duration: 0.5 }}
-                                    className="group relative rounded-3xl overflow-hidden border border-black/5 dark:border-white/10 bg-white dark:bg-white/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                                    className="group relative rounded-[2rem] overflow-hidden  -black/5 dark:-white/10 bg-white dark:bg-white/5 hover: hover:-translate-y-1 transition-all duration-300"
                                 >
-                                    <div className="absolute inset-0">
+                                    <div className="absolute inset-0 overflow-hidden rounded-[2rem]">
                                         <img
                                             src={cs.image}
                                             alt={cs.client}
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
                                             loading="lazy"
+                                            style={{ transform: 'translateZ(0)' }}
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10" />
+                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10 rounded-[2rem]" />
                                     </div>
 
                                     <div className="relative p-6 h-[260px] flex flex-col">
@@ -237,7 +240,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.6 }}
-                    className="bg-white dark:bg-surface border border-black/5 dark:border-white/10 rounded-2xl p-12 text-center shadow-lg"
+                    className="bg-white dark:bg-surface  -black/5 dark:-white/10 rounded-[2rem] p-12 text-center "
                 >
                     <AnimatedHeading
                         as="h2"

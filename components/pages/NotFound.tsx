@@ -277,7 +277,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
         }}
       >
         <motion.h1 
-          className="font-display text-[10rem] md:text-[18rem] lg:text-[22rem] leading-none font-semibold text-coral drop-shadow-[0_0_80px_rgba(255,107,91,0.5)]"
+          className="font-display text-[10rem] md:text-[18rem] lg:text-[22rem] leading-none font-semibold text-coral"
           animate={hasWonGame ? {
             color: ['#FF6B5B', '#FFD93D', '#6BCB77', '#4D96FF', '#FF6B5B'],
           } : {}}
@@ -319,7 +319,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
             onClick={() => handleNavigate('home')}
             size="lg" 
             variant="secondary" 
-            className="group shadow-[0_0_30px_rgba(255,107,91,0.3)]"
+            className="group"
           >
             <Home className="w-4 h-4 mr-2" />
             Return Home
@@ -346,7 +346,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
 
         {/* Popular Links */}
         <motion.div
-          className="mt-16 pt-8 border-t border-white/10"
+          className="mt-16 pt-8 -t -white/10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
@@ -362,7 +362,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
               <motion.button
                 key={link.name}
                 onClick={() => handleNavigate(link.page)}
-                className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-white/70 hover:text-white text-sm transition-all cursor-pointer border border-white/10 hover:border-white/20"
+                className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-white/70 hover:text-white text-sm transition-all cursor-pointer  -white/10 hover:-white/20"
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 1.1 + idx * 0.1 }}
@@ -393,14 +393,14 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
         transition={{ type: 'spring', stiffness: 1000, damping: 50, mass: 0.1 }}
       />
       <motion.div
-        className="fixed top-0 left-0 w-12 h-12 border border-white/30 rounded-full pointer-events-none z-40"
+        className="fixed top-0 left-0 w-12 h-12  -white/30 rounded-full pointer-events-none z-40"
         animate={{ x: mousePosition.x - 24, y: mousePosition.y - 24 }}
         transition={{ type: 'spring', stiffness: 500, damping: 30, mass: 0.5 }}
       />
       
       {/* Outer cursor ring */}
       <motion.div
-        className="fixed top-0 left-0 w-20 h-20 border border-coral/20 rounded-full pointer-events-none z-30"
+        className="fixed top-0 left-0 w-20 h-20  -coral/20 rounded-full pointer-events-none z-30"
         animate={{ 
           x: mousePosition.x - 40, 
           y: mousePosition.y - 40,

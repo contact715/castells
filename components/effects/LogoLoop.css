@@ -116,7 +116,6 @@
   opacity: 1; 
   transform: scale(1.3); /* Slightly reduced scale to prevent jumpiness */
   z-index: 10;
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1));
 }
 
 .logoloop__link {

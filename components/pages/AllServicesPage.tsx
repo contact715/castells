@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { NavigateFn } from '../../types';
-import { SERVICE_CATEGORIES as DATA_SERVICE_CATEGORIES } from '../../data/services';
+import { SERVICE_CATEGORIES as DATA_SERVICE_CATEGORIES, type ServiceCategoryId } from '../../data/services';
 import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { Breadcrumbs } from '../ui/Breadcrumbs';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import Counter from '../ui/Counter';
 import SEO from '../ui/SEO';
+import { cn } from '../../lib/utils';
 import {
   Palette, Book, Layers, Layout, FileText,
   Globe, Smartphone, ShoppingCart, Code,
@@ -59,9 +60,9 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
       />
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pb-32 overflow-hidden">
+      <section className="relative pt-16 md:pt-20 pb-20 md:pb-32">
 
-        <div className="container mx-auto px-6 relative z-10">
+        <div className="container mx-auto px-6 relative z-10 pt-4 md:pt-6">
           {/* Breadcrumbs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -77,83 +78,55 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
             />
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left: Content */}
-            <div>
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.1, duration: 0.5 }}
-              >
-                <Badge variant="pulse" className="mb-6">Full-Stack Growth Partner</Badge>
-              </motion.div>
-
-              <AnimatedHeading
-                as="h1"
-                className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] tracking-tight text-text-primary mb-6"
-                delay={0.2}
-              >
-                Everything you need<br />
-                <span className="text-text-secondary">to dominate.</span>
-              </AnimatedHeading>
-
-              <motion.p
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.5 }}
-                className="text-lg md:text-xl text-text-secondary leading-relaxed max-w-xl mb-8"
-              >
-                From brand identity to performance marketing—we build the infrastructure 
-                that transforms local businesses into market leaders.
-              </motion.p>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.4, duration: 0.5 }}
-                className="flex flex-wrap gap-4"
-              >
-                <Button size="lg" onClick={() => onNavigate?.('contact')} className="group">
-                  Get Started
-                  <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
-                </Button>
-                <Button variant="outline" size="lg" className="group">
-                  <Play className="w-4 h-4 mr-2" />
-                  Watch Showreel
-                </Button>
-              </motion.div>
-            </div>
-
-            {/* Right: Stats Grid */}
+          <div>
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="grid grid-cols-2 gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1, duration: 0.5 }}
             >
-              {STATS.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
-                  className="bg-white dark:bg-surface rounded-2xl p-6 md:p-8 border border-black/5 dark:border-white/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
-                >
-                  <div className="font-display text-4xl md:text-5xl font-semibold text-text-primary mb-2">
-                    <Counter value={stat.value} suffix={stat.suffix} decimals={stat.value % 1 !== 0 ? 1 : 0} />
-                  </div>
-                  <p className="text-sm text-text-secondary font-medium">
-                    {stat.label}
-                  </p>
-                </motion.div>
-              ))}
+              <Badge variant="pulse" className="mb-6">Full-Stack Growth Partner</Badge>
+            </motion.div>
+
+            <AnimatedHeading
+              as="h1"
+              className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] tracking-tight text-text-primary mb-6"
+              delay={0.2}
+            >
+              Everything you need<br />
+              <span className="text-text-secondary">to dominate.</span>
+            </AnimatedHeading>
+
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="text-lg md:text-xl text-text-secondary leading-relaxed max-w-xl mb-8"
+            >
+              From brand identity to performance marketing—we build the infrastructure 
+              that transforms local businesses into market leaders.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="flex flex-wrap gap-4"
+            >
+              <Button size="lg" onClick={() => onNavigate?.('contact')} className="group">
+                Get Started
+                <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              <Button variant="outline" size="lg" className="group">
+                <Play className="w-4 h-4 mr-2" />
+                Watch Showreel
+              </Button>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* Service Categories Overview */}
-      <section className="py-20 md:py-32 bg-ivory border-y border-black/5 dark:border-white/5">
+      <section className="py-20 md:py-32 bg-ivory">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mb-16">
             <Badge className="mb-4">What We Do</Badge>
@@ -183,15 +156,17 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                   onClick={() => setActiveCategory(index)}
-                  className={`relative bg-ivory dark:bg-[#1F1F1F] rounded-2xl p-6 border border-black/5 dark:border-white/5 cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group ${activeCategory === index ? 'ring-2 ring-coral' : ''}`}
+                  className={`relative bg-white dark:bg-surface rounded-[2rem] p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1 group`}
                 >
-                  <div className="w-14 h-14 rounded-xl bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-5 group-hover:bg-coral group-hover:scale-110 transition-all duration-300">
-                    <CategoryIcon className="w-7 h-7 text-coral group-hover:text-white transition-colors" />
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="w-12 h-12 rounded-[2rem] bg-coral/10 dark:bg-coral/20 flex items-center justify-center flex-shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
+                      <CategoryIcon className="w-6 h-6 stroke-[1.5] text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />
+                    </div>
+                    <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight">
+                      {category.name}
+                    </h3>
                   </div>
-                  <h3 className="font-display text-xl font-semibold text-text-primary mb-2 group-hover:text-coral transition-colors">
-                    {category.name}
-                  </h3>
-                  <p className="text-sm text-text-secondary leading-relaxed mb-4">
+                  <p className="text-text-secondary text-sm leading-relaxed mb-4">
                     {category.tagline}
                   </p>
                   <div className="flex items-center text-coral text-sm font-bold uppercase tracking-wider group-hover:gap-2 transition-all">
@@ -223,7 +198,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                   >
-                    <div className="w-16 h-16 rounded-2xl bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-6">
+                    <div className="w-16 h-16 rounded-[2rem] bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-6">
                       <CategoryIcon className="w-8 h-8 text-coral" />
                     </div>
                     <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-4 leading-tight">
@@ -251,11 +226,11 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: serviceIndex * 0.1, duration: 0.5 }}
-                          className="bg-white dark:bg-surface rounded-2xl p-6 border border-black/5 dark:border-white/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
+                          className="bg-white dark:bg-surface rounded-[2rem] p-6  -black/5 dark:-white/5 hover: hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
                         >
                           <div className="flex items-start gap-4">
-                            <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-black dark:group-hover:bg-white transition-colors duration-300">
-                              <ServiceIcon className="w-6 h-6 text-black dark:text-white group-hover:text-white dark:group-hover:text-black transition-colors duration-300" />
+                            <div className="w-12 h-12 rounded-[2rem] bg-coral/10 dark:bg-coral/20 flex items-center justify-center flex-shrink-0 group-hover:bg-black dark:group-hover:bg-white transition-colors duration-300">
+                              <ServiceIcon className="w-6 h-6 text-coral group-hover:text-white dark:group-hover:text-black transition-colors duration-300" />
                             </div>
                             <div className="flex-1">
                               <h3 className="font-display text-lg font-semibold text-text-primary mb-2 group-hover:text-coral transition-colors">
@@ -278,7 +253,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
       })}
 
       {/* Process Section */}
-      <section className="py-20 md:py-32 bg-ivory border-y border-black/5 dark:border-white/5">
+      <section className="py-20 md:py-32 bg-ivory">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
             {/* Left: Content (Sticky) */}
@@ -313,7 +288,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="flex items-start gap-6 p-6 rounded-2xl bg-white dark:bg-surface border border-black/5 dark:border-white/5 hover:shadow-lg transition-all duration-300 group"
+                  className="flex items-start gap-6 p-6 rounded-[2rem] bg-white dark:bg-surface  -black/5 dark:-white/5 hover: transition-all duration-300 group"
                 >
                   <span className="font-display text-4xl font-bold text-coral flex-shrink-0">
                     {step.num}
@@ -373,14 +348,16 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="bg-white dark:bg-surface rounded-2xl p-8 border border-black/5 dark:border-white/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+                  className="bg-white dark:bg-surface rounded-[2rem] p-8  -black/5 dark:-white/5 hover: hover:-translate-y-1 transition-all duration-300 group"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-coral/10 flex items-center justify-center mb-5 group-hover:bg-coral transition-colors duration-300">
-                    <ItemIcon className="w-6 h-6 text-coral group-hover:text-white transition-colors duration-300" />
+                  <div className="flex items-start gap-4 mb-5">
+                    <div className="w-12 h-12 rounded-[2rem] bg-coral/10 flex items-center justify-center flex-shrink-0 group-hover:bg-coral transition-colors duration-300">
+                      <ItemIcon className="w-6 h-6 text-coral group-hover:text-white transition-colors duration-300" />
+                    </div>
+                    <h3 className="font-display text-xl font-semibold text-text-primary">
+                      {item.title}
+                    </h3>
                   </div>
-                  <h3 className="font-display text-xl font-semibold text-text-primary mb-3">
-                    {item.title}
-                  </h3>
                   <p className="text-text-secondary leading-relaxed">
                     {item.desc}
                   </p>
@@ -399,7 +376,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative bg-white dark:bg-[#232323] rounded-3xl p-12 md:p-20 overflow-hidden border border-black/5 dark:border-white/5"
+            className="relative bg-white dark:bg-[#232323] rounded-[2rem] p-12 md:p-20 overflow-hidden  -black/5 dark:-white/5"
           >
 
             <div className="relative z-10 max-w-3xl mx-auto text-center">
@@ -408,7 +385,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="w-20 h-20 rounded-2xl bg-coral flex items-center justify-center mx-auto mb-8"
+                className="w-20 h-20 rounded-[2rem] bg-coral flex items-center justify-center mx-auto mb-8"
               >
                 <Sparkles className="w-10 h-10 text-white" />
               </motion.div>

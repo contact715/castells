@@ -37,7 +37,7 @@ export const ImageRevealCard: React.FC<ImageRevealCardProps> = ({
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             className={cn(
-                "relative overflow-hidden bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-[2rem] h-full transition-all duration-300 hover:shadow-xl hover:-translate-y-1 group",
+                "relative overflow-hidden bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] h-full transition-all duration-300 hover: hover:-translate-y-1 group",
                 className
             )}
             {...props}

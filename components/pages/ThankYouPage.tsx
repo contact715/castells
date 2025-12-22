@@ -26,7 +26,7 @@ const Confetti: React.FC<{ delay: number; x: number }> = ({ delay, x }) => {
         width: randomSize,
         height: randomSize,
         backgroundColor: randomColor,
-        borderRadius: Math.random() > 0.5 ? '50%' : '2px',
+Radius: Math.random() > 0.5 ? '50%' : '2px',
       }}
       initial={{ y: -20, rotate: 0, opacity: 1 }}
       animate={{
@@ -206,7 +206,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
             />
             
             {/* Main circle */}
-            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-coral to-coral/80 flex items-center justify-center shadow-2xl shadow-coral/30">
+            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-coral to-coral/80 flex items-center justify-center  ">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
@@ -247,13 +247,13 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
             {content.features.map((feature, index) => (
               <motion.div
                 key={index}
-                className="bg-white dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-2xl p-6 backdrop-blur-sm"
+                className="bg-white dark:bg-white/5  -black/5 dark:-white/10 rounded-[2rem] p-6 backdrop-blur-sm"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 + index * 0.1 }}
                 whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
               >
-                <div className="w-10 h-10 rounded-xl bg-coral/10 flex items-center justify-center text-coral mb-3 mx-auto">
+                <div className="w-10 h-10 rounded-[2rem] bg-coral/10 flex items-center justify-center text-coral mb-3 mx-auto">
                   {feature.icon}
                 </div>
                 <p className="text-sm text-text-secondary font-medium">{feature.text}</p>
@@ -287,7 +287,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
 
           {/* Social Proof */}
           <motion.div
-            className="mt-16 pt-8 border-t border-black/5 dark:border-white/10"
+            className="mt-16 pt-8 -t -black/5 dark:-white/10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.1 }}

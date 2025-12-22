@@ -56,8 +56,8 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 description="Ready to dominate your market? Schedule a free strategy session and let's discuss how we can help you achieve your goals."
                 canonical="/contact"
             />
-            <div className="min-h-screen bg-ivory pt-32 pb-20 font-sans selection:bg-coral selection:text-white transition-colors duration-500">
-            <div className="container mx-auto px-6">
+            <div className="min-h-screen bg-ivory pt-16 md:pt-20 pb-20 font-sans selection:bg-coral selection:text-white transition-colors duration-500">
+            <div className="container mx-auto px-6 pt-4 md:pt-6">
 
                 {/* Header */}
                 <PageHeader
@@ -80,7 +80,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                         transition={{ duration: 0.6 }}
                         className="lg:col-span-7 lg:sticky lg:top-32 h-fit"
                     >
-                        <div className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-10 border border-black/5 dark:border-white/5 shadow-sm">
+                        <div className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-10  -black/5 dark:-white/5 ">
                             {/* Form Header */}
                             <div className="mb-8">
                                 <h3 className="font-display text-2xl font-semibold text-text-primary mb-2">
@@ -117,7 +117,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                     <div className="space-y-1.5">
                                         <label htmlFor="phone" className="text-xs font-bold uppercase tracking-wider text-text-secondary ml-1">Phone (optional)</label>
                                         <div className="flex gap-2">
-                                            <div className="w-16 bg-ivory dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl flex items-center justify-center text-text-secondary font-medium text-xs">
+                                            <div className="w-16 bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-xl flex items-center justify-center text-text-secondary font-medium text-xs">
                                                 🇺🇸 +1
                                             </div>
                                             <input
@@ -126,7 +126,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                                 placeholder="(555) 000-0000"
                                                 value={formState.phone}
                                                 onChange={e => setFormState({ ...formState, phone: e.target.value })}
-                                                className="flex-1 bg-ivory dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-coral transition-all placeholder:text-text-secondary/50"
+                                                className="flex-1 bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:-coral transition-all placeholder:text-text-secondary/50"
                                             />
                                         </div>
                                     </div>
@@ -136,7 +136,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                         <div className="relative">
                                             <select
                                                 id="topic"
-                                                className="w-full bg-ivory dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-coral transition-all appearance-none cursor-pointer text-text-primary"
+                                                className="w-full bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:-coral transition-all appearance-none cursor-pointer text-text-primary"
                                                 value={formState.topic}
                                                 onChange={e => setFormState({ ...formState, topic: e.target.value })}
                                             >
@@ -160,7 +160,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                         id="message"
                                         required
                                         rows={4}
-                                        className="w-full bg-ivory dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-coral transition-all placeholder:text-text-secondary/50 resize-none"
+                                        className="w-full bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:-coral transition-all placeholder:text-text-secondary/50 resize-none"
                                         placeholder="Tell us about your project, goals, and timeline..."
                                         value={formState.message}
                                         onChange={e => setFormState({ ...formState, message: e.target.value })}
@@ -217,7 +217,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.5 }}
-                                className="bg-white dark:bg-surface rounded-[32px] p-10 border border-black/5 dark:border-white/5 shadow-sm hover:shadow-md transition-all duration-300"
+                                className="bg-white dark:bg-surface rounded-[32px] p-10  -black/5 dark:-white/5  hover: transition-all duration-300"
                             >
                                 <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
                                     <Phone className="w-5 h-5 text-coral" /> Let's talk
@@ -274,7 +274,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5, duration: 0.5 }}
-                                className="bg-white dark:bg-surface rounded-[32px] p-10 border border-black/5 dark:border-white/5 shadow-sm hover:shadow-md transition-all duration-300"
+                                className="bg-white dark:bg-surface rounded-[32px] p-10  -black/5 dark:-white/5  hover: transition-all duration-300"
                             >
                                 <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
                                     <Mail className="w-5 h-5 text-coral" /> Drop a message
@@ -328,7 +328,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
                         {/* Visual / Video Preview */}
-                        <div className="lg:col-span-4 relative min-h-[360px] rounded-[2rem] overflow-hidden border border-black/5 dark:border-white/10 group/image">
+                        <div className="lg:col-span-4 relative min-h-[360px] rounded-[2rem] overflow-hidden  -black/5 dark:-white/10 group/image">
                             <img
                                 src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80"
                                 alt="Client testimonial"
@@ -338,20 +338,20 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
 
                             {/* Play Button */}
-                            <div className="absolute bottom-6 right-6 w-14 h-14 bg-white rounded-full flex items-center justify-center shadow-lg group-hover/image:scale-110 transition-transform">
+                            <div className="absolute bottom-6 right-6 w-14 h-14 bg-white rounded-full flex items-center justify-center  group-hover/image:scale-110 transition-transform">
                                 <Play className="w-5 h-5 text-black fill-current ml-1" />
                             </div>
 
                             {/* Badge */}
                             <div className="absolute top-6 left-6">
-                                <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-white text-xs font-bold uppercase tracking-widest">
+                                <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 backdrop-blur-sm  -white/20 text-white text-xs font-bold uppercase tracking-widest">
                                     5.0 rating · Clutch
                                 </div>
                             </div>
                         </div>
 
                         {/* Quote */}
-                        <div className="lg:col-span-8 bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 flex flex-col justify-between border border-black/5 dark:border-white/10 shadow-sm hover:shadow-md transition-all duration-300 relative overflow-hidden">
+                        <div className="lg:col-span-8 bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 flex flex-col justify-between  -black/5 dark:-white/10  hover: transition-all duration-300 relative overflow-hidden">
                             {/* Subtle background */}
                             <div className="absolute inset-0 pointer-events-none">
                                 <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-coral/10 blur-3xl" />
@@ -431,10 +431,10 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             transition={{ delay: 0.3, duration: 0.5 }}
                             href="/about"
                             onClick={(e) => { e.preventDefault(); onNavigate?.('about'); }}
-                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start border border-black/5 dark:border-white/10 transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:shadow-xl hover:-translate-y-1"
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start  -black/5 dark:-white/10 transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover: hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="w-12 h-12 rounded-xl bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">
+                                <div className="w-12 h-12 rounded-[2rem] bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">
                                     <Users className="w-6 h-6 stroke-[1.5]" />
                                 </div>
                                 <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight group-hover:text-white dark:group-hover:text-black transition-colors">
@@ -455,10 +455,10 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             transition={{ delay: 0.4, duration: 0.5 }}
                             href="/work"
                             onClick={(e) => { e.preventDefault(); onNavigate?.('work'); }}
-                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start border border-black/5 dark:border-white/10 transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:shadow-xl hover:-translate-y-1"
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start  -black/5 dark:-white/10 transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover: hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="w-12 h-12 rounded-xl bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">
+                                <div className="w-12 h-12 rounded-[2rem] bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">
                                     <Briefcase className="w-6 h-6 stroke-[1.5]" />
                                 </div>
                                 <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight group-hover:text-white dark:group-hover:text-black transition-colors">
@@ -479,10 +479,10 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                             transition={{ delay: 0.5, duration: 0.5 }}
                             href="/blog"
                             onClick={(e) => { e.preventDefault(); onNavigate?.('blog'); }}
-                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start border border-black/5 dark:border-white/10 transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:shadow-xl hover:-translate-y-1"
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start  -black/5 dark:-white/10 transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover: hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 mb-4">
-                                <div className="w-12 h-12 rounded-xl bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">
+                                <div className="w-12 h-12 rounded-[2rem] bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">
                                     <FileText className="w-6 h-6 stroke-[1.5]" />
                                 </div>
                                 <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight group-hover:text-white dark:group-hover:text-black transition-colors">

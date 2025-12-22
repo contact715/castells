@@ -72,7 +72,7 @@ const MouseLine: React.FC = () => {
         strokeWidth="3"
         strokeLinecap="round"
         strokeLinejoin="round"
-        className="opacity-60 transition-opacity duration-75 drop-shadow-[0_0_4px_rgba(224,133,118,0.4)]"
+        className="opacity-60 transition-opacity duration-75 [0_0_4px_rgba(224,133,118,0.4)]"
       />
     </svg>
   );

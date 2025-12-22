@@ -49,10 +49,9 @@ const BentoCard: React.FC<BentoCardProps> = ({
       spotlightColor="rgba(224, 133, 118, 0.15)"
       className={cn(
         "group relative col-span-3 flex flex-col justify-between overflow-hidden rounded-[2rem]",
-        // Light styles: White background, subtle border
-        "bg-white border border-black/5 shadow-sm hover:shadow-xl transition-all duration-500 hover:-translate-y-1",
+        // Light styles: White background, subtle         "bg-white  -black/5 transition-all duration-500 hover:-translate-y-1",
         // Dark styles
-        "dark:bg-white/5 dark:border-white/10",
+        "dark:bg-white/5 dark:-white/10",
         className,
       )}
     >
@@ -80,7 +79,7 @@ const BentoCard: React.FC<BentoCardProps> = ({
 
         {/* Footer: Action Icon (Absolute Bottom Right) */}
         <div className="absolute bottom-8 right-8 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-          <div className="w-10 h-10 rounded-xl bg-black text-white dark:bg-white dark:text-black flex items-center justify-center shadow-lg">
+          <div className="w-10 h-10 rounded-[2rem] bg-black text-white dark:bg-white dark:text-black flex items-center justify-center">
             <ArrowUpRight className="w-5 h-5" />
           </div>
         </div>

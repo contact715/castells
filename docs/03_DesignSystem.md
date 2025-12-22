@@ -33,8 +33,25 @@
 - **Ripple Button:** Interactive button with ripple effect on click.
 
 ### Cards
-- **Service/Industry Cards:** White/Surface background, rounded-xl, soft shadow (`shadow-soft` or `shadow-medium`).
+- **Service/Industry Cards:** White/Surface background, `rounded-[2rem]` (32px), soft shadow (`shadow-soft` or `shadow-medium`).
 - **Hover Effects:** Scale up slightly (`scale-[0.98]` -> `1`), shadow increase.
+
+### Border Radius Standards
+- **Primary (Cards, Main Blocks):** `rounded-[2rem]` (32px) - стандарт для всех основных карточек и блоков
+- **Secondary (Small Elements):** `rounded-xl` (12px) - для маленьких элементов типа иконок в контейнерах, инпутов
+- **Tertiary (Very Small):** `rounded-lg` (8px) - для очень маленьких элементов
+- **Circle:** `rounded-full` - для полностью круглых элементов
+
+### Icon Container Standards (Cards on Dark Background)
+- **Default State:** 
+  - Background: `bg-white/0` (прозрачный)
+  - Icon Color: `text-white/50` (полупрозрачный белый)
+  - Backdrop: `backdrop-blur-sm` (легкое размытие)
+- **Hover State:**
+  - Background: `bg-white` (белый)
+  - Icon Color: `text-white` (белый)
+  - Border: `border-white/20` (опционально)
+- **Applies to:** Все карточки с темным фоном (изображения, градиенты) и backdrop-blur эффектом
 
 ### Effects
 - **Noise Overlay:** Subtle grain texture over the background.

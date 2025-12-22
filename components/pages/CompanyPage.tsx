@@ -90,8 +90,8 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
       <div className="min-h-screen bg-ivory dark:bg-[#191919]">
 
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 md:pb-32 overflow-hidden">
-        <div className="container mx-auto px-6 relative z-10">
+      <section className="relative pt-16 md:pt-20 pb-20 md:pb-32 overflow-hidden">
+        <div className="container mx-auto px-6 relative z-10 pt-4 md:pt-6">
           {/* Breadcrumbs */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -163,7 +163,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
               {STATS.map((stat, i) => (
                 <div
                   key={i}
-                  className="bg-surface rounded-2xl p-6 border border-black/5 dark:border-white/10"
+                  className="bg-surface rounded-[2rem] p-6  -black/5 dark:-white/10"
                 >
                   <div className="font-display text-4xl md:text-5xl font-bold text-text-primary mb-2">
                     <Counter value={stat.value} suffix={stat.suffix} />
@@ -177,7 +177,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
       </section>
 
       {/* Our Story Section */}
-      <section className="py-20 md:py-32 bg-ivory border-y border-black/5 dark:border-white/5">
+      <section className="py-20 md:py-32 bg-ivory -y -black/5 dark:-white/5">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
             {/* Left: Sticky Header */}
@@ -204,10 +204,10 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className="bg-surface rounded-2xl p-8 border border-black/5 dark:border-white/10"
+                  className="bg-surface rounded-[2rem] p-8  -black/5 dark:-white/10"
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-coral/10 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-[2rem] bg-coral/10 flex items-center justify-center">
                       <Flag className="w-5 h-5 text-coral" />
                     </div>
                     <span className="text-sm font-bold uppercase tracking-widest text-text-secondary">2012</span>
@@ -224,10 +224,10 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.1 }}
-                  className="bg-surface rounded-2xl p-8 border border-black/5 dark:border-white/10"
+                  className="bg-surface rounded-[2rem] p-8  -black/5 dark:-white/10"
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-coral/10 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-[2rem] bg-coral/10 flex items-center justify-center">
                       <TrendingUp className="w-5 h-5 text-coral" />
                     </div>
                     <span className="text-sm font-bold uppercase tracking-widest text-text-secondary">Today</span>
@@ -244,10 +244,10 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.2 }}
-                  className="bg-surface rounded-2xl p-8 border border-black/5 dark:border-white/10"
+                  className="bg-surface rounded-[2rem] p-8  -black/5 dark:-white/10"
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-xl bg-coral/10 flex items-center justify-center">
+                    <div className="w-10 h-10 rounded-[2rem] bg-coral/10 flex items-center justify-center">
                       <Rocket className="w-5 h-5 text-coral" />
                     </div>
                     <span className="text-sm font-bold uppercase tracking-widest text-text-secondary">Mission</span>
@@ -292,12 +292,14 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-surface rounded-2xl p-8 border border-black/5 dark:border-white/10 hover:border-coral/30 transition-colors group"
+                  className="bg-surface rounded-[2rem] p-8  -black/5 dark:-white/10 hover:-coral/30 transition-colors group"
                 >
-                  <div className="w-12 h-12 rounded-xl bg-coral/10 flex items-center justify-center mb-6 group-hover:bg-coral/20 transition-colors">
-                    <Icon className="w-6 h-6 text-coral" />
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-[2rem] bg-coral/10 flex items-center justify-center flex-shrink-0 group-hover:bg-coral/20 transition-colors">
+                      <Icon className="w-6 h-6 text-coral" />
+                    </div>
+                    <h3 className="font-display text-xl font-semibold text-text-primary">{value.title}</h3>
                   </div>
-                  <h3 className="font-display text-xl font-semibold mb-3 text-text-primary">{value.title}</h3>
                   <p className="text-text-secondary leading-relaxed">{value.description}</p>
                 </motion.div>
               );
@@ -307,7 +309,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
       </section>
 
       {/* Team Section */}
-      <section className="py-20 md:py-32 bg-ivory border-y border-black/5 dark:border-white/5">
+      <section className="py-20 md:py-32 bg-ivory -y -black/5 dark:-white/5">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
             {/* Left: Sticky Header */}
@@ -340,7 +342,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
-                    className="bg-surface rounded-2xl p-6 border border-black/5 dark:border-white/10"
+                    className="bg-surface rounded-[2rem] p-6  -black/5 dark:-white/10"
                   >
                     <div className="font-display text-4xl font-bold text-coral mb-2">{item.count}</div>
                     <div className="text-text-secondary font-medium">{item.label}</div>
@@ -352,10 +354,10 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="bg-surface rounded-2xl p-8 border border-black/5 dark:border-white/10"
+                className="bg-surface rounded-[2rem] p-8  -black/5 dark:-white/10"
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-xl bg-coral/10 flex items-center justify-center">
+                  <div className="w-10 h-10 rounded-[2rem] bg-coral/10 flex items-center justify-center">
                     <Award className="w-5 h-5 text-coral" />
                   </div>
                   <span className="font-display text-lg font-semibold text-text-primary">Why We're Different</span>
@@ -414,7 +416,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
                     onClick={() => onNavigate?.('careers')}
-                    className="bg-surface rounded-2xl p-6 border border-black/5 dark:border-white/10 hover:border-coral/30 transition-all cursor-pointer group"
+                    className="bg-surface rounded-[2rem] p-6  -black/5 dark:-white/10 hover:-coral/30 transition-all cursor-pointer group"
                   >
                     <div className="flex items-center justify-between">
                       <div>
@@ -442,7 +444,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="mt-8 bg-coral/10 rounded-2xl p-6 border border-coral/20"
+                className="mt-8 bg-coral/10 rounded-[2rem] p-6  -coral/20"
               >
                 <div className="flex items-center gap-3 mb-3">
                   <Star className="w-5 h-5 text-coral" />
@@ -461,7 +463,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
       </section>
 
       {/* Blog Section */}
-      <section className="py-20 md:py-32 bg-ivory border-y border-black/5 dark:border-white/5">
+      <section className="py-20 md:py-32 bg-ivory -y -black/5 dark:-white/5">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
             {/* Left: Sticky Header */}
@@ -495,7 +497,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
                     onClick={() => onNavigate?.('blog')}
-                    className="bg-surface rounded-2xl p-6 border border-black/5 dark:border-white/10 hover:border-coral/30 transition-all cursor-pointer group"
+                    className="bg-surface rounded-[2rem] p-6  -black/5 dark:-white/10 hover:-coral/30 transition-all cursor-pointer group"
                   >
                     <div className="flex items-center justify-between">
                       <div>
@@ -526,7 +528,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="relative bg-surface rounded-3xl p-12 md:p-20 overflow-hidden border border-black/5 dark:border-white/5"
+            className="relative bg-surface rounded-[2rem] p-12 md:p-20 overflow-hidden  -black/5 dark:-white/5"
           >
             <div className="relative z-10 max-w-2xl">
               <Badge className="mb-6">Get Started</Badge>
@@ -551,8 +553,8 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
 
             {/* Decorative elements */}
             <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 dark:opacity-20">
-              <div className="absolute top-20 right-20 w-40 h-40 rounded-full border-2 border-coral" />
-              <div className="absolute bottom-20 right-40 w-60 h-60 rounded-full border border-coral" />
+              <div className="absolute top-20 right-20 w-40 h-40 rounded-full -2 -coral" />
+              <div className="absolute bottom-20 right-40 w-60 h-60 rounded-full  -coral" />
             </div>
           </motion.div>
         </div>

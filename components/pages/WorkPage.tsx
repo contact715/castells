@@ -61,8 +61,8 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
     });
 
     return (
-        <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-32 pb-20">
-            <div className="container mx-auto px-6">
+        <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
+            <div className="container mx-auto px-6 pt-4 md:pt-6">
                 {/* Header */}
                 <PageHeader
                     breadcrumbs={[
@@ -85,14 +85,14 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
                             </h2>
 
                             {/* Sort By */}
-                            <div className="mb-6 pb-6 border-b border-black/10 dark:border-white/10">
+                            <div className="mb-6 pb-6 -b -black/10 dark:-white/10">
                                 <label className="block text-xs font-medium text-text-secondary dark:text-white/60 mb-2">
                                     Sort by
                                 </label>
                                 <select
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
-                                    className="w-full bg-white dark:bg-surface border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-text-primary dark:text-white focus:outline-none focus:border-coral"
+                                    className="w-full bg-white dark:bg-surface  -black/10 dark:-white/10 rounded-xl px-3 py-2 text-sm text-text-primary dark:text-white focus:outline-none focus:-coral"
                                 >
                                     <option>Newest</option>
                                     <option>Alphabetically (A to Z)</option>
@@ -101,7 +101,7 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
                             </div>
 
                             {/* Category */}
-                            <div className="mb-6 pb-6 border-b border-black/10 dark:border-white/10">
+                            <div className="mb-6 pb-6 -b -black/10 dark:-white/10">
                                 <label className="block text-xs font-medium text-text-secondary dark:text-white/60 mb-3">
                                     Category
                                 </label>
@@ -112,7 +112,7 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
                                                 type="checkbox"
                                                 checked={selectedCategories.includes(cat)}
                                                 onChange={() => toggleCategory(cat)}
-                                                className="w-4 h-4 rounded border-black/20 dark:border-white/20 bg-white dark:bg-surface text-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
+                                                className="w-4 h-4 rounded -black/20 dark:-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
                                             />
                                             <span className="text-sm text-text-primary dark:text-white group-hover:text-coral transition-colors">
                                                 {cat}
@@ -134,7 +134,7 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
                                                 type="checkbox"
                                                 checked={selectedIndustries.includes(industry)}
                                                 onChange={() => toggleIndustry(industry)}
-                                                className="w-4 h-4 rounded border-black/20 dark:border-white/20 bg-white dark:bg-surface text-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
+                                                className="w-4 h-4 rounded -black/20 dark:-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
                                             />
                                             <span className="text-sm text-text-primary dark:text-white group-hover:text-coral transition-colors">
                                                 {industry}
@@ -158,7 +158,7 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
                                         placeholder="Search cases"
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full bg-white dark:bg-surface border border-black/10 dark:border-white/10 rounded-xl pl-10 pr-4 py-2 text-sm text-text-primary dark:text-white placeholder:text-text-secondary dark:placeholder:text-white/40 focus:outline-none focus:border-coral"
+                                        className="w-full bg-white dark:bg-surface  -black/10 dark:-white/10 rounded-xl pl-10 pr-4 py-2 text-sm text-text-primary dark:text-white placeholder:text-text-secondary dark:placeholder:text-white/40 focus:outline-none focus:-coral"
                                     />
                                 </div>
                             </div>
@@ -192,7 +192,7 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
                                 {sortedProjects.map((project) => (
                                     <div
                                         key={project.id}
-                                        onClick={() => onNavigate('case-study', project)}
+                                        onClick={() => onNavigate('case-study', project as NavigationData)}
                                         className="group relative aspect-[4/3] rounded-[2rem] overflow-hidden cursor-pointer bg-white dark:bg-surface border border-black/5 dark:border-white/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                                     >
                                         {/* Background Media */}
@@ -221,11 +221,11 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
                                         {/* Content */}
                                         <div className="absolute inset-0 p-6 flex flex-col justify-between z-10">
                                             <div className="flex justify-between items-start">
-                                                <span className="bg-white/10 backdrop-blur-md border border-white/10 px-3 py-1 rounded-xl text-white text-[10px] font-bold uppercase tracking-widest">
+                                                <span className="bg-white/10 backdrop-blur-md  -white/10 px-3 py-1 rounded-xl text-white text-[10px] font-bold uppercase tracking-widest">
                                                     {project.industry}
                                                 </span>
-                                                <div className="w-10 h-10 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-all duration-300">
-                                                    <ArrowUpRight className="w-5 h-5" />
+                                                <div className="w-10 h-10 rounded-[2rem] bg-white/0 backdrop-blur-md  -white/10 flex items-center justify-center group-hover:bg-white group-hover:-white/20 transition-all duration-300">
+                                                    <ArrowUpRight className="w-5 h-5 text-white/50 group-hover:text-white transition-colors" />
                                                 </div>
                                             </div>
 
@@ -248,7 +248,7 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
                                     <div
                                         key={project.id}
                                         onClick={() => onNavigate('case-study', project)}
-                                        className="group flex gap-4 bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-xl p-4 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                                        className="group flex gap-4 bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-xl p-4 hover: hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
                                     >
                                         <div className="w-32 h-32 rounded-lg overflow-hidden flex-shrink-0">
                                             {project.video ? (

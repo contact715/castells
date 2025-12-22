@@ -53,12 +53,12 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
   return (
     <motion.div
       layout
-      initial={{ width: "100%", maxWidth: "100%", y: 0, borderRadius: "0px" }}
+      initial={{ width: "100%", maxWidth: "100%", y: 0, Radius: "0px" }}
       animate={{
         width: "100%",
         maxWidth: "100%",
         y: 0,
-        borderRadius: "0px",
+Radius: "0px",
         paddingRight: "0px",
         paddingLeft: "0px",
       }}
@@ -82,11 +82,11 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
 export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
   return (
     <motion.div
-      initial={{ width: "calc(100% - 2rem)", y: 16, borderRadius: "12px" }}
+      initial={{ width: "calc(100% - 2rem)", y: 16, Radius: "12px" }}
       animate={{
         width: visible ? "95%" : "calc(100% - 2rem)",
         y: visible ? 10 : 16,
-        borderRadius: "12px",
+Radius: "12px",
       }}
       transition={{
         type: "spring",
@@ -94,8 +94,8 @@ export const MobileNav = ({ children, className, visible }: MobileNavProps) => {
         damping: 25,
       }}
       className={cn(
-        "pointer-events-auto lg:hidden relative flex flex-col bg-ivory/90 dark:bg-[#191919]/90 backdrop-blur-md border border-black/5 dark:border-white/10 shadow-sm px-4 py-3",
-        visible && "shadow-lg",
+        "pointer-events-auto lg:hidden relative flex flex-col bg-ivory/90 dark:bg-[#191919]/90 backdrop-blur-md border border-black/5 dark:border-white/10 px-4 py-3",
+        visible && "",
         className
       )}
     >
@@ -186,7 +186,7 @@ export const MobileAccordionItem = ({
   onToggle: () => void;
 }) => {
   return (
-    <div className="border border-black/5 dark:border-white/5 rounded-xl overflow-hidden bg-white/50 dark:bg-white/5">
+    <div className=" -black/5 dark:-white/5 rounded-xl overflow-hidden bg-white/50 dark:bg-white/5">
       <button
         onClick={onToggle}
         className="flex items-center justify-between w-full p-4 text-left font-display font-bold text-lg text-text-primary hover:bg-black/5 dark:hover:bg-white/5 transition-colors"

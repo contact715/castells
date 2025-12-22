@@ -27,7 +27,7 @@ const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose, videoId }) => 
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.95, opacity: 0 }}
                             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
-                            className="relative w-full max-w-5xl bg-black rounded-2xl overflow-hidden shadow-2xl border border-white/10"
+                            className="relative w-full max-w-5xl bg-black rounded-[2rem] overflow-hidden   -white/10"
                         >
                             {/* Close Button */}
                             <button

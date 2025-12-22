@@ -64,14 +64,15 @@ const InsightsList: React.FC = () => {
                     onMouseLeave={() => setHoveredId(null)}
                     className="group cursor-pointer"
                 >
-                    <div className={`flex flex-col md:flex-row gap-6 p-6 rounded-2xl transition-all duration-300 ${hoveredId === insight.id ? 'bg-black' : 'bg-white border border-black/5'
+                    <div className={`flex flex-col md:flex-row gap-6 p-6 rounded-[2rem] transition-all duration-300 ${hoveredId === insight.id ? 'bg-black' : 'bg-white  -black/5'
                         }`}>
                         {/* Image */}
                         <div className="w-full md:w-48 h-32 md:h-32 rounded-xl overflow-hidden flex-shrink-0">
                             <img
                                 src={insight.image}
                                 alt={insight.title}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 will-change-transform"
+                                style={{ transform: 'translateZ(0)' }}
                             />
                         </div>
 
@@ -109,7 +110,7 @@ const InsightsList: React.FC = () => {
 
                         {/* Arrow */}
                         <div className="flex items-center">
-                            <div className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all ${hoveredId === insight.id
+                            <div className={`w-12 h-12 rounded-[2rem] flex items-center justify-center transition-all ${hoveredId === insight.id
                                 ? 'bg-white text-black'
                                 : 'bg-black/5 text-text-secondary'
                                 }`}>

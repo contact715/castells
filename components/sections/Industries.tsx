@@ -11,11 +11,11 @@ const Industries: React.FC = () => {
   const [activeTab, setActiveTab] = useState<IndustryCategoryId>('construction');
 
   return (
-    <Section id="industries">
+    <Section id="industries" className="pt-12 md:pt-16 pb-24 md:pb-32">
       <SectionContainer>
 
         {/* Header Section */}
-        <div className="max-w-3xl mb-16">
+        <div className="max-w-3xl mb-8">
           <div className="flex items-center gap-2 mb-4">
             <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
             <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
@@ -36,8 +36,8 @@ const Industries: React.FC = () => {
         </div>
 
         {/* Styled Tabs */}
-        <div className="flex justify-start mb-16">
-          <div className="bg-surface p-1.5 rounded-2xl border border-black/5 shadow-none inline-flex flex-wrap gap-1">
+        <div className="flex justify-start mb-8 overflow-x-auto pb-2 -mx-6 px-6">
+          <div className="bg-surface p-1.5 rounded-[2rem]  -black/5  inline-flex flex-wrap sm:flex-nowrap gap-1 min-w-max">
             {INDUSTRY_CATEGORIES.map((cat) => {
               const isActive = activeTab === cat.id;
               return (
@@ -45,16 +45,16 @@ const Industries: React.FC = () => {
                   key={cat.id}
                   onClick={() => setActiveTab(cat.id)}
                   className={cn(
-                    "relative px-6 py-3 rounded-xl flex items-center gap-2 text-sm font-bold uppercase tracking-widest transition-all duration-300 outline-none",
+                    "relative px-4 sm:px-6 py-2.5 sm:py-3 rounded-[2rem] flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 outline-none whitespace-nowrap",
                     isActive
-                      ? "text-white shadow-md"
+                      ? "text-white "
                       : "text-text-secondary hover:text-text-primary hover:bg-gray-100 dark:hover:bg-neutral-800"
                   )}
                 >
                   {isActive && (
                     <motion.div
                       layoutId="activeIndustryTab"
-                      className="absolute inset-0 bg-black dark:bg-white rounded-xl"
+                      className="absolute inset-0 bg-black dark:bg-white rounded-[2rem]"
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                     />
                   )}
@@ -68,7 +68,7 @@ const Industries: React.FC = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           <AnimatePresence mode="popLayout">
             {INDUSTRY_CATEGORIES.find((c) => c.id === activeTab)?.items.map((item, idx) => {
               const isContactCard = item.type === 'cta';
@@ -83,62 +83,73 @@ const Industries: React.FC = () => {
                   className="col-span-1"
                 >
                   <div className={cn(
-                    "group relative rounded-2xl overflow-hidden h-full min-h-[220px] cursor-pointer transition-all duration-500",
+                    "group relative rounded-[2rem] overflow-hidden h-full min-h-[200px] sm:min-h-[220px] cursor-pointer transition-all duration-500",
                     isContactCard 
-                      ? "bg-surface hover:shadow-xl hover:-translate-y-1" 
-                      : "hover:shadow-xl hover:-translate-y-1"
+                      ? "bg-surface hover: hover:-translate-y-1" 
+                      : "hover: hover:-translate-y-1"
                   )}>
                     {/* Background Image */}
                     {item.type === 'industry' && item.image && !isContactCard && (
-                      <div className="absolute inset-0">
+                      <div className="absolute inset-0 overflow-hidden rounded-[2rem]">
                         <img 
                           src={item.image} 
                           alt={item.name}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
                           loading="lazy"
+                          style={{ transform: 'translateZ(0)' }}
                         />
                         {/* Dark Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30" />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30 rounded-[2rem]" />
                       </div>
                     )}
 
                     {/* Content */}
                     <div className={cn(
-                      "relative h-full p-6 flex flex-col justify-end",
+                      "relative h-full p-6 flex flex-col",
                       isContactCard && "items-center justify-center text-center"
                     )}>
-                      {/* Icon */}
+                      {/* Icon - Top */}
                       <div className={cn(
-                        "w-12 h-12 rounded-xl flex items-center justify-center mb-4 transition-all duration-300",
-                        isContactCard 
-                          ? "bg-coral/10 group-hover:bg-coral" 
-                          : "bg-white/20 backdrop-blur-sm group-hover:bg-coral"
+                        "mb-auto",
+                        isContactCard && "flex justify-center"
                       )}>
-                        <item.icon className={cn(
-                          "w-5 h-5 transition-colors duration-300",
+                        <div className={cn(
+                          "w-12 h-12 rounded-[2rem] flex items-center justify-center flex-shrink-0 transition-all duration-300",
                           isContactCard 
-                            ? "text-coral group-hover:text-white" 
-                            : "text-white"
-                        )} />
+                            ? "bg-coral/10 group-hover:bg-black" 
+                            : "bg-white/0 backdrop-blur-md  -white/10 group-hover:bg-white group-hover:-white/20"
+                        )}>
+                          <item.icon className={cn(
+                            "w-5 h-5 transition-colors duration-300",
+                            isContactCard 
+                              ? "text-coral group-hover:text-white" 
+                              : "text-white/80 group-hover:text-black"
+                          )} />
+                        </div>
                       </div>
 
-                      {/* Title */}
-                      <h3 className={cn(
-                        "font-display font-semibold text-xl mb-2 transition-colors duration-300",
-                        isContactCard 
-                          ? "text-text-primary group-hover:text-coral" 
-                          : "text-white group-hover:text-coral"
+                      {/* Title and Description - Bottom */}
+                      <div className={cn(
+                        "mt-auto",
+                        isContactCard && "text-center"
                       )}>
-                        {item.name}
-                      </h3>
-
-                      {/* Description */}
-                      <p className={cn(
-                        "text-sm leading-relaxed",
-                        isContactCard ? "text-text-secondary" : "text-white/70"
-                      )}>
-                        {item.description}
-                      </p>
+                        {/* Title */}
+                        <h3 className={cn(
+                          "font-display font-semibold text-lg sm:text-xl mb-2 transition-colors duration-300",
+                          isContactCard 
+                            ? "text-text-primary" 
+                            : "text-white"
+                        )}>
+                          {item.name}
+                        </h3>
+                        {/* Description */}
+                        <p className={cn(
+                          "text-xs sm:text-sm leading-relaxed",
+                          isContactCard ? "text-text-secondary" : "text-white/70"
+                        )}>
+                          {item.description}
+                        </p>
+                      </div>
 
                       {/* Arrow for non-contact cards */}
                       {!isContactCard && (
@@ -150,12 +161,12 @@ const Industries: React.FC = () => {
 
                     {/* Border effect (match Team CTA card) */}
                     {isContactCard && (
-                      <div className="absolute inset-0 rounded-2xl border border-black/5 dark:border-white/10 group-hover:border-coral/50 transition-colors duration-300 pointer-events-none" />
+                      <div className="absolute inset-0 rounded-[2rem]  -black/5 dark:-white/10 group-hover:-white/50 transition-colors duration-300 pointer-events-none" />
                     )}
 
                     {/* Link overlay */}
                     <a
-                      href={item.type === 'cta' ? item.href : `/industries/${item.slug}`}
+                      href={isContactCard ? '/contact' : `/industries/${(item as any).slug}`}
                       className="absolute inset-0 z-10"
                       aria-label={item.name}
                     />

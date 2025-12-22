@@ -70,15 +70,15 @@ export const borderRadius = {
 } as const;
 
 export const shadows = {
-  sm: 'shadow-sm',
-  md: 'shadow-lg',
-  lg: 'shadow-xl',
-  xl: 'shadow-2xl',
+  sm: '',
+  md: '',
+  lg: '',
+  xl: '',
   // Hover states
   hover: {
-    sm: 'hover:shadow-md',
-    md: 'hover:shadow-xl',
-    lg: 'hover:shadow-2xl',
+    sm: '',
+    md: '',
+    lg: '',
   },
 } as const;
 
@@ -128,8 +128,8 @@ export const containerClasses = {
  * Standard card classes
  */
 export const cardClasses = {
-  default: `${colors.background.surface} ${spacing.card.md} ${borderRadius.card} ${shadows.md} ${colors.border.light} border`,
-  hover: `${colors.background.surface} ${spacing.card.md} ${borderRadius.card} ${shadows.md} ${colors.border.light} border hover:${shadows.hover.md.replace('hover:', '')} hover:-translate-y-1 ${transitions.default}`,
+  default: `${colors.background.surface} ${spacing.card.md} ${borderRadius.card} ${colors.border.light} border`,
+  hover: `${colors.background.surface} ${spacing.card.md} ${borderRadius.card} ${colors.border.light} border hover:-translate-y-1 ${transitions.default}`,
 } as const;
 
 

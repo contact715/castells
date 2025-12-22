@@ -113,7 +113,7 @@ const QuizForm: React.FC = () => {
                 animate={{ opacity: 1, scale: 1 }}
                 className="flex flex-col items-center justify-center py-24 text-center h-full min-h-[500px]"
             >
-                <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mb-6 text-white border border-white/20">
+                <div className="w-20 h-20 bg-white/10 rounded-full flex items-center justify-center mb-6 text-white  -white/20">
                     <Check className="w-8 h-8" />
                 </div>
                 <h3 className="text-3xl font-display font-semibold mb-4 text-white">Application Received</h3>
@@ -126,7 +126,7 @@ const QuizForm: React.FC = () => {
                         setCurrentStep(0);
                         setFormData({ goal: '', budget: '', industry: '', name: '', email: '', website: '' });
                     }}
-                    className="mt-12 text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors border-b border-white/20 pb-1"
+                    className="mt-12 text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors -b -white/20 pb-1"
                 >
                     Start New Application
                 </button>
@@ -175,10 +175,10 @@ const QuizForm: React.FC = () => {
                                             key={option}
                                             onClick={() => handleOptionSelect(option)}
                                             className={cn(
-                                                "w-full text-left p-5 rounded-xl border transition-all duration-200 group flex items-center justify-between",
+                                                "w-full text-left p-5 rounded-xl  transition-all duration-200 group flex items-center justify-between",
                                                 isSelected
-                                                    ? "bg-white text-black border-white"
-                                                    : "bg-white/5 text-white/80 border-white/10 hover:bg-white/10 hover:border-white/30"
+                                                    ? "bg-white text-black -white"
+                                                    : "bg-white/5 text-white/80 -white/10 hover:bg-white/10 hover:-white/30"
                                             )}
                                         >
                                             <span className="font-medium">{option}</span>

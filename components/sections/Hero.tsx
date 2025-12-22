@@ -7,81 +7,90 @@ import AnimatedHeading from '../ui/AnimatedHeading';
 import { ContactButtons } from '../ui/ContactButtons';
 import '../ui/Marquee.css';
 
-const TESTIMONIAL_AVATARS = [
-    'https://i.pravatar.cc/150?img=1',
-    'https://i.pravatar.cc/150?img=2',
-    'https://i.pravatar.cc/150?img=3',
-    'https://i.pravatar.cc/150?img=4',
-    'https://i.pravatar.cc/150?img=5',
-];
+// Professional logo components
+const VortexLogo = () => (
+    <svg viewBox="0 0 120 32" fill="currentColor" className="h-8 w-auto">
+        <path d="M8 16c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8-8-3.6-8-8zm8-4c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4z" />
+        <path d="M28 8h8v16h-8V8zm2 2v12h4V10h-4z" />
+        <path d="M42 8h12v2h-10v5h8v2h-8v5h10v2H42V8z" />
+        <path d="M60 8h12v2h-5v14h-2V10h-5V8z" />
+        <path d="M78 8h12v2h-5v14h-2V10h-5V8z" />
+        <path d="M96 8h12v2h-5v6h5v2h-5v6h5v2H96V8z" />
+    </svg>
+);
+
+const LuminaLogo = () => (
+    <svg viewBox="0 0 120 32" fill="currentColor" className="h-8 w-auto">
+        <circle cx="16" cy="16" r="10" />
+        <circle cx="16" cy="16" r="6" fill="none" stroke="currentColor" strokeWidth="1.5" />
+        <path d="M32 8h8v16h-8V8zm2 2v12h4V10h-4z" />
+        <path d="M48 8h12v2h-5v5h5v2h-5v5h5v2H48V8z" />
+        <path d="M66 8h12v2h-5v14h-2V10h-5V8z" />
+        <path d="M84 8h12v2h-5v14h-2V10h-5V8z" />
+        <path d="M102 8h12v2h-5v6h5v2h-5v6h5v2H102V8z" />
+    </svg>
+);
+
+const ApexLogo = () => (
+    <svg viewBox="0 0 100 32" fill="currentColor" className="h-8 w-auto">
+        <path d="M16 6L6 26h20L16 6z" />
+        <path d="M32 8h8v16h-8V8zm2 2v12h4V10h-4z" />
+        <path d="M48 8h12v2h-5v5h5v2h-5v5h5v2H48V8z" />
+        <path d="M66 8h12v2h-5v14h-2V10h-5V8z" />
+    </svg>
+);
+
+const OrbitalLogo = () => (
+    <svg viewBox="0 0 120 32" fill="currentColor" className="h-8 w-auto">
+        <ellipse cx="16" cy="16" rx="12" ry="6" transform="rotate(-45 16 16)" />
+        <circle cx="16" cy="16" r="4" />
+        <path d="M34 8h8v16h-8V8zm2 2v12h4V10h-4z" />
+        <path d="M50 8h12v2h-5v5h5v2h-5v5h5v2H50V8z" />
+        <path d="M68 8h12v2h-5v5h5v2h-5v5h5v2H68V8z" />
+        <path d="M86 8h12v2h-5v5h5v2h-5v5h5v2H86V8z" />
+        <path d="M104 8h12v2h-5v6h5v2h-5v6h5v2H104V8z" />
+    </svg>
+);
+
+const NexusLogo = () => (
+    <svg viewBox="0 0 110 32" fill="currentColor" className="h-8 w-auto">
+        <rect x="6" y="6" width="12" height="12" rx="2" />
+        <rect x="14" y="14" width="12" height="12" rx="2" opacity="0.6" />
+        <path d="M32 8h8v16h-8V8zm2 2v12h4V10h-4z" />
+        <path d="M48 8h12v2h-5v5h5v2h-5v5h5v2H48V8z" />
+        <path d="M66 8h12v2h-5v14h-2V10h-5V8z" />
+        <path d="M84 8h12v2h-5v6h5v2h-5v6h5v2H84V8z" />
+    </svg>
+);
+
+const StratosLogo = () => (
+    <svg viewBox="0 0 120 32" fill="currentColor" className="h-8 w-auto">
+        <path d="M6 22 Q16 8 26 22 M16 22 Q26 8 36 22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+        <path d="M44 8h8v16h-8V8zm2 2v12h4V10h-4z" />
+        <path d="M60 8h12v2h-5v5h5v2h-5v5h5v2H60V8z" />
+        <path d="M78 8h12v2h-5v5h5v2h-5v5h5v2H78V8z" />
+        <path d="M96 8h12v2h-5v5h5v2h-5v5h5v2H96V8z" />
+        <path d="M114 8h4v16h-4V8z" />
+    </svg>
+);
+
+const EchoLogo = () => (
+    <svg viewBox="0 0 100 32" fill="currentColor" className="h-8 w-auto">
+        <path d="M12 26V6l16 10-16 10z" />
+        <path d="M34 8h8v16h-8V8zm2 2v12h4V10h-4z" />
+        <path d="M50 8h12v2h-5v5h5v2h-5v5h5v2H50V8z" />
+        <path d="M68 8h12v2h-5v14h-2V10h-5V8z" />
+    </svg>
+);
 
 const CLIENT_LOGOS = [
-    {
-        name: 'Vortex',
-        logo: (
-            <svg viewBox="0 0 100 30" fill="currentColor" className="h-8 w-auto">
-                <path d="M10,15 L20,5 L30,15 L20,25 Z M35,5 H45 V25 H35 Z M50,5 H70 V10 H60 V25 H50 Z M75,5 H95 V10 H85 V25 H95 V20 H85 V15 H95 V10 H85 Z" />
-                <path d="M10 15a5 5 0 1 0 10 0a5 5 0 1 0 -10 0" className="opacity-50" />
-                <text x="35" y="22" fontFamily="sans-serif" fontWeight="bold" fontSize="18">VORTEX</text>
-            </svg>
-        )
-    },
-    {
-        name: 'Lumina',
-        logo: (
-            <svg viewBox="0 0 100 30" fill="currentColor" className="h-8 w-auto">
-                <circle cx="15" cy="15" r="8" />
-                <text x="30" y="22" fontFamily="sans-serif" fontWeight="bold" fontSize="18">LUMINA</text>
-            </svg>
-        )
-    },
-    {
-        name: 'Apex',
-        logo: (
-            <svg viewBox="0 0 100 30" fill="currentColor" className="h-8 w-auto">
-                <path d="M15 5 L5 25 L25 25 Z" />
-                <text x="30" y="22" fontFamily="sans-serif" fontWeight="bold" fontSize="18">APEX</text>
-            </svg>
-        )
-    },
-    {
-        name: 'Orbital',
-        logo: (
-            <svg viewBox="0 0 110 30" fill="currentColor" className="h-8 w-auto">
-                <ellipse cx="15" cy="15" rx="10" ry="5" transform="rotate(-45 15 15)" />
-                <circle cx="15" cy="15" r="3" />
-                <text x="32" y="22" fontFamily="sans-serif" fontWeight="bold" fontSize="18">ORBITAL</text>
-            </svg>
-        )
-    },
-    {
-        name: 'Nexus',
-        logo: (
-            <svg viewBox="0 0 100 30" fill="currentColor" className="h-8 w-auto">
-                <rect x="5" y="5" width="10" height="10" rx="2" />
-                <rect x="12" y="12" width="10" height="10" rx="2" className="opacity-70" />
-                <text x="30" y="22" fontFamily="sans-serif" fontWeight="bold" fontSize="18">NEXUS</text>
-            </svg>
-        )
-    },
-    {
-        name: 'Stratos',
-        logo: (
-            <svg viewBox="0 0 110 30" fill="currentColor" className="h-8 w-auto">
-                <path d="M5 20 Q15 5 25 20 M15 20 Q25 5 35 20" fill="none" stroke="currentColor" strokeWidth="3" />
-                <text x="40" y="22" fontFamily="sans-serif" fontWeight="bold" fontSize="18">STRATOS</text>
-            </svg>
-        )
-    },
-    {
-        name: 'Echo',
-        logo: (
-            <svg viewBox="0 0 100 30" fill="currentColor" className="h-8 w-auto">
-                <path d="M10 25 V5 L25 15 Z" />
-                <text x="30" y="22" fontFamily="sans-serif" fontWeight="bold" fontSize="18">ECHO</text>
-            </svg>
-        )
-    }
+    { name: 'Vortex', logo: <VortexLogo /> },
+    { name: 'Lumina', logo: <LuminaLogo /> },
+    { name: 'Apex', logo: <ApexLogo /> },
+    { name: 'Orbital', logo: <OrbitalLogo /> },
+    { name: 'Nexus', logo: <NexusLogo /> },
+    { name: 'Stratos', logo: <StratosLogo /> },
+    { name: 'Echo', logo: <EchoLogo /> },
 ];
 
 const Hero: React.FC = () => {
@@ -123,17 +132,17 @@ const Hero: React.FC = () => {
     };
 
     return (
-        <div className="pt-32 pb-0 relative overflow-hidden bg-transparent">
-            <div className="container mx-auto px-6 relative z-10">
+        <div className="pt-16 md:pt-20 pb-0 relative overflow-hidden bg-transparent">
+            <div className="container mx-auto px-6 relative z-10 pt-4 md:pt-6">
 
                 {/* Two-Column Header */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-16">
 
                     {/* Left: Headline */}
                     <div>
-                        <span className="text-xs font-bold uppercase tracking-widest text-text-secondary mb-4 block">
-                            Digital Marketing Agency Castells
-                        </span>
+                        <div className="text-xs font-bold uppercase text-text-secondary mb-4">
+                            <span className="tracking-widest">Digital Marketing Agency Castells</span><span className="ml-0.5">.</span>
+                        </div>
                         <AnimatedHeading
                             as="h1"
                             className="font-display text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight text-text-primary mb-0"
@@ -164,46 +173,12 @@ const Hero: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Testimonials Bar */}
-                <div className="flex items-center justify-between py-8 border-t border-b border-black/10 dark:border-white/10 mb-12">
-                    <div className="flex items-center gap-4">
-                        <span className="text-sm text-text-secondary">
-                            Partnering with contractors & service businesses since 2018.
-                        </span>
-                    </div>
-                    <div className="flex items-center gap-4">
-                        {/* Avatars */}
-                        <div className="flex -space-x-3">
-                            {TESTIMONIAL_AVATARS.map((avatar, idx) => (
-                                <img
-                                    key={idx}
-                                    src={avatar}
-                                    alt={`Client ${idx + 1}`}
-                                    className="w-10 h-10 rounded-full border-2 border-white dark:border-black"
-                                />
-                            ))}
-                        </div>
-                        {/* Rating */}
-                        <div className="flex flex-col items-start">
-                            <div className="flex gap-0.5 mb-1">
-                                {[...Array(5)].map((_, i) => (
-                                    <svg key={i} className="w-4 h-4 text-coral fill-coral" viewBox="0 0 24 24">
-                                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                                    </svg>
-                                ))}
-                            </div>
-                            <span className="text-xs font-bold text-text-primary">
-                                Trusted by 100+ Owners
-                            </span>
-                        </div>
-                    </div>
-                </div>
 
                 {/* Client Logos Section */}
-                <div className="mb-20 flex flex-col md:flex-row items-center gap-8 md:gap-12 border-t border-b border-black/5 dark:border-white/5 py-12">
+                <div className="mb-20 flex flex-col md:flex-row items-center gap-8 md:gap-12 -t -b -black/5 dark:-white/5 py-12">
                     <div className="shrink-0 max-w-sm text-center md:text-left">
                         <p className="text-lg md:text-xl font-sans leading-relaxed text-text-primary">
-                            The world's best brands trust <br className="hidden md:block" />
+                            America's best brands trust <br className="hidden md:block" />
                             <span className="text-text-secondary">Castells for Market Domination.</span>
                         </p>
                     </div>
@@ -221,12 +196,12 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Video Section - Contained Width */}
-            <div className="container mx-auto px-6 pb-20">
-                <div className="relative w-full aspect-video rounded-[2rem] overflow-hidden bg-black">
+            <div className="container mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
+                <div className="relative w-full aspect-video rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-black">
                     <iframe
                         ref={iframeRef}
                         src="https://player.vimeo.com/video/1101673750?h=7ccdfe1d0c&autoplay=1&muted=1&loop=1&controls=1&background=0&responsive=1&byline=0&title=0"
-                        className="absolute inset-0 w-full h-full border-0"
+                        className="absolute inset-0 w-full h-full -0"
                         frameBorder="0"
                         referrerPolicy="strict-origin-when-cross-origin"
                         allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
@@ -236,13 +211,13 @@ const Hero: React.FC = () => {
                     {/* Sound Toggle Button */}
                     <button
                         onClick={toggleMute}
-                        className="absolute bottom-4 right-4 z-10 w-12 h-12 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
+                        className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm  -white/20 flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
                         aria-label={isMuted ? "Unmute video" : "Mute video"}
                     >
                         {isMuted ? (
-                            <VolumeX className="w-5 h-5" />
+                            <VolumeX className="w-4 h-4 sm:w-5 sm:h-5" />
                         ) : (
-                            <Volume2 className="w-5 h-5" />
+                            <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" />
                         )}
                     </button>
                 </div>

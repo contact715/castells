@@ -20,6 +20,7 @@ const WhyChoose = React.lazy(() => import('./components/sections/WhyChoose'));
 const Industries = React.lazy(() => import('./components/sections/Industries'));
 
 const Team = React.lazy(() => import('./components/sections/Team'));
+const TrustSection = React.lazy(() => import('./components/sections/TrustSection'));
 
 const CTA = React.lazy(() => import('./components/sections/CTA'));
 const CasesGrid = React.lazy(() => import('./components/sections/CasesGrid'));
@@ -121,6 +122,7 @@ function App() {
                   <Hero />
 
                   <Work onNavigate={navigateTo} />
+                  <TrustSection />
                   <Industries />
                   <WhyChoose />
                   <Services />

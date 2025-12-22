@@ -67,11 +67,11 @@ export const MenuItem = ({
               <motion.div
                 transition={transition}
                 layoutId="active" // layoutId ensures smooth animation
-                className="bg-white dark:bg-[#2A2A2A] backdrop-blur-sm rounded-3xl overflow-hidden border border-black/10 dark:border-white/10 shadow-xl"
+                className="bg-white dark:bg-[#2A2A2A] backdrop-blur-sm rounded-[2rem] overflow-hidden  -black/10 dark:-white/10 "
               >
                 <motion.div
                   layout // layout ensures smooth animation
-                  className="w-max h-full p-4"
+                  className="w-max h-full p-3"
                 >
                   {children}
                 </motion.div>
@@ -131,7 +131,7 @@ export const ProductItem = ({
           width={120}
           height={70}
           alt={title}
-          className="flex-shrink-0 rounded-md shadow-sm object-cover h-[70px] w-[120px]"
+          className="flex-shrink-0 rounded-md  object-cover h-[70px] w-[120px]"
         />
         <div className="absolute inset-0 bg-black/0 group-hover/product:bg-black/10 transition-colors rounded-md" />
       </div>

@@ -122,13 +122,39 @@ const TIMELINE_ENTRIES: ScrollTimelineEntry[] = [
     ],
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80'
   },
+  {
+    year: '2025',
+    title: 'The Future of Growth',
+    icon: Rocket,
+    description: `We're building the next generation of growth marketing tools. Our platform combines AI, automation, and human expertise to deliver unprecedented results. We're not just keeping up with the future—we're creating it.`,
+    items: [
+      'Next-gen growth platform launch',
+      'Expanded AI capabilities',
+      'Global team of 50+ experts',
+      'Revolutionizing client success'
+    ],
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80'
+  },
+  {
+    year: '2026',
+    title: 'Industry Leadership',
+    icon: TrendingUp,
+    description: `As we look ahead, we're setting new standards for what a growth agency can achieve. With cutting-edge technology, world-class talent, and an unwavering focus on revenue, we're helping businesses dominate their markets.`,
+    items: [
+      'Industry-leading growth platform',
+      'Expanded global presence',
+      'Innovation in marketing technology',
+      'Setting new industry standards'
+    ],
+    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80'
+  },
 ];
 
 const AboutPage: React.FC<AboutPageProps> = ({ onBack, onNavigate }) => {
   return (
-    <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-32 pb-20 animate-in fade-in duration-500">
+    <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20 animate-in fade-in duration-500">
       <SEO title="About Us | Castells Agency" description="We are the Anti-Agency. Obsessed with revenue, not vanity metrics." />
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 pt-4 md:pt-6">
 
         {/* Header */}
         <PageHeader
@@ -156,10 +182,12 @@ const AboutPage: React.FC<AboutPageProps> = ({ onBack, onNavigate }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
-                className="bg-white dark:bg-surface p-10 rounded-2xl border border-black/5 dark:border-white/10 hover:border-coral/50 dark:hover:border-coral/40 transition-all duration-300 hover:shadow-lg"
+                className="bg-white dark:bg-surface p-10 rounded-[2rem]  -black/5 dark:-white/10 hover:-coral/50 dark:hover:-coral/40 transition-all duration-300 hover:"
               >
-                <Icon className="w-10 h-10 text-coral mb-6" />
-                <h3 className="font-display text-2xl font-semibold mb-4 text-text-primary dark:text-white">{value.title}</h3>
+                <div className="flex items-start gap-4 mb-6">
+                  <Icon className="w-10 h-10 text-coral flex-shrink-0" />
+                  <h3 className="font-display text-2xl font-semibold text-text-primary dark:text-white">{value.title}</h3>
+                </div>
                 <p className="text-text-secondary dark:text-white/70">{value.desc}</p>
               </motion.div>
             );
@@ -177,16 +205,16 @@ const AboutPage: React.FC<AboutPageProps> = ({ onBack, onNavigate }) => {
 
         {/* Image Grid */}
         <div className="grid grid-cols-12 gap-4 mb-32 h-[600px]">
-          <div className="col-span-8 h-full rounded-3xl overflow-hidden relative group">
-            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Office" />
-            <div className="absolute bottom-6 left-6 bg-white dark:bg-surface px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest text-text-primary dark:text-white border border-black/5 dark:border-white/10">Global HQ — Santa Monica</div>
+          <div className="col-span-8 h-full rounded-[2rem] overflow-hidden relative group">
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform" style={{ transform: 'translateZ(0)' }} alt="Office" />
+            <div className="absolute bottom-6 left-6 bg-white dark:bg-surface px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest text-text-primary dark:text-white  -black/5 dark:-white/10">Global HQ — Santa Monica</div>
           </div>
           <div className="col-span-4 flex flex-col gap-4 h-full">
-            <div className="h-1/2 rounded-3xl overflow-hidden relative group">
-              <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Meeting" />
+            <div className="h-1/2 rounded-[2rem] overflow-hidden relative group">
+              <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform" style={{ transform: 'translateZ(0)' }} alt="Meeting" />
             </div>
-            <div className="h-1/2 rounded-3xl overflow-hidden relative group">
-              <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Team" />
+            <div className="h-1/2 rounded-[2rem] overflow-hidden relative group">
+              <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform" style={{ transform: 'translateZ(0)' }} alt="Team" />
             </div>
           </div>
         </div>

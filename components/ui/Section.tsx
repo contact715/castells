@@ -13,7 +13,7 @@ export const Section: React.FC<SectionProps> = ({ className, children, id, ...pr
     return (
         <section
             id={id}
-            className={cn("py-24 md:py-32 bg-ivory relative overflow-hidden", className)}
+            className={cn("pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory relative overflow-hidden", className)}
             {...props}
         >
             {children}

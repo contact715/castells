@@ -7,9 +7,10 @@ import {
     Hammer, Activity, Building2, Sparkles, Palette, Terminal, Scale, Flag, Mail, Factory, BarChart3, ArrowRight,
     Shield, Smartphone, ShoppingBag, Video, MousePointer2, Database, BarChart, Settings, Wrench, PaintBucket,
     HardHat, Truck, Stethoscope, Landmark, Coins, Droplets, LayoutGrid, Frame, Ruler, ShieldCheck, Sun, ArrowUpRight, MapPin,
-    Book, Layers, Code, ShoppingCart, Calendar, Phone, Send
+    Book, Layers, Code, ShoppingCart, Calendar, Phone, Send, Snowflake
 } from 'lucide-react';
 import AnimatedThemeToggler from '../ui/AnimatedThemeToggler';
+import SnowEffect from '../effects/SnowEffect';
 import { Button } from '../ui/Button';
 import { PageView } from '../../App';
 import { NavigationData } from '../../types';
@@ -17,6 +18,7 @@ import { Menu, MenuItem, HoveredLink, ProductItem } from '../ui/NavbarMenu';
 import { Navbar, NavBody, MobileNav, MobileNavHeader, MobileNavToggle, MobileNavMenu, MobileAccordion, MobileAccordionItem } from '../ui/ResizableNavbar';
 import { CASE_STUDIES } from '../../constants';
 import { INDUSTRY_CATEGORIES, type IndustryCategory, type IndustryItem } from '../../data/industries';
+import { cn } from '../../lib/utils';
 import { SERVICE_CATEGORIES, type ServiceCategory, type ServiceItem } from '../../data/services';
 import { ContactButtons } from '../ui/ContactButtons';
 
@@ -25,8 +27,8 @@ interface NavBarProps {
 }
 
 const CategoryCard = ({ title, icon: Icon, href }: { title: string, icon: React.ComponentType<{ className?: string }>, href: string }) => (
-    <a href={href} className="flex flex-col items-center justify-center gap-3 p-4 rounded-2xl bg-black/5 dark:bg-white/5 hover:bg-coral/10 hover:text-coral transition-all group text-center h-full">
-        <div className="bg-white dark:bg-black p-3 rounded-xl shadow-sm group-hover:scale-110 transition-transform">
+    <a href={href} className="flex flex-col items-center justify-center gap-3 p-4 rounded-[2rem] bg-black/5 dark:bg-white/5 hover:bg-coral/10 hover:text-coral transition-all group text-center h-full">
+        <div className="bg-white dark:bg-black p-3 rounded-xl  group-hover:scale-110 transition-transform">
             <Icon className="w-6 h-6 text-text-primary group-hover:text-coral transition-colors" />
         </div>
         <span className="text-xs font-bold uppercase tracking-wide text-text-primary group-hover:text-coral">{title}</span>
@@ -64,14 +66,15 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Naviga
                             e.preventDefault();
                             onNavigate?.('case-study', caseStudy as any);
                         }}
-                        className="group cursor-pointer rounded-2xl overflow-hidden relative h-[200px] border border-black/5 dark:border-white/10"
+                        className="group cursor-pointer rounded-[2rem] overflow-hidden relative h-[200px]  -black/5 dark:-white/10"
                     >
                         {/* Background Image */}
                         <img
                             src={caseStudy.image}
                             alt={caseStudy.client}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 will-change-transform"
                             loading="lazy"
+                            style={{ transform: 'translateZ(0)' }}
                         />
                         {/* Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
@@ -134,9 +137,9 @@ const CompanyMenu = ({ onNavigate }: { onNavigate?: import('../../types').Naviga
     };
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
             {/* Items Grid */}
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+            <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
                 {allItems.map((item) => (
                     <a
                         key={item.label}
@@ -147,7 +150,7 @@ const CompanyMenu = ({ onNavigate }: { onNavigate?: import('../../types').Naviga
                                 handleItemClick(item);
                             }
                         }}
-                        className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
+                        className="flex items-center gap-2 w-full p-2 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
                     >
                         <item.icon className="w-4 h-4 text-text-secondary group-hover:text-current" />
                         <span className="flex-1 text-sm font-medium">{item.label}</span>
@@ -156,9 +159,9 @@ const CompanyMenu = ({ onNavigate }: { onNavigate?: import('../../types').Naviga
                 ))}
             </div>
 
-            <div className="pt-3 border-t border-black/5 bg-black/5 rounded-xl p-3">
-                <div className="flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-3 min-w-0">
+            <div className="pt-2 -t -black/5 bg-ivory dark:bg-white/5 rounded-[2rem] p-2">
+                <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2 min-w-0">
                         <div className="bg-coral/10 p-2 rounded-full text-coral shrink-0">
                             <Phone className="w-5 h-5" />
                         </div>
@@ -200,24 +203,24 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
     };
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
             {/* Top: Categories */}
-            <div className="flex items-center justify-between gap-1 bg-white dark:bg-neutral-900 p-1.5 rounded-2xl border border-black/5 shadow-sm w-full mb-4">
+            <div className="flex items-center justify-between gap-1 bg-ivory dark:bg-black/30 p-1 rounded-[2rem]  -black/5 dark:-white/10  w-full mb-2">
                 {SERVICES_DATA.map((category) => (
                     <button
                         key={category.id}
                         onMouseEnter={() => setActiveCategory(category.id)}
                         onClick={() => handleCategoryClick(category)}
                         className={`
-                            flex-1 min-w-0 overflow-hidden px-2 xl:px-3 py-3 rounded-xl text-[11px] xl:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap text-center flex items-center justify-center gap-2 cursor-pointer
+                            flex-1 min-w-0 overflow-hidden px-2 py-2 rounded-[2rem] text-[10px] xl:text-[11px] font-bold uppercase tracking-wider transition-all whitespace-nowrap text-center flex items-center justify-center gap-1.5 cursor-pointer
                             ${activeCategory === category.id
-                                ? 'bg-black text-white dark:bg-white dark:text-black shadow-sm'
+                                ? 'bg-black text-white dark:bg-white dark:text-black '
                                 : 'text-text-secondary hover:bg-black/5 dark:hover:bg-white/5 hover:text-text-primary'}
                         `}
                     >
                         {category.icon && (
                             <category.icon
-                                className={`w-4 h-4 shrink-0 ${activeCategory === category.id ? 'text-white dark:text-black' : ''}`}
+                                className={`w-3.5 h-3.5 shrink-0 ${activeCategory === category.id ? 'text-white dark:text-black' : ''}`}
                             />
                         )}
                         <span className="min-w-0 max-w-full truncate">{category.label}</span>
@@ -227,7 +230,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
 
             {/* Bottom: Items */}
             <div>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
                     {SERVICES_DATA.find(c => c.id === activeCategory)?.items.map((item) => (
                         <a
                             key={item.label}
@@ -236,7 +239,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                                 e.preventDefault();
                                 handleItemClick(item);
                             }}
-                            className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
+                            className="flex items-center gap-2 w-full p-2 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
                         >
                             <item.icon className="w-4 h-4 text-text-secondary group-hover:text-current" />
                             <span className="flex-1 text-sm font-medium">{item.label}</span>
@@ -245,9 +248,9 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                     ))}
                 </div>
             </div>
-            <div className="pt-3 border-t border-black/5 bg-black/5 rounded-xl p-3">
-                <div className="flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-3 min-w-0">
+            <div className="pt-2 -t -black/5 bg-ivory dark:bg-white/5 rounded-[2rem] p-2">
+                <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2 min-w-0">
                         <div className="bg-coral/10 p-2 rounded-full text-coral shrink-0">
                             <Sparkles className="w-5 h-5" />
                         </div>
@@ -285,24 +288,24 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
     };
 
     return (
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2">
             {/* Top: Categories */}
-            <div className="flex items-center justify-between gap-1 bg-white dark:bg-neutral-900 p-1.5 rounded-2xl border border-black/5 shadow-sm w-full mb-4">
+            <div className="flex items-center justify-between gap-1 bg-ivory dark:bg-black/30 p-1 rounded-[2rem]  -black/5 dark:-white/10  w-full mb-2">
                 {INDUSTRY_CATEGORIES.map((category) => (
                     <button
                         key={category.id}
                         onMouseEnter={() => setActiveCategory(category.id)}
                         onClick={() => handleCategoryClick(category)}
                         className={`
-                            flex-1 min-w-0 overflow-hidden px-2 xl:px-3 py-3 rounded-xl text-[11px] xl:text-xs font-bold uppercase tracking-wider transition-all whitespace-nowrap flex items-center justify-center gap-2 cursor-pointer
+                            flex-1 min-w-0 overflow-hidden px-2 py-2 rounded-[2rem] text-[10px] xl:text-[11px] font-bold uppercase tracking-wider transition-all whitespace-nowrap flex items-center justify-center gap-1.5 cursor-pointer
                             ${activeCategory === category.id
-                                ? 'bg-black text-white dark:bg-white dark:text-black shadow-sm'
+                                ? 'bg-black text-white dark:bg-white dark:text-black '
                                 : 'text-text-secondary hover:bg-black/5 dark:hover:bg-white/5 hover:text-text-primary'}
                         `}
                     >
                         {category.icon && (
                             <category.icon
-                                className={`w-4 h-4 shrink-0 ${activeCategory === category.id ? 'text-white dark:text-black' : ''}`}
+                                className={`w-3.5 h-3.5 shrink-0 ${activeCategory === category.id ? 'text-white dark:text-black' : ''}`}
                             />
                         )}
                         <span className="min-w-0 max-w-full truncate">{category.label}</span>
@@ -312,7 +315,7 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
 
             {/* Bottom: Items */}
             <div>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
                     {INDUSTRY_CATEGORIES.find(c => c.id === activeCategory)?.items.map((item) => (
                         <a
                             key={item.name}
@@ -325,7 +328,7 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                                 e.preventDefault();
                                 handleItemClick(item);
                             }}
-                            className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
+                            className="flex items-center gap-3 w-full p-3 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
                         >
                             <item.icon className="w-4 h-4 text-text-secondary group-hover:text-current" />
                             <span className="flex-1 text-sm font-medium">{item.name}</span>
@@ -334,9 +337,9 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                     ))}
                 </div>
             </div>
-            <div className="pt-3 border-t border-black/5 bg-black/5 rounded-xl p-3">
-                <div className="flex items-center justify-between gap-4">
-                    <div className="flex items-center gap-3 min-w-0">
+            <div className="pt-2 -t -black/5 bg-ivory dark:bg-white/5 rounded-[2rem] p-2">
+                <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-2 min-w-0">
                         <div className="bg-coral/10 p-2 rounded-full text-coral shrink-0">
                             <Activity className="w-5 h-5" />
                         </div>
@@ -356,6 +359,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
     const [activeTab, setActiveTab] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [openMobileCategory, setOpenMobileCategory] = useState<string | null>(null);
+    const [isSnowActive, setIsSnowActive] = useState(false);
 
     const toggleMobileCategory = (category: string) => {
         setOpenMobileCategory(openMobileCategory === category ? null : category);
@@ -395,11 +399,11 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                         whileHover={{ rotate: 180 }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
                     />
-                    <span className="font-display text-3xl font-bold text-black dark:text-white tracking-tight transition-colors">caste//s</span>
+                    <span className="font-display text-4xl font-bold text-black dark:text-white tracking-tight transition-colors">Caste//s</span>
                 </motion.div>
 
                 <div className="flex items-center gap-6">
-                    <Menu setActive={setActiveTab} className="border-none shadow-none bg-transparent dark:bg-transparent backdrop-blur-none">
+                    <Menu setActive={setActiveTab} className="-none  bg-transparent dark:bg-transparent backdrop-blur-none">
 
                         {/* CASES MENU */}
                         <MenuItem 
@@ -411,7 +415,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                                 onNavigate?.('work');
                             }}
                         >
-                            <div className="w-[720px] p-6">
+                            <div className="w-[720px] p-3">
                                 <CasesMenu onNavigate={onNavigate} />
                             </div>
                         </MenuItem>
@@ -426,7 +430,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                                 onNavigate?.('services');
                             }}
                         >
-                            <div className="w-[800px] p-4">
+                            <div className="w-[800px] p-3">
                                 <ServicesMenu onNavigate={onNavigate} />
                             </div>
                         </MenuItem>
@@ -441,7 +445,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                                 onNavigate?.('industries');
                             }}
                         >
-                            <div className="w-[800px] p-4">
+                            <div className="w-[800px] p-3">
                                 <IndustriesMenu onNavigate={onNavigate} />
                             </div>
                         </MenuItem>
@@ -466,6 +470,13 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
 
                     <div className="flex items-center gap-3">
                         <AnimatedThemeToggler className="w-8 h-8 flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 rounded-full" />
+                        <button
+                            onClick={() => setIsSnowActive(true)}
+                            className="w-8 h-8 flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors p-2"
+                            aria-label="Start snow effect"
+                        >
+                            <Snowflake className="w-5 h-5 text-text-primary" />
+                        </button>
                         <Button
                             href="/contact"
                             size="sm"
@@ -486,10 +497,17 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                 <MobileNavHeader>
                     <div className="flex items-center gap-2" onClick={(e) => { e.preventDefault(); onNavigate?.('home'); setMobileMenuOpen(false); }}>
                         <img src="/castells-logo.png" alt="Castells Logo" className="w-8 h-8 object-contain" />
-                        <span className="font-display text-xl font-bold text-text-primary tracking-tight">caste//s</span>
+                        <span className="font-display text-2xl font-bold text-text-primary tracking-tight">Caste//s</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <AnimatedThemeToggler className="w-8 h-8 flex items-center justify-center" />
+                        <button
+                            onClick={() => setIsSnowActive(true)}
+                            className="w-8 h-8 flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors p-2"
+                            aria-label="Start snow effect"
+                        >
+                            <Snowflake className="w-5 h-5 text-text-primary" />
+                        </button>
                         <MobileNavToggle isOpen={mobileMenuOpen} onClick={() => setMobileMenuOpen(!mobileMenuOpen)} />
                     </div>
                 </MobileNavHeader>
@@ -507,7 +525,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                                 <div className="grid gap-4">
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Branding & Design</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Identity & Logo</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">UI/UX Design</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Brand Guidelines</a>
@@ -515,7 +533,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                                     </div>
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Development</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Custom Web</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Mobile Apps</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">E-commerce</a>
@@ -523,7 +541,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                                     </div>
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Growth</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Paid Media (PPC)</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">SEO Strategy</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Video Ads</a>
@@ -531,7 +549,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                                     </div>
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Systems</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">CRM Setup</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Automation</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Analytics & BI</a>
@@ -548,7 +566,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                                 <div className="grid gap-4">
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Construction</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">General</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Roofing</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Remodeling</a>
@@ -556,14 +574,14 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                                     </div>
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Home Services</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">HVAC</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Solar</a>
                                         </div>
                                     </div>
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Automotive</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Detailing</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Wraps & PPF</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Performance</a>
@@ -571,7 +589,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                                     </div>
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Professional</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Legal</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Finance</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Real Estate</a>
@@ -585,7 +603,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                         <a href="#about" onClick={(e) => { e.preventDefault(); onNavigate?.('about'); setMobileMenuOpen(false); }} className="block p-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-display text-xl font-bold text-text-primary">Agency</a>
                         <a href="#blog" onClick={(e) => { e.preventDefault(); onNavigate?.('blog'); setMobileMenuOpen(false); }} className="block p-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-display text-xl font-bold text-text-primary">Insights</a>
                     </div>
-                    <div className="pt-4 border-t border-black/5 dark:border-white/5">
+                    <div className="pt-4 -t -black/5 dark:-white/5">
                         <Button
                             href="/contact"
                             size="sm"
@@ -601,6 +619,11 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                     </div>
                 </MobileNavMenu>
             </MobileNav>
+
+            {/* Snow Effect */}
+            <SnowEffect
+                isActive={isSnowActive}
+            />
         </Navbar>
     );
 };

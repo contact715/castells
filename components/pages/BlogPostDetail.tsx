@@ -170,7 +170,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
     };
 
     return (
-        <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-32 pb-20">
+        <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20">
             <SEO title={`${post.title} | Castells Blog`} description={post.content.intro} />
             <SchemaMarkup
                 type="Article"
@@ -193,7 +193,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                     }
                 }}
             />
-            <div className="container mx-auto px-6">
+            <div className="container mx-auto px-6 pt-4 md:pt-6">
                 {/* Breadcrumbs */}
                 <div className="mb-12">
                     <Breadcrumbs
@@ -216,13 +216,24 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                         <img
                             src={post.image}
                             alt={post.title}
-                            className="w-full h-full object-cover opacity-90 group-hover:opacity-70 transition-opacity duration-700"
+                            className="w-full h-full object-cover opacity-70 transition-opacity duration-700"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
                     </div>
                     
-                    {/* Content Overlay */}
+                    {/* Content Overlay with Blur Background */}
                     <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between z-10">
+                        {/* Gradient Blur Layer - constant gradient from top (0%) to bottom (100%) */}
+                        <div 
+                            className="absolute inset-0"
+                            style={{
+                                backdropFilter: 'blur(40px)',
+                                WebkitBackdropFilter: 'blur(40px)',
+                                maskImage: 'linear-gradient(to bottom, transparent 0%, black 100%)',
+                                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 100%)',
+                                pointerEvents: 'none',
+                            }}
+                        />
+                        <div className="relative z-10 flex flex-col justify-between h-full">
                         {/* Top: Badge */}
                         <div className="flex items-center gap-2">
                             <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
@@ -254,10 +265,11 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                                     <Clock className="w-4 h-4" />
                                     <span>{post.readTime}</span>
                                 </div>
-                                <div className="ml-auto px-3 py-1.5 bg-coral/20 backdrop-blur-sm border border-coral/30 rounded-xl text-coral text-xs font-bold uppercase tracking-widest">
+                                <div className="ml-auto px-3 py-1.5 bg-coral/20 backdrop-blur-sm  -coral/30 rounded-xl text-coral text-xs font-bold uppercase tracking-widest">
                                     {post.category}
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </div>
                 </motion.div>
@@ -289,16 +301,16 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                             ))}
 
                             {/* Conclusion */}
-                            <div className="pt-8 border-t border-black/10 dark:border-white/10">
+                            <div className="pt-8 -t -black/10 dark:-white/10">
                                 <p className="text-xl text-text-secondary dark:text-white/80 leading-relaxed font-medium">
                                     {post.content.conclusion}
                                 </p>
                             </div>
 
                             {/* Share Section */}
-                            <div className="flex items-center gap-4 pt-8 border-t border-black/10 dark:border-white/10">
+                            <div className="flex items-center gap-4 pt-8 -t -black/10 dark:-white/10">
                                 <span className="text-sm text-text-secondary dark:text-white/60">Share:</span>
-                                <button className="p-2 rounded-xl bg-white dark:bg-surface border border-black/5 dark:border-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
+                                <button className="p-2 rounded-xl bg-white dark:bg-surface  -black/5 dark:-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
                                     <Share2 className="w-4 h-4 text-text-primary dark:text-white" />
                                 </button>
                             </div>
@@ -319,7 +331,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                             </Button>
 
                             {/* Related Posts */}
-                            <div className="bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-[2rem] p-6">
+                            <div className="bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] p-6">
                                 <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white mb-4">
                                     Related Posts
                                 </h3>

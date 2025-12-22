@@ -99,12 +99,12 @@ interface TestimonialCardProps {
 }
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ name, role, quote, avatar }) => (
-  <div className="w-[350px] md:w-[450px] bg-white border border-black/5 p-6 md:p-8 rounded-2xl mx-4 flex flex-col justify-between h-[220px] md:h-[240px] hover:border-coral/20 hover:shadow-lg transition-all duration-300">
+  <div className="w-[350px] md:w-[450px] bg-white  -black/5 p-6 md:p-8 rounded-[2rem] mx-4 flex flex-col justify-between h-[220px] md:h-[240px] hover:-coral/20 hover: transition-all duration-300">
     <p className="text-lg md:text-xl text-text-secondary font-light leading-relaxed line-clamp-4">
       "{quote}"
     </p>
     <div className="flex items-center gap-4 mt-6">
-      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-coral to-purple-500 flex items-center justify-center text-white font-bold text-sm shadow-md">
+      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-coral to-purple-500 flex items-center justify-center text-white font-bold text-sm ">
         {avatar}
       </div>
       <div>
@@ -122,7 +122,7 @@ const Testimonials: React.FC = () => {
   const row3 = TESTIMONIALS.slice(8, 12);
 
   return (
-    <section className="py-32 bg-ivory relative overflow-hidden border-t border-black/5">
+    <section className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory relative overflow-hidden">
       {/* Background Gradients */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-coral/5 blur-[120px] rounded-full opacity-50" />

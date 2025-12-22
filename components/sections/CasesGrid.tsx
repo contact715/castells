@@ -35,11 +35,11 @@ const cardVariants = {
 const staggerOffsets = [0, 60, 20, 80];
 
 const CasesGrid: React.FC<CasesGridProps> = ({ onNavigate }) => {
-    // Take first 4 case studies
-    const cases = CASE_STUDIES.slice(0, 4);
+    // Take first 9 case studies
+    const cases = CASE_STUDIES.slice(0, 9);
 
     return (
-        <section id="cases" className="py-24 bg-ivory dark:bg-black border-t border-black/5 dark:border-white/5">
+        <section id="cases" className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory dark:bg-black">
             <div className="container mx-auto px-6">
 
                 {/* Header */}
@@ -124,14 +124,15 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseItem, onClick }) => {
             className="group cursor-pointer block"
         >
             {/* Image */}
-            <div className="relative aspect-[3/4] rounded-2xl overflow-hidden mb-4">
+            <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden mb-4">
                 <img
                     src={caseItem.image}
                     alt={caseItem.client}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 will-change-transform"
+                    style={{ transform: 'translateZ(0)' }}
                 />
                 {/* Subtle gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[2rem]" />
             </div>
 
             {/* Content */}

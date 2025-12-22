@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Linkedin, ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import { m as motion } from 'framer-motion';
 import { Badge } from '../ui/Badge';
 import AnimatedHeading from '../ui/AnimatedHeading';
@@ -82,7 +82,7 @@ interface TeamProps {
 
 const Team: React.FC<TeamProps> = ({ onNavigate }) => {
   return (
-    <section id="team" className="py-20 bg-ivory dark:bg-[#191919] border-t border-black/5 dark:border-white/5 relative overflow-hidden">
+    <section id="team" className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory dark:bg-[#191919] relative overflow-hidden">
       <div className="container mx-auto px-6 relative z-10">
 
         {/* Section Header */}
@@ -113,22 +113,23 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
             <motion.div
               key={idx}
               variants={cardVariants}
-              className="group relative aspect-[3/4] rounded-xl overflow-hidden"
+              className="group relative aspect-[3/4] rounded-[2rem] overflow-hidden"
             >
               {/* Background Image */}
               <img
                 src={member.image}
                 alt={member.name}
-                className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 will-change-transform"
+                style={{ transform: 'translateZ(0)' }}
               />
 
               {/* Gradient Overlay - Always visible */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
 
               {/* Content - Bottom */}
-              <div className="absolute bottom-0 left-0 right-0 p-4">
+              <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
                 {/* Name */}
-                <h3 className="font-display text-lg font-semibold text-white mb-0.5">
+                <h3 className="font-display text-base sm:text-lg font-semibold text-white mb-0.5">
                   {member.name}
                 </h3>
                 {/* Role */}
@@ -137,13 +138,6 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
                 </span>
               </div>
 
-              {/* LinkedIn - Top Right */}
-              <a
-                href="#"
-                className="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white hover:bg-coral hover:border-coral transition-all"
-              >
-                <Linkedin className="w-3.5 h-3.5" />
-              </a>
             </motion.div>
           ))}
 
@@ -151,7 +145,7 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
           <motion.div
             variants={cardVariants}
             onClick={() => onNavigate?.('careers')}
-            className="group relative aspect-[3/4] rounded-xl overflow-hidden bg-surface cursor-pointer"
+            className="group relative aspect-[3/4] rounded-[2rem] overflow-hidden bg-surface cursor-pointer"
           >
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-30">
@@ -171,7 +165,7 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
             {/* Content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
               {/* Icon */}
-              <div className="w-16 h-16 rounded-2xl bg-coral flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 rounded-[2rem] bg-coral flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                 <ArrowUpRight className="w-7 h-7 text-white group-hover:rotate-45 transition-transform duration-300" />
               </div>
 
@@ -185,7 +179,7 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
             </div>
 
             {/* Border Effect */}
-            <div className="absolute inset-0 rounded-xl border border-black/5 dark:border-white/10 group-hover:border-coral/50 transition-colors duration-300" />
+            <div className="absolute inset-0 rounded-[2rem]  -black/5 dark:-white/10 group-hover:-coral/50 transition-colors duration-300" />
           </motion.div>
         </motion.div>
 

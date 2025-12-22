@@ -13,8 +13,8 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
  * Standardized Input component for consistent form styling
  * 
  * Variants:
- * - default: Light background with border (for light forms)
- * - minimal: Transparent with bottom border (for dark forms)
+ * - default: Light background with  (for light forms)
+ * - minimal: Transparent with bottom  (for dark forms)
  * - dark: Dark background (for dark forms)
  * 
  * Sizes:
@@ -41,15 +41,15 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const baseStyles = "w-full focus:outline-none transition-all font-sans";
     
     const variants = {
-      default: "bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-xl focus:border-coral dark:focus:border-coral focus:bg-white dark:focus:bg-white/10 placeholder:text-black/20 dark:placeholder:text-white/20",
-      minimal: "bg-transparent border-b border-white/20 rounded-none focus:border-white placeholder:text-white/20 text-white",
-      dark: "bg-ivory border border-black/10 rounded-xl focus:border-coral placeholder:text-text-secondary/40"
+      default: "bg-black/5 dark:bg-white/5  -black/5 dark:-white/5 rounded-xl focus:-coral dark:focus:-coral focus:bg-white dark:focus:bg-white/10 placeholder:text-black/20 dark:placeholder:text-white/20",
+      minimal: "bg-transparent -b -white/20 rounded-none focus:-white placeholder:text-white/20 text-white",
+      dark: "bg-ivory  -black/10 rounded-xl focus:-coral placeholder:text-text-secondary/40"
     };
 
     const sizes = {
       sm: "px-4 py-2 text-sm",
       md: "px-4 py-3 text-base",
-      lg: "px-8 py-4 text-xl rounded-2xl"
+      lg: "px-8 py-4 text-xl rounded-xl"
     };
 
     const labelSizes = {
@@ -81,7 +81,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             baseStyles,
             variants[variant],
             sizes[size],
-            error && "border-red-500 focus:border-red-500",
+            error && "-red-500 focus:-red-500",
             className
           )}
           aria-invalid={error ? 'true' : 'false'}

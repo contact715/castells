@@ -37,7 +37,7 @@ const AILab: React.FC = () => {
             <div className="container mx-auto px-6 relative z-10">
                 <div className="max-w-4xl mx-auto">
                     <div className="text-left mb-16">
-                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-black/10 bg-white text-xs font-bold uppercase tracking-widest mb-6 text-text-secondary">
+                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full  -black/10 bg-white text-xs font-bold uppercase tracking-widest mb-6 text-text-secondary">
                             <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
                             Gemini 2.5 Powered
                         </div>
@@ -66,7 +66,7 @@ const AILab: React.FC = () => {
                                 type="submit"
                                 size="md"
                                 disabled={status === LoadingState.LOADING || !input}
-                                className="h-full border-none disabled:opacity-50"
+                                className="h-full -none disabled:opacity-50"
                             >
                                 {status === LoadingState.LOADING ? (
                                     <Loader2 className="animate-spin" />
@@ -78,14 +78,14 @@ const AILab: React.FC = () => {
                     </form>
 
                     {status === LoadingState.ERROR && (
-                        <div className="text-center text-coral bg-red-50 p-4 rounded-lg border border-red-100">
+                        <div className="text-center text-coral bg-red-50 p-4 rounded-lg  -red-100">
                             System unavailable. Please try again later.
                         </div>
                     )}
 
                     {/* Result Card - Solid Opaque */}
                     {status === LoadingState.SUCCESS && concept && (
-                        <div className="bg-white dark:bg-black border border-black/5 dark:border-white/10 rounded-3xl p-8 md:p-16 shadow-none hover:shadow-2xl transition-all duration-500 animate-float">
+                        <div className="bg-white dark:bg-black  -black/5 dark:-white/10 rounded-[2rem] p-8 md:p-16  hover: transition-all duration-500 animate-float">
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                                 <div>
                                     <h3 className="text-xs text-coral font-semibold tracking-widest uppercase mb-3">Brand Concept</h3>
@@ -95,11 +95,11 @@ const AILab: React.FC = () => {
                                     <p className="text-2xl text-text-primary italic font-display mb-8">"{concept.tagline}"</p>
                                 </div>
                                 <div className="space-y-10">
-                                    <div className="bg-ivory dark:bg-white/5 p-6 rounded-xl border border-black/5 dark:border-white/5">
+                                    <div className="bg-ivory dark:bg-white/5 p-6 rounded-xl  -black/5 dark:-white/5">
                                         <h3 className="text-xs text-coral font-semibold tracking-widest uppercase mb-3">Strategic Vision</h3>
                                         <p className="text-text-secondary leading-relaxed text-lg">{concept.description}</p>
                                     </div>
-                                    <div className="bg-ivory dark:bg-white/5 p-6 rounded-xl border border-black/5 dark:border-white/5">
+                                    <div className="bg-ivory dark:bg-white/5 p-6 rounded-xl  -black/5 dark:-white/5">
                                         <h3 className="text-xs text-coral font-semibold tracking-widest uppercase mb-3">Visual Direction</h3>
                                         <p className="text-text-secondary leading-relaxed text-lg">{concept.visualCues}</p>
                                     </div>

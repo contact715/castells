@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Code, TrendingUp, Users, Palette, ArrowRight, ArrowUpRight, Clock } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { Code, TrendingUp, Users, Palette } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import { PageView } from '../../App';
@@ -82,10 +82,8 @@ interface BlogProps {
 }
 
 const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
-    const [hoveredId, setHoveredId] = useState<number | null>(null);
-
     return (
-        <section id="blog" className="py-24 md:py-32 bg-ivory dark:bg-[#191919] border-t border-black/5 dark:border-white/5 overflow-hidden">
+        <section id="blog" className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory dark:bg-[#191919] overflow-hidden">
             <div className="container mx-auto px-6">
                 {/* Header */}
                 <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16">
@@ -114,10 +112,8 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
                 </div>
 
                 {/* Bento Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
                     {BLOG_POSTS.map((post, index) => {
-                        const Icon = post.icon;
-                        const isHovered = hoveredId === post.id;
                         const isFirst = index === 0;
                         
                         return (
@@ -128,123 +124,75 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
                                     e.preventDefault();
                                     onNavigate?.('blog-post', { id: post.id });
                                 }}
-                                onMouseEnter={() => setHoveredId(post.id)}
-                                onMouseLeave={() => setHoveredId(null)}
                                 initial={{ opacity: 0, y: 30 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1, duration: 0.5 }}
                                 className={`
-                                    group relative bg-surface rounded-3xl overflow-hidden border border-black/5 dark:border-white/5 
-                                    hover:border-coral/30 transition-all duration-500 cursor-pointer
-                                    ${isFirst ? 'md:col-span-2 md:row-span-2' : ''}
+                                    group relative bg-surface rounded-[2rem] overflow-hidden  -black/5 dark:-white/5 
+                                    hover:-coral/30 transition-all duration-500 cursor-pointer
+                                    ${isFirst ? 'min-h-[300px] md:col-span-2 md:row-span-2 md:min-h-0' : 'h-[220px]'}
                                 `}
                             >
-                                {/* Background Image */}
-                                <div className="absolute inset-0">
-                                    <img 
-                                        src={post.image} 
-                                        alt={post.title}
-                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                        loading="lazy"
-                                    />
+                                {/* Background Media - Video for featured, Image for others */}
+                                <div className="absolute inset-0 overflow-hidden rounded-[2rem]">
+                                    {isFirst ? (
+                                        <video
+                                            autoPlay
+                                            loop
+                                            muted
+                                            playsInline
+                                            poster={post.image}
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
+                                            style={{ transform: 'translateZ(0)' }}
+                                        >
+                                            <source src="https://videos.pexels.com/video-files/3044159/3044159-hd_1920_1080_30fps.mp4" type="video/mp4" />
+                                        </video>
+                                    ) : (
+                                        <img
+                                            src={post.image}
+                                            alt={post.title}
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
+                                            loading="lazy"
+                                            style={{ transform: 'translateZ(0)' }}
+                                        />
+                                    )}
                                 </div>
                                 
                                 {/* Gradient Overlay for text readability */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20" />
-                                <div className={`absolute inset-0 bg-gradient-to-br ${post.color} opacity-0 group-hover:opacity-40 transition-opacity duration-500`} />
+                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20 rounded-[2rem]" />
+                                <div className={`absolute inset-0 bg-gradient-to-br ${post.color} opacity-0 group-hover:opacity-40 transition-opacity duration-500 rounded-[2rem]`} />
                                 
                                 {/* Content */}
-                                <div className={`relative h-full flex flex-col ${isFirst ? 'p-8 md:p-10' : 'p-6'}`}>
-                                    {/* Top Row */}
-                                    <div className="flex items-start justify-between mb-auto">
-                                        <motion.div 
-                                            className={`
-                                                rounded-2xl bg-white/20 backdrop-blur-sm flex items-center justify-center 
-                                                group-hover:bg-coral transition-colors duration-300
-                                                ${isFirst ? 'w-16 h-16' : 'w-12 h-12'}
-                                            `}
-                                            animate={isHovered ? { scale: 1.1, rotate: 5 } : { scale: 1, rotate: 0 }}
-                                            transition={{ duration: 0.3 }}
-                                        >
-                                            <Icon className={`text-white group-hover:text-white transition-colors ${isFirst ? 'w-8 h-8' : 'w-5 h-5'}`} />
-                                        </motion.div>
-                                        
-                                        <motion.div
-                                            animate={isHovered ? { x: 0, opacity: 1 } : { x: 10, opacity: 0 }}
-                                            transition={{ duration: 0.2 }}
-                                        >
-                                            <ArrowUpRight className="w-5 h-5 text-white" />
-                                        </motion.div>
-                                    </div>
-
-                                    {/* Spacer */}
-                                    <div className={isFirst ? 'h-16 md:h-24' : 'h-8'} />
-
-                                    {/* Bottom Content */}
+                                <div className={`relative h-full flex flex-col justify-end ${isFirst ? 'p-6 sm:p-8 md:p-10' : 'p-6'}`}>
                                     <div>
-                                        {/* Meta */}
-                                        <div className="flex items-center gap-2 mb-3">
-                                            <span className="text-xs font-bold uppercase tracking-widest text-coral">
-                                                {post.category}
-                                            </span>
-                                            <span className="w-1 h-1 rounded-full bg-white/50" />
-                                            <span className="text-xs text-white/70 flex items-center gap-1">
-                                                <Clock className="w-3 h-3" />
-                                                {post.readTime}
-                                            </span>
-                                        </div>
-
                                         {/* Title */}
                                         <h3 className={`
-                                            font-display font-semibold text-white leading-snug
-                                            group-hover:text-coral transition-colors duration-300
-                                            ${isFirst ? 'text-2xl md:text-3xl mb-4' : 'text-base md:text-lg line-clamp-2'}
+                                            font-display font-semibold text-white leading-snug mb-3 md:mb-4
+                                            group-hover:text-white transition-colors duration-300
+                                            ${isFirst ? 'text-xl sm:text-2xl md:text-3xl' : 'text-base md:text-lg line-clamp-2'}
                                         `}>
                                             {post.title}
                                         </h3>
 
                                         {/* Excerpt - only for featured */}
                                         {isFirst && (
-                                            <p className="text-white/70 leading-relaxed mb-6 line-clamp-2">
+                                            <p className="text-white/70 text-sm sm:text-base leading-relaxed mb-3 md:mb-4 line-clamp-2">
                                                 {post.excerpt}
                                             </p>
                                         )}
 
-                                        {/* Date */}
-                                        <div className={`text-xs text-white/60 ${isFirst ? '' : 'mt-3'}`}>
-                                            {post.date}
+                                        {/* Meta - Date and Category */}
+                                        <div className="flex items-center justify-between">
+                                            <div className="text-xs text-white/70">
+                                                {post.date}
+                                            </div>
+                                            <div className="text-xs text-white font-medium group-hover:text-white">
+                                                {post.category}
+                                            </div>
                                         </div>
                                     </div>
-
-                                    {/* Read More - Featured only */}
-                                    {isFirst && (
-                                        <motion.div 
-                                            className="flex items-center gap-2 text-coral font-bold text-sm uppercase tracking-widest mt-6"
-                                            animate={isHovered ? { x: 5 } : { x: 0 }}
-                                        >
-                                            <span>Read Article</span>
-                                            <ArrowRight className="w-4 h-4" />
-                                        </motion.div>
-                                    )}
                                 </div>
-
-                                {/* Decorative Elements - Featured only */}
-                                {isFirst && (
-                                    <>
-                                        <div className="absolute top-0 right-0 w-48 h-48 opacity-10 dark:opacity-20">
-                                            <svg viewBox="0 0 200 200" className="w-full h-full">
-                                                <circle cx="150" cy="50" r="80" fill="none" stroke="#E08576" strokeWidth="1" />
-                                                <circle cx="150" cy="50" r="50" fill="none" stroke="#E08576" strokeWidth="1" />
-                                            </svg>
-                                        </div>
-                                        <motion.div 
-                                            className="absolute bottom-8 right-8 w-2 h-2 rounded-full bg-coral"
-                                            animate={{ scale: [1, 1.5, 1], opacity: [0.5, 1, 0.5] }}
-                                            transition={{ duration: 2, repeat: Infinity }}
-                                        />
-                                    </>
-                                )}
                             </motion.a>
                         );
                     })}

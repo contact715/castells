@@ -16,8 +16,8 @@ import { CASE_STUDIES, CaseStudy } from '../../constants';
 
 const Work: React.FC<WorkProps> = ({ onNavigate }) => {
   return (
-    <section id="work" className="bg-ivory relative border-t border-black/5">
-      <div className="container mx-auto px-6 pt-32 pb-12">
+    <section id="work" className="bg-ivory relative">
+      <div className="container mx-auto px-6 pt-16 md:pt-20 pb-12">
 
         {/* Header - Sticky Left Column Layout (like FAQ) */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 mb-20">
@@ -63,7 +63,7 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
           scaleFactor={0.08} // Stronger scaling effect
           blurAmount={8}
         >
-          {CASE_STUDIES.map((project, idx) => (
+          {CASE_STUDIES.slice(0, 9).map((project, idx) => (
             <ScrollStackItem key={project.id}>
               <StackCard
                 project={project}
@@ -97,10 +97,10 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
         e.preventDefault();
         onClick();
       }}
-      className="w-full h-[600px] rounded-[32px] overflow-hidden shadow-2xl border border-white/10 relative group cursor-pointer transition-transform duration-500 hover:scale-[1.02] transform-gpu isolate block"
+      className="w-full h-[400px] sm:h-[500px] md:h-[600px] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[32px] overflow-hidden   -white/10 relative group cursor-pointer transition-transform duration-500 hover:scale-[1.02] transform-gpu isolate block"
     >
       {/* Full Background Media */}
-      <div className="absolute inset-0 bg-black">
+      <div className="absolute inset-0 bg-black overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[32px]">
         {project.video ? (
           <video
             autoPlay
@@ -108,7 +108,8 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
             muted
             playsInline
             poster={project.image}
-            className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
+            className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700 will-change-opacity"
+            style={{ transform: 'translateZ(0)' }}
           >
             <source src={project.video} type="video/mp4" />
           </video>
@@ -116,47 +117,48 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
           <img
             src={project.image}
             alt={project.client}
-            className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
+            className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700 will-change-opacity"
             loading="lazy"
+            style={{ transform: 'translateZ(0)' }}
           />
         )}
 
         {/* Gradient Overlay for Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[32px]" />
       </div>
 
       {/* Content Overlay */}
-      <div className="absolute inset-0 p-10 md:p-14 flex flex-col justify-between z-10">
+      <div className="absolute inset-0 p-6 sm:p-8 md:p-10 lg:p-14 flex flex-col justify-between z-10">
 
         {/* Top Row */}
         <div className="flex justify-between items-start">
-          <div className="bg-white/10 backdrop-blur-md border border-white/10 px-4 py-2 rounded-xl text-white text-xs font-bold uppercase tracking-widest">
+          <div className="bg-white/10 backdrop-blur-md  -white/10 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest">
             {project.year} — {project.industry}
           </div>
-          <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center text-white group-hover:bg-white group-hover:text-black transition-all duration-300">
-            <ArrowUpRight className="w-5 h-5" />
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-[1.5rem] sm:rounded-[2rem] bg-white/0 backdrop-blur-md  -white/10 flex items-center justify-center group-hover:bg-white group-hover:-white/20 transition-all duration-300">
+            <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/50 group-hover:text-white transition-colors" />
           </div>
         </div>
 
         {/* Bottom Content */}
         <div>
-          <div className="mb-8">
-            <h3 className="font-display text-6xl md:text-8xl font-semibold text-white mb-4 tracking-tight leading-none">
+          <div className="mb-6 sm:mb-8">
+            <h3 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-semibold text-white mb-3 sm:mb-4 tracking-tight leading-none">
               {project.client}
             </h3>
-            <p className="text-white/70 text-lg md:text-xl font-light max-w-2xl leading-relaxed">
+            <p className="text-white/70 text-base sm:text-lg md:text-xl font-light max-w-2xl leading-relaxed">
               {project.description}
             </p>
           </div>
 
           {/* Metrics Row */}
-          <div className="flex gap-12 pt-8 border-t border-white/10">
+          <div className="flex gap-6 sm:gap-12 pt-6 sm:pt-8 -t -white/10">
             <div>
-              <div className="text-4xl md:text-5xl font-display font-bold text-white mb-1">{project.metric}</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1">{project.metric}</div>
               <div className="text-[10px] font-bold uppercase tracking-widest text-white/50">{project.metricLabel}</div>
             </div>
             <div>
-              <div className="text-4xl md:text-5xl font-display font-bold text-white mb-1">{project.secondaryMetric}</div>
+              <div className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1">{project.secondaryMetric}</div>
               <div className="text-[10px] font-bold uppercase tracking-widest text-white/50">{project.secondaryLabel}</div>
             </div>
           </div>

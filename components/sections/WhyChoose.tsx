@@ -58,7 +58,7 @@ const REASONS = [
 
 const WhyChoose: React.FC = () => {
     return (
-        <section className="py-24 md:py-32 bg-ivory relative border-t border-black/5">
+        <section className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory relative">
             <div className="container mx-auto px-6">
 
                 {/* Two Column Layout - Header Left (Sticky), Cards Right (Scroll) */}
@@ -90,27 +90,27 @@ const WhyChoose: React.FC = () => {
                     </div>
 
                     {/* Right: 6 Cards in 2 Columns (Scrollable) */}
-                    <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                         {REASONS.map((item, idx) => (
                             <div
                                 key={idx}
-                                className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start hover:shadow-xl hover:-translate-y-1 transition-all duration-300 border border-black/5 dark:border-white/5 group cursor-pointer"
+                                className="bg-white dark:bg-surface p-6 sm:p-8 rounded-[2rem] h-full flex flex-col items-start hover: hover:-translate-y-1 transition-all duration-300  -black/5 dark:-white/5 group cursor-pointer"
                             >
-                                <div className="flex items-center gap-4 mb-4">
-                                    <div className="w-12 h-12 rounded-xl bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
-                                        <item.icon className="w-6 h-6 stroke-[1.5]" />
+                                <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
+                                    <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-[2rem] bg-coral/10 dark:bg-coral/20 flex items-center justify-center flex-shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
+                                        <item.icon className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.5] text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />
                                     </div>
-                                    <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight">
+                                    <h3 className="font-display font-semibold text-xl sm:text-2xl text-black dark:text-white leading-tight">
                                         {item.title}
                                     </h3>
                                 </div>
 
-                                <p className="text-text-secondary text-sm leading-relaxed mb-4">
+                                <p className="text-text-secondary text-xs sm:text-sm leading-relaxed mb-3 sm:mb-4">
                                     {item.desc}
                                 </p>
 
                                 <div className="mt-auto flex items-baseline gap-2">
-                                    <span className="font-display text-3xl font-bold text-coral">{item.stat}</span>
+                                    <span className="font-display text-2xl sm:text-3xl font-bold text-text-primary dark:text-white">{item.stat}</span>
                                     <span className="text-xs uppercase tracking-widest text-text-secondary">{item.statLabel}</span>
                                 </div>
                             </div>

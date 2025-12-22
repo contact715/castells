@@ -125,7 +125,7 @@ const DivGrid: React.FC<DivGridProps> = ({
           <div
             key={idx}
             className={cn(
-              "cell relative border-[0.5px] transition-all duration-150 will-change-transform hover:opacity-90 hover:scale-[0.98]",
+              "cell relative  transition-all duration-150 will-change-transform hover:opacity-90 hover:scale-[0.98]",
               clickedCell && "animate-cell-reveal [animation-fill-mode:forwards]",
               !interactive && "pointer-events-none",
             )}

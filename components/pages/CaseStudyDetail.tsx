@@ -94,6 +94,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
     { id: 'results', label: 'Results' },
     { id: 'challenge', label: 'Challenge' },
     { id: 'solution', label: 'Solution' },
+    ...(data.brandGuidelines ? [{ id: 'brand-guidelines', label: 'Brand Guidelines' }] : []),
   ];
 
   const scrollToSection = (id: string) => {
@@ -104,9 +105,9 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
   };
 
   return (
-    <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-32 pb-20">
+    <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20">
       <SEO title={`${data.client} Case Study | Castells Agency`} description={data.description} />
-      <div className="container mx-auto px-6">
+      <div className="container mx-auto px-6 pt-4 md:pt-6">
         {/* Breadcrumbs */}
         <div className="mb-12">
           <Breadcrumbs
@@ -126,56 +127,81 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
           className="relative w-full h-[500px] rounded-[2rem] overflow-hidden mb-12 group"
         >
           <div className="absolute inset-0 bg-black">
-            <img
-              src={data.image}
-              alt={data.client}
-              className="w-full h-full object-cover opacity-90 group-hover:opacity-70 transition-opacity duration-700"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
+            {data.video ? (
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                poster={data.image}
+                className="w-full h-full object-cover opacity-70 transition-opacity duration-700"
+              >
+                <source src={data.video} type="video/mp4" />
+              </video>
+            ) : (
+              <img
+                src={data.image}
+                alt={data.client}
+                className="w-full h-full object-cover opacity-70 transition-opacity duration-700"
+              />
+            )}
           </div>
           
-          {/* Content Overlay */}
+          {/* Content Overlay with Blur Background */}
           <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-between z-10">
-            {/* Top: Badge */}
-            <div className="flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
-              <span className="font-bold uppercase tracking-widest text-white text-xs">
-                Case Study
-              </span>
-            </div>
-
-            {/* Bottom: Title, Description and Meta */}
-            <div>
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4 leading-[1.1] tracking-tight">
-                {data.client}
-              </h1>
-              <p className="text-lg text-white/90 mb-6 max-w-3xl leading-relaxed">
-                {data.description}
-              </p>
-              
-              {/* Meta Information */}
-              <div className="flex flex-wrap items-center gap-4 text-sm text-white/80 mb-4">
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4" />
-                  <span>{data.year}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Building2 className="w-4 h-4" />
-                  <span>{data.industry}</span>
-                </div>
-                {data.location && (
-                  <div className="flex items-center gap-2">
-                    <MapPin className="w-4 h-4" />
-                    <span>{data.location}</span>
-                  </div>
-                )}
+            {/* Gradient Blur Layer - constant gradient from top (0%) to bottom (100%) */}
+            <div 
+              className="absolute inset-0"
+              style={{
+                backdropFilter: 'blur(40px)',
+                WebkitBackdropFilter: 'blur(40px)',
+                maskImage: 'linear-gradient(to bottom, transparent 0%, black 100%)',
+                WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 100%)',
+                pointerEvents: 'none',
+              }}
+            />
+            <div className="relative z-10 flex flex-col justify-between h-full">
+              {/* Top: Badge */}
+              <div className="flex items-center gap-2">
+                <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
+                <span className="font-bold uppercase tracking-widest text-white text-xs">
+                  Case Study
+                </span>
               </div>
-              <div className="flex flex-wrap gap-2">
-                {data.services?.map((s: string) => (
-                  <span key={s} className="px-4 py-2 bg-white/10 backdrop-blur-md border border-white/10 rounded-xl text-white text-xs font-bold uppercase tracking-widest">
-                    {s}
-                  </span>
-                ))}
+
+              {/* Bottom: Title, Description and Meta */}
+              <div>
+                <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4 leading-[1.1] tracking-tight">
+                  {data.client}
+                </h1>
+                <p className="text-lg text-white/90 mb-6 max-w-3xl leading-relaxed">
+                  {data.description}
+                </p>
+                
+                {/* Meta Information */}
+                <div className="flex flex-wrap items-center gap-4 text-sm text-white/80 mb-4">
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    <span>{data.year}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Building2 className="w-4 h-4" />
+                    <span>{data.industry}</span>
+                  </div>
+                  {data.location && (
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4" />
+                      <span>{data.location}</span>
+                    </div>
+                  )}
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {data.services?.map((s: string) => (
+                    <span key={s} className="px-4 py-2 bg-white/10 backdrop-blur-md  -white/10 rounded-xl text-white text-xs font-bold uppercase tracking-widest">
+                      {s}
+                    </span>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
@@ -211,7 +237,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {data.results?.map((res: any, idx: number) => (
-                    <div key={idx} className="bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-[2rem] p-6">
+                    <div key={idx} className="bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] p-6">
                       <div className="font-display text-3xl font-bold text-text-primary dark:text-white mb-2">
                         {res.value}
                       </div>
@@ -245,7 +271,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                   {data.solution}
                 </p>
                 {data.keyFeatures && (
-                  <div className="bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-[2rem] p-6">
+                  <div className="bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] p-6">
                     <h3 className="font-display text-lg font-semibold text-text-primary dark:text-white mb-4">Key Deliverables</h3>
                     <ul className="space-y-3">
                       {data.keyFeatures.map((item: string, i: number) => (
@@ -259,9 +285,25 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                 )}
               </section>
 
+              {/* Brand Guidelines - Embedded PDF */}
+              {data.brandGuidelines && (
+                <section id="brand-guidelines" className="space-y-4 pt-8 -t -black/10 dark:-white/10">
+                  <h2 className="font-display text-3xl font-semibold text-text-primary dark:text-white leading-tight">
+                    Brand Guidelines
+                  </h2>
+                  <div className="bg-white dark:bg-surface rounded-[2rem] overflow-hidden  -black/5 dark:-white/5">
+                    <iframe
+                      src={`${encodeURI(data.brandGuidelines)}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+                      className="w-full h-[800px] md:h-[1000px] lg:h-[1200px] border-0"
+                      title={`${data.client} Brand Guidelines`}
+                    />
+                  </div>
+                </section>
+              )}
+
               {/* Testimonial */}
               {data.testimonial && (
-                <div className="pt-8 border-t border-black/10 dark:border-white/10">
+                <div className="pt-8 -t -black/10 dark:-white/10">
                   <div className="text-coral text-5xl font-serif leading-none mb-4">"</div>
                   <blockquote className="font-display text-xl md:text-2xl font-medium leading-relaxed mb-6 text-text-primary dark:text-white">
                     {data.testimonial.quote}
@@ -297,8 +339,57 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                 Back to Work
               </Button>
 
+              {/* Logo & Brand Assets */}
+              {(data.logo || data.logoSvg || data.brandGuidelines || data.website) && (
+                <div className="bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] p-6">
+                  <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white mb-4">
+                    Brand Assets
+                  </h3>
+                  <div className="space-y-4">
+                    {/* Logo */}
+                    {(data.logoSvg || data.logo) && (
+                      <div className="flex items-center justify-center p-4 bg-ivory dark:bg-[#191919] rounded-xl">
+                        <img
+                          src={encodeURI(data.logoSvg || data.logo || '')}
+                          alt={`${data.client} Logo`}
+                          className="max-w-full max-h-24 object-contain"
+                        />
+                      </div>
+                    )}
+                    {/* Brand Guidelines PDF */}
+                    {data.brandGuidelines && (
+                      <a
+                        href={encodeURI(data.brandGuidelines)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between w-full px-4 py-3 bg-ivory dark:bg-[#191919] rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors group"
+                      >
+                        <span className="text-sm font-medium text-text-primary dark:text-white">
+                          Brand Guidelines
+                        </span>
+                        <ExternalLink className="w-4 h-4 text-text-secondary dark:text-white/60 group-hover:text-coral transition-colors" />
+                      </a>
+                    )}
+                    {/* Website Link */}
+                    {data.website && (
+                      <a
+                        href={data.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-between w-full px-4 py-3 bg-ivory dark:bg-[#191919] rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors group"
+                      >
+                        <span className="text-sm font-medium text-text-primary dark:text-white">
+                          Visit Website
+                        </span>
+                        <ExternalLink className="w-4 h-4 text-text-secondary dark:text-white/60 group-hover:text-coral transition-colors" />
+                      </a>
+                    )}
+                  </div>
+                </div>
+              )}
+
               {/* TOC */}
-              <div className="bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-[2rem] p-6">
+              <div className="bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] p-6">
                 <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white mb-4">
                   On this page
                 </h3>
@@ -320,7 +411,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               </div>
 
               {/* Why Castells */}
-              <div className="bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-[2rem] p-6">
+              <div className="bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] p-6">
                 <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white mb-4">
                   Why Castells
                 </h3>
@@ -368,7 +459,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               </div>
 
               {/* CTA */}
-              <div className="bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-[2rem] p-6">
+              <div className="bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] p-6">
                 <h3 className="font-display text-lg font-semibold text-text-primary dark:text-white mb-2">
                   Ready to grow?
                 </h3>

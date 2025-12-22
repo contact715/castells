@@ -24,7 +24,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       <div className="container mx-auto px-6 py-12 relative z-10">
 
         {/* Top Section: CTA - Standardized Two Column Layout */}
-        <div className="border-b border-black/10 mb-8 pb-8">
+        <div className="border-b border-black/10 dark:border-white/10 mb-8 pb-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
 
             {/* Left Column: Badge + Title */}
@@ -64,6 +64,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           </div>
         </div>
+
 
         {/* MEGA FOOTER LAYOUT */}
         <div className="flex flex-col gap-8 mb-8">
