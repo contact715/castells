@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import { cn } from '../../lib/utils';
@@ -7,8 +7,16 @@ import { Section, SectionContainer } from '../ui/Section';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import { INDUSTRY_CATEGORIES, type IndustryCategoryId } from '../../data/industries';
 
-const Industries: React.FC = () => {
+const Industries: React.FC = React.memo(() => {
   const [activeTab, setActiveTab] = useState<IndustryCategoryId>('construction');
+  
+  const handleTabChange = useCallback((tab: IndustryCategoryId) => {
+    setActiveTab(tab);
+  }, []);
+  
+  const activeCategoryItems = useMemo(() => {
+    return INDUSTRY_CATEGORIES.find((c) => c.id === activeTab)?.items || [];
+  }, [activeTab]);
 
   return (
     <Section id="industries" className="pt-12 md:pt-16 pb-24 md:pb-32">
@@ -43,7 +51,7 @@ const Industries: React.FC = () => {
               return (
                 <button
                   key={cat.id}
-                  onClick={() => setActiveTab(cat.id)}
+                  onClick={() => handleTabChange(cat.id)}
                   className={cn(
                     "relative px-4 sm:px-6 py-2.5 sm:py-3 rounded-[2rem] flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 outline-none whitespace-nowrap",
                     isActive
@@ -70,7 +78,7 @@ const Industries: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           <AnimatePresence mode="popLayout">
-            {INDUSTRY_CATEGORIES.find((c) => c.id === activeTab)?.items.map((item, idx) => {
+            {activeCategoryItems.map((item, idx) => {
               const isContactCard = item.type === 'cta';
 
               return (
@@ -180,6 +188,8 @@ const Industries: React.FC = () => {
       </SectionContainer>
     </Section >
   );
-};
+});
+
+Industries.displayName = 'Industries';
 
 export default Industries;

@@ -95,13 +95,48 @@ const CLIENT_LOGOS = [
 
 const Hero: React.FC = () => {
     const [isMuted, setIsMuted] = useState(true);
+    const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
+    const [vimeoScriptLoaded, setVimeoScriptLoaded] = useState(false);
     const iframeRef = useRef<HTMLIFrameElement>(null);
+    const videoContainerRef = useRef<HTMLDivElement>(null);
 
+    // Lazy load video when it enters viewport
     useEffect(() => {
-        // Load Vimeo Player API script
+        if (!videoContainerRef.current) return;
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting && !shouldLoadVideo) {
+                        setShouldLoadVideo(true);
+                        observer.disconnect();
+                    }
+                });
+            },
+            { rootMargin: '100px' } // Start loading 100px before entering viewport
+        );
+
+        observer.observe(videoContainerRef.current);
+
+        return () => {
+            observer.disconnect();
+        };
+    }, [shouldLoadVideo]);
+
+    // Load Vimeo Player API script only when video is about to load
+    useEffect(() => {
+        if (!shouldLoadVideo || vimeoScriptLoaded) return;
+
+        // Check if script already exists
+        if (document.querySelector('script[src="https://player.vimeo.com/api/player.js"]')) {
+            setVimeoScriptLoaded(true);
+            return;
+        }
+
         const script = document.createElement('script');
         script.src = 'https://player.vimeo.com/api/player.js';
         script.async = true;
+        script.onload = () => setVimeoScriptLoaded(true);
         document.body.appendChild(script);
 
         return () => {
@@ -109,7 +144,7 @@ const Hero: React.FC = () => {
                 document.body.removeChild(script);
             }
         };
-    }, []);
+    }, [shouldLoadVideo, vimeoScriptLoaded]);
 
     const toggleMute = () => {
         if (iframeRef.current && (window as any).Vimeo) {
@@ -196,30 +231,39 @@ const Hero: React.FC = () => {
             </div>
 
             {/* Video Section - Contained Width */}
-            <div className="container mx-auto px-4 sm:px-6 pb-12 sm:pb-20">
+            <div className="container mx-auto px-4 sm:px-6 pb-12 sm:pb-20" ref={videoContainerRef}>
                 <div className="relative w-full aspect-video rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-black">
-                    <iframe
-                        ref={iframeRef}
-                        src="https://player.vimeo.com/video/1101673750?h=7ccdfe1d0c&autoplay=1&muted=1&loop=1&controls=1&background=0&responsive=1&byline=0&title=0"
-                        className="absolute inset-0 w-full h-full -0"
-                        frameBorder="0"
-                        referrerPolicy="strict-origin-when-cross-origin"
-                        allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                        allowFullScreen
-                        title="vimeo-player"
-                    />
-                    {/* Sound Toggle Button */}
-                    <button
-                        onClick={toggleMute}
-                        className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm  -white/20 flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
-                        aria-label={isMuted ? "Unmute video" : "Mute video"}
-                    >
-                        {isMuted ? (
-                            <VolumeX className="w-4 h-4 sm:w-5 sm:h-5" />
-                        ) : (
-                            <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" />
-                        )}
-                    </button>
+                    {shouldLoadVideo ? (
+                        <>
+                            <iframe
+                                ref={iframeRef}
+                                src="https://player.vimeo.com/video/1101673750?h=7ccdfe1d0c&autoplay=1&muted=1&loop=1&controls=1&background=0&responsive=1&byline=0&title=0"
+                                className="absolute inset-0 w-full h-full -0"
+                                frameBorder="0"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                                allowFullScreen
+                                title="vimeo-player"
+                                loading="lazy"
+                            />
+                            {/* Sound Toggle Button */}
+                            <button
+                                onClick={toggleMute}
+                                className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm  -white/20 flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
+                                aria-label={isMuted ? "Unmute video" : "Mute video"}
+                            >
+                                {isMuted ? (
+                                    <VolumeX className="w-4 h-4 sm:w-5 sm:h-5" />
+                                ) : (
+                                    <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" />
+                                )}
+                            </button>
+                        </>
+                    ) : (
+                        <div className="absolute inset-0 flex items-center justify-center bg-black/50">
+                            <div className="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

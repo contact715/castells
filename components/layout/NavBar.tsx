@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { m as motion } from "framer-motion";
 import {
     Briefcase, Users, Zap, Globe, Search, Cpu, Home, Car, PenTool,
@@ -352,17 +352,17 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
     );
 };
 
-const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
+const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
     const [activeTab, setActiveTab] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [openMobileCategory, setOpenMobileCategory] = useState<string | null>(null);
     const [isSnowActive, setIsSnowActive] = useState(false);
 
-    const toggleMobileCategory = (category: string) => {
-        setOpenMobileCategory(openMobileCategory === category ? null : category);
-    };
+    const toggleMobileCategory = useCallback((category: string) => {
+        setOpenMobileCategory(prev => prev === category ? null : category);
+    }, []);
 
-    const handleLinkClick = (e: React.MouseEvent, href?: string, page?: PageView) => {
+    const handleLinkClick = useCallback((e: React.MouseEvent, href?: string, page?: PageView) => {
         if (!href) return;
 
         if (page && onNavigate) {
@@ -376,7 +376,16 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
         if (href.startsWith('#')) {
             setMobileMenuOpen(false);
         }
-    };
+    }, [onNavigate]);
+
+    const handleSnowToggle = useCallback(() => {
+        setIsSnowActive(true);
+    }, []);
+
+    const handleHomeClick = useCallback((e: React.MouseEvent) => {
+        e.preventDefault();
+        onNavigate?.('home');
+    }, [onNavigate]);
 
     return (
         <Navbar>
@@ -384,7 +393,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
             <NavBody>
                 <motion.div
                     className="flex items-center gap-2 group cursor-pointer"
-                    onClick={(e) => { e.preventDefault(); onNavigate?.('home'); }}
+                    onClick={handleHomeClick}
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                 >
@@ -395,6 +404,8 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                         initial={{ rotate: 0 }}
                         whileHover={{ rotate: 180 }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
+                        loading="eager"
+                        fetchPriority="high"
                     />
                     <span className="font-display text-4xl font-bold text-black dark:text-white tracking-tight transition-colors leading-none flex items-center">Caste//s</span>
                 </motion.div>
@@ -468,7 +479,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                     <div className="flex items-center gap-3">
                         <AnimatedThemeToggler className="w-8 h-8 flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 rounded-full" />
                         <button
-                            onClick={() => setIsSnowActive(true)}
+                            onClick={handleSnowToggle}
                             className="w-8 h-8 flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors p-2"
                             aria-label="Start snow effect"
                         >
@@ -492,14 +503,14 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
             {/* Mobile Navigation */}
             <MobileNav>
                 <MobileNavHeader>
-                    <div className="flex items-center gap-2" onClick={(e) => { e.preventDefault(); onNavigate?.('home'); setMobileMenuOpen(false); }}>
-                        <img src="/castells-logo.png" alt="Castells Logo" className="w-8 h-8 object-contain" />
+                    <div className="flex items-center gap-2" onClick={(e) => { e.preventDefault(); handleHomeClick(e); setMobileMenuOpen(false); }}>
+                        <img src="/castells-logo.png" alt="Castells Logo" className="w-8 h-8 object-contain" loading="eager" fetchPriority="high" />
                         <span className="font-display text-2xl font-bold text-text-primary tracking-tight">Caste//s</span>
                     </div>
                     <div className="flex items-center gap-2">
                         <AnimatedThemeToggler className="w-8 h-8 flex items-center justify-center" />
                         <button
-                            onClick={() => setIsSnowActive(true)}
+                            onClick={handleSnowToggle}
                             className="w-8 h-8 flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors p-2"
                             aria-label="Start snow effect"
                         >
@@ -623,6 +634,8 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
             />
         </Navbar>
     );
-};
+});
+
+NavBar.displayName = 'NavBar';
 
 export default NavBar;

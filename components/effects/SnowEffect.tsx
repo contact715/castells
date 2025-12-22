@@ -43,9 +43,13 @@ const SnowEffect: React.FC<SnowEffectProps> = ({ isActive, onComplete }) => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Create snowflakes
+    // Create snowflakes - limit count for performance
     const createSnowflakes = () => {
-      const count = Math.floor((canvas.width * canvas.height) / 15000); // Density based on screen size
+      // Limit max snowflakes to 150 for better performance
+      const maxCount = 150;
+      const densityCount = Math.floor((canvas.width * canvas.height) / 15000);
+      const count = Math.min(densityCount, maxCount);
+      
       snowflakesRef.current = Array.from({ length: count }, () => ({
         x: Math.random() * canvas.width,
         y: Math.random() * canvas.height - canvas.height, // Start above screen
@@ -94,44 +98,55 @@ const SnowEffect: React.FC<SnowEffectProps> = ({ isActive, onComplete }) => {
       ctx.restore();
     };
 
-    // Animation loop
-    const animate = () => {
+    // Animation loop with performance optimization
+    let lastTime = 0;
+    const targetFPS = 30; // Target 30 FPS for snow effect to save performance
+    const frameInterval = 1000 / targetFPS;
+
+    const animate = (currentTime: number) => {
       if (!isActive) return;
 
-      // Clear canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const deltaTime = currentTime - lastTime;
 
-      // Update and draw snowflakes
-      snowflakesRef.current.forEach((flake) => {
-        // Update position
-        flake.y += flake.speed;
-        flake.rotation += flake.rotationSpeed;
-        flake.sway += flake.swaySpeed;
+      // Throttle to target FPS
+      if (deltaTime >= frameInterval) {
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Horizontal sway
-        flake.x += Math.sin(flake.sway) * 0.5;
+        // Update and draw snowflakes
+        snowflakesRef.current.forEach((flake) => {
+          // Update position
+          flake.y += flake.speed;
+          flake.rotation += flake.rotationSpeed;
+          flake.sway += flake.swaySpeed;
 
-        // Reset if off screen
-        if (flake.y > canvas.height) {
-          flake.y = -flake.size;
-          flake.x = Math.random() * canvas.width;
-        }
+          // Horizontal sway
+          flake.x += Math.sin(flake.sway) * 0.5;
 
-        // Wrap horizontally
-        if (flake.x < -flake.size) {
-          flake.x = canvas.width + flake.size;
-        } else if (flake.x > canvas.width + flake.size) {
-          flake.x = -flake.size;
-        }
+          // Reset if off screen
+          if (flake.y > canvas.height) {
+            flake.y = -flake.size;
+            flake.x = Math.random() * canvas.width;
+          }
 
-        // Draw snowflake
-        drawSnowflake(flake.x, flake.y, flake.size, flake.rotation, flake.opacity);
-      });
+          // Wrap horizontally
+          if (flake.x < -flake.size) {
+            flake.x = canvas.width + flake.size;
+          } else if (flake.x > canvas.width + flake.size) {
+            flake.x = -flake.size;
+          }
+
+          // Draw snowflake
+          drawSnowflake(flake.x, flake.y, flake.size, flake.rotation, flake.opacity);
+        });
+
+        lastTime = currentTime - (deltaTime % frameInterval);
+      }
 
       animationFrameRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    animationFrameRef.current = requestAnimationFrame(animate);
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);

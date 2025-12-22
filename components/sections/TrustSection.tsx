@@ -9,7 +9,7 @@ const TESTIMONIAL_AVATARS = [
   'https://i.pravatar.cc/150?img=5',
 ];
 
-const TrustSection: React.FC = () => {
+const TrustSection: React.FC = React.memo(() => {
   return (
     <section className="bg-ivory dark:bg-[#191919] py-8 md:py-10">
       <div className="container mx-auto px-6">
@@ -34,6 +34,8 @@ const TrustSection: React.FC = () => {
                   src={avatar}
                   alt={`Client ${idx + 1}`}
                   className="w-10 h-10 rounded-full border-2 border-white dark:border-black"
+                  loading="lazy"
+                  decoding="async"
                 />
               ))}
             </div>
@@ -55,6 +57,8 @@ const TrustSection: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+TrustSection.displayName = 'TrustSection';
 
 export default TrustSection;

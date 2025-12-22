@@ -90,29 +90,74 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
 
 // Redesigned Card for Stacking - "Immersive Overlay" Aesthetic
 const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => void }> = ({ project, index, onClick }) => {
+  const [shouldLoadVideo, setShouldLoadVideo] = React.useState(false);
+  const cardRef = React.useRef<HTMLAnchorElement>(null);
+
+  // Lazy load video when card enters viewport
+  React.useEffect(() => {
+    if (!cardRef.current || !project.video) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !shouldLoadVideo) {
+            setShouldLoadVideo(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { rootMargin: '200px' } // Start loading 200px before entering viewport
+    );
+
+    observer.observe(cardRef.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [project.video, shouldLoadVideo]);
+
   return (
     <a
+      ref={cardRef}
       href={`/case-studies/${encodeURIComponent(project.id)}`}
       onClick={(e) => {
         e.preventDefault();
         onClick();
       }}
       className="w-full h-[400px] sm:h-[500px] md:h-[600px] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[32px] overflow-hidden   -white/10 relative group cursor-pointer transition-transform duration-500 hover:scale-[1.02] transform-gpu isolate block"
+      onMouseEnter={(e) => {
+        e.currentTarget.style.willChange = 'transform';
+      }}
+      onMouseLeave={(e) => {
+        setTimeout(() => {
+          e.currentTarget.style.willChange = 'auto';
+        }, 500);
+      }}
     >
       {/* Full Background Media */}
       <div className="absolute inset-0 bg-black overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[32px]">
         {project.video ? (
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            poster={project.image}
-            className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700 will-change-opacity"
-            style={{ transform: 'translateZ(0)' }}
-          >
-            <source src={project.video} type="video/mp4" />
-          </video>
+          shouldLoadVideo ? (
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster={project.image}
+              className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700 will-change-opacity"
+              style={{ transform: 'translateZ(0)' }}
+            >
+              <source src={project.video} type="video/mp4" />
+            </video>
+          ) : (
+            <img
+              src={project.image}
+              alt={project.client}
+              className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700 will-change-opacity"
+              loading="lazy"
+              style={{ transform: 'translateZ(0)' }}
+            />
+          )
         ) : (
           <img
             src={project.image}

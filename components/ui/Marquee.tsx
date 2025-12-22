@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { cn } from '../../lib/utils';
 
 interface MarqueeProps {
@@ -7,17 +7,20 @@ interface MarqueeProps {
     velocity?: number;
 }
 
-export const Marquee: React.FC<MarqueeProps> = ({
+export const Marquee: React.FC<MarqueeProps> = React.memo(({
     children,
     className,
     velocity = 1
 }) => {
+    const animationDuration = useMemo(() => `${40 / velocity}s`, [velocity]);
+
     return (
         <div className={cn("relative flex overflow-hidden", className)}>
             <div
                 className="flex gap-12 animate-marquee whitespace-nowrap"
                 style={{
-                    animationDuration: `${40 / velocity}s`
+                    animationDuration,
+                    willChange: 'transform', // Оптимизация для GPU
                 }}
             >
                 {children}
@@ -26,7 +29,8 @@ export const Marquee: React.FC<MarqueeProps> = ({
             <div
                 className="absolute top-0 flex gap-12 animate-marquee whitespace-nowrap"
                 style={{
-                    animationDuration: `${40 / velocity}s`
+                    animationDuration,
+                    willChange: 'transform', // Оптимизация для GPU
                 }}
             >
                 {children}
@@ -34,6 +38,8 @@ export const Marquee: React.FC<MarqueeProps> = ({
             </div>
         </div>
     );
-};
+});
+
+Marquee.displayName = 'Marquee';
 
 export default Marquee;

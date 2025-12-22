@@ -51,9 +51,13 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
   useEffect(() => {
     let rafId: number;
+    let ticking = false;
 
-    const onScroll = () => {
-      if (!wrapperRef.current || cards.length === 0) return;
+    const updateCards = () => {
+      if (!wrapperRef.current || cards.length === 0) {
+        ticking = false;
+        return;
+      }
 
       cards.forEach((card, index) => {
         const rect = card.getBoundingClientRect();
@@ -100,19 +104,28 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         }
       });
 
-      rafId = requestAnimationFrame(onScroll);
+      ticking = false;
+    };
+
+    const onScroll = () => {
+      if (!ticking) {
+        rafId = requestAnimationFrame(updateCards);
+        ticking = true;
+      }
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
+    window.addEventListener('resize', onScroll, { passive: true });
     
     // Initial call
-    onScroll();
+    updateCards();
 
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onScroll);
-      cancelAnimationFrame(rafId);
+      if (rafId) {
+        cancelAnimationFrame(rafId);
+      }
     };
   }, [cards, stackOffset, scaleFactor, blurAmount]);
 

@@ -109,13 +109,33 @@ const LightRays: React.FC<LightRaysProps> = ({
     const initializeWebGL = async () => {
       if (!containerRef.current) return;
 
-      // Small delay to ensure container size is correct
-      await new Promise(resolve => setTimeout(resolve, 10));
+      // Use requestIdleCallback for non-critical WebGL initialization
+      const initIdle = (deadline?: IdleDeadline) => {
+        if (deadline && deadline.timeRemaining() < 5) {
+          // Not enough time, schedule for later
+          requestIdleCallback(initIdle, { timeout: 2000 });
+          return;
+        }
+        
+        // Small delay to ensure container size is correct
+        setTimeout(() => {
+          // Race condition check: component might be unmounted or hidden
+          if (!mountedRef.current || !containerRef.current) return;
+          
+          _initializeWebGL();
+        }, 10);
+      };
 
-      // Race condition check: component might be unmounted or hidden
-      if (!mountedRef.current || !containerRef.current) return;
+      const _initializeWebGL = async () => {
+        if (!containerRef.current) return;
 
-      const renderer = new Renderer({
+        // Small delay to ensure container size is correct
+        await new Promise(resolve => setTimeout(resolve, 10));
+
+        // Race condition check: component might be unmounted or hidden
+        if (!mountedRef.current || !containerRef.current) return;
+
+        const renderer = new Renderer({
         dpr: Math.min(window.devicePixelRatio, 2),
         alpha: true
       });
@@ -342,9 +362,16 @@ void main() {
         uniformsRef.current = null;
         meshRef.current = null;
       };
-    };
+      };
 
-    initializeWebGL();
+      // Start initialization with requestIdleCallback if available
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(initIdle, { timeout: 2000 });
+      } else {
+        // Fallback for browsers without requestIdleCallback
+        setTimeout(initIdle, 100);
+      }
+    };
 
     return () => {
       mountedRef.current = false;

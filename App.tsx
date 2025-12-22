@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense, useCallback } from 'react';
+import React, { useState, useEffect, Suspense, useCallback, useTransition, useMemo } from 'react';
 import { LazyMotion, domAnimation } from "framer-motion";
 import NavBar from './components/layout/NavBar';
 import Footer from './components/layout/Footer';
@@ -7,6 +7,7 @@ import SEO from './components/ui/SEO';
 import SchemaMarkup from './components/ui/SchemaMarkup';
 import ErrorBoundary from './components/ui/ErrorBoundary';
 import SmoothScroll from './components/effects/SmoothScroll';
+import LazySection from './components/ui/LazySection';
 
 import type { NavigationData, PageView } from './types';
 export type { PageView } from './types';
@@ -56,27 +57,28 @@ const PageLoader = () => (
 );
 
 function App() {
-  const initialRoute = routeFromPathname(window.location.pathname);
+  const initialRoute = useMemo(() => routeFromPathname(window.location.pathname), []);
   const [currentPage, setCurrentPage] = useState<PageView>(initialRoute.page);
   const [selectedProject, setSelectedProject] = useState<NavigationData | null>(initialRoute.data ?? null);
-
+  const [isPending, startTransition] = useTransition();
 
   // Scroll to top on page change
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'instant' });
   }, [currentPage]);
 
-
-
   const navigateTo = useCallback((page: PageView, data?: NavigationData) => {
-    if (data) setSelectedProject(data);
-    setCurrentPage(page);
+    // Use transition for non-critical page changes to keep UI responsive
+    startTransition(() => {
+      if (data) setSelectedProject(data);
+      setCurrentPage(page);
 
-    const nextPath = pathnameFromRoute(page, data);
-    if (nextPath && window.location.pathname !== nextPath) {
-      window.history.pushState({}, '', nextPath);
-    }
-  }, []);
+      const nextPath = pathnameFromRoute(page, data);
+      if (nextPath && window.location.pathname !== nextPath) {
+        window.history.pushState({}, '', nextPath);
+      }
+    });
+  }, [startTransition]);
 
   // Sync Back/Forward with currentPage
   useEffect(() => {
@@ -119,19 +121,55 @@ function App() {
               {currentPage === 'home' && (
                 <>
                   <SmoothScroll />
-                  <Hero />
+                  <Suspense fallback={<PageLoader />}>
+                    <Hero />
+                  </Suspense>
 
-                  <Work onNavigate={navigateTo} />
-                  <TrustSection />
-                  <Industries />
-                  <WhyChoose />
-                  <Services />
-                  <Process />
+                  <Suspense fallback={<PageLoader />}>
+                    <Work onNavigate={navigateTo} />
+                  </Suspense>
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <TrustSection />
+                    </Suspense>
+                  </LazySection>
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <Industries />
+                    </Suspense>
+                  </LazySection>
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <WhyChoose />
+                    </Suspense>
+                  </LazySection>
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <Services />
+                    </Suspense>
+                  </LazySection>
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <Process />
+                    </Suspense>
+                  </LazySection>
 
-                  <Team onNavigate={navigateTo} />
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <Team onNavigate={navigateTo} />
+                    </Suspense>
+                  </LazySection>
 
-                  <FAQ />
-                  <Blog onNavigate={navigateTo} />
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <FAQ />
+                    </Suspense>
+                  </LazySection>
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <Blog onNavigate={navigateTo} />
+                    </Suspense>
+                  </LazySection>
                 </>
               )}
 

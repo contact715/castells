@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo, useDeferredValue, useId } from 'react';
 import { Search, Grid3x3, List, ArrowUpRight } from 'lucide-react';
 import { PageHeader } from '../ui/PageHeader';
 import { CASE_STUDIES, WORK_CATEGORIES } from '../../constants';
@@ -14,51 +14,64 @@ interface WorkPageProps {
 const CATEGORIES = WORK_CATEGORIES.map(cat => cat.label);
 const INDUSTRIES = Array.from(new Set(CASE_STUDIES.map(cs => cs.industry)));
 
-const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
+const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) => {
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
     const [searchQuery, setSearchQuery] = useState('');
     const [sortBy, setSortBy] = useState('Newest');
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
+    
+    // useDeferredValue для отложенного обновления поиска (не блокирует UI)
+    const deferredSearchQuery = useDeferredValue(searchQuery);
+    const deferredCategories = useDeferredValue(selectedCategories);
+    const deferredIndustries = useDeferredValue(selectedIndustries);
+    
+    // useId для стабильных ID
+    const searchId = useId();
+    const filterId = useId();
 
-    const toggleCategory = (category: string) => {
+    const toggleCategory = useCallback((category: string) => {
         setSelectedCategories(prev => 
             prev.includes(category) 
                 ? prev.filter(c => c !== category)
                 : [...prev, category]
         );
-    };
+    }, []);
 
-    const toggleIndustry = (industry: string) => {
+    const toggleIndustry = useCallback((industry: string) => {
         setSelectedIndustries(prev => 
             prev.includes(industry) 
                 ? prev.filter(i => i !== industry)
                 : [...prev, industry]
         );
-    };
+    }, []);
 
-    const filteredProjects = CASE_STUDIES.filter(project => {
-        const matchesSearch = project.client.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                           project.description.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesCategory = selectedCategories.length === 0 || 
-                               selectedCategories.some(cat => {
-                                   const categoryId = WORK_CATEGORIES.find(c => c.label === cat)?.id;
-                                   return project.category === categoryId;
-                               });
-        const matchesIndustry = selectedIndustries.length === 0 || 
-                               selectedIndustries.includes(project.industry);
-        return matchesSearch && matchesCategory && matchesIndustry;
-    });
+    const filteredProjects = useMemo(() => {
+        return CASE_STUDIES.filter(project => {
+            const matchesSearch = project.client.toLowerCase().includes(deferredSearchQuery.toLowerCase()) ||
+                               project.description.toLowerCase().includes(deferredSearchQuery.toLowerCase());
+            const matchesCategory = deferredCategories.length === 0 || 
+                                   deferredCategories.some(cat => {
+                                       const categoryId = WORK_CATEGORIES.find(c => c.label === cat)?.id;
+                                       return project.category === categoryId;
+                                   });
+            const matchesIndustry = deferredIndustries.length === 0 || 
+                                   deferredIndustries.includes(project.industry);
+            return matchesSearch && matchesCategory && matchesIndustry;
+        });
+    }, [deferredSearchQuery, deferredCategories, deferredIndustries]);
 
-    const sortedProjects = [...filteredProjects].sort((a, b) => {
-        if (sortBy === 'Newest') {
-            return parseInt(b.year) - parseInt(a.year);
-        } else if (sortBy === 'Alphabetically (A to Z)') {
-            return a.client.localeCompare(b.client);
-        } else {
-            return b.client.localeCompare(a.client);
-        }
-    });
+    const sortedProjects = useMemo(() => {
+        return [...filteredProjects].sort((a, b) => {
+            if (sortBy === 'Newest') {
+                return parseInt(b.year) - parseInt(a.year);
+            } else if (sortBy === 'Alphabetically (A to Z)') {
+                return a.client.localeCompare(b.client);
+            } else {
+                return b.client.localeCompare(a.client);
+            }
+        });
+    }, [filteredProjects, sortBy]);
 
     return (
         <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
@@ -86,10 +99,11 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
 
                             {/* Sort By */}
                             <div className="mb-6 pb-6 -b -black/10 dark:-white/10">
-                                <label className="block text-xs font-medium text-text-secondary dark:text-white/60 mb-2">
+                                <label htmlFor={filterId} className="block text-xs font-medium text-text-secondary dark:text-white/60 mb-2">
                                     Sort by
                                 </label>
                                 <select
+                                    id={filterId}
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
                                     className="w-full bg-white dark:bg-surface  -black/10 dark:-white/10 rounded-[2rem] px-3 py-2 text-sm text-text-primary dark:text-white focus:outline-none focus:-coral"
@@ -302,6 +316,8 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
             </div>
         </div>
     );
-};
+});
+
+WorkPage.displayName = 'WorkPage';
 
 export default WorkPage;

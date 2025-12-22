@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useDeferredValue, useId, useCallback } from 'react';
 import { Search, Grid3x3, List, Code, BarChart, Zap, Scale, Globe, Terminal, Users, TrendingUp, Palette } from 'lucide-react';
 import { PageView } from '../../App';
 import { PageHeader } from '../ui/PageHeader';
@@ -93,53 +93,65 @@ const CATEGORIES = ["Marketing", "Design", "Coding", "Business", "Automation", "
 const TOPICS = ["Branding", "Development", "Advertising", "Automation", "Growth", "Strategy", "Case Studies"];
 const INDUSTRIES = ["Construction", "Home Services", "Automotive", "Professional", "Retail", "Healthcare"];
 
-const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) => void }> = ({ onNavigate }) => {
+const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) => void }> = React.memo(({ onNavigate }) => {
     const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
     const [searchQuery, setSearchQuery] = useState('');
     const [sortBy, setSortBy] = useState('Newest');
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
     const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
+    
+    // useDeferredValue для отложенного обновления поиска
+    const deferredSearchQuery = useDeferredValue(searchQuery);
+    const deferredCategories = useDeferredValue(selectedCategories);
+    
+    // useId для стабильных ID
+    const searchId = useId();
+    const filterId = useId();
 
-    const toggleCategory = (category: string) => {
+    const toggleCategory = useCallback((category: string) => {
         setSelectedCategories(prev => 
             prev.includes(category) 
                 ? prev.filter(c => c !== category)
                 : [...prev, category]
         );
-    };
+    }, []);
 
-    const toggleTopic = (topic: string) => {
+    const toggleTopic = useCallback((topic: string) => {
         setSelectedTopics(prev => 
             prev.includes(topic) 
                 ? prev.filter(t => t !== topic)
                 : [...prev, topic]
         );
-    };
+    }, []);
 
-    const toggleIndustry = (industry: string) => {
+    const toggleIndustry = useCallback((industry: string) => {
         setSelectedIndustries(prev => 
             prev.includes(industry) 
                 ? prev.filter(i => i !== industry)
                 : [...prev, industry]
         );
-    };
+    }, []);
 
-    const filteredPosts = BLOG_POSTS.filter(post => {
-        const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase());
-        const matchesCategory = selectedCategories.length === 0 || selectedCategories.includes(post.category);
-        return matchesSearch && matchesCategory;
-    });
+    const filteredPosts = useMemo(() => {
+        return BLOG_POSTS.filter(post => {
+            const matchesSearch = post.title.toLowerCase().includes(deferredSearchQuery.toLowerCase());
+            const matchesCategory = deferredCategories.length === 0 || deferredCategories.includes(post.category);
+            return matchesSearch && matchesCategory;
+        });
+    }, [deferredSearchQuery, deferredCategories]);
 
-    const sortedPosts = [...filteredPosts].sort((a, b) => {
-        if (sortBy === 'Newest') {
-            return new Date(b.date).getTime() - new Date(a.date).getTime();
-        } else if (sortBy === 'Alphabetically (A to Z)') {
-            return a.title.localeCompare(b.title);
-        } else {
-            return b.title.localeCompare(a.title);
-        }
-    });
+    const sortedPosts = useMemo(() => {
+        return [...filteredPosts].sort((a, b) => {
+            if (sortBy === 'Newest') {
+                return new Date(b.date).getTime() - new Date(a.date).getTime();
+            } else if (sortBy === 'Alphabetically (A to Z)') {
+                return a.title.localeCompare(b.title);
+            } else {
+                return b.title.localeCompare(a.title);
+            }
+        });
+    }, [filteredPosts, sortBy]);
 
     return (
         <>
@@ -391,6 +403,8 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
         </div>
         </>
     );
-};
+});
+
+BlogPage.displayName = 'BlogPage';
 
 export default BlogPage;

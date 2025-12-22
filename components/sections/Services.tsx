@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback, useMemo } from 'react';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { cn } from '../../lib/utils';
 import { Section, SectionContainer } from '../ui/Section';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import { SERVICE_CATEGORIES, type ServiceCategoryId } from '../../data/services';
 
-const Services: React.FC = () => {
+const Services: React.FC = React.memo(() => {
   const [activeTab, setActiveTab] = useState<ServiceCategoryId>('branding');
+  
+  const handleTabChange = useCallback((tab: ServiceCategoryId) => {
+    setActiveTab(tab);
+  }, []);
+  
+  const activeCategoryItems = useMemo(() => {
+    return SERVICE_CATEGORIES.find((c) => c.id === activeTab)?.items || [];
+  }, [activeTab]);
 
   return (
     <Section id="services">
@@ -38,9 +46,9 @@ const Services: React.FC = () => {
               {SERVICE_CATEGORIES.map((cat) => {
                 const isActive = activeTab === cat.id;
                 return (
-                  <button
-                    key={cat.id}
-                    onClick={() => setActiveTab(cat.id)}
+                    <button
+                      key={cat.id}
+                      onClick={() => handleTabChange(cat.id)}
                     className={cn(
                       "relative px-4 sm:px-6 py-2.5 sm:py-3 rounded-[2rem] flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 outline-none whitespace-nowrap",
                       isActive
@@ -68,7 +76,7 @@ const Services: React.FC = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
           <AnimatePresence mode="popLayout">
-            {SERVICE_CATEGORIES.find((c) => c.id === activeTab)?.items.map((service, idx) => {
+            {activeCategoryItems.map((service, idx) => {
               const spanClass = "col-span-1";
 
               return (
@@ -102,6 +110,8 @@ const Services: React.FC = () => {
       </SectionContainer >
     </Section >
   );
-};
+});
+
+Services.displayName = 'Services';
 
 export default Services;

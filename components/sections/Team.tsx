@@ -121,6 +121,8 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
                 alt={member.name}
                 className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 will-change-transform"
                 style={{ transform: 'translateZ(0)' }}
+                loading="lazy"
+                decoding="async"
               />
 
               {/* Gradient Overlay - Always visible */}

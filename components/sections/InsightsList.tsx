@@ -73,6 +73,8 @@ const InsightsList: React.FC = () => {
                                 alt={insight.title}
                                 className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 will-change-transform"
                                 style={{ transform: 'translateZ(0)' }}
+                                loading="lazy"
+                                decoding="async"
                             />
                         </div>
 

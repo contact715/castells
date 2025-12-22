@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, Phone, MessageCircle, Send, Mail, ArrowRight, CheckCircle2, Users, Briefcase, FileText, Play } from 'lucide-react';
 import { Button } from '../ui/Button';
@@ -13,7 +13,7 @@ interface ContactPageProps {
     onNavigate?: NavigateFn;
 }
 
-const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
+const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
     const [formState, setFormState] = useState({
         name: '',
         email: '',
@@ -24,7 +24,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const handleSubmit = useCallback(async (e: React.FormEvent) => {
         e.preventDefault();
         setIsSubmitting(true);
         // Simulate API call
@@ -40,7 +40,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                 onNavigate('thank-you', { name: 'contact' });
             }, 500);
         }
-    };
+    }, [onNavigate]);
 
     const contactMethods = [
         { icon: Calendar, label: 'Calendly', value: 'Schedule a call', href: 'https://calendly.com', color: 'bg-blue-500/10 text-blue-500' },
@@ -503,6 +503,8 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
         </div>
         </>
     );
-};
+});
+
+ContactPage.displayName = 'ContactPage';
 
 export default ContactPage;
