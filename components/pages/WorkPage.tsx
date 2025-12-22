@@ -92,7 +92,7 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
                                 <select
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
-                                    className="w-full bg-white dark:bg-surface  -black/10 dark:-white/10 rounded-xl px-3 py-2 text-sm text-text-primary dark:text-white focus:outline-none focus:-coral"
+                                    className="w-full bg-white dark:bg-surface  -black/10 dark:-white/10 rounded-[2rem] px-3 py-2 text-sm text-text-primary dark:text-white focus:outline-none focus:-coral"
                                 >
                                     <option>Newest</option>
                                     <option>Alphabetically (A to Z)</option>
@@ -158,7 +158,7 @@ const WorkPage: React.FC<WorkPageProps> = ({ onBack, onNavigate }) => {
                                         placeholder="Search cases"
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full bg-white dark:bg-surface  -black/10 dark:-white/10 rounded-xl pl-10 pr-4 py-2 text-sm text-text-primary dark:text-white placeholder:text-text-secondary dark:placeholder:text-white/40 focus:outline-none focus:-coral"
+                                        className="w-full bg-white dark:bg-surface  -black/10 dark:-white/10 rounded-[2rem] pl-10 pr-4 py-2 text-sm text-text-primary dark:text-white placeholder:text-text-secondary dark:placeholder:text-white/40 focus:outline-none focus:-coral"
                                     />
                                 </div>
                             </div>

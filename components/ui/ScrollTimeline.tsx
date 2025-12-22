@@ -304,19 +304,6 @@ export default function ScrollTimeline({
                   {/* Content Overlay with Blur Background */}
                   {(entry.image || entry.video) ? (
                     <div className="absolute inset-0 p-6 md:p-8 flex flex-col justify-between z-10">
-                      {/* Gradient Blur Layer - only at bottom with gradient from top (0%) to bottom (100%) */}
-                      <div 
-                        className="absolute bottom-0 left-0 right-0"
-                        style={{
-                          height: '60%',
-                          backdropFilter: 'blur(40px)',
-                          WebkitBackdropFilter: 'blur(40px)',
-                          maskImage: 'linear-gradient(to bottom, transparent 0%, black 100%)',
-                          WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, black 100%)',
-                          pointerEvents: 'none',
-                        }}
-                      />
-
                       <div className="relative z-10 flex flex-col justify-between h-full">
                       {/* Header */}
                       <div className="flex items-center gap-4 mb-4">
@@ -366,22 +353,16 @@ export default function ScrollTimeline({
                         )}
                       >
                         <div className="overflow-hidden">
-                          <div className={cn(
-                            "space-y-4 pt-4 transition-opacity duration-500 ease-out",
-                            isExpanded ? "opacity-100" : "opacity-0"
-                          )}>
+                          <div className="space-y-4 pt-4">
                             {entry.items && entry.items.length > 0 && (
                               <div 
-                                className="rounded-xl p-6 bg-white/10 -white/10"
+                                className="rounded-[2rem] p-6 bg-white/10 -white/10"
                                 style={{
                                   backdropFilter: 'blur(12px)',
                                   WebkitBackdropFilter: 'blur(12px)',
-                                  transform: 'translateZ(0)',
-                                  willChange: 'backdrop-filter',
-                                  backfaceVisibility: 'hidden',
                                 }}
                               >
-                                <ul className="space-y-3">
+                                <ul className="grid grid-cols-2 gap-x-4 gap-y-3">
                                   {entry.items.map((item, itemIndex) => (
                                     <li 
                                       key={itemIndex} 

@@ -37,7 +37,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
     const Component = as || (href ? 'a' : 'button');
     const buttonProps = href ? { href } : { type: 'button' as const };
 
-    const baseStyles = "relative flex cursor-pointer items-center justify-center overflow-hidden text-center transition-all duration-300 ease-in-out rounded-xl font-bold uppercase tracking-widest";
+    const baseStyles = "relative flex cursor-pointer items-center justify-center overflow-hidden text-center transition-all duration-300 ease-in-out rounded-[2rem] font-bold uppercase tracking-widest";
 
     const variants = {
       primary: "bg-black text-white dark:bg-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90",

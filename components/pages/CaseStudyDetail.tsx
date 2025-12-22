@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { m as motion } from 'framer-motion';
-import { ArrowLeft, Calendar, Building2, TrendingUp, Target, CheckCircle2, ExternalLink, Zap, MapPin } from 'lucide-react';
+import { ArrowLeft, Calendar, Building2, TrendingUp, Target, CheckCircle2, ExternalLink, Zap, MapPin, ArrowUpRight, FileText, Globe } from 'lucide-react';
 import { Button } from '../ui/Button';
 import SEO from '../ui/SEO';
 import { Breadcrumbs } from '../ui/Breadcrumbs';
@@ -348,7 +348,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                   <div className="space-y-4">
                     {/* Logo */}
                     {(data.logoSvg || data.logo) && (
-                      <div className="flex items-center justify-center p-4 bg-ivory dark:bg-[#191919] rounded-xl">
+                      <div className="flex items-center justify-center p-4 bg-ivory dark:bg-[#191919] rounded-[2rem]">
                         <img
                           src={encodeURI(data.logoSvg || data.logo || '')}
                           alt={`${data.client} Logo`}
@@ -362,12 +362,11 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                         href={encodeURI(data.brandGuidelines)}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-between w-full px-4 py-3 bg-ivory dark:bg-[#191919] rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors group"
+                        className="flex items-center gap-3 w-full p-3 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
                       >
-                        <span className="text-sm font-medium text-text-primary dark:text-white">
-                          Brand Guidelines
-                        </span>
-                        <ExternalLink className="w-4 h-4 text-text-secondary dark:text-white/60 group-hover:text-coral transition-colors" />
+                        <FileText className="w-4 h-4 text-text-secondary group-hover:text-current" />
+                        <span className="flex-1 text-sm font-medium">Brand Guidelines</span>
+                        <ArrowUpRight className="w-4 h-4 opacity-20 group-hover:opacity-100 transition-opacity" />
                       </a>
                     )}
                     {/* Website Link */}
@@ -376,12 +375,11 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                         href={data.website}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center justify-between w-full px-4 py-3 bg-ivory dark:bg-[#191919] rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors group"
+                        className="flex items-center gap-3 w-full p-3 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
                       >
-                        <span className="text-sm font-medium text-text-primary dark:text-white">
-                          Visit Website
-                        </span>
-                        <ExternalLink className="w-4 h-4 text-text-secondary dark:text-white/60 group-hover:text-coral transition-colors" />
+                        <Globe className="w-4 h-4 text-text-secondary group-hover:text-current" />
+                        <span className="flex-1 text-sm font-medium">Visit Website</span>
+                        <ArrowUpRight className="w-4 h-4 opacity-20 group-hover:opacity-100 transition-opacity" />
                       </a>
                     )}
                   </div>
@@ -398,10 +396,10 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                     <button
                       key={item.id}
                       onClick={() => scrollToSection(item.id)}
-                      className={`w-full text-left px-4 py-2 rounded-xl transition-all text-sm font-medium ${
+                      className={`w-full text-left p-3 rounded-[2rem] transition-all text-sm font-medium flex items-center gap-3 ${
                         activeSection === item.id
-                          ? 'bg-coral text-white'
-                          : 'text-text-primary dark:text-white hover:bg-black/5 dark:hover:bg-white/10'
+                          ? 'bg-black text-white dark:bg-white dark:text-black'
+                          : 'text-text-primary dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black'
                       }`}
                     >
                       {item.label}

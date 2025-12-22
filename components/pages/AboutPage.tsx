@@ -27,7 +27,11 @@ const TIMELINE_ENTRIES: ScrollTimelineEntry[] = [
       'Founded with focus on revenue, not vanity metrics',
       'Worked with three clients in first year',
       'Proved small budgets could generate outsized returns',
-      'Built foundation for data-driven methodology'
+      'Built foundation for data-driven methodology',
+      'Established core values of transparency and results',
+      'Created first proprietary tracking systems',
+      'Developed rapid testing methodology',
+      'Set new standard for agency-client relationships'
     ],
     image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80'
   },
@@ -40,7 +44,11 @@ const TIMELINE_ENTRIES: ScrollTimelineEntry[] = [
       'Helped client scale from $2M to $10M in 12 months',
       '400% increase in revenue with only 150% increase in ad spend',
       'Built custom attribution models',
-      'Tested hundreds of creative variations'
+      'Tested hundreds of creative variations',
+      'Optimized conversion funnels across all channels',
+      'Reduced customer acquisition cost by 40%',
+      'Implemented advanced tracking and analytics',
+      'Achieved 5x return on ad spend (ROAS)'
     ],
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80'
   },
@@ -53,7 +61,11 @@ const TIMELINE_ENTRIES: ScrollTimelineEntry[] = [
       'Grew from 5 to 25 team members',
       'Opened Santa Monica headquarters',
       'Hired talent from Google, Meta, and top agencies',
-      'Built proprietary analytics platforms'
+      'Built proprietary analytics platforms',
+      'Expanded service offerings across industries',
+      'Established rigorous hiring standards',
+      'Created internal training and development programs',
+      'Launched first client success framework'
     ],
     image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80'
   },
@@ -66,7 +78,11 @@ const TIMELINE_ENTRIES: ScrollTimelineEntry[] = [
       'Helped 50+ businesses pivot online',
       'Generated $50M+ in new revenue for clients',
       'Launched campaigns in days instead of weeks',
-      'Built thriving e-commerce operations'
+      'Built thriving e-commerce operations',
+      'Adapted strategies for digital-first world',
+      'Created emergency response playbooks',
+      'Maintained 100% client retention during crisis',
+      'Proved agility as competitive advantage'
     ],
     image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=80'
   },
@@ -79,7 +95,11 @@ const TIMELINE_ENTRIES: ScrollTimelineEntry[] = [
       'Named "Agency of the Year" by Growth Marketing Awards',
       'Featured in Forbes',
       'Clients generated over $200M in revenue',
-      'Scaled methodology across industries'
+      'Scaled methodology across industries',
+      'Received industry recognition and awards',
+      'Published thought leadership content',
+      'Expanded client portfolio significantly',
+      'Built reputation for exceptional results'
     ],
     image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80'
   },
@@ -92,7 +112,11 @@ const TIMELINE_ENTRIES: ScrollTimelineEntry[] = [
       'Opened offices in New York and London',
       'Serving clients across 15 countries',
       'Remote-first culture',
-      'Global knowledge network'
+      'Global knowledge network',
+      'Expanded international client base',
+      'Built 24/7 support capabilities',
+      'Established cross-cultural expertise',
+      'Created global best practices framework'
     ],
     image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&q=80'
   },
@@ -105,7 +129,11 @@ const TIMELINE_ENTRIES: ScrollTimelineEntry[] = [
       'Clients generated over $500M in revenue',
       'Launched proprietary growth framework',
       'Began fractional CMO services',
-      'Battle-tested across hundreds of campaigns'
+      'Battle-tested across hundreds of campaigns',
+      'Achieved record-breaking client results',
+      'Developed comprehensive growth playbooks',
+      'Expanded strategic consulting services',
+      'Built scalable operational infrastructure'
     ],
     image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80'
   },
@@ -118,7 +146,11 @@ const TIMELINE_ENTRIES: ScrollTimelineEntry[] = [
       'AI integrated into all operations',
       '3x better ROAS for clients',
       'Predictive models and automated optimization',
-      'Pioneering new way of growth marketing'
+      'Pioneering new way of growth marketing',
+      'Developed proprietary AI algorithms',
+      'Automated creative testing and optimization',
+      'Enhanced data processing capabilities',
+      'Set new industry benchmarks for efficiency'
     ],
     image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80'
   },
@@ -131,7 +163,11 @@ const TIMELINE_ENTRIES: ScrollTimelineEntry[] = [
       'Next-gen growth platform launch',
       'Expanded AI capabilities',
       'Global team of 50+ experts',
-      'Revolutionizing client success'
+      'Revolutionizing client success',
+      'Launched comprehensive growth suite',
+      'Integrated advanced machine learning',
+      'Built predictive analytics engine',
+      'Created seamless client experience platform'
     ],
     image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80'
   },
@@ -144,7 +180,11 @@ const TIMELINE_ENTRIES: ScrollTimelineEntry[] = [
       'Industry-leading growth platform',
       'Expanded global presence',
       'Innovation in marketing technology',
-      'Setting new industry standards'
+      'Setting new industry standards',
+      'Continuous platform enhancements',
+      'Strategic partnerships and integrations',
+      'Thought leadership in growth marketing',
+      'Driving industry transformation forward'
     ],
     image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80'
   },

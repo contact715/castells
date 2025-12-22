@@ -1031,7 +1031,7 @@ const ProcessScroll: React.FC = () => {
                                 key={step.id}
                                 onClick={() => setActiveStep(idx)}
                                 className={cn(
-                                    "relative px-4 sm:px-6 py-2.5 sm:py-3 rounded-[2rem] flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 outline-none whitespace-nowrap",
+                                    "relative px-4 sm:px-6 py-2.5 sm:py-3 rounded-[2rem] flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 outline-none whitespace-nowrap min-w-[140px] sm:min-w-[160px]",
                                     isActive
                                         ? "text-white "
                                         : "text-text-secondary hover:text-text-primary hover:bg-gray-100 dark:hover:bg-neutral-800"
@@ -1078,9 +1078,11 @@ const ProcessScroll: React.FC = () => {
                         <div>
                             <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                                 <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-[2rem] bg-coral/10 dark:bg-coral/20 flex items-center justify-center shrink-0">
-                                    {React.createElement(PROCESS_STEPS[activeStep].icon, {
-                                        className: "w-6 h-6 sm:w-8 sm:h-8 text-coral"
-                                    })}
+                                    <div className="flex items-center justify-center w-full h-full">
+                                        {React.createElement(PROCESS_STEPS[activeStep].icon, {
+                                            className: "w-6 h-6 sm:w-8 sm:h-8 text-coral"
+                                        })}
+                                    </div>
                                 </div>
                                 <div>
                                     <span className="text-coral text-xs font-bold uppercase tracking-widest mb-1 block">

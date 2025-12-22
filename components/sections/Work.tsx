@@ -136,7 +136,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
             {project.year} — {project.industry}
           </div>
           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-[1.5rem] sm:rounded-[2rem] bg-white/0 backdrop-blur-md  -white/10 flex items-center justify-center group-hover:bg-white group-hover:-white/20 transition-all duration-300">
-            <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/50 group-hover:text-white transition-colors" />
+            <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/50 group-hover:text-black transition-colors" />
           </div>
         </div>
 

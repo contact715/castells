@@ -175,7 +175,7 @@ const QuizForm: React.FC = () => {
                                             key={option}
                                             onClick={() => handleOptionSelect(option)}
                                             className={cn(
-                                                "w-full text-left p-5 rounded-xl  transition-all duration-200 group flex items-center justify-between",
+                                                "w-full text-left p-5 rounded-[2rem]  transition-all duration-200 group flex items-center justify-between",
                                                 isSelected
                                                     ? "bg-white text-black -white"
                                                     : "bg-white/5 text-white/80 -white/10 hover:bg-white/10 hover:-white/30"

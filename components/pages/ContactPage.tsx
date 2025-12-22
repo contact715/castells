@@ -117,7 +117,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                     <div className="space-y-1.5">
                                         <label htmlFor="phone" className="text-xs font-bold uppercase tracking-wider text-text-secondary ml-1">Phone (optional)</label>
                                         <div className="flex gap-2">
-                                            <div className="w-16 bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-xl flex items-center justify-center text-text-secondary font-medium text-xs">
+                                            <div className="w-16 bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-[2rem] flex items-center justify-center text-text-secondary font-medium text-xs">
                                                 🇺🇸 +1
                                             </div>
                                             <input
@@ -126,7 +126,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                                 placeholder="(555) 000-0000"
                                                 value={formState.phone}
                                                 onChange={e => setFormState({ ...formState, phone: e.target.value })}
-                                                className="flex-1 bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:-coral transition-all placeholder:text-text-secondary/50"
+                                                className="flex-1 bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-[2rem] px-4 py-3 text-sm focus:outline-none focus:-coral transition-all placeholder:text-text-secondary/50"
                                             />
                                         </div>
                                     </div>
@@ -136,7 +136,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                         <div className="relative">
                                             <select
                                                 id="topic"
-                                                className="w-full bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:-coral transition-all appearance-none cursor-pointer text-text-primary"
+                                                className="w-full bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-[2rem] px-4 py-3 text-sm focus:outline-none focus:-coral transition-all appearance-none cursor-pointer text-text-primary"
                                                 value={formState.topic}
                                                 onChange={e => setFormState({ ...formState, topic: e.target.value })}
                                             >
@@ -160,7 +160,7 @@ const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                                         id="message"
                                         required
                                         rows={4}
-                                        className="w-full bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-xl px-4 py-3 text-sm focus:outline-none focus:-coral transition-all placeholder:text-text-secondary/50 resize-none"
+                                        className="w-full bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-[2rem] px-4 py-3 text-sm focus:outline-none focus:-coral transition-all placeholder:text-text-secondary/50 resize-none"
                                         placeholder="Tell us about your project, goals, and timeline..."
                                         value={formState.message}
                                         onChange={e => setFormState({ ...formState, message: e.target.value })}

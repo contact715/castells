@@ -41,15 +41,15 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const baseStyles = "w-full focus:outline-none transition-all font-sans";
     
     const variants = {
-      default: "bg-black/5 dark:bg-white/5  -black/5 dark:-white/5 rounded-xl focus:-coral dark:focus:-coral focus:bg-white dark:focus:bg-white/10 placeholder:text-black/20 dark:placeholder:text-white/20",
+      default: "bg-black/5 dark:bg-white/5  -black/5 dark:-white/5 rounded-[2rem] focus:-coral dark:focus:-coral focus:bg-white dark:focus:bg-white/10 placeholder:text-black/20 dark:placeholder:text-white/20",
       minimal: "bg-transparent -b -white/20 rounded-none focus:-white placeholder:text-white/20 text-white",
-      dark: "bg-ivory  -black/10 rounded-xl focus:-coral placeholder:text-text-secondary/40"
+      dark: "bg-ivory  -black/10 rounded-[2rem] focus:-coral placeholder:text-text-secondary/40"
     };
 
     const sizes = {
       sm: "px-4 py-2 text-sm",
       md: "px-4 py-3 text-base",
-      lg: "px-8 py-4 text-xl rounded-xl"
+      lg: "px-8 py-4 text-xl rounded-[2rem]"
     };
 
     const labelSizes = {

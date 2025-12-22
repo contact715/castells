@@ -150,7 +150,7 @@ const CompanyMenu = ({ onNavigate }: { onNavigate?: import('../../types').Naviga
                                 handleItemClick(item);
                             }
                         }}
-                        className="flex items-center gap-2 w-full p-2 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
+                        className="flex items-center gap-3 w-full p-3 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
                     >
                         <item.icon className="w-4 h-4 text-text-secondary group-hover:text-current" />
                         <span className="flex-1 text-sm font-medium">{item.label}</span>
@@ -159,15 +159,14 @@ const CompanyMenu = ({ onNavigate }: { onNavigate?: import('../../types').Naviga
                 ))}
             </div>
 
-            <div className="pt-2 -t -black/5 bg-ivory dark:bg-white/5 rounded-[2rem] p-2">
+            <div className="pt-2 -t -black/5 bg-ivory dark:bg-white/5 rounded-[2rem] p-3">
                 <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2 min-w-0">
-                        <div className="bg-coral/10 p-2 rounded-full text-coral shrink-0">
-                            <Phone className="w-5 h-5" />
+                    <div className="flex items-center gap-3 min-w-0">
+                        <div className="bg-coral/10 h-10 w-10 flex items-center justify-center rounded-full text-coral shrink-0">
+                            <Phone className="w-4 h-4" />
                         </div>
-                        <div className="min-w-0">
-                            <h5 className="font-bold text-sm text-text-primary truncate">Contact us</h5>
-                            <p className="text-xs text-text-secondary truncate">Pick the fastest channel.</p>
+                        <div className="min-w-0 flex items-center">
+                            <h5 className="font-sans font-bold text-sm text-text-primary truncate">Contact us</h5>
                         </div>
                     </div>
 
@@ -239,7 +238,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                                 e.preventDefault();
                                 handleItemClick(item);
                             }}
-                            className="flex items-center gap-2 w-full p-2 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
+                            className="flex items-center gap-3 w-full p-3 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
                         >
                             <item.icon className="w-4 h-4 text-text-secondary group-hover:text-current" />
                             <span className="flex-1 text-sm font-medium">{item.label}</span>
@@ -248,15 +247,14 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                     ))}
                 </div>
             </div>
-            <div className="pt-2 -t -black/5 bg-ivory dark:bg-white/5 rounded-[2rem] p-2">
+            <div className="pt-2 -t -black/5 bg-ivory dark:bg-white/5 rounded-[2rem] p-3">
                 <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2 min-w-0">
-                        <div className="bg-coral/10 p-2 rounded-full text-coral shrink-0">
-                            <Sparkles className="w-5 h-5" />
+                    <div className="flex items-center gap-3 min-w-0">
+                        <div className="bg-coral/10 h-10 w-10 flex items-center justify-center rounded-full text-coral shrink-0">
+                            <Sparkles className="w-4 h-4" />
                         </div>
-                        <div className="min-w-0">
-                            <h5 className="font-bold text-sm text-text-primary truncate">Need a custom solution?</h5>
-                            <p className="text-xs text-text-secondary truncate">We build tailored growth engines.</p>
+                        <div className="min-w-0 flex items-center">
+                            <h5 className="font-sans font-bold text-sm text-text-primary truncate">Need a custom solution?</h5>
                         </div>
                     </div>
                     <ContactButtons />
@@ -337,15 +335,14 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                     ))}
                 </div>
             </div>
-            <div className="pt-2 -t -black/5 bg-ivory dark:bg-white/5 rounded-[2rem] p-2">
+            <div className="pt-2 -t -black/5 bg-ivory dark:bg-white/5 rounded-[2rem] p-3">
                 <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-2 min-w-0">
-                        <div className="bg-coral/10 p-2 rounded-full text-coral shrink-0">
-                            <Activity className="w-5 h-5" />
+                    <div className="flex items-center gap-3 min-w-0">
+                        <div className="bg-coral/10 h-10 w-10 flex items-center justify-center rounded-full text-coral shrink-0">
+                            <Activity className="w-4 h-4" />
                         </div>
-                        <div className="min-w-0">
-                            <h5 className="font-bold text-sm text-text-primary truncate">Don't see your industry?</h5>
-                            <p className="text-xs text-text-secondary truncate">We adapt our strategies to any market.</p>
+                        <div className="min-w-0 flex items-center">
+                            <h5 className="font-sans font-bold text-sm text-text-primary truncate">Don't see your industry?</h5>
                         </div>
                     </div>
                     <ContactButtons />
@@ -399,7 +396,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                         whileHover={{ rotate: 180 }}
                         transition={{ duration: 0.5, ease: "easeInOut" }}
                     />
-                    <span className="font-display text-4xl font-bold text-black dark:text-white tracking-tight transition-colors">Caste//s</span>
+                    <span className="font-display text-4xl font-bold text-black dark:text-white tracking-tight transition-colors leading-none flex items-center">Caste//s</span>
                 </motion.div>
 
                 <div className="flex items-center gap-6">
@@ -460,7 +457,7 @@ const NavBar: React.FC<NavBarProps> = ({ onNavigate }) => {
                                 onNavigate?.('company');
                             }}
                         >
-                            <div className="w-[600px] p-4">
+                            <div className="w-[550px] p-3">
                                 <CompanyMenu onNavigate={onNavigate} />
                             </div>
                         </MenuItem>
