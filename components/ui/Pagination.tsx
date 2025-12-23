@@ -10,7 +10,7 @@ interface PaginationProps {
   className?: string;
 }
 
-export const Pagination: React.FC<PaginationProps> = ({
+export const Pagination: React.FC<PaginationProps> = React.memo(({
   currentPage,
   totalPages,
   onPageChange,
@@ -18,7 +18,7 @@ export const Pagination: React.FC<PaginationProps> = ({
 }) => {
   if (totalPages <= 1) return null;
 
-  const getPageNumbers = () => {
+  const pageNumbers = useMemo(() => {
     const pages: (number | string)[] = [];
     const maxVisible = 5;
 
@@ -52,9 +52,7 @@ export const Pagination: React.FC<PaginationProps> = ({
     }
 
     return pages;
-  };
-
-  const pageNumbers = getPageNumbers();
+  }, [currentPage, totalPages]);
 
   return (
     <div className={cn('flex items-center justify-center gap-2', className)}>
@@ -117,7 +115,9 @@ export const Pagination: React.FC<PaginationProps> = ({
       </Button>
     </div>
   );
-};
+});
+
+Pagination.displayName = 'Pagination';
 
 export default Pagination;
 

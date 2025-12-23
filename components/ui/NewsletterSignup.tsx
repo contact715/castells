@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { Mail, CheckCircle2, Loader2 } from 'lucide-react';
 import { Button } from './Button';
 import { Input } from './Input';
@@ -11,7 +11,7 @@ interface NewsletterSignupProps {
   onSuccess?: () => void;
 }
 
-const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
+const NewsletterSignup: React.FC<NewsletterSignupProps> = React.memo(({
   className = '',
   variant = 'inline',
   onSuccess,
@@ -21,7 +21,7 @@ const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = useCallback(async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
     setIsSubmitting(true);
@@ -53,7 +53,7 @@ const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [email, onSuccess]);
 
   if (variant === 'modal') {
     return (
@@ -140,7 +140,9 @@ const NewsletterSignup: React.FC<NewsletterSignupProps> = ({
       </Button>
     </form>
   );
-};
+});
+
+NewsletterSignup.displayName = 'NewsletterSignup';
 
 export default NewsletterSignup;
 

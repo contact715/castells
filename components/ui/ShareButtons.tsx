@@ -10,7 +10,7 @@ interface ShareButtonsProps {
   className?: string;
 }
 
-const ShareButtons: React.FC<ShareButtonsProps> = ({
+const ShareButtons: React.FC<ShareButtonsProps> = React.memo(({
   url,
   title,
   description,
@@ -113,7 +113,9 @@ const ShareButtons: React.FC<ShareButtonsProps> = ({
       </button>
     </div>
   );
-};
+});
+
+ShareButtons.displayName = 'ShareButtons';
 
 export default ShareButtons;
 

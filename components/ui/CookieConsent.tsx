@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, Cookie } from 'lucide-react';
 import { Button } from './Button';
@@ -9,7 +9,7 @@ interface CookiePreferences {
   marketing: boolean;
 }
 
-const CookieConsent: React.FC = () => {
+const CookieConsent: React.FC = React.memo(() => {
   const [isVisible, setIsVisible] = useState(false);
   const [showPreferences, setShowPreferences] = useState(false);
   const [preferences, setPreferences] = useState<CookiePreferences>({
@@ -40,7 +40,7 @@ const CookieConsent: React.FC = () => {
     }
   };
 
-  const handleAcceptAll = () => {
+  const handleAcceptAll = useCallback(() => {
     const allAccepted = {
       essential: true,
       analytics: true,
@@ -50,16 +50,16 @@ const CookieConsent: React.FC = () => {
     localStorage.setItem('cookie-consent', JSON.stringify(allAccepted));
     applyCookiePreferences(allAccepted);
     setIsVisible(false);
-  };
+  }, []);
 
-  const handleAcceptSelected = () => {
+  const handleAcceptSelected = useCallback(() => {
     localStorage.setItem('cookie-consent', JSON.stringify(preferences));
     applyCookiePreferences(preferences);
     setIsVisible(false);
     setShowPreferences(false);
-  };
+  }, [preferences]);
 
-  const handleRejectAll = () => {
+  const handleRejectAll = useCallback(() => {
     const onlyEssential = {
       essential: true,
       analytics: false,
@@ -69,7 +69,7 @@ const CookieConsent: React.FC = () => {
     localStorage.setItem('cookie-consent', JSON.stringify(onlyEssential));
     applyCookiePreferences(onlyEssential);
     setIsVisible(false);
-  };
+  }, []);
 
   if (!isVisible) return null;
 
@@ -235,7 +235,9 @@ const CookieConsent: React.FC = () => {
       )}
     </AnimatePresence>
   );
-};
+});
+
+CookieConsent.displayName = 'CookieConsent';
 
 export default CookieConsent;
 

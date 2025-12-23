@@ -1,6 +1,9 @@
 /**
  * Analytics utilities for tracking user interactions
- * Supports Google Analytics 4 (gtag)
+ * Supports Google Tag Manager (GTM) and Google Analytics 4
+ * 
+ * GTM использует dataLayer для отправки событий
+ * Все события отправляются через dataLayer.push()
  */
 
 declare global {
@@ -11,49 +14,69 @@ declare global {
       config?: object
     ) => void;
     dataLayer?: any[];
+    GTM_ID?: string;
   }
 }
 
-// Google Analytics Measurement ID
+// Google Analytics Measurement ID (используется в GTM)
 export const GA_MEASUREMENT_ID = 'G-LEQVB6KG6Y';
 
+// GTM Container ID (замените на ваш реальный ID)
+export const GTM_ID = typeof window !== 'undefined' && window.GTM_ID 
+  ? window.GTM_ID 
+  : 'GTM-XXXXXXX'; // TODO: Замените на ваш GTM Container ID
+
 /**
- * Initialize Google Analytics
- * Note: gtag.js is already loaded in index.html
- * This function just ensures gtag is available
+ * Initialize Google Analytics / Google Tag Manager
+ * GTM автоматически загружается из index.html
+ * Эта функция инициализирует dataLayer если его нет
  */
 export const initGA = () => {
-  if (!GA_MEASUREMENT_ID || typeof window === 'undefined') return;
+  if (typeof window === 'undefined') return;
 
-  // gtag.js is already loaded in index.html, just ensure it's initialized
-  if (!window.gtag) {
-    window.dataLayer = window.dataLayer || [];
+  // Инициализируем dataLayer для GTM
+  window.dataLayer = window.dataLayer || [];
+  
+  // Если используется прямой gtag.js (fallback)
+  if (!window.gtag && !window.GTM_ID) {
     window.gtag = function() {
       window.dataLayer.push(arguments);
     };
-  }
-
-  // Configure GA (if not already configured)
-  if (window.gtag) {
-    window.gtag('config', GA_MEASUREMENT_ID, {
-      send_page_view: true,
-    });
+    
+    // Configure GA (если используется прямой gtag)
+    if (GA_MEASUREMENT_ID) {
+      window.gtag('config', GA_MEASUREMENT_ID, {
+        send_page_view: true,
+      });
+    }
   }
 };
 
 /**
  * Track page view
+ * Работает с GTM через dataLayer
  */
 export const pageview = (url: string) => {
-  if (!window.gtag || !GA_MEASUREMENT_ID) return;
+  if (typeof window === 'undefined' || !window.dataLayer) return;
 
-  window.gtag('config', GA_MEASUREMENT_ID, {
+  // Отправляем событие через dataLayer (GTM)
+  window.dataLayer.push({
+    event: 'page_view',
     page_path: url,
+    page_location: typeof window !== 'undefined' ? window.location.href : url,
   });
+
+  // Fallback для прямого gtag.js
+  if (window.gtag && GA_MEASUREMENT_ID) {
+    window.gtag('config', GA_MEASUREMENT_ID, {
+      page_path: url,
+    });
+  }
 };
 
 /**
  * Track custom event
+ * Работает с GTM через dataLayer
  */
 export const event = ({
   action,
@@ -68,14 +91,26 @@ export const event = ({
   value?: number;
   [key: string]: any;
 }) => {
-  if (!window.gtag || !GA_MEASUREMENT_ID) return;
+  if (typeof window === 'undefined' || !window.dataLayer) return;
 
-  window.gtag('event', action, {
+  // Отправляем событие через dataLayer (GTM)
+  window.dataLayer.push({
+    event: action,
     event_category: category,
     event_label: label,
     value: value,
     ...rest,
   });
+
+  // Fallback для прямого gtag.js
+  if (window.gtag && GA_MEASUREMENT_ID) {
+    window.gtag('event', action, {
+      event_category: category,
+      event_label: label,
+      value: value,
+      ...rest,
+    });
+  }
 };
 
 /**

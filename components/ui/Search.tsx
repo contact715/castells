@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import { Search as SearchIcon, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { trackSearch } from '../../lib/analytics';
@@ -38,7 +38,7 @@ const searchIndex: SearchResult[] = [
   { title: 'Home Services', url: '/industries/home-services', type: 'industry' },
 ];
 
-const Search: React.FC<SearchProps> = ({ onNavigate, className = '' }) => {
+const Search: React.FC<SearchProps> = React.memo(({ onNavigate, className = '' }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
@@ -82,7 +82,7 @@ const Search: React.FC<SearchProps> = ({ onNavigate, className = '' }) => {
     return () => window.removeEventListener('keydown', handleEscape);
   }, [isOpen]);
 
-  const handleSearch = (searchQuery: string) => {
+  const handleSearch = useCallback((searchQuery: string) => {
     setQuery(searchQuery);
     
     if (!searchQuery.trim()) {
@@ -101,9 +101,9 @@ const Search: React.FC<SearchProps> = ({ onNavigate, className = '' }) => {
     if (filtered.length > 0) {
       trackSearch(searchQuery, filtered.length);
     }
-  };
+  }, []);
 
-  const handleSelectResult = (result: SearchResult) => {
+  const handleSelectResult = useCallback((result: SearchResult) => {
     if (onNavigate) {
       onNavigate(result.url);
     } else {
@@ -112,7 +112,7 @@ const Search: React.FC<SearchProps> = ({ onNavigate, className = '' }) => {
     setIsOpen(false);
     setQuery('');
     setResults([]);
-  };
+  }, [onNavigate]);
 
   return (
     <div ref={searchRef} className={`relative ${className}`}>
@@ -223,7 +223,9 @@ const Search: React.FC<SearchProps> = ({ onNavigate, className = '' }) => {
       </AnimatePresence>
     </div>
   );
-};
+});
+
+Search.displayName = 'Search';
 
 export default Search;
 
