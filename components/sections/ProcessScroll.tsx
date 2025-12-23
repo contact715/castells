@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Search, PenTool, Rocket, BarChart3, ArrowRight, Send, Video, CheckCircle2 } from 'lucide-react';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { Button } from '../ui/Button';
+import SchemaMarkup from '../ui/SchemaMarkup';
 import { cn } from '../../lib/utils';
 
 // ============ STEP ILLUSTRATIONS ============
@@ -1001,9 +1002,22 @@ const PROCESS_STEPS: ProcessStep[] = [
 
 const ProcessScroll: React.FC = () => {
     const [activeStep, setActiveStep] = useState(0);
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
 
     return (
         <div className="w-full">
+            <SchemaMarkup
+                type="HowTo"
+                data={{
+                    name: 'How to Work with Castells Agency',
+                    description: 'Step-by-step process for working with Castells Agency to grow your business through data-driven marketing strategies.',
+                    totalTime: 'PT6W',
+                    step: PROCESS_STEPS.map(step => ({
+                        name: step.title,
+                        text: `${step.description} ${step.longDescription || ''} Duration: ${step.duration}.`
+                    }))
+                }}
+            />
             {/* Header */}
             <div className="max-w-3xl mb-8">
                 <div className="flex items-center gap-2 mb-4">

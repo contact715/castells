@@ -6,6 +6,7 @@ import { PageView } from '../../App';
 import { NavigationData } from '../../types';
 import { INDUSTRY_CATEGORIES } from '../../data/industries';
 import { SERVICE_CATEGORIES } from '../../data/services';
+import NewsletterSignup from '../ui/NewsletterSignup';
 
 interface FooterProps {
   onNavigate?: (page: PageView, data?: NavigationData) => void;
@@ -23,45 +24,76 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
     <footer className="relative bg-ivory dark:bg-[#191919] text-black dark:text-white overflow-hidden border-t border-black/5 dark:border-white/10">
       <div className="container mx-auto px-6 py-12 relative z-10">
 
-        {/* Top Section: CTA - Standardized Two Column Layout */}
-        <div className="border-b border-black/10 dark:border-white/10 mb-8 pb-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12">
-
-            {/* Left Column: Badge + Title */}
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
-                <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-                  Q2 2025 — Limited Availability
-                </span>
-              </div>
-              <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight text-text-primary max-w-xl">
-                Ready to<br />
-                <span className="text-text-secondary">Dominate?</span>
-              </h2>
-            </div>
-
-            {/* Right Column: CTA + Contact */}
-            <div className="flex flex-col justify-end items-start lg:items-end gap-4">
-              <Button
-                href="#audit"
-                size="md"
+        {/* Top Section: CTA with Video */}
+        <div className="mb-12 pb-8">
+          <div className="relative rounded-[2rem] overflow-hidden bg-white dark:bg-surface">
+            {/* Video Background */}
+            <div className="absolute inset-0">
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
+                className="absolute inset-0 w-full h-full object-cover"
+                style={{ zIndex: 1 }}
               >
-                Start Your Growth Audit
-              </Button>
-
-              <div className="flex items-center gap-4 text-text-secondary text-sm font-medium">
-                <a href="mailto:hello@castells.agency" className="flex items-center gap-2 hover:text-coral transition-colors group">
-                  hello@castells.agency
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </a>
-                <span className="flex items-center gap-2">
-                  Santa Monica, CA
-                  <ArrowUpRight className="w-4 h-4" />
-                </span>
-              </div>
+                <source src="https://media.istockphoto.com/id/1287601917/video/close-up-of-diverse-multiethnic-team-having-conversation-in-meeting-room-in-a-creative-office.mp4?s=mp4-640x640-is&k=20&c=itAwTLCSvfv3Wd3vqirH0-8_bA2JMywNLZOAFkO9lzM=" type="video/mp4" />
+              </video>
+              {/* Very light gradient overlay - only for text readability */}
+              <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/10 to-transparent dark:from-black/40 dark:via-black/20" style={{ zIndex: 2 }} />
             </div>
 
+            {/* Content Overlay */}
+            <div className="relative z-10 p-6 md:p-8 lg:p-10">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                {/* Left Column: Badge, Title & Subtitle */}
+                <div>
+                  {/* Badge */}
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
+                    <span className="text-xs font-bold uppercase tracking-widest text-white/80">
+                      Q2 2025 — Limited Availability
+                    </span>
+                  </div>
+
+                  {/* Title & Subtitle */}
+                  <h2 className="font-display text-2xl md:text-3xl lg:text-4xl font-semibold leading-tight tracking-tight text-white mb-2">
+                    Ready to<br />
+                    <span className="text-white/80">Dominate?</span>
+                  </h2>
+                  <p className="text-base md:text-lg text-white/70 max-w-xl">
+                    Join the team that's helping businesses scale from $2M to $10M+ in revenue.
+                  </p>
+                </div>
+
+                {/* Right Column: CTA Button & Contact Info */}
+                <div className="flex flex-col items-start lg:items-end gap-4">
+                  <Button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      onNavigate?.('contact');
+                    }}
+                    size="md"
+                    className="bg-coral hover:bg-coral-dark text-white"
+                  >
+                    Start Your Growth Audit
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+
+                  {/* Contact Info */}
+                  <div className="flex flex-col lg:items-end gap-2 text-white/70 text-sm font-medium">
+                    <a href="mailto:hello@castells.agency" className="flex items-center gap-2 hover:text-white transition-colors group">
+                      hello@castells.agency
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </a>
+                    <span className="flex items-center gap-2">
+                      Santa Monica, CA
+                      <ArrowUpRight className="w-4 h-4" />
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -168,6 +200,19 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </div>
           </div>
 
+        </div>
+
+        {/* Newsletter Section */}
+        <div className="pt-8 border-t border-black/10 dark:border-white/10 mb-8">
+          <div className="max-w-md">
+            <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white mb-2">
+              Stay Updated
+            </h3>
+            <p className="text-sm text-text-secondary dark:text-white/70 mb-4">
+              Get the latest marketing insights and strategies.
+            </p>
+            <NewsletterSignup variant="inline" />
+          </div>
         </div>
 
         {/* Bottom Section */}

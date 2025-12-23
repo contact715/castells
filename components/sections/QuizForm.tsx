@@ -4,6 +4,8 @@ import { ArrowRight, Check, ChevronRight, Loader2 } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
+import { submitQuizForm } from '../../lib/api/forms';
+import { trackFormSubmit } from '../../lib/analytics';
 
 type QuizData = {
     goal: string;
@@ -64,6 +66,7 @@ const QuizForm: React.FC = () => {
         website: ''
     });
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success'>('idle');
+    const [error, setError] = useState<string | null>(null);
 
     const handleOptionSelect = (value: string) => {
         const stepId = STEPS[currentStep].id as keyof QuizData;
@@ -83,11 +86,37 @@ const QuizForm: React.FC = () => {
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setError(null);
         setStatus('submitting');
 
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        setStatus('success');
+        try {
+            // Track form submission attempt
+            trackFormSubmit('Growth Audit Quiz', {
+                goal: formData.goal,
+                budget: formData.budget,
+                industry: formData.industry,
+            });
+
+            const result = await submitQuizForm({
+                name: formData.name,
+                email: formData.email,
+                website: formData.website,
+                goal: formData.goal,
+                budget: formData.budget,
+                industry: formData.industry,
+            });
+
+            if (result.success) {
+                setStatus('success');
+            } else {
+                setError(result.error || 'Failed to submit form. Please try again.');
+                setStatus('idle');
+            }
+        } catch (err) {
+            setError('An unexpected error occurred. Please try again.');
+            setStatus('idle');
+            console.error('Quiz form submission error:', err);
+        }
     };
 
     const nextStep = () => {
@@ -224,6 +253,15 @@ const QuizForm: React.FC = () => {
                                         placeholder="https://company.com"
                                     />
                                 </div>
+
+                                {/* Error Message */}
+                                {error && (
+                                    <div className="pt-4">
+                                        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4">
+                                            <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+                                        </div>
+                                    </div>
+                                )}
 
                                 <div className="pt-4">
                                     <Button

@@ -7,7 +7,10 @@ import { cn } from '../../lib/utils';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import { PageHeader } from '../ui/PageHeader';
 import SEO from '../ui/SEO';
+import SchemaMarkup from '../ui/SchemaMarkup';
 import type { NavigateFn } from '../../types';
+import { submitContactForm } from '../../lib/api/forms';
+import { trackFormSubmit } from '../../lib/analytics';
 
 interface ContactPageProps {
     onNavigate?: NavigateFn;
@@ -23,24 +26,39 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
     const handleSubmit = useCallback(async (e: React.FormEvent) => {
         e.preventDefault();
+        setError(null);
         setIsSubmitting(true);
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        setIsSubmitting(false);
-        setIsSuccess(true);
-        setFormState({ name: '', email: '', phone: '', topic: 'web-design', message: '' });
 
-        // Navigate to thank you page after successful submission
-        if (onNavigate) {
-            setTimeout(() => {
-                // Pass type as 'contact' for contact form submissions
-                onNavigate('thank-you', { name: 'contact' });
-            }, 500);
+        try {
+            // Track form submission attempt
+            trackFormSubmit('Contact Form', { topic: formState.topic });
+
+            const result = await submitContactForm(formState);
+
+            if (result.success) {
+                setIsSuccess(true);
+                setFormState({ name: '', email: '', phone: '', topic: 'web-design', message: '' });
+
+                // Navigate to thank you page after successful submission
+                if (onNavigate) {
+                    setTimeout(() => {
+                        onNavigate('thank-you', { name: 'contact' });
+                    }, 1500);
+                }
+            } else {
+                setError(result.error || 'Failed to submit form. Please try again.');
+            }
+        } catch (err) {
+            setError('An unexpected error occurred. Please try again.');
+            console.error('Form submission error:', err);
+        } finally {
+            setIsSubmitting(false);
         }
-    }, [onNavigate]);
+    }, [formState, onNavigate]);
 
     const contactMethods = [
         { icon: Calendar, label: 'Calendly', value: 'Schedule a call', href: 'https://calendly.com', color: 'bg-blue-500/10 text-blue-500' },
@@ -49,12 +67,42 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
         { icon: Send, label: 'Telegram', value: '@castells_agency', href: 'https://t.me', color: 'bg-sky-500/10 text-sky-500' },
     ];
 
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+
     return (
         <>
             <SEO 
-                title="Contact Us | Castells Agency" 
-                description="Ready to dominate your market? Schedule a free strategy session and let's discuss how we can help you achieve your goals."
+                title="Contact Us | Castells Agency - Santa Monica Digital Marketing" 
+                description="Ready to dominate your market? Contact Castells Agency in Santa Monica, California. Schedule a free strategy session and let's discuss how we can help you achieve your goals. Serving clients nationwide from our Los Angeles headquarters."
                 canonical="/contact"
+                keywords="contact marketing agency, Santa Monica marketing agency, Los Angeles digital marketing, marketing consultation, free marketing audit, marketing strategy session, California marketing agency"
+                geoRegion="US-CA"
+                geoPlacename="Santa Monica, California"
+                geoPosition="34.0195,-118.4912"
+                summary="Contact Castells Agency for digital marketing services. Located in Santa Monica, California. Schedule a free strategy session to discuss how we can help your business dominate its market. We serve clients nationwide."
+                mainEntity="Contact Information"
+            />
+            <SchemaMarkup
+                type="LocalBusiness"
+                data={{
+                    name: 'Castells Agency',
+                    description: 'Revenue-focused digital marketing agency helping contractors and service providers dominate their local markets.',
+                    telephone: '+1-555-000-0000',
+                    email: 'hello@castells.agency',
+                    streetAddress: '1234 Main Street',
+                    postalCode: '90401',
+                    latitude: 34.0195,
+                    longitude: -118.4912
+                }}
+            />
+            <SchemaMarkup
+                type="BreadcrumbList"
+                data={{
+                    itemListElement: [
+                        { name: 'Home', item: `${siteUrl}/` },
+                        { name: 'Contact Us', item: `${siteUrl}/contact` }
+                    ]
+                }}
             />
             <div className="min-h-screen bg-ivory pt-16 md:pt-20 pb-20 font-sans selection:bg-coral selection:text-white transition-colors duration-500">
             <div className="container mx-auto px-6 pt-4 md:pt-6">
@@ -80,7 +128,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                         transition={{ duration: 0.6 }}
                         className="lg:col-span-7 lg:sticky lg:top-32 h-fit"
                     >
-                        <div className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-10  -black/5 dark:-white/5 ">
+                        <div className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12">
                             {/* Form Header */}
                             <div className="mb-8">
                                 <h3 className="font-display text-2xl font-semibold text-text-primary mb-2">
@@ -167,6 +215,15 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                     />
                                 </div>
 
+                                {/* Error Message */}
+                                {error && (
+                                    <div className="pt-4">
+                                        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4">
+                                            <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+                                        </div>
+                                    </div>
+                                )}
+
                                 {/* Submit */}
                                 <div className="pt-4">
                                     <Button
@@ -211,20 +268,20 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                         className="lg:col-span-5 space-y-6"
                     >
                         {/* Contact Methods Grid */}
-                        <div className="grid grid-cols-1 gap-6">
+                        <div className="grid grid-cols-1 gap-6 lg:gap-8">
                             {/* Let's Talk Card */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.5 }}
-                                className="bg-white dark:bg-surface rounded-[32px] p-10  -black/5 dark:-white/5  hover: transition-all duration-300"
+                                className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                             >
                                 <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
                                     <Phone className="w-5 h-5 text-coral" /> Let's talk
                                 </h3>
-                                <p className="text-text-secondary text-sm mb-10">Pick what works best for you.</p>
+                                <p className="text-text-secondary dark:text-white/70 text-sm mb-8">Pick what works best for you.</p>
 
-                                <div className="space-y-6">
+                                <div className="space-y-3">
                                     {contactMethods.map((method, index) => (
                                         <motion.a
                                             key={index}
@@ -234,7 +291,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                             href={method.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex items-center justify-between p-3 -mx-3 rounded-xl group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer"
+                                            className="flex items-center justify-between p-4 -mx-4 rounded-[2rem] group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer"
                                         >
                                             <div className="flex items-center gap-4">
                                                 <div className="text-text-secondary group-hover:text-white dark:group-hover:text-black transition-colors">
@@ -252,7 +309,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                         initial={{ opacity: 0, x: -20 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: 0.8, duration: 0.4 }}
-                                        className="flex items-center justify-between p-3 -mx-3 rounded-xl group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer"
+                                        className="flex items-center justify-between p-4 -mx-4 rounded-[2rem] group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer"
                                     >
                                         <div className="flex items-center gap-4">
                                             <div className="text-text-secondary group-hover:text-white dark:group-hover:text-black transition-colors">
@@ -274,14 +331,14 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5, duration: 0.5 }}
-                                className="bg-white dark:bg-surface rounded-[32px] p-10  -black/5 dark:-white/5  hover: transition-all duration-300"
+                                className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                             >
                                 <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
                                     <Mail className="w-5 h-5 text-coral" /> Drop a message
                                 </h3>
-                                <p className="text-text-secondary text-sm mb-10">We'll get back soon.</p>
+                                <p className="text-text-secondary dark:text-white/70 text-sm mb-8">We'll get back soon.</p>
 
-                                <div className="space-y-6">
+                                <div className="space-y-3">
                                     {[
                                         { email: 'hello@castells.studio', label: 'General Purpose' },
                                         { email: 'partners@castells.studio', label: 'Partnership' },
@@ -293,7 +350,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: 0.6 + index * 0.1, duration: 0.4 }}
                                             href={`mailto:${item.email}`}
-                                            className="flex items-center justify-between p-3 -mx-3 rounded-xl group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer"
+                                            className="flex items-center justify-between p-4 -mx-4 rounded-[2rem] group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer"
                                         >
                                             <div className="flex items-center gap-4">
                                                 <span className="text-coral group-hover:text-white dark:group-hover:text-black text-lg transition-colors">@</span>
@@ -312,23 +369,28 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
 
                 {/* Testimonials Section */}
                 <div className="mb-32">
-                    <div className="flex items-center gap-2 mb-4">
-                        <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
-                        <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-                            Testimonials
-                        </span>
+                    <div className="max-w-3xl mb-10">
+                        <div className="flex items-center gap-2 mb-3">
+                            <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+                            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+                                Testimonials
+                            </span>
+                        </div>
+                        <AnimatedHeading
+                            as="h2"
+                            className="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-text-primary mb-3"
+                            delay={0.15}
+                        >
+                            What people say
+                        </AnimatedHeading>
+                        <p className="text-lg text-text-secondary leading-relaxed">
+                            Don't just take our word for it. See what our clients have to say about working with us.
+                        </p>
                     </div>
-                    <AnimatedHeading
-                        as="h2"
-                        className="font-display text-3xl md:text-4xl font-semibold text-black dark:text-white mb-12"
-                        delay={0.2}
-                    >
-                        What people say
-                    </AnimatedHeading>
 
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
                         {/* Visual / Video Preview */}
-                        <div className="lg:col-span-4 relative min-h-[360px] rounded-[2rem] overflow-hidden  -black/5 dark:-white/10 group/image">
+                        <div className="lg:col-span-4 relative min-h-[360px] rounded-[2rem] overflow-hidden group/image">
                             <img
                                 src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80"
                                 alt="Client testimonial"
@@ -351,12 +413,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                         </div>
 
                         {/* Quote */}
-                        <div className="lg:col-span-8 bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 flex flex-col justify-between  -black/5 dark:-white/10  hover: transition-all duration-300 relative overflow-hidden">
-                            {/* Subtle background */}
-                            <div className="absolute inset-0 pointer-events-none">
-                                <div className="absolute -top-24 -right-24 w-72 h-72 rounded-full bg-coral/10 blur-3xl" />
-                            </div>
-
+                        <div className="lg:col-span-8 bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 flex flex-col justify-between hover:shadow-xl transition-all duration-300 relative overflow-hidden">
                             <div className="relative">
                                 {/* Quote Icon */}
                                 <div className="text-coral text-5xl font-serif leading-none mb-8">“</div>
@@ -391,7 +448,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                 href="https://clutch.co"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="mt-10 p-3 -mx-3 rounded-xl flex items-center justify-between group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer"
+                                className="mt-10 p-4 -mx-4 rounded-[2rem] flex items-center justify-between group bg-black/5 dark:bg-black/20 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer"
                                 aria-label="Read this review on Clutch"
                             >
                                 <div className="flex items-center gap-3">
@@ -410,19 +467,24 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
 
                 {/* Bottom Grid (Moved) */}
                 <div className="mb-32">
-                    <div className="flex items-center gap-2 mb-4">
-                        <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
-                        <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-                            Discover
-                        </span>
+                    <div className="max-w-3xl mb-10">
+                        <div className="flex items-center gap-2 mb-3">
+                            <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+                            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+                                Discover
+                            </span>
+                        </div>
+                        <AnimatedHeading
+                            as="h2"
+                            className="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-text-primary mb-3"
+                            delay={0.15}
+                        >
+                            Explore our world
+                        </AnimatedHeading>
+                        <p className="text-lg text-text-secondary leading-relaxed">
+                            Learn more about who we are, what we do, and how we can help you achieve your goals.
+                        </p>
                     </div>
-                    <AnimatedHeading
-                        as="h2"
-                        className="font-display text-3xl md:text-4xl font-semibold text-black dark:text-white mb-12"
-                        delay={0.2}
-                    >
-                        Explore our world
-                    </AnimatedHeading>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <motion.a
@@ -431,7 +493,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                             transition={{ delay: 0.3, duration: 0.5 }}
                             href="/about"
                             onClick={(e) => { e.preventDefault(); onNavigate?.('about'); }}
-                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start  -black/5 dark:-white/10 transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover: hover:-translate-y-1"
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:shadow-xl hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-[2rem] bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">
@@ -455,7 +517,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                             transition={{ delay: 0.4, duration: 0.5 }}
                             href="/work"
                             onClick={(e) => { e.preventDefault(); onNavigate?.('work'); }}
-                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start  -black/5 dark:-white/10 transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover: hover:-translate-y-1"
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:shadow-xl hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-[2rem] bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">
@@ -479,7 +541,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                             transition={{ delay: 0.5, duration: 0.5 }}
                             href="/blog"
                             onClick={(e) => { e.preventDefault(); onNavigate?.('blog'); }}
-                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start  -black/5 dark:-white/10 transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover: hover:-translate-y-1"
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:shadow-xl hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-[2rem] bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">

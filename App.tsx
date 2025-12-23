@@ -8,10 +8,15 @@ import SchemaMarkup from './components/ui/SchemaMarkup';
 import ErrorBoundary from './components/ui/ErrorBoundary';
 import SmoothScroll from './components/effects/SmoothScroll';
 import LazySection from './components/ui/LazySection';
+import Analytics from './components/ui/Analytics';
+import SkipToContent from './components/ui/SkipToContent';
+import CookieConsent from './components/ui/CookieConsent';
 
 import type { NavigationData, PageView } from './types';
 export type { PageView } from './types';
 import { pathnameFromRoute, routeFromPathname } from './lib/routes';
+import { useScrollTracking } from './lib/hooks/useScrollTracking';
+import { useTimeOnPage } from './lib/hooks/useTimeOnPage';
 
 // Lazy load components for performance
 const Hero = React.lazy(() => import('./components/sections/Hero'));
@@ -62,6 +67,10 @@ function App() {
   const [selectedProject, setSelectedProject] = useState<NavigationData | null>(initialRoute.data ?? null);
   const [isPending, startTransition] = useTransition();
 
+  // Track scroll depth and time on page
+  useScrollTracking();
+  useTimeOnPage();
+
   // Scroll to top on page change
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
@@ -96,6 +105,7 @@ function App() {
 
   return (
     <ErrorBoundary>
+      <Analytics currentPage={currentPage} />
       <div className="bg-ivory dark:bg-[#191919] min-h-screen text-text-primary selection:bg-coral selection:text-white font-sans relative">
         <SEO />
         <SchemaMarkup type="Organization" />
@@ -104,13 +114,10 @@ function App() {
 
         
         {/* Skip to main content for accessibility */}
-        <a
-          href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-coral focus:text-white focus:rounded-lg focus:font-bold"
-          aria-label="Skip to main content"
-        >
-          Skip to main content
-        </a>
+        <SkipToContent />
+        
+        {/* Cookie Consent */}
+        <CookieConsent />
         
         <div className="relative z-10">
           <LazyMotion features={domAnimation}>

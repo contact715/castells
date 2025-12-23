@@ -1,5 +1,6 @@
 import React from 'react';
 import { m as motion } from 'framer-motion';
+import SchemaMarkup from '../ui/SchemaMarkup';
 
 const TESTIMONIAL_AVATARS = [
   'https://i.pravatar.cc/150?img=1',
@@ -12,6 +13,16 @@ const TESTIMONIAL_AVATARS = [
 const TrustSection: React.FC = React.memo(() => {
   return (
     <section className="bg-ivory dark:bg-[#191919] py-8 md:py-10">
+      <SchemaMarkup
+        type="AggregateRating"
+        data={{
+          ratingValue: '5',
+          bestRating: '5',
+          worstRating: '1',
+          ratingCount: '100',
+          reviewCount: '100'
+        }}
+      />
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

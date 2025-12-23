@@ -2,7 +2,7 @@
 import React, { useState, useCallback } from 'react';
 import { m as motion } from "framer-motion";
 import {
-    Briefcase, Users, Zap, Globe, Search, Cpu, Home, Car, PenTool,
+    Briefcase, Users, Zap, Globe, Search as SearchIcon, Cpu, Home, Car, PenTool,
     Layout, FileText, MessageSquare, LineChart, Megaphone,
     Hammer, Activity, Building2, Sparkles, Palette, Terminal, Scale, Flag, Mail, Factory, BarChart3, ArrowRight,
     Shield, Smartphone, ShoppingBag, Video, MousePointer2, Database, BarChart, Settings, Wrench, PaintBucket,
@@ -21,6 +21,7 @@ import { INDUSTRY_CATEGORIES, type IndustryCategory, type IndustryItem } from '.
 import { cn } from '../../lib/utils';
 import { SERVICE_CATEGORIES, type ServiceCategory, type ServiceItem } from '../../data/services';
 import { ContactButtons } from '../ui/ContactButtons';
+import Search from '../ui/Search';
 
 interface NavBarProps {
     onNavigate?: (page: PageView, data?: NavigationData) => void;
@@ -477,6 +478,40 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                     <div className="h-6 w-[1px] bg-black/10 dark:bg-white/10 mx-2"></div>
 
                     <div className="flex items-center gap-3">
+                        <Search 
+                            onNavigate={(url) => {
+                                // Parse URL and navigate
+                                if (url === '/') {
+                                    onNavigate?.('home');
+                                } else if (url.startsWith('/services/')) {
+                                    const slug = url.replace('/services/', '');
+                                    onNavigate?.('service', { id: slug });
+                                } else if (url.startsWith('/industries/')) {
+                                    const slug = url.replace('/industries/', '');
+                                    onNavigate?.('industry', { id: slug });
+                                } else if (url.startsWith('/blog/')) {
+                                    const id = url.replace('/blog/', '');
+                                    onNavigate?.('blog-post', { id });
+                                } else if (url.startsWith('/case-studies/')) {
+                                    const id = url.replace('/case-studies/', '');
+                                    onNavigate?.('case-study', { id });
+                                } else {
+                                    const pageMap: Record<string, PageView> = {
+                                        '/about': 'about',
+                                        '/work': 'work',
+                                        '/blog': 'blog',
+                                        '/contact': 'contact',
+                                        '/team': 'team',
+                                        '/careers': 'careers',
+                                        '/company': 'company',
+                                    };
+                                    const page = pageMap[url];
+                                    if (page) {
+                                        onNavigate?.(page);
+                                    }
+                                }
+                            }}
+                        />
                         <AnimatedThemeToggler className="w-8 h-8 flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 rounded-full" />
                         <button
                             onClick={handleSnowToggle}

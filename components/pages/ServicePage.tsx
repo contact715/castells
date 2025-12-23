@@ -1,14 +1,70 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { PageHeader } from '../ui/PageHeader';
-import { motion } from 'framer-motion';
-import { ArrowUpRight } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, Plus, Minus } from 'lucide-react';
 import { Section, SectionContainer } from '../ui/Section';
 import AnimatedHeading from '../ui/AnimatedHeading';
+import { Button } from '../ui/Button';
 import type { NavigateFn } from '../../types';
 import { findServiceBySlug, getServiceCategory, type ServiceCategoryId } from '../../data/services';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
 import { CASE_STUDIES, type CaseStudy } from '../../constants';
+
+// FAQ Accordion Component
+const FAQAccordion: React.FC<{ faqs: Array<{ question: string; answer: string }> }> = ({ faqs }) => {
+    const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+    return (
+        <div className="flex flex-col">
+            {faqs.map((faq, idx) => {
+                const isOpen = openIndex === idx;
+                return (
+                    <motion.div
+                        key={idx}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: idx * 0.1 }}
+                        className={`border-b border-black/10 dark:border-white/10 ${idx === 0 ? 'border-t' : ''}`}
+                    >
+                        <button
+                            onClick={() => setOpenIndex(isOpen ? null : idx)}
+                            className="w-full py-8 flex items-start justify-between gap-6 text-left group"
+                        >
+                            <h3 className={`font-display font-semibold text-2xl md:text-3xl transition-colors group-hover:text-coral ${isOpen ? 'text-coral' : 'text-text-primary'}`}>
+                                {faq.question}
+                            </h3>
+                            <span className="flex-shrink-0 mt-1">
+                                {isOpen ? (
+                                    <Minus className="w-6 h-6 text-coral" />
+                                ) : (
+                                    <Plus className="w-6 h-6 text-text-secondary group-hover:text-coral transition-colors" />
+                                )}
+                            </span>
+                        </button>
+
+                        <AnimatePresence>
+                            {isOpen && (
+                                <motion.div
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    exit={{ height: 0, opacity: 0 }}
+                                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                                    className="overflow-hidden"
+                                >
+                                    <p className="text-text-secondary dark:text-white/70 text-lg leading-relaxed max-w-3xl pb-8 font-light">
+                                        {faq.answer}
+                                    </p>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </motion.div>
+                );
+            })}
+        </div>
+    );
+};
 
 interface ServicePageProps {
     onBack?: () => void;
@@ -86,12 +142,30 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
         return merged.slice(0, 3);
     })();
 
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+    const enhancedDescription = `${seoDescription} Serving businesses in Santa Monica, Los Angeles, and nationwide. Proven results with 3x average ROAS and $50M+ revenue generated.`;
+
     return (
         <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
             <SEO
-                title={`${displayName} | Castells Agency`}
-                description={seoDescription}
+                title={`${displayName} | Castells Agency - Santa Monica Marketing Services`}
+                description={enhancedDescription}
                 canonical={seoCanonical}
+                keywords={`${displayName.toLowerCase()}, ${displayName.toLowerCase()} services, Santa Monica ${displayName.toLowerCase()}, Los Angeles marketing services, digital marketing agency, performance marketing`}
+                geoRegion="US-CA"
+                geoPlacename="Santa Monica, California"
+                summary={`${displayName} services by Castells Agency. ${seoDescription} Serving businesses in Santa Monica, Los Angeles, and nationwide with proven results: 3x average ROAS and $50M+ revenue generated.`}
+                mainEntity={displayName}
+            />
+            <SchemaMarkup
+                type="BreadcrumbList"
+                data={{
+                    itemListElement: [
+                        { name: 'Home', item: `${siteUrl}/` },
+                        { name: 'Services', item: `${siteUrl}/services` },
+                        { name: displayName, item: `${siteUrl}${seoCanonical}` }
+                    ]
+                }}
             />
             {matched?.item && (
                 <SchemaMarkup
@@ -234,6 +308,86 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                         </div>
                     </section>
                 )}
+
+                {/* FAQ Section */}
+                <section className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory relative">
+                    {(() => {
+                        const faqs = [
+                            {
+                                question: `What is ${displayName}?`,
+                                answer: `${displayName} is a comprehensive digital marketing service that helps businesses grow their revenue through data-driven strategies and proven methodologies.`
+                            },
+                            {
+                                question: `How long does it take to see results with ${displayName}?`,
+                                answer: `Typically, you'll see initial results within 2-4 weeks, with significant improvements in 3-6 months. Results vary based on your industry, budget, and current marketing infrastructure.`
+                            },
+                            {
+                                question: `What's included in ${displayName} services?`,
+                                answer: `Our ${displayName.toLowerCase()} services include strategy development, campaign setup, creative development, tracking implementation, ongoing optimization, and monthly reporting.`
+                            },
+                            {
+                                question: `Do you work with businesses in my industry?`,
+                                answer: `Yes, we work with businesses across multiple industries including construction, home services, professional services, automotive, retail, and healthcare.`
+                            },
+                            {
+                                question: `What's the minimum budget required for ${displayName}?`,
+                                answer: `We recommend a minimum ad spend of $3,000/month, excluding our agency fee, to see significant results with our systems.`
+                            }
+                        ];
+
+                        return (
+                            <>
+                                <SchemaMarkup
+                                    type="FAQPage"
+                                    data={{
+                                        mainEntity: faqs.map(faq => ({
+                                            question: faq.question,
+                                            answer: faq.answer
+                                        }))
+                                    }}
+                                />
+                                <div className="container mx-auto px-6">
+                                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-24">
+                                        {/* Left Column: Header & CTA */}
+                                        <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
+                                            <div className="mb-8">
+                                                <div className="flex items-center gap-2 mb-3">
+                                                    <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+                                                    <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">FAQ</span>
+                                                </div>
+                                                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4">
+                                                    Common<br />
+                                                    <span className="text-text-secondary">Questions</span>
+                                                </h2>
+                                                <p className="text-lg text-text-secondary leading-relaxed">
+                                                    Transparency is key to our partnership. Here are the answers to the questions you're likely thinking about.
+                                                </p>
+                                            </div>
+
+                                            <div className="flex flex-col items-start gap-4">
+                                                <p className="text-sm font-bold uppercase tracking-widest text-text-primary">
+                                                    Have another question?
+                                                </p>
+                                                <Button
+                                                    onClick={() => onNavigate?.('contact')}
+                                                    size="md"
+                                                    className="inline-flex items-center gap-2 group"
+                                                >
+                                                    Contact Us <ArrowUpRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                                </Button>
+                                            </div>
+                                        </div>
+
+                                        {/* Right Column: Q&A List */}
+                                        <div className="lg:col-span-8">
+                                            <FAQAccordion faqs={faqs} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </>
+                        );
+                    })()}
+                </section>
 
                 {/* CTA Section */}
                 <motion.div

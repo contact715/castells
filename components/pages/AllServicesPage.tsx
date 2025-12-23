@@ -8,6 +8,7 @@ import { Breadcrumbs } from '../ui/Breadcrumbs';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import Counter from '../ui/Counter';
 import SEO from '../ui/SEO';
+import SchemaMarkup from '../ui/SchemaMarkup';
 import { cn } from '../../lib/utils';
 import {
   Palette, Book, Layers, Layout, FileText,
@@ -51,12 +52,28 @@ const PROCESS_STEPS = [
 const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate }) => {
   const [activeCategory, setActiveCategory] = useState(0);
 
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+
   return (
     <div className="min-h-screen bg-ivory dark:bg-[#191919]">
       <SEO
-        title="Services | Castells Agency"
-        description="Full-stack growth services: branding, development, automation, analytics, paid media, and SEO."
+        title="Services | Castells Agency - Full-Stack Growth Marketing Services"
+        description="Full-stack growth services: branding, development, automation, analytics, paid media, and SEO. Serving businesses in Santa Monica, Los Angeles, and nationwide. 500+ projects delivered, 3.2x average ROAS, $50M+ revenue generated."
         canonical="/services"
+        keywords="digital marketing services, branding services, web development, marketing automation, SEO services, paid advertising, Santa Monica marketing services, Los Angeles marketing agency, full-stack marketing"
+        geoRegion="US-CA"
+        geoPlacename="Santa Monica, California"
+        summary="Full-stack growth marketing services by Castells Agency including branding, web development, automation, analytics, paid media, and SEO. 500+ projects delivered with 3.2x average ROAS and $50M+ revenue generated. Serving businesses in Santa Monica, Los Angeles, and nationwide."
+        mainEntity="Marketing Services"
+      />
+      <SchemaMarkup
+        type="BreadcrumbList"
+        data={{
+          itemListElement: [
+            { name: 'Home', item: `${siteUrl}/` },
+            { name: 'Services', item: `${siteUrl}/services` }
+          ]
+        }}
       />
 
       {/* Hero Section */}

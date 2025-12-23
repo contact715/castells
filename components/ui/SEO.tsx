@@ -8,6 +8,12 @@ interface SEOProps {
     image?: string;
     type?: string;
     robots?: string;
+    keywords?: string;
+    geoRegion?: string;
+    geoPlacename?: string;
+    geoPosition?: string;
+    summary?: string; // AI-friendly summary
+    mainEntity?: string; // Main topic/entity for AI understanding
 }
 
 const SEO: React.FC<SEOProps> = ({
@@ -16,7 +22,13 @@ const SEO: React.FC<SEOProps> = ({
     canonical,
     image = 'https://castells.agency/og-image.svg',
     type = 'website',
-    robots = 'noindex, nofollow'
+    robots = 'index, follow',
+    keywords,
+    geoRegion = 'US-CA',
+    geoPlacename = 'Santa Monica, California',
+    geoPosition,
+    summary,
+    mainEntity
 }) => {
     const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
     const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
@@ -28,6 +40,13 @@ const SEO: React.FC<SEOProps> = ({
         <Helmet>
             <title>{title}</title>
             <meta name="description" content={description} />
+            {keywords && <meta name="keywords" content={keywords} />}
+            
+            {/* GEO Meta Tags */}
+            <meta name="geo.region" content={geoRegion} />
+            <meta name="geo.placename" content={geoPlacename} />
+            {geoPosition && <meta name="geo.position" content={geoPosition} />}
+            <meta name="ICBM" content={geoPosition || "34.0195,-118.4912"} />
             
             {/* Open Graph */}
             <meta property="og:title" content={title} />
@@ -39,6 +58,7 @@ const SEO: React.FC<SEOProps> = ({
             <meta property="og:image:height" content="630" />
             <meta property="og:site_name" content="Castells Agency" />
             <meta property="og:locale" content="en_US" />
+            <meta property="og:locale:alternate" content="en_US" />
             
             {/* Twitter */}
             <meta name="twitter:card" content="summary_large_image" />
@@ -50,6 +70,12 @@ const SEO: React.FC<SEOProps> = ({
             <meta name="author" content="Castells Agency" />
             <meta name="robots" content={robots} />
             <link rel="canonical" href={fullCanonical} />
+            
+            {/* AI/LLM Optimization (GEO - Generative Engine Optimization) */}
+            {summary && <meta name="summary" content={summary} />}
+            {mainEntity && <meta name="main-entity" content={mainEntity} />}
+            <meta name="content-type" content="text/html; charset=UTF-8" />
+            <meta name="language" content="en-US" />
         </Helmet>
     );
 };

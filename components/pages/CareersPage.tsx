@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { PageHeader } from '../ui/PageHeader';
 import type { NavigateFn } from '../../types';
 import AnimatedHeading from '../ui/AnimatedHeading';
+import SchemaMarkup from '../ui/SchemaMarkup';
 
 interface CareersPageProps {
   onBack: () => void;
@@ -21,9 +22,29 @@ const OPENINGS = [
 import SEO from '../ui/SEO';
 
 const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+
   return (
     <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20 animate-in fade-in duration-500">
-      <SEO title="Careers | Castells Agency" description="Join the elite. We hire owners, not employees." />
+      <SEO 
+        title="Careers | Castells Agency - Join Our Marketing Team" 
+        description="Join the elite. We hire owners, not employees. Build the future of growth marketing with Castells Agency. Remote and Santa Monica, California positions available. Work with world-class talent from Google, Meta, and top agencies."
+        canonical="/careers"
+        keywords="marketing jobs, digital marketing careers, Santa Monica marketing jobs, Los Angeles marketing careers, remote marketing jobs, performance marketing careers, growth marketing jobs"
+        geoRegion="US-CA"
+        geoPlacename="Santa Monica, California"
+        summary="Career opportunities at Castells Agency. We hire owners, not employees. Open positions for marketing professionals in Santa Monica, California and remote. Work with world-class talent from Google, Meta, and top agencies."
+        mainEntity="Marketing Careers"
+      />
+      <SchemaMarkup
+        type="BreadcrumbList"
+        data={{
+          itemListElement: [
+            { name: 'Home', item: `${siteUrl}/` },
+            { name: 'Careers', item: `${siteUrl}/careers` }
+          ]
+        }}
+      />
       <div className="container mx-auto px-6 pt-4 md:pt-6">
 
         <PageHeader

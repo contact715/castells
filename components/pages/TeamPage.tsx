@@ -8,6 +8,7 @@ import { Button } from '../ui/Button';
 import { Section, SectionContainer, SectionHeader } from '../ui/Section';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import SEO from '../ui/SEO';
+import SchemaMarkup from '../ui/SchemaMarkup';
 import type { NavigateFn } from '../../types';
 
 interface TeamPageProps {
@@ -211,12 +212,29 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
         ? TEAM_MEMBERS 
         : TEAM_MEMBERS.filter(member => member.category.includes(activeCategory));
 
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+
     return (
         <>
             <SEO 
-                title="Our Team | Castells Agency" 
-                description="Meet the talented professionals behind our agency's success. The experts driving revenue growth for our clients."
+                title="Our Team | Castells Agency - Expert Marketing Professionals" 
+                description="Meet the talented professionals behind our agency's success. World-class talent from Google, Meta, and top agencies. 35+ team members with 150+ years combined experience, serving clients from our Santa Monica headquarters and remotely across the US."
                 canonical="/team"
+                keywords="marketing team, digital marketing experts, Santa Monica marketing team, Los Angeles marketing professionals, Google Ads specialists, Meta Ads experts, performance marketing team"
+                geoRegion="US-CA"
+                geoPlacename="Santa Monica, California"
+                summary="Castells Agency team consists of 35+ marketing professionals with 150+ years combined experience. Team includes ex-Google and ex-Meta specialists, serving clients from Santa Monica headquarters and remotely across the US."
+                mainEntity="Marketing Team"
+            />
+            <SchemaMarkup
+                type="BreadcrumbList"
+                data={{
+                    itemListElement: [
+                        { name: 'Home', item: `${siteUrl}/` },
+                        { name: 'Company', item: `${siteUrl}/company` },
+                        { name: 'Our Team', item: `${siteUrl}/team` }
+                    ]
+                }}
             />
             <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20 animate-in fade-in duration-500">
                 {/* Hero Section */}

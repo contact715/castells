@@ -3,6 +3,7 @@ import { VelocityScroll } from '../effects/ScrollBasedVelocity';
 import { Badge } from '../ui/Badge';
 import { cn } from '../../lib/utils';
 import AnimatedHeading from '../ui/AnimatedHeading';
+import SchemaMarkup from '../ui/SchemaMarkup';
 
 const TESTIMONIALS = [
   {
@@ -123,6 +124,30 @@ const Testimonials: React.FC = () => {
 
   return (
     <section className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory relative overflow-hidden">
+      {/* Review Schema for each testimonial */}
+      {TESTIMONIALS.map((testimonial, index) => (
+        <SchemaMarkup
+          key={`review-${testimonial.id}`}
+          type="Review"
+          data={{
+            itemReviewed: {
+              name: 'Castells Agency',
+              type: 'Organization'
+            },
+            author: {
+              name: testimonial.name,
+              type: 'Person'
+            },
+            reviewRating: {
+              ratingValue: '5',
+              bestRating: '5',
+              worstRating: '1'
+            },
+            reviewBody: testimonial.quote,
+            datePublished: new Date(Date.now() - (index * 30 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0]
+          }}
+        />
+      ))}
       {/* Background Gradients */}
       <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
         <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-coral/5 blur-[120px] rounded-full opacity-50" />

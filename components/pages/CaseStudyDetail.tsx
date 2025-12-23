@@ -3,6 +3,7 @@ import { m as motion } from 'framer-motion';
 import { ArrowLeft, Calendar, Building2, TrendingUp, Target, CheckCircle2, ExternalLink, Zap, MapPin, ArrowUpRight, FileText, Globe } from 'lucide-react';
 import { Button } from '../ui/Button';
 import SEO from '../ui/SEO';
+import SchemaMarkup from '../ui/SchemaMarkup';
 import { Breadcrumbs } from '../ui/Breadcrumbs';
 import { CASE_STUDIES } from '../../constants';
 import type { CaseStudy } from '../../constants';
@@ -104,9 +105,31 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
     }
   };
 
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+  const enhancedDescription = `${data.description} Real results from Castells Agency's marketing strategies. Serving businesses in Santa Monica, Los Angeles, and nationwide.`;
+
   return (
     <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20">
-      <SEO title={`${data.client} Case Study | Castells Agency`} description={data.description} />
+      <SEO 
+        title={`${data.client} Case Study | Castells Agency - Marketing Results`} 
+        description={enhancedDescription}
+        canonical={`/case-studies/${data.client?.toLowerCase().replace(/\s+/g, '-')}`}
+        keywords={`${data.client} case study, ${data.industry} marketing, marketing case study, digital marketing results, Santa Monica marketing agency, Los Angeles marketing services`}
+        geoRegion="US-CA"
+        geoPlacename="Santa Monica, California"
+        summary={`Case study: How Castells Agency helped ${data.client} achieve marketing success. ${data.description} Real results from proven marketing strategies.`}
+        mainEntity={`${data.client} Case Study`}
+      />
+      <SchemaMarkup
+        type="BreadcrumbList"
+        data={{
+          itemListElement: [
+            { name: 'Home', item: `${siteUrl}/` },
+            { name: 'Work', item: `${siteUrl}/work` },
+            { name: data.client || 'Case Study', item: `${siteUrl}/case-studies/${data.client?.toLowerCase().replace(/\s+/g, '-')}` }
+          ]
+        }}
+      />
       <div className="container mx-auto px-6 pt-4 md:pt-6">
         {/* Breadcrumbs */}
         <div className="mb-12">

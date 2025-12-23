@@ -8,6 +8,7 @@ import { Breadcrumbs } from '../ui/Breadcrumbs';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import Counter from '../ui/Counter';
 import SEO from '../ui/SEO';
+import SchemaMarkup from '../ui/SchemaMarkup';
 import {
   Hammer, Home, Car, Briefcase, ArrowRight, ArrowUpRight,
   Zap, Droplets, PaintBucket, Sun, Ruler, ShieldCheck,
@@ -41,12 +42,28 @@ const STATS = [
 const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigate }) => {
   const [activeCategory, setActiveCategory] = useState(0);
 
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+
   return (
     <div className="min-h-screen bg-ivory dark:bg-[#191919]">
       <SEO
-        title="Industries | Castells Agency"
-        description="Explore the high-ticket industries we specialize in—from construction to professional services."
+        title="Industries | Castells Agency - Industry-Specific Marketing Services"
+        description="Explore the high-ticket industries we specialize in—from construction to professional services. Proven growth strategies for 47+ industries. Serving businesses in Santa Monica, Los Angeles, and nationwide with industry-specific marketing expertise."
         canonical="/industries"
+        keywords="industry marketing, construction marketing, home services marketing, professional services marketing, automotive marketing, retail marketing, healthcare marketing, Santa Monica marketing, Los Angeles industry marketing"
+        geoRegion="US-CA"
+        geoPlacename="Santa Monica, California"
+        summary="Industry-specific marketing services by Castells Agency. We specialize in 47+ industries including construction, home services, professional services, automotive, retail, and healthcare. Proven growth strategies serving businesses in Santa Monica, Los Angeles, and nationwide."
+        mainEntity="Industry Marketing"
+      />
+      <SchemaMarkup
+        type="BreadcrumbList"
+        data={{
+          itemListElement: [
+            { name: 'Home', item: `${siteUrl}/` },
+            { name: 'Industries', item: `${siteUrl}/industries` }
+          ]
+        }}
       />
 
       {/* Hero Section */}

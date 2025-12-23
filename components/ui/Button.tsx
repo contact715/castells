@@ -52,16 +52,23 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
       lg: "px-8 py-4 text-sm"
     };
 
+    // Add accessibility attributes
+    const accessibilityProps = Component === 'button' ? {
+      'aria-label': props['aria-label'] || (typeof children === 'string' ? children : undefined),
+    } : {};
+
     return (
       <Component
         className={cn(
           baseStyles,
           variants[variant],
           sizes[size],
+          'focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2',
           className
         )}
         ref={ref as any}
         {...buttonProps}
+        {...accessibilityProps}
         {...props}
       >
         {children}

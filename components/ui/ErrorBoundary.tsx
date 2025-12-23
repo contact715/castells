@@ -30,9 +30,29 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore - Vite env types
     const isDev = import.meta.env?.DEV;
+    
+    // Log error
     if (isDev) {
       console.error('ErrorBoundary caught an error:', error, errorInfo);
     }
+
+    // Track error in analytics (if available)
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      try {
+        (window as any).gtag('event', 'exception', {
+          description: error.toString(),
+          fatal: false,
+        });
+      } catch (e) {
+        // Ignore analytics errors
+      }
+    }
+
+    // Optional: Send to error tracking service (Sentry, LogRocket, etc.)
+    // Example for Sentry:
+    // if (window.Sentry) {
+    //   window.Sentry.captureException(error, { contexts: { react: errorInfo } });
+    // }
   }
 
   render() {

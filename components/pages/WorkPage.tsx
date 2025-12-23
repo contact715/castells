@@ -1,10 +1,13 @@
-import React, { useState, useCallback, useMemo, useDeferredValue, useId } from 'react';
+import React, { useState, useCallback, useMemo, useDeferredValue, useId, useEffect } from 'react';
 import { Search, Grid3x3, List, ArrowUpRight } from 'lucide-react';
 import { PageHeader } from '../ui/PageHeader';
 import { CASE_STUDIES, WORK_CATEGORIES } from '../../constants';
 import { PageView } from '../../App';
 import { NavigationData } from '../../types';
 import { m as motion } from 'framer-motion';
+import SEO from '../ui/SEO';
+import SchemaMarkup from '../ui/SchemaMarkup';
+import Pagination from '../ui/Pagination';
 
 interface WorkPageProps {
     onBack: () => void;
@@ -20,6 +23,8 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
     const [sortBy, setSortBy] = useState('Newest');
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const projectsPerPage = 9;
     
     // useDeferredValue для отложенного обновления поиска (не блокирует UI)
     const deferredSearchQuery = useDeferredValue(searchQuery);
@@ -73,7 +78,41 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
         });
     }, [filteredProjects, sortBy]);
 
+    // Pagination
+    const totalPages = Math.ceil(sortedProjects.length / projectsPerPage);
+    const paginatedProjects = useMemo(() => {
+        const startIndex = (currentPage - 1) * projectsPerPage;
+        return sortedProjects.slice(startIndex, startIndex + projectsPerPage);
+    }, [sortedProjects, currentPage, projectsPerPage]);
+
+    // Reset to page 1 when filters change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchQuery, selectedCategories, selectedIndustries, sortBy]);
+
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+
     return (
+        <>
+            <SEO 
+                title="Our Work & Case Studies | Castells Agency - Proven Results" 
+                description="Proven results that speak for themselves: $50M+ in revenue generated, 3x average ROAS, and 250%+ growth across 200+ successful campaigns for clients from startups to Fortune 500s. View our portfolio of digital marketing case studies in Santa Monica, Los Angeles, and nationwide."
+                canonical="/work"
+                keywords="marketing case studies, digital marketing portfolio, successful marketing campaigns, marketing results, Santa Monica marketing agency, Los Angeles marketing services, performance marketing examples"
+                geoRegion="US-CA"
+                geoPlacename="Santa Monica, California"
+                summary="Portfolio of successful digital marketing campaigns by Castells Agency. Results include $50M+ revenue generated, 3x average ROAS, 250%+ growth across 200+ campaigns for clients ranging from startups to Fortune 500 companies."
+                mainEntity="Marketing Case Studies"
+            />
+            <SchemaMarkup
+                type="BreadcrumbList"
+                data={{
+                    itemListElement: [
+                        { name: 'Home', item: `${siteUrl}/` },
+                        { name: 'Our Work', item: `${siteUrl}/work` }
+                    ]
+                }}
+            />
         <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
             <div className="container mx-auto px-6 pt-4 md:pt-6">
                 {/* Header */}
@@ -203,10 +242,10 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                         {/* Projects Grid/List */}
                         {viewMode === 'grid' ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                {sortedProjects.map((project) => (
+                                {paginatedProjects.map((project) => (
                                     <div
                                         key={project.id}
-                                        onClick={() => onNavigate('case-study', project as NavigationData)}
+                                        onClick={() => onNavigate('case-study', project as unknown as NavigationData)}
                                         className="group relative aspect-[4/3] rounded-[2rem] overflow-hidden cursor-pointer bg-white dark:bg-surface border border-black/5 dark:border-white/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
                                     >
                                         {/* Background Media */}
@@ -258,10 +297,10 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                             </div>
                         ) : (
                             <div className="space-y-4">
-                                {sortedProjects.map((project) => (
+                                {paginatedProjects.map((project) => (
                                     <div
                                         key={project.id}
-                                        onClick={() => onNavigate('case-study', project)}
+                                        onClick={() => onNavigate('case-study', project as unknown as NavigationData)}
                                         className="group flex gap-4 bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-xl p-4 hover: hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
                                     >
                                         <div className="w-32 h-32 rounded-lg overflow-hidden flex-shrink-0">
@@ -311,10 +350,22 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                 ))}
                             </div>
                         )}
+
+                        {/* Pagination */}
+                        {totalPages > 1 && (
+                            <div className="mt-12 pt-8 border-t border-black/10 dark:border-white/10">
+                                <Pagination
+                                    currentPage={currentPage}
+                                    totalPages={totalPages}
+                                    onPageChange={setCurrentPage}
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
         </div>
+        </>
     );
 });
 

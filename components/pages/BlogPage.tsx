@@ -1,8 +1,10 @@
-import React, { useState, useMemo, useDeferredValue, useId, useCallback } from 'react';
+import React, { useState, useMemo, useDeferredValue, useId, useCallback, useEffect } from 'react';
 import { Search, Grid3x3, List, Code, BarChart, Zap, Scale, Globe, Terminal, Users, TrendingUp, Palette } from 'lucide-react';
 import { PageView } from '../../App';
 import { PageHeader } from '../ui/PageHeader';
 import SEO from '../ui/SEO';
+import SchemaMarkup from '../ui/SchemaMarkup';
+import Pagination from '../ui/Pagination';
 import { NavigationData } from '../../types';
 
 interface BlogPost {
@@ -100,6 +102,8 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
     const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const postsPerPage = 9;
     
     // useDeferredValue для отложенного обновления поиска
     const deferredSearchQuery = useDeferredValue(searchQuery);
@@ -153,13 +157,64 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
         });
     }, [filteredPosts, sortBy]);
 
+    // Pagination
+    const totalPages = Math.ceil(sortedPosts.length / postsPerPage);
+    const paginatedPosts = useMemo(() => {
+        const startIndex = (currentPage - 1) * postsPerPage;
+        return sortedPosts.slice(startIndex, startIndex + postsPerPage);
+    }, [sortedPosts, currentPage, postsPerPage]);
+
+    // Reset to page 1 when filters change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchQuery, selectedCategories, sortBy]);
+
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+
     return (
         <>
             <SEO 
-                title="Blog & Insights | Castells Agency" 
-                description="Explore our latest insights, strategies, and case studies on digital marketing, growth, automation, and revenue optimization."
+                title="Blog & Insights | Castells Agency - Marketing Strategies & Case Studies" 
+                description="Explore our latest insights, strategies, and case studies on digital marketing, growth, automation, and revenue optimization. Learn from proven marketing tactics used by successful businesses in Santa Monica, Los Angeles, and nationwide."
                 canonical="/blog"
+                keywords="marketing blog, digital marketing insights, marketing strategies, marketing case studies, growth marketing tips, marketing automation, SEO strategies, paid advertising tips, Santa Monica marketing blog"
+                geoRegion="US-CA"
+                geoPlacename="Santa Monica, California"
+                summary="Marketing blog and insights from Castells Agency covering digital marketing strategies, growth tactics, automation, SEO, paid advertising, and revenue optimization. Learn from proven tactics used by successful businesses."
+                mainEntity="Marketing Blog"
             />
+            <SchemaMarkup
+                type="BreadcrumbList"
+                data={{
+                    itemListElement: [
+                        { name: 'Home', item: `${siteUrl}/` },
+                        { name: 'Blog & Insights', item: `${siteUrl}/blog` }
+                    ]
+                }}
+            />
+            {/* Definition schemas for marketing terms used throughout the blog */}
+            {['ROAS', 'ROI', 'CPA', 'CPC', 'CTR', 'Conversion Rate', 'Attribution', 'Funnel', 'PPC', 'SEO', 'Local SEO', 'Geo-targeting'].map((term) => (
+                <SchemaMarkup
+                    key={term}
+                    type="Definition"
+                    data={{
+                        name: term,
+                        description: term === 'ROAS' ? 'Return on Ad Spend - a metric that measures revenue generated per dollar spent on advertising' :
+                            term === 'ROI' ? 'Return on Investment - a measure of the profitability of an investment' :
+                            term === 'CPA' ? 'Cost Per Acquisition - the cost of acquiring a new customer' :
+                            term === 'CPC' ? 'Cost Per Click - the amount paid for each click on an advertisement' :
+                            term === 'CTR' ? 'Click-Through Rate - the percentage of people who click on an ad after seeing it' :
+                            term === 'Conversion Rate' ? 'The percentage of visitors who complete a desired action' :
+                            term === 'Attribution' ? 'The process of identifying which marketing touchpoints contributed to a conversion' :
+                            term === 'Funnel' ? 'Sales Funnel - the customer journey from awareness to purchase' :
+                            term === 'PPC' ? 'Pay-Per-Click - an advertising model where advertisers pay each time their ad is clicked' :
+                            term === 'SEO' ? 'Search Engine Optimization - the practice of improving website visibility in search engine results' :
+                            term === 'Local SEO' ? 'Local Search Engine Optimization - optimizing a website for local search results' :
+                            'Geo-targeting - delivering content or ads to users based on their geographic location',
+                        termSetName: 'Digital Marketing Glossary'
+                    }}
+                />
+            ))}
             <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
             <div className="container mx-auto px-6 pt-4 md:pt-6">
                 {/* Header */}
@@ -310,7 +365,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                         {/* Posts Grid/List */}
                         {viewMode === 'grid' ? (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                                {sortedPosts.map((post) => {
+                                {paginatedPosts.map((post) => {
                                     const Icon = post.icon;
                                     return (
                                         <a
@@ -356,7 +411,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                             </div>
                         ) : (
                             <div className="space-y-4">
-                                {sortedPosts.map((post) => {
+                                {paginatedPosts.map((post) => {
                                     const Icon = post.icon;
                                     return (
                                         <a
@@ -395,6 +450,17 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                         </a>
                                     );
                                 })}
+                            </div>
+                        )}
+
+                        {/* Pagination */}
+                        {totalPages > 1 && (
+                            <div className="mt-12 pt-8 border-t border-black/10 dark:border-white/10">
+                                <Pagination
+                                    currentPage={currentPage}
+                                    totalPages={totalPages}
+                                    onPageChange={setCurrentPage}
+                                />
                             </div>
                         )}
                     </div>

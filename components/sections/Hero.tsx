@@ -5,6 +5,7 @@ import { Button } from '../ui/Button';
 import { Marquee } from '../ui/Marquee';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import { ContactButtons } from '../ui/ContactButtons';
+import SchemaMarkup from '../ui/SchemaMarkup';
 import '../ui/Marquee.css';
 
 // Professional logo components
@@ -166,8 +167,22 @@ const Hero: React.FC = () => {
         }
     };
 
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+    const videoId = '1101673750';
+
     return (
         <div className="pt-16 md:pt-20 pb-0 relative overflow-hidden bg-transparent">
+            <SchemaMarkup
+                type="VideoObject"
+                data={{
+                    name: 'Castells Agency - Digital Marketing Services',
+                    description: 'We dominate local markets. From MVP to scalable results people actually want. We design, build, and optimize campaigns for contractors, service providers, and local businesses.',
+                    thumbnailUrl: `https://vumbnail.com/${videoId}.jpg`,
+                    uploadDate: '2024-01-01',
+                    embedUrl: `https://player.vimeo.com/video/${videoId}`,
+                    contentUrl: `https://vimeo.com/${videoId}`
+                }}
+            />
             <div className="container mx-auto px-6 relative z-10 pt-4 md:pt-6">
 
                 {/* Two-Column Header */}

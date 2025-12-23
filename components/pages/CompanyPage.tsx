@@ -7,6 +7,7 @@ import { Breadcrumbs } from '../ui/Breadcrumbs';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import Counter from '../ui/Counter';
 import SEO from '../ui/SEO';
+import SchemaMarkup from '../ui/SchemaMarkup';
 import {
   Users, Flag, Briefcase, ArrowRight, ArrowUpRight,
   FileText, Mail, Newspaper, Target, Award, Heart,
@@ -80,12 +81,28 @@ const BLOG_POSTS = [
 ];
 
 const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+
   return (
     <>
       <SEO 
-        title="Company | Castells Agency" 
-        description="The Anti-Agency. 12+ years in business, 500+ projects delivered, $50M+ revenue generated. Revenue-obsessed digital marketing agency."
+        title="Company | Castells Agency - The Anti-Agency" 
+        description="The Anti-Agency. 12+ years in business, 500+ projects delivered, $50M+ revenue generated. Revenue-obsessed digital marketing agency based in Santa Monica, California, serving clients nationwide. Built for founders who think like owners."
         canonical="/company"
+        keywords="digital marketing agency, revenue-focused marketing, Santa Monica marketing agency, Los Angeles marketing company, performance marketing agency, growth marketing, anti-agency, marketing company"
+        geoRegion="US-CA"
+        geoPlacename="Santa Monica, California"
+        summary="Castells Agency is The Anti-Agency - a revenue-obsessed digital marketing agency. Founded in 2012, we've delivered 500+ projects and generated $50M+ revenue for clients. Based in Santa Monica, California, serving clients nationwide. Built for founders who think like owners."
+        mainEntity="Digital Marketing Agency"
+      />
+      <SchemaMarkup
+        type="BreadcrumbList"
+        data={{
+          itemListElement: [
+            { name: 'Home', item: `${siteUrl}/` },
+            { name: 'Company', item: `${siteUrl}/company` }
+          ]
+        }}
       />
       <div className="min-h-screen bg-ivory dark:bg-[#191919]">
 

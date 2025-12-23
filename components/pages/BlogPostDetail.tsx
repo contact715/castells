@@ -4,6 +4,7 @@ import { Calendar, ArrowLeft, Share2, Clock, User } from 'lucide-react';
 import { Button } from '../ui/Button';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
+import ShareButtons from '../ui/ShareButtons';
 import { Breadcrumbs } from '../ui/Breadcrumbs';
 import { PageView } from '../../App';
 import { NavigationData } from '../../types';
@@ -169,9 +170,31 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
         return new Date().toISOString().split('T')[0];
     };
 
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+    const enhancedDescription = `${post.content.intro} Marketing insights and strategies from Castells Agency, serving businesses in Santa Monica, Los Angeles, and nationwide.`;
+
     return (
         <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20">
-            <SEO title={`${post.title} | Castells Blog`} description={post.content.intro} />
+            <SEO 
+                title={`${post.title} | Castells Blog - Marketing Insights`} 
+                description={enhancedDescription}
+                canonical={`/blog/${post.id}`}
+                keywords={`${post.title}, marketing blog, digital marketing insights, marketing strategies, Santa Monica marketing blog, Los Angeles marketing tips`}
+                geoRegion="US-CA"
+                geoPlacename="Santa Monica, California"
+                summary={`${post.title}: ${post.content.intro} Marketing insights and strategies from Castells Agency.`}
+                mainEntity="Marketing Article"
+            />
+            <SchemaMarkup
+                type="BreadcrumbList"
+                data={{
+                    itemListElement: [
+                        { name: 'Home', item: `${siteUrl}/` },
+                        { name: 'Blog & Insights', item: `${siteUrl}/blog` },
+                        { name: post.title, item: `${siteUrl}/blog/${post.id}` }
+                    ]
+                }}
+            />
             <SchemaMarkup
                 type="Article"
                 data={{
@@ -193,6 +216,40 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                     }
                 }}
             />
+            {/* Course schema for educational content */}
+            <SchemaMarkup
+                type="Course"
+                data={{
+                    name: post.title,
+                    description: post.content.intro,
+                    provider: {
+                        '@type': 'Organization',
+                        name: 'Castells Agency',
+                        url: siteUrl
+                    },
+                    educationalCredentialAwarded: 'Marketing Knowledge',
+                    courseCode: `BLOG-${post.id}`
+                }}
+            />
+            {/* Definition schemas for marketing terms */}
+            {['ROAS', 'ROI', 'CPA', 'CPC', 'CTR', 'Conversion Rate', 'Attribution', 'Funnel'].map((term) => (
+                <SchemaMarkup
+                    key={term}
+                    type="Definition"
+                    data={{
+                        name: term,
+                        description: term === 'ROAS' ? 'Return on Ad Spend - a metric that measures revenue generated per dollar spent on advertising' :
+                            term === 'ROI' ? 'Return on Investment - a measure of the profitability of an investment' :
+                            term === 'CPA' ? 'Cost Per Acquisition - the cost of acquiring a new customer' :
+                            term === 'CPC' ? 'Cost Per Click - the amount paid for each click on an advertisement' :
+                            term === 'CTR' ? 'Click-Through Rate - the percentage of people who click on an ad after seeing it' :
+                            term === 'Conversion Rate' ? 'The percentage of visitors who complete a desired action' :
+                            term === 'Attribution' ? 'The process of identifying which marketing touchpoints contributed to a conversion' :
+                            'Sales Funnel - the customer journey from awareness to purchase',
+                        termSetName: 'Digital Marketing Glossary'
+                    }}
+                />
+            ))}
             <div className="container mx-auto px-6 pt-4 md:pt-6">
                 {/* Breadcrumbs */}
                 <div className="mb-12">
@@ -308,11 +365,12 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                             </div>
 
                             {/* Share Section */}
-                            <div className="flex items-center gap-4 pt-8 -t -black/10 dark:-white/10">
-                                <span className="text-sm text-text-secondary dark:text-white/60">Share:</span>
-                                <button className="p-2 rounded-xl bg-white dark:bg-surface  -black/5 dark:-white/5 hover:bg-black/5 dark:hover:bg-white/10 transition-colors">
-                                    <Share2 className="w-4 h-4 text-text-primary dark:text-white" />
-                                </button>
+                            <div className="pt-8 -t -black/10 dark:-white/10">
+                                <ShareButtons
+                                    url={typeof window !== 'undefined' ? window.location.href : ''}
+                                    title={post.title}
+                                    description={post.content.intro}
+                                />
                             </div>
                         </div>
                     </div>

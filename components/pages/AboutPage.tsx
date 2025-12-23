@@ -10,6 +10,7 @@ import ScrollTimeline, { ScrollTimelineEntry } from '../ui/ScrollTimeline';
 import { PageHeader } from '../ui/PageHeader';
 import type { NavigateFn } from '../../types';
 import SEO from '../ui/SEO';
+import SchemaMarkup from '../ui/SchemaMarkup';
 
 interface AboutPageProps {
   onBack: () => void;
@@ -150,9 +151,29 @@ const TIMELINE_ENTRIES: ScrollTimelineEntry[] = [
 ];
 
 const AboutPage: React.FC<AboutPageProps> = React.memo(({ onBack, onNavigate }) => {
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+  
   return (
     <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20 animate-in fade-in duration-500">
-      <SEO title="About Us | Castells Agency" description="We are the Anti-Agency. Obsessed with revenue, not vanity metrics." />
+      <SEO 
+        title="About Us | Castells Agency - Revenue-Focused Digital Marketing" 
+        description="We are the Anti-Agency. 12+ years helping contractors and service providers in Santa Monica, Los Angeles, and across the US dominate their local markets through data-driven strategies. Obsessed with revenue, not vanity metrics."
+        canonical="/about"
+        keywords="digital marketing agency, revenue-focused marketing, Santa Monica marketing agency, Los Angeles marketing, local marketing services, performance marketing, growth marketing agency"
+        geoRegion="US-CA"
+        geoPlacename="Santa Monica, California"
+        summary="Castells Agency is a revenue-focused digital marketing agency founded in 2012. We help contractors and service providers dominate their local markets through data-driven strategies. 12+ years in business, 500+ projects delivered, $50M+ revenue generated for clients."
+        mainEntity="Digital Marketing Agency"
+      />
+      <SchemaMarkup
+        type="BreadcrumbList"
+        data={{
+          itemListElement: [
+            { name: 'Home', item: `${siteUrl}/` },
+            { name: 'About Us', item: `${siteUrl}/about` }
+          ]
+        }}
+      />
       <div className="container mx-auto px-6 pt-4 md:pt-6">
 
         {/* Header */}
