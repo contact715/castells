@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { m as motion } from 'framer-motion';
-import { ArrowLeft, Calendar, Building2, TrendingUp, Target, CheckCircle2, ExternalLink, Zap, MapPin, ArrowUpRight, FileText, Globe } from 'lucide-react';
+import { ArrowLeft, Calendar, Building2, TrendingUp, Target, CheckCircle2, ExternalLink, Zap, MapPin, ArrowUpRight, FileText, Globe, User, Share2, Clock, Sparkles, Phone, Bookmark } from 'lucide-react';
 import { Button } from '../ui/Button';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
@@ -8,6 +9,9 @@ import { Breadcrumbs } from '../ui/Breadcrumbs';
 import { CASE_STUDIES } from '../../constants';
 import type { CaseStudy } from '../../constants';
 import type { NavigateFn } from '../../types';
+import { findAuthorById, AUTHORS } from '../../data/authors';
+import ShareButtons from '../ui/ShareButtons';
+import { ContactButtons } from '../ui/ContactButtons';
 
 interface CaseStudyDetailProps {
   onBack: () => void;
@@ -18,6 +22,13 @@ interface CaseStudyDetailProps {
 const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, project }) => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState('overview');
+  const [readTime, setReadTime] = useState(0);
+  const [shareDropdownVisible, setShareDropdownVisible] = useState(false);
+  const [assetsDropdownVisible, setAssetsDropdownVisible] = useState(false);
+  const [shareDropdownPos, setShareDropdownPos] = useState({ top: 0, right: 0 });
+  const [assetsDropdownPos, setAssetsDropdownPos] = useState({ top: 0, right: 0 });
+  const shareButtonRef = useRef<HTMLButtonElement>(null);
+  const assetsButtonRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,6 +39,46 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Find case study from constants or use project data
+  const caseStudyId = project?.id != null ? String(project.id) : undefined;
+  const caseStudy = caseStudyId
+    ? CASE_STUDIES.find(cs => cs.id === caseStudyId)
+    : null;
+  
+  // Get author for this case study (default to first author if not specified)
+  const authorId = (caseStudy as any)?.authorId || (project as any)?.authorId || 'alex-castells';
+  const author = findAuthorById(authorId) || AUTHORS[0];
+  
+  const data = caseStudy || project || {
+    client: 'Apex Architecture',
+    industry: 'Construction',
+    year: '2024',
+    services: ['Brand Identity', 'Web Development', 'SEO'],
+    description: 'A complete digital transformation for a leading sustainable architecture firm looking to dominate the luxury residential market.',
+    challenge: "Apex was losing market share to younger, digital-native firms. Their legacy website didn't reflect their premium status, and their lead pipeline was dependent on referrals.",
+    solution: "We rebuilt their brand identity to emphasize 'Sustainability as Luxury'. We deployed a headless CMS website optimized for local SEO and launched a targeted Meta Ads campaign focusing on high-net-worth individuals.",
+    results: [
+      { label: "Monthly Revenue", value: "$697k", growth: "+210%" },
+      { label: "Cost Per Lead", value: "$42", growth: "-65%" },
+      { label: "Organic Traffic", value: "12k", growth: "+400%" },
+    ],
+    image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1600&q=80',
+    keyFeatures: ['Custom Headless Architecture', 'Granular Conversion Tracking', 'Sales Funnel Automation'],
+    testimonial: {
+      quote: "The results speak for themselves. We've never seen this level of growth in such a short period.",
+      author: "Sarah Jenkins",
+      role: "CEO, Apex Architecture"
+    }
+  };
+
+  const tableOfContents = useMemo(() => [
+    { id: 'overview', label: 'Overview' },
+    { id: 'results', label: 'Results' },
+    { id: 'challenge', label: 'Challenge' },
+    { id: 'solution', label: 'Solution' },
+    ...(data.brandGuidelines ? [{ id: 'brand-guidelines', label: 'Brand Guidelines' }] : []),
+  ], [data.brandGuidelines]);
 
   // Track active section on scroll
   useEffect(() => {
@@ -60,43 +111,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
     return () => {
       observers.forEach(observer => observer.disconnect());
     };
-  }, []);
-
-  // Find case study from constants or use project data
-  const caseStudyId = project?.id != null ? String(project.id) : undefined;
-  const caseStudy = caseStudyId
-    ? CASE_STUDIES.find(cs => cs.id === caseStudyId)
-    : null;
-  
-  const data = caseStudy || project || {
-    client: 'Apex Architecture',
-    industry: 'Construction',
-    year: '2024',
-    services: ['Brand Identity', 'Web Development', 'SEO'],
-    description: 'A complete digital transformation for a leading sustainable architecture firm looking to dominate the luxury residential market.',
-    challenge: "Apex was losing market share to younger, digital-native firms. Their legacy website didn't reflect their premium status, and their lead pipeline was dependent on referrals.",
-    solution: "We rebuilt their brand identity to emphasize 'Sustainability as Luxury'. We deployed a headless CMS website optimized for local SEO and launched a targeted Meta Ads campaign focusing on high-net-worth individuals.",
-    results: [
-      { label: "Monthly Revenue", value: "$697k", growth: "+210%" },
-      { label: "Cost Per Lead", value: "$42", growth: "-65%" },
-      { label: "Organic Traffic", value: "12k", growth: "+400%" },
-    ],
-    image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1600&q=80',
-    keyFeatures: ['Custom Headless Architecture', 'Granular Conversion Tracking', 'Sales Funnel Automation'],
-    testimonial: {
-      quote: "The results speak for themselves. We've never seen this level of growth in such a short period.",
-      author: "Sarah Jenkins",
-      role: "CEO, Apex Architecture"
-    }
-  };
-
-  const tableOfContents = [
-    { id: 'overview', label: 'Overview' },
-    { id: 'results', label: 'Results' },
-    { id: 'challenge', label: 'Challenge' },
-    { id: 'solution', label: 'Solution' },
-    ...(data.brandGuidelines ? [{ id: 'brand-guidelines', label: 'Brand Guidelines' }] : []),
-  ];
+  }, [tableOfContents]);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -105,8 +120,25 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
     }
   };
 
+  // Calculate reading time
+  useEffect(() => {
+    const calculateReadTime = () => {
+      const content = document.querySelector('[id="overview"], [id="results"], [id="challenge"], [id="solution"]');
+      if (content) {
+        const text = content.textContent || '';
+        const words = text.split(/\s+/).length;
+        const minutes = Math.ceil(words / 200); // Average reading speed: 200 words per minute
+        setReadTime(minutes);
+      }
+    };
+    
+    // Calculate after content is rendered
+    setTimeout(calculateReadTime, 500);
+  }, [data]);
+
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
   const enhancedDescription = `${data.description} Real results from Castells Agency's marketing strategies. Serving businesses in Santa Monica, Los Angeles, and nationwide.`;
+  const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   return (
     <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20">
@@ -165,6 +197,8 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               <img
                 src={data.image}
                 alt={data.client}
+                loading="lazy"
+                decoding="async"
                 className="w-full h-full object-cover opacity-70 transition-opacity duration-700"
               />
             )}
@@ -184,66 +218,78 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               }}
             />
             <div className="relative z-10 flex flex-col justify-between h-full">
-              {/* Top: Badge */}
-              <div className="flex items-center gap-2">
-                <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
-                <span className="font-bold uppercase tracking-widest text-white text-xs">
-                  Case Study
-                </span>
+              {/* Top: Badge (Left) and Meta (Right Top) */}
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
+                  <span className="font-bold uppercase tracking-widest text-white text-xs">
+                    Case Study
+                  </span>
+                </div>
+                
+                {/* Meta Information - Right Top Corner */}
+                <div className="flex flex-wrap items-center gap-3 text-xs text-white/80 justify-end">
+                  <span>{data.year}</span>
+                  {readTime > 0 && (
+                    <>
+                      <span className="text-white/50">·</span>
+                      <span>{readTime} min read</span>
+                    </>
+                  )}
+                </div>
               </div>
 
-              {/* Bottom: Title, Description and Meta */}
-              <div>
+              {/* Bottom: Title, Description, and Services Tags */}
+              <div className="mt-auto pt-8">
+                {/* Industry Category - Above Title */}
+                <div className="mb-3">
+                  <span className="text-xs font-bold uppercase tracking-widest text-white/80">
+                    {data.industry}
+                  </span>
+                </div>
+                
                 <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4 leading-[1.1] tracking-tight">
                   {data.client}
                 </h1>
-                <p className="text-lg text-white/90 mb-6 max-w-3xl leading-relaxed">
-                  {data.description}
-                </p>
                 
-                {/* Meta Information */}
-                <div className="flex flex-wrap items-center gap-4 text-sm text-white/80 mb-4">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-4 h-4" />
-                    <span>{data.year}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Building2 className="w-4 h-4" />
-                    <span>{data.industry}</span>
-                  </div>
-                  {data.location && (
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4" />
-                      <span>{data.location}</span>
+                {/* Description and Services Tags - Both at Bottom */}
+                <div className="flex flex-wrap items-end justify-between gap-4">
+                  <p className="text-lg text-white/90 max-w-3xl leading-relaxed flex-1 min-w-0">
+                    {data.description}
+                  </p>
+                  
+                  {/* Services Tags - Right Bottom */}
+                  {data.services && data.services.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-2 shrink-0">
+                      {data.services.map((s: string) => (
+                        <span key={s} className="px-4 py-2 bg-white/10 backdrop-blur-md rounded-xl text-white text-xs font-bold uppercase tracking-widest whitespace-nowrap">
+                          {s}
+                        </span>
+                      ))}
                     </div>
                   )}
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {data.services?.map((s: string) => (
-                    <span key={s} className="px-4 py-2 bg-white/10 backdrop-blur-md  -white/10 rounded-xl text-white text-xs font-bold uppercase tracking-widest">
-                      {s}
-                    </span>
-                  ))}
                 </div>
               </div>
             </div>
           </div>
         </motion.div>
 
-        {/* Two Column Layout */}
-        <div className="flex flex-col lg:flex-row gap-12">
-          {/* Left Column: Main Content (70%) */}
-          <div className="lg:w-[70%] relative">
-            {/* Reading Progress Line */}
-            <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-black/5 dark:bg-white/10 rounded-full hidden lg:block">
-              <motion.div
-                className="w-full bg-coral rounded-full origin-top"
-                style={{ height: `${scrollProgress}%` }}
-              />
-            </div>
+        {/* Main Content - Two Column Layout */}
+        <div className="relative">
+          <div className="container mx-auto px-6">
+            <div className="flex flex-col lg:flex-row gap-8 items-start">
+              {/* Left Column: Main Content */}
+              <div className="flex-1 min-w-0 w-full">
+                {/* Reading Progress Line */}
+                <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-black/5 dark:bg-white/10 rounded-full hidden lg:block">
+                  <motion.div
+                    className="w-full bg-coral rounded-full origin-top"
+                    style={{ height: `${scrollProgress}%` }}
+                  />
+                </div>
 
-            {/* Content */}
-            <div className="lg:pl-8 space-y-8">
+                {/* Content */}
+                <div className="lg:pl-8 space-y-8">
               {/* Overview */}
               <section id="overview">
                 <div className="prose prose-lg dark:prose-invert max-w-none">
@@ -260,7 +306,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {data.results?.map((res: any, idx: number) => (
-                    <div key={idx} className="bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] p-6">
+                    <div key={idx} className="bg-white dark:bg-surface rounded-[2rem] p-6">
                       <div className="font-display text-3xl font-bold text-text-primary dark:text-white mb-2">
                         {res.value}
                       </div>
@@ -294,7 +340,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                   {data.solution}
                 </p>
                 {data.keyFeatures && (
-                  <div className="bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] p-6">
+                  <div className="bg-white dark:bg-surface rounded-[2rem] p-6">
                     <h3 className="font-display text-lg font-semibold text-text-primary dark:text-white mb-4">Key Deliverables</h3>
                     <ul className="space-y-3">
                       {data.keyFeatures.map((item: string, i: number) => (
@@ -310,11 +356,11 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
 
               {/* Brand Guidelines - Embedded PDF */}
               {data.brandGuidelines && (
-                <section id="brand-guidelines" className="space-y-4 pt-8 -t -black/10 dark:-white/10">
+                <section id="brand-guidelines" className="space-y-4 pt-8">
                   <h2 className="font-display text-3xl font-semibold text-text-primary dark:text-white leading-tight">
                     Brand Guidelines
                   </h2>
-                  <div className="bg-white dark:bg-surface rounded-[2rem] overflow-hidden  -black/5 dark:-white/5">
+                  <div className="bg-white dark:bg-surface rounded-[2rem] overflow-hidden">
                     <iframe
                       src={`${encodeURI(data.brandGuidelines)}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
                       className="w-full h-[800px] md:h-[1000px] lg:h-[1200px] border-0"
@@ -326,7 +372,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
 
               {/* Testimonial */}
               {data.testimonial && (
-                <div className="pt-8 -t -black/10 dark:-white/10">
+                <div className="pt-8">
                   <div className="text-coral text-5xl font-serif leading-none mb-4">"</div>
                   <blockquote className="font-display text-xl md:text-2xl font-medium leading-relaxed mb-6 text-text-primary dark:text-white">
                     {data.testimonial.quote}
@@ -346,160 +392,159 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                   </div>
                 </div>
               )}
-            </div>
-          </div>
-
-          {/* Right Column: Sidebar (30%) */}
-          <div className="lg:w-[30%]">
-            <div className="sticky top-32 space-y-6">
-              {/* Back Button */}
-              <Button
-                onClick={onBack}
-                variant="primary"
-                className="w-full"
-              >
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Work
-              </Button>
-
-              {/* Logo & Brand Assets */}
-              {(data.logo || data.logoSvg || data.brandGuidelines || data.website) && (
-                <div className="bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] p-6">
-                  <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white mb-4">
-                    Brand Assets
-                  </h3>
-                  <div className="space-y-4">
-                    {/* Logo */}
-                    {(data.logoSvg || data.logo) && (
-                      <div className="flex items-center justify-center p-4 bg-ivory dark:bg-[#191919] rounded-[2rem]">
-                        <img
-                          src={encodeURI(data.logoSvg || data.logo || '')}
-                          alt={`${data.client} Logo`}
-                          className="max-w-full max-h-24 object-contain"
-                        />
-                      </div>
-                    )}
-                    {/* Brand Guidelines PDF */}
-                    {data.brandGuidelines && (
-                      <a
-                        href={encodeURI(data.brandGuidelines)}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-3 w-full p-3 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
-                      >
-                        <FileText className="w-4 h-4 text-text-secondary group-hover:text-current" />
-                        <span className="flex-1 text-sm font-medium">Brand Guidelines</span>
-                        <ArrowUpRight className="w-4 h-4 opacity-20 group-hover:opacity-100 transition-opacity" />
-                      </a>
-                    )}
-                    {/* Website Link */}
-                    {data.website && (
-                      <a
-                        href={data.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex items-center gap-3 w-full p-3 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
-                      >
-                        <Globe className="w-4 h-4 text-text-secondary group-hover:text-current" />
-                        <span className="flex-1 text-sm font-medium">Visit Website</span>
-                        <ArrowUpRight className="w-4 h-4 opacity-20 group-hover:opacity-100 transition-opacity" />
-                      </a>
-                    )}
-                  </div>
                 </div>
-              )}
+              </div>
 
-              {/* TOC */}
-              <div className="bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] p-6">
-                <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white mb-4">
-                  On this page
-                </h3>
-                <div className="space-y-2">
-                  {tableOfContents.map((item) => (
-                    <button
-                      key={item.id}
-                      onClick={() => scrollToSection(item.id)}
-                      className={`w-full text-left p-3 rounded-[2rem] transition-all text-sm font-medium flex items-center gap-3 ${
-                        activeSection === item.id
-                          ? 'bg-black text-white dark:bg-white dark:text-black'
-                          : 'text-text-primary dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black'
-                      }`}
+              {/* Right Column: Navigation Panel */}
+              <div className="lg:w-64 shrink-0">
+                <div className="sticky top-24 bg-white dark:bg-surface rounded-[2rem] p-4 flex flex-col gap-3">
+                  {/* Header */}
+                  <div className="pb-2 border-b border-black/5 dark:border-white/10">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">Navigate</span>
+                  </div>
+
+                  {/* TOC - Vertical with Full Labels */}
+                  <div className="flex flex-col gap-1.5">
+                    {tableOfContents.map((item) => (
+                      <button
+                        key={item.id}
+                        onClick={() => scrollToSection(item.id)}
+                        className={`shrink-0 px-3 py-2 rounded-[2rem] transition-all text-xs font-medium flex items-center justify-start gap-2 min-w-[120px] ${
+                          activeSection === item.id
+                            ? 'bg-black text-white dark:bg-white dark:text-black'
+                            : 'bg-ivory dark:bg-[#191919] text-text-primary dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black'
+                        }`}
+                      >
+                        <span className="w-1.5 h-1.5 rounded-full bg-current opacity-60" />
+                        <span>{item.label}</span>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Divider */}
+                  <div className="border-t border-black/5 dark:border-white/10 pt-2">
+                    <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">Resources</span>
+                  </div>
+
+                  {/* Assets */}
+                  {(data.brandGuidelines || data.website) && (
+                    <div 
+                      className="relative"
+                      onMouseLeave={() => setAssetsDropdownVisible(false)}
                     >
-                      {item.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
+                      <button 
+                        ref={assetsButtonRef}
+                        className="flex items-center gap-2 px-3 py-2 rounded-[2rem] bg-ivory dark:bg-[#191919] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all text-xs font-medium w-full justify-start"
+                        onMouseEnter={() => {
+                          if (assetsButtonRef.current) {
+                            const rect = assetsButtonRef.current.getBoundingClientRect();
+                            setAssetsDropdownPos({
+                              top: rect.bottom + 8,
+                              right: window.innerWidth - rect.right
+                            });
+                            setAssetsDropdownVisible(true);
+                          }
+                        }}
+                      >
+                        <Globe className="w-4 h-4 shrink-0" />
+                        <span>Assets</span>
+                      </button>
+                    </div>
+                  )}
 
-              {/* Why Castells */}
-              <div className="bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] p-6">
-                <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white mb-4">
-                  Why Castells
-                </h3>
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center flex-shrink-0">
-                      <Target className="w-4 h-4 text-coral" />
+                  {/* Author */}
+                  <button
+                    onClick={() => onNavigate('author', { id: author.id, name: author.name })}
+                    className="group flex items-center gap-2 px-3 py-2 rounded-[2rem] bg-ivory dark:bg-[#191919] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all text-xs font-medium w-full justify-start"
+                  >
+                    <div className="w-6 h-6 rounded-full overflow-hidden shrink-0">
+                      <img
+                        src={author.avatar}
+                        loading="lazy"
+                        decoding="async"
+                        alt={author.name}
+                        className="w-full h-full object-cover"
+                      />
                     </div>
-                    <div>
-                      <div className="font-semibold text-sm text-text-primary dark:text-white mb-1">
-                        Revenue-First Approach
-                      </div>
-                      <div className="text-xs text-text-secondary dark:text-white/60">
-                        We optimize exclusively for revenue and ROAS, not vanity metrics.
-                      </div>
+                    <span className="truncate">{author.name.split(' ')[0]}</span>
+                  </button>
+
+                  {/* Contact Buttons - Bottom */}
+                  <div className="pt-2 border-t border-black/5 dark:border-white/10">
+                    <div className="mb-2">
+                      <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">Contact</span>
                     </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center flex-shrink-0">
-                      <Zap className="w-4 h-4 text-coral" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-sm text-text-primary dark:text-white mb-1">
-                        Fast Execution
-                      </div>
-                      <div className="text-xs text-text-secondary dark:text-white/60">
-                        Campaigns live within 14 days. Speed to market matters.
-                      </div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="w-8 h-8 rounded-lg bg-coral/10 dark:bg-coral/20 flex items-center justify-center flex-shrink-0">
-                      <TrendingUp className="w-4 h-4 text-coral" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-sm text-text-primary dark:text-white mb-1">
-                        200+ Projects
-                      </div>
-                      <div className="text-xs text-text-secondary dark:text-white/60">
-                        Proven track record across industries and markets.
-                      </div>
-                    </div>
+                    <ContactButtons defaultExpanded={null} />
                   </div>
                 </div>
-              </div>
-
-              {/* CTA */}
-              <div className="bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] p-6">
-                <h3 className="font-display text-lg font-semibold text-text-primary dark:text-white mb-2">
-                  Ready to grow?
-                </h3>
-                <p className="text-text-secondary dark:text-white/60 text-sm mb-4">
-                  Get a free strategy audit
-                </p>
-                <Button
-                  onClick={() => onNavigate('contact')}
-                  size="md"
-                  variant="primary"
-                  className="w-full"
-                >
-                  Get Free Audit
-                </Button>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Dropdown Portals - Rendered outside hero container */}
+      {typeof document !== 'undefined' && createPortal(
+        <>
+          {/* Share Dropdown */}
+          {shareDropdownVisible && (
+            <div
+              className="fixed bg-white dark:bg-surface rounded-[2rem] p-4 transition-all duration-200 z-[100]"
+              style={{
+                top: `${shareDropdownPos.top}px`,
+                right: `${shareDropdownPos.right}px`,
+              }}
+              onMouseEnter={() => setShareDropdownVisible(true)}
+              onMouseLeave={() => setShareDropdownVisible(false)}
+            >
+              <ShareButtons
+                url={currentUrl}
+                title={`${data.client} Case Study`}
+                description={data.description}
+              />
+            </div>
+          )}
+
+          {/* Assets Dropdown */}
+          {assetsDropdownVisible && (data.brandGuidelines || data.website) && (
+            <div
+              className="fixed bg-white dark:bg-surface rounded-[2rem] p-3 min-w-[180px] transition-all duration-200 z-[100]"
+              style={{
+                top: `${assetsDropdownPos.top}px`,
+                right: `${assetsDropdownPos.right}px`,
+              }}
+              onMouseEnter={() => setAssetsDropdownVisible(true)}
+              onMouseLeave={() => setAssetsDropdownVisible(false)}
+            >
+              <div className="space-y-2">
+                {data.brandGuidelines && (
+                  <a
+                    href={encodeURI(data.brandGuidelines)}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 w-full p-2 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all text-xs"
+                  >
+                    <FileText className="w-4 h-4" />
+                    <span>Guidelines</span>
+                  </a>
+                )}
+                {data.website && (
+                  <a
+                    href={data.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 w-full p-2 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all text-xs"
+                  >
+                    <Globe className="w-4 h-4" />
+                    <span>Website</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          )}
+        </>,
+        document.body
+      )}
     </div>
   );
 };

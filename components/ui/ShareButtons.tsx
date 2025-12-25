@@ -65,7 +65,7 @@ const ShareButtons: React.FC<ShareButtonsProps> = React.memo(({
       
       <button
         onClick={() => handleShare('facebook', shareUrl)}
-        className="p-2 rounded-xl bg-white dark:bg-surface border border-black/5 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+        className="p-2 rounded-xl bg-white dark:bg-surface hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         aria-label="Share on Facebook"
         title="Share on Facebook"
       >
@@ -74,7 +74,7 @@ const ShareButtons: React.FC<ShareButtonsProps> = React.memo(({
 
       <button
         onClick={() => handleShare('twitter', shareUrl)}
-        className="p-2 rounded-xl bg-white dark:bg-surface border border-black/5 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+        className="p-2 rounded-xl bg-white dark:bg-surface hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         aria-label="Share on Twitter"
         title="Share on Twitter"
       >
@@ -83,7 +83,7 @@ const ShareButtons: React.FC<ShareButtonsProps> = React.memo(({
 
       <button
         onClick={() => handleShare('linkedin', shareUrl)}
-        className="p-2 rounded-xl bg-white dark:bg-surface border border-black/5 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+        className="p-2 rounded-xl bg-white dark:bg-surface hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         aria-label="Share on LinkedIn"
         title="Share on LinkedIn"
       >
@@ -92,7 +92,7 @@ const ShareButtons: React.FC<ShareButtonsProps> = React.memo(({
 
       <button
         onClick={() => handleShare('email', shareUrl)}
-        className="p-2 rounded-xl bg-white dark:bg-surface border border-black/5 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+        className="p-2 rounded-xl bg-white dark:bg-surface hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         aria-label="Share via Email"
         title="Share via Email"
       >
@@ -101,7 +101,7 @@ const ShareButtons: React.FC<ShareButtonsProps> = React.memo(({
 
       <button
         onClick={() => handleShare('copy', shareUrl)}
-        className="p-2 rounded-xl bg-white dark:bg-surface border border-black/5 dark:border-white/10 hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+        className="p-2 rounded-xl bg-white dark:bg-surface hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         aria-label="Copy link"
         title="Copy link"
       >

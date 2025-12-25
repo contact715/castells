@@ -11,6 +11,12 @@ import LazySection from './components/ui/LazySection';
 import Analytics from './components/ui/Analytics';
 import SkipToContent from './components/ui/SkipToContent';
 import CookieConsent from './components/ui/CookieConsent';
+import ReadingProgress from './components/ui/ReadingProgress';
+import BackToTop from './components/ui/BackToTop';
+import KeyboardShortcuts from './components/ui/KeyboardShortcuts';
+import { initWebVitals } from './lib/webVitals';
+import { initABTesting } from './lib/abTesting';
+import { initI18n } from './lib/i18n';
 
 import type { NavigationData, PageView } from './types';
 export type { PageView } from './types';
@@ -41,6 +47,7 @@ const CareersPage = React.lazy(() => import('./components/pages/CareersPage'));
 const NotFound = React.lazy(() => import('./components/pages/NotFound'));
 const ContactPage = React.lazy(() => import('./components/pages/ContactPage'));
 const TeamPage = React.lazy(() => import('./components/pages/TeamPage'));
+const AuthorPage = React.lazy(() => import('./components/pages/AuthorPage'));
 const BlogPage = React.lazy(() => import('./components/pages/BlogPage'));
 const BlogPostDetail = React.lazy(() => import('./components/pages/BlogPostDetail'));
 const ServicePage = React.lazy(() => import('./components/pages/ServicePage'));
@@ -101,7 +108,12 @@ function App() {
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
-
+  // Initialize utilities
+  useEffect(() => {
+    initWebVitals();
+    initABTesting();
+    initI18n();
+  }, []);
 
   return (
     <ErrorBoundary>
@@ -118,6 +130,23 @@ function App() {
         
         {/* Cookie Consent */}
         <CookieConsent />
+        
+        {/* Reading Progress Bar */}
+        <ReadingProgress />
+        
+        {/* Back to Top Button */}
+        <BackToTop />
+        
+        {/* Keyboard Shortcuts */}
+        <KeyboardShortcuts
+          onSearchOpen={() => {
+            // Trigger search open via global method
+            if (typeof window !== 'undefined' && (window as any).__openSearch) {
+              (window as any).__openSearch();
+            }
+          }}
+          onHomeNavigate={() => navigateTo('home')}
+        />
         
         <div className="relative z-10">
           <LazyMotion features={domAnimation}>
@@ -217,6 +246,14 @@ function App() {
                 <TeamPage
                   onBack={() => navigateTo('home')}
                   onNavigate={navigateTo}
+                />
+              )}
+
+              {currentPage === 'author' && (
+                <AuthorPage
+                  onBack={() => navigateTo('team')}
+                  onNavigate={navigateTo}
+                  authorId={selectedProject?.id ? String(selectedProject.id) : undefined}
                 />
               )}
 

@@ -275,9 +275,27 @@ const Hero: React.FC = () => {
                             </button>
                         </>
                     ) : (
-                        <div className="absolute inset-0 flex items-center justify-center bg-black/50">
-                            <div className="w-8 h-8 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
-                        </div>
+                        <>
+                            {/* Video Thumbnail Preview */}
+                            <img
+                                src={`https://vumbnail.com/${videoId}.jpg`}
+                                alt="Video preview"
+                                className="absolute inset-0 w-full h-full object-cover"
+                                loading="lazy"
+                                decoding="async"
+                                loading="lazy"
+                            />
+                            {/* Play Button Overlay */}
+                            <button
+                                onClick={() => setShouldLoadVideo(true)}
+                                className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors cursor-pointer group"
+                                aria-label="Play video"
+                            >
+                                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/90 hover:bg-white group-hover:scale-110 transition-all flex items-center justify-center">
+                                    <ArrowRight className="w-8 h-8 sm:w-10 sm:h-10 text-black ml-1" />
+                                </div>
+                            </button>
+                        </>
                     )}
                 </div>
             </div>

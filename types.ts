@@ -40,6 +40,7 @@ export type PageView =
   | 'contact'
   | 'not-found'
   | 'team'
+  | 'author'
   | 'service'
   | 'industry'
   | 'services'

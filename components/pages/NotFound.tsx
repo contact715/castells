@@ -1,196 +1,18 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React from 'react';
 import { Button } from '../ui/Button';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Home, Search, ArrowLeft, RefreshCw, Sparkles, Ghost, Zap } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Home, ArrowLeft, Search, FileText, Briefcase, Users, Mail } from 'lucide-react';
 import { PageView } from '../../App';
 import SEO from '../ui/SEO';
+import AnimatedHeading from '../ui/AnimatedHeading';
+import { PageHeader } from '../ui/PageHeader';
 import type { NavigateFn } from '../../types';
 
 interface NotFoundProps {
   onNavigate?: NavigateFn;
 }
 
-// Floating particle component
-const FloatingParticle: React.FC<{ delay: number }> = ({ delay }) => {
-  const randomX = Math.random() * 100;
-  const randomSize = 2 + Math.random() * 4;
-  const duration = 15 + Math.random() * 10;
-
-  return (
-    <motion.div
-      className="absolute rounded-full bg-coral/30"
-      style={{
-        width: randomSize,
-        height: randomSize,
-        left: `${randomX}%`,
-        bottom: '-10px',
-      }}
-      animate={{
-        y: [0, -window.innerHeight - 50],
-        opacity: [0, 1, 1, 0],
-        scale: [0, 1, 1, 0],
-      }}
-      transition={{
-        duration,
-        delay,
-        repeat: Infinity,
-        ease: 'linear',
-      }}
-    />
-  );
-};
-
-// Glitch text effect
-const GlitchText: React.FC<{ children: string }> = ({ children }) => {
-  const [glitching, setGlitching] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setGlitching(true);
-      setTimeout(() => setGlitching(false), 200);
-    }, 3000);
-    return () => clearInterval(interval);
-  }, []);
-
-  return (
-    <span className="relative inline-block">
-      <span className={glitching ? 'invisible' : ''}>{children}</span>
-      {glitching && (
-        <>
-          <span className="absolute inset-0 text-cyan-400 animate-pulse" style={{ clipPath: 'inset(0 0 50% 0)', transform: 'translate(-2px, -1px)' }}>
-            {children}
-          </span>
-          <span className="absolute inset-0 text-red-400 animate-pulse" style={{ clipPath: 'inset(50% 0 0 0)', transform: 'translate(2px, 1px)' }}>
-            {children}
-          </span>
-        </>
-      )}
-    </span>
-  );
-};
-
-// Interactive ghost that follows cursor slowly
-const FollowingGhost: React.FC<{ mousePosition: { x: number; y: number } }> = ({ mousePosition }) => {
-  const [ghostPos, setGhostPos] = useState({ x: 0, y: 0 });
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setGhostPos(prev => ({
-        x: prev.x + (mousePosition.x - prev.x) * 0.02,
-        y: prev.y + (mousePosition.y - prev.y) * 0.02,
-      }));
-    }, 16);
-    return () => clearInterval(timer);
-  }, [mousePosition]);
-
-  return (
-    <motion.div
-      className="fixed pointer-events-none z-10 opacity-20"
-      style={{ left: ghostPos.x - 30, top: ghostPos.y - 30 }}
-    >
-      <Ghost className="w-16 h-16 text-coral" />
-    </motion.div>
-  );
-};
-
-// Mini game: Click the numbers
-const NumberGame: React.FC<{ onWin: () => void }> = ({ onWin }) => {
-  const [numbers, setNumbers] = useState([4, 0, 4]);
-  const [score, setScore] = useState(0);
-  const [gameActive, setGameActive] = useState(false);
-
-  const scrambleNumber = (index: number) => {
-    if (!gameActive) return;
-    
-    setNumbers(prev => {
-      const newNums = [...prev];
-      newNums[index] = Math.floor(Math.random() * 10);
-      return newNums;
-    });
-    setScore(s => s + 1);
-
-    if (score >= 9) {
-      onWin();
-    }
-  };
-
-  const startGame = () => {
-    setGameActive(true);
-    setScore(0);
-    setNumbers([4, 0, 4]);
-  };
-
-  return (
-    <div className="text-center">
-      {!gameActive ? (
-        <motion.button
-          onClick={startGame}
-          className="text-sm text-white/50 hover:text-coral transition-colors flex items-center gap-2 mx-auto"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
-          <Zap className="w-4 h-4" />
-          Click to play a mini game
-        </motion.button>
-      ) : (
-        <div>
-          <p className="text-xs text-white/50 mb-2">Click the numbers! ({10 - score} clicks left)</p>
-          <div className="flex justify-center gap-4">
-            {numbers.map((num, idx) => (
-              <motion.button
-                key={idx}
-                onClick={() => scrambleNumber(idx)}
-                className="font-display text-6xl md:text-8xl font-bold text-coral hover:text-white transition-colors cursor-pointer"
-                whileHover={{ scale: 1.1, rotate: Math.random() * 10 - 5 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                {num}
-              </motion.button>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-};
-
 const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [hasWonGame, setHasWonGame] = useState(false);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [showEasterEgg, setShowEasterEgg] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [particles] = useState(() => 
-    Array.from({ length: 20 }, (_, i) => ({ id: i, delay: Math.random() * 10 }))
-  );
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  // Easter egg: type "magic" to reveal secret
-  useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      const key = e.key.toLowerCase();
-      const newQuery = (searchQuery + key).slice(-5);
-      setSearchQuery(newQuery);
-      if (newQuery === 'magic') {
-        setShowEasterEgg(true);
-        setTimeout(() => setShowEasterEgg(false), 3000);
-      }
-    };
-    window.addEventListener('keypress', handleKeyPress);
-    return () => window.removeEventListener('keypress', handleKeyPress);
-  }, [searchQuery]);
-
-  const handleGameWin = useCallback(() => {
-    setHasWonGame(true);
-  }, []);
-
   const handleNavigate = (page: PageView) => {
     if (onNavigate) {
       onNavigate(page);
@@ -199,219 +21,175 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
     }
   };
 
+  const popularPages = [
+    { name: 'Services', page: 'services' as PageView, icon: Briefcase, description: 'Our marketing services' },
+    { name: 'Work', page: 'work' as PageView, icon: FileText, description: 'Case studies & portfolio' },
+    { name: 'About', page: 'about' as PageView, icon: Users, description: 'Learn about us' },
+    { name: 'Contact', page: 'contact' as PageView, icon: Mail, description: 'Get in touch' },
+  ];
+
   return (
-    <div 
-      ref={containerRef} 
-      className="min-h-screen w-full flex flex-col items-center justify-center bg-[#191919] text-white relative overflow-hidden cursor-none selection:bg-coral selection:text-white"
-    >
+    <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20 font-sans selection:bg-coral selection:text-white transition-colors duration-500">
       <SEO
         title="404 | Page not found"
-        description="The page you’re looking for doesn’t exist."
+        description="The page you're looking for doesn't exist."
         canonical="/404"
         robots="noindex, nofollow"
       />
-      {/* Floating Particles */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {particles.map(p => (
-          <FloatingParticle key={p.id} delay={p.delay} />
-        ))}
-      </div>
 
-      {/* Following Ghost */}
-      <FollowingGhost mousePosition={mousePosition} />
+      <div className="container mx-auto px-6 pt-4 md:pt-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-4xl mx-auto"
+        >
+          {/* Badge */}
+          <div className="flex items-center gap-2 mb-6">
+            <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+              404
+            </span>
+          </div>
 
-      {/* Easter Egg Animation */}
-      <AnimatePresence>
-        {showEasterEgg && (
+          {/* Main Content Card */}
+          <div className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 lg:p-16 mb-12">
+            {/* Large 404 Number */}
+            <div className="text-center mb-8">
+              <motion.h1
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
+                className="font-display text-[8rem] md:text-[12rem] lg:text-[16rem] font-semibold leading-none text-coral/20 dark:text-coral/10 mb-4"
+              >
+                404
+              </motion.h1>
+            </div>
+
+            {/* Heading */}
+            <AnimatedHeading
+              as="h2"
+              className="font-display text-4xl md:text-5xl font-semibold text-text-primary mb-4 text-center"
+              delay={0.3}
+            >
+              Page Not Found
+            </AnimatedHeading>
+
+            {/* Description */}
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4 }}
+              className="text-lg text-text-secondary text-center mb-8 max-w-2xl mx-auto"
+            >
+              The page you're looking for doesn't exist or has been moved. Don't worry, we'll help you find what you need.
+            </motion.p>
+
+            {/* Action Buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
+              className="flex flex-col sm:flex-row gap-4 justify-center mb-12"
+            >
+              <Button
+                onClick={() => handleNavigate('home')}
+                size="lg"
+                variant="primary"
+                className="group"
+              >
+                <Home className="w-4 h-4 mr-2" />
+                Return Home
+              </Button>
+              <Button
+                onClick={() => window.history.back()}
+                size="lg"
+                variant="outline"
+                className="group"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+                Go Back
+              </Button>
+            </motion.div>
+          </div>
+
+          {/* Popular Pages Section */}
           <motion.div
-            className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="mb-12"
+          >
+            <div className="text-center mb-8">
+              <div className="flex items-center gap-2 justify-center mb-3">
+                <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+                <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+                  Popular Pages
+                </span>
+              </div>
+              <h3 className="font-display text-2xl md:text-3xl font-semibold text-text-primary mb-2">
+                Or explore these pages
+              </h3>
+              <p className="text-text-secondary">
+                Find what you're looking for on our most popular pages
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {popularPages.map((page, index) => {
+                const Icon = page.icon;
+                return (
+                  <motion.button
+                    key={page.name}
+                    onClick={() => handleNavigate(page.page)}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.7 + index * 0.1 }}
+                    className="bg-white dark:bg-surface rounded-[2rem] p-6 hover:-translate-y-1 transition-all duration-300 text-left group"
+                  >
+                    <div className="w-12 h-12 rounded-[2rem] bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-4 group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
+                      <Icon className="w-6 h-6 text-coral dark:text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />
+                    </div>
+                    <h4 className="font-display text-xl font-semibold text-text-primary mb-2 group-hover:text-coral transition-colors">
+                      {page.name}
+                    </h4>
+                    <p className="text-sm text-text-secondary">
+                      {page.description}
+                    </p>
+                  </motion.button>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          {/* Search Suggestion */}
+          <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            transition={{ delay: 1 }}
+            className="bg-black/5 dark:bg-white/5 rounded-[2rem] p-6 md:p-8 text-center"
           >
-            <motion.div
-              className="text-6xl"
-              animate={{ 
-                scale: [1, 1.5, 1],
-                rotate: [0, 360],
-              }}
-              transition={{ duration: 1 }}
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Search className="w-5 h-5 text-coral" />
+              <h3 className="font-display text-xl font-semibold text-text-primary">
+                Can't find what you're looking for?
+              </h3>
+            </div>
+            <p className="text-text-secondary mb-6 max-w-md mx-auto">
+              Try using the search function in the navigation bar or contact us directly for assistance.
+            </p>
+            <Button
+              onClick={() => handleNavigate('contact')}
+              size="md"
+              variant="outline"
+              className="group"
             >
-              ✨🎉✨
-            </motion.div>
+              <Mail className="w-4 h-4 mr-2" />
+              Contact Us
+            </Button>
           </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Gradient Orbs */}
-      <motion.div
-        className="absolute w-[500px] h-[500px] rounded-full bg-gradient-to-br from-coral/20 to-transparent blur-3xl pointer-events-none"
-        animate={{
-          x: mousePosition.x * 0.02 - 250,
-          y: mousePosition.y * 0.02 - 250,
-        }}
-        transition={{ type: 'spring', stiffness: 50, damping: 30 }}
-      />
-      <motion.div
-        className="absolute w-[300px] h-[300px] rounded-full bg-gradient-to-tr from-blue-500/10 to-transparent blur-3xl pointer-events-none"
-        style={{ bottom: '10%', right: '10%' }}
-        animate={{
-          scale: [1, 1.2, 1],
-        }}
-        transition={{ duration: 8, repeat: Infinity }}
-      />
-
-      {/* Layer 1: Dim Content (Background) */}
-      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none select-none">
-        <h1 className="font-display text-[10rem] md:text-[18rem] lg:text-[22rem] leading-none font-semibold text-white/[0.03]">
-          <GlitchText>404</GlitchText>
-        </h1>
+        </motion.div>
       </div>
-
-      {/* Layer 2: Spotlight Content (Revealed by mask) */}
-      <motion.div
-        className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-20"
-        style={{
-          maskImage: `radial-gradient(circle 350px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
-          WebkitMaskImage: `radial-gradient(circle 350px at ${mousePosition.x}px ${mousePosition.y}px, black 0%, transparent 100%)`,
-        }}
-      >
-        <motion.h1 
-          className="font-display text-[10rem] md:text-[18rem] lg:text-[22rem] leading-none font-semibold text-coral"
-          animate={hasWonGame ? {
-            color: ['#FF6B5B', '#FFD93D', '#6BCB77', '#4D96FF', '#FF6B5B'],
-          } : {}}
-          transition={{ duration: 2, repeat: hasWonGame ? Infinity : 0 }}
-        >
-          404
-        </motion.h1>
-      </motion.div>
-
-      {/* Layer 3: Main Content - Always visible */}
-      <div className="relative z-30 text-center px-6 mt-16 md:mt-20">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-        >
-          <h2 className="font-display text-3xl md:text-5xl mb-4 text-white font-light">
-            {hasWonGame ? '🎉 You Found It!' : 'Page Not Found'}
-          </h2>
-          <p className="text-lg md:text-xl text-white/70 max-w-md mx-auto mb-4">
-            {hasWonGame 
-              ? 'You\'ve discovered the secret! Here\'s a virtual high-five 🖐️'
-              : 'The page you\'re looking for has vanished into the digital void.'
-            }
-          </p>
-          <p className="text-sm text-white/40 mb-8">
-            Hint: Move your cursor to reveal the hidden message
-          </p>
-        </motion.div>
-
-        {/* Action Buttons */}
-        <motion.div
-          className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5 }}
-        >
-          <Button 
-            onClick={() => handleNavigate('home')}
-            size="lg" 
-            variant="secondary" 
-            className="group"
-          >
-            <Home className="w-4 h-4 mr-2" />
-            Return Home
-          </Button>
-          <Button 
-            onClick={() => window.history.back()}
-            size="lg" 
-            variant="outline-white"
-            className="group"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-            Go Back
-          </Button>
-        </motion.div>
-
-        {/* Mini Game Section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-        >
-          <NumberGame onWin={handleGameWin} />
-        </motion.div>
-
-        {/* Popular Links */}
-        <motion.div
-          className="mt-16 pt-8 -t -white/10"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1 }}
-        >
-          <p className="text-sm text-white/50 mb-6">Or try these popular pages:</p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
-            {[
-              { name: 'Services', page: 'services' as PageView },
-              { name: 'Work', page: 'work' as PageView },
-              { name: 'About', page: 'about' as PageView },
-              { name: 'Contact', page: 'contact' as PageView },
-            ].map((link, idx) => (
-              <motion.button
-                key={link.name}
-                onClick={() => handleNavigate(link.page)}
-                className="px-4 py-2 rounded-full bg-white/5 hover:bg-white/10 text-white/70 hover:text-white text-sm transition-all cursor-pointer  -white/10 hover:-white/20"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1.1 + idx * 0.1 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {link.name}
-              </motion.button>
-            ))}
-          </div>
-        </motion.div>
-
-        {/* Secret hint */}
-        <motion.p
-          className="mt-8 text-xs text-white/20"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-        >
-          Psst... try typing "magic" 🪄
-        </motion.p>
-      </div>
-
-      {/* Custom Cursor Elements */}
-      <motion.div
-        className="fixed top-0 left-0 w-4 h-4 bg-coral rounded-full pointer-events-none z-50 mix-blend-difference"
-        animate={{ x: mousePosition.x - 8, y: mousePosition.y - 8 }}
-        transition={{ type: 'spring', stiffness: 1000, damping: 50, mass: 0.1 }}
-      />
-      <motion.div
-        className="fixed top-0 left-0 w-12 h-12  -white/30 rounded-full pointer-events-none z-40"
-        animate={{ x: mousePosition.x - 24, y: mousePosition.y - 24 }}
-        transition={{ type: 'spring', stiffness: 500, damping: 30, mass: 0.5 }}
-      />
-      
-      {/* Outer cursor ring */}
-      <motion.div
-        className="fixed top-0 left-0 w-20 h-20  -coral/20 rounded-full pointer-events-none z-30"
-        animate={{ 
-          x: mousePosition.x - 40, 
-          y: mousePosition.y - 40,
-          scale: [1, 1.1, 1],
-        }}
-        transition={{ 
-          x: { type: 'spring', stiffness: 300, damping: 25 },
-          y: { type: 'spring', stiffness: 300, damping: 25 },
-          scale: { duration: 2, repeat: Infinity },
-        }}
-      />
     </div>
   );
 };

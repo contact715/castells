@@ -291,39 +291,42 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                             }}
                         />
                         <div className="relative z-10 flex flex-col justify-between h-full">
-                        {/* Top: Badge */}
-                        <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
-                            <span className="font-bold uppercase tracking-widest text-white text-xs">
-                                Blog & Insights
-                            </span>
+                        {/* Top: Badge (Left) and Meta (Right) */}
+                        <div className="flex items-start justify-between gap-4">
+                            <div className="flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
+                                <span className="font-bold uppercase tracking-widest text-white text-xs">
+                                    Blog & Insights
+                                </span>
+                            </div>
+                            
+                            {/* Meta Information - Right Top */}
+                            <div className="flex flex-wrap items-center gap-3 text-xs text-white/80 justify-end">
+                                <span>{post.date}</span>
+                                <span className="text-white/50">·</span>
+                                <span>{post.author}</span>
+                                <span className="text-white/50">·</span>
+                                <span>{post.readTime}</span>
+                            </div>
                         </div>
 
-                        {/* Bottom: Title, Description and Meta */}
-                        <div>
+                        {/* Bottom: Title, Description and Category */}
+                        <div className="mt-auto pt-8">
                             <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4 leading-[1.1] tracking-tight">
                                 {post.title}
                             </h1>
-                            <p className="text-lg text-white/90 mb-6 max-w-3xl leading-relaxed">
-                                {post.content.intro}
-                            </p>
                             
-                            {/* Meta Information */}
-                            <div className="flex flex-wrap items-center gap-4 text-sm text-white/80">
-                                <div className="flex items-center gap-2">
-                                    <Calendar className="w-4 h-4" />
-                                    <span>{post.date}</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <User className="w-4 h-4" />
-                                    <span>{post.author}</span>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    <Clock className="w-4 h-4" />
-                                    <span>{post.readTime}</span>
-                                </div>
-                                <div className="ml-auto px-3 py-1.5 bg-coral/20 backdrop-blur-sm  -coral/30 rounded-xl text-coral text-xs font-bold uppercase tracking-widest">
-                                    {post.category}
+                            {/* Description and Category - Both at Bottom */}
+                            <div className="flex flex-wrap items-end justify-between gap-4">
+                                <p className="text-lg text-white/90 max-w-3xl leading-relaxed flex-1 min-w-0">
+                                    {post.content.intro}
+                                </p>
+                                
+                                {/* Category Tag - Right Bottom */}
+                                <div className="flex flex-wrap items-center gap-2 shrink-0">
+                                    <span className="px-4 py-2 bg-white/10 backdrop-blur-md rounded-xl text-white text-xs font-bold uppercase tracking-widest whitespace-nowrap">
+                                        {post.category}
+                                    </span>
                                 </div>
                             </div>
                         </div>

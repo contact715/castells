@@ -86,7 +86,7 @@ const CookieConsent: React.FC = React.memo(() => {
           aria-labelledby="cookie-consent-title"
           aria-describedby="cookie-consent-description"
         >
-          <div className="max-w-4xl mx-auto bg-white dark:bg-surface rounded-[2rem] shadow-2xl border border-black/10 dark:border-white/10 p-6 md:p-8">
+          <div className="max-w-4xl mx-auto bg-white dark:bg-surface rounded-[2rem] p-6 md:p-8">
             {!showPreferences ? (
               <>
                 <div className="flex items-start gap-4 mb-6">
@@ -166,7 +166,7 @@ const CookieConsent: React.FC = React.memo(() => {
                           type="checkbox"
                           checked={preferences.essential}
                           disabled
-                          className="w-5 h-5 rounded border-black/20 accent-coral cursor-not-allowed"
+                          className="w-5 h-5 rounded accent-coral cursor-not-allowed"
                           aria-label="Essential cookies (required)"
                         />
                       </div>
@@ -185,7 +185,7 @@ const CookieConsent: React.FC = React.memo(() => {
                           type="checkbox"
                           checked={preferences.analytics}
                           onChange={(e) => setPreferences({ ...preferences, analytics: e.target.checked })}
-                          className="w-5 h-5 rounded border-black/20 accent-coral cursor-pointer"
+                          className="w-5 h-5 rounded accent-coral cursor-pointer"
                           aria-label="Analytics cookies"
                         />
                       </div>
@@ -204,7 +204,7 @@ const CookieConsent: React.FC = React.memo(() => {
                           type="checkbox"
                           checked={preferences.marketing}
                           onChange={(e) => setPreferences({ ...preferences, marketing: e.target.checked })}
-                          className="w-5 h-5 rounded border-black/20 accent-coral cursor-pointer"
+                          className="w-5 h-5 rounded accent-coral cursor-pointer"
                           aria-label="Marketing cookies"
                         />
                       </div>

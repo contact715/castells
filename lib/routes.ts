@@ -14,6 +14,7 @@ export const buildBlogPostPath = (id?: string | number) => (id != null ? `/blog/
 export const buildCaseStudyPath = (id?: string | number) => (id != null ? `/case-studies/${encodeURIComponent(String(id))}` : '/work');
 export const buildServicePath = (slug?: string) => (slug ? `/services/${encodeURIComponent(slug)}` : '/services');
 export const buildIndustryPath = (slug?: string) => (slug ? `/industries/${encodeURIComponent(slug)}` : '/industries');
+export const buildAuthorPath = (id?: string) => (id ? `/team/${encodeURIComponent(id)}` : '/team');
 
 export const routeFromPathname = (pathname: string): { page: PageView; data?: NavigationData } => {
   const clean = pathname.replace(/\/+$/, '') || '/';
@@ -42,6 +43,12 @@ export const routeFromPathname = (pathname: string): { page: PageView; data?: Na
     const id = decodeURIComponent(clean.replace('/industries/', ''));
     if (id) return { page: 'industry', data: { id, name: titleize(id) } };
     return { page: 'industries' };
+  }
+
+  if (clean.startsWith('/team/')) {
+    const id = decodeURIComponent(clean.replace('/team/', ''));
+    if (id) return { page: 'author', data: { id, name: titleize(id) } };
+    return { page: 'team' };
   }
 
   // Static routes
@@ -103,6 +110,8 @@ export const pathnameFromRoute = (page: PageView, data?: NavigationData | null):
       return '/contact';
     case 'team':
       return '/team';
+    case 'author':
+      return buildAuthorPath(data?.id != null ? String(data.id) : undefined);
     case 'services':
       return '/services';
     case 'service':

@@ -21,7 +21,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   };
 
   return (
-    <footer className="relative bg-ivory dark:bg-[#191919] text-black dark:text-white overflow-hidden border-t border-black/5 dark:border-white/10">
+    <footer className="relative bg-ivory dark:bg-[#191919] text-black dark:text-white overflow-hidden">
       <div className="container mx-auto px-6 py-12 relative z-10">
 
         {/* Top Section: CTA with Video */}
@@ -104,7 +104,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           {/* ROW 1: SERVICES DOMAIN */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-text-primary dark:text-white mb-6 border-b border-black/10 dark:border-white/10 pb-3">Services Domain</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-text-primary dark:text-white mb-6 pb-3">Services Domain</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 items-start">
               {SERVICE_CATEGORIES.map((category) => (
                 <div key={category.id} className="flex flex-col gap-2 text-text-secondary text-sm">
@@ -128,7 +128,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           {/* ROW 2: INDUSTRIES DOMAIN */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-text-primary dark:text-white mb-6 border-b border-black/10 dark:border-white/10 pb-3">Industries Domain</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-text-primary dark:text-white mb-6 pb-3">Industries Domain</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 items-start">
               {INDUSTRY_CATEGORIES.map((category) => (
                 <div key={category.id} className="flex flex-col gap-2 text-text-secondary text-sm">
@@ -155,7 +155,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           {/* ROW 3: AGENCY ECOSYSTEM */}
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-widest text-text-primary dark:text-white mb-6 border-b border-black/10 dark:border-white/10 pb-3">Agency Ecosystem</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-widest text-text-primary dark:text-white mb-6 pb-3">Agency Ecosystem</h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 items-start">
               <div>
                 <h4 className="text-xs font-semibold uppercase tracking-widest text-coral dark:text-coral mb-3">Resources</h4>
@@ -204,7 +204,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         </div>
 
         {/* Newsletter Section */}
-        <div className="pt-8 border-t border-black/10 dark:border-white/10 mb-8">
+        <div className="pt-8 mb-8">
           <div className="max-w-md">
             <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white mb-2">
               Stay Updated
@@ -217,7 +217,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         </div>
 
         {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center pt-6 border-t border-black/10 dark:border-white/10">
+        <div className="flex flex-col md:flex-row justify-between items-center pt-6">
           <div className="flex items-center gap-2 mb-3 md:mb-0">
             <img src="/castells-logo.png" alt="Castells Logo" className="w-8 h-8 object-contain" loading="lazy" />
             <span className="font-display font-bold text-lg tracking-tight text-text-primary dark:text-white">Castells.</span>

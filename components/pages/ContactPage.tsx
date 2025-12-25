@@ -11,6 +11,7 @@ import SchemaMarkup from '../ui/SchemaMarkup';
 import type { NavigateFn } from '../../types';
 import { submitContactForm } from '../../lib/api/forms';
 import { trackFormSubmit } from '../../lib/analytics';
+import { validate, type ValidationRule } from '../../lib/formValidation';
 
 interface ContactPageProps {
     onNavigate?: NavigateFn;
@@ -27,10 +28,35 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
     const [error, setError] = useState<string | null>(null);
+    const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
+
+    // Validation rules
+    const validationRules: Record<string, ValidationRule[]> = {
+        name: [{ type: 'required', message: 'Name is required' }, { type: 'minLength', value: 2, message: 'Name must be at least 2 characters' }],
+        email: [{ type: 'required', message: 'Email is required' }, { type: 'email', message: 'Please enter a valid email address' }],
+        message: [{ type: 'required', message: 'Message is required' }, { type: 'minLength', value: 10, message: 'Message must be at least 10 characters' }],
+    };
 
     const handleSubmit = useCallback(async (e: React.FormEvent) => {
         e.preventDefault();
         setError(null);
+        setFieldErrors({});
+
+        // Validate all fields
+        const errors: Record<string, string> = {};
+        Object.entries(validationRules).forEach(([field, rules]) => {
+            const value = formState[field as keyof typeof formState] as string;
+            const result = validate(value, rules);
+            if (!result.isValid && result.error) {
+                errors[field] = result.error;
+            }
+        });
+
+        if (Object.keys(errors).length > 0) {
+            setFieldErrors(errors);
+            return;
+        }
+
         setIsSubmitting(true);
 
         try {
@@ -54,11 +80,13 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
             }
         } catch (err) {
             setError('An unexpected error occurred. Please try again.');
-            console.error('Form submission error:', err);
+            if (process.env.NODE_ENV === 'development') {
+              console.error('Form submission error:', err);
+            }
         } finally {
             setIsSubmitting(false);
         }
-    }, [formState, onNavigate]);
+    }, [formState, onNavigate, validationRules]);
 
     const contactMethods = [
         { icon: Calendar, label: 'Calendly', value: 'Schedule a call', href: 'https://calendly.com', color: 'bg-blue-500/10 text-blue-500' },
@@ -144,19 +172,40 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <Input
                                         type="text"
+                                        name="name"
                                         label="Name"
                                         required
                                         placeholder="Your full name"
                                         value={formState.name}
-                                        onChange={e => setFormState({ ...formState, name: e.target.value })}
+                                        onChange={e => {
+                                            setFormState({ ...formState, name: e.target.value });
+                                            // Clear error on change
+                                            if (fieldErrors.name) {
+                                                setFieldErrors({ ...fieldErrors, name: '' });
+                                            }
+                                        }}
+                                        validationRules={validationRules.name}
+                                        formName="Contact Form"
+                                        showValidationIcon={true}
+                                        error={fieldErrors.name}
                                     />
                                     <Input
                                         type="email"
+                                        name="email"
                                         label="Email"
                                         required
                                         placeholder="Your email"
                                         value={formState.email}
-                                        onChange={e => setFormState({ ...formState, email: e.target.value })}
+                                        onChange={e => {
+                                            setFormState({ ...formState, email: e.target.value });
+                                            if (fieldErrors.email) {
+                                                setFieldErrors({ ...fieldErrors, email: '' });
+                                            }
+                                        }}
+                                        validationRules={validationRules.email}
+                                        formName="Contact Form"
+                                        showValidationIcon={true}
+                                        error={fieldErrors.email}
                                     />
                                 </div>
 
@@ -218,7 +267,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                 {/* Error Message */}
                                 {error && (
                                     <div className="pt-4">
-                                        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4">
+                                        <div className="bg-red-50 dark:bg-red-900/20 rounded-xl p-4">
                                             <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
                                         </div>
                                     </div>
@@ -274,7 +323,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.5 }}
-                                className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                                className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 hover:-translate-y-1 transition-all duration-300"
                             >
                                 <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
                                     <Phone className="w-5 h-5 text-coral" /> Let's talk
@@ -331,7 +380,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5, duration: 0.5 }}
-                                className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                                className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 hover:-translate-y-1 transition-all duration-300"
                             >
                                 <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
                                     <Mail className="w-5 h-5 text-coral" /> Drop a message
@@ -396,6 +445,8 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                 alt="Client testimonial"
                                 className="absolute inset-0 w-full h-full object-cover grayscale group-hover/image:grayscale-0 transition-all duration-500"
                                 loading="lazy"
+                                decoding="async"
+                                loading="lazy"
                             />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-black/10 to-transparent" />
 
@@ -413,7 +464,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                         </div>
 
                         {/* Quote */}
-                        <div className="lg:col-span-8 bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 flex flex-col justify-between hover:shadow-xl transition-all duration-300 relative overflow-hidden">
+                        <div className="lg:col-span-8 bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 flex flex-col justify-between transition-all duration-300 relative overflow-hidden">
                             <div className="relative">
                                 {/* Quote Icon */}
                                 <div className="text-coral text-5xl font-serif leading-none mb-8">“</div>
@@ -493,7 +544,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                             transition={{ delay: 0.3, duration: 0.5 }}
                             href="/about"
                             onClick={(e) => { e.preventDefault(); onNavigate?.('about'); }}
-                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:shadow-xl hover:-translate-y-1"
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-[2rem] bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">
@@ -517,7 +568,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                             transition={{ delay: 0.4, duration: 0.5 }}
                             href="/work"
                             onClick={(e) => { e.preventDefault(); onNavigate?.('work'); }}
-                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:shadow-xl hover:-translate-y-1"
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-[2rem] bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">
@@ -541,7 +592,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                             transition={{ delay: 0.5, duration: 0.5 }}
                             href="/blog"
                             onClick={(e) => { e.preventDefault(); onNavigate?.('blog'); }}
-                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:shadow-xl hover:-translate-y-1"
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-[2rem] bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">

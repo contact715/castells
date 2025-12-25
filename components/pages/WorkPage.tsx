@@ -246,7 +246,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                     <div
                                         key={project.id}
                                         onClick={() => onNavigate('case-study', project as unknown as NavigationData)}
-                                        className="group relative aspect-[4/3] rounded-[2rem] overflow-hidden cursor-pointer bg-white dark:bg-surface border border-black/5 dark:border-white/5 hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                                        className="group relative aspect-[4/3] rounded-[2rem] overflow-hidden cursor-pointer bg-white dark:bg-surface hover:-translate-y-1 transition-all duration-300"
                                     >
                                         {/* Background Media */}
                                         <div className="absolute inset-0 bg-black">
@@ -266,6 +266,8 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                                     src={project.image}
                                                     alt={project.client}
                                                     className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
+                                                    loading="lazy"
+                                                    decoding="async"
                                                 />
                                             )}
                                             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
@@ -353,7 +355,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
 
                         {/* Pagination */}
                         {totalPages > 1 && (
-                            <div className="mt-12 pt-8 border-t border-black/10 dark:border-white/10">
+                            <div className="mt-12 pt-8">
                                 <Pagination
                                     currentPage={currentPage}
                                     totalPages={totalPages}

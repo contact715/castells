@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
 import { PageHeader } from '../ui/PageHeader';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, Plus, Minus } from 'lucide-react';
+import { ArrowUpRight, Plus, Minus, ArrowRight } from 'lucide-react';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import { Button } from '../ui/Button';
 import type { NavigateFn } from '../../types';
 import { findIndustryBySlug, getIndustryCategory, type IndustryCategoryId } from '../../data/industries';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
+import Breadcrumbs from '../ui/Breadcrumbs';
 import { CASE_STUDIES, type CaseStudy } from '../../constants';
+import TrustIndicators from '../ui/TrustIndicators';
+import Benefits from '../ui/Benefits';
+import ProcessSteps from '../ui/ProcessSteps';
+import MetricsDashboard from '../ui/MetricsDashboard';
+import ServiceTestimonials from '../ui/ServiceTestimonials';
+import WhyChooseUs from '../ui/WhyChooseUs';
+import RiskReversal from '../ui/RiskReversal';
+import NextSteps from '../ui/NextSteps';
 
 // FAQ Accordion Component
 const FAQAccordion: React.FC<{ faqs: Array<{ question: string; answer: string }> }> = ({ faqs }) => {
@@ -25,7 +34,7 @@ const FAQAccordion: React.FC<{ faqs: Array<{ question: string; answer: string }>
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: idx * 0.1 }}
-                        className={`border-b border-black/10 dark:border-white/10 ${idx === 0 ? 'border-t' : ''}`}
+                        className=""
                     >
                         <button
                             onClick={() => setOpenIndex(isOpen ? null : idx)}
@@ -178,8 +187,13 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                     description={`Dominating the ${displayName.toLowerCase()} market with proven strategies.`}
                     onNavigate={onNavigate}
                 />
+            </div>
 
-                {/* Industries Grid */}
+            {/* Trust Indicators */}
+            <TrustIndicators className="mb-0" />
+
+            <div className="container mx-auto px-6 pt-4 md:pt-6">
+                {/* Industries Grid / Description */}
                 {industries.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
                         {industries.map((industry, index) => {
@@ -221,6 +235,65 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                     </div>
                 )}
 
+                {/* Inline CTA */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 text-center mb-20"
+                >
+                    <AnimatedHeading
+                        as="h2"
+                        className="font-display text-2xl md:text-3xl font-semibold mb-3 text-text-primary"
+                        delay={0.1}
+                    >
+                        Ready to dominate the {displayName.toLowerCase()} market?
+                    </AnimatedHeading>
+                    <p className="text-text-secondary mb-6 max-w-xl mx-auto">
+                        Schedule a free strategy session to discuss how we can help you achieve your goals.
+                    </p>
+                    <Button
+                        onClick={() => onNavigate?.('contact')}
+                        size="lg"
+                        variant="primary"
+                        className="group"
+                    >
+                        Schedule Free Consultation
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                </motion.div>
+            </div>
+
+            {/* Benefits */}
+            <Benefits
+                title={`Why ${displayName} businesses choose us`}
+                subtitle={`We combine industry expertise with data-driven strategies to deliver results that matter for ${displayName.toLowerCase()} businesses.`}
+                className="mb-0"
+            />
+
+            {/* Process/How It Works */}
+            <ProcessSteps
+                title={`How we help ${displayName.toLowerCase()} businesses`}
+                subtitle={`Our proven process for driving measurable growth in the ${displayName.toLowerCase()} industry`}
+                className="mb-0"
+            />
+
+            {/* Metrics/Stats */}
+            <MetricsDashboard
+                title={`${displayName} marketing results`}
+                subtitle={`Real metrics from our ${displayName.toLowerCase()} marketing campaigns`}
+                className="mb-0"
+            />
+
+            {/* Testimonials */}
+            <ServiceTestimonials
+                title={`What ${displayName.toLowerCase()} clients say`}
+                subtitle={`See how we've helped ${displayName.toLowerCase()} businesses achieve remarkable growth.`}
+                className="mb-0"
+            />
+
+            <div className="container mx-auto px-6 pt-4 md:pt-6">
                 {/* Related Case Studies */}
                 {relatedCases.length > 0 && (
                     <section className="mb-20">
@@ -296,7 +369,37 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                     </section>
                 )}
 
-                {/* FAQ Section */}
+                {/* Mid-page CTA */}
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="bg-coral rounded-[2rem] p-8 md:p-12 text-center mb-20"
+                >
+                    <AnimatedHeading
+                        as="h2"
+                        className="font-display text-3xl md:text-4xl font-semibold mb-4 text-white"
+                        delay={0.1}
+                    >
+                        Let's discuss your {displayName.toLowerCase()} marketing needs
+                    </AnimatedHeading>
+                    <p className="text-white/90 mb-8 max-w-2xl mx-auto text-lg">
+                        Get a free strategy session and discover how we can help you dominate your market.
+                    </p>
+                    <Button
+                        onClick={() => onNavigate?.('contact')}
+                        size="lg"
+                        variant="secondary"
+                        className="group"
+                    >
+                        Get Started Today
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
+                </motion.div>
+            </div>
+
+            {/* FAQ Section */}
                 <section className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory relative">
                     {(() => {
                         const faqs = [
@@ -376,31 +479,59 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                     })()}
                 </section>
 
-                {/* CTA Section */}
+            {/* Why Choose Us */}
+            <WhyChooseUs
+                title={`Why choose Castells for ${displayName.toLowerCase()} marketing`}
+                subtitle={`We're different from traditional agencies. Here's how we deliver better results for ${displayName.toLowerCase()} businesses.`}
+                className="mb-0"
+            />
+
+            {/* Risk Reversal */}
+            <RiskReversal
+                title="No risk, all reward"
+                subtitle={`We're confident in our ability to deliver ${displayName.toLowerCase()} marketing results. Here's how we reduce your risk.`}
+                ctaText="Start Your Free Consultation"
+                onCtaClick={() => onNavigate?.('contact')}
+                className="mb-0"
+            />
+
+            <div className="container mx-auto px-6 pt-4 md:pt-6">
+                {/* Final CTA */}
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.3, duration: 0.6 }}
-                    className="bg-white dark:bg-surface  -black/5 dark:-white/10 rounded-[2rem] p-12 text-center "
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6 }}
+                    className="bg-white dark:bg-surface rounded-[2rem] p-12 text-center mb-20"
                 >
                     <AnimatedHeading
                         as="h2"
                         className="font-display text-3xl md:text-4xl font-semibold mb-4 text-text-primary dark:text-white"
-                        delay={0.4}
+                        delay={0.1}
                     >
                         Ready to dominate your market?
                     </AnimatedHeading>
-                    <p className="text-text-secondary dark:text-white/60 mb-8 max-w-2xl mx-auto">
+                    <p className="text-text-secondary dark:text-white/60 mb-8 max-w-2xl mx-auto text-lg">
                         Let's discuss how we can help you achieve your goals in the {displayName.toLowerCase()} industry.
                     </p>
-                    <button
+                    <Button
                         onClick={() => onNavigate?.('contact')}
-                        className="px-8 py-4 bg-coral text-white rounded-xl font-bold uppercase tracking-widest text-sm hover:bg-coral-dark transition-colors"
+                        size="lg"
+                        variant="primary"
+                        className="group"
                     >
                         Get Started
-                    </button>
+                        <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Button>
                 </motion.div>
             </div>
+
+            {/* Next Steps */}
+            <NextSteps
+                title="What happens next"
+                subtitle="Here's what to expect after you contact us about our industry-specific marketing services"
+                className="mb-0"
+            />
         </div>
     );
 };

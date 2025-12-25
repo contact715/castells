@@ -44,7 +44,9 @@ const TrustSection: React.FC = React.memo(() => {
                   key={idx}
                   src={avatar}
                   alt={`Client ${idx + 1}`}
-                  className="w-10 h-10 rounded-full border-2 border-white dark:border-black"
+                  className="w-10 h-10 rounded-full"
+                  loading="lazy"
+                  decoding="async"
                   loading="lazy"
                   decoding="async"
                 />

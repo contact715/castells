@@ -68,7 +68,7 @@ Radius: "0px",
         damping: 25,
       }}
       className={cn(
-        "pointer-events-auto hidden lg:block relative bg-ivory dark:bg-[#191919] border-b border-black/5 dark:border-white/10 py-4 overflow-visible z-50",
+        "pointer-events-auto hidden lg:block relative bg-ivory dark:bg-[#191919] py-4 overflow-visible z-50",
         className
       )}
     >
@@ -94,7 +94,7 @@ Radius: "12px",
         damping: 25,
       }}
       className={cn(
-        "pointer-events-auto lg:hidden relative flex flex-col bg-ivory/90 dark:bg-[#191919]/90 backdrop-blur-md border border-black/5 dark:border-white/10 px-4 py-3",
+        "pointer-events-auto lg:hidden relative flex flex-col bg-ivory/90 dark:bg-[#191919]/90 backdrop-blur-md px-4 py-3",
         visible && "",
         className
       )}
@@ -151,7 +151,7 @@ export const MobileNavMenu = ({
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.3, ease: "easeInOut" }}
           className={cn(
-            "overflow-hidden border-t border-black/5 dark:border-white/5 mt-2",
+            "overflow-hidden mt-2",
             className
           )}
         >
@@ -208,7 +208,7 @@ export const MobileAccordionItem = ({
             transition={{ duration: 0.3, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <div className="p-4 pt-0 flex flex-col gap-3 border-t border-black/5 dark:border-white/5 bg-black/5 dark:bg-black/20">
+            <div className="p-4 pt-0 flex flex-col gap-3 bg-black/5 dark:bg-black/20">
               {children}
             </div>
           </motion.div>

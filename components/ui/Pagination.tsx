@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from './Button';
 import { cn } from '../../lib/utils';
@@ -92,7 +92,7 @@ export const Pagination: React.FC<PaginationProps> = React.memo(({
                 'min-w-[40px] h-10 px-3 rounded-xl font-semibold text-sm transition-all',
                 isActive
                   ? 'bg-coral text-white'
-                  : 'bg-white dark:bg-surface border border-black/10 dark:border-white/10 text-text-primary dark:text-white hover:bg-black/5 dark:hover:bg-white/10'
+                  : 'bg-white dark:bg-surface text-text-primary dark:text-white hover:bg-black/5 dark:hover:bg-white/10'
               )}
               aria-label={`Go to page ${pageNum}`}
               aria-current={isActive ? 'page' : undefined}

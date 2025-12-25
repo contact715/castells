@@ -233,3 +233,102 @@ export const trackBlogPostView = (postId: string, postTitle: string) => {
   });
 };
 
+/**
+ * Track micro-conversion (small engagement actions)
+ */
+export const trackMicroConversion = (
+  action: string,
+  value?: number,
+  metadata?: Record<string, any>
+) => {
+  event({
+    action: 'micro_conversion',
+    category: 'Engagement',
+    label: action,
+    value: value,
+    ...metadata,
+  });
+};
+
+/**
+ * Track user journey step
+ */
+export const trackJourneyStep = (
+  step: string,
+  stepNumber: number,
+  journeyType: string = 'default'
+) => {
+  event({
+    action: 'journey_step',
+    category: 'User Journey',
+    label: step,
+    value: stepNumber,
+    journey_type: journeyType,
+  });
+};
+
+/**
+ * Track heatmap event (for future heatmap integration)
+ */
+export const trackHeatmapEvent = (
+  element: string,
+  position: { x: number; y: number },
+  eventType: 'click' | 'hover' | 'scroll' = 'click'
+) => {
+  event({
+    action: 'heatmap_event',
+    category: 'Heatmap',
+    label: element,
+    event_type: eventType,
+    position_x: position.x,
+    position_y: position.y,
+  });
+};
+
+/**
+ * Track form field interaction
+ */
+export const trackFormFieldInteraction = (
+  formName: string,
+  fieldName: string,
+  action: 'focus' | 'blur' | 'change'
+) => {
+  event({
+    action: 'form_field_interaction',
+    category: 'Form',
+    label: `${formName}.${fieldName}`,
+    field_name: fieldName,
+    form_name: formName,
+    interaction_type: action,
+  });
+};
+
+/**
+ * Track CTA visibility
+ */
+export const trackCTAVisibility = (ctaName: string, location: string) => {
+  event({
+    action: 'cta_visible',
+    category: 'CTA',
+    label: ctaName,
+    cta_location: location,
+  });
+};
+
+/**
+ * Track video engagement
+ */
+export const trackVideoEngagement = (
+  videoName: string,
+  action: 'play' | 'pause' | 'complete' | 'seek',
+  progress?: number
+) => {
+  event({
+    action: 'video_engagement',
+    category: 'Video',
+    label: videoName,
+    engagement_action: action,
+    progress_percent: progress,
+  });
+};
+

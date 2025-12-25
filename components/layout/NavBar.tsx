@@ -72,6 +72,8 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Naviga
                         {/* Background Image */}
                         <img
                             src={caseStudy.image}
+                            loading="lazy"
+                            decoding="async"
                             alt={caseStudy.client}
                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 will-change-transform"
                             loading="lazy"
@@ -286,64 +288,135 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
         onNavigate('industry', { name: item.name, id: item.slug });
     };
 
-    return (
-        <div className="flex flex-col gap-2">
-            {/* Top: Categories */}
-            <div className="flex items-center justify-between gap-1 bg-ivory dark:bg-black/30 p-1 rounded-[2rem]  -black/5 dark:-white/10  w-full mb-2">
-                {INDUSTRY_CATEGORIES.map((category) => (
-                    <button
-                        key={category.id}
-                        onMouseEnter={() => setActiveCategory(category.id)}
-                        onClick={() => handleCategoryClick(category)}
-                        className={`
-                            flex-1 min-w-0 overflow-hidden px-2 py-2 rounded-[2rem] text-[10px] xl:text-[11px] font-bold uppercase tracking-wider transition-all whitespace-nowrap flex items-center justify-center gap-1.5 cursor-pointer
-                            ${activeCategory === category.id
-                                ? 'bg-black text-white dark:bg-white dark:text-black '
-                                : 'text-text-secondary hover:bg-black/5 dark:hover:bg-white/5 hover:text-text-primary'}
-                        `}
-                    >
-                        {category.icon && (
-                            <category.icon
-                                className={`w-3.5 h-3.5 shrink-0 ${activeCategory === category.id ? 'text-white dark:text-black' : ''}`}
-                            />
-                        )}
-                        <span className="min-w-0 max-w-full truncate">{category.label}</span>
-                    </button>
-                ))}
-            </div>
+    const activeCategoryData = INDUSTRY_CATEGORIES.find(c => c.id === activeCategory);
+    const items = activeCategoryData?.items || [];
+    // Split items into two columns
+    const midPoint = Math.ceil(items.length / 2);
+    const leftColumnItems = items.slice(0, midPoint);
+    const rightColumnItems = items.slice(midPoint);
 
-            {/* Bottom: Items */}
-            <div>
-                <div className="grid grid-cols-2 gap-x-3 gap-y-1.5">
-                    {INDUSTRY_CATEGORIES.find(c => c.id === activeCategory)?.items.map((item) => (
-                        <a
-                            key={item.name}
-                            href={
-                                item.type === 'cta'
-                                    ? item.href
-                                    : `/industries/${encodeURIComponent(item.slug)}`
-                            }
-                            onClick={(e) => {
-                                e.preventDefault();
-                                handleItemClick(item);
-                            }}
-                            className="flex items-center gap-3 w-full p-3 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
+    return (
+        <div className="flex flex-col gap-3">
+            <div className="flex gap-3">
+                {/* Left Column: Categories (Vertical) - Modern Design */}
+                <div className="flex flex-col gap-1.5 bg-white dark:bg-[#2A2A2A] p-2 rounded-[2rem] w-[220px] flex-shrink-0">
+                    <div className="px-2 py-1.5 mb-2">
+                        <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">Categories</span>
+                    </div>
+                    {INDUSTRY_CATEGORIES.map((category, idx) => (
+                        <button
+                            key={category.id}
+                            onMouseEnter={() => setActiveCategory(category.id)}
+                            onClick={() => handleCategoryClick(category)}
+                            className={`
+                                w-full p-3 rounded-[2rem] text-sm font-semibold transition-all text-left flex items-center gap-3 cursor-pointer relative group
+                                ${activeCategory === category.id
+                                    ? 'bg-coral text-white dark:bg-coral dark:text-white'
+                                    : 'text-text-primary hover:bg-black/5 dark:hover:bg-white/5'}
+                            `}
                         >
-                            <item.icon className="w-4 h-4 text-text-secondary group-hover:text-current" />
-                            <span className="flex-1 text-sm font-medium">{item.name}</span>
-                            <ArrowUpRight className="w-4 h-4 opacity-20 group-hover:opacity-100 transition-opacity" />
-                        </a>
+                            {category.icon && (
+                                <div className={`
+                                    w-8 h-8 rounded-[2rem] flex items-center justify-center shrink-0 transition-all
+                                    ${activeCategory === category.id
+                                        ? 'bg-white/20 text-white'
+                                        : 'bg-black/5 dark:bg-white/5 text-text-secondary group-hover:bg-coral/10 group-hover:text-coral'}
+                                `}>
+                                    <category.icon className="w-4 h-4" />
+                                </div>
+                            )}
+                            <span className="flex-1 min-w-0 truncate">{category.label}</span>
+                            {activeCategory === category.id && (
+                                <div className="absolute right-2 w-1.5 h-1.5 rounded-full bg-white/80" />
+                            )}
+                        </button>
                     ))}
                 </div>
+
+                {/* Right Columns: Items (2 columns) - Enhanced Design */}
+                <div className="flex gap-2.5 w-fit">
+                    {/* Column 2 */}
+                    <div className="w-[280px] space-y-1 pt-2 flex-shrink-0">
+                        {leftColumnItems.length > 0 && (
+                            <div className="px-2 py-1.5 mb-2">
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">
+                                    {activeCategoryData?.label || 'Services'}
+                                </span>
+                            </div>
+                        )}
+                        {leftColumnItems.map((item) => (
+                            <a
+                                key={item.name}
+                                href={
+                                    item.type === 'cta'
+                                        ? item.href
+                                        : `/industries/${encodeURIComponent(item.slug)}`
+                                }
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleItemClick(item);
+                                }}
+                                className="flex items-center gap-3 w-full p-3 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 justify-between group cursor-pointer relative overflow-hidden hover:scale-[1.02] hover:-translate-y-0.5"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-coral/0 via-coral/0 to-coral/0 group-hover:from-coral/5 group-hover:via-coral/10 group-hover:to-coral/5 transition-all duration-300 opacity-0 group-hover:opacity-100" />
+                                <div className="relative flex items-center gap-3 flex-1 min-w-0">
+                                    <div className="w-8 h-8 rounded-[2rem] bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                                        <item.icon className="w-4 h-4 text-text-secondary group-hover:text-current transition-all duration-300" />
+                                    </div>
+                                    <span className="flex-1 text-sm font-medium truncate group-hover:translate-x-1 transition-transform duration-300">{item.name}</span>
+                                </div>
+                                <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all duration-300 relative z-10 translate-x-[-4px] group-hover:translate-x-0 group-hover:rotate-45" />
+                            </a>
+                        ))}
+                    </div>
+
+                    {/* Column 3 */}
+                    <div className="w-[280px] space-y-1 pt-2 flex-shrink-0">
+                        {rightColumnItems.length > 0 && (
+                            <div className="px-2 py-1.5 mb-2">
+                                <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary opacity-0">
+                                    {activeCategoryData?.label || 'Services'}
+                                </span>
+                            </div>
+                        )}
+                        {rightColumnItems.map((item) => (
+                            <a
+                                key={item.name}
+                                href={
+                                    item.type === 'cta'
+                                        ? item.href
+                                        : `/industries/${encodeURIComponent(item.slug)}`
+                                }
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    handleItemClick(item);
+                                }}
+                                className="flex items-center gap-3 w-full p-3 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 justify-between group cursor-pointer relative overflow-hidden hover:scale-[1.02] hover:-translate-y-0.5"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-r from-coral/0 via-coral/0 to-coral/0 group-hover:from-coral/5 group-hover:via-coral/10 group-hover:to-coral/5 transition-all duration-300 opacity-0 group-hover:opacity-100" />
+                                <div className="relative flex items-center gap-3 flex-1 min-w-0">
+                                    <div className="w-8 h-8 rounded-[2rem] bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-all duration-300 group-hover:scale-110 group-hover:rotate-3">
+                                        <item.icon className="w-4 h-4 text-text-secondary group-hover:text-current transition-all duration-300" />
+                                    </div>
+                                    <span className="flex-1 text-sm font-medium truncate group-hover:translate-x-1 transition-transform duration-300">{item.name}</span>
+                                </div>
+                                <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-all duration-300 relative z-10 translate-x-[-4px] group-hover:translate-x-0 group-hover:rotate-45" />
+                            </a>
+                        ))}
+                    </div>
+                </div>
             </div>
-            <div className="pt-2 -t -black/5 bg-ivory dark:bg-white/5 rounded-[2rem] p-3">
+
+            {/* Footer CTA - Enhanced */}
+            <div className="mt-2 pt-3 bg-gradient-to-r from-coral/5 via-coral/10 to-coral/5 dark:from-coral/10 dark:via-coral/20 dark:to-coral/10 rounded-[2rem] p-4">
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
-                        <div className="bg-coral/10 h-10 w-10 flex items-center justify-center rounded-full text-coral shrink-0">
-                            <Activity className="w-4 h-4" />
+                        <div className="bg-coral h-10 w-10 flex items-center justify-center rounded-[2rem] text-white shrink-0">
+                            <Activity className="w-5 h-5" />
                         </div>
-                        <div className="min-w-0 flex items-center">
-                            <h5 className="font-sans font-bold text-sm text-text-primary truncate">Don't see your industry?</h5>
+                        <div className="min-w-0 flex flex-col">
+                            <h5 className="font-sans font-bold text-sm text-text-primary">Don't see your industry?</h5>
+                            <p className="text-xs text-text-secondary">We work with businesses across all sectors</p>
                         </div>
                     </div>
                     <ContactButtons />
@@ -454,7 +527,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                 onNavigate?.('industries');
                             }}
                         >
-                            <div className="w-[800px] p-3">
+                            <div className="w-fit max-w-[900px] p-3">
                                 <IndustriesMenu onNavigate={onNavigate} />
                             </div>
                         </MenuItem>

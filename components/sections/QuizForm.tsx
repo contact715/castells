@@ -115,7 +115,9 @@ const QuizForm: React.FC = () => {
         } catch (err) {
             setError('An unexpected error occurred. Please try again.');
             setStatus('idle');
-            console.error('Quiz form submission error:', err);
+            if (process.env.NODE_ENV === 'development') {
+              console.error('Quiz form submission error:', err);
+            }
         }
     };
 
@@ -257,7 +259,7 @@ const QuizForm: React.FC = () => {
                                 {/* Error Message */}
                                 {error && (
                                     <div className="pt-4">
-                                        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4">
+                                        <div className="bg-red-50 dark:bg-red-900/20 rounded-xl p-4">
                                             <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
                                         </div>
                                     </div>

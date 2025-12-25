@@ -13,6 +13,7 @@ interface SearchResult {
 interface SearchProps {
   onNavigate?: (url: string) => void;
   className?: string;
+  onOpenChange?: (isOpen: boolean) => void;
 }
 
 // Simple search index (in production, use a proper search service)
@@ -38,8 +39,21 @@ const searchIndex: SearchResult[] = [
   { title: 'Home Services', url: '/industries/home-services', type: 'industry' },
 ];
 
-const Search: React.FC<SearchProps> = React.memo(({ onNavigate, className = '' }) => {
+const Search: React.FC<SearchProps> = React.memo(({ onNavigate, className = '', onOpenChange }) => {
   const [isOpen, setIsOpen] = useState(false);
+  
+  // Expose open method for keyboard shortcuts
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      (window as any).__openSearch = () => {
+        setIsOpen(true);
+      };
+    }
+  }, []);
+  
+  useEffect(() => {
+    onOpenChange?.(isOpen);
+  }, [isOpen, onOpenChange]);
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -66,20 +80,34 @@ const Search: React.FC<SearchProps> = React.memo(({ onNavigate, className = '' }
     }
   }, [isOpen]);
 
-  // Handle Escape key
+  // Handle Escape key and slash (/) key
   useEffect(() => {
-    if (!isOpen) return;
-    
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Don't trigger if user is typing in an input/textarea
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement ||
+        (e.target as HTMLElement).isContentEditable
+      ) {
+        return;
+      }
+
+      // Escape - close search
+      if (e.key === 'Escape' && isOpen) {
         setIsOpen(false);
         setQuery('');
         setResults([]);
       }
+      
+      // Slash (/) - open search
+      if (e.key === '/' && !isOpen && !e.ctrlKey && !e.metaKey) {
+        e.preventDefault();
+        setIsOpen(true);
+      }
     };
     
-    window.addEventListener('keydown', handleEscape);
-    return () => window.removeEventListener('keydown', handleEscape);
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
   }, [isOpen]);
 
   const handleSearch = useCallback((searchQuery: string) => {
@@ -144,7 +172,7 @@ const Search: React.FC<SearchProps> = React.memo(({ onNavigate, className = '' }
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="fixed top-20 left-1/2 transform -translate-x-1/2 w-full max-w-2xl z-[9999] bg-white dark:bg-surface rounded-[2rem] shadow-2xl border border-black/10 dark:border-white/10"
+              className="fixed top-20 left-1/2 transform -translate-x-1/2 w-full max-w-2xl z-[9999] bg-white dark:bg-surface rounded-[2rem]"
             >
               <div className="p-4">
                 {/* Search Input */}
@@ -156,7 +184,7 @@ const Search: React.FC<SearchProps> = React.memo(({ onNavigate, className = '' }
                     placeholder="Search..."
                     value={query}
                     onChange={(e) => handleSearch(e.target.value)}
-                    className="w-full pl-12 pr-10 py-3 bg-ivory dark:bg-black/20 rounded-xl border border-black/10 dark:border-white/10 focus:outline-none focus:ring-2 focus:ring-coral text-text-primary dark:text-white"
+                    className="w-full pl-12 pr-10 py-3 bg-ivory dark:bg-black/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-coral text-text-primary dark:text-white"
                     aria-label="Search input"
                   />
                   {query && (
