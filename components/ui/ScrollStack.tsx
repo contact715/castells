@@ -52,6 +52,8 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
   useEffect(() => {
     let rafId: number;
     let ticking = false;
+    let resizeTimeout: NodeJS.Timeout;
+    let windowHeight = window.innerHeight;
 
     const updateCards = () => {
       if (!wrapperRef.current || cards.length === 0) {
@@ -59,22 +61,12 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         return;
       }
 
+      // Cache window height
+      if (windowHeight !== window.innerHeight) {
+        windowHeight = window.innerHeight;
+      }
+
       cards.forEach((card, index) => {
-        const rect = card.getBoundingClientRect();
-        // The target "stuck" position for this card
-        const targetTop = stackOffset + (index * 15);
-        
-        // Calculate how far into the "stickiness" we are
-        // If rect.top matches targetTop, it's fully stuck.
-        // If rect.top > targetTop, it's scrolling up normally.
-        
-        // We want to affect previous cards based on the NEXT card's position
-        // Or simply scale cards as they sit at the top.
-        
-        // Alternative Logic:
-        // As a card hits the top, it stays. 
-        // As the *next* card scrolls up over it, the *current* card scales down.
-        
         const nextCard = cards[index + 1];
         if (nextCard) {
             const nextRect = nextCard.getBoundingClientRect();
@@ -82,7 +74,6 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
             
             // Distance of the next card from its sticking point
             const distance = Math.max(0, nextRect.top - nextTargetTop);
-            const windowHeight = window.innerHeight;
             
             // Normalize distance: 0 = next card is stuck (fully covering current), 1 = next card is at bottom of screen
             // We use a shorter range for the effect to complete quickly
@@ -95,10 +86,13 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
             const blur = (1 - progress) * blurAmount;
             const brightness = 1 - ((1 - progress) * 0.2); // Darken slightly
 
+            // Use will-change for better performance
+            card.style.willChange = 'transform, filter';
             card.style.transform = `scale(${scale}) translateZ(0)`;
             card.style.filter = `blur(${blur}px) brightness(${brightness})`;
         } else {
             // Last card doesn't scale down
+            card.style.willChange = 'auto';
             card.style.transform = 'scale(1) translateZ(0)';
             card.style.filter = 'none';
         }
@@ -114,15 +108,25 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       }
     };
 
+    const onResize = () => {
+      // Throttle resize events
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        windowHeight = window.innerHeight;
+        updateCards();
+      }, 150);
+    };
+
     window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll, { passive: true });
+    window.addEventListener('resize', onResize, { passive: true });
     
     // Initial call
     updateCards();
 
     return () => {
       window.removeEventListener('scroll', onScroll);
-      window.removeEventListener('resize', onScroll);
+      window.removeEventListener('resize', onResize);
+      clearTimeout(resizeTimeout);
       if (rafId) {
         cancelAnimationFrame(rafId);
       }

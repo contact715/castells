@@ -6,6 +6,7 @@ import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
 import ShareButtons from '../ui/ShareButtons';
 import { Breadcrumbs } from '../ui/Breadcrumbs';
+import OptimizedImage from '../ui/OptimizedImage';
 import { PageView } from '../../App';
 import { NavigationData } from '../../types';
 
@@ -270,10 +271,13 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                     className="relative w-full h-[500px] rounded-[2rem] overflow-hidden mb-12 group"
                 >
                     <div className="absolute inset-0 bg-black">
-                        <img
+                        <OptimizedImage
                             src={post.image}
                             alt={post.title}
                             className="w-full h-full object-cover opacity-70 transition-opacity duration-700"
+                            width={1600}
+                            height={900}
+                            loading="eager"
                         />
                     </div>
                     

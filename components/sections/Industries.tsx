@@ -5,6 +5,7 @@ import { ArrowUpRight } from 'lucide-react';
 import { cn } from '../../lib/utils';
 import { Section, SectionContainer } from '../ui/Section';
 import AnimatedHeading from '../ui/AnimatedHeading';
+import OptimizedImage from '../ui/OptimizedImage';
 import { INDUSTRY_CATEGORIES, type IndustryCategoryId } from '../../data/industries';
 
 const Industries: React.FC = React.memo(() => {
@@ -99,12 +100,14 @@ const Industries: React.FC = React.memo(() => {
                     {/* Background Image */}
                     {item.type === 'industry' && item.image && !isContactCard && (
                       <div className="absolute inset-0 overflow-hidden rounded-[2rem]">
-                        <img 
+                        <OptimizedImage 
                           src={item.image} 
                           alt={item.name}
-                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                           loading="lazy"
-                          style={{ transform: 'translateZ(0)' }}
+                          width={800}
+                          height={600}
+                          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                         {/* Dark Overlay */}
                         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30 rounded-[2rem]" />

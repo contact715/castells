@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useMemo, memo, useCallback } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { m as motion } from 'framer-motion';
 import { Button } from '../ui/Button';
+import OptimizedImage from '../ui/OptimizedImage';
 import { CASE_STUDIES, CaseStudy } from '../../constants';
 import type { NavigateFn } from '../../types';
 
@@ -35,8 +36,16 @@ const cardVariants = {
 const staggerOffsets = [0, 60, 20, 80];
 
 const CasesGrid: React.FC<CasesGridProps> = ({ onNavigate }) => {
-    // Take first 9 case studies
-    const cases = CASE_STUDIES.slice(0, 9);
+    // Memoize case studies to prevent unnecessary re-renders
+    const cases = useMemo(() => CASE_STUDIES.slice(0, 9), []);
+
+    const handleViewAll = useCallback(() => {
+        onNavigate?.('work');
+    }, [onNavigate]);
+
+    const handleCaseClick = useCallback((caseItem: CaseStudy) => {
+        onNavigate?.('case-study', { id: caseItem.id, name: caseItem.client });
+    }, [onNavigate]);
 
     return (
         <section id="cases" className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory dark:bg-black">
@@ -58,7 +67,7 @@ const CasesGrid: React.FC<CasesGridProps> = ({ onNavigate }) => {
                     </div>
 
                     <Button
-                        onClick={() => onNavigate?.('work')}
+                        onClick={handleViewAll}
                         size="sm"
                         className="self-start lg:self-end"
                     >
@@ -83,7 +92,7 @@ const CasesGrid: React.FC<CasesGridProps> = ({ onNavigate }) => {
                         >
                             <CaseCard
                                 caseItem={caseItem}
-                                onClick={() => onNavigate?.('case-study', { id: caseItem.id, name: caseItem.client })}
+                                onClick={() => handleCaseClick(caseItem)}
                             />
                         </motion.div>
                     ))}
@@ -97,7 +106,7 @@ const CasesGrid: React.FC<CasesGridProps> = ({ onNavigate }) => {
                         >
                             <CaseCard
                                 caseItem={caseItem}
-                                onClick={() => onNavigate?.('case-study', { id: caseItem.id, name: caseItem.client })}
+                                onClick={() => handleCaseClick(caseItem)}
                             />
                         </motion.div>
                     ))}
@@ -113,25 +122,28 @@ interface CaseCardProps {
     onClick: () => void;
 }
 
-const CaseCard: React.FC<CaseCardProps> = ({ caseItem, onClick }) => {
+const CaseCard: React.FC<CaseCardProps> = memo(({ caseItem, onClick }) => {
+    const handleClick = useCallback((e: React.MouseEvent<HTMLAnchorElement>) => {
+        e.preventDefault();
+        onClick();
+    }, [onClick]);
+
     return (
         <a
             href={`/case-studies/${encodeURIComponent(caseItem.id)}`}
-            onClick={(e) => {
-                e.preventDefault();
-                onClick();
-            }}
+            onClick={handleClick}
             className="group cursor-pointer block"
         >
             {/* Image */}
             <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden mb-4">
-                <img
+                <OptimizedImage
                     src={caseItem.image}
                     alt={caseItem.client}
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 will-change-transform"
-                    style={{ transform: 'translateZ(0)' }}
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     loading="lazy"
-                    decoding="async"
+                    width={800}
+                    height={1067}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
                 {/* Subtle gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[2rem]" />
@@ -157,6 +169,10 @@ const CaseCard: React.FC<CaseCardProps> = ({ caseItem, onClick }) => {
             </div>
         </a>
     );
-};
+}, (prevProps, nextProps) => {
+    return prevProps.caseItem.id === nextProps.caseItem.id;
+});
 
-export default CasesGrid;
+CaseCard.displayName = 'CaseCard';
+
+export default memo(CasesGrid);

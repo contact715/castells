@@ -12,6 +12,7 @@ import type { NavigateFn } from '../../types';
 import { findAuthorById, AUTHORS } from '../../data/authors';
 import ShareButtons from '../ui/ShareButtons';
 import { ContactButtons } from '../ui/ContactButtons';
+import OptimizedImage from '../ui/OptimizedImage';
 
 interface CaseStudyDetailProps {
   onBack: () => void;
@@ -190,15 +191,18 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                 playsInline
                 poster={data.image}
                 className="w-full h-full object-cover opacity-70 transition-opacity duration-700"
+                preload="metadata"
+                loading="lazy"
               >
                 <source src={data.video} type="video/mp4" />
               </video>
             ) : (
-              <img
+              <OptimizedImage
                 src={data.image}
                 alt={data.client}
                 loading="lazy"
-                decoding="async"
+                width={1600}
+                height={900}
                 className="w-full h-full object-cover opacity-70 transition-opacity duration-700"
               />
             )}

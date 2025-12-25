@@ -1,11 +1,12 @@
 
-import React from 'react';
+import React, { useMemo, memo, useCallback } from 'react';
 import { ArrowUpRight, TrendingUp, MapPin, Layers } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import ScrollFloat from '../effects/ScrollFloat';
 import ScrollStack, { ScrollStackItem } from '../ui/ScrollStack';
 import AnimatedHeading from '../ui/AnimatedHeading';
+import OptimizedImage from '../ui/OptimizedImage';
 import type { NavigateFn } from '../../types';
 
 interface WorkProps {
@@ -15,6 +16,18 @@ interface WorkProps {
 import { CASE_STUDIES, CaseStudy } from '../../constants';
 
 const Work: React.FC<WorkProps> = ({ onNavigate }) => {
+  // Memoize case studies to prevent unnecessary re-renders
+  const displayedCases = useMemo(() => CASE_STUDIES.slice(0, 9), []);
+
+  // Memoize click handler
+  const handleCaseClick = useCallback((project: CaseStudy) => {
+    onNavigate?.('case-study', { id: project.id, name: project.client });
+  }, [onNavigate]);
+
+  const handleViewArchive = useCallback(() => {
+    onNavigate?.('work');
+  }, [onNavigate]);
+
   return (
     <section id="work" className="bg-ivory relative">
       <div className="container mx-auto px-6 pt-16 md:pt-20 pb-12">
@@ -41,7 +54,7 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
               We track every click, call, and conversion. Our portfolio isn't just a gallery of pretty pictures — it's a ledger of market conquests.
             </p>
             <Button
-              onClick={() => onNavigate?.('work')}
+              onClick={handleViewArchive}
               size="md"
               className="self-start"
             >
@@ -63,12 +76,12 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
           scaleFactor={0.08} // Stronger scaling effect
           blurAmount={8}
         >
-          {CASE_STUDIES.slice(0, 9).map((project, idx) => (
+          {displayedCases.map((project, idx) => (
             <ScrollStackItem key={project.id}>
               <StackCard
                 project={project}
                 index={idx}
-                onClick={() => onNavigate?.('case-study', { id: project.id, name: project.client })}
+                onClick={() => handleCaseClick(project)}
               />
             </ScrollStackItem>
           ))}
@@ -78,7 +91,7 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
       {/* Bottom CTA Button */}
       <div className="container mx-auto px-6 pb-24 pt-8 flex justify-center">
         <Button
-          onClick={() => onNavigate?.('work')}
+          onClick={handleViewArchive}
           size="md"
         >
           View Full Archive
@@ -89,8 +102,9 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
 };
 
 // Redesigned Card for Stacking - "Immersive Overlay" Aesthetic
-const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => void }> = ({ project, index, onClick }) => {
+const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => void }> = memo(({ project, index, onClick }) => {
   const [shouldLoadVideo, setShouldLoadVideo] = React.useState(false);
+  const [imageLoaded, setImageLoaded] = React.useState(false);
   const cardRef = React.useRef<HTMLAnchorElement>(null);
 
   // Lazy load video when card enters viewport
@@ -146,25 +160,30 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
               poster={project.image}
               className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700 will-change-opacity"
               style={{ transform: 'translateZ(0)' }}
+              preload="metadata"
             >
               <source src={project.video} type="video/mp4" />
             </video>
           ) : (
-            <img
+            <OptimizedImage
               src={project.image}
               alt={project.client}
-              className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700 will-change-opacity"
+              className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
               loading="lazy"
-              style={{ transform: 'translateZ(0)' }}
+              width={1600}
+              height={900}
+              onLoad={() => setImageLoaded(true)}
             />
           )
         ) : (
-          <img
+          <OptimizedImage
             src={project.image}
             alt={project.client}
-            className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700 will-change-opacity"
+            className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
             loading="lazy"
-            style={{ transform: 'translateZ(0)' }}
+            width={1600}
+            height={900}
+            onLoad={() => setImageLoaded(true)}
           />
         )}
 
@@ -212,6 +231,12 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
       </div>
     </a>
   );
-};
+}, (prevProps, nextProps) => {
+  // Custom comparison for memo
+  return prevProps.project.id === nextProps.project.id && 
+         prevProps.index === nextProps.index;
+});
 
-export default Work;
+StackCard.displayName = 'StackCard';
+
+export default memo(Work);

@@ -6,6 +6,7 @@ import { Marquee } from '../ui/Marquee';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import { ContactButtons } from '../ui/ContactButtons';
 import SchemaMarkup from '../ui/SchemaMarkup';
+import OptimizedImage from '../ui/OptimizedImage';
 import '../ui/Marquee.css';
 
 // Professional logo components
@@ -277,13 +278,13 @@ const Hero: React.FC = () => {
                     ) : (
                         <>
                             {/* Video Thumbnail Preview */}
-                            <img
+                            <OptimizedImage
                                 src={`https://vumbnail.com/${videoId}.jpg`}
                                 alt="Video preview"
                                 className="absolute inset-0 w-full h-full object-cover"
                                 loading="lazy"
-                                decoding="async"
-                                loading="lazy"
+                                width={1920}
+                                height={1080}
                             />
                             {/* Play Button Overlay */}
                             <button
