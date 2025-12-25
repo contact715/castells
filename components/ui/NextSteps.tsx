@@ -29,14 +29,14 @@ const DEFAULT_STEPS: Step[] = [
   {
     number: '02',
     title: 'Custom Proposal',
-    description: 'We'll create a tailored strategy and proposal based on your needs.',
+      description: "We'll create a tailored strategy and proposal based on your needs.",
     icon: FileText,
     duration: '3-5 days'
   },
   {
     number: '03',
     title: 'Kickoff Meeting',
-    description: 'We'll align on strategy, set up tracking, and launch your first campaigns.',
+    description: "We'll align on strategy, set up tracking, and launch your first campaigns.",
     icon: Rocket,
     duration: 'Week 1'
   },
@@ -52,7 +52,7 @@ const DEFAULT_STEPS: Step[] = [
 const NextSteps: React.FC<NextStepsProps> = React.memo(({
   steps = DEFAULT_STEPS,
   title = 'What happens next',
-  subtitle = 'Here\'s what to expect after you contact us',
+  subtitle = "Here's what to expect after you contact us",
   className = ''
 }) => {
   return (

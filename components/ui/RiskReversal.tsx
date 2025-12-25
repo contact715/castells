@@ -45,7 +45,7 @@ const DEFAULT_GUARANTEES: Guarantee[] = [
 const RiskReversal: React.FC<RiskReversalProps> = React.memo(({
   guarantees = DEFAULT_GUARANTEES,
   title = 'No risk, all reward',
-  subtitle = 'We're confident in our ability to deliver results. Here's how we reduce your risk.',
+    subtitle = "We're confident in our ability to deliver results. Here's how we reduce your risk.",
   ctaText = 'Start Your Free Consultation',
   onCtaClick,
   className = ''

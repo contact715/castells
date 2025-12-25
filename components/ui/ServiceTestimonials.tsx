@@ -41,7 +41,7 @@ const DEFAULT_TESTIMONIALS: Testimonial[] = [
 const ServiceTestimonials: React.FC<ServiceTestimonialsProps> = React.memo(({
   testimonials = DEFAULT_TESTIMONIALS,
   title = 'What our clients say',
-  subtitle = 'Don\'t just take our word for it. See what our clients have to say about working with us.',
+  subtitle = "Don't just take our word for it. See what our clients have to say about working with us.",
   className = ''
 }) => {
   return (

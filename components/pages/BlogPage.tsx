@@ -385,7 +385,6 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
                                                     loading="lazy"
                                                     decoding="async"
-                                                    loading="lazy"
                                                     style={{ transform: 'translateZ(0)' }}
                                                 />
                                                 <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10 rounded-[2rem]" />

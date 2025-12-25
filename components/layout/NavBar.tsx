@@ -72,11 +72,10 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Naviga
                         {/* Background Image */}
                         <img
                             src={caseStudy.image}
-                            loading="lazy"
-                            decoding="async"
                             alt={caseStudy.client}
                             className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 will-change-transform"
                             loading="lazy"
+                            decoding="async"
                             style={{ transform: 'translateZ(0)' }}
                         />
                         {/* Overlay */}

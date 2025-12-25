@@ -52,7 +52,7 @@ const DEFAULT_COMPARISONS: ComparisonItem[] = [
 const WhyChooseUs: React.FC<WhyChooseUsProps> = React.memo(({
   comparisons = DEFAULT_COMPARISONS,
   title = 'Why choose Castells',
-  subtitle = 'We're different from traditional agencies. Here's how.',
+  subtitle = "We're different from traditional agencies. Here's how.",
   className = ''
 }) => {
   return (

@@ -47,8 +47,6 @@ const TrustSection: React.FC = React.memo(() => {
                   className="w-10 h-10 rounded-full"
                   loading="lazy"
                   decoding="async"
-                  loading="lazy"
-                  decoding="async"
                 />
               ))}
             </div>
