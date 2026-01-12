@@ -55,6 +55,7 @@ const IndustryPage = React.lazy(() => import('./components/pages/IndustryPage'))
 const AllServicesPage = React.lazy(() => import('./components/pages/AllServicesPage'));
 const AllIndustriesPage = React.lazy(() => import('./components/pages/AllIndustriesPage'));
 const CompanyPage = React.lazy(() => import('./components/pages/CompanyPage'));
+const ProjectXPage = React.lazy(() => import('./components/pages/ProjectXPage'));
 const ThankYouPage = React.lazy(() => import('./components/pages/ThankYouPage'));
 // NOTE: keep explicit extensions here to satisfy TS bundler resolution in some setups
 const PrivacyPolicyPage = React.lazy(() => import('./components/pages/PrivacyPolicyPage.tsx'));
@@ -310,6 +311,12 @@ function App() {
               {currentPage === 'company' && (
                 <CompanyPage
                   onBack={() => navigateTo('home')}
+                  onNavigate={navigateTo}
+                />
+              )}
+
+              {currentPage === 'projectx' && (
+                <ProjectXPage
                   onNavigate={navigateTo}
                 />
               )}

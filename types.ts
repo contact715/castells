@@ -46,6 +46,7 @@ export type PageView =
   | 'services'
   | 'industries'
   | 'company'
+  | 'projectx'
   | 'thank-you'
   | 'privacy-policy'
   | 'terms'

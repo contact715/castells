@@ -75,6 +75,8 @@ export const routeFromPathname = (pathname: string): { page: PageView; data?: Na
       return { page: 'industries' };
     case '/company':
       return { page: 'company' };
+    case '/projectx':
+      return { page: 'projectx' };
     case '/thank-you':
       return { page: 'thank-you', data: { name: 'general' } };
     case '/privacy-policy':
@@ -122,6 +124,8 @@ export const pathnameFromRoute = (page: PageView, data?: NavigationData | null):
       return buildIndustryPath(data?.id != null ? String(data.id) : undefined);
     case 'company':
       return '/company';
+    case 'projectx':
+      return '/projectx';
     case 'thank-you':
       return '/thank-you';
     case 'privacy-policy':

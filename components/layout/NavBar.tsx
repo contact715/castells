@@ -547,6 +547,19 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                         </MenuItem>
                     </Menu>
 
+                    {/* ProjectX Button */}
+                    <Button
+                        variant="secondary"
+                        size="sm"
+                        className="hidden lg:flex"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            onNavigate?.('projectx');
+                        }}
+                    >
+                        Our ProjectX
+                    </Button>
+
                     <div className="h-6 w-[1px] bg-black/10 dark:bg-white/10 mx-2"></div>
 
                     <div className="flex items-center gap-3">
@@ -717,6 +730,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
 
                         <a href="#about" onClick={(e) => { e.preventDefault(); onNavigate?.('about'); setMobileMenuOpen(false); }} className="block p-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-display text-xl font-bold text-text-primary">Agency</a>
                         <a href="#blog" onClick={(e) => { e.preventDefault(); onNavigate?.('blog'); setMobileMenuOpen(false); }} className="block p-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-display text-xl font-bold text-text-primary">Insights</a>
+                        <a href="#projectx" onClick={(e) => { e.preventDefault(); onNavigate?.('projectx'); setMobileMenuOpen(false); }} className="block p-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-display text-xl font-bold text-text-primary">Our ProjectX</a>
                     </div>
                     <div className="pt-4 -t -black/5 dark:-white/5">
                         <Button
