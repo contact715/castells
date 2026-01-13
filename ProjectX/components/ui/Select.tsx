@@ -1,23 +1,18 @@
-import { cn } from "@/lib/utils";
+import { twMerge } from "tailwind-merge";
 import { SelectHTMLAttributes } from "react";
 
-interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
-  className?: string;
-}
+interface SelectProps extends SelectHTMLAttributes<HTMLSelectElement> { }
 
 export function Select({ className, children, ...props }: SelectProps) {
-  return (
-    <select
-      className={cn(
-        "w-full rounded-xl bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 px-4 py-3 text-base text-text-primary dark:text-white focus:outline-none focus:border-coral dark:focus:border-coral focus:bg-white dark:focus:bg-white/10 transition-all duration-300 font-sans",
-        className
-      )}
-      {...props}
-    >
-      {children}
-    </select>
-  );
+    return (
+        <select
+            className={twMerge(
+                "flex w-full rounded-[2rem] bg-black/10 dark:bg-black/30 px-4 py-3 text-base text-text-primary dark:text-white focus:outline-none focus:ring-2 focus:ring-coral/20 transition-all duration-300 font-sans cursor-pointer",
+                className
+            )}
+            {...props}
+        >
+            {children}
+        </select>
+    );
 }
-
-
-

@@ -8,6 +8,18 @@ export interface FormField {
   placeholder?: string;
   options?: string[];
   allowedZips?: string[];
+  logic?: {
+    showIfFieldId?: string;
+    showIfValue?: string;
+  };
+}
+
+export interface WelcomeScreen {
+  enabled: boolean;
+  title: string;
+  description: string;
+  buttonText: string;
+  incentiveText?: string; // e.g., "Get a $50 coupon after completion"
 }
 
 interface FormBuilderStore {
@@ -16,6 +28,7 @@ interface FormBuilderStore {
   buttonColor: string;
   backgroundImage: string | null;
   requireSMS: boolean;
+  welcomeScreen: WelcomeScreen;
   addField: (field: FormField) => void;
   removeField: (id: string) => void;
   updateField: (id: string, updates: Partial<FormField>) => void;
@@ -24,6 +37,7 @@ interface FormBuilderStore {
   setButtonColor: (color: string) => void;
   setBackgroundImage: (image: string | null) => void;
   setRequireSMS: (require: boolean) => void;
+  setWelcomeScreen: (screen: WelcomeScreen) => void;
   resetForm: () => void;
 }
 
@@ -33,6 +47,12 @@ export const useFormBuilderStore = create<FormBuilderStore>((set) => ({
   buttonColor: "#00C8FF",
   backgroundImage: null,
   requireSMS: false,
+  welcomeScreen: {
+    enabled: true,
+    title: "Find Your Perfect Solution",
+    description: "Answer a few questions to get a personalized quote in under 2 minutes.",
+    buttonText: "Start Now"
+  },
   addField: (field) =>
     set((state) => ({ formFields: [...state.formFields, field] })),
   removeField: (id) =>
@@ -50,6 +70,7 @@ export const useFormBuilderStore = create<FormBuilderStore>((set) => ({
   setButtonColor: (color) => set({ buttonColor: color }),
   setBackgroundImage: (image) => set({ backgroundImage: image }),
   setRequireSMS: (require) => set({ requireSMS: require }),
+  setWelcomeScreen: (screen) => set({ welcomeScreen: screen }),
   resetForm: () =>
     set({
       formTitle: "New Form",
@@ -57,6 +78,12 @@ export const useFormBuilderStore = create<FormBuilderStore>((set) => ({
       buttonColor: "#00C8FF",
       backgroundImage: null,
       requireSMS: false,
+      welcomeScreen: {
+        enabled: true,
+        title: "Find Your Perfect Solution",
+        description: "Answer a few questions to get a personalized quote in under 2 minutes.",
+        buttonText: "Start Now"
+      },
     }),
 }));
 

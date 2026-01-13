@@ -2,12 +2,18 @@ from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, JSO
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.db.base import Base
+# Import Pipeline for string reference in relationship if needed, 
+# but usually string is fine. Keeping imports minimal.
 
 class Lead(Base):
     __tablename__ = "leads"
 
     id = Column(Integer, primary_key=True, index=True)
     organization_id = Column(Integer, ForeignKey("organizations.id"), nullable=False)
+    
+    # Pipeline Info
+    pipeline_id = Column(Integer, ForeignKey("pipelines.id"), nullable=True)
+    stage_id = Column(Integer, ForeignKey("pipeline_stages.id"), nullable=True)
     
     # Contact Info
     first_name = Column(String, nullable=True)
@@ -41,6 +47,9 @@ class Lead(Base):
     organization = relationship("Organization")
     
     # Phase 3 Relationships
-    property_data = relationship("PropertyData", uselist=False, back_populates="lead")
     vision_scans = relationship("VisionScan", back_populates="lead")
     seo_jobs = relationship("SEOJob", back_populates="lead")
+    
+    # Pipeline Relationships
+    pipeline = relationship("Pipeline")
+    stage = relationship("PipelineStage")

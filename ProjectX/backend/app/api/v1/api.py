@@ -1,4 +1,4 @@
-from app.api.v1.endpoints import leads, marketing, analytics, compliance, auth, vision, agent, settings
+from app.api.v1.endpoints import leads, marketing, analytics, compliance, auth, vision, agent, settings, pipeline
 
 api_router = APIRouter()
 api_router.include_router(leads.router, prefix="/leads", tags=["leads"])
@@ -9,3 +9,4 @@ api_router.include_router(auth.router, prefix="/auth", tags=["auth"])
 api_router.include_router(vision.router, prefix="/vision", tags=["vision"])
 api_router.include_router(agent.router, prefix="/agent", tags=["agent"])
 api_router.include_router(settings.router, prefix="/settings", tags=["settings"])
+api_router.include_router(pipeline.router, prefix="/pipeline", tags=["pipeline"])

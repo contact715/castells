@@ -34,7 +34,7 @@ export function KPICard({
       transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
       whileHover={{ y: -4 }}
     >
-      <Card variant="glass" className="h-full">
+      <Card variant="default" className="h-full">
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <p className="text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-white/70 mb-2">{title}</p>
