@@ -8,53 +8,31 @@ import { Input } from "@/components/ui/Input";
 import { motion } from "framer-motion";
 
 export function Header() {
-    const [currentTime, setCurrentTime] = useState(new Date());
-
-    useEffect(() => {
-        const timer = setInterval(() => {
-            setCurrentTime(new Date());
-        }, 1000);
-
-        return () => clearInterval(timer);
-    }, []);
-
     return (
         <header
-            className="bg-surface dark:bg-dark-surface px-6 py-4 lg:rounded-[2rem] sticky top-0 md:static z-40"
+            className="bg-surface dark:bg-dark-surface p-4 lg:py-3 lg:px-6 rounded-card sticky top-0 md:static z-40 border border-black/5 dark:border-white/5"
         >
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-8">
                     <motion.h1
-                        className="text-2xl font-display font-semibold text-text-primary dark:text-white"
-                        whileHover={{ scale: 1.05 }}
+                        className="text-2xl font-display font-bold text-text-primary dark:text-white tracking-tight"
+                        whileHover={{ scale: 1.02, x: 5 }}
                         transition={{ duration: 0.2 }}
                     >
                         M.O.S. Engine
                     </motion.h1>
                     <div className="hidden md:flex items-center gap-2 relative">
-                        <Search className="absolute left-3 w-4 h-4 text-text-secondary dark:text-white/50" />
+                        <Search className="absolute left-4 w-3.5 h-3.5 text-text-secondary dark:text-white/40" />
                         <Input
                             type="text"
-                            placeholder="Search..."
-                            className="pl-10 w-64 bg-black/5 dark:bg-dark-surface/50 rounded-[2rem]"
+                            placeholder="Search systems..."
+                            className="pl-11 w-80 bg-black/5 dark:bg-white/5 rounded-full border border-black/5 dark:border-white/5 h-10 text-xs font-medium"
                         />
                     </div>
                 </div>
 
                 <div className="flex items-center gap-4">
-                    <div className="hidden sm:block text-sm text-text-secondary dark:text-white/70 font-sans">
-                        {format(currentTime, "MMM dd, yyyy, hh:mm a")}
-                    </div>
-                    <Button variant="ghost" size="sm" className="relative">
-                        <Bell className="w-5 h-5" />
-                        <span className="absolute top-0 right-0 w-2 h-2 bg-coral rounded-full"></span>
-                    </Button>
-                    <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 rounded-full bg-coral/10 flex items-center justify-center">
-                            <User className="w-5 h-5 text-coral" />
-                        </div>
-                        <span className="hidden sm:block text-sm font-medium text-text-primary dark:text-white">Client Name</span>
-                    </div>
+                    <div id="header-actions" className="flex items-center gap-3"></div>
                 </div>
             </div>
         </header>

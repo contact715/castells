@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Radar, ExternalLink, MessageCircle, Clock, Check } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { ModuleDescription } from "@/components/dashboard/ModuleDescription";
 
 interface Opportunity {
   id: string;
@@ -42,37 +41,16 @@ export default function NeighborhoodWatchPage() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-        <div>
-          <h1 className="text-3xl font-bold font-display tracking-tight text-white flex items-center gap-3">
-            <Radar className="w-8 h-8 text-red-500 animate-pulse" />
-            Neighborhood Watch
-          </h1>
-          <p className="text-text-secondary mt-1">
-            AI-агент сканирует Nextdoor и Facebook на наличие ключевых слов...
-          </p>
-        </div>
-        <div className="bg-red-500/10 ed-500/20 text-red-400 px-4 py-2 rounded-[2rem] flex items-center gap-2 text-sm">
+    <div className="flex flex-col h-full gap-8">
+      <div className="flex justify-end p-4 lg:p-8 bg-surface dark:bg-dark-surface rounded-[2rem] shadow-sm">
+        <div className="bg-red-500/10 text-red-500 dark:text-red-400 px-4 py-2 rounded-[2rem] flex items-center gap-2 text-sm border border-red-500/20 shadow-lg shadow-red-500/10">
           <span className="relative flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span className="absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
           </span>
-          Режим «Watch» отслеживает активность конкурентов и уведомляет вас.
+          Watch Mode Active
         </div>
       </div>
-
-      {/* Module Description */}
-      <ModuleDescription
-        moduleName="Neighborhood Watch"
-        icon={<Radar className="w-6 h-6" />}
-        shortDescription="Ваш тайный агент в гиперлокальных сетях (Nextdoor, Facebook Groups). Система в реальном времени отслеживает запросы на услуги в вашем районе и предлагает готовые ответы, позволяя вам забирать лидов раньше конкурентов."
-        problem="Более 40% локальных запросов на услуги (сантехника, ремонт, уборка) происходят в закрытых сообществах и чатах. Пока вы ждете лида из Google, ваши соседи уже нанимают кого-то другого в Nextdoor. Владельцы бизнеса физически не могут мониторить эти площадки 24/7."
-        businessValue="Для клиента: Мгновенный доступ к «теплому» спросу в вашем районе. Возможность ответить на запрос первым. Рост доверия за счет рекомендаций соседей. Полная автоматизация мониторинга — вы получаете только уведомление о готовой сделке."
-        monetization="Base tier: Мониторинг 1 района (ZIP-код) — включено. Pro tier: До 5 районов, расширенные ключевые слова — +$150/мес. Enterprise: Весь город, приоритетное уведомление — +$400/мес."
-        roi="Получение 3-5 дополнительных высокомаржинальных заказов в месяц. Экономия на рекламе: стоимость лида из соцсетей в 5-10 раз ниже, чем в Google Ads. Построение репутации «местного эксперта»."
-        example="Пример: В группе Nextdoor житель спросил 'кто посоветует хорошего кровельщика?'. Neighborhood Watch обнаружил пост за 2 секунды и прислал уведомление. Менеджер ответил через 5 минут и закрыл сделку на $12,000. Цена модуля: $150. ROI: 7,900%."
-      />
 
       <div className="grid grid-cols-1 gap-4">
         {loading ? (
@@ -88,9 +66,7 @@ export default function NeighborhoodWatchPage() {
             >
               <div className="flex justify-between items-start mb-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center font-bold text-white">
-                    {opp.author.charAt(0)}
-                  </div>
+                  <div className="w-1.5 h-1.5 rounded-full bg-green-500" />
                   <div>
                     <h4 className="text-white font-medium">{opp.author}</h4>
                     <div className="flex items-center gap-2 text-xs text-text-tertiary">
@@ -121,7 +97,7 @@ export default function NeighborhoodWatchPage() {
                 />
                 <div className="flex gap-3">
                   <Button className="bg-bblue-600 hover:bg-bblue-500 text-white flex-1">
-                    <Check className="w-4 h-4 mr-2" />
+                    <Check className="w-4 h-4" />
                     Approve & Post Reply
                   </Button>
                   <Button variant="outline" className="text-text-secondary hover:bg-black/5 dark:bg-dark-surface/50">

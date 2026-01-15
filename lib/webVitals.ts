@@ -69,19 +69,15 @@ export const trackWebVital = (metric: WebVitalMetric): void => {
 export const initWebVitals = (): void => {
   if (typeof window === 'undefined') return;
 
-  // Check if web-vitals library is available
-  if (typeof window.webVitals === 'undefined') {
-    // Load web-vitals library dynamically
-    import('web-vitals').then(({ onCLS, onFID, onLCP, onFCP, onTTFB, onINP }) => {
-      onCLS(trackWebVital);
-      onFID(trackWebVital);
-      onLCP(trackWebVital);
-      onFCP(trackWebVital);
-      onTTFB(trackWebVital);
-      onINP(trackWebVital);
-    }).catch((err) => {
-      console.warn('Failed to load web-vitals:', err);
-    });
-  }
+  // Load web-vitals library dynamically
+  import('web-vitals').then(({ onCLS, onLCP, onFCP, onTTFB, onINP }) => {
+    onCLS(trackWebVital);
+    onLCP(trackWebVital);
+    onFCP(trackWebVital);
+    onTTFB(trackWebVital);
+    onINP(trackWebVital);
+  }).catch((err) => {
+    console.warn('Failed to load web-vitals:', err);
+  });
 };
 

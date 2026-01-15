@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Upload, Camera, AlertTriangle, CheckCircle, ArrowRight, ScanLine } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { ModuleDescription } from "@/components/dashboard/ModuleDescription";
+import { HeaderActions } from "@/components/layout/HeaderActions";
 
 export default function VisionPage() {
   const [analyzing, setAnalyzing] = useState(false);
@@ -56,28 +56,15 @@ export default function VisionPage() {
   };
 
   return (
-    <div className="space-y-6">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold font-display tracking-tight text-white flex items-center gap-3">
-          <ScanLine className="w-8 h-8 text-bblue-400" />
-          AI Vision Estimator
-        </h1>
-        <p className="text-text-secondary mt-1 max-w-2xl">
-          Загружайте фотографии с объектов для мгновенной идентификации оборудования, обнаружения повреждений и генерации смет с помощью Gemini 3.0 Pro Vision.
-        </p>
-      </div>
-
-      {/* Module Description */}
-      <ModuleDescription
-        moduleName="AI Vision Estimator"
-        icon={<ScanLine className="w-6 h-6" />}
-        shortDescription="Революционный инструмент для визуальной оценки объектов. Используя новейшие модели компьютерного зрения, система 'видит' модель оборудования по фотографии, определяет наличие дефектов и автоматически рассчитывает предварительную смету на ремонт."
-        problem="Мастера тратят до 30 минут на каждом объекте только на переписывание серийных номеров и поиск запчастей. Ошибки в идентификации модели приводят к повторным выездам и заказу неверных деталей. Дистанционная оценка по фото раньше была невозможна с высокой точностью."
-        businessValue="Для клиента: Мгновенное превращение фото в готовую смету. Исключение ошибок в определении спецификаций оборудования. Возможность давать предварительную оценку клиенту по телефону, просто попросив прислать фото."
-        monetization="Base tier: До 50 сканов/мес — включено. Pro tier: До 200 сканов, экспорт в PDF смету — +$250/мес. Enterprise: Безлимит, обучение модели на специфических запчастях — +$800/мес."
-        roi="Сокращение времени на диагностику на 50%. Снижение количества повторных выездов из-за неверных деталей на 30%. Повышение доверия клиента за счет 'магически быстрого' получения сметы. ROI модуля: 500-800%."
-        example="Пример: Клиент прислал фото внешнего блока кондиционера. AI Vision узнал модель Trane XR14 и заметил повреждение лопасти вентилятора. Смета на $550 была готова через 10 секунд. Клиент оплатил заказ, пока конкуренты еще только перезванивали."
-      />
+    <div className="flex flex-col h-full gap-8">
+      <HeaderActions>
+        {!analyzing && (
+          <Button onClick={simulateAnalysis} className="rounded-[2rem]">
+            <Upload className="w-4 h-4 mr-2" />
+            Analyze Site Photo
+          </Button>
+        )}
+      </HeaderActions>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         {/* Upload Zone */}

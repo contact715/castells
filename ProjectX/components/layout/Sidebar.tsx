@@ -28,7 +28,13 @@ import {
   ChevronDown,
   ChevronRight,
   PanelLeftClose,
-  PanelLeft
+  PanelLeft,
+  Zap,
+  Clock,
+  ChevronLeft,
+  Bell,
+  Cpu,
+  Trophy,
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -52,55 +58,40 @@ interface SidebarGroup {
 }
 
 const sidebarConfig: SidebarGroup[] = [
-  { id: "home", label: "Home", icon: LayoutDashboard, path: "/dashboard" },
   {
-    id: "communication",
-    label: "Communication",
-    icon: MessageSquare,
-    items: [
-      { path: "/ai-chat", label: "AI Chat inbox", icon: MessageSquare },
-      { path: "/speed-dialer", label: "Speed-Dialer", icon: Phone },
-    ],
+    id: "mission-control", label: "Mission Control", icon: LayoutDashboard, items: [
+      { path: "/dashboard", label: "Institutional Dashboard", icon: Radar },
+      { path: "/sales-command", label: "Sales Command Center", icon: Trophy },
+      { path: "/sales-analytics", label: "Sales Analytics Index", icon: TrendingUp },
+    ]
   },
   {
-    id: "pipelines",
-    label: "Pipelines",
-    icon: Kanban,
+    id: "core-tools",
+    label: "MOS Core Tools",
+    icon: Zap,
     items: [
-      { path: "/pipeline", label: "Deals Pipeline", icon: Kanban },
-    ],
-  },
-  { id: "tasks", label: "Tasks", icon: ListChecks, path: "/tasks" },
-  {
-    id: "lists",
-    label: "Lists",
-    icon: FileText,
-    items: [
-      { path: "/smart-forms", label: "Smart Forms", icon: FileText },
-      { path: "/team", label: "Team & Users", icon: Users },
-    ],
-  },
-  {
-    id: "ai-automation",
-    label: "AI & Automation",
-    icon: Workflow,
-    items: [
-      { path: "/agentic-flow", label: "Agentic Workflows", icon: Workflow },
+      { path: "/speed-dialer", label: "Dialer Engine", icon: Phone },
+      { path: "/ai-chat", label: "AI Chat Inbox", icon: MessageSquare },
+      { path: "/smart-forms", label: "Lead Forms", icon: FileText },
       { path: "/ai-lead-profiler", label: "AI Lead Profiler", icon: UserSearch },
-      { path: "/content-engine", label: "Content Engine", icon: FileImage },
-      { path: "/database-reactivation", label: "Database Reactivation", icon: Database },
-      { path: "/review-guardian", label: "Review Guardian", icon: Star },
+      { path: "/conversations", label: "Live Conversations", icon: MessageSquare },
     ],
   },
   {
-    id: "insights",
-    label: "Insights",
-    icon: TrendingUp,
+    id: "future-modules",
+    label: "Future Modules",
+    icon: Clock,
     items: [
       { path: "/roi-analytics", label: "ROI Analytics", icon: TrendingUp },
       { path: "/vision", label: "Vision Estimator", icon: ScanEye },
       { path: "/neighborhood-watch", label: "Spy Dashboard", icon: Radar },
       { path: "/local-seo", label: "Local SEO Engine", icon: MapPin },
+      { path: "/agentic-flow", label: "Agentic Workflows", icon: Cpu },
+      { path: "/database-reactivation", label: "Database Reactivation", icon: Database },
+      { path: "/review-guardian", label: "Review Guardian", icon: Star },
+      { path: "/content-engine", label: "Content Engine", icon: FileImage },
+      { path: "/pipeline", label: "Sales Pipeline", icon: Kanban },
+      { path: "/tasks", label: "Task Management", icon: ListChecks },
     ],
   },
   {
@@ -108,6 +99,7 @@ const sidebarConfig: SidebarGroup[] = [
     label: "Account",
     icon: Settings,
     items: [
+      { path: "/team", label: "Team & Users", icon: Users },
       { path: "/tech-portal", label: "Tech Portal", icon: Wrench },
       { path: "/knowledge-base", label: "Knowledge Base", icon: Database },
       { path: "/billing", label: "Billing & Usage", icon: CreditCard },
@@ -129,6 +121,7 @@ export function Sidebar() {
     toggleGroup
   } = useUIStore();
 
+  const sidebarRef = useRef<HTMLElement>(null);
   const [hoveredGroup, setHoveredGroup] = useState<string | null>(null);
   const [flyoutPos, setFlyoutPos] = useState({ top: 0 });
 
@@ -142,8 +135,13 @@ export function Sidebar() {
     // Show flyout only if collapsed OR if NOT expanded in accordion
     if (sidebarCollapsed || (!isExpanded && group.items && group.items.length > 0)) {
       const rect = e.currentTarget.getBoundingClientRect();
-      // Use the top of the button for alignment
-      setFlyoutPos({ top: rect.top });
+      const sidebarRect = sidebarRef.current?.getBoundingClientRect();
+
+      // Calculate position relative to the sidebar container
+      // This is necessary because Sidebar has a transform/transition which creates a new coordinate system for 'fixed' children
+      const relativeTop = rect.top - (sidebarRect?.top || 0) + (rect.height / 2);
+
+      setFlyoutPos({ top: relativeTop });
       setHoveredGroup(group.id);
     }
   };
@@ -166,35 +164,37 @@ export function Sidebar() {
 
       {/* Sidebar Wrapper */}
       <aside
+        ref={sidebarRef}
         className={cn(
           "fixed lg:static inset-y-0 left-0 z-50 transition-all duration-300 lg:h-full lg:flex lg:flex-col",
-          sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0",
-          sidebarCollapsed ? "w-20" : "w-64"
+          sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
+        style={{ width: sidebarCollapsed ? '64px' : '240px' }}
       >
-        <div className="flex flex-col h-full bg-surface dark:bg-dark-surface rounded-[2rem] shadow-sm overflow-hidden">
+        <div className="flex flex-col h-full bg-surface dark:bg-dark-surface rounded-card shadow-sm overflow-hidden border border-black/[0.03] dark:border-white/[0.03]">
 
-          {/* Sidebar Header / Logo */}
-          <div className="p-6 flex items-center justify-between">
-            {!sidebarCollapsed && (
-              <h2 className="text-2xl font-display font-bold text-coral flex items-center gap-2">
-                <span className="w-8 h-8 bg-coral rounded-[2rem] flex items-center justify-center text-white text-base">M</span>
-                MOS Engine
-              </h2>
-            )}
-            {sidebarCollapsed && (
-              <div className="w-8 h-8 bg-coral rounded-[2rem] flex items-center justify-center text-white text-base mx-auto">M</div>
-            )}
+          <div className={cn(
+            "p-4 lg:p-6 flex items-center shrink-0 transition-all duration-300",
+            sidebarCollapsed ? "flex-col gap-3" : "justify-between"
+          )}>
+            <div className={cn("flex items-center gap-2", sidebarCollapsed && "justify-center w-full")}>
+              <div className="w-8 h-8 bg-coral rounded-full flex items-center justify-center text-white text-base font-bold shrink-0">M</div>
+              {!sidebarCollapsed && (
+                <h2 className="text-xl font-display font-bold text-coral whitespace-nowrap">
+                  MOS Engine
+                </h2>
+              )}
+            </div>
             <button
               onClick={toggleSidebarCollapse}
-              className="hidden lg:flex p-1.5 hover:bg-black/5 dark:hover:bg-white/5 rounded-[2rem] text-gray-400 hover:text-coral transition-colors"
+              className="hidden lg:flex p-1.5 hover:bg-black/5 dark:hover:bg-white/5 rounded-full text-gray-400 hover:text-coral transition-all shrink-0"
             >
-              {sidebarCollapsed ? <PanelLeft className="w-5 h-5" /> : <PanelLeftClose className="w-5 h-5" />}
+              {sidebarCollapsed ? <PanelLeft className="w-4 h-4" /> : <PanelLeftClose className="w-4 h-4" />}
             </button>
           </div>
 
           {/* Navigation Items */}
-          <nav className="flex-1 px-4 pb-6 space-y-1 overflow-y-auto no-scrollbar">
+          <nav className="flex-1 px-3 pb-4 lg:px-4 lg:pb-6 space-y-1 overflow-y-auto no-scrollbar">
             {sidebarConfig.map((group) => {
               const Icon = group.icon;
               const hasItems = group.items && group.items.length > 0;
@@ -211,30 +211,32 @@ export function Sidebar() {
                     <Link
                       href={group.path}
                       className={cn(
-                        "flex items-center gap-3 px-4 py-3 rounded-[2rem] transition-all duration-300 font-sans group mb-1",
+                        "flex items-center rounded-full transition-all duration-300 font-satoshi group mb-1",
+                        sidebarCollapsed ? "justify-center p-2.5 mx-auto w-10 h-10" : "gap-2.5 px-3 py-2",
                         isActive
-                          ? "bg-coral/10 text-coral shadow-sm"
-                          : "text-text-secondary dark:text-white/80 hover:text-coral hover:bg-black/5 dark:hover:bg-white/5"
+                          ? "bg-coral text-white shadow-xl shadow-black/5"
+                          : "text-text-secondary dark:text-white/60 hover:text-coral hover:bg-black/5 dark:hover:bg-white/5"
                       )}
                     >
-                      <Icon className={cn("w-5 h-5 min-w-[20px]", isActive ? "text-coral" : "group-hover:text-coral")} />
-                      {!sidebarCollapsed && <span className="font-medium whitespace-nowrap">{group.label}</span>}
+                      <Icon className={cn("w-4.5 h-4.5 shrink-0", isActive ? "text-white" : "group-hover:text-coral")} />
+                      {!sidebarCollapsed && <span className="font-bold text-[13px] uppercase tracking-widest whitespace-nowrap text-white">{group.label}</span>}
                     </Link>
                   ) : (
                     <button
                       onClick={() => handleGroupClick(group)}
                       className={cn(
-                        "w-full flex items-center gap-3 px-4 py-3 rounded-[2rem] transition-all duration-300 font-sans group mb-1",
+                        "w-full flex items-center rounded-full transition-all duration-300 font-satoshi group mb-1",
+                        sidebarCollapsed ? "justify-center p-2.5 mx-auto w-10 h-10" : "gap-2.5 px-3 py-2",
                         isActive && !isExpanded
-                          ? "bg-coral/10 text-coral"
-                          : "text-text-secondary dark:text-white/80 hover:text-coral hover:bg-black/5 dark:hover:bg-white/5"
+                          ? "bg-coral text-white shadow-xl shadow-black/5"
+                          : "text-text-secondary dark:text-white/60 hover:text-coral hover:bg-black/5 dark:hover:bg-white/5"
                       )}
                     >
-                      <Icon className={cn("w-5 h-5 min-w-[20px]", isActive ? "text-coral" : "group-hover:text-coral")} />
+                      <Icon className={cn("w-4.5 h-4.5 shrink-0", isActive ? "text-white" : "group-hover:text-coral")} />
                       {!sidebarCollapsed && (
                         <div className="flex-1 flex items-center justify-between min-w-0">
-                          <span className="font-medium whitespace-nowrap">{group.label}</span>
-                          {isExpanded ? <ChevronDown className="w-4 h-4 opacity-50" /> : <ChevronRight className="w-4 h-4 opacity-50" />}
+                          <span className="font-bold text-[13px] uppercase tracking-widest whitespace-nowrap text-white">{group.label}</span>
+                          {isExpanded ? <ChevronDown className="w-4 h-4 opacity-70" /> : <ChevronRight className="w-4 h-4 opacity-70" />}
                         </div>
                       )}
                     </button>
@@ -249,19 +251,19 @@ export function Sidebar() {
                         exit={{ height: 0, opacity: 0 }}
                         className="overflow-hidden"
                       >
-                        <div className="pl-12 pr-4 py-2 space-y-1">
+                        <div className="pl-8 pr-4 py-2 space-y-1">
                           {group.items?.map((item) => (
                             <Link
                               key={item.path}
                               href={item.path}
                               className={cn(
-                                "flex items-center gap-3 px-4 py-2 rounded-[2rem] text-sm transition-all duration-200",
+                                "flex items-center gap-2.5 px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all duration-200",
                                 isItemActive(item.path)
-                                  ? "bg-coral/10 text-coral font-bold"
-                                  : "text-text-secondary dark:text-white/60 hover:text-coral hover:bg-black/5 dark:hover:bg-white/5"
+                                  ? "bg-coral/20 text-coral"
+                                  : "text-white/80 hover:text-coral hover:bg-white/10"
                               )}
                             >
-                              <item.icon className="w-4 h-4" />
+                              <item.icon className="w-3.5 h-3.5" />
                               <span>{item.label}</span>
                             </Link>
                           ))}
@@ -277,34 +279,55 @@ export function Sidebar() {
           </nav>
 
           {/* Sidebar Footer */}
-          <div className="p-4 ">
+          <div className="p-4 border-t border-black/5 dark:border-white/5">
             <div className={cn(
-              "flex items-center gap-3 p-3 rounded-[2rem] bg-black/5 dark:bg-dark-surface/50",
-              sidebarCollapsed && "justify-center p-2"
+              "flex items-center rounded-card bg-black/5 dark:bg-dark-surface/50 border border-black/5 dark:border-white/5 transition-all duration-300 overflow-hidden",
+              sidebarCollapsed ? "justify-center w-11 h-11 mx-auto" : "w-full"
             )}>
-              <div className="w-10 h-10 rounded-full bg-coral/20 flex items-center justify-center text-coral font-bold shrink-0">
-                JD
-              </div>
-              {!sidebarCollapsed && (
-                <div className="min-w-0">
-                  <p className="text-sm font-bold text-text-primary dark:text-white truncate">John Doe</p>
-                  <p className="text-xs text-text-secondary dark:text-white/40 truncate">Admin Profile</p>
+              {!sidebarCollapsed ? (
+                <div className="flex w-full divide-x divide-black/5 dark:divide-white/5">
+                  <div className="flex-[7.5] flex items-center gap-2 p-2 min-w-0">
+                    <div className="w-7 h-7 rounded-full bg-coral/20 flex items-center justify-center text-coral font-bold shrink-0 text-[11px] border border-black/5 dark:border-white/5">
+                      JD
+                    </div>
+                    <div className="min-w-0 text-left">
+                      <p className="text-[12px] font-bold text-white truncate">John Doe</p>
+                      {/* AIInsights section - assuming 'insight' is defined elsewhere or this is a placeholder */}
+                      {/* For demonstration, let's assume a dummy insight */}
+                      {/* <div
+                            key={index} // 'index' would need to be defined if this were in a map
+                            className="p-4 rounded-card bg-white/5 border border-white/10 hover:bg-coral/10 transition-colors"
+                        >
+                            <p className="text-sm font-sans text-white leading-relaxed font-medium">AI Insight: Your usage is up 15% this month.</p>
+                        </div> */}
+                      <p className="text-[10px] text-white/60 truncate">Admin Profile</p>
+                    </div>
+                  </div>
+                  <button className="flex-[2.5] flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/5 transition-colors relative">
+                    <Bell className="w-4 h-4 text-white/70" />
+                    <span className="absolute top-2.5 right-3 w-1.5 h-1.5 bg-coral rounded-full"></span>
+                  </button>
+                </div>
+              ) : (
+                <div className="w-8 h-8 rounded-full bg-coral/20 flex items-center justify-center text-coral font-bold shrink-0 text-sm border border-black/5 dark:border-white/5">
+                  JD
                 </div>
               )}
             </div>
           </div>
         </div>
 
-        {/* Flyout Menu (Popup) - Rendered outside overflow-hidden but inside aside for accessibility */}
+        {/* Flyout Menu (Popup) */}
         {hoveredGroup && (
           sidebarConfig.find(g => g.id === hoveredGroup)?.items && (
             <div
               className={cn(
-                "fixed z-[100] w-72 -ml-12 pl-12 group/flyout", // Massive 48px overlap bridge
-                sidebarCollapsed ? "left-20" : "left-64"
+                "fixed z-[100] w-64 pointer-events-auto group/flyout -translate-y-1/2",
+                "before:absolute before:inset-y-0 before:-left-8 before:w-8 before:content-['']"
               )}
               style={{
                 top: flyoutPos.top,
+                left: sidebarCollapsed ? '64px' : '240px'
               }}
               onMouseEnter={() => setHoveredGroup(hoveredGroup)}
               onMouseLeave={() => setHoveredGroup(null)}
@@ -312,7 +335,7 @@ export function Sidebar() {
               <motion.div
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="bg-surface dark:bg-dark-surface rounded-[2rem] shadow-2xl p-2 border border-black/10 dark:border-white/10 overflow-hidden"
+                className="bg-surface dark:bg-dark-surface rounded-card shadow-lg p-2 border border-black/10 dark:border-white/10 overflow-hidden"
               >
                 <div className="px-4 py-2 mb-1">
                   <span className="text-xs font-bold text-text-secondary dark:text-white/40 uppercase tracking-widest">
@@ -324,10 +347,10 @@ export function Sidebar() {
                     key={item.path}
                     href={item.path}
                     className={cn(
-                      "flex items-center gap-3 px-4 py-2.5 rounded-[2rem] text-sm transition-all duration-200",
+                      "flex items-center gap-3 px-4 py-2.5 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all duration-200 mb-1",
                       isItemActive(item.path)
-                        ? "bg-coral/10 text-coral font-bold"
-                        : "text-text-secondary dark:text-white/70 hover:bg-black/5 dark:hover:bg-white/5 hover:text-coral"
+                        ? "bg-coral/10 text-coral"
+                        : "text-text-secondary dark:text-white/40 hover:bg-black/5 dark:hover:bg-white/5 hover:text-coral"
                     )}
                   >
                     <item.icon className="w-4 h-4" />

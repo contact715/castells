@@ -7,6 +7,7 @@ import AnimatedHeading from '../ui/AnimatedHeading';
 import { ContactButtons } from '../ui/ContactButtons';
 import SchemaMarkup from '../ui/SchemaMarkup';
 import OptimizedImage from '../ui/OptimizedImage';
+import AmbiLight from '../ui/AmbiLight';
 import '../ui/Marquee.css';
 
 // Professional logo components
@@ -248,57 +249,58 @@ const Hero: React.FC = () => {
 
             {/* Video Section - Contained Width */}
             <div className="container mx-auto px-4 sm:px-6 pb-12 sm:pb-20" ref={videoContainerRef}>
-                <div className="relative w-full aspect-video rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-black">
-                    {shouldLoadVideo ? (
-                        <>
-                            <iframe
-                                ref={iframeRef}
-                                src="https://player.vimeo.com/video/1101673750?h=7ccdfe1d0c&autoplay=1&muted=1&loop=1&controls=1&background=0&responsive=1&byline=0&title=0"
-                                className="absolute inset-0 w-full h-full -0"
-                                frameBorder="0"
-                                referrerPolicy="strict-origin-when-cross-origin"
-                                allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
-                                allowFullScreen
-                                title="vimeo-player"
-                                loading="lazy"
-                            />
-                            {/* Sound Toggle Button */}
-                            <button
-                                onClick={toggleMute}
-                                className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm  -white/20 flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
-                                aria-label={isMuted ? "Unmute video" : "Mute video"}
-                            >
-                                {isMuted ? (
-                                    <VolumeX className="w-4 h-4 sm:w-5 sm:h-5" />
-                                ) : (
-                                    <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" />
-                                )}
-                            </button>
-                        </>
-                    ) : (
-                        <>
-                            {/* Video Thumbnail Preview */}
-                            <OptimizedImage
-                                src={`https://vumbnail.com/${videoId}.jpg`}
-                                alt="Video preview"
-                                className="absolute inset-0 w-full h-full object-cover"
-                                loading="lazy"
-                                width={1920}
-                                height={1080}
-                            />
-                            {/* Play Button Overlay */}
-                            <button
-                                onClick={() => setShouldLoadVideo(true)}
-                                className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors cursor-pointer group"
-                                aria-label="Play video"
-                            >
-                                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/90 hover:bg-white group-hover:scale-110 transition-all flex items-center justify-center">
-                                    <ArrowRight className="w-8 h-8 sm:w-10 sm:h-10 text-black ml-1" />
-                                </div>
-                            </button>
-                        </>
-                    )}
-                </div>
+                <AmbiLight vimeoId={videoId} vimeoHash="7ccdfe1d0c" blur={80} intensity={0.65} spread={1.15} saturate={1.8} brightness={1.3} className="w-full aspect-video rounded-[1.5rem] sm:rounded-[2rem] overflow-visible">
+                    <div className="relative w-full h-full rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-black">
+                        {shouldLoadVideo ? (
+                            <>
+                                <iframe
+                                    ref={iframeRef}
+                                    src="https://player.vimeo.com/video/1101673750?h=7ccdfe1d0c&autoplay=1&muted=1&loop=1&controls=1&background=0&responsive=1&byline=0&title=0"
+                                    className="absolute inset-0 w-full h-full border-0"
+                                    frameBorder="0"
+                                    referrerPolicy="strict-origin-when-cross-origin"
+                                    allow="autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share"
+                                    title="vimeo-player"
+                                    loading="lazy"
+                                />
+                                {/* Sound Toggle Button */}
+                                <button
+                                    onClick={toggleMute}
+                                    className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
+                                    aria-label={isMuted ? "Unmute video" : "Mute video"}
+                                >
+                                    {isMuted ? (
+                                        <VolumeX className="w-4 h-4 sm:w-5 sm:h-5" />
+                                    ) : (
+                                        <Volume2 className="w-4 h-4 sm:w-5 sm:h-5" />
+                                    )}
+                                </button>
+                            </>
+                        ) : (
+                            <>
+                                {/* Video Thumbnail Preview */}
+                                <OptimizedImage
+                                    src={`https://vumbnail.com/${videoId}.jpg`}
+                                    alt="Video preview"
+                                    className="absolute inset-0 w-full h-full object-cover"
+                                    loading="lazy"
+                                    width={1920}
+                                    height={1080}
+                                />
+                                {/* Play Button Overlay */}
+                                <button
+                                    onClick={() => setShouldLoadVideo(true)}
+                                    className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors cursor-pointer group"
+                                    aria-label="Play video"
+                                >
+                                    <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/90 hover:bg-white group-hover:scale-110 transition-all flex items-center justify-center">
+                                        <ArrowRight className="w-8 h-8 sm:w-10 sm:h-10 text-black ml-1" />
+                                    </div>
+                                </button>
+                            </>
+                        )}
+                    </div>
+                </AmbiLight>
             </div>
         </div>
     );

@@ -34,10 +34,8 @@ export function ModuleDescription({
     icon,
 }: ModuleDescriptionProps) {
     return (
-        <div
-            className="mb-6"
-        >
-            <Card variant="default" className="p-6">
+        <div>
+            <Card variant="default" className="p-8">
                 <div className="space-y-4">
                     {/* Short Description - Always Visible */}
                     <div className="space-y-3">
@@ -122,7 +120,7 @@ export function ModuleDescription({
                                         Пример расчета
                                     </h4>
                                 </div>
-                                <div className="bg-black/5 dark:bg-dark-surface/50 rounded-[2rem] p-4 ">
+                                <div className="bg-black/5 dark:bg-white/5 rounded-card p-4 border border-black/5 dark:border-white/5">
                                     <p className="text-sm text-text-secondary dark:text-white/70 font-sans leading-relaxed whitespace-pre-line">
                                         {example}
                                     </p>

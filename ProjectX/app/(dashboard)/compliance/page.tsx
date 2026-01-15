@@ -4,35 +4,15 @@ import { motion } from "framer-motion";
 import { Shield, AlertTriangle, Lock, FileText, CheckCircle, Ban } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { ModuleDescription } from "@/components/dashboard/ModuleDescription";
 
 export default function CompliancePage() {
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold font-display tracking-tight text-white flex items-center gap-3">
-            <Shield className="w-8 h-8 text-emerald-500" />
-            Compliance Guardian
-          </h1>
-          <p className="text-text-secondary mt-1">Статус: <span className="text-emerald-400 font-bold">АКТИВЕН</span> (Защита TCPA и DNC включена)</p>
-        </div>
+    <div className="flex flex-col h-full gap-8">
+      <div className="flex justify-end">
         <div className="flex gap-2">
           <Button variant="outline"><FileText className="w-4 h-4 mr-2" /> Export Audit Log</Button>
         </div>
       </div>
-
-      {/* Module Description */}
-      <ModuleDescription
-        moduleName="Compliance Guardian"
-        icon={<Shield className="w-6 h-6" />}
-        shortDescription="Ваша юридическая броня в мире цифрового маркетинга. Система автоматически фильтрует контакты через реестры DNC (Do Not Call), проверяет согласия TCPA и обеспечивает полное соответствие законам о рекламе США и Канады."
-        problem="Нарушение закона TCPA может стоить бизнесу от $500 до $1,500 за каждый нежелательный звонок или SMS. Один массовый обзвон без проверки базы может привести к многомиллионным штрафам и мгновенной блокировке всех телефонных номеров компании."
-        businessValue="Для клиента: Полное спокойствие и защита от юридических рисков. Автоматическая очистка базы от 'опасных' номеров. Сохранение репутации отправителя (sender score), что гарантирует доставку ваших сообщений клиентам."
-        monetization="Base tier: Проверка по DNC реестрам — включено. Pro tier: Расширенные аудит-логи, защита от судебных исков — +$150/мес. Enterprise: Выделенный комплаенс-офицер, страхование рисков — +$500/мес."
-        roi="Предотвращение штрафов: потенциальная экономия от $10,000 до $1M+. Сокращение времени на юридическую проверку баз. ROI модуля невозможно оценить в процентах, так как это 'страховка', спасающая бизнес от закрытия."
-        example="Пример: Перед запуском кампании на 5,000 номеров, Compliance Guardian выявил 420 номеров в черном списке DNC. Это превентивно спасло компанию от потенциального штрафа в $210,000 (420 × $500)."
-      />
 
       {/* Risk Score */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">

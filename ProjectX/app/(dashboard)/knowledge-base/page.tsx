@@ -1,36 +1,38 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { Database, Upload, FileText, Search, Trash2 } from "lucide-react";
+import {
+  AlertCircle,
+  Phone,
+  Mail,
+  HelpCircle,
+  ExternalLink,
+  Settings as SettingsIcon,
+  MessageSquare,
+  Sliders,
+  X,
+  Plus as PlusIcon,
+  Save,
+
+  Database, // Re-added from original
+  FileText, // Re-added from original
+  Search, // Re-added from original
+  Trash2, // Re-added from original
+  Upload // Re-added from original, as it's used in HeaderActions
+} from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { ModuleDescription } from "@/components/dashboard/ModuleDescription";
+import { Select as SelectComponent } from "@/components/ui/Select"; // Added Select component import
+import { HeaderActions } from "@/components/layout/HeaderActions";
 
 export default function KnowledgeBasePage() {
   return (
-    <div className="space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold font-display tracking-tight text-white flex items-center gap-3">
-            <Database className="w-8 h-8 text-cyan-500" />
-            Knowledge Base (RAG)
-          </h1>
-          <p className="text-text-secondary mt-1">Загружайте документы для обучения ваших AI-агентов.</p>
-        </div>
-        <Button className="bg-cyan-600 hover:bg-cyan-500 text-white"><Upload className="w-4 h-4 mr-2" /> Upload Document</Button>
-      </div>
-
-      {/* Module Description */}
-      <ModuleDescription
-        moduleName="Knowledge Base (RAG)"
-        icon={<Database className="w-6 h-6" />}
-        shortDescription="Интеллектуальное ядро вашего бизнеса. Эта система использует технологию RAG (Retrieval-Augmented Generation), позволяя AI-агентам мгновенно находить ответы в ваших прайслистах, регламентах и технических руководствах."
-        problem="Обучение нового сотрудника занимает недели, а опытные менеджеры тратят до 30% времени на поиск информации в разрозненных файлах. Ошибки в консультировании клиентов по сложным продуктам могут привести к потере сделок и репутационным искам."
-        businessValue="Для клиента: AI-агенты отвечают с точностью 99%, основываясь только на ваших документах. Мгновенный поиск по тысячам страниц текста. Легкое обновление знаний: просто загрузите новый PDF, и все агенты 'узнают' об изменениях."
-        monetization="Base tier: До 10 документов, 100 МБ хранилища — включено. Pro tier: До 100 документов, OCR (распознавание фото), 1 ГБ — +$200/мес. Enterprise: Сегментация знаний, кастомные векторные БД — +$500/мес."
-        roi="Сокращение времени на онбординг персонала на 80%. Исключение ошибок в расчете смет и подборе оборудования. Экономия на внутреннем обучении и поддержке: до $3,000-5,000/мес."
-        example="Пример: Компания загрузила 50 технических мануалов по отопительному оборудованию. Теперь AI-агент за 2 секунды находит нужную деталь и схему подключения, на что раньше у диспетчера уходило 15 минут. Это позволяет обрабатывать в 3 раза больше звонков тем же штатом."
-      />
+    <div className="flex flex-col h-full gap-8">
+      <HeaderActions>
+        <Button className="bg-cyan-600 hover:bg-cyan-500 text-white shadow-lg shadow-cyan-600/20 rounded-[2rem]">
+          <Upload className="w-4 h-4 mr-2" />
+          Upload Document
+        </Button>
+      </HeaderActions>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         <Card variant="glass" className="lg:col-span-1 h-fit">

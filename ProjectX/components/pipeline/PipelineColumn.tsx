@@ -43,7 +43,7 @@ export function PipelineColumn({ id, title, color, deals, count, totalValue, onD
       <div
         ref={setNodeRef}
         className={clsx(
-          "flex-1 bg-black/5 dark:bg-black/20 rounded-b-[2rem] p-2 overflow-y-auto custom-scrollbar transition-colors",
+          "flex-1 flex flex-col gap-3 bg-black/5 dark:bg-white/5 rounded-b-[2rem] p-4 overflow-y-auto custom-scrollbar transition-colors",
           isOver ? "bg-coral/10 dark:bg-coral/20 ring-2 ring-coral/20" : ""
         )}
       >

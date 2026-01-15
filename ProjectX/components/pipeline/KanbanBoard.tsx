@@ -113,7 +113,7 @@ export function KanbanBoard() {
         onDragOver={handleDragOver}
         onDragEnd={handleDragEnd}
       >
-        <div className="flex bg-gray-50 dark:bg-bblack/40 p-4 h-full overflow-x-auto items-start gap-4">
+        <div className="flex bg-transparent p-4 h-full overflow-x-auto items-start gap-4">
           {MOCK_STAGES.map((stage) => {
             const stageDeals = deals[stage.id] || [];
             const totalValue = stageDeals.reduce((sum, deal) => sum + deal.value, 0);

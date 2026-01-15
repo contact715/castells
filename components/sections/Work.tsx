@@ -233,8 +233,8 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
   );
 }, (prevProps, nextProps) => {
   // Custom comparison for memo
-  return prevProps.project.id === nextProps.project.id && 
-         prevProps.index === nextProps.index;
+  return prevProps.project.id === nextProps.project.id &&
+    prevProps.index === nextProps.index;
 });
 
 StackCard.displayName = 'StackCard';

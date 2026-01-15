@@ -5,9 +5,9 @@ import { useState, useEffect } from "react";
 import { User, Mail, Shield, Plus, MoreVertical, Search } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Input } from "@/components/ui/Input";
-import { ModuleDescription } from "@/components/dashboard/ModuleDescription";
 import { Users } from "lucide-react";
 import { useAuth } from "@/components/providers/AuthProvider";
+import { HeaderActions } from "@/components/layout/HeaderActions";
 
 interface TeamMember {
   id: number;
@@ -53,30 +53,13 @@ export default function TeamPage() {
 
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold font-display tracking-tight text-white">Team Management</h1>
-          <p className="text-text-secondary mt-1">Управляйте доступом и ролями в вашей организации.</p>
-        </div>
-        <Button className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20">
+    <div className="flex flex-col h-full gap-8">
+      <HeaderActions>
+        <Button className="bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 rounded-[2rem]">
           <Plus className="w-4 h-4 mr-2" />
           Invite Member
         </Button>
-      </div>
-
-      {/* Module Description */}
-      <ModuleDescription
-        moduleName="Team Management"
-        icon={<Users className="w-6 h-6" />}
-        shortDescription="Централизованный хаб для управления сотрудниками, их ролями и правами доступа. Обеспечивает безопасность данных и эффективную совместную работу всего отдела продаж и маркетинга."
-        problem="При отсутствии четкого разграничения прав доступа возникают риски утечки базы клиентов или удаления важных настроек. Без системы управления сотрудники тратят время на выяснение ответственности и ожидание доступов."
-        businessValue="Для клиента: Полный контроль над тем, кто и что видит в системе. Быстрый онбординг новых сотрудников (через инвайт). История действий пользователей для контроля качества работы и безопасности."
-        monetization="Base tier: До 5 пользователей — включено. Pro tier: До 20 пользователей, расширенные роли — +$100/мес. Enterprise: Безлимит пользователей, SSO, аудит-логи — +$300/мес."
-        roi="Предотвращение потери базы клиентов (оценивается в $10,000+). Сокращение времени на администрирование системы на 5-10 часов в месяц. Общий ROI: 200-300% за счет безопасности и порядка."
-        example="Пример: Увольнение сотрудника теперь занимает 1 клик, полностью закрывая доступ ко всем модулям M.O.S Engine, включая CRM и телефонию. Это гарантирует сохранение коммерческой тайны и клиентской базы."
-      />
+      </HeaderActions>
 
       {/* Filters */}
       <div className="flex gap-4 items-center bg-black/5 dark:bg-dark-surface/50 p-2 rounded-[2rem] w-fit">

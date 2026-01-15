@@ -15,8 +15,8 @@ export function AIInsights() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
         >
-            <Card variant="default" className="p-6">
-                <div className="flex items-center gap-2 mb-4">
+            <Card variant="default" className="p-8 h-full">
+                <div className="flex items-center gap-3 mb-6">
                     <Sparkles className="w-5 h-5 text-coral" />
                     <h3 className="text-2xl font-display font-semibold text-text-primary dark:text-white">AI Insights</h3>
                 </div>
@@ -24,9 +24,9 @@ export function AIInsights() {
                     {insights.map((insight, index) => (
                         <div
                             key={index}
-                            className="p-4 rounded-[2rem] bg-black/5 dark:bg-white/5"
+                            className="p-4 rounded-card bg-white/5 border border-white/10 hover:bg-coral/10 transition-colors"
                         >
-                            <p className="text-sm font-sans text-text-secondary dark:text-white/80 leading-relaxed">{insight}</p>
+                            <p className="text-sm font-sans text-white leading-relaxed font-medium">{insight}</p>
                         </div>
                     ))}
                 </div>

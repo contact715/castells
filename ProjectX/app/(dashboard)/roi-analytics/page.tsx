@@ -5,7 +5,6 @@ import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import { Select } from "@/components/ui/Select";
-import { ModuleDescription } from "@/components/dashboard/ModuleDescription";
 import { motion } from "framer-motion";
 import {
     Table,
@@ -30,7 +29,8 @@ import {
     Legend,
     ResponsiveContainer,
 } from "recharts";
-import { FileText, TrendingUp, Download } from "lucide-react";
+import { FileText, TrendingUp, Download, Share2 } from "lucide-react";
+import { HeaderActions } from "@/components/layout/HeaderActions";
 
 const roiData = [
     { month: "Jan", roi: 120 },
@@ -87,41 +87,31 @@ export default function ROIAnalyticsPage() {
     const [dateRange, setDateRange] = useState("");
 
     return (
-        <motion.div
-            className="space-y-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+        <div
+            className="flex flex-col h-full gap-8"
         >
-            {/* Module Description */}
-            <ModuleDescription
-                moduleName="ROI Analytics"
-                icon={<TrendingUp className="w-6 h-6" />}
-                shortDescription="Полноценный центр управления доходностью вашего маркетинга. Система автоматически сопоставляет затраты на рекламу с реальными сделками в CRM, показывая чистую прибыль по каждому каналу, менеджеру и рекламному объявлению."
-                problem="Бизнес часто тратит деньги на рекламу вслепую, не зная, какие звонки превращаются в деньги. В итоге 30-50% бюджета уходит на неэффективные каналы, а менеджеры по маркетингу не могут обосновать ROI своих действий."
-                businessValue="Для клиента: Полная прозрачность каждой потраченной копейки. Автоматический расчет стоимости лида (CPL) и стоимости привлечения клиента (CAC). Готовые отчеты для планирования бюджета на основе цифр, а не догадок."
-                monetization="Base tier: Базовые графики и KPI — включено. Pro tier: Расширенные отчеты, прогнозы на базе AI и экспорт данных — +$150/мес. Enterprise: Глубокая интеграция с внешними BI (Tableau, PowerBI) — +$400/мес."
-                roi="Оптимизация маркетингового бюджета: высвобождение 20-30% средств из нерабочих каналов. Рост общей прибыли на 15-25% за счет масштабирования эффективных связок. Окупаемость модуля — в первый же месяц."
-                example="Пример: Клиент тратил $5,000/мес на Google Ads и $5,000 на Facebook. ROI Analytics показал, что FB дает в 3 раза больше прибыли. Перенос бюджета в FB увеличил выручку с $30,000 до $55,000 при тех же затратах. Цена: $150. ROI: 16,500%."
-            />
+            <HeaderActions>
+                <Button variant="outline" className="rounded-[2rem]">
+                    <Share2 className="w-4 h-4 mr-2" />
+                    Share
+                </Button>
+                <Button className="rounded-[2rem]">
+                    <Download className="w-4 h-4 mr-2" />
+                    Download PDF Report
+                </Button>
+            </HeaderActions>
 
             <div className="flex items-center justify-between flex-wrap gap-4">
-                <h1 className="text-3xl font-display font-semibold text-text-primary dark:text-white">ROI Analytics</h1>
                 <div className="flex gap-2">
-                    <Button
-                        variant="outline"
-                        onClick={() => {
-                            // TODO: Implement export
-                            alert("Export to PDF/Excel - Coming soon!");
-                        }}
+                    {/* Primary actions moved to Header */}
+                    <Select
+                        defaultValue="6m"
+                        className="w-40 bg-black/5 dark:bg-dark-surface/50 rounded-[2rem]"
                     >
-                        <Download className="w-4 h-4 mr-2" />
-                        Export Report
-                    </Button>
-                    <Button onClick={() => setShowCustomReportModal(true)}>
-                        <FileText className="w-4 h-4 mr-2" />
-                        Generate Custom Report
-                    </Button>
+                        <option value="1m">Last 30 Days</option>
+                        <option value="6m">Last 6 Months</option>
+                        <option value="1y">Last Year</option>
+                    </Select>
                 </div>
             </div>
 
@@ -323,7 +313,7 @@ export default function ROIAnalyticsPage() {
                     </Button>
                 </div>
             </Modal>
-        </motion.div>
+        </div >
     );
 }
 

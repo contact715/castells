@@ -17,9 +17,12 @@ import {
   MoreHorizontal,
   ChevronDown,
   RefreshCw,
-  Flag
+  Flag,
+  Share2,
+  Download
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { HeaderActions } from "@/components/layout/HeaderActions";
 import { Card } from "@/components/ui/Card";
 import { Modal } from "@/components/ui/Modal";
 import { Input } from "@/components/ui/Input";
@@ -179,50 +182,14 @@ export default function TasksPage() {
   };
 
   return (
-    <div className="h-[calc(100vh-4rem)] flex flex-col bg-white dark:bg-[#191919]">
-      {/* Header / Toolbar */}
-      <div className="flex items-center justify-between p-4  dark:bg-white dark:bg-[#1E1E1E]">
-        <div className="flex items-center gap-4">
-          <div className="flex items-center gap-2">
-            <button className="p-2 hover:bg-gray-100 dark:hover:bg-black/5 dark:bg-white/10 rounded-[2rem] transition-colors">
-              <Filter className="w-4 h-4 text-gray-500" />
-            </button>
-            <span className="text-sm text-gray-500">Sort, group, section</span>
-          </div>
-
-          <div className="h-8 w-[1px] bg-gray-200 dark:bg-black/5 dark:bg-white/10 mx-2" />
-
-          {/* Filter Buttons */}
-          <div className="flex items-center gap-2">
-            <Button
-              size="sm"
-              className={`rounded-[2rem] ${filterType === "todo"
-                ? "bg-green-500 text-white"
-                : "bg-gray-100 dark:bg-black/5 dark:bg-white/10 text-gray-600 dark:text-gray-300"
-                }`}
-              onClick={() => setFilterType("todo")}
-            >
-              To-Do
-            </Button>
-            <Button
-              size="sm"
-              variant="ghost"
-              className={`rounded-[2rem] ${filterType === "routine"
-                ? "bg-coral text-white"
-                : "text-gray-500"
-                }`}
-              onClick={() => setFilterType("routine")}
-            >
-              Routine
-            </Button>
-          </div>
-        </div>
-
-        <div className="flex items-center gap-3">
+    <div className="flex flex-col h-full gap-8">
+      <HeaderActions>
+        <div className="flex items-center gap-2">
           <Button variant="outline" size="sm" className="rounded-[2rem]">
             Pipeline
           </Button>
           <Button variant="outline" size="sm" className="rounded-[2rem]">
+            <RefreshCw className="w-4 h-4 mr-2" />
             SYNC
           </Button>
           <Button
@@ -234,15 +201,54 @@ export default function TasksPage() {
             Add Task
           </Button>
         </div>
+      </HeaderActions>
+
+      {/* Toolbar */}
+      <div className="flex items-center justify-between p-4 lg:p-6 bg-surface dark:bg-dark-surface rounded-[2rem] shadow-sm">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2">
+            <button className="p-2 hover:bg-black/5 dark:hover:bg-white/5 rounded-[2rem] transition-colors">
+              <Filter className="w-4 h-4 text-gray-500" />
+            </button>
+            <span className="text-sm text-gray-500">Sort, group, section</span>
+          </div>
+
+          <div className="h-8 w-[1px] bg-black/10 dark:bg-white/10 mx-2" />
+
+          {/* Filter Buttons */}
+          <div className="flex items-center gap-2">
+            <Button
+              size="sm"
+              className={`rounded-[2rem] px-6 ${filterType === "todo"
+                ? "bg-green-500 text-white hover:bg-green-600"
+                : "bg-gray-100 dark:bg-white/5 text-gray-600 dark:text-gray-300"
+                }`}
+              onClick={() => setFilterType("todo")}
+            >
+              To-Do
+            </Button>
+            <Button
+              size="sm"
+              variant="ghost"
+              className={`rounded-[2rem] px-6 ${filterType === "routine"
+                ? "bg-coral text-white hover:bg-coral/90"
+                : "text-gray-500 hover:bg-black/5 dark:hover:bg-white/5"
+                }`}
+              onClick={() => setFilterType("routine")}
+            >
+              Routine
+            </Button>
+          </div>
+        </div>
       </div>
 
       {/* Tabs */}
-      <div className="flex justify-center  dark:bg-gray-50 dark:bg-[#1A1A1A]">
+      <div className="flex justify-center bg-surface dark:bg-dark-surface rounded-[2rem] shadow-sm overflow-hidden">
         <button
           onClick={() => setActiveTab("today")}
-          className={`px-8 py-4 text-sm font-medium transition-all -2 ${activeTab === "today"
-            ? "blue-500 text-bblue-600 dark:text-bblue-400"
-            : "ransparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+          className={`px-8 py-4 text-sm font-medium transition-all border-b-2 ${activeTab === "today"
+            ? "border-coral text-coral"
+            : "border-transparent text-text-secondary dark:text-white/70 hover:text-coral"
             }`}
         >
           <div className="text-xs uppercase tracking-wider mb-1">To-Do Today</div>
@@ -250,9 +256,9 @@ export default function TasksPage() {
         </button>
         <button
           onClick={() => setActiveTab("tomorrow")}
-          className={`px-8 py-4 text-sm font-medium transition-all -2 ${activeTab === "tomorrow"
-            ? "blue-500 text-bblue-600 dark:text-bblue-400"
-            : "ransparent text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+          className={`px-8 py-4 text-sm font-medium transition-all border-b-2 ${activeTab === "tomorrow"
+            ? "border-coral text-coral"
+            : "border-transparent text-text-secondary dark:text-white/70 hover:text-coral"
             }`}
         >
           <div className="text-xs uppercase tracking-wider mb-1">To-Do Tomorrow</div>
@@ -261,7 +267,7 @@ export default function TasksPage() {
       </div>
 
       {/* Task List */}
-      <div className="flex-1 overflow-y-auto p-6">
+      <div className="flex-1 overflow-y-auto px-6">
         <div className="max-w-4xl mx-auto space-y-3">
           <AnimatePresence>
             {displayTasks.length === 0 ? (
@@ -288,7 +294,7 @@ export default function TasksPage() {
                   exit={{ opacity: 0, x: -20 }}
                   transition={{ delay: index * 0.05 }}
                   onClick={() => handleTaskClick(task)}
-                  className="group bg-white dark:bg-[#2C2C2C] rounded-[2rem]  dark:p-4 hover:shadow-xl hover:/40 transition-all cursor-pointer"
+                  className="group bg-surface dark:bg-dark-surface rounded-[2rem] p-4 hover:shadow-xl hover:shadow-coral/10 transition-all cursor-pointer border border-transparent hover:border-coral/20"
                 >
                   <div className="flex items-start gap-4">
                     {/* Checkbox */}
@@ -340,7 +346,7 @@ export default function TasksPage() {
                           {task.dueTime}
                         </span>
                       )}
-                      <button className="p-1 opacity-0 group-hover:opacity-100 hover:bg-gray-100 dark:hover:bg-black/5 dark:bg-white/10 rounded-full transition-all">
+                      <button className="p-1 opacity-0 group-hover:opacity-100 hover:bg-black/5 dark:hover:bg-white/5 rounded-full transition-all">
                         <MoreHorizontal className="w-4 h-4 text-gray-400" />
                       </button>
                     </div>

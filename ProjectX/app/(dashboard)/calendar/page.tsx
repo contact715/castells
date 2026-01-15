@@ -1,44 +1,36 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Calendar as CalendarIcon, Clock, ChevronLeft, ChevronRight, Video, Phone } from "lucide-react";
+import { Calendar as CalendarIcon, Clock, ChevronLeft, ChevronRight, Video, Phone, Plus, RefreshCw } from "lucide-react";
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { ModuleDescription } from "@/components/dashboard/ModuleDescription";
+import { HeaderActions } from "@/components/layout/HeaderActions";
+import { Select } from "@/components/ui/Select";
 
 export default function CalendarPage() {
   const days = Array.from({ length: 35 }, (_, i) => i + 1); // Mock calendar grid days
 
   return (
-    <div className="h-[calc(100vh-8rem)] flex flex-col space-y-6">
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold font-display tracking-tight text-white flex items-center gap-3">
-            <CalendarIcon className="w-8 h-8 text-pink-500" />
-            Smart Schedule
-          </h1>
+    <div className="h-full flex flex-col gap-8">
+      <HeaderActions>
+        <div className="flex items-center gap-2 bg-black/5 dark:bg-dark-surface/50 rounded-[2rem] px-3 py-1 mr-2">
+          <Button variant="ghost" size="sm" className="h-8 w-8 p-0 rounded-full">
+            <ChevronLeft className="w-4 h-4" />
+          </Button>
+          <span className="text-sm font-bold text-white px-2">October 2024</span>
+          <Button variant="ghost" size="sm" className="h-8 w-8 p-0 rounded-full">
+            <ChevronRight className="w-4 h-4" />
+          </Button>
         </div>
-        <div className="flex items-center gap-4">
-          <div className="flex items-center bg-black/5 dark:bg-dark-surface/50 rounded-[2rem] p-1">
-            <Button variant="ghost" size="sm"><ChevronLeft className="w-4 h-4" /></Button>
-            <span className="px-4 text-white font-medium">Октябрь 2025</span>
-            <Button variant="ghost" size="sm"><ChevronRight className="w-4 h-4" /></Button>
-          </div>
-          <Button className="bg-pink-600 hover:bg-pink-500 text-white">Share Link</Button>
-        </div>
-      </div>
-
-      {/* Module Description */}
-      <ModuleDescription
-        moduleName="Smart Schedule"
-        icon={<CalendarIcon className="w-6 h-6" />}
-        shortDescription="Интеллектуальный календарь, который сам назначает встречи. Интегрируется с вашим Google или Outlook календарем, учитывает занятость мастеров и позволяет клиентам записываться на свободные слоты без звонков."
-        problem="Диспетчеры тратят до 2 часов в день на согласование времени визита с клиентами. Около 20% записей отменяются или переносятся из-за забывчивости клиентов. Пустые слоты в расписании — это прямые убытки компании."
-        businessValue="Для клиента: Сокращение 'телефонного пинг-понга'. Автоматические напоминания клиентам. Мастера видят свое расписание в реальном времени. Возможность внедрить онлайн-бронирование прямо на сайте."
-        monetization="Base tier: 1 календарь — включено. Pro tier: До 10 календарей, групповые записи, кастомная страница бронирования — +$50/мес. Enterprise: Безлимит, интеграция с внешними CRM — +$150/мес."
-        roi="Сокращение неявок (no-shows) на 40-50% за счет авто-напоминаний. Освобождение 10-15 часов в месяц работы диспетчера. Повышение загрузки мастеров на 15% за счет плотного графика."
-        example="Пример: Ссылка на Smart Schedule была добавлена в SMS-рассылку. За ночь 8 клиентов самостоятельно записались на сервисное обслуживание, заполнив календарь на следующий день без участия менеджера."
-      />
+        <Button variant="outline" className="rounded-[2rem]">
+          <RefreshCw className="w-4 h-4 mr-2" />
+          Sync
+        </Button>
+        <Button className="rounded-[2rem]">
+          <Plus className="w-4 h-4 mr-2" />
+          Add Appointment
+        </Button>
+      </HeaderActions>
 
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-4 gap-6 overflow-hidden">
         {/* Calendar Grid */}

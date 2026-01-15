@@ -22,7 +22,6 @@ import {
 import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { cn } from "@/lib/utils";
-import { ModuleDescription } from "@/components/dashboard/ModuleDescription";
 
 interface ModuleOption {
   id: string;
@@ -82,26 +81,10 @@ export default function BillingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-ivory dark:bg-[#111] p-4 lg:p-8 flex flex-col lg:flex-row gap-8">
+    <div className="flex flex-col lg:flex-row gap-8">
       {/* Main Content */}
-      <div className="flex-1 space-y-8 max-w-5xl">
-        <header>
-          <h1 className="text-3xl font-display font-bold text-text-primary dark:text-white mb-2">Billing</h1>
-          <p className="text-text-secondary dark:text-white/60">
-            Управляйте подпиской MOS Engine. Выбирайте тарифный план, подключайте модули и масштабируйте свой бизнес.
-          </p>
-        </header>
-
-        <ModuleDescription
-          moduleName="Billing & Subscription"
-          icon={<CreditCard className="w-6 h-6" />}
-          shortDescription="Удобное управление вашими инвестициями в автоматизацию. Конструктор тарифа позволяет гибко подключать только те модули, которые приносят вам прибыль прямо сейчас, и масштабировать количество рабочих мест по мере роста команды."
-          problem="Многие CRM принуждают платить за 'пакеты' функций, 70% из которых вы не используете. Сложность в расчете реальной стоимости владения софтом и отсутствие прозрачности в списаниях мешают финансовому планированию бизнеса."
-          businessValue="Для клиента: Гибкость и экономия: платите только за то, что работает. Прозрачный расчет ROI прямо в корзине. Возможность получить скидку до 35% при годовой подписке. Мгновенная активация модулей без участия поддержки."
-          monetization="Ваш индивидуальный тариф формируется из базовой стоимости места + стоимости выбранных модулей. С нашей системой 'Pay-as-you-grow' вы всегда контролируете свои расходы."
-          roi="Оптимизация затрат на софт: экономия до 40% по сравнению с фиксированными 'Enterprise' планами конкурентов. Прямая корреляция между стоимостью подписки и генерируемой выручкой (прозрачный ROI для каждой копейки)."
-          example="Пример: Вы начали с базового плана за $15. Увидев результат от Smart Forms, вы подключили их за $65. Это принесло вам +10 лидов в неделю. Вы платите $80, а зарабатываете на $5,000 больше. ROI конкретного решения очевиден."
-        />
+      <div className="flex-1 flex flex-col gap-8 max-w-5xl">
+        {/* Removed redundant header */}
 
         {/* Plan Selection */}
         <section className="space-y-4">
@@ -124,7 +107,7 @@ export default function BillingPage() {
                 className={cn(
                   "relative p-6 rounded-[2rem] text-left transition-all duration-300 bg-white dark:bg-[#1A1A1A]",
                   selectedPlan === plan.id
-                    ? " shadow-2xl shadow-coral/10 scale-[1.02] z-10"
+                    ? " scale-[1.02] z-10"
                     : "hover:/30"
                 )}
               >
@@ -226,7 +209,7 @@ export default function BillingPage() {
                   className={cn(
                     "relative p-3 rounded-[2rem] transition-all text-center",
                     period.id === p.id
-                      ? " bg-coral text-white shadow-lg shadow-coral/20"
+                      ? " bg-coral text-white"
                       : "hover:/20 text-text-secondary dark:text-white/60"
                   )}
                 >
@@ -249,7 +232,7 @@ export default function BillingPage() {
       {/* Checkout Sidebar */}
       <div className="w-full lg:w-[400px]">
         <div className="sticky top-8 space-y-4">
-          <Card className="p-8  shadow-2xl bg-white dark:bg-[#1A1A1A] overflow-hidden relative group/summary hover:shadow-coral/5 transition-all duration-500 rounded-[2rem]">
+          <Card className="p-8 bg-white dark:bg-[#1A1A1A] overflow-hidden relative group/summary transition-all duration-500 rounded-[2rem]">
             <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover/summary:opacity-10 transition-opacity">
               <CreditCard className="w-32 h-32 rotate-12" />
             </div>
@@ -314,7 +297,7 @@ export default function BillingPage() {
                 </div>
               </div>
 
-              <Button className="w-full bg-coral hover:bg-coral/90 text-white py-8 rounded-[2rem] shadow-2xl shadow-coral/30 font-bold text-lg group/btn overflow-hidden relative transition-all active:scale-[0.98]">
+              <Button className="w-full bg-coral hover:bg-coral/90 text-white py-8 rounded-[2rem] font-bold text-lg group/btn overflow-hidden relative transition-all active:scale-[0.98]">
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover/btn:translate-x-full transition-transform duration-1000" />
                 <span className="relative flex items-center justify-center gap-2">
                   Complete Checkout

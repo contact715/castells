@@ -3,14 +3,13 @@
 @tailwind utilities;
 
 
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap');
 @import url('https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,600,700,800,900&display=swap');
 
 @layer base {
   :root {
-    --font-outfit: "Outfit", var(--font-inter), sans-serif;
-    --font-satoshi: "Satoshi", var(--font-inter), sans-serif;
-    --accent: 224, 133, 118;
-    --accent-dark: 214, 112, 96;
+    --accent: #E08576;
+    --accent-dark: #D67060;
   }
 
   * {
@@ -19,15 +18,15 @@
     box-sizing: border-box;
   }
 
-  /* Smooth theme transition for all elements */
+  /* Smooth theme transition for all elements - 1:1 with Castells Studio */
   *,
   *::before,
   *::after {
     transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
       color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
       fill 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-      stroke 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-      backdrop-filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      stroke 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Disable transitions for elements that shouldn't animate */
@@ -43,7 +42,7 @@
   }
 
   .glass-panel {
-    @apply bg-white/70 dark:bg-dark-surface/80 backdrop-blur-md shadow-sm;
+    @apply bg-white/70 dark:bg-dark-surface/80 backdrop-blur-md shadow-sm border border-black/5 dark:border-white/5;
   }
 
   html,
@@ -53,12 +52,10 @@
   }
 
   body {
-    @apply bg-ivory text-text-primary font-sans;
+    @apply bg-ivory text-black dark:text-white font-sans;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     min-height: 100vh;
-    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-      color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   h1,
@@ -67,7 +64,7 @@
   h4,
   h5,
   h6 {
-    @apply font-display;
+    @apply font-display font-semibold;
   }
 
   .dark {
@@ -76,29 +73,17 @@
 
   /* Custom checkbox styling to match site theme */
   input[type="checkbox"] {
-    accent-color: rgb(var(--accent));
-  }
-
-  input[type="checkbox"]:checked {
-    background-color: rgb(var(--accent));
+    accent-color: var(--accent);
   }
 }
 
 @layer utilities {
-  .text-text-primary {
-    @apply text-black dark:text-white;
-  }
-
-  .text-text-secondary {
-    @apply text-[#555555] dark:text-[#CCCCCC];
-  }
-
   .bg-ivory {
-    @apply bg-[#EBECE7] dark:bg-dark-bg;
+    @apply bg-[#EBECE7] dark:bg-[#191919];
   }
 
   .bg-surface {
-    @apply bg-white dark:bg-dark-surface;
+    @apply bg-white dark:bg-[#2A2A2A];
   }
 
   .no-scrollbar::-webkit-scrollbar {
@@ -113,31 +98,27 @@
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 6px;
+  height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.05);
-}
-
-.dark ::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.2);
 }

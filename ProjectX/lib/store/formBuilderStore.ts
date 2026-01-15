@@ -22,6 +22,12 @@ export interface WelcomeScreen {
   incentiveText?: string; // e.g., "Get a $50 coupon after completion"
 }
 
+export interface QualitySettings {
+  addressAutocomplete: boolean;
+  voipFilter: boolean;
+  botDetection: boolean;
+}
+
 interface FormBuilderStore {
   formTitle: string;
   formFields: FormField[];
@@ -29,6 +35,7 @@ interface FormBuilderStore {
   backgroundImage: string | null;
   requireSMS: boolean;
   welcomeScreen: WelcomeScreen;
+  qualitySettings: QualitySettings;
   addField: (field: FormField) => void;
   removeField: (id: string) => void;
   updateField: (id: string, updates: Partial<FormField>) => void;
@@ -38,6 +45,7 @@ interface FormBuilderStore {
   setBackgroundImage: (image: string | null) => void;
   setRequireSMS: (require: boolean) => void;
   setWelcomeScreen: (screen: WelcomeScreen) => void;
+  setQualitySettings: (settings: Partial<QualitySettings>) => void;
   resetForm: () => void;
 }
 
@@ -52,6 +60,11 @@ export const useFormBuilderStore = create<FormBuilderStore>((set) => ({
     title: "Find Your Perfect Solution",
     description: "Answer a few questions to get a personalized quote in under 2 minutes.",
     buttonText: "Start Now"
+  },
+  qualitySettings: {
+    addressAutocomplete: false,
+    voipFilter: false,
+    botDetection: true,
   },
   addField: (field) =>
     set((state) => ({ formFields: [...state.formFields, field] })),
@@ -71,6 +84,10 @@ export const useFormBuilderStore = create<FormBuilderStore>((set) => ({
   setBackgroundImage: (image) => set({ backgroundImage: image }),
   setRequireSMS: (require) => set({ requireSMS: require }),
   setWelcomeScreen: (screen) => set({ welcomeScreen: screen }),
+  setQualitySettings: (settings) =>
+    set((state) => ({
+      qualitySettings: { ...state.qualitySettings, ...settings },
+    })),
   resetForm: () =>
     set({
       formTitle: "New Form",
@@ -83,6 +100,11 @@ export const useFormBuilderStore = create<FormBuilderStore>((set) => ({
         title: "Find Your Perfect Solution",
         description: "Answer a few questions to get a personalized quote in under 2 minutes.",
         buttonText: "Start Now"
+      },
+      qualitySettings: {
+        addressAutocomplete: false,
+        voipFilter: false,
+        botDetection: true,
       },
     }),
 }));
