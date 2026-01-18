@@ -101,9 +101,12 @@ const Hero: React.FC = () => {
     const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
     const [vimeoScriptLoaded, setVimeoScriptLoaded] = useState(false);
     const [currentVimeoId, setCurrentVimeoId] = useState('1101673750');
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [targetSyncTime, setTargetSyncTime] = useState<number | undefined>(undefined);
     const iframeRef = useRef<HTMLIFrameElement>(null);
     const videoContainerRef = useRef<HTMLDivElement>(null);
     const playerRef = useRef<any>(null);
+    const lastSyncTimeRef = useRef<number>(0);
 
     // Lazy load video when it enters viewport
     useEffect(() => {
@@ -118,7 +121,7 @@ const Hero: React.FC = () => {
                     }
                 });
             },
-            { rootMargin: '100px' } // Start loading 100px before entering viewport
+            { rootMargin: '100px' }
         );
 
         observer.observe(videoContainerRef.current);
@@ -128,11 +131,10 @@ const Hero: React.FC = () => {
         };
     }, [shouldLoadVideo]);
 
-    // Load Vimeo Player API script only when video is about to load
+    // Load Vimeo Player API script 
     useEffect(() => {
         if (!shouldLoadVideo || vimeoScriptLoaded) return;
 
-        // Check if script already exists
         if (document.querySelector('script[src="https://player.vimeo.com/api/player.js"]')) {
             setVimeoScriptLoaded(true);
             return;
@@ -157,21 +159,49 @@ const Hero: React.FC = () => {
             const player = new (window as any).Vimeo.Player(iframeRef.current);
             playerRef.current = player;
 
-            // Listen for play events to sync the background glow with the current video
             player.on('play', (data: any) => {
+                setIsPlaying(true);
                 if (data.id && data.id.toString() !== currentVimeoId) {
                     setCurrentVimeoId(data.id.toString());
                 }
+                player.getCurrentTime().then((time: number) => {
+                    setTargetSyncTime(time);
+                });
             });
 
-            // Fallback for load event
+            player.on('pause', () => {
+                setIsPlaying(false);
+            });
+
+            player.on('ended', () => {
+                setIsPlaying(false);
+            });
+
+            player.on('seeked', (data: any) => {
+                setTargetSyncTime(data.seconds);
+            });
+
+            const syncInterval = setInterval(() => {
+                if (playerRef.current && isPlaying) {
+                    playerRef.current.getCurrentTime().then((time: number) => {
+                        if (Math.abs(time - lastSyncTimeRef.current) > 0.3) {
+                            setTargetSyncTime(time);
+                            lastSyncTimeRef.current = time;
+                        }
+                    });
+                }
+            }, 2500);
+
             player.on('loaded', (data: any) => {
                 if (data.id && data.id.toString() !== currentVimeoId) {
                     setCurrentVimeoId(data.id.toString());
+                    setTargetSyncTime(0);
                 }
             });
+
+            return () => clearInterval(syncInterval);
         }
-    }, [shouldLoadVideo, vimeoScriptLoaded, currentVimeoId]);
+    }, [shouldLoadVideo, vimeoScriptLoaded, currentVimeoId, isPlaying]);
 
     const toggleMute = () => {
         if (playerRef.current) {
@@ -180,32 +210,15 @@ const Hero: React.FC = () => {
                 playerRef.current.setMuted(newMutedState);
                 setIsMuted(newMutedState);
             });
-        } else if (iframeRef.current && (window as any).Vimeo) {
-            const player = new (window as any).Vimeo.Player(iframeRef.current);
-            playerRef.current = player;
-            player.getMuted().then((muted: boolean) => {
-                const newMutedState = !muted;
-                player.setMuted(newMutedState);
-                setIsMuted(newMutedState);
-            });
-        } else {
-            // Fallback for when API is not available
-            setIsMuted(!isMuted);
-            if (iframeRef.current) {
-                const currentSrc = iframeRef.current.src;
-                const newSrc = isMuted
-                    ? currentSrc.replace('&muted=1', '&muted=0')
-                    : currentSrc.replace('&muted=0', '&muted=1');
-                iframeRef.current.src = newSrc;
-            }
         }
     };
 
     const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
     const videoId = '1101673750';
 
+
     return (
-        <div className="pt-16 md:pt-20 pb-0 relative overflow-hidden bg-transparent">
+        <div className="pt-16 md:pt-20 pb-0 relative z-[2] bg-transparent">
             <SchemaMarkup
                 type="VideoObject"
                 data={{
@@ -281,7 +294,7 @@ const Hero: React.FC = () => {
 
             {/* Video Section - Contained Width */}
             <div className="container mx-auto px-4 sm:px-6 pb-12 sm:pb-20" ref={videoContainerRef}>
-                <AmbiLight vimeoId={currentVimeoId} vimeoHash="7ccdfe1d0c" blur={80} intensity={0.65} spread={1.15} saturate={1.8} brightness={1.3} className="w-full aspect-video rounded-[1.5rem] sm:rounded-[2rem] overflow-visible">
+                <AmbiLight vimeoId={currentVimeoId} vimeoHash="7ccdfe1d0c" playing={isPlaying} syncTime={targetSyncTime} blur={80} intensity={0.65} spread={1.15} saturate={1.8} brightness={1.3} className="w-full aspect-video rounded-[1.5rem] sm:rounded-[2rem] overflow-visible">
                     <div className="relative w-full h-full rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-black">
                         {shouldLoadVideo ? (
                             <>

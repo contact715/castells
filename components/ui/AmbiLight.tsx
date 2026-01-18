@@ -12,6 +12,8 @@ interface AmbiLightProps {
     saturate?: number;
     brightness?: number;
     className?: string;
+    playing?: boolean;
+    syncTime?: number;
 }
 
 /**
@@ -30,14 +32,49 @@ export const AmbiLight: React.FC<AmbiLightProps> = ({
     saturate = 1.5,
     brightness = 1.2,
     className = "",
+    playing = true,
+    syncTime,
 }) => {
     const [isReady, setIsReady] = useState(false);
+    const prevVimeoIdRef = useRef<string | undefined>(vimeoId);
+    const iframeRef = useRef<HTMLIFrameElement>(null);
+    const bgPlayerRef = useRef<any>(null);
 
     useEffect(() => {
         // Small delay to ensure smooth entry
         const timer = setTimeout(() => setIsReady(true), 100);
         return () => clearTimeout(timer);
     }, []);
+
+    // Sync playback state and video ID with Vimeo Player API
+    useEffect(() => {
+        if (!iframeRef.current || !(window as any).Vimeo) return;
+
+        if (!bgPlayerRef.current) {
+            bgPlayerRef.current = new (window as any).Vimeo.Player(iframeRef.current);
+        }
+
+        const player = bgPlayerRef.current;
+
+        // If ID changed, use loadVideo instead of re-mounting iframe
+        if (vimeoId && vimeoId !== prevVimeoIdRef.current) {
+            player.loadVideo(vimeoId).catch(() => { });
+            prevVimeoIdRef.current = vimeoId;
+        }
+
+        if (playing) {
+            player.play().catch(() => { });
+        } else {
+            player.pause().catch(() => { });
+        }
+    }, [playing, vimeoId]);
+
+    // Precise timestamp synchronization
+    useEffect(() => {
+        if (syncTime !== undefined && bgPlayerRef.current) {
+            bgPlayerRef.current.setCurrentTime(syncTime).catch(() => { });
+        }
+    }, [syncTime]);
 
     const glowBaseStyles: React.CSSProperties = {
         position: "absolute",
@@ -59,8 +96,9 @@ export const AmbiLight: React.FC<AmbiLightProps> = ({
             // Important: Use responsive=1 and no controls for the background glow
             return (
                 <iframe
-                    key={`ambilight-${vimeoId}`}
-                    src={`https://player.vimeo.com/video/${vimeoId}?h=${vimeoHash || ''}&autoplay=1&muted=1&loop=1&controls=0&byline=0&title=0&portrait=0&badge=0&dnt=1&playsinline=1`}
+                    ref={iframeRef}
+                    key="ambilight-vimeo-frame"
+                    src={`https://player.vimeo.com/video/${vimeoId}?h=${vimeoHash || ''}&autoplay=${playing ? 1 : 0}&muted=1&loop=1&controls=0&byline=0&title=0&portrait=0&badge=0&dnt=1&playsinline=1`}
                     style={glowBaseStyles}
                     frameBorder="0"
                     allow="autoplay; fullscreen"

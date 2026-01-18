@@ -29,7 +29,7 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
   }, [onNavigate]);
 
   return (
-    <section id="work" className="bg-ivory relative">
+    <section id="work" className="bg-ivory relative z-[1]">
       <div className="container mx-auto px-6 pt-16 md:pt-20 pb-12">
 
         {/* Header - Sticky Left Column Layout (like FAQ) */}
