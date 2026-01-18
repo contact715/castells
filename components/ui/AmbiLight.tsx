@@ -71,10 +71,15 @@ export const AmbiLight: React.FC<AmbiLightProps> = ({
 
     // Precise timestamp synchronization
     useEffect(() => {
-        if (syncTime !== undefined && bgPlayerRef.current) {
-            bgPlayerRef.current.setCurrentTime(syncTime).catch(() => { });
+        if (syncTime !== undefined && bgPlayerRef.current && playing) {
+            bgPlayerRef.current.getCurrentTime().then((currentTime: number) => {
+                // Only seek if drift is detectable (> 100ms) to avoid stuttering
+                if (Math.abs(currentTime - syncTime) > 0.1) {
+                    bgPlayerRef.current.setCurrentTime(syncTime).catch(() => { });
+                }
+            });
         }
-    }, [syncTime]);
+    }, [syncTime, playing]);
 
     const glowBaseStyles: React.CSSProperties = {
         position: "absolute",

@@ -161,6 +161,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
               className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700 will-change-opacity"
               style={{ transform: 'translateZ(0)' }}
               preload="metadata"
+              {...({ fetchPriority: 'low' } as any)}
             >
               <source src={project.video} type="video/mp4" />
             </video>

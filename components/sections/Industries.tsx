@@ -6,15 +6,16 @@ import { cn } from '../../lib/utils';
 import { Section, SectionContainer } from '../ui/Section';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import OptimizedImage from '../ui/OptimizedImage';
+import { useWillChange } from '../ui/WillChangeManager';
 import { INDUSTRY_CATEGORIES, type IndustryCategoryId } from '../../data/industries';
 
 const Industries: React.FC = React.memo(() => {
   const [activeTab, setActiveTab] = useState<IndustryCategoryId>('construction');
-  
+
   const handleTabChange = useCallback((tab: IndustryCategoryId) => {
     setActiveTab(tab);
   }, []);
-  
+
   const activeCategoryItems = useMemo(() => {
     return INDUSTRY_CATEGORIES.find((c) => c.id === activeTab)?.items || [];
   }, [activeTab]);
@@ -65,6 +66,7 @@ const Industries: React.FC = React.memo(() => {
                       layoutId="activeIndustryTab"
                       className="absolute inset-0 bg-black dark:bg-white rounded-[2rem]"
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
+                      style={{ willChange: 'transform, opacity' }}
                     />
                   )}
                   <span className="relative z-10 flex items-center gap-2">
@@ -90,18 +92,19 @@ const Industries: React.FC = React.memo(() => {
                   exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
                   className="col-span-1"
+                  style={{ willChange: 'opacity, transform, scale' }}
                 >
                   <div className={cn(
                     "group relative rounded-[2rem] overflow-hidden h-full min-h-[200px] sm:min-h-[220px] cursor-pointer transition-all duration-500",
-                    isContactCard 
-                      ? "bg-surface hover: hover:-translate-y-1" 
+                    isContactCard
+                      ? "bg-surface hover: hover:-translate-y-1"
                       : "hover: hover:-translate-y-1"
                   )}>
                     {/* Background Image */}
                     {item.type === 'industry' && item.image && !isContactCard && (
                       <div className="absolute inset-0 overflow-hidden rounded-[2rem]">
-                        <OptimizedImage 
-                          src={item.image} 
+                        <OptimizedImage
+                          src={item.image}
                           alt={item.name}
                           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                           loading="lazy"
@@ -126,14 +129,14 @@ const Industries: React.FC = React.memo(() => {
                       )}>
                         <div className={cn(
                           "w-12 h-12 rounded-[2rem] flex items-center justify-center flex-shrink-0 transition-all duration-300",
-                          isContactCard 
-                            ? "bg-coral/10 group-hover:bg-black" 
+                          isContactCard
+                            ? "bg-coral/10 group-hover:bg-black"
                             : "bg-white/0 backdrop-blur-md  -white/10 group-hover:bg-white group-hover:-white/20"
                         )}>
                           <item.icon className={cn(
                             "w-5 h-5 transition-colors duration-300",
-                            isContactCard 
-                              ? "text-coral group-hover:text-white" 
+                            isContactCard
+                              ? "text-coral group-hover:text-white"
                               : "text-white/80 group-hover:text-black"
                           )} />
                         </div>
@@ -147,8 +150,8 @@ const Industries: React.FC = React.memo(() => {
                         {/* Title */}
                         <h3 className={cn(
                           "font-display font-semibold text-lg sm:text-xl mb-2 transition-colors duration-300",
-                          isContactCard 
-                            ? "text-text-primary" 
+                          isContactCard
+                            ? "text-text-primary"
                             : "text-white"
                         )}>
                           {item.name}

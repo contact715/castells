@@ -11,6 +11,7 @@ interface OptimizedImageProps {
   sizes?: string;
   srcSet?: string;
   blurDataURL?: string; // Base64 encoded blur placeholder
+  fetchPriority?: 'high' | 'low' | 'auto';
   onLoad?: () => void;
 }
 
@@ -30,6 +31,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   sizes,
   srcSet,
   blurDataURL,
+  fetchPriority = 'auto',
   onLoad,
 }) => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -56,7 +58,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
   const generateSrcSet = (baseSrc: string) => {
     if (srcSet) return srcSet;
     if (!width) return undefined;
-    
+
     // Generate srcset for common breakpoints
     const breakpoints = [400, 800, 1200, 1600];
     return breakpoints
@@ -65,13 +67,11 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
       .join(', ');
   };
 
-  const imageClasses = `transition-opacity duration-300 ${
-    isLoaded ? 'opacity-100' : 'opacity-0'
-  } ${className}`;
+  const imageClasses = `transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0'
+    } ${className}`;
 
-  const placeholderClasses = `absolute inset-0 transition-opacity duration-300 ${
-    isLoaded ? 'opacity-0' : 'opacity-100'
-  } ${className}`;
+  const placeholderClasses = `absolute inset-0 transition-opacity duration-300 ${isLoaded ? 'opacity-0' : 'opacity-100'
+    } ${className}`;
 
   // If WebP source is provided, use <picture> element
   if (webpSrc) {
@@ -87,10 +87,10 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
             style={{ filter: 'blur(20px)', transform: 'scale(1.1)' }}
           />
         )}
-        
+
         <picture>
-          <source 
-            srcSet={generateSrcSet(webpSrc) || webpSrc} 
+          <source
+            srcSet={generateSrcSet(webpSrc) || webpSrc}
             type="image/webp"
             sizes={sizes}
           />
@@ -109,7 +109,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
             onError={handleError}
           />
         </picture>
-        
+
         {hasError && (
           <div className="absolute inset-0 flex items-center justify-center bg-black/5 dark:bg-white/5">
             <span className="text-text-secondary text-sm">Failed to load image</span>
@@ -132,7 +132,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
           style={{ filter: 'blur(20px)', transform: 'scale(1.1)' }}
         />
       )}
-      
+
       <img
         ref={imgRef}
         src={src}
@@ -144,10 +144,11 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
         sizes={sizes}
         srcSet={generateSrcSet(src) || srcSet}
         decoding="async"
+        fetchPriority={fetchPriority}
         onLoad={handleLoad}
         onError={handleError}
       />
-      
+
       {hasError && (
         <div className="absolute inset-0 flex items-center justify-center bg-black/5 dark:bg-white/5">
           <span className="text-text-secondary text-sm">Failed to load image</span>

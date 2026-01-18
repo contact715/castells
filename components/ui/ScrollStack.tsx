@@ -1,5 +1,4 @@
-
-import React, { useRef, useEffect, useState, ReactNode } from 'react';
+import React, { useRef, useEffect, useState, ReactNode, useCallback } from 'react';
 import './ScrollStack.css';
 
 interface ScrollStackProps {
@@ -11,9 +10,9 @@ interface ScrollStackProps {
   blurAmount?: number; // How much to blur underlying cards
 }
 
-export const ScrollStackItem: React.FC<{ children: ReactNode; className?: string }> = ({ 
-  children, 
-  className = '' 
+export const ScrollStackItem: React.FC<{ children: ReactNode; className?: string }> = ({
+  children,
+  className = ''
 }) => {
   return (
     <div className={`scroll-stack-card ${className}`}>{children}</div>
@@ -29,10 +28,15 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [cards, setCards] = useState<HTMLElement[]>([]);
+  const cardOffsets = useRef<number[]>([]);
+  const ticking = useRef(false);
+  const rafId = useRef<number>(0);
+  const resizeTimeout = useRef<NodeJS.Timeout | null>(null);
+  const windowHeight = useRef(typeof window !== 'undefined' ? window.innerHeight : 800);
 
   useEffect(() => {
     if (!wrapperRef.current) return;
-    
+
     // Select only direct children cards
     const cardElements = Array.from(
       wrapperRef.current.querySelectorAll('.scroll-stack-card')
@@ -49,89 +53,84 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 
   }, [children, stackOffset]);
 
+  const calculateOffsets = useCallback(() => {
+    if (!wrapperRef.current) return;
+
+    cardOffsets.current = cards.map((card) => {
+      return card.offsetTop;
+    });
+  }, [cards]);
+
+  const updateCards = useCallback(() => {
+    if (!wrapperRef.current || cards.length === 0) {
+      ticking.current = false;
+      return;
+    }
+
+    if (windowHeight.current !== window.innerHeight) {
+      windowHeight.current = window.innerHeight;
+    }
+
+    const wrapperRect = wrapperRef.current.getBoundingClientRect();
+
+    cards.forEach((card, index) => {
+      const nextCard = cards[index + 1];
+      if (nextCard) {
+        const nextCardTopRelativeToViewport = wrapperRect.top + nextCard.offsetTop;
+        const nextTargetTop = stackOffset + ((index + 1) * 15);
+
+        const distance = Math.max(0, nextCardTopRelativeToViewport - nextTargetTop);
+        const range = windowHeight.current * 0.5;
+        const progress = Math.min(1, Math.max(0, distance / range));
+
+        const scale = 1 - ((1 - progress) * scaleFactor);
+        const blur = (1 - progress) * blurAmount;
+        const brightness = 1 - ((1 - progress) * 0.2);
+
+        card.style.transform = `scale(${scale}) translateZ(0)`;
+        card.style.filter = `blur(${blur}px) brightness(${brightness})`;
+      } else {
+        card.style.transform = 'scale(1) translateZ(0)';
+        card.style.filter = 'none';
+      }
+    });
+
+    ticking.current = false;
+  }, [cards, stackOffset, scaleFactor, blurAmount]);
+
   useEffect(() => {
-    let rafId: number;
-    let ticking = false;
-    let resizeTimeout: NodeJS.Timeout;
-    let windowHeight = window.innerHeight;
-
-    const updateCards = () => {
-      if (!wrapperRef.current || cards.length === 0) {
-        ticking = false;
-        return;
-      }
-
-      // Cache window height
-      if (windowHeight !== window.innerHeight) {
-        windowHeight = window.innerHeight;
-      }
-
-      cards.forEach((card, index) => {
-        const nextCard = cards[index + 1];
-        if (nextCard) {
-            const nextRect = nextCard.getBoundingClientRect();
-            const nextTargetTop = stackOffset + ((index + 1) * 15);
-            
-            // Distance of the next card from its sticking point
-            const distance = Math.max(0, nextRect.top - nextTargetTop);
-            
-            // Normalize distance: 0 = next card is stuck (fully covering current), 1 = next card is at bottom of screen
-            // We use a shorter range for the effect to complete quickly
-            const range = windowHeight * 0.5; // Effect happens over 50% of viewport height
-            const progress = Math.min(1, Math.max(0, distance / range));
-            
-            // When progress is 1 (next card far away), scale is 1.
-            // When progress is 0 (next card on top), scale is (1 - scaleFactor).
-            const scale = 1 - ((1 - progress) * scaleFactor);
-            const blur = (1 - progress) * blurAmount;
-            const brightness = 1 - ((1 - progress) * 0.2); // Darken slightly
-
-            // Use will-change for better performance
-            card.style.willChange = 'transform, filter';
-            card.style.transform = `scale(${scale}) translateZ(0)`;
-            card.style.filter = `blur(${blur}px) brightness(${brightness})`;
-        } else {
-            // Last card doesn't scale down
-            card.style.willChange = 'auto';
-            card.style.transform = 'scale(1) translateZ(0)';
-            card.style.filter = 'none';
-        }
-      });
-
-      ticking = false;
-    };
-
     const onScroll = () => {
-      if (!ticking) {
-        rafId = requestAnimationFrame(updateCards);
-        ticking = true;
+      if (!ticking.current) {
+        rafId.current = requestAnimationFrame(updateCards);
+        ticking.current = true;
       }
     };
 
     const onResize = () => {
-      // Throttle resize events
-      clearTimeout(resizeTimeout);
-      resizeTimeout = setTimeout(() => {
-        windowHeight = window.innerHeight;
+      if (resizeTimeout.current) clearTimeout(resizeTimeout.current);
+      resizeTimeout.current = setTimeout(() => {
+        windowHeight.current = window.innerHeight;
+        calculateOffsets();
         updateCards();
       }, 150);
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onResize, { passive: true });
-    
+
     // Initial call
+    calculateOffsets();
     updateCards();
 
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
-      clearTimeout(resizeTimeout);
-      if (rafId) {
-        cancelAnimationFrame(rafId);
+      if (resizeTimeout.current) clearTimeout(resizeTimeout.current);
+      if (rafId.current) {
+        cancelAnimationFrame(rafId.current);
       }
     };
-  }, [cards, stackOffset, scaleFactor, blurAmount]);
+  }, [calculateOffsets, updateCards]);
 
   return (
     <div ref={wrapperRef} className={`scroll-stack-wrapper ${className}`}>

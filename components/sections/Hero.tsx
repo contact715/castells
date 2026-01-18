@@ -166,6 +166,7 @@ const Hero: React.FC = () => {
                 }
                 player.getCurrentTime().then((time: number) => {
                     setTargetSyncTime(time);
+                    lastSyncTimeRef.current = time;
                 });
             });
 
@@ -179,18 +180,20 @@ const Hero: React.FC = () => {
 
             player.on('seeked', (data: any) => {
                 setTargetSyncTime(data.seconds);
+                lastSyncTimeRef.current = data.seconds;
             });
 
             const syncInterval = setInterval(() => {
                 if (playerRef.current && isPlaying) {
                     playerRef.current.getCurrentTime().then((time: number) => {
-                        if (Math.abs(time - lastSyncTimeRef.current) > 0.3) {
+                        // Tightened threshold to 0.15s and increased frequency to 500ms
+                        if (Math.abs(time - lastSyncTimeRef.current) > 0.15) {
                             setTargetSyncTime(time);
                             lastSyncTimeRef.current = time;
                         }
                     });
                 }
-            }, 2500);
+            }, 500);
 
             player.on('loaded', (data: any) => {
                 if (data.id && data.id.toString() !== currentVimeoId) {
@@ -328,7 +331,8 @@ const Hero: React.FC = () => {
                                     src={`https://vumbnail.com/${videoId}.jpg`}
                                     alt="Video preview"
                                     className="absolute inset-0 w-full h-full object-cover"
-                                    loading="lazy"
+                                    loading="eager"
+                                    fetchPriority="high"
                                     width={1920}
                                     height={1080}
                                 />
