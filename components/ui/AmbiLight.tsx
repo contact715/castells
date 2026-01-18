@@ -73,8 +73,8 @@ export const AmbiLight: React.FC<AmbiLightProps> = ({
     useEffect(() => {
         if (syncTime !== undefined && bgPlayerRef.current && playing) {
             bgPlayerRef.current.getCurrentTime().then((currentTime: number) => {
-                // Only seek if drift is detectable (> 100ms) to avoid stuttering
-                if (Math.abs(currentTime - syncTime) > 0.1) {
+                // Tightened threshold to 0.05s (50ms) to avoid visual jitter while staying ultra-responsive
+                if (Math.abs(currentTime - syncTime) > 0.05) {
                     bgPlayerRef.current.setCurrentTime(syncTime).catch(() => { });
                 }
             });

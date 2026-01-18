@@ -183,17 +183,14 @@ const Hero: React.FC = () => {
                 lastSyncTimeRef.current = data.seconds;
             });
 
-            const syncInterval = setInterval(() => {
-                if (playerRef.current && isPlaying) {
-                    playerRef.current.getCurrentTime().then((time: number) => {
-                        // Tightened threshold to 0.15s and increased frequency to 500ms
-                        if (Math.abs(time - lastSyncTimeRef.current) > 0.15) {
-                            setTargetSyncTime(time);
-                            lastSyncTimeRef.current = time;
-                        }
-                    });
+            player.on('timeupdate', (data: any) => {
+                const time = data.seconds;
+                // Tightened threshold to 0.05s (50ms) for high-precision sync
+                if (Math.abs(time - lastSyncTimeRef.current) > 0.05) {
+                    setTargetSyncTime(time);
+                    lastSyncTimeRef.current = time;
                 }
-            }, 500);
+            });
 
             player.on('loaded', (data: any) => {
                 if (data.id && data.id.toString() !== currentVimeoId) {
@@ -202,7 +199,14 @@ const Hero: React.FC = () => {
                 }
             });
 
-            return () => clearInterval(syncInterval);
+            return () => {
+                player.off('timeupdate');
+                player.off('play');
+                player.off('pause');
+                player.off('ended');
+                player.off('seeked');
+                player.off('loaded');
+            };
         }
     }, [shouldLoadVideo, vimeoScriptLoaded, currentVimeoId, isPlaying]);
 
