@@ -8,8 +8,8 @@
 
 @layer base {
   :root {
-    --accent: #E08576;
-    --accent-dark: #D67060;
+    --accent: #FF5722;
+    --accent-dark: #E64A19;
   }
 
   * {
@@ -22,11 +22,11 @@
   *,
   *::before,
   *::after {
-    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-      color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-      border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-      fill 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-      stroke 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      fill 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      stroke 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   /* Disable transitions for elements that shouldn't animate */
@@ -42,7 +42,7 @@
   }
 
   .glass-panel {
-    @apply bg-white/70 dark:bg-dark-surface/80 backdrop-blur-md shadow-sm border border-black/5 dark:border-white/5;
+    @apply bg-white/70 dark:bg-dark-surface/70 backdrop-blur-xl shadow-sm border border-white/20 dark:border-white/5;
   }
 
   html,
@@ -78,14 +78,6 @@
 }
 
 @layer utilities {
-  .bg-ivory {
-    @apply bg-[#EBECE7] dark:bg-[#191919];
-  }
-
-  .bg-surface {
-    @apply bg-white dark:bg-[#2A2A2A];
-  }
-
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }

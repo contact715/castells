@@ -19,20 +19,20 @@ export function Button({
 }: ButtonProps) {
     const variantClasses = {
         primary:
-            "bg-white text-black hover:bg-white/90 font-sans font-bold uppercase tracking-widest shadow-sm border border-black/5 dark:border-white/10",
+            "bg-white text-black hover:bg-white/90 font-sans font-medium shadow-sm border border-black/5 dark:border-white/10",
         secondary:
-            "bg-coral text-white hover:bg-coral-dark font-sans font-bold uppercase tracking-widest shadow-sm",
+            "bg-primary text-white hover:bg-primary/90 font-sans font-medium shadow-sm",
         outline:
-            "bg-transparent border border-black/10 dark:border-white/10 text-white hover:bg-white hover:text-black font-sans font-bold uppercase tracking-widest",
-        ghost: "text-white hover:bg-white/5 font-sans font-bold uppercase tracking-widest",
-        danger: "bg-red-600 text-white hover:bg-red-700 font-sans font-bold uppercase tracking-widest shadow-sm",
+            "bg-transparent border border-black/10 dark:border-white/10 text-text-primary dark:text-white hover:bg-black/5 dark:hover:bg-white/5 font-sans font-medium",
+        ghost: "text-text-primary dark:text-white hover:bg-black/5 dark:hover:bg-white/5 font-sans font-medium",
+        danger: "bg-red-600 text-white hover:bg-red-700 font-sans font-medium shadow-sm",
     };
 
     const sizeClasses = {
-        sm: "px-4 py-2 text-[10px] rounded-full",
-        md: "px-6 py-2.5 text-[11px] rounded-full",
-        lg: "px-8 py-3.5 text-[13px] rounded-full",
-        icon: "p-2 rounded-full aspect-square",
+        sm: "px-3 py-1.5 text-xs rounded-button",
+        md: "px-5 py-2 text-sm rounded-button",
+        lg: "px-8 py-3 text-base rounded-button",
+        icon: "p-2 rounded-button aspect-square",
     };
 
     return (

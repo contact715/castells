@@ -10,32 +10,44 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                ivory: '#EBECE7',
-                coral: '#E08576',
-                'coral-dark': '#D67060',
+                ivory: '#F4F5F5', // Platinum/Off-white
+                coral: '#FF5722', // Electric Orange
+                'coral-dark': '#E64A19',
                 surface: '#FFFFFF',
-                'text-primary': 'rgb(0, 0, 0)',
-                'text-secondary': 'rgb(85, 85, 85)',
+                primary: '#FF5722', // Semantic alias
+                secondary: '#212121', // Semantic alias
+
+                'text-primary': '#111111',
+                'text-secondary': '#666666',
                 glass: 'rgba(255, 255, 255, 0.7)',
                 'glass-border': 'rgba(255, 255, 255, 0.5)',
 
-                // Dark mode colors - Matching Castells Studio
-                'dark-bg': '#191919',
-                'dark-surface': '#2A2A2A',
-                'dark-glass': 'rgba(42, 42, 42, 0.8)',
-                'dark-glass-border': 'rgba(255, 255, 255, 0.05)',
+                // Dark mode colors - Mosco.ai Premium
+                'dark-bg': '#0A0A0A', // Deep Onyx
+                'dark-surface': '#161616', // Dark Slate
+                'dark-glass': 'rgba(22, 22, 22, 0.8)',
+                'dark-glass-border': 'rgba(255, 255, 255, 0.08)',
                 'dark-text-primary': '#FFFFFF',
-                'dark-text-secondary': '#A1A1A1',
+                'dark-text-secondary': '#A3A3A3',
             },
             fontFamily: {
-                display: ['Newsreader', 'serif'],
+                display: ['Satoshi', 'sans-serif'], // Unify display font
                 sans: ['Satoshi', 'sans-serif'],
             },
             borderRadius: {
-                '3xl': '2rem',
-                'card': '2rem',
-                'button': '2rem',
-                'input': '2rem',
+                none: '0',
+                sm: '0.25rem',   // 4px
+                DEFAULT: '0.25rem',
+                md: '0.5rem',    // 8px
+                lg: '0.75rem',   // 12px
+                xl: '1rem',      // 16px
+                '2xl': '1.5rem', // 24px
+                '3xl': '2rem',   // 32px (kept for legacy support if needed)
+
+                // Semantic components - Cloud/Soft Radius
+                'card': '2rem',    // 32px (Restored per user request)
+                'button': '2rem',  // 32px
+                'input': '2rem',   // 32px
             },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

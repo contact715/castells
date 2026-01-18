@@ -184,7 +184,7 @@ export default function SettingsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Sidebar Navigation */}
-        <div className="lg:col-span-1 space-y-2">
+        <div className="lg:col-span-1 space-y-2 bg-black/5 dark:bg-black/40 p-2 rounded-card border border-black/5 dark:border-white/5 h-fit">
           {[
             { id: "general", label: "General & Bio", icon: <Bot className="w-4 h-4" /> },
             { id: "scoring", label: "Scoring Weights", icon: <Sliders className="w-4 h-4" /> },
@@ -199,12 +199,13 @@ export default function SettingsPage() {
             { id: "playground", label: "AI Playground", icon: <Play className="w-4 h-4" /> },
             { id: "business_connections", label: "Business Connections", icon: <LayoutGrid className="w-4 h-4" /> },
           ].map((tab) => (
+
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`w-full text-left px-4 py-3 rounded-[2rem] flex items-center gap-3 transition-all ${activeTab === tab.id
-                ? "bg-coral/10 text-coral shadow-sm"
-                : "text-text-secondary hover:bg-black/5 dark:bg-dark-surface/50 hover:text-white"
+              className={`w-full text-left px-4 py-3 rounded-full flex items-center gap-3 transition-all text-xs font-medium ${activeTab === tab.id
+                ? "bg-black/5 dark:bg-white/10 text-primary dark:text-white shadow-sm"
+                : "text-text-secondary hover:bg-black/5 dark:hover:bg-white/5"
                 }`}
             >
               {tab.icon}
@@ -227,7 +228,7 @@ export default function SettingsPage() {
                   <label className="text-sm font-medium text-text-primary dark:text-white">Business Bio (AI Knowledge Base)</label>
                   <p className="text-xs text-text-secondary">This text authenticates your AI. Include hours, pricing, and history.</p>
                   <textarea
-                    className="w-full h-40 bg-bblack/20 rounded-[2rem] p-3 text-sm text-white focus:ring-1 focus:ring-bblue-500 outline-none resize-none"
+                    className="w-full h-40 bg-bblack/20 rounded-card p-3 text-sm text-white focus:ring-1 focus:ring-bblue-500 outline-none resize-none"
                     value={settings.business_bio}
                     onChange={(e) => setSettings({ ...settings, business_bio: e.target.value })}
                   />
@@ -554,7 +555,7 @@ export default function SettingsPage() {
                   <div className="grid grid-cols-2 gap-4">
                     <button
                       onClick={() => setTheme("light")}
-                      className={`p-4 rounded-[2rem] transition-all flex items-center justify-center gap-3 ${theme === "light"
+                      className={`p-4 rounded-card transition-all flex items-center justify-center gap-3 ${theme === "light"
                         ? " bg-white text-black"
                         : " bg-black/5 dark:bg-dark-surface/50 text-white/50 hover:bg-black/5 dark:bg-white/10"
                         }`}
@@ -567,7 +568,7 @@ export default function SettingsPage() {
 
                     <button
                       onClick={() => setTheme("dark")}
-                      className={`p-4 rounded-[2rem] transition-all flex items-center justify-center gap-3 ${theme === "dark"
+                      className={`p-4 rounded-card transition-all flex items-center justify-center gap-3 ${theme === "dark"
                         ? " bg-black text-white"
                         : " bg-black/5 dark:bg-dark-surface/50 text-white/50 hover:bg-black/5 dark:bg-white/10"
                         }`}
@@ -603,7 +604,7 @@ export default function SettingsPage() {
                         key={accent.id}
                         onClick={() => setAccentColor(accent.id as any)}
                         title={accent.label}
-                        className={`p-2 rounded-[1.5rem] transition-all flex items-center justify-center group relative ${accentColor === accent.id
+                        className={`p-2 rounded-xl transition-all flex items-center justify-center group relative ${accentColor === accent.id
                           ? " bg-white/5 ring-2 ring-offset-2 ring-offset-dark-surface/50 text-white scale-110"
                           : " bg-black/5 dark:bg-dark-surface/50 hover:bg-white/5 hover:scale-105"
                           }`}
@@ -641,37 +642,37 @@ export default function SettingsPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-xl px-4 mt-8">
                           <Button
                             onClick={() => { setSelectedProvider("Yelp"); setConnectionStep("authorizing"); }}
-                            className="bg-bblue-600 hover:bg-bblue-500 text-white rounded-[2rem] py-4 group"
+                            className="bg-bblue-600 hover:bg-bblue-500 text-white rounded-card py-4 group"
                           >
                             <Plus className="w-4 h-4 mr-2 group-hover:rotate-90 transition-transform" />
                             ADD YELP BIZ ACCOUNT
                           </Button>
                           <Button
                             onClick={() => { setSelectedProvider("Thumbtack"); setConnectionStep("authorizing"); }}
-                            className="bg-bblue-600 hover:bg-bblue-500 text-white rounded-[2rem] py-4 group"
+                            className="bg-bblue-600 hover:bg-bblue-500 text-white rounded-card py-4 group"
                           >
                             <Plus className="w-4 h-4 mr-2 group-hover:rotate-90 transition-transform" />
                             ADD THUMBTACK ACCOUNT
                           </Button>
-                          <Button variant="outline" className="rounded-[2rem] py-4 border-white/5 hover:bg-white/5 uppercase text-xs font-bold tracking-widest text-white/50">
+                          <Button variant="outline" className="rounded-card py-4 border-white/5 hover:bg-white/5 uppercase text-xs font-bold tracking-widest text-white/50">
                             <Chrome className="w-4 h-4 mr-2 text-[#4285F4]" />
                             Google My Business
                           </Button>
-                          <Button variant="outline" className="rounded-[2rem] py-4 border-white/5 hover:bg-white/5 uppercase text-xs font-bold tracking-widest text-white/50">
+                          <Button variant="outline" className="rounded-card py-4 border-white/5 hover:bg-white/5 uppercase text-xs font-bold tracking-widest text-white/50">
                             <Facebook className="w-4 h-4 mr-2 text-[#1877F2]" />
                             Meta (Facebook/IG)
                           </Button>
-                          <Button variant="outline" className="rounded-[2rem] py-4 border-white/5 hover:bg-white/5 uppercase text-xs font-bold tracking-widest text-white/50">
+                          <Button variant="outline" className="rounded-card py-4 border-white/5 hover:bg-white/5 uppercase text-xs font-bold tracking-widest text-white/50">
                             <MessageSquare className="w-4 h-4 mr-2 text-[#25D366]" />
                             WhatsApp Business
                           </Button>
-                          <Button variant="outline" className="rounded-[2rem] py-4 border-white/5 hover:bg-white/5 uppercase text-xs font-bold tracking-widest text-white/50">
+                          <Button variant="outline" className="rounded-card py-4 border-white/5 hover:bg-white/5 uppercase text-xs font-bold tracking-widest text-white/50">
                             <Share2 className="w-4 h-4 mr-2 text-[#0088cc]" />
                             Telegram Bot
                           </Button>
                         </div>
 
-                        <div className="mt-12 p-6 bg-black/5 dark:bg-dark-surface/50 rounded-[2rem] w-full max-w-md border border-white/5">
+                        <div className="mt-12 p-6 bg-black/5 dark:bg-dark-surface/50 rounded-card w-full max-w-md border border-white/5">
                           <h4 className="font-bold text-white mb-2 underline decoration-coral underline-offset-4">Need help?</h4>
                           <p className="text-sm text-text-secondary mb-4">
                             Don&apos;t want to set it up yourself? Just give us a call, and we&apos;ll set everything up for you in 5 minutes—completely free.
@@ -723,8 +724,8 @@ export default function SettingsPage() {
                         </p>
 
                         <div className="grid grid-cols-2 gap-4">
-                          <Button variant="outline" className="rounded-[2rem] h-12" onClick={() => setConnectionStep("selection")}>Cancel</Button>
-                          <Button className="bg-bblue-600 hover:bg-bblue-500 text-white rounded-[2rem] h-12" onClick={() => setConnectionStep("success")}>Allow</Button>
+                          <Button variant="outline" className="rounded-card h-12" onClick={() => setConnectionStep("selection")}>Cancel</Button>
+                          <Button className="bg-bblue-600 hover:bg-bblue-500 text-white rounded-card h-12" onClick={() => setConnectionStep("success")}>Allow</Button>
                         </div>
                       </Card>
                     </motion.div>
@@ -739,14 +740,14 @@ export default function SettingsPage() {
                     >
                       {/* Success Alerts */}
                       <div className="space-y-2">
-                        <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-[1rem] flex items-center justify-between">
+                        <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-xl flex items-center justify-between">
                           <div className="flex items-center gap-2 text-green-500 text-sm">
                             <CheckCircle className="w-4 h-4" />
                             <span>Processed 3 businesses: 3 successful, None failed</span>
                           </div>
                           <X className="w-4 h-4 text-green-500/50 cursor-pointer" />
                         </div>
-                        <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-[1rem] flex items-center justify-between">
+                        <div className="p-3 bg-green-500/10 border border-green-500/20 rounded-xl flex items-center justify-between">
                           <div className="flex items-center gap-2 text-green-500 text-sm font-medium">
                             <span>Business successfully connected: Dmitry Pro, HandyCleaning, Super Paint! 🥳</span>
                           </div>
@@ -787,7 +788,7 @@ export default function SettingsPage() {
                           {["DMITRY PRO", "HANDYCLEANING", "SUPER PAINT"].map((biz, i) => (
                             <div
                               key={i}
-                              className="group bg-surface dark:bg-dark-surface rounded-[2rem] p-4 transition-all cursor-pointer border border-white/10 hover:border-coral/40"
+                              className="group bg-surface dark:bg-dark-surface rounded-card p-4 transition-all cursor-pointer border border-white/10 hover:border-coral/40"
                             >
                               <div className="flex items-center gap-2 mb-4">
                                 <div className="w-2 h-2 rounded-full bg-gray-400" />

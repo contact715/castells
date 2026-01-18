@@ -164,16 +164,16 @@ export default function SmartFormsPage() {
           {/* Left Column: Form Settings & Fields */}
           <div className="lg:col-span-1 space-y-6">
             <Tabs defaultValue="fields" className="w-full">
-              <TabsList className="w-full grid grid-cols-2 mb-4 bg-black/5 dark:bg-white/10 p-1 rounded-[2rem]">
+              <TabsList className="w-full grid grid-cols-2 mb-4 bg-black/5 dark:bg-black/40 p-1 rounded-full border border-black/5 dark:border-white/5 shadow-sm">
                 <TabsTrigger
                   value="fields"
-                  className="rounded-[2rem] py-2 text-xs font-semibold transition-all data-[state=active]:bg-white data-[state=active]:text-black dark:data-[state=active]:bg-coral dark:data-[state=active]:text-white"
+                  className="rounded-full py-2 text-xs font-medium transition-all data-[state=active]:bg-white dark:data-[state=active]:bg-white/10 data-[state=active]:text-primary dark:data-[state=active]:text-white shadow-sm"
                 >
                   Builder
                 </TabsTrigger>
                 <TabsTrigger
                   value="settings"
-                  className="rounded-[2rem] py-2 text-xs font-semibold transition-all data-[state=active]:bg-white data-[state=active]:text-black dark:data-[state=active]:bg-coral dark:data-[state=active]:text-white"
+                  className="rounded-full py-2 text-xs font-medium transition-all data-[state=active]:bg-white dark:data-[state=active]:bg-white/10 data-[state=active]:text-primary dark:data-[state=active]:text-white shadow-sm"
                 >
                   Settings
                 </TabsTrigger>
@@ -444,10 +444,10 @@ export default function SmartFormsPage() {
             </Card>
           </div>
         </div>
-      </div>
+      </div >
 
       {/* Preview Modal */}
-      <Modal
+      < Modal
         isOpen={showPreview}
         onClose={() => {
           setShowPreview(false);
@@ -455,7 +455,8 @@ export default function SmartFormsPage() {
           setValidationError(null);
           setPreviewValues({});
           setCurrentStep(0);
-        }}
+        }
+        }
         className="bg-[#121212] p-0 overflow-hidden"
         size="lg"
       >
@@ -643,8 +644,8 @@ export default function SmartFormsPage() {
             </div>
           )}
         </div>
-      </Modal>
-    </div>
+      </Modal >
+    </div >
   );
 }
 

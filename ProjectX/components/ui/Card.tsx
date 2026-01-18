@@ -17,7 +17,7 @@ export function Card({ children, className, variant = "default" }: CardProps) {
     return (
         <div
             className={cn(
-                "rounded-[2rem] p-8 transition-all duration-300",
+                "rounded-card p-6 transition-all duration-300 border border-black/5 dark:border-white/5",
                 variantClasses[variant],
                 className
             )}

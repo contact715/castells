@@ -59,7 +59,7 @@ export default function VisionPage() {
     <div className="flex flex-col h-full gap-8">
       <HeaderActions>
         {!analyzing && (
-          <Button onClick={simulateAnalysis} className="rounded-[2rem]">
+          <Button onClick={simulateAnalysis} className="rounded-card">
             <Upload className="w-4 h-4 mr-2" />
             Analyze Site Photo
           </Button>
@@ -72,7 +72,7 @@ export default function VisionPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           className={`
-         rounded-[2rem] p-12 flex flex-col items-center justify-center text-center transition-all min-h-[400px]
+         rounded-card p-12 flex flex-col items-center justify-center text-center transition-all min-h-[400px]
         ${dragActive ? "blue-500 bg-bblue-500/10" : " bg-black/5 dark:bg-dark-surface/50 hover:"}
         ${analyzing ? "opacity-50 pointer-events-none" : ""}
       `}
@@ -111,7 +111,7 @@ export default function VisionPage() {
               animate={{ opacity: 1, x: 0 }}
               className="space-y-4"
             >
-              <div className="glass-panel p-6 rounded-[2rem] relative overflow-hidden">
+              <div className="glass-panel p-6 rounded-card relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-green-500 to-emerald-500" />
                 <h3 className="text-lg font-bold text-white mb-4 flex items-center">
                   <CheckCircle className="w-5 h-5 text-green-500 mr-2" />
@@ -136,7 +136,7 @@ export default function VisionPage() {
                     </div>
                   </div>
 
-                  <div className="p-4 bg-black/5 dark:bg-dark-surface/50 rounded-[2rem] mt-4">
+                  <div className="p-4 bg-black/5 dark:bg-dark-surface/50 rounded-card mt-4">
                     <label className="text-xs text-text-secondary uppercase font-medium">AI Repair Estimate</label>
                     <div className="text-3xl font-bold text-green-400 mt-1">{result.estimate}</div>
                     <p className="text-sm text-text-secondary mt-2">{result.recommendation}</p>
@@ -151,7 +151,7 @@ export default function VisionPage() {
           )}
 
           {!result && !analyzing && (
-            <div className="h-full flex items-center justify-center text-text-tertiary  rounded-[2rem]">
+            <div className="h-full flex items-center justify-center text-text-tertiary rounded-card">
               <p>Analysis results will appear here</p>
             </div>
           )}

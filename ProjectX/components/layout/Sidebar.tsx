@@ -177,10 +177,10 @@ export function Sidebar() {
             "p-4 lg:p-6 flex items-center shrink-0 transition-all duration-300",
             sidebarCollapsed ? "flex-col gap-3" : "justify-between"
           )}>
-            <div className={cn("flex items-center gap-2", sidebarCollapsed && "justify-center w-full")}>
-              <div className="w-8 h-8 bg-coral rounded-full flex items-center justify-center text-white text-base font-bold shrink-0">M</div>
+            <div className={cn("flex items-center gap-3", sidebarCollapsed && "justify-center w-full")}>
+              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white text-base font-bold shrink-0 shadow-sm shadow-primary/20">M</div>
               {!sidebarCollapsed && (
-                <h2 className="text-xl font-display font-bold text-coral whitespace-nowrap">
+                <h2 className="text-lg font-sans font-bold text-text-primary dark:text-white tracking-tight">
                   MOS Engine
                 </h2>
               )}
@@ -211,32 +211,32 @@ export function Sidebar() {
                     <Link
                       href={group.path}
                       className={cn(
-                        "flex items-center rounded-full transition-all duration-300 font-satoshi group mb-1",
-                        sidebarCollapsed ? "justify-center p-2.5 mx-auto w-10 h-10" : "gap-2.5 px-3 py-2",
+                        "flex items-center rounded-lg transition-all duration-200 font-sans group mb-0.5",
+                        sidebarCollapsed ? "justify-center p-2 mx-auto w-10 h-10" : "gap-3 px-3 py-2",
                         isActive
-                          ? "bg-coral text-white shadow-xl shadow-black/5"
-                          : "text-text-secondary dark:text-white/60 hover:text-coral hover:bg-black/5 dark:hover:bg-white/5"
+                          ? "bg-primary text-white shadow-md shadow-primary/20"
+                          : "text-text-secondary dark:text-white/60 hover:text-primary hover:bg-black/5 dark:hover:bg-white/5"
                       )}
                     >
-                      <Icon className={cn("w-4.5 h-4.5 shrink-0", isActive ? "text-white" : "group-hover:text-coral")} />
-                      {!sidebarCollapsed && <span className="font-bold text-[13px] uppercase tracking-widest whitespace-nowrap text-white">{group.label}</span>}
+                      <Icon className={cn("w-4 h-4 shrink-0", isActive ? "text-white" : "group-hover:text-primary")} />
+                      {!sidebarCollapsed && <span className="font-medium text-sm tracking-tight whitespace-nowrap">{group.label}</span>}
                     </Link>
                   ) : (
                     <button
                       onClick={() => handleGroupClick(group)}
                       className={cn(
-                        "w-full flex items-center rounded-full transition-all duration-300 font-satoshi group mb-1",
-                        sidebarCollapsed ? "justify-center p-2.5 mx-auto w-10 h-10" : "gap-2.5 px-3 py-2",
+                        "w-full flex items-center rounded-lg transition-all duration-200 font-sans group mb-0.5",
+                        sidebarCollapsed ? "justify-center p-2 mx-auto w-10 h-10" : "gap-3 px-3 py-2",
                         isActive && !isExpanded
-                          ? "bg-coral text-white shadow-xl shadow-black/5"
-                          : "text-text-secondary dark:text-white/60 hover:text-coral hover:bg-black/5 dark:hover:bg-white/5"
+                          ? "bg-primary text-white shadow-md shadow-primary/20"
+                          : "text-text-secondary dark:text-white/60 hover:text-primary hover:bg-black/5 dark:hover:bg-white/5"
                       )}
                     >
-                      <Icon className={cn("w-4.5 h-4.5 shrink-0", isActive ? "text-white" : "group-hover:text-coral")} />
+                      <Icon className={cn("w-4 h-4 shrink-0", isActive ? "text-white" : "group-hover:text-primary")} />
                       {!sidebarCollapsed && (
                         <div className="flex-1 flex items-center justify-between min-w-0">
-                          <span className="font-bold text-[13px] uppercase tracking-widest whitespace-nowrap text-white">{group.label}</span>
-                          {isExpanded ? <ChevronDown className="w-4 h-4 opacity-70" /> : <ChevronRight className="w-4 h-4 opacity-70" />}
+                          <span className="font-medium text-sm tracking-tight whitespace-nowrap">{group.label}</span>
+                          {isExpanded ? <ChevronDown className="w-3.5 h-3.5 opacity-70" /> : <ChevronRight className="w-3.5 h-3.5 opacity-70" />}
                         </div>
                       )}
                     </button>
@@ -257,10 +257,10 @@ export function Sidebar() {
                               key={item.path}
                               href={item.path}
                               className={cn(
-                                "flex items-center gap-2.5 px-4 py-2 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all duration-200",
+                                "flex items-center gap-2.5 px-4 py-2 rounded-lg text-xs font-medium tracking-tight transition-all duration-200",
                                 isItemActive(item.path)
-                                  ? "bg-coral/20 text-coral"
-                                  : "text-white/80 hover:text-coral hover:bg-white/10"
+                                  ? "bg-primary/10 text-primary"
+                                  : "text-white/70 hover:text-primary hover:bg-white/5"
                               )}
                             >
                               <item.icon className="w-3.5 h-3.5" />
@@ -281,35 +281,27 @@ export function Sidebar() {
           {/* Sidebar Footer */}
           <div className="p-4 border-t border-black/5 dark:border-white/5">
             <div className={cn(
-              "flex items-center rounded-card bg-black/5 dark:bg-dark-surface/50 border border-black/5 dark:border-white/5 transition-all duration-300 overflow-hidden",
+              "flex items-center rounded-xl bg-black/5 dark:bg-dark-surface/50 border border-black/5 dark:border-white/5 transition-all duration-300 overflow-hidden",
               sidebarCollapsed ? "justify-center w-11 h-11 mx-auto" : "w-full"
             )}>
               {!sidebarCollapsed ? (
                 <div className="flex w-full divide-x divide-black/5 dark:divide-white/5">
                   <div className="flex-[7.5] flex items-center gap-2 p-2 min-w-0">
-                    <div className="w-7 h-7 rounded-full bg-coral/20 flex items-center justify-center text-coral font-bold shrink-0 text-[11px] border border-black/5 dark:border-white/5">
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold shrink-0 text-xs border border-white/5">
                       JD
                     </div>
                     <div className="min-w-0 text-left">
-                      <p className="text-[12px] font-bold text-white truncate">John Doe</p>
-                      {/* AIInsights section - assuming 'insight' is defined elsewhere or this is a placeholder */}
-                      {/* For demonstration, let's assume a dummy insight */}
-                      {/* <div
-                            key={index} // 'index' would need to be defined if this were in a map
-                            className="p-4 rounded-card bg-white/5 border border-white/10 hover:bg-coral/10 transition-colors"
-                        >
-                            <p className="text-sm font-sans text-white leading-relaxed font-medium">AI Insight: Your usage is up 15% this month.</p>
-                        </div> */}
-                      <p className="text-[10px] text-white/60 truncate">Admin Profile</p>
+                      <p className="text-xs font-bold text-white truncate">John Doe</p>
+                      <p className="text-[10px] text-white/50 truncate">Admin Profile</p>
                     </div>
                   </div>
                   <button className="flex-[2.5] flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/5 transition-colors relative">
                     <Bell className="w-4 h-4 text-white/70" />
-                    <span className="absolute top-2.5 right-3 w-1.5 h-1.5 bg-coral rounded-full"></span>
+                    <span className="absolute top-3 right-3.5 w-1.5 h-1.5 bg-primary rounded-full"></span>
                   </button>
                 </div>
               ) : (
-                <div className="w-8 h-8 rounded-full bg-coral/20 flex items-center justify-center text-coral font-bold shrink-0 text-sm border border-black/5 dark:border-white/5">
+                <div className="w-8 h-8 rounded-lg bg-primary/20 flex items-center justify-center text-primary font-bold shrink-0 text-xs border border-white/5">
                   JD
                 </div>
               )}
@@ -335,10 +327,10 @@ export function Sidebar() {
               <motion.div
                 initial={{ opacity: 0, x: -10 }}
                 animate={{ opacity: 1, x: 0 }}
-                className="bg-surface dark:bg-dark-surface rounded-card shadow-lg p-2 border border-black/10 dark:border-white/10 overflow-hidden"
+                className="bg-surface dark:bg-dark-surface rounded-xl shadow-xl p-2 border border-black/10 dark:border-white/10 overflow-hidden"
               >
-                <div className="px-4 py-2 mb-1">
-                  <span className="text-xs font-bold text-text-secondary dark:text-white/40 uppercase tracking-widest">
+                <div className="px-3 py-2 mb-1 border-b border-black/5 dark:border-white/5">
+                  <span className="text-xs font-bold text-text-secondary dark:text-white/40 uppercase tracking-wider">
                     {sidebarConfig.find(g => g.id === hoveredGroup)?.label}
                   </span>
                 </div>
@@ -347,10 +339,10 @@ export function Sidebar() {
                     key={item.path}
                     href={item.path}
                     className={cn(
-                      "flex items-center gap-3 px-4 py-2.5 rounded-full text-[11px] font-bold uppercase tracking-widest transition-all duration-200 mb-1",
+                      "flex items-center gap-3 px-3 py-2 rounded-lg text-xs font-medium tracking-tight transition-all duration-200 mb-0.5",
                       isItemActive(item.path)
-                        ? "bg-coral/10 text-coral"
-                        : "text-text-secondary dark:text-white/40 hover:bg-black/5 dark:hover:bg-white/5 hover:text-coral"
+                        ? "bg-primary/10 text-primary"
+                        : "text-text-secondary dark:text-white/60 hover:bg-black/5 dark:hover:bg-white/5 hover:text-primary"
                     )}
                   >
                     <item.icon className="w-4 h-4" />

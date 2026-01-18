@@ -64,7 +64,7 @@ export default function ConversationsPage() {
             {/* Three-Column Layout */}
             <div className="grid grid-cols-12 gap-8 h-full">
                 {/* Left: Conversation List */}
-                <div className="col-span-3 rounded-[2rem] overflow-hidden shadow-xl bg-dark-surface">
+                <div className="col-span-3 rounded-card overflow-hidden shadow-xl bg-dark-bg">
                     <ConversationList
                         conversations={conversations}
                         activeConversationId={activeConversationId}
@@ -73,7 +73,7 @@ export default function ConversationsPage() {
                 </div>
 
                 {/* Center: Message Thread */}
-                <div className="col-span-6 rounded-[2rem] overflow-hidden shadow-xl bg-dark-surface flex flex-col">
+                <div className="col-span-6 rounded-card overflow-hidden shadow-xl bg-dark-bg flex flex-col">
                     {activeConversation ? (
                         <>
                             {/* Thread Header */}
@@ -105,7 +105,7 @@ export default function ConversationsPage() {
                 </div>
 
                 {/* Right: Lead Details */}
-                <div className="col-span-3 rounded-[2rem] overflow-hidden shadow-xl bg-dark-surface">
+                <div className="col-span-3 rounded-card overflow-hidden shadow-xl bg-dark-bg">
                     {activeConversation ? (
                         <LeadDetailsPanel
                             leadDetails={activeConversation.leadDetails}

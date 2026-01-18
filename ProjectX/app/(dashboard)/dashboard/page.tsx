@@ -7,15 +7,15 @@ import { Card } from "@/components/ui/Card";
 
 const LeadFunnel = dynamic(() => import("@/components/dashboard/LeadFunnel").then(mod => mod.LeadFunnel), {
     ssr: false,
-    loading: () => <div className="h-[200px] w-full animate-pulse bg-white/5 rounded-3xl" />
+    loading: () => <div className="h-[200px] w-full animate-pulse bg-white/5 rounded-card" />
 });
 const RevenueChart = dynamic(() => import("@/components/dashboard/RevenueChart").then(mod => mod.RevenueChart), {
     ssr: false,
-    loading: () => <div className="h-[200px] w-full animate-pulse bg-white/5 rounded-3xl" />
+    loading: () => <div className="h-[200px] w-full animate-pulse bg-white/5 rounded-card" />
 });
 const GeoHeatmap = dynamic(() => import("@/components/dashboard/GeoHeatmap").then(mod => mod.GeoHeatmap), {
     ssr: false,
-    loading: () => <div className="h-[200px] w-full animate-pulse bg-white/5 rounded-3xl" />
+    loading: () => <div className="h-[200px] w-full animate-pulse bg-white/5 rounded-card" />
 });
 
 import {
@@ -52,7 +52,7 @@ const InfoTooltip = ({ content }: { content: { what: string, how: string, from: 
                         initial={{ opacity: 0, scale: 0.95, y: 10 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                        className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-[260px] bg-[#1A1F2B] border border-white/10 rounded-2xl p-4 shadow-2xl z-50 backdrop-blur-xl pointer-events-none"
+                        className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 w-[260px] bg-[#1A1F2B] border border-white/10 rounded-card p-4 shadow-2xl z-50 backdrop-blur-xl pointer-events-none"
                     >
                         <div className="space-y-3">
                             <div>
@@ -233,7 +233,7 @@ export default function DashboardPage() {
             {/* STRATEGIC DOMINANCE LAYER */}
             <MagicBento className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
                 {strategicMetrics.map((m, i) => (
-                    <ParticleCard key={i} className="bg-[#11141D] p-4 lg:p-5 rounded-2xl border border-white/10 group relative overflow-hidden magic-bento-card">
+                    <ParticleCard key={i} className="bg-[#11141D] p-4 lg:p-5 rounded-card border border-white/10 group relative overflow-hidden magic-bento-card">
                         <div className="absolute -right-2 -top-2 p-4 text-white/5">
                             {m.icon}
                         </div>
@@ -253,7 +253,7 @@ export default function DashboardPage() {
             {/* IMPACT & EFFICIENCY */}
             <MagicBento className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {impactMetrics.map((m, i) => (
-                    <ParticleCard key={i} className="bg-coral/[0.03] p-5 rounded-2xl border border-coral/20 relative overflow-hidden group magic-bento-card">
+                    <ParticleCard key={i} className="bg-coral/[0.03] p-5 rounded-card border border-coral/20 relative overflow-hidden group magic-bento-card">
                         <div className="absolute left-0 top-0 h-full w-0.5 bg-coral" />
                         <div className="flex items-center justify-between mb-2">
                             <div className="flex items-center gap-3">
@@ -273,7 +273,7 @@ export default function DashboardPage() {
             {/* TECHNICAL MODULE PERFORMANCE MATRIX */}
             <MagicBento className="grid grid-cols-1 xl:grid-cols-5 gap-4 mt-2">
                 {modules.map((mod, i) => (
-                    <ParticleCard key={i} className="bg-[#11141D] p-5 rounded-2xl border border-white/10 hover:bg-white/[0.02] transition-all magic-bento-card">
+                    <ParticleCard key={i} className="bg-[#11141D] p-5 rounded-card border border-white/10 hover:bg-white/[0.02] transition-all magic-bento-card">
                         <ModuleHeader title={mod.name} icon={mod.icon} efficiency={mod.efficiency} />
                         <div className="space-y-4 pt-1">
                             {mod.stats.map((s, idx) => (

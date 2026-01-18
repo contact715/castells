@@ -30,7 +30,7 @@ export default function AIChatPage() {
         <div className="flex flex-col h-full gap-8">
             <HeaderActions>
                 <div className="flex items-center justify-between w-full">
-                    <div className="flex items-center gap-4 bg-white/5 border border-white/5 rounded-[2rem] px-4 py-2 w-96 group focus-within:border-coral/50 transition-all">
+                    <div className="flex items-center gap-4 bg-white/5 border border-white/5 rounded-card px-4 py-2 w-96 group focus-within:border-coral/50 transition-all">
                         <Search className="w-5 h-5 text-white/30 group-focus-within:text-coral transition-colors" />
                         <input
                             type="text"
@@ -47,17 +47,18 @@ export default function AIChatPage() {
 
             <div className="flex-1 overflow-hidden flex flex-col gap-6">
                 {/* Navigation Breadcrumbs/Tabs */}
-                <div className="flex items-center gap-2 text-sm">
+                {/* Navigation Breadcrumbs/Tabs */}
+                <div className="flex items-center gap-2 text-sm bg-black/5 dark:bg-black/40 p-1 rounded-full w-fit border border-black/5 dark:border-white/5 shadow-sm">
                     <button
                         onClick={() => setView("instances")}
-                        className={`px-4 py-2 rounded-[2rem] transition-all text-[10px] font-bold tracking-widest uppercase ${view === "instances" ? "bg-white/10 text-white font-bold" : "text-white/40 hover:text-white/60"}`}
+                        className={`px-6 py-2.5 rounded-full transition-all text-xs font-medium ${view === "instances" ? "bg-white dark:bg-white/10 text-primary dark:text-white shadow-sm" : "text-text-secondary dark:text-white/40 hover:text-primary dark:hover:text-white"}`}
                     >
                         CHATBOT INSTANCES
                     </button>
                     {view !== "instances" && (
                         <>
-                            <span className="text-white/20">/</span>
-                            <span className="px-4 py-2 rounded-[2rem] bg-coral/10 text-coral font-bold flex items-center gap-2 capitalize text-xs tracking-tight">
+                            <span className="text-text-secondary/20 px-1">/</span>
+                            <span className="px-6 py-2.5 rounded-full bg-white dark:bg-white/10 text-primary dark:text-white font-medium flex items-center gap-2 capitalize text-xs tracking-tight shadow-sm">
                                 {view === "transcripts" ? <History className="w-4 h-4" /> : <Sliders className="w-4 h-4" />}
                                 {selectedBot} {view}
                             </span>

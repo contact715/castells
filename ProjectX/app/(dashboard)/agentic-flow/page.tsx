@@ -46,16 +46,16 @@ export default function AgenticFlowPage() {
       </HeaderActions>
 
       <Tabs defaultValue="builder" className="w-full flex-1 flex flex-col gap-6" onValueChange={setActiveTab}>
-        <TabsList className="bg-black/20 dark:bg-white/5 p-1 rounded-2xl w-fit border border-white/5">
-          <TabsTrigger value="builder" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-purple-600 data-[state=active]:text-white">
+        <TabsList className="bg-black/5 dark:bg-black/40 p-1 rounded-full w-fit border border-black/5 dark:border-white/5 shrink-0 shadow-sm">
+          <TabsTrigger value="builder" className="rounded-full px-6 py-2.5 text-xs font-medium data-[state=active]:bg-white dark:data-[state=active]:bg-white/10 data-[state=active]:text-primary dark:data-[state=active]:text-white shadow-sm transition-all">
             <Zap className="w-4 h-4 mr-2" />
             Workflow Builder
           </TabsTrigger>
-          <TabsTrigger value="team" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-purple-600 data-[state=active]:text-white">
+          <TabsTrigger value="team" className="rounded-full px-6 py-2.5 text-xs font-medium data-[state=active]:bg-white dark:data-[state=active]:bg-white/10 data-[state=active]:text-primary dark:data-[state=active]:text-white shadow-sm transition-all">
             <Users className="w-4 h-4 mr-2" />
             Sales Team
           </TabsTrigger>
-          <TabsTrigger value="analytics" className="rounded-xl px-6 py-2.5 data-[state=active]:bg-purple-600 data-[state=active]:text-white">
+          <TabsTrigger value="analytics" className="rounded-full px-6 py-2.5 text-xs font-medium data-[state=active]:bg-white dark:data-[state=active]:bg-white/10 data-[state=active]:text-primary dark:data-[state=active]:text-white shadow-sm transition-all">
             <BarChart3 className="w-4 h-4 mr-2" />
             Target Hunter Stats
           </TabsTrigger>
@@ -109,9 +109,9 @@ export default function AgenticFlowPage() {
                 </h3>
 
                 <Tabs defaultValue="sms" className="w-full">
-                  <TabsList className="w-full bg-white/5 rounded-xl border border-white/5 p-1 mb-6">
-                    <TabsTrigger value="sms" className="flex-1 text-xs py-2 rounded-lg">SMS Hook</TabsTrigger>
-                    <TabsTrigger value="call" className="flex-1 text-xs py-2 rounded-lg">Call Logic</TabsTrigger>
+                  <TabsList className="w-full bg-black/5 dark:bg-black/40 rounded-full border border-black/5 dark:border-white/5 p-1 mb-6 shadow-sm">
+                    <TabsTrigger value="sms" className="flex-1 text-xs py-2 rounded-full font-medium data-[state=active]:bg-white dark:data-[state=active]:bg-white/10 data-[state=active]:text-primary dark:data-[state=active]:text-white shadow-sm transition-all">SMS Hook</TabsTrigger>
+                    <TabsTrigger value="call" className="flex-1 text-xs py-2 rounded-full font-medium data-[state=active]:bg-white dark:data-[state=active]:bg-white/10 data-[state=active]:text-primary dark:data-[state=active]:text-white shadow-sm transition-all">Call Logic</TabsTrigger>
                   </TabsList>
 
                   <TabsContent value="sms" className="space-y-4">

@@ -10,23 +10,23 @@ import { motion } from "framer-motion";
 export function Header() {
     return (
         <header
-            className="bg-surface dark:bg-dark-surface p-4 lg:py-3 lg:px-6 rounded-card sticky top-0 md:static z-40 border border-black/5 dark:border-white/5"
+            className="glass-panel px-6 py-4 sticky top-0 z-40 border-b border-black/5 dark:border-white/5"
         >
             <div className="flex items-center justify-between">
                 <div className="flex items-center gap-8">
                     <motion.h1
-                        className="text-2xl font-display font-bold text-text-primary dark:text-white tracking-tight"
+                        className="text-xl font-sans font-bold text-text-primary dark:text-white tracking-tight hidden md:block" // Hidden because Sidebar has title
                         whileHover={{ scale: 1.02, x: 5 }}
                         transition={{ duration: 0.2 }}
                     >
                         M.O.S. Engine
                     </motion.h1>
                     <div className="hidden md:flex items-center gap-2 relative">
-                        <Search className="absolute left-4 w-3.5 h-3.5 text-text-secondary dark:text-white/40" />
+                        <Search className="absolute left-4 w-4 h-4 text-text-secondary dark:text-white/40" />
                         <Input
                             type="text"
-                            placeholder="Search systems..."
-                            className="pl-11 w-80 bg-black/5 dark:bg-white/5 rounded-full border border-black/5 dark:border-white/5 h-10 text-xs font-medium"
+                            placeholder="Search systems..." // Placeholder style already handled in Input component
+                            className="pl-11 w-96 h-11 bg-black/5 dark:bg-white/5 rounded-input border-transparent focus:border-primary/20"
                         />
                     </div>
                 </div>

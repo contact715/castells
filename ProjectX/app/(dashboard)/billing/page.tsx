@@ -105,7 +105,7 @@ export default function BillingPage() {
                 key={plan.id}
                 onClick={() => setSelectedPlan(plan.id as any)}
                 className={cn(
-                  "relative p-6 rounded-[2rem] text-left transition-all duration-300 bg-white dark:bg-[#1A1A1A]",
+                  "relative p-6 rounded-card text-left transition-all duration-300 bg-white dark:bg-[#1A1A1A]",
                   selectedPlan === plan.id
                     ? " scale-[1.02] z-10"
                     : "hover:/30"
@@ -143,7 +143,7 @@ export default function BillingPage() {
                 key={mod.id}
                 onClick={() => toggleModule(mod.id)}
                 className={cn(
-                  "p-4 rounded-[2rem] text-left transition-all bg-white dark:bg-[#1A1A1A] group",
+                  "p-4 rounded-card text-left transition-all bg-white dark:bg-[#1A1A1A] group",
                   selectedModules.includes(mod.id)
                     ? " bg-coral/5"
                     : "hover:/20"
@@ -172,7 +172,7 @@ export default function BillingPage() {
         {/* Seats & Subscription */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Seats */}
-          <section className="bg-white dark:bg-[#1A1A1A] p-6 rounded-[2rem] ">
+          <section className="bg-white dark:bg-[#1A1A1A] p-6 rounded-card ">
             <h2 className="text-lg font-bold text-text-primary dark:text-white mb-4">Number of seats</h2>
             <div className="flex items-center gap-6">
               <div className="flex items-center gap-4 bg-ivory dark:bg-bblack/20 p-2 rounded-[2rem] ">
@@ -199,25 +199,25 @@ export default function BillingPage() {
           </section>
 
           {/* Period */}
-          <section className="bg-white dark:bg-[#1A1A1A] p-6 rounded-[2rem] ">
+          <section className="bg-white dark:bg-[#1A1A1A] p-6 rounded-card">
             <h2 className="text-lg font-bold text-text-primary dark:text-white mb-4">Subscription period</h2>
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 bg-black/5 dark:bg-black/40 p-1 rounded-full border border-black/5 dark:border-white/5 shadow-sm">
               {PERIOD_DISCOUNTS.map((p) => (
                 <button
                   key={p.id}
                   onClick={() => setPeriod(p)}
                   className={cn(
-                    "relative p-3 rounded-[2rem] transition-all text-center",
+                    "relative py-3 px-2 rounded-full transition-all text-center flex flex-col items-center justify-center",
                     period.id === p.id
-                      ? " bg-coral text-white"
-                      : "hover:/20 text-text-secondary dark:text-white/60"
+                      ? "bg-white dark:bg-white/10 text-primary dark:text-white shadow-sm"
+                      : "text-text-secondary dark:text-white/60 hover:text-primary dark:hover:text-white"
                   )}
                 >
-                  <div className="text-xs font-bold">{p.label}</div>
+                  <div className="text-xs font-medium">{p.label}</div>
                   {p.tag && (
                     <div className={cn(
-                      "mt-1 text-[9px] uppercase tracking-tighter font-bold",
-                      period.id === p.id ? "text-white/80" : "text-coral"
+                      "text-[9px] uppercase tracking-tighter font-bold mt-0.5",
+                      period.id === p.id ? "text-primary dark:text-white" : "text-coral"
                     )}>
                       {p.tag}
                     </div>
@@ -232,7 +232,7 @@ export default function BillingPage() {
       {/* Checkout Sidebar */}
       <div className="w-full lg:w-[400px]">
         <div className="sticky top-8 space-y-4">
-          <Card className="p-8 bg-white dark:bg-[#1A1A1A] overflow-hidden relative group/summary transition-all duration-500 rounded-[2rem]">
+          <Card className="p-8 bg-white dark:bg-[#1A1A1A] overflow-hidden relative group/summary transition-all duration-500 rounded-card">
             <div className="absolute top-0 right-0 p-4 opacity-5 pointer-events-none group-hover/summary:opacity-10 transition-opacity">
               <CreditCard className="w-32 h-32 rotate-12" />
             </div>

@@ -62,7 +62,7 @@ export default function TeamPage() {
       </HeaderActions>
 
       {/* Filters */}
-      <div className="flex gap-4 items-center bg-black/5 dark:bg-dark-surface/50 p-2 rounded-[2rem] w-fit">
+      <div className="flex gap-4 items-center bg-black/5 dark:bg-dark-surface/50 p-2 rounded-card w-fit">
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-text-secondary" />
           <input
@@ -80,19 +80,19 @@ export default function TeamPage() {
         {members.map((member) => (
           <div
             key={member.id}
-            className="glass-panel p-6 rounded-[2rem] hover: transition-colors group relative"
+            className="glass-panel p-6 rounded-card hover: transition-colors group relative"
           >
             <button className="absolute top-4 right-4 text-text-secondary hover:text-white opacity-0 group-hover:opacity-100 transition-opacity">
               <MoreVertical className="w-4 h-4" />
             </button>
 
             <div className="flex items-center gap-4 mb-4">
-              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-bblue-500 to-indigo-600 flex items-center justify-center text-lg font-bold text-white shadow-inner">
+              <div className="w-12 h-12 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center text-lg font-bold text-white shadow-inner">
                 {member.full_name ? member.full_name.charAt(0) : member.email.charAt(0).toUpperCase()}
               </div>
               <div>
                 <h3 className="text-white font-medium">{member.full_name || "Unknown"}</h3>
-                <span className={`text-xs px-2 py-0.5 rounded-full ${member.role === 'Admin' ? 'bg-purple-500/20 text-purple-400' : 'bg-bblue-500/20 text-bblue-400'}`}>
+                <span className={`text-xs px-2 py-0.5 rounded-full ${member.role === 'Admin' ? 'bg-purple-500/20 text-purple-400' : 'bg-blue-500/20 text-blue-400'}`}>
                   {member.role}
                 </span>
               </div>
@@ -120,7 +120,7 @@ export default function TeamPage() {
 
         {/* Placeholder for Add New */}
         <div
-          className=" rounded-[2rem] p-6 flex flex-col items-center justify-center text-text-secondary hover:bg-black/5 dark:bg-dark-surface/50 hover: transition-all cursor-pointer min-h-[200px]"
+          className=" rounded-card p-6 flex flex-col items-center justify-center text-text-secondary hover:bg-black/5 dark:bg-dark-surface/50 hover: transition-all cursor-pointer min-h-[200px]"
         >
           <div className="w-12 h-12 rounded-full bg-black/5 dark:bg-dark-surface/50 flex items-center justify-center mb-3">
             <Plus className="w-6 h-6 text-text-tertiary" />

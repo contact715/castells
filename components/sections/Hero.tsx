@@ -100,8 +100,10 @@ const Hero: React.FC = () => {
     const [isMuted, setIsMuted] = useState(true);
     const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
     const [vimeoScriptLoaded, setVimeoScriptLoaded] = useState(false);
+    const [currentVimeoId, setCurrentVimeoId] = useState('1101673750');
     const iframeRef = useRef<HTMLIFrameElement>(null);
     const videoContainerRef = useRef<HTMLDivElement>(null);
+    const playerRef = useRef<any>(null);
 
     // Lazy load video when it enters viewport
     useEffect(() => {
@@ -149,15 +151,45 @@ const Hero: React.FC = () => {
         };
     }, [shouldLoadVideo, vimeoScriptLoaded]);
 
-    const toggleMute = () => {
-        if (iframeRef.current && (window as any).Vimeo) {
+    // Initialize Vimeo Player instance and sync events
+    useEffect(() => {
+        if (shouldLoadVideo && iframeRef.current && (window as any).Vimeo && !playerRef.current) {
             const player = new (window as any).Vimeo.Player(iframeRef.current);
+            playerRef.current = player;
+
+            // Listen for play events to sync the background glow with the current video
+            player.on('play', (data: any) => {
+                if (data.id && data.id.toString() !== currentVimeoId) {
+                    setCurrentVimeoId(data.id.toString());
+                }
+            });
+
+            // Fallback for load event
+            player.on('loaded', (data: any) => {
+                if (data.id && data.id.toString() !== currentVimeoId) {
+                    setCurrentVimeoId(data.id.toString());
+                }
+            });
+        }
+    }, [shouldLoadVideo, vimeoScriptLoaded, currentVimeoId]);
+
+    const toggleMute = () => {
+        if (playerRef.current) {
+            playerRef.current.getMuted().then((muted: boolean) => {
+                const newMutedState = !muted;
+                playerRef.current.setMuted(newMutedState);
+                setIsMuted(newMutedState);
+            });
+        } else if (iframeRef.current && (window as any).Vimeo) {
+            const player = new (window as any).Vimeo.Player(iframeRef.current);
+            playerRef.current = player;
             player.getMuted().then((muted: boolean) => {
-                player.setMuted(!muted);
-                setIsMuted(!muted);
+                const newMutedState = !muted;
+                player.setMuted(newMutedState);
+                setIsMuted(newMutedState);
             });
         } else {
-            // Fallback: reload iframe with different muted parameter
+            // Fallback for when API is not available
             setIsMuted(!isMuted);
             if (iframeRef.current) {
                 const currentSrc = iframeRef.current.src;
@@ -249,7 +281,7 @@ const Hero: React.FC = () => {
 
             {/* Video Section - Contained Width */}
             <div className="container mx-auto px-4 sm:px-6 pb-12 sm:pb-20" ref={videoContainerRef}>
-                <AmbiLight vimeoId={videoId} vimeoHash="7ccdfe1d0c" blur={80} intensity={0.65} spread={1.15} saturate={1.8} brightness={1.3} className="w-full aspect-video rounded-[1.5rem] sm:rounded-[2rem] overflow-visible">
+                <AmbiLight vimeoId={currentVimeoId} vimeoHash="7ccdfe1d0c" blur={80} intensity={0.65} spread={1.15} saturate={1.8} brightness={1.3} className="w-full aspect-video rounded-[1.5rem] sm:rounded-[2rem] overflow-visible">
                     <div className="relative w-full h-full rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-black">
                         {shouldLoadVideo ? (
                             <>

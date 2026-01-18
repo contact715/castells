@@ -59,11 +59,13 @@ export const AmbiLight: React.FC<AmbiLightProps> = ({
             // Important: Use responsive=1 and no controls for the background glow
             return (
                 <iframe
-                    src={`https://player.vimeo.com/video/${vimeoId}?h=${vimeoHash || ''}&background=1&autoplay=1&muted=1&loop=1&byline=0&title=0&quality=auto`}
+                    key={`ambilight-${vimeoId}`}
+                    src={`https://player.vimeo.com/video/${vimeoId}?h=${vimeoHash || ''}&autoplay=1&muted=1&loop=1&controls=0&byline=0&title=0&portrait=0&badge=0&dnt=1&playsinline=1`}
                     style={glowBaseStyles}
                     frameBorder="0"
-                    allow="autoplay"
+                    allow="autoplay; fullscreen"
                     title="ambilight-vimeo-glow"
+                    loading="eager"
                 />
             );
         }
