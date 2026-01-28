@@ -156,7 +156,7 @@ export const IndividualSalesPerformance = ({ salespersonId = "alexander" }) => {
                             <Card key={i} className="bg-coral/[0.03] border-coral/10 p-6 relative group overflow-hidden">
                                 <div className="absolute top-0 left-0 w-0.5 h-full bg-coral transition-all duration-500 group-hover:w-full group-hover:opacity-5" />
                                 <div className="flex items-center gap-4 mb-4 relative z-10">
-                                    <div className="p-2 bg-coral/20 rounded-xl text-coral">
+                                    <div className="p-2 bg-coral/20 rounded-2xl text-coral">
                                         {c.icon}
                                     </div>
                                     <span className="text-[9px] font-black text-white/60 uppercase tracking-widest">{c.label}</span>

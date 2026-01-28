@@ -26,9 +26,7 @@ export default function SalesCommandPage() {
     return (
         <div className="flex flex-col h-full gap-8 pb-20">
             {/* High-Impact TV Header */}
-            <div className="flex flex-col lg:flex-row items-center justify-between p-6 lg:p-8 bg-[#11141D] rounded-card border border-white/10 relative overflow-hidden group gap-8">
-                <div className="absolute inset-0 bg-white/[0.02] opacity-50" />
-
+            <div className="flex flex-col lg:flex-row items-center justify-between p-6 lg:p-8 future-glass rounded-card border border-white/5 relative overflow-hidden group gap-8">
                 {/* Left: Module Identity */}
                 <div className="flex items-center gap-4 lg:gap-6 relative z-10 shrink-0">
                     <div className="p-3 lg:p-4 bg-coral/20 rounded-2xl text-coral">
@@ -75,7 +73,7 @@ export default function SalesCommandPage() {
                 {/* Left: The Main Combat Arena (Leaderboards) */}
                 <div className="col-span-12 xl:col-span-8 space-y-8">
                     <MagicBento className="grid grid-cols-1 gap-8">
-                        <ParticleCard className="bg-[#11141D] py-8 px-6 lg:px-10 lg:py-8 rounded-card border border-white/10 relative overflow-hidden magic-bento-card">
+                        <ParticleCard className="py-8 px-6 lg:px-10 lg:py-8 magic-bento-card">
                             <div className="flex items-center justify-between mb-8">
                                 <div className="flex items-center gap-5">
                                     <div className="p-2 bg-coral/10 rounded-xl text-coral">
@@ -102,7 +100,7 @@ export default function SalesCommandPage() {
                 <div className="col-span-12 xl:col-span-4 space-y-8">
                     <MagicBento className="grid grid-cols-1 gap-8">
                         {/* War Room Live Feed */}
-                        <ParticleCard className="bg-[#11141D] p-6 lg:p-8 rounded-card border border-white/5 magic-bento-card">
+                        <ParticleCard className="p-6 lg:p-8 magic-bento-card">
                             <div className="flex items-center justify-between mb-6">
                                 <div className="flex items-center gap-4">
                                     <Zap className="w-5 h-5 text-coral" />
@@ -135,7 +133,7 @@ export default function SalesCommandPage() {
                         </ParticleCard>
 
                         {/* The "Big Pie" Bonus Pool */}
-                        <ParticleCard className="bg-[#11141D] p-6 lg:p-8 rounded-card border border-white/5 relative overflow-hidden group magic-bento-card">
+                        <ParticleCard className="p-6 lg:p-8 relative overflow-hidden group magic-bento-card">
                             <div className="absolute -right-4 -top-4 p-8 text-white/[0.02]">
                                 <Coins className="w-32 h-32" />
                             </div>
@@ -156,7 +154,7 @@ export default function SalesCommandPage() {
                         </ParticleCard>
 
                         {/* Team Synergy Pairings */}
-                        <ParticleCard className="bg-[#11141D] p-6 lg:p-8 rounded-card border border-white/5 magic-bento-card">
+                        <ParticleCard className="p-6 lg:p-8 magic-bento-card">
                             <div className="flex items-center justify-between mb-6">
                                 <h3 className="text-xs font-black text-white uppercase tracking-widest">Combat Pairings</h3>
                                 <Users className="w-4 h-4 text-white/20" />
@@ -183,7 +181,7 @@ export default function SalesCommandPage() {
 
                     {/* Tech & Support Node */}
                     <div className="bg-coral p-0.5 rounded-card">
-                        <div className="bg-[#11141D] rounded-[2.45rem] p-6 lg:p-8">
+                        <div className="future-glass rounded-[2.45rem] p-6 lg:p-8 border border-white/5">
                             <div className="flex flex-col items-center text-center gap-5">
                                 <div className="p-4 bg-coral/10 rounded-full text-coral">
                                     <Rocket className="w-8 h-8" />
@@ -204,7 +202,7 @@ export default function SalesCommandPage() {
             </div>
 
             {/* TV Signature Footer */}
-            <div className="bg-[#11141D] p-6 rounded-card border border-white/10 flex items-center justify-between">
+            <div className="future-glass p-6 rounded-card border border-white/5 flex items-center justify-between">
                 <div className="flex items-center gap-12">
                     <div className="flex items-center gap-3">
                         <ShieldCheck className="w-5 h-5 text-emerald-500" />

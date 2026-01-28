@@ -97,7 +97,7 @@ export function BotSettings({ botId, onBack }: BotSettingsProps) {
                                     <h3 className="text-lg font-bold text-white">Knowledge Sources</h3>
                                     <p className="text-sm text-white/40">Upload documents or link URLs to train your bot.</p>
                                 </div>
-                                <Button className="bg-white/5 hover:bg-white/10 text-white rounded-xl">
+                                <Button className="bg-white/5 hover:bg-white/10 text-white rounded-[2rem]">
                                     Add Source
                                 </Button>
                             </div>

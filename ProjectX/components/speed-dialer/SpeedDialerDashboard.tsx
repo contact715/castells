@@ -2,147 +2,312 @@
 
 import { Card } from "@/components/ui/Card";
 import { Button } from "@/components/ui/Button";
-import { Play, Pause, Activity, TrendingUp, Users, Clock, DollarSign, Zap } from "lucide-react";
-import { motion } from "framer-motion";
+import { Pause, Activity, TrendingUp, Users, Clock, DollarSign, Zap } from "lucide-react";
+import { cn } from "@/lib/utils";
+
+// Stat Card Component (точно как в dashboard)
+const StatCard = ({ 
+    title, 
+    value, 
+    subtitle, 
+    change, 
+    icon: Icon,
+    trend = "up",
+}: { 
+    title: string;
+    value: string;
+    subtitle?: string;
+    change?: string;
+    icon?: any;
+    trend?: "up" | "down";
+}) => {
+    // Вычисляем процент заполненности из subtitle (например, "27,500 /30,000" -> 91.7%)
+    // Или из value и subtitle (например, value="27,500", subtitle="/30,000")
+    let percentage = 0;
+    
+    // Вариант 1: subtitle содержит оба значения "27,500 /30,000"
+    if (subtitle && subtitle.includes("/") && !subtitle.startsWith("/")) {
+        const parts = subtitle.split("/");
+        if (parts.length === 2) {
+            const currentStr = parts[0].replace(/,/g, "").trim();
+            const maxStr = parts[1].replace(/,/g, "").trim();
+            const current = parseFloat(currentStr) || 0;
+            const max = parseFloat(maxStr) || 0;
+            if (max > 0 && current > 0) {
+                percentage = Math.min((current / max) * 100, 100);
+            }
+        }
+    }
+    
+    // Вариант 2: value содержит текущее значение, subtitle содержит максимум "/30,000"
+    if (percentage === 0 && subtitle && subtitle.startsWith("/")) {
+        const currentStr = value.replace(/,/g, "").replace(/\$/g, "").replace(/k/gi, "").trim();
+        const maxStr = subtitle.substring(1).replace(/,/g, "").trim();
+        const current = parseFloat(currentStr) || 0;
+        const max = parseFloat(maxStr) || 0;
+        if (max > 0 && current > 0) {
+            percentage = Math.min((current / max) * 100, 100);
+        }
+    }
+    
+    // Вариант 3: для "Avg. response time" или "Avg. Response Speed" - вычисляем процент на основе времени ответа
+    if (percentage === 0 && (title === "Avg. response time" || title === "Avg. Response Speed") && subtitle && subtitle.includes("sec")) {
+        const timeValue = parseFloat(value) || 0;
+        const maxTime = 30; // Максимальное время ответа в секундах
+        if (timeValue > 0) {
+            percentage = Math.min((timeValue / maxTime) * 100, 100);
+        }
+    }
+    
+    // Вариант 4: для "Conversion rate" - извлекаем процент из value (например, "82%")
+    if (percentage === 0 && title === "Conversion rate" && value.includes("%")) {
+        const percentValue = parseFloat(value.replace(/%/g, "")) || 0;
+        if (percentValue > 0) {
+            percentage = Math.min(percentValue, 100);
+        }
+    }
+
+    // Определяем CSS градиент в зависимости от процента:
+    // >= 80% - зеленый (отличный показатель)
+    // 60-80% - желтый (средний показатель)
+    // 40-60% - голубой (маленький показатель)
+    // < 40% - красный (совсем низкий показатель)
+    const getGradientStyle = (percent: number) => {
+        if (percent >= 80) {
+            // Зеленый радиальный градиент для высоких показателей
+            return {
+                background: 'radial-gradient(circle at top left, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.05) 50%, transparent 100%)'
+            };
+        }
+        if (percent >= 60) {
+            // Желтый радиальный градиент для средних показателей
+            return {
+                background: 'radial-gradient(circle at top left, rgba(245, 158, 11, 0.2) 0%, rgba(245, 158, 11, 0.05) 50%, transparent 100%)'
+            };
+        }
+        if (percent >= 40) {
+            // Голубой радиальный градиент для маленьких показателей
+            return {
+                background: 'radial-gradient(circle at top left, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.05) 50%, transparent 100%)'
+            };
+        }
+        // Красный радиальный градиент для совсем низких показателей
+        return {
+            background: 'radial-gradient(circle at top left, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.05) 50%, transparent 100%)'
+        };
+    };
+
+    return (
+        <Card className="relative overflow-hidden">
+            {/* Градиентный overlay в зависимости от заполненности */}
+            {percentage > 0 && (
+                <div 
+                    className="absolute inset-0 rounded-card pointer-events-none"
+                    style={getGradientStyle(percentage)}
+                />
+            )}
+            <div className="relative flex items-start justify-between z-10">
+                <div className="flex-1">
+                    {change && (
+                        <div className={`inline-flex items-center gap-1 text-xs font-medium mb-2 px-2 py-0.5 rounded-full ${
+                            trend === "up" 
+                                ? "text-emerald-600 bg-emerald-50" 
+                                : "text-red-500 bg-red-50"
+                        }`}>
+                            {trend === "up" ? <TrendingUp className="w-3 h-3" /> : <TrendingUp className="w-3 h-3" />}
+                            {change}
+                        </div>
+                    )}
+                    <p className="text-sm text-gray-200 mb-1">{title}</p>
+                    <div className="flex items-baseline gap-1">
+                        <span className="text-2xl font-semibold text-white">{value}</span>
+                        {subtitle && <span className="text-sm text-gray-300">{subtitle}</span>}
+                    </div>
+                </div>
+                {Icon && (
+                    <div className="w-10 h-10 rounded-inner bg-white/10 flex items-center justify-center">
+                        <Icon className={`w-5 h-5 ${percentage > 0 ? 'text-white' : 'text-gray-400'}`} />
+                    </div>
+                )}
+            </div>
+        </Card>
+    );
+};
+
+// Team Member Row (точно как в dashboard)
+const TeamMember = ({ 
+    name, 
+    role, 
+    avatar, 
+    status, 
+    money,
+    deals
+}: { 
+    name: string;
+    role: string;
+    avatar: string;
+    status: "online" | "busy" | "offline";
+    money: number;
+    deals: number;
+}) => (
+    <div className="flex items-center gap-3 p-3 bg-white/5 rounded-inner">
+        <div className="relative">
+            <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-sm font-medium text-gray-300">
+                {avatar}
+            </div>
+            <span className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-[#2C2C2C] ${
+                status === "online" ? "bg-emerald-500" :
+                status === "busy" ? "bg-amber-500" : "bg-gray-500"
+            }`} />
+        </div>
+        <div className="flex-1 min-w-0">
+            <p className="text-sm font-medium text-white truncate">{name}</p>
+            <p className="text-xs text-gray-400">{deals} meetings set</p>
+        </div>
+        <div className="text-right">
+            <p className="text-sm font-semibold text-emerald-400">${money}</p>
+            <p className="text-xs text-gray-400">Bonus</p>
+        </div>
+    </div>
+);
+
+// Activity Feed Item (точно как AlertItem в dashboard)
+const ActivityItem = ({ time, event, type }: { time: string; event: string; type: "lead" | "system" | "success" }) => (
+    <div className="flex items-start gap-3 p-3 bg-white/5 rounded-inner">
+        <div className={`w-8 h-8 rounded-element flex items-center justify-center shrink-0 ${
+            type === "success" ? "bg-emerald-500/20" :
+            type === "lead" ? "bg-blue-500/20" : "bg-white/10"
+        }`}>
+            <Activity className={`w-4 h-4 ${
+                type === "success" ? "text-emerald-400" :
+                type === "lead" ? "text-blue-400" : "text-gray-400"
+            }`} />
+        </div>
+        <div className="flex-1 min-w-0">
+            <p className="text-sm text-gray-200">{event}</p>
+            <p className="text-xs text-gray-400 mt-0.5">{time}</p>
+        </div>
+    </div>
+);
 
 export function SpeedDialerDashboard() {
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 h-full">
-            {/* Left Column: Metrics & Controls */}
-            <div className="lg:col-span-2 space-y-6">
-                {/* Global Control & Hero Metrics */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <Card variant="strong" className="bg-primary/5 border-primary/20 p-6 flex flex-col justify-between relative overflow-hidden">
-                        <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full -mr-16 -mt-16 blur-3xl" />
+        <div className="space-y-6">
+            {/* Top Stats Row - точно как в dashboard */}
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <StatCard 
+                    title="Leads Saved"
+                    value="128"
+                    icon={Zap}
+                />
+                <StatCard 
+                    title="Active Agents"
+                    value="08"
+                    subtitle="/12"
+                    icon={Users}
+                />
+                <StatCard 
+                    title="Est. Payouts"
+                    value="$2.4k"
+                    icon={DollarSign}
+                />
+                <StatCard 
+                    title="Avg. Response Speed"
+                    value="14"
+                    subtitle="sec"
+                    change="+12%"
+                    trend="up"
+                    icon={Clock}
+                />
+            </div>
 
-                        <div>
-                            <div className="flex items-center gap-2 mb-2">
-                                <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                                    <Zap className="w-5 h-5" />
-                                </div>
-                                <span className="text-xs font-bold uppercase tracking-widest text-primary">System Status</span>
+            {/* Main Content Grid - точно как в dashboard */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Left Column */}
+                <div className="lg:col-span-2 space-y-6">
+                    {/* System Status Card - как AI Assistant в dashboard */}
+                    <Card>
+                        <div className="flex items-center gap-4">
+                            <div className="w-12 h-12 rounded-inner bg-blue-500/20 flex items-center justify-center">
+                                <Zap className="w-6 h-6 text-blue-400" />
                             </div>
-                            <h3 className="text-2xl font-display font-bold text-text-primary dark:text-white">Active Hunt</h3>
+                            <div className="flex-1">
+                                <h3 className="text-lg font-semibold text-white">System Status</h3>
+                                <p className="text-sm text-gray-400">Active Hunt Engine</p>
+                            </div>
+                            <div className="hidden sm:block text-right">
+                                <p className="text-2xl font-semibold text-white">14</p>
+                                <p className="text-xs text-gray-400">sec avg</p>
+                            </div>
+                        </div>
+                        
+                        <div className="mt-4 grid grid-cols-3 gap-4">
+                            <div className="text-center p-3 bg-white/10 rounded-inner">
+                                <p className="text-xl font-semibold text-white">128</p>
+                                <p className="text-xs text-gray-400">Leads</p>
+                            </div>
+                            <div className="text-center p-3 bg-white/10 rounded-inner">
+                                <p className="text-xl font-semibold text-white">8</p>
+                                <p className="text-xs text-gray-400">Agents</p>
+                            </div>
+                            <div className="text-center p-3 bg-white/10 rounded-inner">
+                                <p className="text-xl font-semibold text-white">4.2x</p>
+                                <p className="text-xs text-gray-400">ROI</p>
+                            </div>
                         </div>
 
-                        <div className="mt-8">
-                            <Button className="w-full bg-primary hover:bg-primary/90 text-white shadow-lg shadow-primary/20 group">
-                                <Pause className="w-4 h-4 mr-2 group-hover:scale-90 transition-transform" />
-                                PAUSE HUNTING ENGINE
+                        <div className="mt-6">
+                            <Button className="w-full font-semibold bg-white text-gray-900 hover:bg-gray-50">
+                                <Pause className="w-4 h-4 mr-2" />
+                                PAUSE ENGINE
                             </Button>
                         </div>
                     </Card>
 
-                    <Card className="p-6 flex flex-col justify-between">
-                        <div className="flex items-center gap-2 mb-2 text-text-secondary dark:text-white/40">
-                            <Clock className="w-4 h-4" />
-                            <span className="text-xs font-bold uppercase tracking-widest">Avg. Response Speed</span>
+                    {/* Activity Feed - как Alerts в dashboard */}
+                    <Card>
+                        <div className="flex items-center justify-between mb-4">
+                            <h3 className="text-lg font-semibold text-white">Live Feed</h3>
+                            <div className="flex items-center gap-2">
+                                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                                <span className="text-xs text-gray-400 font-medium">LIVE</span>
+                            </div>
                         </div>
-                        <div className="mt-4">
-                            <div className="text-4xl font-display font-bold text-text-primary dark:text-white flex items-end gap-2">
-                                14<span className="text-lg text-text-secondary dark:text-white/40 font-medium mb-1">sec</span>
-                            </div>
-                            <div className="flex items-center gap-1 mt-2 text-xs font-medium text-green-500">
-                                <TrendingUp className="w-3 h-3" />
-                                <span>12% faster than yesterday</span>
-                            </div>
+                        <div className="space-y-2">
+                            {[
+                                { time: "2 min ago", event: "New Lead: Roofing Request (Yelp)", type: "lead" as const },
+                                { time: "5 min ago", event: "SMS sent to Client", type: "system" as const },
+                                { time: "8 min ago", event: "Blast Dialing: 5 Agents", type: "system" as const },
+                                { time: "12 min ago", event: "Sarah J. connected (12s)", type: "success" as const },
+                            ].map((item, i) => (
+                                <ActivityItem key={i} {...item} />
+                            ))}
                         </div>
                     </Card>
                 </div>
 
-                {/* Secondary Metrics */}
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    <Card className="p-4">
-                        <div className="text-[10px] font-bold uppercase tracking-widest text-text-secondary dark:text-white/40 mb-2">Leads Saved</div>
-                        <div className="text-2xl font-display font-bold text-text-primary dark:text-white">128</div>
-                    </Card>
-                    <Card className="p-4">
-                        <div className="text-[10px] font-bold uppercase tracking-widest text-text-secondary dark:text-white/40 mb-2">Active Agents</div>
-                        <div className="text-2xl font-display font-bold text-text-primary dark:text-white flex items-center gap-2">
-                            8 <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-green-500/10 text-green-500 font-medium">ONLINE</span>
+                {/* Right Column - точно как в dashboard */}
+                <div className="space-y-6">
+                    {/* Team Leaders - как Team в dashboard */}
+                    <Card>
+                        <div className="flex items-center justify-between mb-4">
+                            <h3 className="text-lg font-semibold text-white">Daily Leaders</h3>
+                            <button className="text-sm text-blue-400 font-medium hover:underline">
+                                View All
+                            </button>
                         </div>
-                    </Card>
-                    <Card className="p-4">
-                        <div className="text-[10px] font-bold uppercase tracking-widest text-text-secondary dark:text-white/40 mb-2">Est. Payouts</div>
-                        <div className="text-2xl font-display font-bold text-text-primary dark:text-white flex items-center gap-1">
-                            <span className="text-text-secondary dark:text-white/20">$</span>2.4k
+                        <div className="space-y-2">
+                            {[
+                                { name: "Sarah Johnson", role: "Senior Agent", avatar: "SJ", status: "online" as const, money: 450, deals: 3 },
+                                { name: "Mike Smith", role: "Agent", avatar: "MS", status: "busy" as const, money: 320, deals: 2 },
+                                { name: "Alex Chen", role: "Agent", avatar: "AC", status: "online" as const, money: 150, deals: 1 },
+                                { name: "Jessica Wu", role: "Junior Agent", avatar: "JW", status: "offline" as const, money: 0, deals: 0 },
+                            ].map((member, i) => (
+                                <TeamMember key={i} {...member} />
+                            ))}
                         </div>
-                    </Card>
-                    <Card className="p-4">
-                        <div className="text-[10px] font-bold uppercase tracking-widest text-text-secondary dark:text-white/40 mb-2">ROI / Burn</div>
-                        <div className="text-2xl font-display font-bold text-green-500">4.2x</div>
                     </Card>
                 </div>
-
-                {/* Real-time Activity Feed */}
-                <Card variant="glass" className="flex-1 flex flex-col p-6 min-h-[300px]">
-                    <div className="flex items-center justify-between mb-6">
-                        <h3 className="text-sm font-bold uppercase tracking-widest text-text-primary dark:text-white flex items-center gap-2">
-                            <Activity className="w-4 h-4 text-primary" /> Live Feed
-                        </h3>
-                        <div className="flex items-center gap-2">
-                            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-                            <span className="text-[10px] text-text-secondary dark:text-white/40 font-mono">LIVE</span>
-                        </div>
-                    </div>
-                    <div className="space-y-4 font-mono text-xs">
-                        {[
-                            { time: "14:02:22", event: "New Lead: Roofing Request (Yelp)", type: "lead" },
-                            { time: "14:02:24", event: "SMS sent to Client", type: "system" },
-                            { time: "14:02:29", event: "Blast Dialing: 5 Agents", type: "system" },
-                            { time: "14:02:41", event: "Sarah J. connected (12s)", type: "success" },
-                        ].map((log, i) => (
-                            <div key={i} className="flex gap-4 items-center border-b border-black/5 dark:border-white/5 pb-2 last:border-0 last:pb-0">
-                                <span className="text-text-secondary/60 dark:text-white/20 w-16 shrink-0">{log.time}</span>
-                                <span className={
-                                    log.type === 'lead' ? 'text-text-primary dark:text-white font-bold' :
-                                        log.type === 'success' ? 'text-green-500 font-bold' :
-                                            'text-text-secondary dark:text-white/60'
-                                }>{log.event}</span>
-                            </div>
-                        ))}
-                    </div>
-                </Card>
-            </div>
-
-            {/* Right Column: Leaderboard */}
-            <div className="lg:col-span-1">
-                <Card className="h-full bg-surface dark:bg-black/20 flex flex-col p-0 overflow-hidden">
-                    <div className="p-6 border-b border-black/5 dark:border-white/5 bg-black/5 dark:bg-white/5">
-                        <h3 className="text-sm font-bold uppercase tracking-widest text-text-primary dark:text-white flex items-center gap-2">
-                            <Users className="w-4 h-4" /> Daily Leaders
-                        </h3>
-                    </div>
-                    <div className="p-4 space-y-2 overflow-y-auto">
-                        {[
-                            { name: "Sarah Johnson", money: 450, deals: 3, status: 'online' },
-                            { name: "Mike Smith", money: 320, deals: 2, status: 'busy' },
-                            { name: "Alex Chen", money: 150, deals: 1, status: 'online' },
-                            { name: "Jessica Wu", money: 0, deals: 0, status: 'offline' },
-                        ].map((agent, i) => (
-                            <div key={i} className="p-3 rounded-xl bg-white dark:bg-white/5 border border-black/5 dark:border-white/5 flex items-center justify-between group hover:border-primary/30 transition-all">
-                                <div className="flex items-center gap-3">
-                                    <div className="relative">
-                                        <div className="w-10 h-10 rounded-full bg-black/5 dark:bg-white/10 flex items-center justify-center font-bold text-text-secondary dark:text-white/60 text-xs">
-                                            {agent.name.split(' ').map(n => n[0]).join('')}
-                                        </div>
-                                        <div className={`absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full border-2 border-white dark:border-[#1A1A1A] ${agent.status === 'online' ? 'bg-green-500' :
-                                                agent.status === 'busy' ? 'bg-yellow-500' : 'bg-gray-500'
-                                            }`} />
-                                    </div>
-                                    <div>
-                                        <div className="font-medium text-sm text-text-primary dark:text-white">{agent.name}</div>
-                                        <div className="text-[10px] text-text-secondary dark:text-white/40">{agent.deals} meetings set</div>
-                                    </div>
-                                </div>
-                                <div className="text-right">
-                                    <div className="font-bold text-green-500 text-sm">${agent.money}</div>
-                                    <div className="text-[9px] font-bold uppercase tracking-wider text-text-secondary/50 dark:text-white/20">Bonus</div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </Card>
             </div>
         </div>
     );

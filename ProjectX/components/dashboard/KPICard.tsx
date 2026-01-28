@@ -1,7 +1,6 @@
 import { Card } from "@/components/ui/Card";
 import { TrendingUp, TrendingDown } from "lucide-react";
-import { ReactNode } from "react";
-import { motion } from "framer-motion";
+import { ReactNode, memo } from "react";
 import { cn } from "@/lib/utils";
 
 interface KPICardProps {
@@ -15,7 +14,7 @@ interface KPICardProps {
   variant?: "default" | "success" | "danger";
 }
 
-export function KPICard({
+export const KPICard = memo(function KPICard({
   title,
   value,
   trend,
@@ -29,39 +28,28 @@ export function KPICard({
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ y: -4 }}
-      className="h-full"
-    >
-      <Card variant="default" className="p-8 hover:shadow-2xl transition-all duration-500 group h-full border border-black/5 dark:border-white/5 bg-surface dark:bg-dark-surface rounded-[2rem]">
-        <div className="flex items-start justify-between">
-          <div className="flex-1">
-            <p className="text-[10px] font-satoshi font-bold uppercase tracking-widest text-text-secondary dark:text-white/40 mb-3">{title}</p>
-            <p className={cn("text-3xl lg:text-4xl font-newsreader font-bold tracking-tight", variantClasses[variant])}>
-              {value}
-            </p>
-            {trend && (
-              <div
-                className={`flex items-center gap-1 mt-2 text-sm font-satoshi ${trend.isPositive ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"
-                  }`}
-              >
-                {trend.isPositive ? (
-                  <TrendingUp className="w-4 h-4" />
-                ) : (
-                  <TrendingDown className="w-4 h-4" />
-                )}
-                <span>{Math.abs(trend.value)}%</span>
-              </div>
-            )}
-          </div>
-          {icon && <div className="text-coral bg-coral/5 p-3 rounded-[2rem] group-hover:bg-coral group-hover:text-white transition-all duration-500">{icon}</div>}
+    <Card variant="default" className="p-8 h-full border border-white/5 future-glass rounded-[2rem]">
+      <div className="flex items-start justify-between">
+        <div className="flex-1">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-white/60 mb-3">{title}</p>
+          <p className={cn("text-3xl lg:text-4xl font-bold tracking-tight text-white", variantClasses[variant])}>
+            {value}
+          </p>
+          {trend && (
+            <div
+              className={`flex items-center gap-1 mt-2 text-sm ${trend.isPositive ? "text-neon-lime" : "text-red-500"}`}
+            >
+              {trend.isPositive ? (
+                <TrendingUp className="w-4 h-4" />
+              ) : (
+                <TrendingDown className="w-4 h-4" />
+              )}
+              <span>{Math.abs(trend.value)}%</span>
+            </div>
+          )}
         </div>
-      </Card>
-    </motion.div>
+        {icon && <div className="text-primary bg-primary/10 p-3 rounded-[2rem]">{icon}</div>}
+      </div>
+    </Card>
   );
-}
-
-
+});

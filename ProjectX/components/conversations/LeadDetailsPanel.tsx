@@ -179,7 +179,7 @@ export function LeadDetailsPanel({ leadDetails, platform, status }: LeadDetailsP
                                 <Mail className="w-4 h-4 text-text-secondary mt-0.5" />
                                 <div className="flex-1">
                                     <p className="text-xs text-text-secondary mb-1">Email</p>
-                                    <a href={`mailto:${leadDetails.email}`} className="text-sm text-white hover:text-coral transition-colors">
+                                    <a href={`mailto:${leadDetails.email}`} className="text-sm text-white hover:text-primary transition-colors">
                                         {leadDetails.email}
                                     </a>
                                 </div>
@@ -191,7 +191,7 @@ export function LeadDetailsPanel({ leadDetails, platform, status }: LeadDetailsP
                                 <Phone className="w-4 h-4 text-text-secondary mt-0.5" />
                                 <div className="flex-1">
                                     <p className="text-xs text-text-secondary mb-1">Phone</p>
-                                    <a href={`tel:${leadDetails.phone}`} className="text-sm text-white hover:text-coral transition-colors">
+                                    <a href={`tel:${leadDetails.phone}`} className="text-sm text-white hover:text-primary transition-colors">
                                         {leadDetails.phone}
                                     </a>
                                 </div>

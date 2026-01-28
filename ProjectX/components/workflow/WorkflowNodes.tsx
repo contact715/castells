@@ -15,27 +15,27 @@ interface NodeProps {
 export function WorkflowNode({ title, description, icon: Icon, color, active, onClick }: NodeProps) {
     return (
         <div onClick={onClick} className="w-full h-full cursor-pointer">
-            <Card variant="glass"
+            <Card
                 className={twMerge(
                     "p-6 h-full relative group border-l-4 transition-all active:scale-[0.98]",
-                    active ? "border-l-coral scale-[1.02] bg-white/5" : "border-l-transparent hover:border-l-white/20"
+                    active ? "border-l-blue-500 scale-[1.02]" : "border-l-transparent hover:border-l-blue-300/50"
                 )}>
                 <div className="flex items-start gap-4">
-                    <div className={twMerge("w-12 h-12 rounded-[2rem] flex items-center justify-center shrink-0", color)}>
+                    <div className={twMerge("w-12 h-12 rounded-inner flex items-center justify-center shrink-0", color)}>
                         <Icon className="w-6 h-6 text-white" />
                     </div>
                     <div className="flex-1 min-w-0">
                         <div className="flex items-center justify-between mb-1">
-                            <h4 className="font-bold text-white tracking-tight">{title}</h4>
+                            <h4 className="font-semibold text-gray-900 tracking-tight">{title}</h4>
                             {active && (
                                 <div className="flex gap-1">
-                                    <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+                                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
                                 </div>
                             )}
                         </div>
-                        <p className="text-sm text-white/50 leading-relaxed truncate">{description}</p>
+                        <p className="text-sm text-gray-500 leading-relaxed truncate">{description}</p>
                     </div>
-                    <ChevronRight className="w-5 h-5 text-white/10 group-hover:text-white/40 transition-colors self-center" />
+                    <ChevronRight className="w-5 h-5 text-gray-300 group-hover:text-gray-600 transition-colors self-center" />
                 </div>
             </Card>
         </div>

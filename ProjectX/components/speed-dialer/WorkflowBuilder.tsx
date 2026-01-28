@@ -24,23 +24,21 @@ export function WorkflowBuilder() {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 h-full">
             <div className="lg:col-span-2">
-                <Card variant="default" className="min-h-[850px] flex flex-col relative overflow-hidden bg-surface dark:bg-black/40 border-black/5 dark:border-white/5">
-                    <div className="absolute inset-0 bg-[radial-gradient(#00000010_1px,transparent_1px)] dark:bg-[radial-gradient(#ffffff10_1px,transparent_1px)] [background-size:32px_32px] opacity-20" />
-
-                    <div className="p-6 border-b border-black/5 dark:border-white/5 flex items-center justify-between relative z-10">
+                <Card className="min-h-[850px] flex flex-col relative overflow-hidden">
+                    <div className="p-6 border-b border-gray-200/50 flex items-center justify-between relative z-10">
                         <div className="flex items-center gap-4">
-                            <div className="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center">
-                                <Zap className="w-5 h-5 text-primary" />
+                            <div className="w-10 h-10 rounded-inner bg-blue-100 flex items-center justify-center">
+                                <Zap className="w-5 h-5 text-blue-600" />
                             </div>
                             <div>
-                                <h3 className="text-xl font-display font-semibold text-text-primary dark:text-white tracking-tight">Lead-to-Call Bridge</h3>
-                                <p className="text-xs text-text-secondary dark:text-white/40">Omnichannel Fast Connect Engine</p>
+                                <h3 className="text-xl font-semibold text-gray-900 tracking-tight">Lead-to-Call Bridge</h3>
+                                <p className="text-xs text-gray-500">Omnichannel Fast Connect Engine</p>
                             </div>
                         </div>
-                        <Badge variant="info" className="text-[10px] text-text-secondary dark:text-white/30 border-black/10 dark:border-white/10 uppercase tracking-widest bg-transparent rounded-full">v2.4.0 (Instant Hunt)</Badge>
+                        <Badge variant="info" className="text-xs text-gray-500 border-gray-200 uppercase tracking-widest bg-white/40 rounded-full">v2.4.0 (Instant Hunt)</Badge>
                     </div>
 
-                    <div className="flex-1 p-12 overflow-y-auto relative z-10 flex flex-col items-center">
+                    <div className="flex-1 p-12 overflow-y-auto relative z-10 flex flex-col items-center bg-white/40 rounded-inner m-4">
                         <TriggerNode onClick={() => setSelectedNode({ type: 'trigger', title: 'Omnichannel Entry' })} />
                         <WaitNode onClick={() => setSelectedNode({ type: 'wait', title: 'Smart Delay' })} />
                         <SmsNode onClick={() => setSelectedNode({ type: 'sms', title: 'Auto-Hook SMS' })} />
@@ -102,12 +100,12 @@ export function WorkflowBuilder() {
                             animate={{ opacity: 1, x: 0 }}
                             exit={{ opacity: 0, x: 20 }}
                         >
-                            <Card variant="glass" className="p-6 border-primary/30 bg-primary/5 border-2 rounded-card">
+                            <Card className="p-6 border-blue-300/50 border-2">
                                 <div className="flex items-center justify-between mb-6">
-                                    <h3 className="text-sm font-bold uppercase tracking-widest text-primary">
+                                    <h3 className="text-sm font-semibold text-gray-900">
                                         Configure {selectedNode.title}
                                     </h3>
-                                    <button onClick={() => setSelectedNode(null)} className="text-text-secondary dark:text-white/20 hover:text-text-primary dark:hover:text-white transition-colors">
+                                    <button onClick={() => setSelectedNode(null)} className="text-gray-400 hover:text-gray-600 transition-colors">
                                         <X className="w-4 h-4" />
                                     </button>
                                 </div>
@@ -115,26 +113,26 @@ export function WorkflowBuilder() {
                                 <div className="space-y-4">
                                     {selectedNode.type === 'sms' && (
                                         <div className="space-y-2">
-                                            <label className="text-[10px] font-bold text-text-secondary dark:text-white/40 uppercase">SMS Template</label>
-                                            <textarea className="w-full h-32 bg-white dark:bg-black/40 border border-black/5 dark:border-white/5 rounded-xl p-3 text-sm text-text-primary dark:text-white/80 focus:border-primary transition-colors outline-none resize-none" defaultValue="Hi {name}, thanks for reaching out to {company}. I can get you an estimate in under 60 seconds."></textarea>
-                                            <p className="text-[10px] text-text-secondary dark:text-white/20 italic">Available tags: {'{name}'}, {'{company}'}</p>
+                                            <label className="text-xs font-semibold text-gray-500">SMS Template</label>
+                                            <textarea className="w-full h-32 bg-white/60 backdrop-blur-sm border border-gray-200 rounded-inner p-3 text-sm text-gray-700 focus:border-blue-300 transition-colors outline-none resize-none" defaultValue="Hi {name}, thanks for reaching out to {company}. I can get you an estimate in under 60 seconds."></textarea>
+                                            <p className="text-xs text-gray-400 italic">Available tags: {'{name}'}, {'{company}'}</p>
                                         </div>
                                     )}
                                     {selectedNode.type === 'wait' && (
                                         <div className="space-y-2">
-                                            <label className="text-[10px] font-bold text-text-secondary dark:text-white/40 uppercase">Delay Duration (Seconds)</label>
-                                            <Input type="number" defaultValue="15" className="bg-white dark:bg-black/40 border-black/5 dark:border-white/5" />
-                                            <p className="text-[10px] text-text-secondary dark:text-white/20 italic">Rec: 10-15s for "Instant Hunt" effect</p>
+                                            <label className="text-xs font-semibold text-gray-500">Delay Duration (Seconds)</label>
+                                            <Input type="number" defaultValue="15" className="bg-white/60 backdrop-blur-sm border-gray-200" />
+                                            <p className="text-xs text-gray-400 italic">Rec: 10-15s for &quot;Instant Hunt&quot; effect</p>
                                         </div>
                                     )}
                                     {selectedNode.type === 'blast' && (
                                         <div className="space-y-2">
-                                            <label className="text-[10px] font-bold text-text-secondary dark:text-white/40 uppercase">Whisper Script</label>
-                                            <textarea className="w-full h-20 bg-white dark:bg-black/40 border border-black/5 dark:border-white/5 rounded-xl p-3 text-sm text-text-primary dark:text-white/80 focus:border-primary transition-colors outline-none resize-none" defaultValue="Attention! Mosco.ai Hunt starting. Lead: {name}. Press 1 to win."></textarea>
+                                            <label className="text-xs font-semibold text-gray-500">Whisper Script</label>
+                                            <textarea className="w-full h-20 bg-white/60 backdrop-blur-sm border border-gray-200 rounded-inner p-3 text-sm text-gray-700 focus:border-blue-300 transition-colors outline-none resize-none" defaultValue="Attention! Mosco.ai Hunt starting. Lead: {name}. Press 1 to win."></textarea>
                                         </div>
                                     )}
                                     <div className="flex gap-2 pt-4">
-                                        <Button variant="secondary" className="flex-1 py-4">
+                                        <Button variant="primary" className="flex-1 py-4">
                                             <Save className="w-4 h-4 mr-2" /> SAVE CONFIG
                                         </Button>
                                     </div>
@@ -142,8 +140,8 @@ export function WorkflowBuilder() {
                             </Card>
                         </motion.div>
                     ) : (
-                        <div className="h-full flex flex-col items-center justify-center p-8 border-2 border-dashed border-black/5 dark:border-white/5 rounded-card opacity-50">
-                            <p className="text-xs font-bold uppercase tracking-widest text-center">Select a node to configure</p>
+                        <div className="h-full flex flex-col items-center justify-center p-8 border-2 border-dashed border-gray-200 rounded-card opacity-50">
+                            <p className="text-xs font-semibold text-gray-400 text-center">Select a node to configure</p>
                         </div>
                     )}
                 </AnimatePresence>

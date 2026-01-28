@@ -222,7 +222,7 @@ const ROPView = ({ managers }: any) => (
                 <h2 className="text-lg font-bold text-white">Эффективность команды (ROP View)</h2>
                 <div className="flex gap-2">
                     <button className="px-3 py-1.5 bg-slate-800 text-xs font-bold rounded-lg border border-slate-700 hover:bg-slate-700">7 ДНЕЙ</button>
-                    <button className="px-3 py-1.5 bg-blue-600 text-xs font-bold rounded-lg text-white">МЕСЯЦ</button>
+                    <button className="px-3 py-1.5 bg-primary text-xs font-bold rounded-lg text-white hover:bg-primary/90">МЕСЯЦ</button>
                 </div>
             </div>
             <table className="w-full text-left">
@@ -463,19 +463,87 @@ const TeamSettingsView = ({ managers }: any) => (
 
 // --- Small UI Helpers ---
 
-const StatCard = ({ title, value, icon, subtitle, trend }: any) => (
-    <div className="bg-[#161920] rounded-2xl border border-slate-800 p-6 shadow-sm hover:border-slate-700 transition-all group">
-        <div className="flex items-center justify-between mb-4">
-            <div className="p-2 bg-slate-800 rounded-lg group-hover:scale-110 transition-transform">
-                {icon}
+const StatCard = ({ title, value, icon, subtitle, trend }: any) => {
+    // Вычисляем процент заполненности
+    let percentage = 0;
+    
+    // Для "Ср. время реакции" - вычисляем процент на основе времени ответа
+    if (title === "Ср. время реакции" && subtitle && subtitle.includes("Target:")) {
+        const timeMatch = value.match(/(\d+)/);
+        if (timeMatch) {
+            const timeValue = parseFloat(timeMatch[1]) || 0;
+            const maxTime = 30; // Максимальное время ответа в секундах
+            if (timeValue > 0) {
+                percentage = Math.min((timeValue / maxTime) * 100, 100);
+            }
+        }
+    }
+    
+    // Для "ROI" - извлекаем процент из value (например, "420%")
+    if (title === "ROI (Today)" && value.includes("%")) {
+        const percentValue = parseFloat(value.replace(/%/g, "")) || 0;
+        if (percentValue > 0) {
+            // Нормализуем ROI: 420% = 100% для градиента, но ограничиваем до 100%
+            percentage = Math.min((percentValue / 500) * 100, 100);
+        }
+    }
+    
+    // Для "Активные Лиды" - можно использовать значение напрямую, если есть максимум
+    // Пока оставляем без градиента, если нет явного максимума
+    
+    // Определяем CSS градиент в зависимости от процента:
+    // >= 80% - зеленый (отличный показатель)
+    // 60-80% - желтый (средний показатель)
+    // 40-60% - голубой (маленький показатель)
+    // < 40% - красный (совсем низкий показатель)
+    const getGradientStyle = (percent: number) => {
+        if (percent >= 80) {
+            // Зеленый радиальный градиент для высоких показателей
+            return {
+                background: 'radial-gradient(circle at top left, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.05) 50%, transparent 100%)'
+            };
+        }
+        if (percent >= 60) {
+            // Желтый радиальный градиент для средних показателей
+            return {
+                background: 'radial-gradient(circle at top left, rgba(245, 158, 11, 0.2) 0%, rgba(245, 158, 11, 0.05) 50%, transparent 100%)'
+            };
+        }
+        if (percent >= 40) {
+            // Голубой радиальный градиент для маленьких показателей
+            return {
+                background: 'radial-gradient(circle at top left, rgba(59, 130, 246, 0.2) 0%, rgba(59, 130, 246, 0.05) 50%, transparent 100%)'
+            };
+        }
+        // Красный радиальный градиент для совсем низких показателей
+        return {
+            background: 'radial-gradient(circle at top left, rgba(239, 68, 68, 0.2) 0%, rgba(239, 68, 68, 0.05) 50%, transparent 100%)'
+        };
+    };
+
+    return (
+        <div className="bg-[#161920] rounded-2xl border border-slate-800 p-6 shadow-sm hover:border-slate-700 transition-all group relative overflow-hidden">
+            {/* Градиентный overlay в зависимости от заполненности */}
+            {percentage > 0 && (
+                <div 
+                    className="absolute inset-0 rounded-2xl pointer-events-none"
+                    style={getGradientStyle(percentage)}
+                />
+            )}
+            <div className="relative z-10">
+                <div className="flex items-center justify-between mb-4">
+                    <div className={`p-2 bg-slate-800 rounded-lg group-hover:scale-110 transition-transform ${percentage > 0 ? '[&_svg]:!text-white' : ''}`}>
+                        {icon}
+                    </div>
+                    {trend && <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${trend.startsWith('+') ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>{trend}</span>}
+                </div>
+                <h3 className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">{title}</h3>
+                <p className="text-2xl font-bold text-white mt-1">{value}</p>
+                <p className="text-[10px] text-slate-500 mt-2 italic">{subtitle}</p>
             </div>
-            {trend && <span className={`text-[10px] font-bold px-2 py-0.5 rounded ${trend.startsWith('+') ? 'bg-green-500/10 text-green-400' : 'bg-red-500/10 text-red-400'}`}>{trend}</span>}
         </div>
-        <h3 className="text-slate-400 text-[10px] font-bold uppercase tracking-widest">{title}</h3>
-        <p className="text-2xl font-bold text-white mt-1">{value}</p>
-        <p className="text-[10px] text-slate-500 mt-2 italic">{subtitle}</p>
-    </div>
-);
+    );
+};
 
 const FunnelStep = ({ label, count, width, color }: any) => (
     <div className="space-y-2">

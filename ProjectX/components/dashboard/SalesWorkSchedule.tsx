@@ -46,7 +46,7 @@ export const SalesWorkSchedule = () => {
     };
 
     return (
-        <Card className="p-0 overflow-hidden bg-[#11141D] border-white/10">
+        <Card variant="glass" className="p-0 overflow-hidden">
             <div className="p-6 border-b border-white/5 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <CalendarIcon className="w-5 h-5 text-coral" />
@@ -71,7 +71,7 @@ export const SalesWorkSchedule = () => {
                 <table className="w-full border-collapse">
                     <thead>
                         <tr>
-                            <th className="sticky left-0 z-20 bg-[#11141D] p-4 text-left border-b border-r border-white/5 min-w-[140px]">
+                            <th className="sticky left-0 z-20 bg-black/40 backdrop-blur p-4 text-left border-b border-r border-white/5 min-w-[140px]">
                                 <span className="text-[10px] font-black text-white/40 uppercase tracking-widest">Сотрудник</span>
                             </th>
                             {days.map(day => (
@@ -90,7 +90,7 @@ export const SalesWorkSchedule = () => {
                     <tbody>
                         {scheduleData.map((person, idx) => (
                             <tr key={idx} className="group hover:bg-white/[0.02] transition-colors">
-                                <td className="sticky left-0 z-10 bg-[#11141D] p-4 font-black text-white text-xs border-r border-b border-white/5 group-hover:bg-[#1A1F2B]">
+                                <td className="sticky left-0 z-10 bg-black/30 backdrop-blur p-4 font-black text-white text-xs border-r border-b border-white/5 group-hover:bg-black/40">
                                     {person.name}
                                 </td>
                                 {days.map(day => {

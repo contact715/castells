@@ -46,7 +46,7 @@ export const SalesComparisonTable = () => {
 
 
     return (
-        <Card className="p-0 overflow-hidden bg-[#11141D] border-white/10">
+        <Card variant="glass" className="p-0 overflow-hidden">
             <div className="p-6 border-b border-white/5 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                     <Users className="w-5 h-5 text-coral" />

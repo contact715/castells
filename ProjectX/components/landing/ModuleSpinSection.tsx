@@ -29,7 +29,7 @@ export const ModuleSpinSection: React.FC<ModuleSpinSectionProps> = ({
     problem,
     implication,
     needPayoff,
-    accentColor = "#FF6B35",
+    accentColor = "rgb(var(--accent))",
     index,
     children,
 }) => {
@@ -108,10 +108,10 @@ export const ModuleSpinSection: React.FC<ModuleSpinSectionProps> = ({
 
                         {/* Implication */}
                         <motion.div style={{ opacity: implicationOpacity }}>
-                            <p className="text-orange-400/70 text-sm uppercase tracking-[0.2em] mb-3">Последствия</p>
+                            <p className="text-red-400/70 text-sm uppercase tracking-[0.2em] mb-3">Последствия</p>
                             <ScrollText
                                 text={implication}
-                                textClassName="text-lg md:text-xl lg:text-2xl font-sans text-orange-300/80 leading-relaxed justify-center"
+                                textClassName="text-lg md:text-xl lg:text-2xl font-sans text-red-300/80 leading-relaxed justify-center"
                                 startOffset={0.6}
                                 endOffset={0.4}
                                 enableBlur={true}

@@ -129,7 +129,7 @@ export const KnowledgeBase: React.FC = () => {
                         <input
                             type="text"
                             placeholder="Поиск по базе знаний..."
-                            className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-sm text-white focus:outline-none focus:border-coral/50 transition-colors"
+                            className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-12 pr-4 text-sm text-white focus:outline-none focus:border-primary/50 transition-colors"
                             value={searchQuery}
                             onChange={(e) => setSearchQuery(e.target.value)}
                         />
@@ -154,8 +154,8 @@ export const KnowledgeBase: React.FC = () => {
                                             key={item.id}
                                             onClick={() => setActiveId(item.id)}
                                             className={`w-full group flex items-center justify-between px-3 py-2 rounded-xl transition-all ${activeId === item.id
-                                                    ? "bg-coral/10 text-coral border border-coral/20"
-                                                    : "text-white/40 hover:text-white/80 hover:bg-white/5 border border-transparent"
+                                                ? "bg-primary/10 text-primary border border-primary/20"
+                                                : "text-white/40 hover:text-white/80 hover:bg-white/5 border border-transparent"
                                                 }`}
                                         >
                                             <span className="text-[13px] font-bold truncate">{item.title}</span>
@@ -180,12 +180,12 @@ export const KnowledgeBase: React.FC = () => {
                                 className="bg-white/[0.03] border border-white/10 rounded-card p-8 lg:p-12 min-h-[500px] flex flex-col shadow-2xl relative overflow-hidden"
                             >
                                 {/* Decorative elements */}
-                                <div className="absolute top-0 right-0 w-64 h-64 bg-coral/5 blur-[100px] -z-10 rounded-full" />
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[100px] -z-10 rounded-full" />
 
                                 <div className="flex items-start justify-between mb-10">
                                     <div>
                                         <div className="flex items-center gap-3 mb-4">
-                                            <span className="px-3 py-1 bg-coral/20 text-coral text-[10px] font-bold rounded-full border border-coral/20 uppercase tracking-widest">
+                                            <span className="px-3 py-1 bg-primary/20 text-primary text-[10px] font-bold rounded-full border border-primary/20 uppercase tracking-widest">
                                                 Database Entry
                                             </span>
                                             <span className="text-white/20 text-xs font-mono">ID: {activeItem.id}</span>
@@ -225,7 +225,7 @@ export const KnowledgeBase: React.FC = () => {
                                             <div className="grid grid-cols-1 gap-3">
                                                 {activeItem.specs.map((spec, i) => (
                                                     <div key={i} className="flex items-center gap-3 px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-sm text-white/80 font-bold">
-                                                        <div className="w-1.5 h-1.5 rounded-full bg-coral" />
+                                                        <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                                                         {spec}
                                                     </div>
                                                 ))}

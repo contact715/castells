@@ -16,7 +16,7 @@ import { Select } from "@/components/ui/Select";
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState("general");
-  const { theme, setTheme, accentColor, setAccentColor } = useTheme();
+  const { theme, setTheme, accentColor, setAccentColor, backgroundMode, setBackgroundMode, liquidVariant, setLiquidVariant } = useTheme();
   const [loading, setLoading] = useState(false);
   const [settings, setSettings] = useState<any>({
     business_bio: "",
@@ -176,7 +176,7 @@ export default function SettingsPage() {
             ОФФЛАЙН РЕЖИМ
           </span>
         )}
-        <Button onClick={handleSave} variant="primary" size="md" className="bg-white text-black dark:bg-white dark:text-black hover:bg-white/90">
+        <Button onClick={handleSave} variant="neon" size="md" className="font-bold tracking-widest">
           {loading ? <RefreshCw className="w-4 h-4 animate-spin mr-2" /> : <Save className="w-4 h-4 mr-2" />}
           SAVE CHANGES
         </Button>
@@ -184,7 +184,7 @@ export default function SettingsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Sidebar Navigation */}
-        <div className="lg:col-span-1 space-y-2 bg-black/5 dark:bg-black/40 p-2 rounded-card border border-black/5 dark:border-white/5 h-fit">
+        <div className="lg:col-span-1 space-y-2 bg-black/40 p-2 rounded-card border border-white/10 h-fit">
           {[
             { id: "general", label: "General & Bio", icon: <Bot className="w-4 h-4" /> },
             { id: "scoring", label: "Scoring Weights", icon: <Sliders className="w-4 h-4" /> },
@@ -203,9 +203,9 @@ export default function SettingsPage() {
             <button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
-              className={`w-full text-left px-4 py-3 rounded-full flex items-center gap-3 transition-all text-xs font-medium ${activeTab === tab.id
-                ? "bg-black/5 dark:bg-white/10 text-primary dark:text-white shadow-sm"
-                : "text-text-secondary hover:bg-black/5 dark:hover:bg-white/5"
+              className={`w-full text-left px-4 py-3 rounded-xl flex items-center gap-3 transition-all text-xs font-bold tracking-wide ${activeTab === tab.id
+                ? "bg-primary/10 text-primary border border-primary/20 shadow-[0_0_10px_rgba(var(--accent),0.16)]"
+                : "text-white/60 hover:bg-white/5 hover:text-white"
                 }`}
             >
               {tab.icon}
@@ -228,7 +228,7 @@ export default function SettingsPage() {
                   <label className="text-sm font-medium text-text-primary dark:text-white">Business Bio (AI Knowledge Base)</label>
                   <p className="text-xs text-text-secondary">This text authenticates your AI. Include hours, pricing, and history.</p>
                   <textarea
-                    className="w-full h-40 bg-bblack/20 rounded-card p-3 text-sm text-white focus:ring-1 focus:ring-bblue-500 outline-none resize-none"
+                    className="w-full h-40 bg-black/40 rounded-xl border border-white/10 p-3 text-sm text-white focus:border-primary/50 focus:ring-1 focus:ring-primary/20 outline-none resize-none font-sans"
                     value={settings.business_bio}
                     onChange={(e) => setSettings({ ...settings, business_bio: e.target.value })}
                   />
@@ -240,14 +240,14 @@ export default function SettingsPage() {
                   </label>
                   <div className="flex flex-wrap gap-2 mb-2">
                     {settings.active_zip_codes.map((zip: string) => (
-                      <span key={zip} className="px-3 py-1 bg-bblue-500/20 text-bblue-400 rounded-full text-sm blue-500/20">
+                      <span key={zip} className="px-3 py-1 bg-primary/10 text-primary border border-primary/20 rounded-lg text-sm font-bold">
                         {zip}
                       </span>
                     ))}
                   </div>
                   <Input
                     placeholder="Add ZIP code (e.g. 90210)"
-                    className="bg-bblack/20 "
+                    className="bg-white/5 border border-white/10 text-white focus:border-primary/50 focus:ring-1 focus:ring-primary/20"
                     onKeyDown={(e) => {
                       if (e.key === 'Enter') {
                         const val = e.currentTarget.value;
@@ -265,7 +265,7 @@ export default function SettingsPage() {
                 <div>
                   <div className="flex justify-between mb-2">
                     <label className="text-sm font-medium text-white">Property Value Weight</label>
-                    <span className="text-bblue-400 font-bold">{settings?.lead_score_weights?.property_value}%</span>
+                    <span className="text-primary font-bold">{settings?.lead_score_weights?.property_value}%</span>
                   </div>
                   <Slider
                     value={settings?.lead_score_weights?.property_value || 0}
@@ -550,6 +550,72 @@ export default function SettingsPage() {
               <Card variant="default" className="space-y-8">
                 <div>
                   <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                    <Zap className="w-5 h-5 text-coral" /> Dynamic Atmosphere
+                  </h3>
+                  <div className="grid grid-cols-2 xl:grid-cols-4 gap-4 mb-8">
+                    {[
+                      { id: 'static', label: 'Static Sky', icon: <Sun className="w-5 h-5" />, desc: 'Clean, professional gradient.' },
+                      { id: 'liquid', label: 'Liquid Harmony', icon: <RefreshCw className="w-5 h-5" />, desc: 'Floating, meditative blobs.' },
+                      { id: 'gradient', label: 'Interactive Aura', icon: <Users className="w-5 h-5" />, desc: 'Follows your cursor movement.' },
+                      { id: 'mesh', label: 'Neon Mesh', icon: <Globe className="w-5 h-5" />, desc: 'Complex moving color gradients.' },
+                    ].map((mode) => (
+                      <button
+                        key={mode.id}
+                        onClick={() => setBackgroundMode(mode.id as any)}
+                        className={`p-4 rounded-xl text-left transition-all border ${backgroundMode === mode.id // Access from hook
+                          ? "bg-white/10 border-primary/50 ring-1 ring-primary/50"
+                          : "bg-black/20 border-white/5 hover:bg-white/5"
+                          }`}
+                      >
+                        <div className={`mb-3 w-10 h-10 rounded-full flex items-center justify-center ${backgroundMode === mode.id
+                          ? "bg-primary/20 text-primary"
+                          : "bg-white/5 text-white/40"
+                          }`}>
+                          {mode.icon}
+                        </div>
+                        <h4 className="font-bold text-white text-sm mb-1">{mode.label}</h4>
+                        <p className="text-[10px] text-white/50 leading-tight">{mode.desc}</p>
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Sub-selector for Liquid Variants */}
+                  {backgroundMode === 'liquid' && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: 'auto' }}
+                      exit={{ opacity: 0, height: 0 }}
+                      className="mb-8"
+                    >
+                      <h4 className="text-xs font-bold text-white/50 uppercase tracking-widest mb-3 pl-1">Select Atmosphere Style</h4>
+                      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-2">
+                        {[
+                          { id: 'lava', label: 'Lava', color: 'bg-orange-500' },
+                          { id: 'prism', label: 'Prism', color: 'bg-blue-400' },
+                          { id: 'plasma', label: 'Plasma', color: 'bg-purple-500' },
+                          { id: 'pulse', label: 'Pulse', color: 'bg-green-500' },
+                          { id: 'vortex', label: 'Vortex', color: 'bg-indigo-600' },
+                          { id: 'mist', label: 'Mist', color: 'bg-pink-500' },
+                        ].map((variant) => (
+                          <button
+                            key={variant.id}
+                            onClick={() => setLiquidVariant(variant.id as any)}
+                            className={`px-3 py-2 rounded-lg text-xs font-bold uppercase tracking-wide border transition-all flex items-center gap-2 ${liquidVariant === variant.id
+                              ? "bg-white/10 border-white/40 text-white"
+                              : "bg-black/20 border-white/5 text-white/40 hover:bg-white/5 hover:text-white"
+                              }`}
+                          >
+                            <div className={`w-2 h-2 rounded-full ${variant.color}`} />
+                            {variant.label}
+                          </button>
+                        ))}
+                      </div>
+                    </motion.div>
+                  )}
+                </div>
+
+                <div>
+                  <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
                     <Monitor className="w-5 h-5 text-coral" /> Theme Preferences
                   </h3>
                   <div className="grid grid-cols-2 gap-4">
@@ -642,14 +708,14 @@ export default function SettingsPage() {
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full max-w-xl px-4 mt-8">
                           <Button
                             onClick={() => { setSelectedProvider("Yelp"); setConnectionStep("authorizing"); }}
-                            className="bg-bblue-600 hover:bg-bblue-500 text-white rounded-card py-4 group"
+                            className="bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 rounded-xl py-4 group"
                           >
                             <Plus className="w-4 h-4 mr-2 group-hover:rotate-90 transition-transform" />
                             ADD YELP BIZ ACCOUNT
                           </Button>
                           <Button
                             onClick={() => { setSelectedProvider("Thumbtack"); setConnectionStep("authorizing"); }}
-                            className="bg-bblue-600 hover:bg-bblue-500 text-white rounded-card py-4 group"
+                            className="bg-primary/10 hover:bg-primary/20 text-primary border border-primary/20 rounded-xl py-4 group"
                           >
                             <Plus className="w-4 h-4 mr-2 group-hover:rotate-90 transition-transform" />
                             ADD THUMBTACK ACCOUNT
@@ -693,8 +759,8 @@ export default function SettingsPage() {
                     >
                       <Card variant="glass" className="p-8 text-center bg-white dark:bg-dark-surface">
                         <div className="mb-6">
-                          <h2 className="text-2xl font-bold text-black dark:text-white">
-                            <span className="text-bblue-500">M.O.S. Engine</span> wants access to your {selectedProvider} account
+                          <h2 className="text-2xl font-bold text-white">
+                            <span className="text-primary">Mosco.ai</span> wants access to your {selectedProvider} account
                           </h2>
                         </div>
 
@@ -725,7 +791,7 @@ export default function SettingsPage() {
 
                         <div className="grid grid-cols-2 gap-4">
                           <Button variant="outline" className="rounded-card h-12" onClick={() => setConnectionStep("selection")}>Cancel</Button>
-                          <Button className="bg-bblue-600 hover:bg-bblue-500 text-white rounded-card h-12" onClick={() => setConnectionStep("success")}>Allow</Button>
+                          <Button className="bg-primary text-white hover:bg-primary/90 font-bold rounded-xl h-12 shadow-[0_0_15px_rgba(var(--accent),0.25)]" onClick={() => setConnectionStep("success")}>Allow</Button>
                         </div>
                       </Card>
                     </motion.div>
@@ -756,10 +822,10 @@ export default function SettingsPage() {
                       </div>
 
                       {/* Trial CTA */}
-                      <Card className="text-center p-8 bg-black/5 dark:bg-dark-surface/50 border border-bblue-500/30">
-                        <h3 className="text-bblue-400 font-bold mb-4">Your account is not active</h3>
+                      <Card className="text-center p-8 bg-black/40 border border-primary/20 shadow-[0_0_30px_rgba(var(--accent),0.04)]">
+                        <h3 className="text-primary font-bold mb-4 font-display text-xl">Your account is not active</h3>
                         <Button size="sm" className="bg-coral hover:bg-coral-dark text-white rounded-full px-6 h-9 font-bold text-[11px] uppercase tracking-widest">
-                          <CreditCard className="w-4 h-4 mr-2" /> Start Free Trial
+                          <CreditCard className="w-4 h-4 mr-2" /> Start Activation Protocol
                         </Button>
                         <p className="text-[10px] text-text-secondary leading-normal max-w-sm mx-auto">
                           After your free trial: $65/week for up to 25 leads, then $2.99 per lead up to 100, and $2.49 per lead after that.<br />
@@ -773,10 +839,10 @@ export default function SettingsPage() {
                           <div className="space-y-1">
                             <div className="flex items-center gap-3">
                               <h3 className="text-lg font-bold text-white">{selectedProvider} Pro Account:</h3>
-                              <span className="px-3 py-1 bg-bblue-600 rounded-md text-xs font-bold text-white uppercase tracking-wider">Dmitry Superbis</span>
+                              <span className="px-3 py-1 bg-primary/20 border border-primary/30 rounded-md text-xs font-bold text-primary uppercase tracking-wider">Dmitry Superbis</span>
                             </div>
                             <p className="text-sm text-text-secondary">Email: elvin@leadwinner.ai</p>
-                            <p className="text-sm text-text-secondary">Number of businesses: 3 <button className="text-bblue-400 ml-1 hover:underline">Hide businesses</button></p>
+                            <p className="text-sm text-text-secondary">Number of businesses: 3 <button className="text-primary ml-1 hover:underline">Hide businesses</button></p>
                           </div>
                           <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center cursor-pointer hover:bg-white/10 transition-colors">
                             <Sliders className="w-5 h-5 text-white/50" />

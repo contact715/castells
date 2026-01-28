@@ -1,19 +1,29 @@
-
 import { twMerge } from "tailwind-merge";
-import { InputHTMLAttributes } from "react";
+import { InputHTMLAttributes, memo } from "react";
 
 interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
     className?: string;
+    variant?: "default" | "filled";
 }
 
-export function Input({ className, ...props }: InputProps) {
+/**
+ * Thalassa-style Input Component
+ * Clean, light inputs with subtle borders
+ */
+export const Input = memo(function Input({ className, variant = "default", ...props }: InputProps) {
+    const variants = {
+        default: "bg-white border-gray-200 focus:border-primary focus:ring-primary/20",
+        filled: "bg-gray-50 border-gray-100 focus:border-primary focus:ring-primary/20",
+    };
+
     return (
         <input
             className={twMerge(
-                "flex w-full rounded-input bg-black/5 dark:bg-white/5 px-4 py-2 text-sm text-text-primary dark:text-white placeholder:text-text-secondary/50 dark:placeholder:text-white/30 border border-black/5 dark:border-white/5 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/30 transition-all duration-300 font-sans",
+                "flex w-full rounded-inner px-4 py-2.5 text-sm text-gray-900 placeholder:text-gray-400 border focus:outline-none focus:ring-2 transition-all duration-200",
+                variants[variant],
                 className
             )}
             {...props}
         />
     );
-}
+});

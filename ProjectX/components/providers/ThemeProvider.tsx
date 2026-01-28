@@ -3,28 +3,42 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 type Theme = "dark" | "light";
-export type AccentColor = "coral" | "blue" | "yellow" | "green";
+export type AccentColor = "teal" | "ink" | "coral" | "blue" | "yellow" | "green";
 
-const accentPalette: Record<AccentColor, { primary: string; dark: string }> = {
-  coral: { primary: "224, 133, 118", dark: "214, 112, 96" },
-  blue: { primary: "133, 169, 224", dark: "112, 149, 214" },
-  yellow: { primary: "224, 201, 133", dark: "214, 188, 112" },
-  green: { primary: "133, 224, 153", dark: "112, 214, 134" },
+// Thalassa design system colors
+const accentPalette: Record<AccentColor, { primary: string; dark: string; secondary: string }> = {
+  teal: { primary: "59, 130, 246", dark: "37, 99, 235", secondary: "96, 165, 250" }, // Blue-500
+  ink: { primary: "17, 24, 39", dark: "15, 23, 42", secondary: "100, 116, 139" },
+  coral: { primary: "239, 68, 68", dark: "220, 38, 38", secondary: "248, 113, 113" }, // Red-500
+  blue: { primary: "59, 130, 246", dark: "37, 99, 235", secondary: "96, 165, 250" }, // Blue-500
+  yellow: { primary: "245, 158, 11", dark: "217, 119, 6", secondary: "251, 191, 36" }, // Amber-500
+  green: { primary: "34, 197, 94", dark: "22, 163, 74", secondary: "74, 222, 128" }, // Green-500
 };
+
+export type BackgroundMode = "static" | "liquid" | "gradient" | "mesh";
+
+export type LiquidVariant = "prism" | "lava" | "plasma" | "pulse" | "vortex" | "mist";
 
 interface ThemeContextType {
   theme: Theme;
   accentColor: AccentColor;
+  backgroundMode: BackgroundMode;
+  liquidVariant: LiquidVariant;
   toggleTheme: () => void;
   setTheme: (theme: Theme) => void;
   setAccentColor: (color: AccentColor) => void;
+  setBackgroundMode: (mode: BackgroundMode) => void;
+  setLiquidVariant: (variant: LiquidVariant) => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>("dark");
-  const [accentColor, setAccentColorState] = useState<AccentColor>("coral");
+  // Default to light theme with teal accent for Thalassa style
+  const [theme, setThemeState] = useState<Theme>("light");
+  const [accentColor, setAccentColorState] = useState<AccentColor>("teal");
+  const [backgroundMode, setBackgroundModeState] = useState<BackgroundMode>("static");
+  const [liquidVariant, setLiquidVariantState] = useState<LiquidVariant>("lava");
 
   useEffect(() => {
     // Check local storage for theme
@@ -33,7 +47,8 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       setThemeState(savedTheme);
       document.documentElement.classList.toggle("dark", savedTheme === "dark");
     } else {
-      document.documentElement.classList.add("dark");
+      // Default to light theme for Thalassa
+      document.documentElement.classList.remove("dark");
     }
 
     // Check local storage for accent color
@@ -42,7 +57,20 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
       setAccentColorState(savedAccent);
       updateAccentVariables(savedAccent);
     } else {
-      updateAccentVariables("coral");
+      // Default to teal for Thalassa
+      updateAccentVariables("teal");
+    }
+
+    // Check local storage for background mode
+    const savedBg = localStorage.getItem("background-mode") as BackgroundMode;
+    if (savedBg) {
+      setBackgroundModeState(savedBg);
+    }
+
+    // Check local storage for liquid variant
+    const savedLiquid = localStorage.getItem("liquid-variant") as LiquidVariant;
+    if (savedLiquid) {
+      setLiquidVariantState(savedLiquid);
     }
   }, []);
 
@@ -50,6 +78,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const palette = accentPalette[color];
     document.documentElement.style.setProperty("--accent", palette.primary);
     document.documentElement.style.setProperty("--accent-dark", palette.dark);
+    document.documentElement.style.setProperty("--secondary", palette.secondary);
+    // Keep legacy variables in sync
+    document.documentElement.style.setProperty("--primary", palette.primary);
+    document.documentElement.style.setProperty("--primary-dark", palette.dark);
   };
 
   const setTheme = (newTheme: Theme) => {
@@ -64,12 +96,22 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     updateAccentVariables(newColor);
   };
 
+  const setBackgroundMode = (newMode: BackgroundMode) => {
+    setBackgroundModeState(newMode);
+    localStorage.setItem("background-mode", newMode);
+  };
+
+  const setLiquidVariant = (newVariant: LiquidVariant) => {
+    setLiquidVariantState(newVariant);
+    localStorage.setItem("liquid-variant", newVariant);
+  };
+
   const toggleTheme = () => {
     setTheme(theme === "dark" ? "light" : "dark");
   };
 
   return (
-    <ThemeContext.Provider value={{ theme, accentColor, toggleTheme, setTheme, setAccentColor }}>
+    <ThemeContext.Provider value={{ theme, accentColor, backgroundMode, liquidVariant, toggleTheme, setTheme, setAccentColor, setBackgroundMode, setLiquidVariant }}>
       {children}
     </ThemeContext.Provider>
   );

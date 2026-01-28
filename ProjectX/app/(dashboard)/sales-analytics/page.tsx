@@ -47,7 +47,7 @@ export default function SalesAnalyticsPage() {
                     { label: "CAC", val: "$412", sub: "Inst. Cost", icon: <Rocket className="w-3.5 h-3.5" /> },
                     { label: "Yield/Min", val: "$8.2", sub: "Talk Time", icon: <Zap className="w-3.5 h-3.5" /> },
                 ].map((m, i) => (
-                    <Card key={i} className="bg-[#11141D] p-5 border-white/10 group relative overflow-hidden">
+                    <Card key={i} variant="glass" className="p-5">
                         <div className="absolute top-0 right-0 p-3 text-white/[0.02]">
                             {m.icon}
                         </div>
@@ -71,7 +71,7 @@ export default function SalesAnalyticsPage() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
                 {/* Revenue Trend - 8 cols */}
                 <div className="lg:col-span-8 space-y-6">
-                    <Card variant="default" className="p-8">
+                    <Card variant="glass" className="p-8">
                         <div className="flex items-center justify-between mb-8">
                             <div className="flex items-center gap-3">
                                 <TrendingUp className="w-5 h-5 text-coral" />
@@ -101,7 +101,7 @@ export default function SalesAnalyticsPage() {
                     </Card>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <Card variant="default" className="p-8">
+                        <Card variant="glass" className="p-8">
                             <DepartmentFunnel />
                         </Card>
                         <DashboardSettings />
@@ -111,7 +111,7 @@ export default function SalesAnalyticsPage() {
                 {/* Vertical Distribution Stats - 4 cols */}
                 <div className="lg:col-span-4 space-y-6">
                     {/* Source Distribution */}
-                    <Card variant="default" className="p-8">
+                    <Card variant="glass" className="p-8">
                         <div className="flex items-center gap-3 mb-6">
                             <PieChartIcon className="w-5 h-5 text-coral" />
                             <h3 className="text-lg font-display font-bold text-white uppercase tracking-tight">Source Quality</h3>
@@ -135,7 +135,7 @@ export default function SalesAnalyticsPage() {
                     </Card>
 
                     {/* Regional Market Yield */}
-                    <Card variant="default" className="p-8">
+                    <Card variant="glass" className="p-8">
                         <div className="flex items-center gap-3 mb-6">
                             <Target className="w-5 h-5 text-coral" />
                             <h3 className="text-lg font-display font-bold text-white uppercase tracking-tight">Market Yield</h3>
@@ -161,7 +161,7 @@ export default function SalesAnalyticsPage() {
                     </Card>
 
                     {/* Global Team Performance */}
-                    <Card variant="default" className="p-8">
+                    <Card variant="glass" className="p-8">
                         <div className="flex items-center gap-3 mb-6">
                             <Users className="w-5 h-5 text-coral" />
                             <h3 className="text-lg font-display font-bold text-white uppercase tracking-tight">Top Units</h3>

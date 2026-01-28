@@ -1,8 +1,6 @@
 "use client";
 
 import {
-    LineChart,
-    Line,
     XAxis,
     YAxis,
     CartesianGrid,
@@ -11,7 +9,7 @@ import {
     Area,
     AreaChart
 } from "recharts";
-import { cn } from "@/lib/utils";
+import { memo } from "react";
 
 const data = [
     { month: "Jan", revenue: 12000, forecast: 12000 },
@@ -28,88 +26,112 @@ const data = [
     { month: "Dec", forecast: 61000 },
 ];
 
-export function RevenueChart() {
+// Thalassa colors
+const COLORS = {
+    primary: "#10B981",      // Emerald Green
+    secondary: "#94A3B8",    // Gray
+    text: "#FFFFFF",
+    textMuted: "#CCCCCC",
+    grid: "rgba(255, 255, 255, 0.1)",
+};
+
+export const RevenueChart = memo(function RevenueChart() {
+    // Определяем тренд: сравниваем первое и последнее значение
+    const revenueData = data.filter(d => d.revenue !== undefined);
+    const firstRevenue = revenueData[0]?.revenue || 0;
+    const lastRevenue = revenueData[revenueData.length - 1]?.revenue || 0;
+    const isRevenueUp = lastRevenue >= firstRevenue;
+    
+    // Для forecast сравниваем первое и последнее значение
+    const forecastData = data.filter(d => d.forecast !== undefined);
+    const firstForecast = forecastData[0]?.forecast || 0;
+    const lastForecast = forecastData[forecastData.length - 1]?.forecast || 0;
+    const isForecastUp = lastForecast >= firstForecast;
+    
+    const revenueColor = isRevenueUp ? "#10B981" : "#EF4444"; // Зеленый если вверх, красный если вниз
+    const forecastColor = isForecastUp ? "#10B981" : "#EF4444"; // Зеленый если вверх, красный если вниз
+    
     return (
         <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={data}>
+            <AreaChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
                 <defs>
                     <linearGradient id="revenueGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="rgb(var(--accent))" stopOpacity={0.2} />
-                        <stop offset="95%" stopColor="rgb(var(--accent))" stopOpacity={0} />
+                        <stop offset="0%" stopColor={revenueColor} stopOpacity={0.3} />
+                        <stop offset="100%" stopColor={revenueColor} stopOpacity={0} />
                     </linearGradient>
                     <linearGradient id="forecastGradient" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#64748b" stopOpacity={0.1} />
-                        <stop offset="95%" stopColor="#64748b" stopOpacity={0} />
+                        <stop offset="0%" stopColor={forecastColor} stopOpacity={0.2} />
+                        <stop offset="100%" stopColor={forecastColor} stopOpacity={0} />
                     </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="currentColor" className="opacity-[0.03]" />
+                <CartesianGrid 
+                    strokeDasharray="3 3" 
+                    vertical={false} 
+                    stroke={COLORS.grid}
+                />
                 <XAxis
                     dataKey="month"
-                    stroke="currentColor"
+                    stroke={COLORS.textMuted}
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fontSize: 9, fontWeight: 700 }}
+                    tick={{ fontSize: 11, fill: COLORS.textMuted }}
                     dy={10}
-                    className="text-text-secondary dark:text-white/20 uppercase tracking-widest font-sans"
                 />
                 <YAxis
-                    stroke="currentColor"
+                    stroke={COLORS.textMuted}
                     axisLine={false}
                     tickLine={false}
-                    tick={{ fontSize: 9, fontWeight: 700 }}
+                    tick={{ fontSize: 11, fill: COLORS.textMuted }}
                     tickFormatter={(value) => `$${value / 1000}k`}
-                    className="text-text-secondary dark:text-white/20 font-sans"
+                    width={50}
                 />
                 <Tooltip
                     content={({ active, payload, label }) => {
                         if (active && payload && payload.length) {
                             const isForecast = !payload[0].payload.revenue;
                             return (
-                                <div className="bg-surface dark:bg-dark-surface border border-black/5 dark:border-white/10 p-4 rounded-2xl shadow-2xl min-w-[200px]">
-                                    <div className="flex justify-between items-center mb-3">
-                                        <p className="text-[13px] font-display font-bold text-text-primary dark:text-white">{label}</p>
-                                        {isForecast && (
-                                            <span className="px-2 py-0.5 bg-coral/10 text-coral text-[8px] font-bold uppercase rounded-full tracking-widest">
-                                                AI Forecast
-                                            </span>
-                                        )}
-                                    </div>
+                                <div className="bg-[#2C2C2C] border border-white/10 p-3 rounded-inner shadow-lg min-w-[140px]">
+                                    <p className="text-sm font-semibold text-white mb-1">{label}</p>
                                     <div className="flex justify-between items-center">
-                                        <span className="text-[10px] font-bold text-text-secondary dark:text-white/40 uppercase tracking-widest">
-                                            {isForecast ? 'Projected' : 'Actual'}
+                                        <span className="text-xs text-gray-400">
+                                            {isForecast ? 'Forecast' : 'Revenue'}
                                         </span>
-                                        <span className={cn("text-lg font-display font-bold", isForecast ? "text-text-secondary dark:text-white/20" : "text-coral")}>
+                                        <span className="text-sm font-semibold text-white">
                                             ${(payload[0].value as number).toLocaleString()}
                                         </span>
                                     </div>
+                                    {isForecast && (
+                                        <span className="inline-block mt-2 px-2 py-0.5 bg-white/10 text-gray-400 text-xs rounded-full">
+                                            Projected
+                                        </span>
+                                    )}
                                 </div>
                             );
                         }
                         return null;
                     }}
-                    cursor={{ stroke: '#E08576', strokeWidth: 1, opacity: 0.2 }}
+                    cursor={{ stroke: revenueColor, strokeWidth: 1, strokeDasharray: '4 4' }}
                 />
                 <Area
                     type="monotone"
                     dataKey="revenue"
-                    stroke="rgb(var(--accent))"
-                    strokeWidth={3}
+                    stroke={revenueColor}
+                    strokeWidth={2}
                     fillOpacity={1}
                     fill="url(#revenueGradient)"
-                    animationDuration={2000}
+                    animationDuration={1000}
                 />
                 <Area
                     type="monotone"
                     dataKey="forecast"
-                    stroke="#64748b"
+                    stroke={forecastColor}
                     strokeWidth={2}
-                    strokeDasharray="5 5"
+                    strokeDasharray="4 4"
                     fillOpacity={1}
                     fill="url(#forecastGradient)"
-                    animationDuration={2000}
-                    style={{ opacity: 0.5 }}
+                    animationDuration={1000}
                 />
             </AreaChart>
         </ResponsiveContainer>
     );
-}
+});

@@ -3,17 +3,18 @@
 import { Card } from "@/components/ui/Card";
 import { Sunrise, Calendar, Target, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
+import { Button } from "@/components/ui/Button";
 
 export function DailySalesPlan() {
     const today = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
 
     return (
-        <Card variant="default" className="p-8 border-coral/20 bg-coral/[0.02]">
+        <Card variant="glass" className="p-8">
             <div className="flex flex-col lg:flex-row gap-8">
                 {/* Morning Briefing */}
                 <div className="flex-1 space-y-6">
                     <div className="flex items-center gap-3">
-                        <div className="p-2.5 bg-coral text-white rounded-xl">
+                        <div className="p-2.5 bg-coral text-white rounded-2xl">
                             <Sunrise className="w-6 h-6" />
                         </div>
                         <div>
@@ -23,14 +24,14 @@ export function DailySalesPlan() {
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="p-4 bg-white/50 dark:bg-white/5 rounded-2xl border border-black/5 dark:border-white/5">
+                        <div className="p-4 bg-white/5 rounded-[2rem] border border-white/10">
                             <p className="text-[9px] font-bold text-white/60 uppercase tracking-widest mb-1">Yesterday&apos;s Close</p>
                             <p className="text-xl font-display font-bold text-white">$42,850</p>
                             <div className="flex items-center gap-1 mt-1">
                                 <span className="text-[9px] font-bold text-emerald-500 uppercase">+12% vs avg</span>
                             </div>
                         </div>
-                        <div className="p-4 bg-white/50 dark:bg-white/5 rounded-2xl border border-black/5 dark:border-white/5">
+                        <div className="p-4 bg-white/5 rounded-[2rem] border border-white/10">
                             <p className="text-[9px] font-bold text-white/60 uppercase tracking-widest mb-1">Today&apos;s Objective</p>
                             <p className="text-xl font-display font-bold text-white">$55,000</p>
                             <div className="flex items-center gap-1 mt-1">
@@ -47,7 +48,7 @@ export function DailySalesPlan() {
                         <span className="text-[11px] font-bold text-coral uppercase tracking-widest">64% Finalized</span>
                     </div>
 
-                    <div className="relative h-3 bg-black/5 dark:bg-white/5 rounded-full overflow-hidden">
+                    <div className="relative h-3 bg-white/5 rounded-full overflow-hidden">
                         <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: "64%" }}
@@ -73,9 +74,9 @@ export function DailySalesPlan() {
                         </div>
                     </div>
 
-                    <button className="w-full py-2.5 bg-black dark:bg-white text-white dark:text-black rounded-full font-bold text-[10px] uppercase tracking-widest mt-2 hover:opacity-90 transition-opacity">
+                    <Button variant="outline" size="sm" className="w-full rounded-full font-bold text-[10px] uppercase tracking-widest mt-2 border-white/10 hover:bg-white/5">
                         View Detailed Forecast
-                    </button>
+                    </Button>
                 </div>
             </div>
         </Card>

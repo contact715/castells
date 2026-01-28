@@ -2,6 +2,7 @@
 
 import { SALES_DATA, SALES_PEOPLE, SalesMetrics } from "@/lib/sales-data";
 import { cn } from "@/lib/utils";
+import { Card } from "@/components/ui/Card";
 
 // Helper to safely format numbers and percentages
 const fmt = (val: number, isCurrency = false, isPercent = false) => {
@@ -80,25 +81,26 @@ export function DepartmentAnalyticsTable() {
     };
 
     return (
-        <div className="w-full overflow-x-auto rounded-card border border-black/5 dark:border-white/5 bg-surface dark:bg-dark-surface shadow-sm text-xs">
-            <table className="w-full border-collapse min-w-[1000px]">
+        <Card variant="glass" className="p-0 overflow-hidden text-xs">
+            <div className="w-full overflow-x-auto no-scrollbar">
+                <table className="w-full border-collapse min-w-[1000px]">
                 <thead>
-                    <tr className="bg-black/5 dark:bg-white/5 text-[10px] font-bold uppercase tracking-widest text-text-secondary dark:text-white/60">
-                        <th className="p-3 text-left w-64 border-b border-r border-black/5 dark:border-white/5 whitespace-nowrap sticky left-0 bg-surface dark:bg-dark-surface z-10">
+                    <tr className="bg-white/[0.02] text-[10px] font-bold uppercase tracking-widest text-white/60">
+                        <th className="p-3 text-left w-64 border-b border-r border-white/5 whitespace-nowrap sticky left-0 bg-black/40 backdrop-blur z-10">
                             Показатели
                         </th>
                         {/* Person Columns */}
                         {people.map(person => (
-                            <th key={person.id} className="p-3 text-center border-b border-r border-black/5 dark:border-white/5 w-32 min-w-[100px]">
+                            <th key={person.id} className="p-3 text-center border-b border-r border-white/5 w-32 min-w-[100px]">
                                 {person.name}
                             </th>
                         ))}
 
                         {/* Summary Columns matching 'Сводная таблица' */}
-                        <th className="p-3 text-center border-b border-r border-black/5 dark:border-white/5 bg-blue-500/10 text-blue-600 dark:text-blue-400 w-24">
+                        <th className="p-3 text-center border-b border-r border-white/5 bg-primary/10 text-primary w-24">
                             Среднее
                         </th>
-                        <th className="p-3 text-center border-b border-r border-black/5 dark:border-white/5 bg-blue-500/10 text-blue-600 dark:text-blue-400 w-24">
+                        <th className="p-3 text-center border-b border-r border-white/5 bg-primary/10 text-primary w-24">
                             Суммарное
                         </th>
                         {/* Plan columns would require a 'plan' definitions for each metric which we don't strictly have in the generic SalesMetrics beyond overall 'plan'. 
@@ -107,12 +109,12 @@ export function DepartmentAnalyticsTable() {
                         */}
                     </tr>
                 </thead>
-                <tbody className="divide-y divide-black/5 dark:divide-white/5">
+                <tbody className="divide-y divide-white/5">
                     {ROWS.map((row, idx) => {
                         if (row.isHeader) {
                             return (
-                                <tr key={idx} className="bg-black/[0.02] dark:bg-white/[0.02]">
-                                    <td className="p-3 font-bold text-text-primary dark:text-white uppercase tracking-widest sticky left-0 bg-surface dark:bg-dark-surface/95 backdrop-blur z-10 border-r border-black/5 dark:border-white/5">
+                                <tr key={idx} className="bg-white/[0.02]">
+                                    <td className="p-3 font-bold text-white uppercase tracking-widest sticky left-0 bg-black/40 backdrop-blur z-10 border-r border-white/5">
                                         {row.label}
                                     </td>
                                     <td colSpan={people.length + 2} className="p-3"></td>
@@ -123,34 +125,35 @@ export function DepartmentAnalyticsTable() {
                         const { values, total, avg } = calculateRow(row);
 
                         return (
-                            <tr key={idx} className="hover:bg-black/[0.01] dark:hover:bg-white/[0.01] transition-colors group">
+                            <tr key={idx} className="hover:bg-white/[0.02] transition-colors group">
                                 <td className={cn(
-                                    "p-3 text-text-secondary dark:text-white/80 font-medium border-r border-black/5 dark:border-white/5 sticky left-0 bg-surface dark:bg-dark-surface z-10 group-hover:bg-black/[0.01] dark:group-hover:bg-white/[0.01]",
+                                    "p-3 text-white/80 font-medium border-r border-white/5 sticky left-0 bg-black/30 backdrop-blur z-10 group-hover:bg-black/40",
                                     row.indent && "pl-8 text-[11px]"
                                 )}>
                                     {row.label}
                                 </td>
 
                                 {people.map((p, i) => (
-                                    <td key={p.id} className="p-3 text-center border-r border-black/5 dark:border-white/5 text-text-primary dark:text-white">
+                                    <td key={p.id} className="p-3 text-center border-r border-white/5 text-white">
                                         {fmt(values[i], row.isCurrency, row.isPercent)}
                                     </td>
                                 ))}
 
                                 {/* Average */}
-                                <td className="p-3 text-center border-r border-black/5 dark:border-white/5 font-bold text-text-primary dark:text-white bg-black/[0.02] dark:bg-white/[0.02]">
+                                <td className="p-3 text-center border-r border-white/5 font-bold text-white bg-white/[0.02]">
                                     {fmt(avg, row.isCurrency, row.isPercent)}
                                 </td>
 
                                 {/* Total */}
-                                <td className="p-3 text-center font-bold text-text-primary dark:text-white bg-black/[0.02] dark:bg-white/[0.02]">
+                                <td className="p-3 text-center font-bold text-white bg-white/[0.02]">
                                     {fmt(total, row.isCurrency, row.isPercent)}
                                 </td>
                             </tr>
                         );
                     })}
                 </tbody>
-            </table>
-        </div>
+                </table>
+            </div>
+        </Card>
     );
 }

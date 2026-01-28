@@ -1,6 +1,7 @@
 import { Header } from "@/components/layout/Header";
 import { Sidebar } from "@/components/layout/Sidebar";
-import FloatingAssistant from "@/components/layout/FloatingAssistant";
+import { AboutModal } from "@/components/layout/AboutModal";
+import { DashboardThemeEnforcer } from "@/components/providers/DashboardThemeEnforcer";
 
 export default function DashboardLayout({
     children,
@@ -8,17 +9,35 @@ export default function DashboardLayout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="flex flex-col h-screen overflow-hidden bg-ivory dark:bg-dark-bg p-6 gap-6">
-            <Header />
-            <div className="flex-1 flex overflow-hidden gap-6">
+        <>
+            <DashboardThemeEnforcer />
+            
+            {/* Dark theme background */}
+            <div 
+                className="fixed inset-0 -z-10 bg-[#1A1A1A]"
+            />
+
+            {/* Main Layout Container */}
+            <div className="dash-light relative z-10 flex h-[100dvh] p-4 lg:p-5 gap-4 lg:gap-5 overflow-hidden">
+                {/* Sidebar - full height left block */}
                 <Sidebar />
-                <main className="flex-1 overflow-hidden relative rounded-card bg-surface dark:bg-dark-surface border border-black/5 dark:border-white/5">
-                    <div className="h-full overflow-y-auto p-0 no-scrollbar">
-                        {children}
-                    </div>
-                </main>
+                
+                {/* Right side: Header + Main Content */}
+                <div className="flex-1 flex flex-col min-h-0 gap-4 lg:gap-5 overflow-hidden">
+                    <Header />
+                    
+                    {/* Main Content Area - dark theme */}
+                    <main className="flex-1 min-w-0 overflow-hidden relative rounded-container shadow-[0_2px_8px_rgba(0,0,0,0.3),0_4px_16px_rgba(0,0,0,0.2)] animate-gradient border border-white/10" style={{
+                        background: 'linear-gradient(135deg, #1F2326 0%, #1A2427 25%, #1C2528 50%, #1E2529 75%, #1F2326 100%)'
+                    }}>
+                        <div className="h-full overflow-y-auto no-scrollbar p-6">
+                            {children}
+                        </div>
+                    </main>
+                </div>
+                
+                <AboutModal />
             </div>
-            <FloatingAssistant />
-        </div>
+        </>
     );
 }

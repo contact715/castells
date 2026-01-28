@@ -1,12 +1,28 @@
 "use client";
 
 import { useRef } from 'react';
+import { motion } from "framer-motion";
 
 /**
  * GUTTED MagicBento: "No-Glow" Lockdown Edition.
- * All mouse-tracking, particles, ripples, and spotlight effects have been purged.
- * This component now provides a clean, high-contrast container for bento-style layouts.
+ * Now with Staggered Entrance Animation via Framer Motion.
  */
+
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2
+    }
+  }
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 20 } }
+};
 
 export const ParticleCard = ({
   children,
@@ -14,21 +30,29 @@ export const ParticleCard = ({
   style = {},
 }) => {
   return (
-    <div
-      className={`${className} relative overflow-hidden bg-surface dark:bg-dark-surface border border-black/5 dark:border-white/10 rounded-card`}
+    <motion.div
+      variants={item}
+      className={`${className} relative overflow-hidden rounded-card border future-glass hover:border-primary/40 transition-all duration-300`}
       style={style}
     >
       {children}
-    </div>
+    </motion.div>
   );
 };
 
 export const GlobalSpotlight = () => null;
 
 export const BentoCardGrid = ({ children, gridRef, className = '' }) => (
-  <div className={`${className} bento-section`} ref={gridRef}>
+  <motion.div
+    variants={container}
+    initial="hidden"
+    whileInView="show"
+    viewport={{ once: true }}
+    className={`${className} bento-section`}
+    ref={gridRef}
+  >
     {children}
-  </div>
+  </motion.div>
 );
 
 const MagicBento = ({

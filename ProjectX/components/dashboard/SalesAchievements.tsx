@@ -32,8 +32,8 @@ export function SalesAchievements({ salespersonId = "alexander" }: { salesperson
             title: "Лидер Гонки",
             description: "Оборот > 500к ₽",
             icon: Trophy,
-            color: "text-amber-500",
-            bg: "bg-amber-500/10",
+            color: "text-purple-500",
+            bg: "bg-purple-500/10",
             date: "Текущий",
             unlocked: data.salesAmount > 500000
         },
@@ -82,8 +82,8 @@ export function SalesAchievements({ salespersonId = "alexander" }: { salesperson
             title: "Машина",
             description: "100+ звонков за отчетный период",
             icon: Flame,
-            color: "text-orange-500",
-            bg: "bg-orange-500/10",
+            color: "text-primary",
+            bg: "bg-primary/10",
             date: "Текущий",
             unlocked: data.calls > 100
         },

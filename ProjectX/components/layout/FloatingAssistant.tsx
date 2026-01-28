@@ -23,7 +23,7 @@ export default function FloatingAssistant() {
                             height: isMinimized ? "auto" : "500px"
                         }}
                         exit={{ opacity: 0, scale: 0.8, y: 20 }}
-                        className="w-[400px] bg-[#11141D] border border-white/10 rounded-[2rem] shadow-2xl flex flex-col overflow-hidden backdrop-blur-2xl"
+                        className="w-[400px] bg-[#11141D] border border-white/10 rounded-card shadow-2xl flex flex-col overflow-hidden"
                     >
                         {/* Header */}
                         <div className="p-6 border-b border-white/5 flex items-center justify-between bg-white/[0.02]">
@@ -94,7 +94,7 @@ export default function FloatingAssistant() {
                         whileTap={{ scale: 0.95 }}
                     >
                         <Button
-                            className="w-16 h-16 rounded-[1.5rem] bg-gradient-to-tr from-purple-600 to-blue-500 shadow-xl shadow-purple-600/30 flex items-center justify-center p-0 border-none group"
+                            className="w-16 h-16 rounded-card bg-gradient-to-tr from-purple-600 to-blue-500 shadow-xl shadow-purple-600/30 flex items-center justify-center p-0 border-none group"
                             onClick={() => setIsOpen(true)}
                         >
                             <MessageCircle className="w-8 h-8 text-white transition-transform group-hover:rotate-12" />

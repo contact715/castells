@@ -16,7 +16,8 @@ interface UIStore {
 }
 
 export const useUIStore = create<UIStore>((set) => ({
- sidebarOpen: true,
+ // Default closed for mobile; desktop is always visible via CSS (lg:translate-x-0)
+ sidebarOpen: false,
  sidebarCollapsed: false,
  expandedGroups: [],
  activePage: "/",

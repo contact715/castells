@@ -52,14 +52,16 @@ export default function CompliancePage() {
         </div>
         <div className="divide-y divide-white/10">
           {[
-            { action: "Blocked Call", reason: "DNC Registry Match", time: "2 mins ago", icon: Ban, color: "text-red-400" },
-            { action: "Scrubber Check", reason: "Valid Mobile Number", time: "5 mins ago", icon: CheckCircle, color: "text-emerald-400" },
-            { action: "Data Encryption", reason: "Daily Backup Secured", time: "1 hour ago", icon: Lock, color: "text-bblue-400" },
-            { action: "Opt-Out Request", reason: "User replied STOP", time: "2 hours ago", icon: AlertTriangle, color: "text-yellow-400" },
+            { action: "Blocked Call", reason: "DNC Registry Match", time: "2 mins ago", icon: Ban, color: "text-red-400", bgColor: "bg-red-500/20" },
+            { action: "Scrubber Check", reason: "Valid Mobile Number", time: "5 mins ago", icon: CheckCircle, color: "text-emerald-400", bgColor: "bg-emerald-500/20" },
+            { action: "Data Encryption", reason: "Daily Backup Secured", time: "1 hour ago", icon: Lock, color: "text-blue-400", bgColor: "bg-blue-500/20" },
+            { action: "Opt-Out Request", reason: "User replied STOP", time: "2 hours ago", icon: AlertTriangle, color: "text-amber-400", bgColor: "bg-amber-500/20" },
           ].map((item, i) => (
             <div key={i} className="p-4 flex items-center justify-between hover:bg-black/5 dark:bg-dark-surface/50 transition-colors">
               <div className="flex items-center gap-4">
-                <item.icon className={`w-5 h-5 ${item.color}`} />
+                <div className={`w-8 h-8 rounded-element flex items-center justify-center shrink-0 ${item.bgColor}`}>
+                  <item.icon className={`w-4 h-4 ${item.color}`} />
+                </div>
                 <div>
                   <div className="text-sm font-medium text-white">{item.action}</div>
                   <div className="text-xs text-text-secondary">{item.reason}</div>

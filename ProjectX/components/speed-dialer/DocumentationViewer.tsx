@@ -82,7 +82,7 @@ export function DocumentationViewer() {
                                 <p className="text-sm opacity-80">Зачем: Устраняет языковой барьер и повышает конверсию на мультикультурных рынках США (например, Техас, Флорида, Калифорния).</p>
                             </li>
                             <li><strong>Dynamic Routing (VIP Priority) (i):</strong> Лиды с высоким чеком направляются только «Top Hunters».</li>
-                            <li><strong>AI Whisper Script (i):</strong> Бот произносит в трубку менеджеру: "New Estimate Lead! Language: Spanish. Client: John. Press 1".</li>
+                            <li><strong>AI Whisper Script (i):</strong> Бот произносит в трубку менеджеру: &quot;New Estimate Lead! Language: Spanish. Client: John. Press 1&quot;.</li>
                         </ul>
 
                         <h3>3. Система мотивации и ЦКП (Value-Based KPI)</h3>
@@ -193,7 +193,7 @@ Content-Type: application/json`}</code></pre>
                         <p><code>PATCH /v1/leads/{`{external_id}`}/status</code></p>
                         <p>Поля:</p>
                         <ul>
-                            <li><code>status</code>: "Estimate Scheduled", "Sold", "Job Completed".</li>
+                            <li><code>status</code>: &quot;Estimate Scheduled&quot;, &quot;Sold&quot;, &quot;Job Completed&quot;.</li>
                             <li><code>invoice_amount</code>: Сумма сделки для расчета ROI.</li>
                         </ul>
 

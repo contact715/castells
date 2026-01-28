@@ -10,48 +10,92 @@ const config: Config = {
     theme: {
         extend: {
             colors: {
-                ivory: '#F4F5F5', // Platinum/Off-white
-                coral: '#FF5722', // Electric Orange
-                'coral-dark': '#E64A19',
-                surface: '#FFFFFF',
-                primary: '#FF5722', // Semantic alias
-                secondary: '#212121', // Semantic alias
-
-                'text-primary': '#111111',
-                'text-secondary': '#666666',
-                glass: 'rgba(255, 255, 255, 0.7)',
-                'glass-border': 'rgba(255, 255, 255, 0.5)',
-
-                // Dark mode colors - Mosco.ai Premium
-                'dark-bg': '#0A0A0A', // Deep Onyx
-                'dark-surface': '#161616', // Dark Slate
-                'dark-glass': 'rgba(22, 22, 22, 0.8)',
+                /* ═══════════════════════════════════════════════════════════
+                   THALASSA COLOR PALETTE
+                   Clean, professional, light dashboard theme
+                ═══════════════════════════════════════════════════════════ */
+                
+                // Primary: Soft Teal/Mint
+                primary: 'rgb(var(--accent) / <alpha-value>)',
+                'primary-dark': 'rgb(var(--primary-dark) / <alpha-value>)',
+                
+                // Secondary: Muted Blue-Gray
+                secondary: 'rgb(var(--secondary) / <alpha-value>)',
+                
+                // Semantic
+                success: '#10B981',
+                warning: '#F59E0B',
+                error: '#EF4444',
+                info: '#3B82F6',
+                
+                // Surfaces
+                surface: 'var(--surface)',
+                'surface-secondary': 'var(--surface-secondary)',
+                'surface-tertiary': 'var(--surface-tertiary)',
+                
+                // Text
+                'text-primary': 'var(--text-primary)',
+                'text-secondary': 'var(--text-secondary)',
+                'text-tertiary': 'var(--text-tertiary)',
+                
+                // Legacy compatibility
+                ivory: '#F5F8FA',
+                glass: 'rgba(255, 255, 255, 0.9)',
+                'glass-border': 'rgba(0, 0, 0, 0.06)',
+                
+                // Dark mode variants (for compatibility)
+                'dark-bg': '#0F172A',
+                'dark-surface': '#1E293B',
+                'dark-glass': 'rgba(15, 23, 42, 0.8)',
                 'dark-glass-border': 'rgba(255, 255, 255, 0.08)',
                 'dark-text-primary': '#FFFFFF',
-                'dark-text-secondary': '#A3A3A3',
+                'dark-text-secondary': '#94A3B8',
+                
+                // Accent highlight (soft lime for positive changes)
+                'neon-lime': '#10B981',
             },
             fontFamily: {
-                display: ['Satoshi', 'sans-serif'], // Unify display font
-                sans: ['Satoshi', 'sans-serif'],
+                // Primary: Plus Jakarta Sans (clean geometric, similar to Lufga)
+                sans: ['var(--font-plus-jakarta)', 'var(--font-inter)', 'system-ui', 'sans-serif'],
+                display: ['var(--font-plus-jakarta)', 'var(--font-outfit)', 'system-ui', 'sans-serif'],
+                // Legacy
+                instrument: ['var(--font-instrument)', 'system-ui', 'sans-serif'],
             },
             borderRadius: {
                 none: '0',
-                sm: '0.25rem',   // 4px
-                DEFAULT: '0.25rem',
-                md: '0.5rem',    // 8px
-                lg: '0.75rem',   // 12px
-                xl: '1rem',      // 16px
-                '2xl': '1.5rem', // 24px
-                '3xl': '2rem',   // 32px (kept for legacy support if needed)
-
-                // Semantic components - Cloud/Soft Radius
-                'card': '2rem',    // 32px (Restored per user request)
-                'button': '2rem',  // 32px
-                'input': '2rem',   // 32px
+                sm: '0.25rem',        // 4px
+                DEFAULT: '0.5rem',    // 8px
+                md: '0.5rem',         // 8px
+                lg: '0.75rem',        // 12px
+                xl: '1rem',           // 16px
+                '2xl': '1.25rem',     // 20px
+                '3xl': '1.5rem',      // 24px
+                
+                /* ═══════════════════════════════════════════════════════════
+                   ФИРМЕННОЕ ЗАКРУГЛЕНИЕ
+                   Единый радиус 20px для всех элементов
+                ═══════════════════════════════════════════════════════════ */
+                'container': '1.25rem',  // 20px - main layout blocks
+                'card': '1.25rem',       // 20px - cards
+                'inner': '1.25rem',      // 20px - inner elements
+                'element': '0.75rem',    // 12px - small elements
+                'pill': '9999px',        // full - pill shapes
+                
+                // Legacy aliases
+                'button': '0.75rem',     // 12px
+                'input': '0.75rem',      // 12px
+            },
+            boxShadow: {
+                'thalassa-sm': '0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.04)',
+                'thalassa-md': '0 2px 8px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.04)',
+                'thalassa-lg': '0 4px 12px rgba(0, 0, 0, 0.06), 0 8px 24px rgba(0, 0, 0, 0.05)',
+                'thalassa-xl': '0 8px 24px rgba(0, 0, 0, 0.08), 0 16px 48px rgba(0, 0, 0, 0.06)',
+                'thalassa-card': '0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.04)',
             },
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
                 "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+                "thalassa-gradient": "linear-gradient(135deg, #F5F8FA 0%, #E8F4F8 50%, #D9EAF7 100%)",
             },
         },
     },
@@ -59,6 +103,3 @@ const config: Config = {
 };
 
 export default config;
-
-
-

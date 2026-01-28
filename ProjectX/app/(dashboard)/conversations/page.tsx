@@ -8,6 +8,7 @@ import { MessageComposer } from '@/components/conversations/MessageComposer';
 import { LeadDetailsPanel } from '@/components/conversations/LeadDetailsPanel';
 import { PlatformBadge } from '@/components/conversations/PlatformBadge';
 import { MessageSquare } from 'lucide-react';
+import { Card } from '@/components/ui/Card';
 
 export default function ConversationsPage() {
     const [conversations, setConversations] = useState<Conversation[]>(mockConversations);
@@ -64,20 +65,20 @@ export default function ConversationsPage() {
             {/* Three-Column Layout */}
             <div className="grid grid-cols-12 gap-8 h-full">
                 {/* Left: Conversation List */}
-                <div className="col-span-3 rounded-card overflow-hidden shadow-xl bg-dark-bg">
+                <Card variant="glass" className="col-span-3 p-0 overflow-hidden">
                     <ConversationList
                         conversations={conversations}
                         activeConversationId={activeConversationId}
                         onSelectConversation={setActiveConversationId}
                     />
-                </div>
+                </Card>
 
                 {/* Center: Message Thread */}
-                <div className="col-span-6 rounded-card overflow-hidden shadow-xl bg-dark-bg flex flex-col">
+                <Card variant="glass" className="col-span-6 p-0 overflow-hidden flex flex-col">
                     {activeConversation ? (
                         <>
                             {/* Thread Header */}
-                            <div className="p-4 border-b border-white/10 flex items-center gap-3 bg-dark-surface">
+                            <div className="p-4 border-b border-white/10 flex items-center gap-3 bg-white/5">
                                 <PlatformBadge platform={activeConversation.platform} size="md" />
                                 <div className="flex-1">
                                     <h2 className="font-bold text-white">{activeConversation.leadName}</h2>
@@ -102,10 +103,10 @@ export default function ConversationsPage() {
                             </div>
                         </div>
                     )}
-                </div>
+                </Card>
 
                 {/* Right: Lead Details */}
-                <div className="col-span-3 rounded-card overflow-hidden shadow-xl bg-dark-bg">
+                <Card variant="glass" className="col-span-3 p-0 overflow-hidden">
                     {activeConversation ? (
                         <LeadDetailsPanel
                             leadDetails={activeConversation.leadDetails}
@@ -113,11 +114,11 @@ export default function ConversationsPage() {
                             status={activeConversation.status}
                         />
                     ) : (
-                        <div className="h-full bg-dark-surface flex items-center justify-center">
+                        <div className="h-full bg-white/5 flex items-center justify-center">
                             <p className="text-text-secondary text-sm">No conversation selected</p>
                         </div>
                     )}
-                </div>
+                </Card>
             </div>
         </div>
     );

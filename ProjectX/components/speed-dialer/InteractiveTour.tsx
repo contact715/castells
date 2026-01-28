@@ -111,7 +111,7 @@ export function InteractiveTour() {
             </div>
 
             <div class="mt-16 text-center">
-                <button onclick="startHunt()" id="hunt-btn" class="px-10 py-4 bg-blue-600 text-white font-extrabold rounded-2xl shadow-2xl shadow-blue-300 hover:bg-blue-700 hover:-translate-y-1 transition-all active:scale-95 text-lg italic">ЗАПУСТИТЬ ОХОТУ 🚀</button>
+                <button onclick="startHunt()" id="hunt-btn" class="px-10 py-4 bg-primary text-white font-extrabold rounded-2xl shadow-2xl shadow-primary/30 hover:bg-primary/90 hover:-translate-y-1 transition-all active:scale-95 text-lg italic">ЗАПУСТИТЬ ОХОТУ 🚀</button>
             </div>
         </div>
     </section>

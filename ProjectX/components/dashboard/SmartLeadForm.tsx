@@ -80,7 +80,7 @@ export function SmartLeadForm() {
   return (
     <div className="w-full max-w-md mx-auto bg-[#0A0A0A] p-8 rounded-[2rem] shadow-2xl relative overflow-hidden">
       {/* Background Decor */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-coral/5 blur-[80px] rounded-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-[80px] rounded-full pointer-events-none" />
 
       <AnimatePresence mode="wait">
         {step === "form" && (
@@ -142,7 +142,7 @@ export function SmartLeadForm() {
                 </div>
               )}
 
-              <Button type="submit" className="w-full h-12 bg-coral hover:bg-orange-600 text-white font-bold rounded-[2rem]" disabled={isLoading}>
+              <Button type="submit" className="w-full h-12 bg-primary hover:bg-primary/80 text-black font-bold rounded-[2rem] shadow-[0_0_20px_rgba(var(--accent),0.22)] transition-all hover:scale-[1.02]" disabled={isLoading}>
                 {isLoading ? <Spinner className="w-5 h-5" /> : "Check Availability"}
               </Button>
             </form>
@@ -157,7 +157,7 @@ export function SmartLeadForm() {
             exit={{ opacity: 0, x: 20 }}
             className="text-center space-y-6 py-8"
           >
-            <div className="w-16 h-16 bg-bblue-500/10 rounded-full flex items-center justify-center mx-auto text-bblue-400 mb-4">
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary mb-4 shadow-[0_0_20px_rgba(var(--accent),0.16)]">
               <ShieldCheck className="w-8 h-8" />
             </div>
 
@@ -180,8 +180,8 @@ export function SmartLeadForm() {
               <div className="text-red-400 text-sm">{error}</div>
             )}
 
-            <Button onClick={onVerifyOtp} className="w-full bg-bblue-600 hover:bg-bblue-700 text-white h-12 rounded-[2rem]" disabled={isLoading}>
-              {isLoading ? <Spinner className="w-5 h-5 text-white" /> : "Verify Code"}
+            <Button onClick={onVerifyOtp} className="w-full bg-primary hover:bg-primary/80 text-black h-12 rounded-[2rem] font-bold shadow-[0_0_20px_rgba(var(--accent),0.22)]" disabled={isLoading}>
+              {isLoading ? <Spinner className="w-5 h-5 text-black" /> : "Verify Code"}
             </Button>
           </motion.div>
         )}

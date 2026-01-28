@@ -114,7 +114,7 @@ export const FireEffect = () => (
                     delay: Math.random() * 1,
                     ease: "easeOut"
                 }}
-                className="absolute w-6 bg-gradient-to-t from-orange-600 via-red-500 to-amber-300 rounded-t-full filter blur-[4px]"
+                className="absolute w-6 bg-gradient-to-t from-blue-600 via-primary to-purple-300 rounded-t-full filter blur-[4px]"
                 style={{
                     left: `${(i / 12) * 100}%`,
                     width: `${Math.random() * 10 + 10}%`
@@ -122,6 +122,6 @@ export const FireEffect = () => (
             />
         ))}
         {/* Base Glow */}
-        <div className="absolute bottom-0 left-0 right-0 h-10 bg-orange-600/30 blur-xl" />
+        <div className="absolute bottom-0 left-0 right-0 h-10 bg-primary/30 blur-xl" />
     </div>
 );
