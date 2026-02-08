@@ -23,7 +23,8 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
         email: '',
         phone: '',
         topic: 'web-design',
-        message: ''
+        message: '',
+        smsConsent: false
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
@@ -67,7 +68,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
 
             if (result.success) {
                 setIsSuccess(true);
-                setFormState({ name: '', email: '', phone: '', topic: 'web-design', message: '' });
+                setFormState({ name: '', email: '', phone: '', topic: 'web-design', message: '', smsConsent: false });
 
                 // Navigate to thank you page after successful submission
                 if (onNavigate) {
@@ -264,6 +265,38 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                     />
                                 </div>
 
+                                {/* SMS Consent Checkbox */}
+                                <div className="space-y-2">
+                                    <label className="flex items-start gap-3 cursor-pointer group">
+                                        <input
+                                            type="checkbox"
+                                            checked={formState.smsConsent}
+                                            onChange={e => setFormState({ ...formState, smsConsent: e.target.checked })}
+                                            className="mt-1 w-4 h-4 rounded border-black/20 dark:border-white/20 text-coral focus:ring-coral focus:ring-offset-0 cursor-pointer shrink-0"
+                                        />
+                                        <span className="text-xs text-text-secondary leading-relaxed">
+                                            I agree to receive SMS/text messages from Castells Agency LLC at the phone number provided. I understand that message and data rates may apply, message frequency varies (typically 1–5/month), and I can opt out at any time by replying STOP. Reply HELP for help. See our{' '}
+                                            <button
+                                                type="button"
+                                                onClick={(e) => { e.preventDefault(); onNavigate?.('privacy-policy'); }}
+                                                className="text-coral hover:underline"
+                                            >
+                                                Privacy Policy
+                                            </button>{' '}and{' '}
+                                            <button
+                                                type="button"
+                                                onClick={(e) => { e.preventDefault(); onNavigate?.('terms'); }}
+                                                className="text-coral hover:underline"
+                                            >
+                                                Terms of Service
+                                            </button>. Consent is not a condition of purchase.
+                                        </span>
+                                    </label>
+                                    {fieldErrors.smsConsent && (
+                                        <p className="text-xs text-red-500 ml-7">{fieldErrors.smsConsent}</p>
+                                    )}
+                                </div>
+
                                 {/* Error Message */}
                                 {error && (
                                     <div className="pt-4">
@@ -294,13 +327,20 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                         )}
                                     </Button>
                                     <p className="text-[10px] text-text-secondary mt-4 text-center">
-                                        By clicking \"Send Request\", you consent to our{' '}
+                                        By clicking "Send Request", you agree to our{' '}
                                         <button
                                             type="button"
                                             onClick={() => onNavigate?.('privacy-policy')}
                                             className="text-coral hover:underline cursor-pointer"
                                         >
                                             Privacy Policy
+                                        </button>{' '}and{' '}
+                                        <button
+                                            type="button"
+                                            onClick={() => onNavigate?.('terms')}
+                                            className="text-coral hover:underline cursor-pointer"
+                                        >
+                                            Terms of Service
                                         </button>
                                         .
                                     </p>

@@ -30,41 +30,83 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
         >
           <div className="bg-white dark:bg-white/5  rounded-[2rem] p-8 md:p-12 space-y-10">
             <div className="text-sm text-text-secondary">
-              <p><span className="font-semibold text-text-primary">Last updated:</span> Dec 17, 2025</p>
+              <p><span className="font-semibold text-text-primary">Last updated:</span> February 7, 2026</p>
+              <p className="mt-2">These Terms of Service ("Terms") govern your use of the website and services provided by Castells Agency LLC ("Castells," "we," "us," or "our"). By accessing our website or using our services, including receiving SMS/text messages, you agree to these Terms.</p>
             </div>
 
             <section className="space-y-3">
               <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">1. Using the site</h2>
               <p className="text-text-secondary">
-                You may browse our site and submit inquiries. You agree not to misuse the site, attempt to disrupt services, or submit unlawful content.
+                You may browse our site and submit inquiries through our contact forms. You agree not to misuse the site, attempt to disrupt services, or submit unlawful content. You must be at least 18 years of age to use our services.
               </p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">2. No guarantees</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">2. SMS/Text messaging terms</h2>
               <p className="text-text-secondary">
-                Any examples, metrics, or case studies are illustrative. Marketing results vary based on market conditions, budget, competition, and many other factors.
+                By opting in to receive SMS/text messages from Castells Agency LLC, you agree to the following:
               </p>
+              <ul className="list-disc pl-6 text-text-secondary space-y-2">
+                <li><span className="font-semibold text-text-primary">Consent:</span> You consent to receive text messages from Castells Agency LLC at the phone number you provided. Consent is not a condition of any purchase.</li>
+                <li><span className="font-semibold text-text-primary">Types of messages:</span> You may receive service updates, appointment reminders, project notifications, and occasional promotional offers related to our digital marketing services.</li>
+                <li><span className="font-semibold text-text-primary">Message frequency:</span> Message frequency varies. Typically 1–5 messages per month.</li>
+                <li><span className="font-semibold text-text-primary">Costs:</span> Message and data rates may apply. You are responsible for any charges from your mobile carrier.</li>
+                <li><span className="font-semibold text-text-primary">Opt-out:</span> You may opt out at any time by replying <span className="font-mono font-semibold text-text-primary">STOP</span> to any message. You will receive a confirmation and no further messages.</li>
+                <li><span className="font-semibold text-text-primary">Help:</span> Reply <span className="font-mono font-semibold text-text-primary">HELP</span> for assistance or email <a className="text-coral hover:underline" href="mailto:hello@castells.agency">hello@castells.agency</a>.</li>
+                <li><span className="font-semibold text-text-primary">Carriers supported:</span> Compatible with major US carriers including AT&T, T-Mobile, Verizon, and others. Carrier participation may vary.</li>
+              </ul>
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">3. Intellectual property</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">3. No guarantees</h2>
               <p className="text-text-secondary">
-                Site content (text, visuals, code, branding) belongs to Castells or its licensors and may not be copied or reused without permission.
+                Any examples, metrics, or case studies are illustrative. Marketing results vary based on market conditions, budget, competition, and many other factors. Past results do not guarantee future performance.
               </p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">4. Links & third parties</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">4. Intellectual property</h2>
               <p className="text-text-secondary">
-                We may link to third-party websites or tools. We are not responsible for their content or practices.
+                Site content (text, visuals, code, branding) belongs to Castells Agency LLC or its licensors and may not be copied, reproduced, or reused without prior written permission.
               </p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">5. Contact</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">5. Links & third parties</h2>
+              <p className="text-text-secondary">
+                We may link to third-party websites or tools. We are not responsible for their content, privacy practices, or terms of service.
+              </p>
+            </section>
+
+            <section className="space-y-3">
+              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">6. Privacy</h2>
+              <p className="text-text-secondary">
+                Your use of our services is also governed by our{' '}
+                <button
+                  type="button"
+                  onClick={() => onNavigate?.('privacy-policy')}
+                  className="text-coral hover:underline cursor-pointer"
+                >
+                  Privacy Policy
+                </button>
+                , which describes how we collect, use, and protect your personal information, including data collected through our SMS program.
+              </p>
+            </section>
+
+            <section className="space-y-3">
+              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">7. Changes to these terms</h2>
+              <p className="text-text-secondary">
+                We may update these Terms from time to time. Continued use of our website or services after changes constitutes acceptance of the updated Terms.
+              </p>
+            </section>
+
+            <section className="space-y-3">
+              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">8. Contact</h2>
               <p className="text-text-secondary">
                 Questions about these terms: <a className="text-coral hover:underline" href="mailto:hello@castells.agency">hello@castells.agency</a>
+              </p>
+              <p className="text-text-secondary">
+                Castells Agency LLC, Santa Monica, CA 90401
               </p>
             </section>
           </div>
