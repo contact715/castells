@@ -117,7 +117,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                     name: 'Castells Agency',
                     description: 'Revenue-focused digital marketing agency helping contractors and service providers dominate their local markets.',
                     telephone: '+1-555-000-0000',
-                    email: 'hello@castells.agency',
+                    email: 'contact@castells.media',
                     streetAddress: '1234 Main Street',
                     postalCode: '90401',
                     latitude: 34.0195,

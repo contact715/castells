@@ -26,7 +26,7 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
           },
           contactPoint: {
             '@type': 'ContactPoint',
-            email: 'hello@castells.agency',
+            email: 'contact@castells.media',
             contactType: 'Customer Service'
           },
           sameAs: [
@@ -154,7 +154,7 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
             longitude: data?.longitude || -118.4912
           },
           telephone: data?.telephone || '+1-555-000-0000',
-          email: data?.email || 'hello@castells.agency',
+          email: data?.email || 'contact@castells.media',
           priceRange: data?.priceRange || '$$$',
           areaServed: {
             '@type': 'Country',

@@ -73,7 +73,7 @@ const submitViaResend = async (
       },
       body: JSON.stringify({
         from: 'Castells Agency <noreply@castells.agency>',
-        to: ['hello@castells.agency'], // Your email
+        to: ['contact@castells.media'], // Your email
         reply_to: data.email,
         subject: `New Contact Form Submission: ${data.topic}`,
         html: `
@@ -206,7 +206,7 @@ const submitQuizViaResend = async (
       },
       body: JSON.stringify({
         from: 'Castells Agency <noreply@castells.agency>',
-        to: ['hello@castells.agency'],
+        to: ['contact@castells.media'],
         reply_to: data.email,
         subject: 'New Growth Audit Request',
         html: `

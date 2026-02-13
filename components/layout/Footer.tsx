@@ -83,8 +83,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
                   {/* Contact Info */}
                   <div className="flex flex-col lg:items-end gap-2 text-white/70 text-sm font-medium">
-                    <a href="mailto:hello@castells.agency" className="flex items-center gap-2 hover:text-white transition-colors group">
-                      hello@castells.agency
+                    <a href="mailto:contact@castells.media" className="flex items-center gap-2 hover:text-white transition-colors group">
+                      contact@castells.media
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </a>
                     <span className="flex items-center gap-2">
