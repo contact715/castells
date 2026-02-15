@@ -171,7 +171,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
         return new Date().toISOString().split('T')[0];
     };
 
-    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
     const enhancedDescription = `${post.content.intro} Marketing insights and strategies from Castells Agency, serving businesses in Santa Monica, Los Angeles, and nationwide.`;
 
     return (
@@ -212,7 +212,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                         name: 'Castells Agency',
                         logo: {
                             '@type': 'ImageObject',
-                            url: typeof window !== 'undefined' ? `${window.location.origin}/castells-logo.png` : 'https://castells.agency/castells-logo.png'
+                            url: typeof window !== 'undefined' ? `${window.location.origin}/castells-logo.png` : 'https://castells.studio/castells-logo.png'
                         }
                     }
                 }}

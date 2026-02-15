@@ -90,13 +90,13 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
     }, [formState, onNavigate, validationRules]);
 
     const contactMethods = [
-        { icon: Calendar, label: 'Calendly', value: 'Schedule a call', href: 'https://calendly.com', color: 'bg-blue-500/10 text-blue-500' },
-        { icon: Phone, label: 'Phone Call', value: '+1 (555) 000-0000', href: 'tel:+15550000000', color: 'bg-green-500/10 text-green-500' },
-        { icon: MessageCircle, label: 'WhatsApp', value: 'Chat with us', href: 'https://whatsapp.com', color: 'bg-emerald-500/10 text-emerald-500' },
-        { icon: Send, label: 'Telegram', value: '@castells_agency', href: 'https://t.me', color: 'bg-sky-500/10 text-sky-500' },
+        { icon: Calendar, label: 'Book a Call', value: 'Schedule a call', href: 'https://calendar.app.google/3ydSwahZK2uNw6EA8', color: 'bg-blue-500/10 text-blue-500' },
+        { icon: Phone, label: 'Phone Call', value: '+1 (956) 315-3156', href: 'tel:+19563153156', color: 'bg-green-500/10 text-green-500' },
+        { icon: MessageCircle, label: 'WhatsApp', value: 'Chat with us', href: 'https://wa.me/19563153156', color: 'bg-emerald-500/10 text-emerald-500' },
+        { icon: Send, label: 'Telegram', value: 'Message us', href: 'https://t.me/+19563153156', color: 'bg-sky-500/10 text-sky-500' },
     ];
 
-    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
 
     return (
         <>
@@ -116,7 +116,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                 data={{
                     name: 'Castells Agency',
                     description: 'Revenue-focused digital marketing agency helping contractors and service providers dominate their local markets.',
-                    telephone: '+1-555-000-0000',
+                    telephone: '+1-956-315-3156',
                     email: 'contact@castells.media',
                     streetAddress: '1234 Main Street',
                     postalCode: '90401',
@@ -221,7 +221,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                             <input
                                                 type="tel"
                                                 id="phone"
-                                                placeholder="(555) 000-0000"
+                                                placeholder="(956) 315-3156"
                                                 value={formState.phone}
                                                 onChange={e => setFormState({ ...formState, phone: e.target.value })}
                                                 className="flex-1 bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-[2rem] px-4 py-3 text-sm focus:outline-none focus:-coral transition-all placeholder:text-text-secondary/50"
@@ -429,9 +429,9 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
 
                                 <div className="space-y-3">
                                     {[
-                                        { email: 'hello@castells.studio', label: 'General Purpose' },
-                                        { email: 'partners@castells.studio', label: 'Partnership' },
-                                        { email: 'careers@castells.studio', label: 'Careers' }
+                                        { email: 'contact@castells.media', label: 'General Purpose' },
+                                        { email: 'contact@castells.media', label: 'Partnership' },
+                                        { email: 'contact@castells.media', label: 'Careers' }
                                     ].map((item, index) => (
                                         <motion.a
                                             key={item.email}

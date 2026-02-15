@@ -7,7 +7,7 @@ interface SchemaMarkupProps {
 
 const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data }) => {
   const getSchema = () => {
-    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
     
     switch (type) {
       case 'Organization':
@@ -153,7 +153,7 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
             latitude: data?.latitude || 34.0195,
             longitude: data?.longitude || -118.4912
           },
-          telephone: data?.telephone || '+1-555-000-0000',
+          telephone: data?.telephone || '+1-956-315-3156',
           email: data?.email || 'contact@castells.media',
           priceRange: data?.priceRange || '$$$',
           areaServed: {

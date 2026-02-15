@@ -220,7 +220,7 @@ const Hero: React.FC = () => {
         }
     };
 
-    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
     const videoId = '1101673750';
 
 

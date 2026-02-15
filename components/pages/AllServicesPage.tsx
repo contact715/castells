@@ -52,7 +52,7 @@ const PROCESS_STEPS = [
 const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate }) => {
   const [activeCategory, setActiveCategory] = useState(0);
 
-  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
 
   return (
     <div className="min-h-screen bg-ivory dark:bg-[#191919]">

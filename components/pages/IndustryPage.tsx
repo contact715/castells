@@ -149,7 +149,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
         return merged.slice(0, 3);
     })();
 
-    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
     const enhancedDescription = `${seoDescription} Specialized marketing strategies for ${displayName.toLowerCase()} businesses in Santa Monica, Los Angeles, and across the US. Proven results with 3x average ROAS.`;
 
     return (

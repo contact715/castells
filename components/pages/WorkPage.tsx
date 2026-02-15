@@ -90,7 +90,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
         setCurrentPage(1);
     }, [searchQuery, selectedCategories, selectedIndustries, sortBy]);
 
-    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
 
     return (
         <>

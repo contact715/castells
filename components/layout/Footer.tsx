@@ -53,7 +53,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                   <div className="flex items-center gap-2 mb-3">
                     <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
                     <span className="text-xs font-bold uppercase tracking-widest text-white/80">
-                      Q2 2025 — Limited Availability
+                      Q1 2026 — Limited Availability
                     </span>
                   </div>
 
@@ -169,20 +169,20 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 </div>
               </div>
               <div>
-                <h4 className="text-xs font-semibold uppercase tracking-widest text-coral dark:text-coral mb-3">Tools</h4>
+                <h4 className="text-xs font-semibold uppercase tracking-widest text-coral dark:text-coral mb-3">Get Started</h4>
                 <div className="flex flex-col gap-2 text-text-secondary text-sm">
-                  <a href="/contact" onClick={(e) => handleNav(e, 'contact')} className="hover:text-coral transition-colors">ROI Calculator</a>
-                  <a href="/contact" onClick={(e) => handleNav(e, 'contact')} className="hover:text-coral transition-colors">Competitor Audit</a>
-                  <a href="/contact" onClick={(e) => handleNav(e, 'contact')} className="hover:text-coral transition-colors">Keyword Planner</a>
+                  <a href="/contact" onClick={(e) => handleNav(e, 'contact')} className="hover:text-coral transition-colors">Free Growth Audit</a>
+                  <a href="/contact" onClick={(e) => handleNav(e, 'contact')} className="hover:text-coral transition-colors">Get a Quote</a>
+                  <a href="/contact" onClick={(e) => handleNav(e, 'contact')} className="hover:text-coral transition-colors">Schedule a Call</a>
                 </div>
               </div>
               <div>
                 <h4 className="text-xs font-semibold uppercase tracking-widest text-coral dark:text-coral mb-3">Company</h4>
                 <div className="flex flex-col gap-2 text-text-secondary text-sm">
-                  <a href="#about" onClick={(e) => handleNav(e, 'about')} className="hover:text-text-primary dark:hover:text-white transition-colors">About Us</a>
-                  <a href="#careers" onClick={(e) => handleNav(e, 'careers')} className="hover:text-text-primary dark:hover:text-white transition-colors">Careers</a>
+                  <a href="/about" onClick={(e) => handleNav(e, 'about')} className="hover:text-text-primary dark:hover:text-white transition-colors">About Us</a>
+                  <a href="/careers" onClick={(e) => handleNav(e, 'careers')} className="hover:text-text-primary dark:hover:text-white transition-colors">Careers</a>
                   <a href="/company" onClick={(e) => handleNav(e, 'company')} className="hover:text-text-primary dark:hover:text-white transition-colors">Partner Program</a>
-                  <a href="#contact" onClick={(e) => handleNav(e, 'contact')} className="hover:text-text-primary dark:hover:text-white transition-colors">Contact</a>
+                  <a href="/contact" onClick={(e) => handleNav(e, 'contact')} className="hover:text-text-primary dark:hover:text-white transition-colors">Contact</a>
                 </div>
               </div>
               <div>

@@ -24,11 +24,11 @@ export const ContactButtons = ({ defaultExpanded = 'Book call' }: { defaultExpan
             onMouseLeave={() => setHoveredButton(defaultExpanded)}
         >
             {[
-                { label: 'Phone', cta: 'Call now', icon: Phone, href: 'tel:+15550000000', external: false },
-                { label: 'WhatsApp', cta: 'WhatsApp', icon: WhatsAppIcon, href: 'https://whatsapp.com', external: true },
-                { label: 'Telegram', cta: 'Telegram', icon: Send, href: 'https://t.me', external: true },
-                { label: 'Email', cta: 'Email us', icon: Mail, href: 'mailto:hello@castells.studio', external: false },
-                { label: 'Calendly', cta: 'Book call', icon: Calendar, href: 'https://calendly.com', external: true },
+                { label: 'Phone', cta: 'Call now', icon: Phone, href: 'tel:+19563153156', external: false },
+                { label: 'WhatsApp', cta: 'WhatsApp', icon: WhatsAppIcon, href: 'https://wa.me/19563153156', external: true },
+                { label: 'Telegram', cta: 'Telegram', icon: Send, href: 'https://t.me/+19563153156', external: true },
+                { label: 'Email', cta: 'Email us', icon: Mail, href: 'mailto:contact@castells.media', external: false },
+                { label: 'Calendly', cta: 'Book call', icon: Calendar, href: 'https://calendar.app.google/3ydSwahZK2uNw6EA8', external: true },
             ].map((m) => {
                 const isExpanded = hoveredButton === m.cta;
                 return (

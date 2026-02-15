@@ -27,7 +27,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   className,
   illustration,
 }) => {
-  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+  const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
   
   const breadcrumbItems = breadcrumbs.map(item => ({
     ...item,

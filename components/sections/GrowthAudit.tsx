@@ -50,7 +50,7 @@ const GrowthAudit: React.FC = () => {
                         <div className="flex items-center gap-2 mb-3">
                             <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
                             <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-                                Limited Availability: Q2 2025
+                                Limited Availability: Q1 2026
                             </span>
                         </div>
                         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary mb-6 leading-tight tracking-tight">

@@ -81,7 +81,7 @@ const BLOG_POSTS = [
 ];
 
 const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
-  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
 
   return (
     <>

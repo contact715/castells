@@ -39,7 +39,7 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
     ? CASE_STUDIES.filter(cs => author.caseStudies?.includes(cs.id))
     : [];
 
-  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
 
   return (
     <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">

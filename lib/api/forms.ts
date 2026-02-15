@@ -72,7 +72,7 @@ const submitViaResend = async (
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: 'Castells Agency <noreply@castells.agency>',
+        from: 'Castells Agency <noreply@castells.media>',
         to: ['contact@castells.media'], // Your email
         reply_to: data.email,
         subject: `New Contact Form Submission: ${data.topic}`,
@@ -83,7 +83,7 @@ const submitViaResend = async (
           ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ''}
           <p><strong>Topic:</strong> ${data.topic}</p>
           <p><strong>Message:</strong></p>
-          <p>${data.message.replace(/\n/g, '<br>')}</p>
+          <p>${data.message.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/\n/g, '<br>')}</p>
         `,
       }),
     });
@@ -205,18 +205,18 @@ const submitQuizViaResend = async (
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: 'Castells Agency <noreply@castells.agency>',
+        from: 'Castells Agency <noreply@castells.media>',
         to: ['contact@castells.media'],
         reply_to: data.email,
         subject: 'New Growth Audit Request',
         html: `
           <h2>New Growth Audit Request</h2>
-          <p><strong>Name:</strong> ${data.name}</p>
-          <p><strong>Email:</strong> ${data.email}</p>
-          ${data.website ? `<p><strong>Website:</strong> ${data.website}</p>` : ''}
-          ${data.goal ? `<p><strong>Goal:</strong> ${data.goal}</p>` : ''}
-          ${data.budget ? `<p><strong>Budget:</strong> ${data.budget}</p>` : ''}
-          ${data.industry ? `<p><strong>Industry:</strong> ${data.industry}</p>` : ''}
+          <p><strong>Name:</strong> ${(data.name || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+          <p><strong>Email:</strong> ${(data.email || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
+          ${data.website ? `<p><strong>Website:</strong> ${data.website.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>` : ''}
+          ${data.goal ? `<p><strong>Goal:</strong> ${data.goal.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>` : ''}
+          ${data.budget ? `<p><strong>Budget:</strong> ${data.budget.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>` : ''}
+          ${data.industry ? `<p><strong>Industry:</strong> ${data.industry.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>` : ''}
         `,
       }),
     });

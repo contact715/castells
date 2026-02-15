@@ -151,7 +151,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
         return merged.slice(0, 3);
     })();
 
-    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
     const enhancedDescription = `${seoDescription} Serving businesses in Santa Monica, Los Angeles, and nationwide. Proven results with 3x average ROAS and $50M+ revenue generated.`;
 
     return (

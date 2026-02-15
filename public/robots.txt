@@ -1,11 +1,4 @@
 User-agent: *
-Disallow: /
+Allow: /
 
-# Site is closed from indexing temporarily
-# Sitemap: https://castells.agency/sitemap.xml
-
-
-
-
-
-
+Sitemap: https://castells.studio/sitemap.xml

@@ -22,7 +22,7 @@ const OPENINGS = [
 import SEO from '../ui/SEO';
 
 const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
-  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
 
   return (
     <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20 animate-in fade-in duration-500">

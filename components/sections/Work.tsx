@@ -143,8 +143,9 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
         e.currentTarget.style.willChange = 'transform';
       }}
       onMouseLeave={(e) => {
+        const target = e.currentTarget;
         setTimeout(() => {
-          e.currentTarget.style.willChange = 'auto';
+          if (target) target.style.willChange = 'auto';
         }, 500);
       }}
     >

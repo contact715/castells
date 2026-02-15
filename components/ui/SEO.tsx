@@ -20,7 +20,7 @@ const SEO: React.FC<SEOProps> = ({
     title = 'Castells Agency | Dominate Your Market',
     description = 'We help contractors and service providers dominate their local markets through data-driven strategies.',
     canonical,
-    image = 'https://castells.agency/og-image.svg',
+    image = 'https://castells.studio/og-image.svg',
     type = 'website',
     robots = 'index, follow',
     keywords,
@@ -30,7 +30,7 @@ const SEO: React.FC<SEOProps> = ({
     summary,
     mainEntity
 }) => {
-    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
     const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
     const fullCanonical = canonical
         ? (canonical.startsWith('http') ? canonical : `${siteUrl}${canonical.startsWith('/') ? '' : '/'}${canonical}`)

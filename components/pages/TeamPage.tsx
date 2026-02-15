@@ -212,7 +212,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
         ? TEAM_MEMBERS 
         : TEAM_MEMBERS.filter(member => member.category.includes(activeCategory));
 
-    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
 
     return (
         <>

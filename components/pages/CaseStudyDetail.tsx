@@ -137,7 +137,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
     setTimeout(calculateReadTime, 500);
   }, [data]);
 
-  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
   const enhancedDescription = `${data.description} Real results from Castells Agency's marketing strategies. Serving businesses in Santa Monica, Los Angeles, and nationwide.`;
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
 

@@ -169,7 +169,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
         setCurrentPage(1);
     }, [searchQuery, selectedCategories, sortBy]);
 
-    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
 
     return (
         <>

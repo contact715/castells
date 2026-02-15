@@ -1,10 +1,9 @@
 {
   "routes": [
+    { "src": "/auth/thumbtack/callback", "dest": "/api/thumbtack.py" },
+    { "src": "/webhook/thumbtack/(.*)", "dest": "/api/thumbtack.py" },
+    { "src": "/api/health", "dest": "/api/health.py" },
     { "handle": "filesystem" },
     { "src": "/.*", "dest": "/index.html" }
   ]
 }
-
-
-
-

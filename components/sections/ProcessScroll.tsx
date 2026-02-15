@@ -1002,7 +1002,7 @@ const PROCESS_STEPS: ProcessStep[] = [
 
 const ProcessScroll: React.FC = () => {
     const [activeStep, setActiveStep] = useState(0);
-    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.agency';
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
 
     return (
         <div className="w-full">
