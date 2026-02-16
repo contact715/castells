@@ -24,9 +24,19 @@ const CookieConsent: React.FC = React.memo(() => {
     if (!consent) {
       setIsVisible(true);
     } else {
-      const savedPreferences = JSON.parse(consent);
-      setPreferences(savedPreferences);
-      applyCookiePreferences(savedPreferences);
+      try {
+        const savedPreferences = JSON.parse(consent);
+        if (savedPreferences && typeof savedPreferences === 'object' && 'essential' in savedPreferences) {
+          setPreferences(savedPreferences);
+          applyCookiePreferences(savedPreferences);
+        }
+      } catch {
+        // Legacy plain-string value (e.g. "accepted") — treat as all accepted
+        const allAccepted = { essential: true, analytics: true, marketing: true };
+        localStorage.setItem('cookie-consent', JSON.stringify(allAccepted));
+        setPreferences(allAccepted);
+        applyCookiePreferences(allAccepted);
+      }
     }
   }, []);
 

@@ -27,6 +27,7 @@ import { useTimeOnPage } from './lib/hooks/useTimeOnPage';
 // Lazy load components for performance
 const Hero = React.lazy(() => import('./components/sections/Hero'));
 const Services = React.lazy(() => import('./components/sections/Services'));
+const ServicesConstellation = React.lazy(() => import('./components/sections/ServicesConstellationSection'));
 const Work = React.lazy(() => import('./components/sections/Work'));
 const WhyChoose = React.lazy(() => import('./components/sections/WhyChoose'));
 const Industries = React.lazy(() => import('./components/sections/Industries'));
@@ -182,7 +183,7 @@ function App() {
                   </LazySection>
                   <LazySection rootMargin="300px">
                     <Suspense fallback={null}>
-                      <Services />
+                      <ServicesConstellation />
                     </Suspense>
                   </LazySection>
                   <LazySection rootMargin="300px">

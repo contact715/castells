@@ -1,0 +1,16 @@
+node_modules
+dist
+Master
+docs
+stats.html
+*.md
+*.pdf
+public/*.pdf
+public/Roman's Service*
+public/Smart Factory*
+public/UNITED HVAC*
+public/LogoBook*
+public/Kit Modern*
+public/Aveon*
+public/Detailed Exotics*
+public/Appliance_HVAC*
