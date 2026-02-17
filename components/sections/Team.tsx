@@ -119,7 +119,7 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
               <img
                 src={member.image}
                 alt={member.name}
-                className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 will-change-transform"
+                className="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                 style={{ transform: 'translateZ(0)' }}
                 loading="lazy"
                 decoding="async"

@@ -27,22 +27,8 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* Top Section: CTA with Video */}
         <div className="mb-12 pb-8">
           <div className="relative rounded-[2rem] overflow-hidden bg-white dark:bg-surface">
-            {/* Video Background */}
-            <div className="absolute inset-0">
-              <video
-                autoPlay
-                loop
-                muted
-                playsInline
-                preload="metadata"
-                className="absolute inset-0 w-full h-full object-cover"
-                style={{ zIndex: 1 }}
-              >
-                <source src="https://media.istockphoto.com/id/1287601917/video/close-up-of-diverse-multiethnic-team-having-conversation-in-meeting-room-in-a-creative-office.mp4?s=mp4-640x640-is&k=20&c=itAwTLCSvfv3Wd3vqirH0-8_bA2JMywNLZOAFkO9lzM=" type="video/mp4" />
-              </video>
-              {/* Very light gradient overlay - only for text readability */}
-              <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-black/10 to-transparent dark:from-black/40 dark:via-black/20" style={{ zIndex: 2 }} />
-            </div>
+            {/* Background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/70 to-black/50 dark:from-black/95 dark:via-black/80 dark:to-black/60" />
 
             {/* Content Overlay */}
             <div className="relative z-10 p-6 md:p-8 lg:p-10">
@@ -51,7 +37,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <div>
                   {/* Badge */}
                   <div className="flex items-center gap-2 mb-3">
-                    <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
+                    <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse" />
                     <span className="text-xs font-bold uppercase tracking-widest text-white/80">
                       Q1 2026 — Limited Availability
                     </span>

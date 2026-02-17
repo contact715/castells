@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useInView, useScroll, useTransform } from 'framer-motion';
+import { m as motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { Calendar, TrendingUp, Users, Award, Rocket, Target } from 'lucide-react';
 import { cn } from '../../lib/utils';
 

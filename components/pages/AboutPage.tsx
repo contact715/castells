@@ -226,15 +226,15 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onBack, onNavigate }) 
         {/* Image Grid */}
         <div className="grid grid-cols-12 gap-4 mb-32 h-[600px]">
           <div className="col-span-8 h-full rounded-[2rem] overflow-hidden relative group">
-            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform" style={{ transform: 'translateZ(0)' }} alt="Office" />
+            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" alt="Office" />
             <div className="absolute bottom-6 left-6 bg-white dark:bg-surface px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest text-text-primary dark:text-white  -black/5 dark:-white/10">Global HQ — Santa Monica</div>
           </div>
           <div className="col-span-4 flex flex-col gap-4 h-full">
             <div className="h-1/2 rounded-[2rem] overflow-hidden relative group">
-              <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform" style={{ transform: 'translateZ(0)' }} alt="Meeting" />
+              <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" alt="Meeting" />
             </div>
             <div className="h-1/2 rounded-[2rem] overflow-hidden relative group">
-              <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 will-change-transform" style={{ transform: 'translateZ(0)' }} alt="Team" />
+              <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" alt="Team" />
             </div>
           </div>
         </div>

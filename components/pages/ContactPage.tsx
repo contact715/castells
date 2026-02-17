@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { Calendar, Phone, MessageCircle, Send, Mail, ArrowRight, CheckCircle2, Users, Briefcase, FileText, Play } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
@@ -460,7 +460,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                 <div className="mb-32">
                     <div className="max-w-3xl mb-10">
                         <div className="flex items-center gap-2 mb-3">
-                            <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+                            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
                             <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
                                 Testimonials
                             </span>
@@ -559,7 +559,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                 <div className="mb-32">
                     <div className="max-w-3xl mb-10">
                         <div className="flex items-center gap-2 mb-3">
-                            <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+                            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
                             <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
                                 Discover
                             </span>

@@ -48,7 +48,7 @@ const GrowthAudit: React.FC = () => {
                     {/* Left Column: Copy */}
                     <div className="flex flex-col items-start text-left">
                         <div className="flex items-center gap-2 mb-3">
-                            <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
+                            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse"></span>
                             <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
                                 Limited Availability: Q1 2026
                             </span>

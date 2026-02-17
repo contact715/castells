@@ -30,7 +30,7 @@ export const Badge: React.FC<BadgeProps> = ({
       {variant !== 'outline' && (
         <span
           className={cn(
-            "w-2 h-2 rounded-full bg-coral",
+            "w-2 h-2 rounded-full bg-coral-gradient",
             variant === 'pulse' && "animate-pulse"
           )}
         />

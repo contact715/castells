@@ -342,7 +342,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                                             <img
                                                 src={member.image}
                                                 alt={member.name}
-                                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 will-change-transform"
+                                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                                 style={{ transform: 'translateZ(0)' }}
                                             />
                                             <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent rounded-xl" />

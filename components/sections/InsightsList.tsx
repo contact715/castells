@@ -71,7 +71,7 @@ const InsightsList: React.FC = () => {
                             <img
                                 src={insight.image}
                                 alt={insight.title}
-                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 will-change-transform"
+                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                                 style={{ transform: 'translateZ(0)' }}
                                 loading="lazy"
                                 decoding="async"

@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { Code, TrendingUp, Users, Palette } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
@@ -136,27 +136,12 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
                             >
                                 {/* Background Media - Video for featured, Image for others */}
                                 <div className="absolute inset-0 overflow-hidden rounded-[2rem]">
-                                    {isFirst ? (
-                                        <video
-                                            autoPlay
-                                            loop
-                                            muted
-                                            playsInline
-                                            poster={post.image}
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
-                                            style={{ transform: 'translateZ(0)' }}
-                                        >
-                                            <source src="https://videos.pexels.com/video-files/3044159/3044159-hd_1920_1080_30fps.mp4" type="video/mp4" />
-                                        </video>
-                                    ) : (
-                                        <img
-                                            src={post.image}
-                                            alt={post.title}
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
-                                            loading="lazy"
-                                            style={{ transform: 'translateZ(0)' }}
-                                        />
-                                    )}
+                                    <img
+                                        src={post.image}
+                                        alt={post.title}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                                        loading={isFirst ? "eager" : "lazy"}
+                                    />
                                 </div>
                                 
                                 {/* Gradient Overlay for text readability */}

@@ -382,7 +382,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                 <img
                                                     src={post.image}
                                                     alt={post.title}
-                                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
+                                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                                     loading="lazy"
                                                     decoding="async"
                                                     style={{ transform: 'translateZ(0)' }}

@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { motion, useInView, Variants } from 'framer-motion';
+import { m as motion, useInView, Variants } from 'framer-motion';
 import { cn } from '../../lib/utils';
 
 interface AnimatedHeadingProps {

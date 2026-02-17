@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { ArrowLeft, Mail, Linkedin, Twitter, Briefcase, User } from 'lucide-react';
 import { Button } from '../ui/Button';
 import SEO from '../ui/SEO';
@@ -88,7 +88,7 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
             </div>
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-3">
-                <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+                <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
                 <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
                   Team Member
                 </span>

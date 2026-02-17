@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import type { NavigateFn } from '../../types';
 import { SERVICE_CATEGORIES as DATA_SERVICE_CATEGORIES, type ServiceCategoryId } from '../../data/services';
 import { Badge } from '../ui/Badge';

@@ -213,7 +213,7 @@ const ServicesConstellationSection: React.FC = React.memo(() => {
         {/* Section header */}
         <div className="mb-12 md:mb-16">
           <div className="flex items-center gap-2 mb-4">
-            <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
+            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse" />
             <span className="text-xs font-bold uppercase tracking-widest text-white/40">Our Expertise</span>
           </div>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-white">
@@ -234,7 +234,7 @@ const ServicesConstellationSection: React.FC = React.memo(() => {
                 style={{ '--text-delay': `${i * 0.1}s` } as React.CSSProperties}
               >
                 <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-[2rem] bg-coral/10 flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-[2rem] bg-coral-gradient-subtle flex items-center justify-center flex-shrink-0">
                     <b.icon className="w-5 h-5 md:w-6 md:h-6 text-coral" strokeWidth={1.5} />
                   </div>
                   <h3 className="font-display text-xl md:text-2xl font-semibold text-white">{b.title}</h3>

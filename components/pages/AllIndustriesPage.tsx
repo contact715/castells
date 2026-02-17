@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import type { NavigateFn } from '../../types';
 import { INDUSTRY_CATEGORIES } from '../../data/industries';
 import { Badge } from '../ui/Badge';

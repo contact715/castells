@@ -13,11 +13,9 @@
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
     <link rel="dns-prefetch" href="https://api.fontshare.com" />
     <link rel="dns-prefetch" href="https://player.vimeo.com" />
-    <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-    <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />
     
     <!-- Preload critical resources -->
     <link rel="preload" href="/castells-logo.png" as="image" type="image/png" />
@@ -35,7 +33,7 @@
       }
       @font-face {
         font-family: 'Satoshi';
-        font-display: optional; /* Faster loading, fallback to system font if slow */
+        font-display: swap;
       }
       
       /* Critical CSS - Above the fold styles */
@@ -60,38 +58,21 @@
     
     <title>Castells Agency | Dominate Your Market</title>
     
-    <!-- Google Tag Manager -->
+    <!-- Google Tag Manager — uncomment when you have a real GTM ID -->
+    <!-- GTM_ID: replace GTM-XXXXXXX with your real container ID, then uncomment both blocks -->
+    <!--
     <script>
-      // GTM Container ID - замените GTM-XXXXXXX на ваш реальный ID
-      window.GTM_ID = 'GTM-XXXXXXX'; // TODO: Замените на ваш GTM Container ID
       (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
       new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
       j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer',window.GTM_ID);
-    </script>
-    <!-- End Google Tag Manager -->
-    
-    <!-- Fallback: Google Analytics 4 (если GTM не настроен) -->
-    <!-- Раскомментируйте, если используете прямой gtag.js вместо GTM -->
-    <!--
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LEQVB6KG6Y"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-LEQVB6KG6Y');
+      })(window,document,'script','dataLayer','GTM-XXXXXXX');
     </script>
     -->
   </head>
   <body>
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
-      height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <!-- TODO: Замените GTM-XXXXXXX на ваш реальный GTM Container ID в двух местах выше -->
+    <!-- GTM noscript — uncomment when GTM is active -->
+    <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
     
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>

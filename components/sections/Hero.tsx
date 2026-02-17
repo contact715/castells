@@ -7,7 +7,6 @@ import AnimatedHeading from '../ui/AnimatedHeading';
 import { ContactButtons } from '../ui/ContactButtons';
 import SchemaMarkup from '../ui/SchemaMarkup';
 import OptimizedImage from '../ui/OptimizedImage';
-import AmbiLight from '../ui/AmbiLight';
 import '../ui/Marquee.css';
 
 // Professional logo components
@@ -100,13 +99,9 @@ const Hero: React.FC = () => {
     const [isMuted, setIsMuted] = useState(true);
     const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
     const [vimeoScriptLoaded, setVimeoScriptLoaded] = useState(false);
-    const [currentVimeoId, setCurrentVimeoId] = useState('1101673750');
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [targetSyncTime, setTargetSyncTime] = useState<number | undefined>(undefined);
     const iframeRef = useRef<HTMLIFrameElement>(null);
     const videoContainerRef = useRef<HTMLDivElement>(null);
     const playerRef = useRef<any>(null);
-    const lastSyncTimeRef = useRef<number>(0);
 
     // Lazy load video when it enters viewport
     useEffect(() => {
@@ -153,62 +148,12 @@ const Hero: React.FC = () => {
         };
     }, [shouldLoadVideo, vimeoScriptLoaded]);
 
-    // Initialize Vimeo Player instance and sync events
+    // Initialize Vimeo Player instance
     useEffect(() => {
         if (shouldLoadVideo && iframeRef.current && (window as any).Vimeo && !playerRef.current) {
-            const player = new (window as any).Vimeo.Player(iframeRef.current);
-            playerRef.current = player;
-
-            player.on('play', (data: any) => {
-                setIsPlaying(true);
-                if (data.id && data.id.toString() !== currentVimeoId) {
-                    setCurrentVimeoId(data.id.toString());
-                }
-                player.getCurrentTime().then((time: number) => {
-                    setTargetSyncTime(time);
-                    lastSyncTimeRef.current = time;
-                });
-            });
-
-            player.on('pause', () => {
-                setIsPlaying(false);
-            });
-
-            player.on('ended', () => {
-                setIsPlaying(false);
-            });
-
-            player.on('seeked', (data: any) => {
-                setTargetSyncTime(data.seconds);
-                lastSyncTimeRef.current = data.seconds;
-            });
-
-            player.on('timeupdate', (data: any) => {
-                const time = data.seconds;
-                // Tightened threshold to 0.05s (50ms) for high-precision sync
-                if (Math.abs(time - lastSyncTimeRef.current) > 0.05) {
-                    setTargetSyncTime(time);
-                    lastSyncTimeRef.current = time;
-                }
-            });
-
-            player.on('loaded', (data: any) => {
-                if (data.id && data.id.toString() !== currentVimeoId) {
-                    setCurrentVimeoId(data.id.toString());
-                    setTargetSyncTime(0);
-                }
-            });
-
-            return () => {
-                player.off('timeupdate');
-                player.off('play');
-                player.off('pause');
-                player.off('ended');
-                player.off('seeked');
-                player.off('loaded');
-            };
+            playerRef.current = new (window as any).Vimeo.Player(iframeRef.current);
         }
-    }, [shouldLoadVideo, vimeoScriptLoaded, currentVimeoId, isPlaying]);
+    }, [shouldLoadVideo, vimeoScriptLoaded]);
 
     const toggleMute = () => {
         if (playerRef.current) {
@@ -301,8 +246,8 @@ const Hero: React.FC = () => {
 
             {/* Video Section - Contained Width */}
             <div className="container mx-auto px-4 sm:px-6 pb-12 sm:pb-20" ref={videoContainerRef}>
-                <AmbiLight vimeoId={currentVimeoId} vimeoHash="7ccdfe1d0c" playing={isPlaying} syncTime={targetSyncTime} blur={80} intensity={0.65} spread={1.15} saturate={1.8} brightness={1.3} className="w-full aspect-video rounded-[1.5rem] sm:rounded-[2rem] overflow-visible">
-                    <div className="relative w-full h-full rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden bg-black">
+                <div className="w-full aspect-video rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden">
+                    <div className="relative w-full h-full bg-black">
                         {shouldLoadVideo ? (
                             <>
                                 <iframe
@@ -353,7 +298,7 @@ const Hero: React.FC = () => {
                             </>
                         )}
                     </div>
-                </AmbiLight>
+                </div>
             </div>
         </div>
     );

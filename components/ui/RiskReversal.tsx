@@ -1,5 +1,5 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { Shield, CheckCircle2, Clock, Headphones } from 'lucide-react';
 import AnimatedHeading from './AnimatedHeading';
 import { Button } from './Button';
@@ -55,7 +55,7 @@ const RiskReversal: React.FC<RiskReversalProps> = React.memo(({
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
             <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
               Guarantees
             </span>

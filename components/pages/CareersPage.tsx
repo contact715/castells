@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowLeft, ArrowUpRight } from 'lucide-react';
 import { Button } from '../ui/Button';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { PageHeader } from '../ui/PageHeader';
 import type { NavigateFn } from '../../types';
 import AnimatedHeading from '../ui/AnimatedHeading';

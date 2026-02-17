@@ -298,7 +298,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                         {/* Top: Badge (Left) and Meta (Right) */}
                         <div className="flex items-start justify-between gap-4">
                             <div className="flex items-center gap-2">
-                                <span className="w-2 h-2 rounded-full bg-coral animate-pulse" />
+                                <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse" />
                                 <span className="font-bold uppercase tracking-widest text-white text-xs">
                                     Blog & Insights
                                 </span>

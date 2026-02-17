@@ -7,10 +7,9 @@ import {
     Hammer, Activity, Building2, Sparkles, Palette, Terminal, Scale, Flag, Mail, Factory, BarChart3, ArrowRight,
     Shield, Smartphone, ShoppingBag, Video, MousePointer2, Database, BarChart, Settings, Wrench, PaintBucket,
     HardHat, Truck, Stethoscope, Landmark, Coins, Droplets, LayoutGrid, Frame, Ruler, ShieldCheck, Sun, ArrowUpRight, MapPin,
-    Book, Layers, Code, ShoppingCart, Calendar, Phone, Send, Snowflake
+    Book, Layers, Code, ShoppingCart, Calendar, Phone, Send
 } from 'lucide-react';
 import AnimatedThemeToggler from '../ui/AnimatedThemeToggler';
-import SnowEffect from '../effects/SnowEffect';
 import { Button } from '../ui/Button';
 import { PageView } from '../../App';
 import { NavigationData } from '../../types';
@@ -73,7 +72,7 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Naviga
                         <img
                             src={caseStudy.image}
                             alt={caseStudy.client}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110 will-change-transform"
+                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                             loading="lazy"
                             decoding="async"
                             style={{ transform: 'translateZ(0)' }}
@@ -496,8 +495,6 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
     const [activeTab, setActiveTab] = useState<string | null>(null);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
     const [openMobileCategory, setOpenMobileCategory] = useState<string | null>(null);
-    const [isSnowActive, setIsSnowActive] = useState(false);
-
     const toggleMobileCategory = useCallback((category: string) => {
         setOpenMobileCategory(prev => prev === category ? null : category);
     }, []);
@@ -517,10 +514,6 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
             setMobileMenuOpen(false);
         }
     }, [onNavigate]);
-
-    const handleSnowToggle = useCallback(() => {
-        setIsSnowActive(true);
-    }, []);
 
     const handleHomeClick = useCallback((e: React.MouseEvent) => {
         e.preventDefault();
@@ -665,13 +658,6 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                             }}
                         />
                         <AnimatedThemeToggler className="w-8 h-8 flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 rounded-full" />
-                        <button
-                            onClick={handleSnowToggle}
-                            className="w-8 h-8 flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors p-2"
-                            aria-label="Start snow effect"
-                        >
-                            <Snowflake className="w-5 h-5 text-text-primary" />
-                        </button>
                         <Button
                             href="/contact"
                             size="sm"
@@ -696,13 +682,6 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                     </div>
                     <div className="flex items-center gap-2">
                         <AnimatedThemeToggler className="w-8 h-8 flex items-center justify-center" />
-                        <button
-                            onClick={handleSnowToggle}
-                            className="w-8 h-8 flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 rounded-full transition-colors p-2"
-                            aria-label="Start snow effect"
-                        >
-                            <Snowflake className="w-5 h-5 text-text-primary" />
-                        </button>
                         <MobileNavToggle isOpen={mobileMenuOpen} onClick={() => setMobileMenuOpen(!mobileMenuOpen)} />
                     </div>
                 </MobileNavHeader>
@@ -816,10 +795,6 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                 </MobileNavMenu>
             </MobileNav>
 
-            {/* Snow Effect */}
-            <SnowEffect
-                isActive={isSnowActive}
-            />
         </Navbar>
     );
 });

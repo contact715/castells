@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m as motion, AnimatePresence } from 'framer-motion';
 import { Check, ArrowRight, Sparkles, Mail, Phone, Clock, Heart, Star } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { PageView } from '../../App';

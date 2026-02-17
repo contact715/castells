@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '../ui/Button';
-import { motion } from 'framer-motion';
+import { m as motion } from 'framer-motion';
 import { Home, ArrowLeft, Search, FileText, Briefcase, Users, Mail } from 'lucide-react';
 import { PageView } from '../../App';
 import SEO from '../ui/SEO';
@@ -46,7 +46,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
         >
           {/* Badge */}
           <div className="flex items-center gap-2 mb-6">
-            <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
             <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
               404
             </span>
@@ -122,7 +122,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
           >
             <div className="text-center mb-8">
               <div className="flex items-center gap-2 justify-center mb-3">
-                <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+                <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
                 <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
                   Popular Pages
                 </span>

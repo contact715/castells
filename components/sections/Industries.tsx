@@ -27,7 +27,7 @@ const Industries: React.FC = React.memo(() => {
         {/* Header Section */}
         <div className="max-w-3xl mb-8">
           <div className="flex items-center gap-2 mb-4">
-            <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
             <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
               Sector Expertise
             </span>
@@ -130,7 +130,7 @@ const Industries: React.FC = React.memo(() => {
                         <div className={cn(
                           "w-12 h-12 rounded-[2rem] flex items-center justify-center flex-shrink-0 transition-all duration-300",
                           isContactCard
-                            ? "bg-coral/10 group-hover:bg-black"
+                            ? "bg-coral-gradient-subtle group-hover:bg-black"
                             : "bg-white/0 backdrop-blur-md  -white/10 group-hover:bg-white group-hover:-white/20"
                         )}>
                           <item.icon className={cn(

@@ -1002,7 +1002,7 @@ const PROCESS_STEPS: ProcessStep[] = [
 
 const ProcessScroll: React.FC = () => {
     const [activeStep, setActiveStep] = useState(0);
-    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
+    const step = PROCESS_STEPS[activeStep];
 
     return (
         <div className="w-full">
@@ -1012,22 +1012,23 @@ const ProcessScroll: React.FC = () => {
                     name: 'How to Work with Castells Agency',
                     description: 'Step-by-step process for working with Castells Agency to grow your business through data-driven marketing strategies.',
                     totalTime: 'PT6W',
-                    step: PROCESS_STEPS.map(step => ({
-                        name: step.title,
-                        text: `${step.description} ${step.longDescription || ''} Duration: ${step.duration}.`
+                    step: PROCESS_STEPS.map(s => ({
+                        name: s.title,
+                        text: `${s.description} ${s.longDescription || ''} Duration: ${s.duration}.`
                     }))
                 }}
             />
-            {/* Header */}
-            <div className="max-w-3xl mb-8">
-                <div className="flex items-center gap-2 mb-4">
-                    <span className="w-2 h-2 rounded-full bg-coral animate-pulse"></span>
+
+            {/* ─── Centered Header ─────────────────────────────────────── */}
+            <div className="text-center max-w-2xl mx-auto mb-12 md:mb-16">
+                <div className="flex items-center justify-center gap-2 mb-4">
+                    <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse" />
                     <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
                         Est. Timeline: 4-6 Weeks
                     </span>
                 </div>
-                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary leading-tight tracking-tight mb-6">
-                    The Growth<br />
+                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary leading-tight tracking-tight mb-4">
+                    The Growth{' '}
                     <span className="text-text-secondary">Blueprint</span>
                 </h2>
                 <p className="text-lg text-text-secondary leading-relaxed">
@@ -1035,41 +1036,46 @@ const ProcessScroll: React.FC = () => {
                 </p>
             </div>
 
-            {/* Horizontal Timeline Tabs - Services Style */}
-            <div className="flex justify-start mb-8 overflow-x-auto pb-2 -mx-6 px-6">
-                <div className="bg-surface p-1.5 rounded-[2rem]  -black/5  inline-flex flex-wrap sm:flex-nowrap gap-1 min-w-max">
-                    {PROCESS_STEPS.map((step, idx) => {
+            {/* ─── Horizontal Timeline ─────────────────────────────────── */}
+            <div className="relative mb-10 md:mb-14">
+                {/* Connector line (desktop) */}
+                <div className="hidden md:block absolute top-5 left-0 right-0 h-px bg-black/10 dark:bg-white/10" />
+                <div
+                    className="hidden md:block absolute top-5 left-0 h-px bg-coral-gradient transition-all duration-500"
+                    style={{ width: `${(activeStep / (PROCESS_STEPS.length - 1)) * 100}%` }}
+                />
+
+                <div className="flex justify-between overflow-x-auto pb-2 -mx-6 px-6 md:mx-0 md:px-0 gap-2 md:gap-0">
+                    {PROCESS_STEPS.map((s, idx) => {
                         const isActive = activeStep === idx;
+                        const isPast = idx < activeStep;
                         return (
                             <button
-                                key={step.id}
+                                key={s.id}
                                 onClick={() => setActiveStep(idx)}
-                                className={cn(
-                                    "relative px-4 sm:px-6 py-2.5 sm:py-3 rounded-[2rem] flex items-center justify-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 outline-none whitespace-nowrap min-w-[140px] sm:min-w-[160px]",
-                                    isActive
-                                        ? "text-white "
-                                        : "text-text-secondary hover:text-text-primary hover:bg-gray-100 dark:hover:bg-neutral-800"
-                                )}
+                                className="relative flex flex-col items-center gap-2 group outline-none flex-shrink-0 md:flex-shrink min-w-[72px] md:min-w-0"
                             >
-                                {isActive && (
-                                    <motion.div
-                                        layoutId="activeProcessTab"
-                                        className="absolute inset-0 bg-black dark:bg-white rounded-[2rem]"
-                                        transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
-                                    />
-                                )}
-                                <span className="relative z-10 flex items-center gap-2">
-                                    <span className={cn(
-                                        "w-5 h-5 rounded-full flex items-center justify-center text-[10px] font-bold",
-                                        isActive 
-                                            ? "bg-white text-black dark:bg-black dark:text-white" 
-                                            : "bg-coral/20 text-coral"
-                                    )}>
-                                        {idx + 1}
-                                    </span>
-                                    <span className={isActive ? "text-white dark:text-black" : ""}>
-                                        {step.title}
-                                    </span>
+                                {/* Circle */}
+                                <div className={cn(
+                                    "relative z-10 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 border-2",
+                                    isActive
+                                        ? "bg-coral-gradient border-transparent text-white scale-110 shadow-lg shadow-coral/30"
+                                        : isPast
+                                            ? "bg-coral-gradient-subtle border-coral text-coral"
+                                            : "bg-white dark:bg-white/5 border-black/10 dark:border-white/10 text-text-secondary group-hover:border-coral/50 group-hover:text-coral"
+                                )}>
+                                    {isPast ? (
+                                        <CheckCircle2 className="w-4 h-4" />
+                                    ) : (
+                                        idx + 1
+                                    )}
+                                </div>
+                                {/* Label */}
+                                <span className={cn(
+                                    "text-[10px] sm:text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-colors duration-300",
+                                    isActive ? "text-text-primary dark:text-white" : "text-text-secondary"
+                                )}>
+                                    {s.title}
                                 </span>
                             </button>
                         );
@@ -1077,145 +1083,150 @@ const ProcessScroll: React.FC = () => {
                 </div>
             </div>
 
-            {/* Active Step Content - Full Width Card */}
+            {/* ─── Content Panel — Bento Layout ────────────────────────── */}
             <AnimatePresence mode="wait">
                 <motion.div
                     key={activeStep}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -20 }}
-                    transition={{ duration: 0.3 }}
-                    className="rounded-[2rem] p-6 sm:p-8 md:p-12 bg-surface dark:bg-white/5"
+                    exit={{ opacity: 0, y: -16 }}
+                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
                 >
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
-                        {/* Left: Icon + Title + Description */}
-                        <div>
-                            <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
-                                <div className="w-12 h-12 sm:w-16 sm:h-16 rounded-[2rem] bg-coral/10 dark:bg-coral/20 flex items-center justify-center shrink-0">
-                                    <div className="flex items-center justify-center w-full h-full">
-                                        {React.createElement(PROCESS_STEPS[activeStep].icon, {
-                                            className: "w-6 h-6 sm:w-8 sm:h-8 text-coral"
-                                        })}
-                                    </div>
+                    <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
+
+                        {/* ── Illustration Card (spans 2 cols) ──────────── */}
+                        <div className="lg:col-span-2 bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/[0.06] rounded-[2rem] overflow-hidden relative">
+                            {/* Duration badge */}
+                            <div className="absolute top-5 left-5 z-10">
+                                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 dark:bg-black/50 backdrop-blur-sm border border-black/10 dark:border-white/15">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-coral" />
+                                    <span className="font-display text-sm font-semibold text-text-primary dark:text-white">
+                                        {step.duration}
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div className="h-[260px] sm:h-[320px] lg:h-[380px]">
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={step.id}
+                                        initial={{ opacity: 0, scale: 0.96 }}
+                                        animate={{ opacity: 1, scale: 1 }}
+                                        exit={{ opacity: 0, scale: 1.04 }}
+                                        transition={{ duration: 0.4 }}
+                                        className="w-full h-full"
+                                    >
+                                        {React.createElement(STEP_ILLUSTRATIONS[step.id])}
+                                    </motion.div>
+                                </AnimatePresence>
+                            </div>
+                        </div>
+
+                        {/* ── Info Card (right column) ─────────────────── */}
+                        <div className="lg:col-span-1 bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/[0.06] rounded-[2rem] p-6 sm:p-8 flex flex-col">
+                            {/* Step badge + icon */}
+                            <div className="flex items-center gap-3 mb-5">
+                                <div className="w-12 h-12 rounded-[2rem] bg-coral-gradient-subtle flex items-center justify-center shrink-0">
+                                    {React.createElement(step.icon, {
+                                        className: "w-6 h-6 text-coral"
+                                    })}
                                 </div>
                                 <div>
-                                    <span className="text-coral text-xs font-bold uppercase tracking-widest mb-1 block">
-                                        Step {activeStep + 1} of {PROCESS_STEPS.length}
+                                    <span className="text-coral text-[10px] font-bold uppercase tracking-widest block">
+                                        Step {activeStep + 1} / {PROCESS_STEPS.length}
                                     </span>
-                                    <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-semibold text-text-primary dark:text-white">
-                                        {PROCESS_STEPS[activeStep].title}
+                                    <h3 className="font-display text-xl sm:text-2xl font-semibold text-text-primary dark:text-white leading-tight">
+                                        {step.title}
                                     </h3>
                                 </div>
                             </div>
 
-                            <p className="text-text-secondary dark:text-white/70 text-base sm:text-lg leading-relaxed mb-4">
-                                {PROCESS_STEPS[activeStep].description}
+                            <p className="text-text-secondary text-sm sm:text-base leading-relaxed mb-5">
+                                {step.description}
                             </p>
 
-                            {PROCESS_STEPS[activeStep].longDescription && (
-                                <p className="text-text-secondary dark:text-white/60 text-sm sm:text-base leading-relaxed mb-4 sm:mb-6">
-                                    {PROCESS_STEPS[activeStep].longDescription}
-                                </p>
-                            )}
-
-                            {PROCESS_STEPS[activeStep].nextSteps && (
-                                <div className="mb-6 sm:mb-8 p-3 sm:p-4 bg-coral/10 dark:bg-coral/20 rounded-[2rem]  -coral/20 dark:-coral/30">
-                                    <span className="text-xs font-bold uppercase tracking-widest text-coral mb-2 block">
-                                        Next Steps
+                            {/* Next Steps callout */}
+                            {step.nextSteps && (
+                                <div className="mb-5 p-4 bg-coral/[0.06] dark:bg-coral/10 rounded-2xl">
+                                    <span className="text-[10px] font-bold uppercase tracking-widest text-coral block mb-1">
+                                        Next
                                     </span>
-                                    <p className="text-text-primary dark:text-white font-medium">
-                                        {PROCESS_STEPS[activeStep].nextSteps}
+                                    <p className="text-text-primary dark:text-white text-sm font-medium leading-snug">
+                                        {step.nextSteps}
                                     </p>
                                 </div>
                             )}
 
-                            <Button size="md" className="inline-flex items-center gap-2">
-                                Start Now <ArrowRight className="w-4 h-4" />
-                            </Button>
+                            <div className="mt-auto">
+                                <Button size="md" className="w-full inline-flex items-center justify-center gap-2 group">
+                                    Start Now
+                                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                                </Button>
+                            </div>
                         </div>
 
-                        {/* Right: Unified Card with Illustration + Info */}
-                        <div className="rounded-[2rem] overflow-hidden bg-ivory dark:bg-[#191919]">
-                            {/* Illustration Section */}
-                            <div className="relative h-[200px] sm:h-[260px] overflow-hidden">
-                                <AnimatePresence mode="wait">
+                        {/* ── Bottom Row: Deliverables + Metrics + Detail ── */}
+                        <div className="bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/[0.06] rounded-[2rem] p-6 sm:p-8">
+                            <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-white/50 mb-4">
+                                What You Get
+                            </h4>
+                            <div className="space-y-3">
+                                {step.deliverables.map((item, idx) => (
                                     <motion.div
-                                        key={PROCESS_STEPS[activeStep].id}
-                                        initial={{ opacity: 0, scale: 0.95 }}
-                                        animate={{ opacity: 1, scale: 1 }}
-                                        exit={{ opacity: 0, scale: 1.05 }}
-                                        transition={{ duration: 0.4 }}
-                                        className="absolute inset-0"
+                                        key={`${activeStep}-d-${idx}`}
+                                        initial={{ opacity: 0, x: -8 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        transition={{ duration: 0.3, delay: idx * 0.08 }}
+                                        className="flex items-center gap-3"
                                     >
-                                        {React.createElement(STEP_ILLUSTRATIONS[PROCESS_STEPS[activeStep].id])}
-                                    </motion.div>
-                                </AnimatePresence>
-                                
-                                {/* Duration Badge - Floating */}
-                                <div className="absolute top-4 left-4">
-                                    <div className="inline-flex items-center gap-2 px-4 py-2 rounded-[2rem] bg-white/90 dark:bg-black/50 backdrop-blur-sm  -black/10 dark:-white/20 ">
-                                        <span className="font-display text-base font-semibold text-text-primary dark:text-white">
-                                            {PROCESS_STEPS[activeStep].duration}
+                                        <div className="w-6 h-6 rounded-full bg-coral-gradient-subtle flex items-center justify-center shrink-0">
+                                            <CheckCircle2 className="w-3.5 h-3.5 text-coral" />
+                                        </div>
+                                        <span className="font-semibold text-sm text-text-primary dark:text-white">
+                                            {item}
                                         </span>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            {/* Info Section - Two Columns */}
-                            <div className="p-4 sm:p-6">
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-                                    {/* What You Get */}
-                                    <div>
-                                        <h4 className="text-xs font-semibold uppercase tracking-widest text-text-secondary dark:text-white/60 mb-4">
-                                            What You Get
-                                        </h4>
-                                        <div className="space-y-3">
-                                            {PROCESS_STEPS[activeStep].deliverables.map((item, idx) => (
-                                                <motion.div
-                                                    key={idx}
-                                                    initial={{ opacity: 0, x: -10 }}
-                                                    animate={{ opacity: 1, x: 0 }}
-                                                    transition={{ duration: 0.3, delay: idx * 0.1 }}
-                                                    className="flex items-center gap-3"
-                                                >
-                                                    <div className="w-6 h-6 rounded-full bg-coral/10 dark:bg-coral/20  -coral/20 dark:-coral/30 flex items-center justify-center shrink-0">
-                                                        <CheckCircle2 className="w-3 h-3 text-coral" />
-                                                    </div>
-                                                    <span className="font-sans font-semibold text-sm text-text-primary dark:text-white">
-                                                        {item}
-                                                    </span>
-                                                </motion.div>
-                                            ))}
-                                        </div>
-                                    </div>
-
-                                    {/* Key Metrics */}
-                                    {PROCESS_STEPS[activeStep].keyMetrics && (
-                                        <div className="md:-l md:-black/5 md:dark:-white/10 md:pl-6">
-                                            <h4 className="text-xs font-semibold uppercase tracking-widest text-text-secondary dark:text-white/60 mb-4">
-                                                Key Metrics
-                                            </h4>
-                                            <div className="space-y-3">
-                                                {PROCESS_STEPS[activeStep].keyMetrics?.map((metric, idx) => (
-                                                    <motion.div
-                                                        key={idx}
-                                                        initial={{ opacity: 0, y: 10 }}
-                                                        animate={{ opacity: 1, y: 0 }}
-                                                        transition={{ duration: 0.3, delay: 0.2 + idx * 0.1 }}
-                                                        className="flex items-center gap-2"
-                                                    >
-                                                        <div className="w-1.5 h-1.5 rounded-full bg-coral shrink-0" />
-                                                        <span className="text-text-secondary dark:text-white/80 text-sm">
-                                                            {metric}
-                                                        </span>
-                                                    </motion.div>
-                                                ))}
-                                            </div>
-                                        </div>
-                                    )}
-                                </div>
+                                    </motion.div>
+                                ))}
                             </div>
                         </div>
+
+                        {step.keyMetrics && (
+                            <div className="bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/[0.06] rounded-[2rem] p-6 sm:p-8">
+                                <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-white/50 mb-4">
+                                    Key Metrics
+                                </h4>
+                                <div className="space-y-3">
+                                    {step.keyMetrics.map((metric, idx) => (
+                                        <motion.div
+                                            key={`${activeStep}-m-${idx}`}
+                                            initial={{ opacity: 0, y: 8 }}
+                                            animate={{ opacity: 1, y: 0 }}
+                                            transition={{ duration: 0.3, delay: 0.1 + idx * 0.08 }}
+                                            className="flex items-start gap-2"
+                                        >
+                                            <div className="w-1.5 h-1.5 rounded-full bg-coral shrink-0 mt-1.5" />
+                                            <span className="text-text-secondary dark:text-white/70 text-sm leading-snug">
+                                                {metric}
+                                            </span>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
+
+                        {step.longDescription && (
+                            <div className={cn(
+                                "bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/[0.06] rounded-[2rem] p-6 sm:p-8",
+                                !step.keyMetrics && "lg:col-span-2"
+                            )}>
+                                <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-white/50 mb-3">
+                                    Details
+                                </h4>
+                                <p className="text-text-secondary dark:text-white/60 text-sm leading-relaxed">
+                                    {step.longDescription}
+                                </p>
+                            </div>
+                        )}
                     </div>
                 </motion.div>
             </AnimatePresence>

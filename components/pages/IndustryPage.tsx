@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PageHeader } from '../ui/PageHeader';
-import { motion, AnimatePresence } from 'framer-motion';
+import { m as motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight, Plus, Minus, ArrowRight } from 'lucide-react';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import { Button } from '../ui/Button';
@@ -299,7 +299,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                     <section className="mb-20">
                         <div className="max-w-3xl mb-10">
                             <div className="flex items-center gap-2 mb-3">
-                                <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+                                <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
                                 <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">Proof</span>
                             </div>
                             <AnimatedHeading
@@ -332,7 +332,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                                         <img
                                             src={cs.image}
                                             alt={cs.client}
-                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 will-change-transform"
+                                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                                             loading="lazy"
                                             style={{ transform: 'translateZ(0)' }}
                                         />
@@ -442,7 +442,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                                         <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
                                             <div className="mb-8">
                                                 <div className="flex items-center gap-2 mb-3">
-                                                    <span className="w-2 h-2 rounded-full bg-coral animate-pulse shrink-0" aria-hidden="true" />
+                                                    <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
                                                     <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">FAQ</span>
                                                 </div>
                                                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4">

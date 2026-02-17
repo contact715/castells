@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '../../lib/utils';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'outline-white';
+  variant?: 'primary' | 'secondary' | 'coral' | 'outline' | 'outline-white';
   size?: 'sm' | 'md' | 'lg';
   as?: 'button' | 'a';
   href?: string;
@@ -42,6 +42,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
     const variants = {
       primary: "bg-black text-white dark:bg-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90",
       secondary: "bg-white text-black hover:bg-white/90",
+      coral: "bg-coral-gradient text-white hover:shadow-lg hover:shadow-coral/25 hover:brightness-110",
       outline: "bg-transparent  -black dark:-white text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black",
       'outline-white': "bg-transparent  -white/10 text-white hover:bg-white hover:text-black"
     };

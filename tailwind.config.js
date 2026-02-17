@@ -15,6 +15,8 @@ export default {
         ivory: '#EBECE7',
         coral: '#E08576',
         'coral-dark': '#D67060',
+        'coral-from': '#C95D54',
+        'coral-to': '#F0B088',
         surface: '#FFFFFF',
         'surface-dark': '#2A2A2A',
         'text-primary': '#000000',

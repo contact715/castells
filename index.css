@@ -45,27 +45,26 @@
     box-sizing: border-box;
   }
 
-  /* Smooth theme transition for all elements */
-  *,
-  *::before,
-  *::after {
+  /* Theme transition — targeted to layout elements only, not every DOM node */
+  body,
+  section,
+  nav,
+  header,
+  footer,
+  main,
+  aside,
+  div,
+  span,
+  p,
+  a,
+  button,
+  input,
+  textarea,
+  select,
+  h1, h2, h3, h4, h5, h6 {
     transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
                 color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                fill 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                stroke 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-
-  /* Disable transitions for elements that shouldn't animate */
-  img,
-  video,
-  iframe,
-  canvas,
-  svg path,
-  svg circle,
-  svg rect,
-  [data-no-theme-transition] {
-    transition: none !important;
+                border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   body {
@@ -117,6 +116,43 @@
     @apply bg-white dark:bg-[#2A2A2A];
   }
   
+  /* ─── Coral gradient system ─────────────────────────────── */
+  .bg-coral-gradient {
+    background: linear-gradient(135deg, #C95D54 0%, #E08576 45%, #F0B088 100%);
+  }
+
+  .bg-coral-gradient-subtle {
+    background: linear-gradient(135deg, rgba(201,93,84,0.12) 0%, rgba(224,133,118,0.10) 45%, rgba(240,176,136,0.12) 100%);
+  }
+
+  .dark .bg-coral-gradient-subtle {
+    background: linear-gradient(135deg, rgba(201,93,84,0.18) 0%, rgba(224,133,118,0.15) 45%, rgba(240,176,136,0.18) 100%);
+  }
+
+  .text-coral-gradient {
+    background: linear-gradient(135deg, #C95D54 0%, #E08576 45%, #F0B088 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .glow-coral {
+    background: radial-gradient(circle, rgba(201,93,84,0.25) 0%, rgba(240,176,136,0.15) 50%, transparent 70%);
+  }
+
+  .dark .glow-coral {
+    background: radial-gradient(circle, rgba(201,93,84,0.15) 0%, rgba(240,176,136,0.08) 50%, transparent 70%);
+  }
+
+  .border-coral-gradient {
+    border-image: linear-gradient(135deg, #C95D54, #E08576, #F0B088) 1;
+  }
+
+  .ring-coral-gradient {
+    --tw-ring-color: #E08576;
+    box-shadow: 0 0 0 2px #C95D54, 0 0 0 4px #F0B088;
+  }
+
   .mask-linear-fade {
     mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);

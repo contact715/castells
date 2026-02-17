@@ -1,7 +1,7 @@
 
 import React from "react";
 import { cn } from "../../lib/utils";
-import { motion, useScroll, useTransform, useSpring } from "framer-motion";
+import { m as motion, useScroll, useTransform, useSpring } from "framer-motion";
 
 type SpotlightProps = {
   className?: string;
