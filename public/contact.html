@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact Us | Castells Agency - Santa Monica Digital Marketing</title>
+<meta name="description" content="Ready to dominate your market? Contact Castells Agency in Santa Monica, California. Schedule a free strategy session and let's discuss how we can help you achieve your goals.">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/castells-logo.png">
+<link rel="canonical" href="https://www.castells.studio/contact">
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background-color: #EBECE7;
+    color: #000;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1.6;
+  }
+  h1, h2, h3 { font-family: 'Newsreader', serif; }
+  a { color: #E08576; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .container { max-width: 720px; margin: 0 auto; padding: 80px 24px 60px; }
+
+  /* Breadcrumb */
+  .breadcrumb { font-size: 12px; text-transform: uppercase; letter-spacing: 1.5px; color: #555; margin-bottom: 32px; font-weight: 500; }
+  .breadcrumb a { color: #555; }
+  .breadcrumb a:hover { color: #E08576; }
+  .breadcrumb .sep { margin: 0 8px; opacity: 0.4; }
+
+  /* Header */
+  .page-header { margin-bottom: 48px; }
+  .badge { display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #555; margin-bottom: 16px; }
+  .badge::before { content: ''; display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: linear-gradient(135deg, #C95D54, #E08576, #F0B088); margin-right: 8px; vertical-align: middle; }
+  h1 { font-size: 36px; font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; color: #000; margin-bottom: 12px; }
+  .subtitle { font-size: 16px; color: #555; max-width: 480px; }
+
+  /* Form Card */
+  .form-card {
+    background: #fff;
+    border-radius: 2rem;
+    padding: 48px;
+    margin-bottom: 32px;
+  }
+  .form-title { font-size: 22px; font-weight: 600; margin-bottom: 4px; }
+  .form-desc { font-size: 14px; color: #555; margin-bottom: 32px; }
+
+  /* Form Fields */
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .field { margin-bottom: 20px; }
+  label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: #555; margin-bottom: 6px; margin-left: 4px; }
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  select,
+  textarea {
+    width: 100%;
+    background: #EBECE7;
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 2rem;
+    padding: 12px 16px;
+    font-size: 14px;
+    font-family: inherit;
+    color: #000;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  input:focus, select:focus, textarea:focus {
+    border-color: #E08576;
+  }
+  textarea { border-radius: 1.5rem; resize: none; min-height: 100px; }
+  select { appearance: none; cursor: pointer; }
+
+  .phone-row { display: flex; gap: 8px; }
+  .phone-prefix {
+    width: 64px;
+    background: #EBECE7;
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    color: #555;
+    font-weight: 500;
+    flex-shrink: 0;
+  }
+  .phone-row input { flex: 1; }
+
+  /* Consent Checkbox */
+  .consent-block { margin: 24px 0; }
+  .consent-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    cursor: pointer;
+    line-height: 1.5;
+  }
+  .consent-label input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-top: 3px;
+    accent-color: #E08576;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .consent-text {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.6;
+  }
+  .consent-text a {
+    color: #E08576;
+    text-decoration: underline;
+  }
+
+  /* Submit Button */
+  .submit-btn {
+    width: 100%;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 2rem;
+    padding: 14px 24px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 8px;
+  }
+  .submit-btn:hover { background: #333; }
+
+  .form-footer {
+    font-size: 10px;
+    color: #555;
+    text-align: center;
+    margin-top: 16px;
+  }
+  .form-footer a { color: #E08576; }
+
+  /* Contact Methods */
+  .methods-card {
+    background: #fff;
+    border-radius: 2rem;
+    padding: 48px;
+    margin-bottom: 32px;
+  }
+  .methods-title { font-size: 20px; font-weight: 600; margin-bottom: 4px; }
+  .methods-desc { font-size: 14px; color: #555; margin-bottom: 24px; }
+  .method-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    margin: 0 -16px;
+    border-radius: 2rem;
+    color: #000;
+    font-weight: 500;
+    font-size: 15px;
+    transition: background 0.2s, color 0.2s;
+  }
+  .method-link:hover { background: #000; color: #fff; text-decoration: none; }
+  .method-link .arrow { font-size: 18px; opacity: 0.3; }
+  .method-link:hover .arrow { opacity: 1; }
+
+  /* Email card */
+  .email-card {
+    background: #fff;
+    border-radius: 2rem;
+    padding: 48px;
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .container { padding: 60px 16px 40px; }
+    .form-card, .methods-card, .email-card { padding: 32px 24px; }
+    .field-row { grid-template-columns: 1fr; }
+    h1 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="/">Home</a>
+    <span class="sep">/</span>
+    <span>Contact us</span>
+  </nav>
+
+  <!-- Page Header -->
+  <div class="page-header">
+    <div class="badge">Get in Touch</div>
+    <h1>Let's make something great together</h1>
+    <p class="subtitle">Ready to dominate your market? Schedule a free strategy session and let's discuss how we can help you achieve your goals.</p>
+  </div>
+
+  <!-- Contact Form -->
+  <div class="form-card">
+    <h2 class="form-title">Start a project</h2>
+    <p class="form-desc">Fill out the form and we'll get back to you within 24 hours.</p>
+
+    <form action="https://formspree.io/f/placeholder" method="POST" id="contact-form">
+      <!-- Name & Email -->
+      <div class="field-row">
+        <div>
+          <label for="name">Name *</label>
+          <input type="text" id="name" name="name" placeholder="Your full name" required>
+        </div>
+        <div>
+          <label for="email">Email *</label>
+          <input type="email" id="email" name="email" placeholder="Your email" required>
+        </div>
+      </div>
+
+      <!-- Phone & Service -->
+      <div class="field-row">
+        <div>
+          <label for="phone">Phone (optional)</label>
+          <div class="phone-row">
+            <div class="phone-prefix">+1</div>
+            <input type="tel" id="phone" name="phone" placeholder="(956) 315-3156">
+          </div>
+        </div>
+        <div>
+          <label for="topic">Service</label>
+          <select id="topic" name="topic">
+            <option value="web-design">Web Design &amp; Development</option>
+            <option value="marketing">Digital Marketing</option>
+            <option value="branding">Branding &amp; Identity</option>
+            <option value="automation">Automation &amp; Analytics</option>
+            <option value="other">Other</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Message -->
+      <div class="field">
+        <label for="message">Project details *</label>
+        <textarea id="message" name="message" rows="4" placeholder="Tell us about your project, goals, and timeline..." required></textarea>
+      </div>
+
+      <!-- SMS Consent Checkbox -->
+      <div class="consent-block">
+        <label class="consent-label">
+          <input type="checkbox" id="sms-consent" name="sms_consent" value="yes">
+          <span class="consent-text">
+            I agree to receive SMS/text messages from Castells Agency LLC at the phone number provided.
+            I understand that message and data rates may apply, message frequency varies (typically 1&ndash;5/month),
+            and I can opt out at any time by replying STOP. Reply HELP for help.
+            See our <a href="/privacy-policy.html" target="_blank">Privacy Policy</a>
+            and <a href="/terms-of-service.html" target="_blank">Terms of Service</a>.
+            Consent is not a condition of purchase.
+          </span>
+        </label>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="submit-btn">Send Request &rarr;</button>
+
+      <p class="form-footer">
+        By clicking "Send Request", you agree to our
+        <a href="/privacy-policy.html">Privacy Policy</a> and
+        <a href="/terms-of-service.html">Terms of Service</a>.
+      </p>
+    </form>
+  </div>
+
+  <!-- Contact Methods -->
+  <div class="methods-card">
+    <h3 class="methods-title">Let's talk</h3>
+    <p class="methods-desc">Pick what works best for you.</p>
+
+    <a href="https://calendar.app.google/3ydSwahZK2uNw6EA8" class="method-link" target="_blank" rel="noopener">
+      Book a Call <span class="arrow">&rarr;</span>
+    </a>
+    <a href="tel:+19563153156" class="method-link">
+      Phone: +1 (956) 315-3156 <span class="arrow">&rarr;</span>
+    </a>
+    <a href="https://wa.me/19563153156" class="method-link" target="_blank" rel="noopener">
+      WhatsApp <span class="arrow">&rarr;</span>
+    </a>
+    <a href="https://t.me/+19563153156" class="method-link" target="_blank" rel="noopener">
+      Telegram <span class="arrow">&rarr;</span>
+    </a>
+  </div>
+
+  <!-- Email -->
+  <div class="email-card">
+    <h3 class="methods-title">Drop a message</h3>
+    <p class="methods-desc">We'll get back soon.</p>
+
+    <a href="mailto:contact@castells.media" class="method-link">
+      General Purpose <span class="arrow">&rarr;</span>
+    </a>
+    <a href="mailto:contact@castells.media" class="method-link">
+      Partnership <span class="arrow">&rarr;</span>
+    </a>
+    <a href="mailto:contact@castells.media" class="method-link">
+      Careers <span class="arrow">&rarr;</span>
+    </a>
+  </div>
+
+</div>
+
+</body>
+</html>

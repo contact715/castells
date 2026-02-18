@@ -3,6 +3,7 @@
     { "src": "/auth/thumbtack/callback", "dest": "/api/thumbtack.py" },
     { "src": "/webhook/thumbtack/(.*)", "dest": "/api/thumbtack.py" },
     { "src": "/api/health", "dest": "/api/health.py" },
+    { "src": "/contact", "dest": "/contact.html" },
     { "handle": "filesystem" },
     { "src": "/.*", "dest": "/index.html" }
   ]
