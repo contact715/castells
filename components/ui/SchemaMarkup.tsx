@@ -153,7 +153,7 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
             latitude: data?.latitude || 34.0195,
             longitude: data?.longitude || -118.4912
           },
-          telephone: data?.telephone || '+1-956-315-3156',
+          telephone: data?.telephone || '+1-916-378-7121',
           email: data?.email || 'contact@castells.media',
           priceRange: data?.priceRange || '$$$',
           areaServed: {

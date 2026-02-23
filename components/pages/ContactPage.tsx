@@ -91,7 +91,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
 
     const contactMethods = [
         { icon: Calendar, label: 'Book a Call', value: 'Schedule a call', href: 'https://calendar.app.google/3ydSwahZK2uNw6EA8', color: 'bg-blue-500/10 text-blue-500' },
-        { icon: Phone, label: 'Phone Call', value: '+1 (956) 315-3156', href: 'tel:+19563153156', color: 'bg-green-500/10 text-green-500' },
+        { icon: Phone, label: 'Phone Call', value: '+1 (916) 378-7121', href: 'tel:+19163787121', color: 'bg-green-500/10 text-green-500' },
         { icon: MessageCircle, label: 'WhatsApp', value: 'Chat with us', href: 'https://wa.me/19563153156', color: 'bg-emerald-500/10 text-emerald-500' },
         { icon: Send, label: 'Telegram', value: 'Message us', href: 'https://t.me/+19563153156', color: 'bg-sky-500/10 text-sky-500' },
     ];
@@ -116,7 +116,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                 data={{
                     name: 'Castells Agency',
                     description: 'Revenue-focused digital marketing agency helping contractors and service providers dominate their local markets.',
-                    telephone: '+1-956-315-3156',
+                    telephone: '+1-916-378-7121',
                     email: 'contact@castells.media',
                     streetAddress: '1234 Main Street',
                     postalCode: '90401',
@@ -221,10 +221,10 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                             <input
                                                 type="tel"
                                                 id="phone"
-                                                placeholder="(956) 315-3156"
+                                                placeholder="(555) 123-4567"
                                                 value={formState.phone}
                                                 onChange={e => setFormState({ ...formState, phone: e.target.value })}
-                                                className="flex-1 bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-[2rem] px-4 py-3 text-sm focus:outline-none focus:-coral transition-all placeholder:text-text-secondary/50"
+                                                className="flex-1 bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-[2rem] px-4 py-3 text-sm focus:outline-none focus:-coral transition-[border-color] placeholder:text-text-secondary/50"
                                             />
                                         </div>
                                     </div>
@@ -234,7 +234,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                         <div className="relative">
                                             <select
                                                 id="topic"
-                                                className="w-full bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-[2rem] px-4 py-3 text-sm focus:outline-none focus:-coral transition-all appearance-none cursor-pointer text-text-primary"
+                                                className="w-full bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-[2rem] px-4 py-3 text-sm focus:outline-none focus:-coral transition-[border-color] appearance-none cursor-pointer text-text-primary"
                                                 value={formState.topic}
                                                 onChange={e => setFormState({ ...formState, topic: e.target.value })}
                                             >
@@ -258,7 +258,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                         id="message"
                                         required
                                         rows={4}
-                                        className="w-full bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-[2rem] px-4 py-3 text-sm focus:outline-none focus:-coral transition-all placeholder:text-text-secondary/50 resize-none"
+                                        className="w-full bg-ivory dark:bg-white/5  -black/5 dark:-white/5 rounded-[2rem] px-4 py-3 text-sm focus:outline-none focus:-coral transition-[border-color] placeholder:text-text-secondary/50 resize-none"
                                         placeholder="Tell us about your project, goals, and timeline..."
                                         value={formState.message}
                                         onChange={e => setFormState({ ...formState, message: e.target.value })}
@@ -363,7 +363,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.3, duration: 0.5 }}
-                                className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 hover:-translate-y-1 transition-all duration-300"
+                                className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 hover:-translate-y-1 transition-[transform] duration-300"
                             >
                                 <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
                                     <Phone className="w-5 h-5 text-coral" /> Let's talk
@@ -380,7 +380,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                             href={method.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="flex items-center justify-between p-4 -mx-4 rounded-[2rem] group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer"
+                                            className="flex items-center justify-between p-4 -mx-4 rounded-[2rem] group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color] cursor-pointer"
                                         >
                                             <div className="flex items-center gap-4">
                                                 <div className="text-text-secondary group-hover:text-white dark:group-hover:text-black transition-colors">
@@ -398,7 +398,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                         initial={{ opacity: 0, x: -20 }}
                                         animate={{ opacity: 1, x: 0 }}
                                         transition={{ delay: 0.8, duration: 0.4 }}
-                                        className="flex items-center justify-between p-4 -mx-4 rounded-[2rem] group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer"
+                                        className="flex items-center justify-between p-4 -mx-4 rounded-[2rem] group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color] cursor-pointer"
                                     >
                                         <div className="flex items-center gap-4">
                                             <div className="text-text-secondary group-hover:text-white dark:group-hover:text-black transition-colors">
@@ -420,7 +420,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 transition={{ delay: 0.5, duration: 0.5 }}
-                                className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 hover:-translate-y-1 transition-all duration-300"
+                                className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 hover:-translate-y-1 transition-[transform] duration-300"
                             >
                                 <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
                                     <Mail className="w-5 h-5 text-coral" /> Drop a message
@@ -439,7 +439,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                             animate={{ opacity: 1, x: 0 }}
                                             transition={{ delay: 0.6 + index * 0.1, duration: 0.4 }}
                                             href={`mailto:${item.email}`}
-                                            className="flex items-center justify-between p-4 -mx-4 rounded-[2rem] group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer"
+                                            className="flex items-center justify-between p-4 -mx-4 rounded-[2rem] group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color] cursor-pointer"
                                         >
                                             <div className="flex items-center gap-4">
                                                 <span className="text-coral group-hover:text-white dark:group-hover:text-black text-lg transition-colors">@</span>
@@ -483,7 +483,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                             <img
                                 src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80"
                                 alt="Client testimonial"
-                                className="absolute inset-0 w-full h-full object-cover grayscale group-hover/image:grayscale-0 transition-all duration-500"
+                                className="absolute inset-0 w-full h-full object-cover grayscale group-hover/image:grayscale-0 transition-[filter] duration-500"
                                 loading="lazy"
                                 decoding="async"
                             />
@@ -503,7 +503,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                         </div>
 
                         {/* Quote */}
-                        <div className="lg:col-span-8 bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 flex flex-col justify-between transition-all duration-300 relative overflow-hidden">
+                        <div className="lg:col-span-8 bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 flex flex-col justify-between transition-[box-shadow] duration-300 relative overflow-hidden">
                             <div className="relative">
                                 {/* Quote Icon */}
                                 <div className="text-coral text-5xl font-serif leading-none mb-8">“</div>
@@ -538,7 +538,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                 href="https://clutch.co"
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="mt-10 p-4 -mx-4 rounded-[2rem] flex items-center justify-between group bg-black/5 dark:bg-black/20 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all cursor-pointer"
+                                className="mt-10 p-4 -mx-4 rounded-[2rem] flex items-center justify-between group bg-black/5 dark:bg-black/20 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color] cursor-pointer"
                                 aria-label="Read this review on Clutch"
                             >
                                 <div className="flex items-center gap-3">
@@ -583,7 +583,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                             transition={{ delay: 0.3, duration: 0.5 }}
                             href="/about"
                             onClick={(e) => { e.preventDefault(); onNavigate?.('about'); }}
-                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:-translate-y-1"
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start transition-[background-color,color,transform] duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-[2rem] bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">
@@ -607,7 +607,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                             transition={{ delay: 0.4, duration: 0.5 }}
                             href="/work"
                             onClick={(e) => { e.preventDefault(); onNavigate?.('work'); }}
-                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:-translate-y-1"
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start transition-[background-color,color,transform] duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-[2rem] bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">
@@ -631,7 +631,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                             transition={{ delay: 0.5, duration: 0.5 }}
                             href="/blog"
                             onClick={(e) => { e.preventDefault(); onNavigate?.('blog'); }}
-                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start transition-all duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:-translate-y-1"
+                            className="bg-white dark:bg-surface p-8 rounded-[2rem] h-full flex flex-col items-start transition-[background-color,color,transform] duration-300 group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black hover:-translate-y-1"
                         >
                             <div className="flex items-center gap-4 mb-4">
                                 <div className="w-12 h-12 rounded-[2rem] bg-black/5 dark:bg-white/10 flex items-center justify-center text-black dark:text-white flex-shrink-0 group-hover:bg-white/10 group-hover:text-white dark:group-hover:bg-black/5 dark:group-hover:text-black transition-colors duration-300">

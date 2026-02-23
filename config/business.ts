@@ -8,9 +8,9 @@ export const BUSINESS = {
   legalName: 'Castells Agency Inc.',
 
   // Contact
-  phone: '+19563153156',
-  phoneFormatted: '+1 (956) 315-3156',
-  phoneSchema: '+1-956-315-3156',
+  phone: '+19163787121',
+  phoneFormatted: '+1 (916) 378-7121',
+  phoneSchema: '+1-916-378-7121',
   email: 'contact@castells.media',
 
   // Location

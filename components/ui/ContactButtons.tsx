@@ -24,7 +24,7 @@ export const ContactButtons = ({ defaultExpanded = 'Book call' }: { defaultExpan
             onMouseLeave={() => setHoveredButton(defaultExpanded)}
         >
             {[
-                { label: 'Phone', cta: 'Call now', icon: Phone, href: 'tel:+19563153156', external: false },
+                { label: 'Phone', cta: 'Call now', icon: Phone, href: 'tel:+19163787121', external: false },
                 { label: 'WhatsApp', cta: 'WhatsApp', icon: WhatsAppIcon, href: 'https://wa.me/19563153156', external: true },
                 { label: 'Telegram', cta: 'Telegram', icon: Send, href: 'https://t.me/+19563153156', external: true },
                 { label: 'Email', cta: 'Email us', icon: Mail, href: 'mailto:contact@castells.media', external: false },
@@ -40,7 +40,7 @@ export const ContactButtons = ({ defaultExpanded = 'Book call' }: { defaultExpan
                         title={m.cta}
                         aria-label={m.cta}
                         onMouseEnter={() => setHoveredButton(m.cta)}
-                        className={`group h-10 flex-none rounded-[2rem]  transition-all duration-300 ease-in-out flex items-center justify-center overflow-hidden ${
+                        className={`group h-10 flex-none rounded-[2rem]  transition-[width,background-color,color,border-color] duration-300 ease-in-out flex items-center justify-center overflow-hidden ${
                             isExpanded
                                 ? 'w-[120px] bg-black text-white dark:bg-white dark:text-black -transparent'
                                 : 'w-10 rounded-[2rem] bg-white/60 dark:bg-white/5 -black/5 dark:-white/10'
@@ -49,7 +49,7 @@ export const ContactButtons = ({ defaultExpanded = 'Book call' }: { defaultExpan
                         <m.icon className={`w-4 h-4 shrink-0 transition-colors duration-300 ${
                             isExpanded ? 'text-current' : 'text-text-secondary'
                         }`} />
-                        <span className={`text-[11px] font-bold uppercase tracking-widest whitespace-nowrap transition-all duration-300 ease-in-out ${
+                        <span className={`text-[11px] font-bold uppercase tracking-widest whitespace-nowrap transition-[opacity,max-width,margin] duration-300 ease-in-out ${
                             isExpanded
                                 ? 'opacity-100 max-w-[90px] ml-2'
                                 : 'opacity-0 max-w-0 ml-0'
