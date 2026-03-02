@@ -3,6 +3,9 @@
     { "src": "/auth/thumbtack/callback", "dest": "/api/thumbtack.py" },
     { "src": "/webhook/thumbtack/(.*)", "dest": "/api/thumbtack.py" },
     { "src": "/api/health", "dest": "/api/health.py" },
+    { "src": "/api/lead-form", "dest": "/api/lead-form.js" },
+    { "src": "/api/whatsapp-webhook", "dest": "/api/whatsapp-webhook.js" },
+    { "src": "/api/telegram-webhook", "dest": "/api/telegram-webhook.js" },
     { "src": "/contact", "dest": "/contact.html" },
     { "handle": "filesystem" },
     { "src": "/.*", "dest": "/index.html" }
