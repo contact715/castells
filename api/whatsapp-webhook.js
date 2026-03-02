@@ -20,6 +20,23 @@ import { analyzeMessage, generateReply } from "./_lib/ai-engine.js";
 const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN || "mosco-wa-verify-2026";
 const APP_SECRET = process.env.WHATSAPP_APP_SECRET || "";
 
+// Disable Vercel's automatic body parsing so we get the raw body for signature validation
+export const config = {
+  api: { bodyParser: false },
+};
+
+/**
+ * Read the raw request body as a string.
+ */
+function getRawBody(req) {
+  return new Promise((resolve, reject) => {
+    const chunks = [];
+    req.on("data", (chunk) => chunks.push(chunk));
+    req.on("end", () => resolve(Buffer.concat(chunks).toString("utf-8")));
+    req.on("error", reject);
+  });
+}
+
 export default async function handler(req, res) {
   // --- GET: Webhook verification ---
   if (req.method === "GET") {
@@ -36,6 +53,16 @@ export default async function handler(req, res) {
 
   // --- POST: Incoming webhook event ---
   if (req.method === "POST") {
+    // Read raw body for signature validation
+    const rawBody = await getRawBody(req);
+    let body;
+    try {
+      body = JSON.parse(rawBody);
+    } catch {
+      console.warn("Invalid JSON body");
+      return res.status(400).send("Bad Request");
+    }
+
     // Validate signature
     if (APP_SECRET) {
       const { createHmac } = await import("crypto");
@@ -45,8 +72,6 @@ export default async function handler(req, res) {
         return res.status(401).send("Unauthorized");
       }
 
-      const rawBody =
-        typeof req.body === "string" ? req.body : JSON.stringify(req.body);
       const expectedSig =
         "sha256=" +
         createHmac("sha256", APP_SECRET)
@@ -63,7 +88,7 @@ export default async function handler(req, res) {
     res.status(200).json({ status: "received" });
 
     try {
-      await processWebhook(req.body);
+      await processWebhook(body);
     } catch (err) {
       console.error("Webhook processing error:", err);
     }
