@@ -21,8 +21,10 @@ const VERIFY_TOKEN = process.env.WHATSAPP_VERIFY_TOKEN || "mosco-wa-verify-2026"
 const APP_SECRET = process.env.WHATSAPP_APP_SECRET || "";
 
 // Disable Vercel's automatic body parsing so we get the raw body for signature validation
+// maxDuration: 10s on Hobby (max allowed)
 export const config = {
   api: { bodyParser: false },
+  maxDuration: 10,
 };
 
 /**
@@ -84,16 +86,14 @@ export default async function handler(req, res) {
       }
     }
 
-    // Respond to Meta immediately
-    res.status(200).json({ status: "received" });
-
+    // Process webhook first, then respond (Vercel may freeze after res.send)
     try {
       await processWebhook(body);
     } catch (err) {
       console.error("Webhook processing error:", err);
     }
 
-    return;
+    return res.status(200).json({ status: "received" });
   }
 
   return res.status(405).send("Method not allowed");
