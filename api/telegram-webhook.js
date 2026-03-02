@@ -32,26 +32,24 @@ export default async function handler(req, res) {
     return res.status(405).send("Method not allowed");
   }
 
-  // Respond immediately
-  res.status(200).json({ ok: true });
-
+  // Process before responding (Vercel may freeze after res.send)
   try {
     const update = req.body;
 
     // Handle callback queries (inline button presses)
     if (update.callback_query) {
       await handleCallbackQuery(update.callback_query);
-      return;
+      return res.status(200).json({ ok: true });
     }
 
     const message = update.message;
-    if (!message) return;
+    if (!message) return res.status(200).json({ ok: true });
 
     // Only process messages from the owner
     const chatId = String(message.chat.id);
     if (chatId !== OWNER_CHAT_ID()) {
       console.log(`Ignoring message from unauthorized chat: ${chatId}`);
-      return;
+      return res.status(200).json({ ok: true });
     }
 
     const text = message.text || "";
@@ -59,13 +57,13 @@ export default async function handler(req, res) {
     // Handle commands
     if (text.startsWith("/")) {
       await handleCommand(text.trim());
-      return;
+      return res.status(200).json({ ok: true });
     }
 
     // Handle reply to a forwarded message
     if (message.reply_to_message) {
       await handleReply(message);
-      return;
+      return res.status(200).json({ ok: true });
     }
 
     // Handle direct message in format: phone message
@@ -74,13 +72,15 @@ export default async function handler(req, res) {
       const phone = directMatch[1].replace(/^\+/, "");
       const replyText = directMatch[2].trim();
       await sendToWhatsApp(phone, replyText, null);
-      return;
+      return res.status(200).json({ ok: true });
     }
 
     await sendMessage("Unknown format. Reply to a notification or use: PHONE MESSAGE\n\nCommands: /help");
   } catch (err) {
     console.error("Telegram webhook error:", err);
   }
+
+  return res.status(200).json({ ok: true });
 }
 
 /**
