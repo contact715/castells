@@ -35,9 +35,11 @@ export default async function handler(req, res) {
   // Process before responding (Vercel may freeze after res.send)
   try {
     const update = req.body;
+    console.log("Telegram update received:", JSON.stringify(update).substring(0, 500));
 
     // Handle callback queries (inline button presses)
     if (update.callback_query) {
+      console.log("Handling callback query");
       await handleCallbackQuery(update.callback_query);
       return res.status(200).json({ ok: true });
     }
@@ -47,12 +49,15 @@ export default async function handler(req, res) {
 
     // Only process messages from the owner
     const chatId = String(message.chat.id);
-    if (chatId !== OWNER_CHAT_ID()) {
+    const ownerChatId = OWNER_CHAT_ID();
+    console.log(`Chat ID: "${chatId}", Owner ID: "${ownerChatId}", match: ${chatId === ownerChatId}`);
+    if (chatId !== ownerChatId) {
       console.log(`Ignoring message from unauthorized chat: ${chatId}`);
       return res.status(200).json({ ok: true });
     }
 
     const text = message.text || "";
+    console.log(`Processing text: "${text}", has reply_to: ${!!message.reply_to_message}`);
 
     // Handle commands
     if (text.startsWith("/")) {
