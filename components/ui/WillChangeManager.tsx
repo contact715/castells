@@ -1,4 +1,6 @@
-import { useEffect, useRef } from 'react';
+// React нужен целиком: ниже вызывается React.cloneElement.
+// Без этого импорта компонент WillChangeManager падал бы при первом же применении.
+import React, { useEffect, useRef } from 'react';
 
 /**
  * WillChangeManager - Hook для динамического управления will-change

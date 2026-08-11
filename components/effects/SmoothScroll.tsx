@@ -4,8 +4,9 @@ import 'lenis/dist/lenis.css';
 
 const SmoothScroll = () => {
     const lenisRef = useRef<Lenis | null>(null);
-    const rafIdRef = useRef<number>();
-    const idleTimeoutRef = useRef<NodeJS.Timeout>();
+    // В типах React 19 useRef требует явного начального значения
+    const rafIdRef = useRef<number | undefined>(undefined);
+    const idleTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
     const isRunning = useRef(false);
 
     useEffect(() => {

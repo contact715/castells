@@ -40,7 +40,9 @@ export const initGA = () => {
   // Если используется прямой gtag.js (fallback)
   if (!window.gtag && !window.GTM_ID) {
     window.gtag = function() {
-      window.dataLayer.push(arguments);
+      // dataLayer инициализируется выше, но между вызовами его мог кто-то снести:
+      // без этой проверки аналитика роняла бы страницу
+      (window.dataLayer = window.dataLayer || []).push(arguments);
     };
     
     // Configure GA (если используется прямой gtag)

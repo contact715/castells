@@ -1,0 +1,26 @@
+# Castells Agency
+
+Digital marketing agency working with contractors, home service companies and
+local businesses in the United States. We build the systems that bring in work:
+websites, Google Business Profile, paid advertising, and tracking that ties every
+call and form back to revenue.
+
+## Services
+
+- [All services](https://www.castells.media/services): branding and design, development, automation and analytics, advertising and SEO
+- [Industries we serve](https://www.castells.media/industries): HVAC, plumbing, roofing, remodeling, automotive services, healthcare
+- [Selected work](https://www.castells.media/work): case studies with revenue and return figures
+- [Blog](https://www.castells.media/blog): articles on local marketing, lead generation and automation
+
+## Company
+
+- [About](https://www.castells.media/about)
+- [Team](https://www.castells.media/team)
+- [Careers](https://www.castells.media/careers)
+- [Contact](https://www.castells.media/contact)
+
+## Legal
+
+- [Privacy policy](https://www.castells.media/privacy-policy)
+- [Terms of service](https://www.castells.media/terms)
+- [Cookie policy](https://www.castells.media/cookie-policy)

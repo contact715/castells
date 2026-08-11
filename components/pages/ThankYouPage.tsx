@@ -26,7 +26,9 @@ const Confetti: React.FC<{ delay: number; x: number }> = ({ delay, x }) => {
         width: randomSize,
         height: randomSize,
         backgroundColor: randomColor,
-Radius: Math.random() > 0.5 ? '50%' : '2px',
+        // было "Radius" — такого свойства нет, поэтому часть конфетти,
+        // задуманная круглой, оставалась квадратной
+        borderRadius: Math.random() > 0.5 ? '50%' : '2px',
       }}
       initial={{ y: -20, rotate: 0, opacity: 1 }}
       animate={{
