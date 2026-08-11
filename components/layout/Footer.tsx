@@ -30,7 +30,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
           {/* Logo + tagline */}
           <div>
             <div className="flex items-center gap-2.5 mb-3">
-              <img src="/castells-logo.png" alt="Castells Logo" className="w-9 h-9 object-contain" loading="lazy" />
+              <img src="/castells-logo.webp" alt="Castells Logo" width="127" height="144" className="w-9 h-9 object-contain" loading="lazy" />
               <span className="font-display font-bold text-2xl tracking-tight text-text-primary dark:text-white">Castells.</span>
             </div>
             <p className="text-sm text-text-secondary dark:text-white/60 max-w-xs leading-relaxed">

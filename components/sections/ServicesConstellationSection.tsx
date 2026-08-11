@@ -481,7 +481,7 @@ const ServicesConstellationSection: React.FC = React.memo(() => {
             {/* Center — Castells */}
             <div className="absolute flex items-center gap-2 -translate-x-1/2 -translate-y-1/2 z-20"
               style={{ left: `${CENTER.x / 10}%`, top: `${CENTER.y / 8}%` }}>
-              <img src="/castells-logo.png" alt="Castells" className="w-7 h-7 md:w-9 md:h-9" data-no-theme-transition />
+              <img src="/castells-logo.webp" alt="Castells" width="127" height="144" className="w-7 h-7 md:w-9 md:h-9" data-no-theme-transition />
               <span className="font-display text-lg md:text-xl font-semibold text-white tracking-tight">Castells</span>
             </div>
 

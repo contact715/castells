@@ -531,8 +531,10 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                     whileTap={{ scale: 0.95 }}
                 >
                     <motion.img
-                        src="/castells-logo.png"
+                        src="/castells-logo.webp"
                         alt="Castells Logo"
+                        width={127}
+                        height={144}
                         className="w-12 h-12 object-contain brightness-0 dark:brightness-0 dark:invert"
                         initial={{ rotate: 0 }}
                         whileHover={{ rotate: 180 }}
@@ -664,7 +666,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
             <MobileNav>
                 <MobileNavHeader>
                     <div className="flex items-center gap-2" onClick={(e) => { e.preventDefault(); handleHomeClick(e); setMobileMenuOpen(false); }}>
-                        <img src="/castells-logo.png" alt="Castells Logo" className="w-8 h-8 object-contain" loading="eager" fetchPriority="high" />
+                        <img src="/castells-logo.webp" alt="Castells Logo" width="127" height="144" className="w-8 h-8 object-contain" loading="eager" fetchPriority="high" />
                         <span className="font-display text-2xl font-bold text-text-primary tracking-tight">Caste//s</span>
                     </div>
                     <div className="flex items-center gap-2">
