@@ -118,7 +118,7 @@ const CookieConsent: React.FC = React.memo(() => {
                           setShowPreferences(true);
                         }}
                       >
-                        Learn more
+                        Cookie settings and policy
                       </a>
                     </p>
                   </div>
