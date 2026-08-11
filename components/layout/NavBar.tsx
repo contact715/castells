@@ -27,11 +27,11 @@ interface NavBarProps {
 }
 
 const CategoryCard = ({ title, icon: Icon, href }: { title: string, icon: React.ComponentType<{ className?: string }>, href: string }) => (
-    <a href={href} className="flex flex-col items-center justify-center gap-3 p-4 rounded-card bg-black/5 dark:bg-white/5 hover:bg-coral/10 hover:text-coral transition-[background-color,color] group text-center h-full">
+    <a href={href} className="flex flex-col items-center justify-center gap-3 p-4 rounded-card bg-black/5 dark:bg-white/5 hover:bg-coral/10 hover:text-coral-text transition-[background-color,color] group text-center h-full">
         <div className="bg-white dark:bg-black p-3 rounded-xl  group-hover:scale-110 transition-transform">
-            <Icon className="w-6 h-6 text-text-primary group-hover:text-coral transition-colors" />
+            <Icon className="w-6 h-6 text-text-primary group-hover:text-coral-text transition-colors" />
         </div>
-        <span className="text-xs font-bold uppercase tracking-wide text-text-primary group-hover:text-coral">{title}</span>
+        <span className="text-xs font-bold uppercase tracking-wide text-text-primary group-hover:text-coral-text">{title}</span>
     </a>
 );
 
@@ -87,11 +87,11 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Naviga
                                     {caseStudy.industry}
                                 </span>
                             </div>
-                            <h4 className="text-white font-semibold text-sm mb-1 group-hover:text-coral transition-colors">
+                            <h4 className="text-white font-semibold text-sm mb-1 group-hover:text-coral-text transition-colors">
                                 {caseStudy.client}
                             </h4>
                             <div className="flex items-baseline gap-1">
-                                <span className="text-coral font-bold text-lg">{caseStudy.metric}</span>
+                                <span className="text-coral-text font-bold text-lg">{caseStudy.metric}</span>
                                 <span className="text-white/50 text-[10px] uppercase">{caseStudy.metricLabel}</span>
                             </div>
                         </div>
@@ -163,7 +163,7 @@ const CompanyMenu = ({ onNavigate }: { onNavigate?: import('../../types').Naviga
             <div className="pt-2 border-t border-black/5 bg-ivory dark:bg-white/5 rounded-card p-3">
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
-                        <div className="bg-coral/10 h-10 w-10 flex items-center justify-center rounded-full text-coral shrink-0">
+                        <div className="bg-coral/10 h-10 w-10 flex items-center justify-center rounded-full text-coral-text shrink-0">
                             <Phone className="w-4 h-4" />
                         </div>
                         <div className="min-w-0 flex items-center">
@@ -234,7 +234,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                                     w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-[background-color,color]
                                     ${activeCategory === category.id
                                         ? 'bg-white/20 text-white'
-                                        : 'bg-black/5 dark:bg-white/5 text-text-secondary group-hover:bg-coral/10 group-hover:text-coral'}
+                                        : 'bg-black/5 dark:bg-white/5 text-text-secondary group-hover:bg-coral/10 group-hover:text-coral-text'}
                                 `}>
                                     <category.icon className="w-3.5 h-3.5" />
                                 </div>
@@ -385,7 +385,7 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                                     w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-[background-color,color]
                                     ${activeCategory === category.id
                                         ? 'bg-white/20 text-white'
-                                        : 'bg-black/5 dark:bg-white/5 text-text-secondary group-hover:bg-coral/10 group-hover:text-coral'}
+                                        : 'bg-black/5 dark:bg-white/5 text-text-secondary group-hover:bg-coral/10 group-hover:text-coral-text'}
                                 `}>
                                     <category.icon className="w-3.5 h-3.5" />
                                 </div>
@@ -685,7 +685,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                             >
                                 <div className="grid gap-4">
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Branding & Design</h5>
+                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Branding & Design</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Identity & Logo</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">UI/UX Design</a>
@@ -693,7 +693,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Development</h5>
+                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Development</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Custom Web</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Mobile Apps</a>
@@ -701,7 +701,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Growth</h5>
+                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Growth</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Paid Media (PPC)</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">SEO Strategy</a>
@@ -709,7 +709,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Systems</h5>
+                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Systems</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">CRM Setup</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Automation</a>
@@ -726,7 +726,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                             >
                                 <div className="grid gap-4">
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Construction</h5>
+                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Construction</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">General</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Roofing</a>
@@ -734,14 +734,14 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Home Services</h5>
+                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Home Services</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">HVAC</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Solar</a>
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Automotive</h5>
+                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Automotive</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Detailing</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Wraps & PPF</a>
@@ -749,7 +749,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Professional</h5>
+                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Professional</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Legal</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Finance</a>

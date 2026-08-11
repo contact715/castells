@@ -204,7 +204,7 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onBack, onNavigate }) 
                 className="bg-white dark:bg-surface p-10 rounded-card shadow-spatial-card border border-black/5 dark:border-white/10 hover:border-coral/50 dark:hover:border-coral/40 hover:shadow-spatial-md transition-[border-color,box-shadow] duration-300"
               >
                 <div className="flex items-start gap-4 mb-6">
-                  <Icon className="w-10 h-10 text-coral shrink-0" />
+                  <Icon className="w-10 h-10 text-coral-text shrink-0" />
                   <h3 className="font-display text-2xl font-semibold text-text-primary dark:text-white">{value.title}</h3>
                 </div>
                 <p className="text-text-secondary dark:text-white/70">{value.desc}</p>

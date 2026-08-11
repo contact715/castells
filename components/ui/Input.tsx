@@ -112,7 +112,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             )}
           >
             {label}
-            {props.required && <span className="text-coral ml-1">*</span>}
+            {props.required && <span className="text-coral-text ml-1">*</span>}
           </label>
         )}
         <div className="relative">

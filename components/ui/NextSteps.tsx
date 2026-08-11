@@ -92,27 +92,27 @@ const NextSteps: React.FC<NextStepsProps> = React.memo(({
                 {/* Connector Arrow (except last) */}
                 {index < steps.length - 1 && (
                   <div className="hidden lg:block absolute top-8 left-full w-full -z-10">
-                    <ArrowRight className="w-6 h-6 text-coral/30 mx-auto" />
+                    <ArrowRight className="w-6 h-6 text-coral-text/30 mx-auto" />
                   </div>
                 )}
 
                 <div className="bg-ivory dark:bg-[#191919] rounded-card p-8 h-full hover:-translate-y-1 transition-[transform,box-shadow] group">
                   <div className="flex items-center justify-between mb-4">
                     <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
-                      <Icon className="w-6 h-6 text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />
+                      <Icon className="w-6 h-6 text-coral-text group-hover:text-white dark:group-hover:text-black transition-colors" />
                     </div>
-                    <span className="text-2xl font-display font-bold text-coral/30 dark:text-coral/20">
+                    <span className="text-2xl font-display font-bold text-coral-text/30 dark:text-coral-text/20">
                       {step.number}
                     </span>
                   </div>
-                  <h3 className="font-display text-xl font-semibold text-text-primary mb-2 group-hover:text-coral transition-colors">
+                  <h3 className="font-display text-xl font-semibold text-text-primary mb-2 group-hover:text-coral-text transition-colors">
                     {step.title}
                   </h3>
                   <p className="text-text-secondary leading-relaxed mb-3">
                     {step.description}
                   </p>
                   {step.duration && (
-                    <div className="text-xs font-bold uppercase tracking-widest text-coral">
+                    <div className="text-xs font-bold uppercase tracking-widest text-coral-text">
                       {step.duration}
                     </div>
                   )}

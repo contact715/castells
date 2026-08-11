@@ -177,7 +177,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                 >
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
-                      <CategoryIcon className="w-6 h-6 stroke-[1.5] text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />
+                      <CategoryIcon className="w-6 h-6 stroke-[1.5] text-coral-text group-hover:text-white dark:group-hover:text-black transition-colors" />
                     </div>
                     <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight">
                       {category.name}
@@ -186,7 +186,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                   <p className="text-text-secondary text-sm leading-relaxed mb-4">
                     {category.tagline}
                   </p>
-                  <div className="flex items-center text-coral text-sm font-bold uppercase tracking-wider group-hover:gap-2 transition-[gap]">
+                  <div className="flex items-center text-coral-text text-sm font-bold uppercase tracking-wider group-hover:gap-2 transition-[gap]">
                     <span>Explore</span>
                     <ChevronRight className="w-4 h-4 ml-1" />
                   </div>
@@ -216,7 +216,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                     transition={{ duration: 0.5 }}
                   >
                     <div className="w-16 h-16 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-6">
-                      <CategoryIcon className="w-8 h-8 text-coral" />
+                      <CategoryIcon className="w-8 h-8 text-coral-text" />
                     </div>
                     <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-4 leading-tight">
                       {category.name}
@@ -247,10 +247,10 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                         >
                           <div className="flex items-start gap-4">
                             <div className="w-12 h-12 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center shrink-0 group-hover:bg-black dark:group-hover:bg-white transition-colors duration-300">
-                              <ServiceIcon className="w-6 h-6 text-coral group-hover:text-white dark:group-hover:text-black transition-colors duration-300" />
+                              <ServiceIcon className="w-6 h-6 text-coral-text group-hover:text-white dark:group-hover:text-black transition-colors duration-300" />
                             </div>
                             <div className="flex-1">
-                              <h3 className="font-display text-lg font-semibold text-text-primary mb-2 group-hover:text-coral transition-colors">
+                              <h3 className="font-display text-lg font-semibold text-text-primary mb-2 group-hover:text-coral-text transition-colors">
                                 {service.name}
                               </h3>
                               <p className="text-sm text-text-secondary leading-relaxed">
@@ -307,15 +307,15 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                   className="flex items-start gap-6 p-6 rounded-card shadow-spatial-card bg-white dark:bg-surface border border-black/5 dark:border-white/5 hover:shadow-spatial-md transition-shadow duration-300 group"
                 >
-                  <span className="font-display text-4xl font-bold text-coral shrink-0">
+                  <span className="font-display text-4xl font-bold text-coral-text shrink-0">
                     {step.num}
                   </span>
                   <div className="flex-1">
                     <div className="flex items-center justify-between mb-2">
-                      <h3 className="font-display text-xl font-semibold text-text-primary group-hover:text-coral transition-colors">
+                      <h3 className="font-display text-xl font-semibold text-text-primary group-hover:text-coral-text transition-colors">
                         {step.title}
                       </h3>
-                      <span className="text-xs font-bold uppercase tracking-wider text-coral bg-coral/10 px-3 py-1 rounded-full">
+                      <span className="text-xs font-bold uppercase tracking-wider text-coral-text bg-coral/10 px-3 py-1 rounded-full">
                         {step.duration}
                       </span>
                     </div>
@@ -369,7 +369,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                 >
                   <div className="flex items-start gap-4 mb-5">
                     <div className="w-12 h-12 rounded-element bg-coral/10 flex items-center justify-center shrink-0 group-hover:bg-coral transition-colors duration-300">
-                      <ItemIcon className="w-6 h-6 text-coral group-hover:text-white transition-colors duration-300" />
+                      <ItemIcon className="w-6 h-6 text-coral-text group-hover:text-white transition-colors duration-300" />
                     </div>
                     <h3 className="font-display text-xl font-semibold text-text-primary">
                       {item.title}

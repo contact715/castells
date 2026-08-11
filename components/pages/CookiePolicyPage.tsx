@@ -58,7 +58,7 @@ const CookiePolicyPage: React.FC<CookiePolicyPageProps> = ({ onNavigate }) => {
             <section className="space-y-3">
               <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">Contact</h2>
               <p className="text-text-secondary">
-                Questions: <a className="text-coral hover:underline" href="mailto:contact@castells.media">contact@castells.media</a>
+                Questions: <a className="text-coral-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a>
               </p>
             </section>
           </div>

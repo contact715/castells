@@ -1074,8 +1074,8 @@ const ProcessScroll: React.FC = () => {
                                     isActive
                                         ? "bg-coral-gradient border-transparent text-white scale-110 shadow-lg shadow-coral/30"
                                         : isPast
-                                            ? "bg-coral-gradient-subtle border-coral text-coral"
-                                            : "bg-white dark:bg-white/5 border-black/10 dark:border-white/10 text-text-secondary group-hover:border-coral/50 group-hover:text-coral"
+                                            ? "bg-coral-gradient-subtle border-coral text-coral-text"
+                                            : "bg-white dark:bg-white/5 border-black/10 dark:border-white/10 text-text-secondary group-hover:border-coral/50 group-hover:text-coral-text"
                                 )}>
                                     {isPast ? (
                                         <CheckCircle2 className="w-4 h-4" />
@@ -1141,11 +1141,11 @@ const ProcessScroll: React.FC = () => {
                             <div className="flex items-center gap-3 mb-5">
                                 <div className="w-12 h-12 rounded-element bg-coral-gradient-subtle flex items-center justify-center shrink-0">
                                     {React.createElement(step.icon, {
-                                        className: "w-6 h-6 text-coral"
+                                        className: "w-6 h-6 text-coral-text"
                                     })}
                                 </div>
                                 <div>
-                                    <span className="text-coral text-[10px] font-bold uppercase tracking-widest block">
+                                    <span className="text-coral-text text-[10px] font-bold uppercase tracking-widest block">
                                         Step {activeStep + 1} / {PROCESS_STEPS.length}
                                     </span>
                                     <h3 className="font-display text-xl sm:text-2xl font-semibold text-text-primary dark:text-white leading-tight">
@@ -1161,7 +1161,7 @@ const ProcessScroll: React.FC = () => {
                             {/* Next Steps callout */}
                             {step.nextSteps && (
                                 <div className="mb-5 p-4 bg-coral/6 dark:bg-coral/10 rounded-2xl">
-                                    <span className="text-[10px] font-bold uppercase tracking-widest text-coral block mb-1">
+                                    <span className="text-[10px] font-bold uppercase tracking-widest text-coral-text block mb-1">
                                         Next
                                     </span>
                                     <p className="text-text-primary dark:text-white text-sm font-medium leading-snug">
@@ -1193,7 +1193,7 @@ const ProcessScroll: React.FC = () => {
                                         className="flex items-center gap-3"
                                     >
                                         <div className="w-6 h-6 rounded-full bg-coral-gradient-subtle flex items-center justify-center shrink-0">
-                                            <CheckCircle2 className="w-3.5 h-3.5 text-coral" />
+                                            <CheckCircle2 className="w-3.5 h-3.5 text-coral-text" />
                                         </div>
                                         <span className="font-semibold text-sm text-text-primary dark:text-white">
                                             {item}

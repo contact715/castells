@@ -94,7 +94,7 @@ const KeyboardShortcuts: React.FC<KeyboardShortcutsProps> = React.memo(({
             <div className="bg-white dark:bg-surface rounded-card p-8 max-w-md w-full">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
-                  <HelpCircle className="w-6 h-6 text-coral" />
+                  <HelpCircle className="w-6 h-6 text-coral-text" />
                   <h2 className="font-display text-2xl font-semibold text-text-primary">
                     Keyboard Shortcuts
                   </h2>

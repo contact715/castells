@@ -91,10 +91,10 @@ const MetricsDashboard: React.FC<MetricsDashboardProps> = React.memo(({
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
-                    <Icon className="w-6 h-6 text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />
+                    <Icon className="w-6 h-6 text-coral-text group-hover:text-white dark:group-hover:text-black transition-colors" />
                   </div>
                   {metric.change && (
-                    <span className="text-xs font-bold uppercase tracking-widest text-coral">
+                    <span className="text-xs font-bold uppercase tracking-widest text-coral-text">
                       {metric.change}
                     </span>
                   )}

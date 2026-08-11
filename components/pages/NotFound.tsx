@@ -60,7 +60,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-                className="font-display text-[8rem] md:text-[12rem] lg:text-[16rem] font-semibold leading-none text-coral/20 dark:text-coral/10 mb-4"
+                className="font-display text-[8rem] md:text-[12rem] lg:text-[16rem] font-semibold leading-none text-coral-text/20 dark:text-coral-text/10 mb-4"
               >
                 404
               </motion.h1>
@@ -148,9 +148,9 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
                     className="bg-white dark:bg-surface rounded-card p-6 hover:-translate-y-1 transition-[transform,box-shadow] duration-300 text-left group"
                   >
                     <div className="w-12 h-12 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-4 group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
-                      <Icon className="w-6 h-6 text-coral dark:text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />
+                      <Icon className="w-6 h-6 text-coral-text dark:text-coral-text group-hover:text-white dark:group-hover:text-black transition-colors" />
                     </div>
-                    <h4 className="font-display text-xl font-semibold text-text-primary mb-2 group-hover:text-coral transition-colors">
+                    <h4 className="font-display text-xl font-semibold text-text-primary mb-2 group-hover:text-coral-text transition-colors">
                       {page.name}
                     </h4>
                     <p className="text-sm text-text-secondary">
@@ -170,7 +170,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
             className="bg-black/5 dark:bg-white/5 rounded-card p-6 md:p-8 text-center"
           >
             <div className="flex items-center justify-center gap-3 mb-4">
-              <Search className="w-5 h-5 text-coral" />
+              <Search className="w-5 h-5 text-coral-text" />
               <h3 className="font-display text-xl font-semibold text-text-primary">
                 Can't find what you're looking for?
               </h3>

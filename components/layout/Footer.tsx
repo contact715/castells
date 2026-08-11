@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Instagram, Linkedin, Twitter } from '../ui/icons/SocialIcons';
+import { Instagram, Threads, Facebook } from '../ui/icons/SocialIcons';
 import { PageView } from '../../App';
 import { NavigationData } from '../../types';
 import { INDUSTRY_CATEGORIES } from '../../data/industries';
@@ -52,7 +52,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8 mb-10">
           {SERVICE_CATEGORIES.map((category) => (
             <div key={category.id}>
-              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-coral mb-4">
+              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-coral-text mb-4">
                 {category.label}
               </h4>
               <div className="flex flex-col gap-2.5">
@@ -75,7 +75,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8 mb-10">
           {INDUSTRY_CATEGORIES.map((category) => (
             <div key={category.id}>
-              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-coral mb-4">
+              <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-coral-text mb-4">
                 {category.label}
               </h4>
               <div className="flex flex-col gap-2.5">
@@ -100,7 +100,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         {/* Agency / Company */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-8">
           <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-coral mb-4">Resources</h4>
+            <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-coral-text mb-4">Resources</h4>
             <div className="flex flex-col gap-2.5">
               <a href="/blog" onClick={(e) => handleNav(e, 'blog')} className="text-[13px] text-text-secondary dark:text-white/50 hover:text-text-primary dark:hover:text-white transition-colors">Agency Blog</a>
               <a href="/work" onClick={(e) => handleNav(e, 'work')} className="text-[13px] text-text-secondary dark:text-white/50 hover:text-text-primary dark:hover:text-white transition-colors">Case Studies</a>
@@ -109,7 +109,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </div>
           </div>
           <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-coral mb-4">Get Started</h4>
+            <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-coral-text mb-4">Get Started</h4>
             <div className="flex flex-col gap-2.5">
               <a href="/contact" onClick={(e) => handleNav(e, 'contact')} className="text-[13px] text-text-secondary dark:text-white/50 hover:text-text-primary dark:hover:text-white transition-colors">Free Growth Audit</a>
               <a href="/contact" onClick={(e) => handleNav(e, 'contact')} className="text-[13px] text-text-secondary dark:text-white/50 hover:text-text-primary dark:hover:text-white transition-colors">Get a Quote</a>
@@ -117,7 +117,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </div>
           </div>
           <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-coral mb-4">Company</h4>
+            <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-coral-text mb-4">Company</h4>
             <div className="flex flex-col gap-2.5">
               <a href="/about" onClick={(e) => handleNav(e, 'about')} className="text-[13px] text-text-secondary dark:text-white/50 hover:text-text-primary dark:hover:text-white transition-colors">About Us</a>
               <a href="/careers" onClick={(e) => handleNav(e, 'careers')} className="text-[13px] text-text-secondary dark:text-white/50 hover:text-text-primary dark:hover:text-white transition-colors">Careers</a>
@@ -126,11 +126,11 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </div>
           </div>
           <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-coral mb-4">Connect</h4>
+            <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-coral-text mb-4">Connect</h4>
             <div className="flex gap-2 mb-5">
-              <a href="#" className="inline-flex items-center justify-center w-11 h-11 rounded-full text-text-secondary dark:text-white/40 hover:text-text-primary dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors" aria-label="LinkedIn"><Linkedin className="w-[18px] h-[18px]" /></a>
-              <a href="#" className="inline-flex items-center justify-center w-11 h-11 rounded-full text-text-secondary dark:text-white/40 hover:text-text-primary dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors" aria-label="Instagram"><Instagram className="w-[18px] h-[18px]" /></a>
-              <a href="#" className="inline-flex items-center justify-center w-11 h-11 rounded-full text-text-secondary dark:text-white/40 hover:text-text-primary dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors" aria-label="Twitter"><Twitter className="w-[18px] h-[18px]" /></a>
+              <a href="https://www.instagram.com/castells.media/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-11 h-11 rounded-full text-text-secondary dark:text-white/55 hover:text-text-primary dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors" aria-label="Castells in Instagram"><Instagram className="w-[18px] h-[18px]" /></a>
+              <a href="https://www.threads.com/@castells.media" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-11 h-11 rounded-full text-text-secondary dark:text-white/55 hover:text-text-primary dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors" aria-label="Castells in Threads"><Threads className="w-[18px] h-[18px]" /></a>
+              <a href="https://www.facebook.com/castells.media" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center w-11 h-11 rounded-full text-text-secondary dark:text-white/55 hover:text-text-primary dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/10 transition-colors" aria-label="Castells in Facebook"><Facebook className="w-[18px] h-[18px]" /></a>
             </div>
           </div>
         </div>
@@ -139,10 +139,10 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       {/* ── BOTTOM BAR ────────────────────────────────────────────── */}
       <div className="container mx-auto px-6 pb-6">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-black/10 dark:border-white/10">
-          <p className="text-[11px] text-text-secondary dark:text-white/40 uppercase tracking-widest">
+          <p className="text-[11px] text-text-secondary dark:text-white/55 uppercase tracking-widest">
             © {new Date().getFullYear()} Castells Agency Inc.
           </p>
-          <div className="flex items-center gap-6 text-[11px] text-text-secondary dark:text-white/40">
+          <div className="flex items-center gap-6 text-[11px] text-text-secondary dark:text-white/55">
             <a href="/privacy-policy" onClick={(e) => handleNav(e, 'privacy-policy')} className="hover:text-text-primary dark:hover:text-white transition-colors">Privacy</a>
             <a href="/terms" onClick={(e) => handleNav(e, 'terms')} className="hover:text-text-primary dark:hover:text-white transition-colors">Terms</a>
             <a href="/cookie-policy" onClick={(e) => handleNav(e, 'cookie-policy')} className="hover:text-text-primary dark:hover:text-white transition-colors">Cookies</a>

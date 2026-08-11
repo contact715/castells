@@ -136,7 +136,7 @@ const Industries: React.FC = React.memo(() => {
                           <item.icon className={cn(
                             "w-5 h-5 transition-colors duration-300",
                             isContactCard
-                              ? "text-coral group-hover:text-white"
+                              ? "text-coral-text group-hover:text-white"
                               : "text-white/80 group-hover:text-black"
                           )} />
                         </div>

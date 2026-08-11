@@ -272,21 +272,21 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                             type="checkbox"
                                             checked={formState.smsConsent}
                                             onChange={e => setFormState({ ...formState, smsConsent: e.target.checked })}
-                                            className="mt-1 w-4 h-4 rounded-sm border-black/20 dark:border-white/20 text-coral focus:ring-coral focus:ring-offset-0 cursor-pointer shrink-0"
+                                            className="mt-1 w-4 h-4 rounded-sm border-black/20 dark:border-white/20 text-coral-text focus:ring-coral focus:ring-offset-0 cursor-pointer shrink-0"
                                         />
                                         <span className="text-xs text-text-secondary leading-relaxed">
                                             I agree to receive SMS/text messages from Castells Agency LLC at the phone number provided. I understand that message and data rates may apply, message frequency varies (typically 1–5/month), and I can opt out at any time by replying STOP. Reply HELP for help. See our{' '}
                                             <button
                                                 type="button"
                                                 onClick={(e) => { e.preventDefault(); onNavigate?.('privacy-policy'); }}
-                                                className="text-coral hover:underline"
+                                                className="text-coral-text hover:underline"
                                             >
                                                 Privacy Policy
                                             </button>{' '}and{' '}
                                             <button
                                                 type="button"
                                                 onClick={(e) => { e.preventDefault(); onNavigate?.('terms'); }}
-                                                className="text-coral hover:underline"
+                                                className="text-coral-text hover:underline"
                                             >
                                                 Terms of Service
                                             </button>. Consent is not a condition of purchase.
@@ -331,14 +331,14 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                         <button
                                             type="button"
                                             onClick={() => onNavigate?.('privacy-policy')}
-                                            className="text-coral hover:underline cursor-pointer"
+                                            className="text-coral-text hover:underline cursor-pointer"
                                         >
                                             Privacy Policy
                                         </button>{' '}and{' '}
                                         <button
                                             type="button"
                                             onClick={() => onNavigate?.('terms')}
-                                            className="text-coral hover:underline cursor-pointer"
+                                            className="text-coral-text hover:underline cursor-pointer"
                                         >
                                             Terms of Service
                                         </button>
@@ -366,7 +366,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                 className="bg-white dark:bg-surface rounded-card p-8 md:p-12 hover:-translate-y-1 transition-[transform] duration-300"
                             >
                                 <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
-                                    <Phone className="w-5 h-5 text-coral" /> Let's talk
+                                    <Phone className="w-5 h-5 text-coral-text" /> Let's talk
                                 </h3>
                                 <p className="text-text-secondary dark:text-white/70 text-sm mb-8">Pick what works best for you.</p>
 
@@ -423,7 +423,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                 className="bg-white dark:bg-surface rounded-card p-8 md:p-12 hover:-translate-y-1 transition-[transform] duration-300"
                             >
                                 <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
-                                    <Mail className="w-5 h-5 text-coral" /> Drop a message
+                                    <Mail className="w-5 h-5 text-coral-text" /> Drop a message
                                 </h3>
                                 <p className="text-text-secondary dark:text-white/70 text-sm mb-8">We'll get back soon.</p>
 
@@ -442,7 +442,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                             className="flex items-center justify-between p-4 -mx-4 rounded-inner group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color] cursor-pointer"
                                         >
                                             <div className="flex items-center gap-4">
-                                                <span className="text-coral group-hover:text-white dark:group-hover:text-black text-lg transition-colors">@</span>
+                                                <span className="text-coral-text group-hover:text-white dark:group-hover:text-black text-lg transition-colors">@</span>
                                                 <span className="font-medium text-base text-text-primary group-hover:text-white dark:group-hover:text-black transition-colors">{item.label}</span>
                                             </div>
                                             <ArrowRight className="w-4 h-4 text-text-secondary/50 group-hover:text-white dark:group-hover:text-black transition-colors" />
@@ -506,7 +506,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                         <div className="lg:col-span-8 bg-white dark:bg-surface rounded-card p-8 md:p-12 flex flex-col justify-between transition-shadow duration-300 relative overflow-hidden">
                             <div className="relative">
                                 {/* Quote Icon */}
-                                <div className="text-coral text-5xl font-serif leading-none mb-8">“</div>
+                                <div className="text-coral-text text-5xl font-serif leading-none mb-8">“</div>
 
                                 <p className="text-xl md:text-3xl font-light leading-relaxed text-text-primary dark:text-white/90 mb-10">
                                     Castells Agency&apos;s ability to turn ideas into solutions was outstanding.
@@ -517,7 +517,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                         <h4 className="font-semibold text-text-primary dark:text-white text-lg mb-1">
                                             Sunil Chauhan
                                         </h4>
-                                        <div className="flex items-center gap-2 text-text-secondary dark:text-white/40 text-xs uppercase tracking-wider font-medium">
+                                        <div className="flex items-center gap-2 text-text-secondary dark:text-white/55 text-xs uppercase tracking-wider font-medium">
                                             <span>Executive at</span>
                                             <span className="text-text-primary dark:text-white/60">Twister Digital</span>
                                         </div>
@@ -549,7 +549,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                         Read on Clutch
                                     </span>
                                 </div>
-                                <ArrowRight className="w-5 h-5 text-text-secondary/50 dark:text-white/40 group-hover:text-white dark:group-hover:text-black transition-colors -rotate-45" />
+                                <ArrowRight className="w-5 h-5 text-text-secondary/50 dark:text-white/55 group-hover:text-white dark:group-hover:text-black transition-colors -rotate-45" />
                             </a>
                         </div>
                     </div>

@@ -268,7 +268,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                 onChange={() => toggleCategory(cat)}
                                                 className="w-4 h-4 rounded-sm border border-black/20 dark:border-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
                                             />
-                                            <span className="text-sm text-text-primary dark:text-white group-hover:text-coral transition-colors">
+                                            <span className="text-sm text-text-primary dark:text-white group-hover:text-coral-text transition-colors">
                                                 {cat}
                                             </span>
                                         </label>
@@ -290,7 +290,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                 onChange={() => toggleTopic(topic)}
                                                 className="w-4 h-4 rounded-sm border border-black/20 dark:border-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
                                             />
-                                            <span className="text-sm text-text-primary dark:text-white group-hover:text-coral transition-colors">
+                                            <span className="text-sm text-text-primary dark:text-white group-hover:text-coral-text transition-colors">
                                                 {topic}
                                             </span>
                                         </label>
@@ -312,7 +312,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                 onChange={() => toggleIndustry(industry)}
                                                 className="w-4 h-4 rounded-sm border border-black/20 dark:border-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
                                             />
-                                            <span className="text-sm text-text-primary dark:text-white group-hover:text-coral transition-colors">
+                                            <span className="text-sm text-text-primary dark:text-white group-hover:text-coral-text transition-colors">
                                                 {industry}
                                             </span>
                                         </label>
@@ -441,10 +441,10 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                 <div className="text-xs text-text-secondary dark:text-white/60 mb-1">
                                                     {post.date}
                                                 </div>
-                                                <h3 className="font-display text-base font-semibold text-text-primary dark:text-white mb-1 max-h-[2.8em] overflow-hidden group-hover:text-coral transition-colors">
+                                                <h3 className="font-display text-base font-semibold text-text-primary dark:text-white mb-1 max-h-[2.8em] overflow-hidden group-hover:text-coral-text transition-colors">
                                                     {post.title}
                                                 </h3>
-                                                <div className="text-xs text-coral font-medium">
+                                                <div className="text-xs text-coral-text font-medium">
                                                     {post.category}
                                                 </div>
                                             </div>

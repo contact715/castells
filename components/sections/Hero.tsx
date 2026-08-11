@@ -201,7 +201,7 @@ const Hero: React.FC = () => {
                             duration={0.8}
                         >
                             We dominate<br />
-                            <span className="text-coral italic font-semibold">local markets</span>
+                            <span className="text-coral-text italic font-semibold">local markets</span>
                         </AnimatedHeading>
                     </div>
 

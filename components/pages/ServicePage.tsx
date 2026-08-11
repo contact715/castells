@@ -41,14 +41,14 @@ const FAQAccordion: React.FC<{ faqs: Array<{ question: string; answer: string }>
                             onClick={() => setOpenIndex(isOpen ? null : idx)}
                             className="w-full py-8 flex items-start justify-between gap-6 text-left group"
                         >
-                            <h3 className={`font-display font-semibold text-2xl md:text-3xl transition-colors group-hover:text-coral ${isOpen ? 'text-coral' : 'text-text-primary'}`}>
+                            <h3 className={`font-display font-semibold text-2xl md:text-3xl transition-colors group-hover:text-coral-text ${isOpen ? 'text-coral-text' : 'text-text-primary'}`}>
                                 {faq.question}
                             </h3>
                             <span className="shrink-0 mt-1">
                                 {isOpen ? (
-                                    <Minus className="w-6 h-6 text-coral" />
+                                    <Minus className="w-6 h-6 text-coral-text" />
                                 ) : (
-                                    <Plus className="w-6 h-6 text-text-secondary group-hover:text-coral transition-colors" />
+                                    <Plus className="w-6 h-6 text-text-secondary group-hover:text-coral-text transition-colors" />
                                 )}
                             </span>
                         </button>
@@ -221,7 +221,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                                 >
                                     <div className="flex items-start gap-4 mb-4">
                                         <div className="w-12 h-12 rounded-element bg-coral/10 dark:bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-coral dark:group-hover:bg-white transition-colors">
-                                            <Icon className="w-6 h-6 text-coral dark:text-white group-hover:text-white dark:group-hover:text-black transition-colors" />
+                                            <Icon className="w-6 h-6 text-coral-text dark:text-white group-hover:text-white dark:group-hover:text-black transition-colors" />
                                         </div>
                                         <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white">
                                             {service.name}
@@ -355,14 +355,14 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                                         </div>
 
                                         <div className="mt-auto">
-                                            <h3 className="font-display text-2xl font-semibold text-white leading-tight group-hover:text-coral transition-colors mb-2">
+                                            <h3 className="font-display text-2xl font-semibold text-white leading-tight group-hover:text-coral-text transition-colors mb-2">
                                                 {cs.client}
                                             </h3>
                                             <p className="text-sm text-white/70 leading-relaxed max-h-[2.8em] overflow-hidden">
                                                 {cs.description}
                                             </p>
                                             <div className="mt-4 flex items-baseline gap-2">
-                                                <span className="text-coral font-bold text-2xl">{cs.metric}</span>
+                                                <span className="text-coral-text font-bold text-2xl">{cs.metric}</span>
                                                 <span className="text-white/60 text-[10px] font-bold uppercase tracking-widest">
                                                     {cs.metricLabel}
                                                 </span>

@@ -83,7 +83,7 @@ const HeroCard: React.FC<{ item: Reason; index: number }> = React.memo(({ item, 
 
         <div className="relative z-10">
             <div className="w-12 h-12 rounded-element bg-coral-gradient-subtle flex items-center justify-center mb-6 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
-                <item.icon className="w-6 h-6 stroke-[1.5] text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />
+                <item.icon className="w-6 h-6 stroke-[1.5] text-coral-text group-hover:text-white dark:group-hover:text-black transition-colors" />
             </div>
             <h3 className="font-display font-semibold text-2xl sm:text-3xl text-black dark:text-white leading-tight mb-3">
                 {item.title}
@@ -122,7 +122,7 @@ const StandardCard: React.FC<{ item: Reason; index: number }> = React.memo(({ it
         className="bg-white dark:bg-white/3 border border-black/5 dark:border-white/10 rounded-card p-6 sm:p-8 flex flex-col h-full group cursor-pointer will-change-transform hover:-translate-y-1 hover:shadow-spatial-md hover:border-black/10 dark:hover:border-white/15 transition-[transform,border-color,box-shadow] duration-300"
     >
         <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-element bg-coral-gradient-subtle flex items-center justify-center mb-4 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
-            <item.icon className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.5] text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />
+            <item.icon className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.5] text-coral-text group-hover:text-white dark:group-hover:text-black transition-colors" />
         </div>
 
         <h3 className="font-display font-semibold text-xl sm:text-2xl text-black dark:text-white leading-tight mb-2">

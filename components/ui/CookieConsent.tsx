@@ -101,7 +101,7 @@ const CookieConsent: React.FC = React.memo(() => {
               <>
                 <div className="flex items-start gap-4 mb-6">
                   <div className="shrink-0 w-12 h-12 rounded-full bg-coral/10 flex items-center justify-center">
-                    <Cookie className="w-6 h-6 text-coral" />
+                    <Cookie className="w-6 h-6 text-coral-text" />
                   </div>
                   <div className="flex-1">
                     <h3 id="cookie-consent-title" className="font-display text-xl font-semibold text-text-primary dark:text-white mb-2">
@@ -112,7 +112,7 @@ const CookieConsent: React.FC = React.memo(() => {
                       By clicking "Accept All", you consent to our use of cookies.{' '}
                       <a
                         href="/cookie-policy"
-                        className="text-coral hover:underline"
+                        className="text-coral-text hover:underline"
                         onClick={(e) => {
                           e.preventDefault();
                           setShowPreferences(true);

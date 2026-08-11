@@ -30,7 +30,9 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
             contactType: 'Customer Service'
           },
           sameAs: [
-            // Add social media links when available
+            'https://www.instagram.com/castells.media/',
+            'https://www.threads.com/@castells.media',
+            'https://www.facebook.com/castells.media'
           ],
           ...data
         };

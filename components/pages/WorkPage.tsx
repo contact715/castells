@@ -167,7 +167,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                                 onChange={() => toggleCategory(cat)}
                                                 className="w-4 h-4 rounded-sm border border-black/20 dark:border-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
                                             />
-                                            <span className="text-sm text-text-primary dark:text-white group-hover:text-coral transition-colors">
+                                            <span className="text-sm text-text-primary dark:text-white group-hover:text-coral-text transition-colors">
                                                 {cat}
                                             </span>
                                         </label>
@@ -189,7 +189,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                                 onChange={() => toggleIndustry(industry)}
                                                 className="w-4 h-4 rounded-sm border border-black/20 dark:border-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
                                             />
-                                            <span className="text-sm text-text-primary dark:text-white group-hover:text-coral transition-colors">
+                                            <span className="text-sm text-text-primary dark:text-white group-hover:text-coral-text transition-colors">
                                                 {industry}
                                             </span>
                                         </label>
@@ -329,14 +329,14 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                         </div>
                                         <div className="flex-1 min-w-0">
                                             <div className="flex items-center gap-2 mb-2">
-                                                <span className="px-2 py-1 bg-coral/10 text-coral rounded-lg text-[10px] font-bold uppercase tracking-widest">
+                                                <span className="px-2 py-1 bg-coral/10 text-coral-text rounded-lg text-[10px] font-bold uppercase tracking-widest">
                                                     {project.industry}
                                                 </span>
                                                 <span className="text-xs text-text-secondary dark:text-white/60">
                                                     {project.year}
                                                 </span>
                                             </div>
-                                            <h3 className="font-display text-lg font-semibold text-text-primary dark:text-white mb-2 group-hover:text-coral transition-colors">
+                                            <h3 className="font-display text-lg font-semibold text-text-primary dark:text-white mb-2 group-hover:text-coral-text transition-colors">
                                                 {project.client}
                                             </h3>
                                             <p className="text-sm text-text-secondary dark:text-white/70 mb-2 line-clamp-2">
@@ -349,7 +349,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                                 </div>
                                             </div>
                                         </div>
-                                        <ArrowUpRight className="w-5 h-5 text-text-secondary dark:text-white/60 group-hover:text-coral transition-colors shrink-0" />
+                                        <ArrowUpRight className="w-5 h-5 text-text-secondary dark:text-white/60 group-hover:text-coral-text transition-colors shrink-0" />
                                     </div>
                                 ))}
                             </div>

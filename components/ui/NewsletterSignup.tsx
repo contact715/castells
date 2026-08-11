@@ -62,7 +62,7 @@ const NewsletterSignup: React.FC<NewsletterSignupProps> = React.memo(({
       <div className={`bg-white dark:bg-surface rounded-card p-8 ${className}`}>
         <div className="text-center mb-6">
           <div className="w-16 h-16 rounded-full bg-coral/10 flex items-center justify-center mx-auto mb-4">
-            <Mail className="w-8 h-8 text-coral" />
+            <Mail className="w-8 h-8 text-coral-text" />
           </div>
           <h3 className="font-display text-2xl font-semibold text-text-primary dark:text-white mb-2">
             Stay Updated

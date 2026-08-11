@@ -317,7 +317,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                       <div className="text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-white/60 mb-1">
                         {res.label}
                       </div>
-                      <div className="text-coral text-sm font-semibold">
+                      <div className="text-coral-text text-sm font-semibold">
                         {res.growth}
                       </div>
                     </div>
@@ -349,7 +349,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                     <ul className="space-y-3">
                       {data.keyFeatures.map((item: string, i: number) => (
                         <li key={i} className="flex items-center gap-3 text-text-primary dark:text-white">
-                          <CheckCircle2 className="w-5 h-5 text-coral shrink-0" />
+                          <CheckCircle2 className="w-5 h-5 text-coral-text shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -377,12 +377,12 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               {/* Testimonial */}
               {data.testimonial && (
                 <div className="pt-8">
-                  <div className="text-coral text-5xl font-serif leading-none mb-4">"</div>
+                  <div className="text-coral-text text-5xl font-serif leading-none mb-4">"</div>
                   <blockquote className="font-display text-xl md:text-2xl font-medium leading-relaxed mb-6 text-text-primary dark:text-white">
                     {data.testimonial.quote}
                   </blockquote>
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center text-coral font-bold text-lg">
+                    <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center text-coral-text font-bold text-lg">
                       {data.testimonial.author.charAt(0)}
                     </div>
                     <div>

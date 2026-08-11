@@ -193,15 +193,15 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                   className={`relative bg-white dark:bg-surface rounded-card shadow-spatial-card p-6 border border-black/5 dark:border-white/5 cursor-pointer transition-[transform,box-shadow] duration-300 hover:shadow-spatial-md hover:-translate-y-1 group ${activeCategory === index ? 'ring-2 ring-coral' : ''}`}
                 >
                   <div className="w-14 h-14 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-5 group-hover:bg-coral group-hover:scale-110 transition-[background-color,transform] duration-300">
-                    <CategoryIcon className="w-7 h-7 text-coral group-hover:text-white transition-colors" />
+                    <CategoryIcon className="w-7 h-7 text-coral-text group-hover:text-white transition-colors" />
                   </div>
-                  <h3 className="font-display text-xl font-semibold text-text-primary mb-2 group-hover:text-coral transition-colors">
+                  <h3 className="font-display text-xl font-semibold text-text-primary mb-2 group-hover:text-coral-text transition-colors">
                     {category.name}
                   </h3>
                   <p className="text-sm text-text-secondary leading-relaxed mb-4">
                     {category.tagline}
                   </p>
-                  <div className="flex items-center text-coral text-sm font-bold uppercase tracking-wider group-hover:gap-2 transition-[gap]">
+                  <div className="flex items-center text-coral-text text-sm font-bold uppercase tracking-wider group-hover:gap-2 transition-[gap]">
                     <span>Explore</span>
                     <ChevronRight className="w-4 h-4 ml-1" />
                   </div>
@@ -231,7 +231,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                     transition={{ duration: 0.5 }}
                   >
                     <div className="w-16 h-16 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-6">
-                      <CategoryIcon className="w-8 h-8 text-coral" />
+                      <CategoryIcon className="w-8 h-8 text-coral-text" />
                     </div>
                     <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-4 leading-tight">
                       {category.name}
@@ -265,7 +265,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                               <IndustryIcon className="w-6 h-6 text-text-primary group-hover:text-white transition-colors duration-300" />
                             </div>
                             <div className="flex-1">
-                              <h3 className="font-display text-lg font-semibold text-text-primary mb-2 group-hover:text-coral transition-colors">
+                              <h3 className="font-display text-lg font-semibold text-text-primary mb-2 group-hover:text-coral-text transition-colors">
                                 {industry.name}
                               </h3>
                               <p className="text-sm text-text-secondary leading-relaxed">
@@ -323,7 +323,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                 >
                   <div className="flex items-start gap-4 mb-5">
                     <div className="w-12 h-12 rounded-element bg-coral/10 flex items-center justify-center shrink-0 group-hover:bg-coral transition-colors duration-300">
-                      <ItemIcon className="w-6 h-6 text-coral group-hover:text-white transition-colors duration-300" />
+                      <ItemIcon className="w-6 h-6 text-coral-text group-hover:text-white transition-colors duration-300" />
                     </div>
                     <h3 className="font-display text-xl font-semibold text-text-primary">
                       {item.title}

@@ -75,7 +75,7 @@ const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => 
                 <span className="font-semibold text-text-primary">Opt-out:</span> You can opt out of SMS messages at any time by replying <span className="font-mono font-semibold text-text-primary">STOP</span> to any message you receive from us. After opting out, you will receive a one-time confirmation message and will no longer receive text messages from us.
               </p>
               <p className="text-text-secondary">
-                <span className="font-semibold text-text-primary">Help:</span> For help with our SMS service, reply <span className="font-mono font-semibold text-text-primary">HELP</span> to any message or email us at <a className="text-coral hover:underline" href="mailto:contact@castells.media">contact@castells.media</a>.
+                <span className="font-semibold text-text-primary">Help:</span> For help with our SMS service, reply <span className="font-mono font-semibold text-text-primary">HELP</span> to any message or email us at <a className="text-coral-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a>.
               </p>
               <p className="text-text-secondary">
                 <span className="font-semibold text-text-primary">No mobile information sharing:</span> We do not sell, rent, loan, trade, lease, or otherwise transfer for profit any phone numbers or personal information collected through our SMS program to any third party.
@@ -109,7 +109,7 @@ const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => 
             <section className="space-y-3">
               <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">Contact</h2>
               <p className="text-text-secondary">
-                For privacy requests or questions about this policy, email <a className="text-coral hover:underline" href="mailto:contact@castells.media">contact@castells.media</a> or write to us at: Castells Agency LLC, Santa Monica, CA 90401.
+                For privacy requests or questions about this policy, email <a className="text-coral-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a> or write to us at: Castells Agency LLC, Santa Monica, CA 90401.
               </p>
             </section>
           </div>

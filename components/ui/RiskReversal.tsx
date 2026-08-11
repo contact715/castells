@@ -85,9 +85,9 @@ const RiskReversal: React.FC<RiskReversalProps> = React.memo(({
                 className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-8 hover:-translate-y-1 hover:shadow-spatial-md transition-[transform,box-shadow] group"
               >
                 <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-4 group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
-                  <Icon className="w-6 h-6 text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />
+                  <Icon className="w-6 h-6 text-coral-text group-hover:text-white dark:group-hover:text-black transition-colors" />
                 </div>
-                <h3 className="font-display text-lg font-semibold text-text-primary mb-2 group-hover:text-coral transition-colors">
+                <h3 className="font-display text-lg font-semibold text-text-primary mb-2 group-hover:text-coral-text transition-colors">
                   {guarantee.title}
                 </h3>
                 <p className="text-sm text-text-secondary leading-relaxed">

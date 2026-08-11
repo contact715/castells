@@ -414,7 +414,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                                                 }}
                                                 className="block group"
                                             >
-                                                <h4 className="font-display text-sm font-semibold text-text-primary dark:text-white mb-1 group-hover:text-coral transition-colors line-clamp-2">
+                                                <h4 className="font-display text-sm font-semibold text-text-primary dark:text-white mb-1 group-hover:text-coral-text transition-colors line-clamp-2">
                                                     {relatedPost.title}
                                                 </h4>
                                                 <p className="text-xs text-text-secondary dark:text-white/60">

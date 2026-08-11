@@ -48,7 +48,7 @@ const Confetti: React.FC<{ delay: number; x: number }> = ({ delay, x }) => {
 // Floating icon component
 const FloatingIcon: React.FC<{ icon: React.ReactNode; delay: number; x: number; y: number }> = ({ icon, delay, x, y }) => (
   <motion.div
-    className="absolute text-coral/20 dark:text-coral/30"
+    className="absolute text-coral-text/20 dark:text-coral-text/30"
     style={{ left: `${x}%`, top: `${y}%` }}
     initial={{ opacity: 0, scale: 0 }}
     animate={{ 
@@ -255,7 +255,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
                 transition={{ delay: 0.7 + index * 0.1 }}
                 whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
               >
-                <div className="w-10 h-10 rounded-element bg-coral/10 flex items-center justify-center text-coral mb-3 mx-auto">
+                <div className="w-10 h-10 rounded-element bg-coral/10 flex items-center justify-center text-coral-text mb-3 mx-auto">
                   {feature.icon}
                 </div>
                 <p className="text-sm text-text-secondary font-medium">{feature.text}</p>
@@ -305,7 +305,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1.2 + i * 0.1 }}
                 >
-                  <Star className="w-5 h-5 text-coral fill-coral" />
+                  <Star className="w-5 h-5 text-coral-text fill-coral" />
                 </motion.div>
               ))}
               <span className="ml-2 text-sm font-semibold text-text-primary">5.0</span>

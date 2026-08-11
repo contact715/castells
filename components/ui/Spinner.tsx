@@ -16,7 +16,7 @@ const sizeClasses = {
 export const Spinner: React.FC<SpinnerProps> = ({ size = 'md', className }) => {
   return (
     <Loader2
-      className={cn('animate-spin text-coral', sizeClasses[size], className)}
+      className={cn('animate-spin text-coral-text', sizeClasses[size], className)}
       aria-label="Loading"
     />
   );

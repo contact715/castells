@@ -96,7 +96,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
                     transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
                     className="w-20 h-20 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center"
                   >
-                    <AlertTriangle className="w-10 h-10 text-coral" />
+                    <AlertTriangle className="w-10 h-10 text-coral-text" />
                   </motion.div>
                 </div>
 
@@ -127,26 +127,26 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
                   className="bg-black/5 dark:bg-white/5 rounded-card p-6 mb-8"
                 >
                   <div className="flex items-start gap-3 mb-4">
-                    <HelpCircle className="w-5 h-5 text-coral shrink-0 mt-0.5" />
+                    <HelpCircle className="w-5 h-5 text-coral-text shrink-0 mt-0.5" />
                     <h3 className="font-display text-lg font-semibold text-text-primary">
                       What you can do:
                     </h3>
                   </div>
                   <ul className="space-y-2 text-text-secondary">
                     <li className="flex items-start gap-3">
-                      <span className="text-coral mt-1">•</span>
+                      <span className="text-coral-text mt-1">•</span>
                       <span>Try refreshing the page - this often resolves temporary issues</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-coral mt-1">•</span>
+                      <span className="text-coral-text mt-1">•</span>
                       <span>Check your internet connection and try again</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-coral mt-1">•</span>
+                      <span className="text-coral-text mt-1">•</span>
                       <span>Clear your browser cache if the problem persists</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-coral mt-1">•</span>
+                      <span className="text-coral-text mt-1">•</span>
                       <span>Go back to the previous page and try a different path</span>
                     </li>
                   </ul>
@@ -205,7 +205,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
                     transition={{ delay: 0.7 }}
                     className="mt-8"
                   >
-                    <summary className="cursor-pointer text-sm font-semibold text-text-secondary mb-3 hover:text-coral transition-colors">
+                    <summary className="cursor-pointer text-sm font-semibold text-text-secondary mb-3 hover:text-coral-text transition-colors">
                       Error Details (Development Only)
                     </summary>
                     <div className="bg-black/5 dark:bg-white/5 rounded-card p-6 mt-3 overflow-auto">

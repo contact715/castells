@@ -101,7 +101,7 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
               >
                 {author.name}
               </AnimatedHeading>
-              <p className="text-xl text-coral font-semibold mb-6">{author.role}</p>
+              <p className="text-xl text-coral-text font-semibold mb-6">{author.role}</p>
               
               {/* Social Links */}
               <div className="flex items-center gap-4">
@@ -149,7 +149,7 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
           {/* Expertise */}
           <div className="bg-white dark:bg-surface rounded-card p-8 md:p-12 mb-8">
             <h2 className="font-display text-2xl font-semibold text-text-primary mb-6 flex items-center gap-3">
-              <Briefcase className="w-6 h-6 text-coral" />
+              <Briefcase className="w-6 h-6 text-coral-text" />
               Expertise
             </h2>
             <div className="flex flex-wrap gap-3">
@@ -168,7 +168,7 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
           {relatedCaseStudies.length > 0 && (
             <div className="bg-white dark:bg-surface rounded-card p-8 md:p-12 mb-8">
               <h2 className="font-display text-2xl font-semibold text-text-primary mb-6 flex items-center gap-3">
-                <User className="w-6 h-6 text-coral" />
+                <User className="w-6 h-6 text-coral-text" />
                 Case Studies
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -192,7 +192,7 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
                       <div className="absolute inset-0 bg-linear-to-t from-black via-black/50 to-black/10" />
                     </div>
                     <div className="relative p-6 pt-24">
-                      <h3 className="font-display text-xl font-semibold text-white mb-2 group-hover:text-coral transition-colors">
+                      <h3 className="font-display text-xl font-semibold text-white mb-2 group-hover:text-coral-text transition-colors">
                         {cs.client}
                       </h3>
                       <p className="text-sm text-white/70 line-clamp-2">{cs.description}</p>

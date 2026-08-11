@@ -194,7 +194,7 @@ export default function ScrollTimeline({
                           "w-20 h-20 rounded-card flex items-center justify-center font-display text-xl font-bold transition-[background-color,color,transform,box-shadow] duration-300 relative",
                           isActive
                             ? "bg-coral text-white scale-110 ring-4 ring-coral/20"
-                            : "bg-coral/10 dark:bg-coral/20 text-coral border-2 border-coral/20 dark:border-coral/30"
+                            : "bg-coral/10 dark:bg-coral/20 text-coral-text border-2 border-coral/20 dark:border-coral/30"
                         )}
                         whileHover={{ scale: 1.05 }}
                         animate={isActive ? {
@@ -512,7 +512,7 @@ export default function ScrollTimeline({
                     {isActive && (
                       <>
                         <motion.div
-                          className="absolute top-4 right-4 text-coral/20"
+                          className="absolute top-4 right-4 text-coral-text/20"
                           animate={{
                             y: [0, -10, 0],
                             opacity: [0.2, 0.4, 0.2],
@@ -526,7 +526,7 @@ export default function ScrollTimeline({
                           <Sparkles className="w-4 h-4" />
                         </motion.div>
                         <motion.div
-                          className="absolute bottom-4 right-8 text-coral/15"
+                          className="absolute bottom-4 right-8 text-coral-text/15"
                           animate={{
                             y: [0, 10, 0],
                             opacity: [0.15, 0.3, 0.15],

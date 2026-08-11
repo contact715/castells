@@ -84,7 +84,7 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = React.memo(({
               <div className="font-display text-lg font-semibold text-text-primary">
                 Feature
               </div>
-              <div className="font-display text-lg font-semibold text-coral text-center">
+              <div className="font-display text-lg font-semibold text-coral-text text-center">
                 Castells
               </div>
               <div className="font-display text-lg font-semibold text-text-secondary text-center">
