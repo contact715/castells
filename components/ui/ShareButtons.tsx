@@ -1,5 +1,6 @@
 import React from 'react';
-import { Share2, Facebook, Twitter, Linkedin, Mail, Link2, Check } from 'lucide-react';
+import { Share2, Mail, Link2, Check } from 'lucide-react';
+import { Facebook, Twitter, Linkedin } from './icons/SocialIcons';
 import { Button } from './Button';
 import { trackOutboundLink } from '../../lib/analytics';
 
@@ -65,50 +66,50 @@ const ShareButtons: React.FC<ShareButtonsProps> = React.memo(({
       
       <button
         onClick={() => handleShare('facebook', shareUrl)}
-        className="p-2 rounded-xl bg-white dark:bg-surface hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+        className="p-3 rounded-xl bg-white dark:bg-surface hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         aria-label="Share on Facebook"
         title="Share on Facebook"
       >
-        <Facebook className="w-4 h-4 text-text-primary dark:text-white" />
+        <Facebook className="w-[18px] h-[18px] text-text-primary dark:text-white" />
       </button>
 
       <button
         onClick={() => handleShare('twitter', shareUrl)}
-        className="p-2 rounded-xl bg-white dark:bg-surface hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+        className="p-3 rounded-xl bg-white dark:bg-surface hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         aria-label="Share on Twitter"
         title="Share on Twitter"
       >
-        <Twitter className="w-4 h-4 text-text-primary dark:text-white" />
+        <Twitter className="w-[18px] h-[18px] text-text-primary dark:text-white" />
       </button>
 
       <button
         onClick={() => handleShare('linkedin', shareUrl)}
-        className="p-2 rounded-xl bg-white dark:bg-surface hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+        className="p-3 rounded-xl bg-white dark:bg-surface hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         aria-label="Share on LinkedIn"
         title="Share on LinkedIn"
       >
-        <Linkedin className="w-4 h-4 text-text-primary dark:text-white" />
+        <Linkedin className="w-[18px] h-[18px] text-text-primary dark:text-white" />
       </button>
 
       <button
         onClick={() => handleShare('email', shareUrl)}
-        className="p-2 rounded-xl bg-white dark:bg-surface hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+        className="p-3 rounded-xl bg-white dark:bg-surface hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         aria-label="Share via Email"
         title="Share via Email"
       >
-        <Mail className="w-4 h-4 text-text-primary dark:text-white" />
+        <Mail className="w-[18px] h-[18px] text-text-primary dark:text-white" />
       </button>
 
       <button
         onClick={() => handleShare('copy', shareUrl)}
-        className="p-2 rounded-xl bg-white dark:bg-surface hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+        className="p-3 rounded-xl bg-white dark:bg-surface hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         aria-label="Copy link"
         title="Copy link"
       >
         {copied ? (
-          <Check className="w-4 h-4 text-green-500" />
+          <Check className="w-[18px] h-[18px] text-green-500" />
         ) : (
-          <Link2 className="w-4 h-4 text-text-primary dark:text-white" />
+          <Link2 className="w-[18px] h-[18px] text-text-primary dark:text-white" />
         )}
       </button>
     </div>

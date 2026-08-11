@@ -83,7 +83,7 @@ const TrustedBy: React.FC = () => {
                 >
                     <p className="text-center text-xs font-bold uppercase tracking-[0.2em] text-text-secondary mb-12 opacity-60">Trusted by industry leaders</p>
 
-                    <div className="relative h-40 overflow-hidden mask-fade-sides opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
+                    <div className="relative h-40 overflow-hidden mask-fade-sides opacity-60 grayscale hover:grayscale-0 transition-[filter] duration-700">
                         <LogoLoop
                             logos={PARTNER_LOGOS}
                             speed={50}

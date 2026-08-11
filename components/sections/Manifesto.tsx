@@ -8,7 +8,7 @@ const Manifesto: React.FC = () => {
         <section id="manifesto" className="pt-12 md:pt-16 pb-24 bg-text-primary overflow-hidden relative">
 
             {/* Marquee */}
-            <div className="whitespace-nowrap overflow-hidden flex py-12 -y -white/10">
+            <div className="whitespace-nowrap overflow-hidden flex py-12 border-y border-white/10">
                 <div className="animate-[slide_40s_linear_infinite] flex items-center">
                     <span className="text-7xl md:text-9xl font-display font-light italic text-white/90 px-4 tracking-tight">
                         {repeatedText}

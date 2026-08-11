@@ -16,10 +16,10 @@ export const Skeleton: React.FC<SkeletonProps> = ({
   style,
   ...props
 }) => {
-  const baseStyles = 'animate-pulse bg-black/5 dark:bg-white/10 rounded';
+  const baseStyles = 'animate-pulse bg-black/5 dark:bg-white/10 rounded-sm';
   
   const variantStyles = {
-    text: 'h-4 rounded',
+    text: 'h-4 rounded-sm',
     circular: 'rounded-full',
     rectangular: 'rounded-xl',
   };

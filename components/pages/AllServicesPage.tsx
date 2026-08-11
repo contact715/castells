@@ -173,10 +173,10 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                   onClick={() => setActiveCategory(index)}
-                  className={`relative bg-white dark:bg-surface rounded-[2rem] p-6 cursor-pointer transition-all duration-300 hover:-translate-y-1 group`}
+                  className={`relative bg-white dark:bg-surface rounded-card p-6 cursor-pointer transition-[transform,box-shadow] duration-300 hover:-translate-y-1 group`}
                 >
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-[2rem] bg-coral/10 dark:bg-coral/20 flex items-center justify-center flex-shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
+                    <div className="w-12 h-12 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
                       <CategoryIcon className="w-6 h-6 stroke-[1.5] text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />
                     </div>
                     <h3 className="font-display font-semibold text-2xl text-black dark:text-white leading-tight">
@@ -186,7 +186,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                   <p className="text-text-secondary text-sm leading-relaxed mb-4">
                     {category.tagline}
                   </p>
-                  <div className="flex items-center text-coral text-sm font-bold uppercase tracking-wider group-hover:gap-2 transition-all">
+                  <div className="flex items-center text-coral text-sm font-bold uppercase tracking-wider group-hover:gap-2 transition-[gap]">
                     <span>Explore</span>
                     <ChevronRight className="w-4 h-4 ml-1" />
                   </div>
@@ -215,7 +215,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                   >
-                    <div className="w-16 h-16 rounded-[2rem] bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-6">
+                    <div className="w-16 h-16 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-6">
                       <CategoryIcon className="w-8 h-8 text-coral" />
                     </div>
                     <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-4 leading-tight">
@@ -243,10 +243,10 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: serviceIndex * 0.1, duration: 0.5 }}
-                          className="bg-white dark:bg-surface rounded-[2rem] p-6  -black/5 dark:-white/5 hover: hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
+                          className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-6 border border-black/5 dark:border-white/5 hover:shadow-spatial-md hover:-translate-y-1 transition-[transform,box-shadow] duration-300 group cursor-pointer"
                         >
                           <div className="flex items-start gap-4">
-                            <div className="w-12 h-12 rounded-[2rem] bg-coral/10 dark:bg-coral/20 flex items-center justify-center flex-shrink-0 group-hover:bg-black dark:group-hover:bg-white transition-colors duration-300">
+                            <div className="w-12 h-12 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center shrink-0 group-hover:bg-black dark:group-hover:bg-white transition-colors duration-300">
                               <ServiceIcon className="w-6 h-6 text-coral group-hover:text-white dark:group-hover:text-black transition-colors duration-300" />
                             </div>
                             <div className="flex-1">
@@ -305,9 +305,9 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="flex items-start gap-6 p-6 rounded-[2rem] bg-white dark:bg-surface  -black/5 dark:-white/5 hover: transition-all duration-300 group"
+                  className="flex items-start gap-6 p-6 rounded-card shadow-spatial-card bg-white dark:bg-surface border border-black/5 dark:border-white/5 hover:shadow-spatial-md transition-shadow duration-300 group"
                 >
-                  <span className="font-display text-4xl font-bold text-coral flex-shrink-0">
+                  <span className="font-display text-4xl font-bold text-coral shrink-0">
                     {step.num}
                   </span>
                   <div className="flex-1">
@@ -365,10 +365,10 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="bg-white dark:bg-surface rounded-[2rem] p-8  -black/5 dark:-white/5 hover: hover:-translate-y-1 transition-all duration-300 group"
+                  className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-8 border border-black/5 dark:border-white/5 hover:shadow-spatial-md hover:-translate-y-1 transition-[transform,box-shadow] duration-300 group"
                 >
                   <div className="flex items-start gap-4 mb-5">
-                    <div className="w-12 h-12 rounded-[2rem] bg-coral/10 flex items-center justify-center flex-shrink-0 group-hover:bg-coral transition-colors duration-300">
+                    <div className="w-12 h-12 rounded-element bg-coral/10 flex items-center justify-center shrink-0 group-hover:bg-coral transition-colors duration-300">
                       <ItemIcon className="w-6 h-6 text-coral group-hover:text-white transition-colors duration-300" />
                     </div>
                     <h3 className="font-display text-xl font-semibold text-text-primary">
@@ -393,7 +393,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative bg-white dark:bg-[#232323] rounded-[2rem] p-12 md:p-20 overflow-hidden  -black/5 dark:-white/5"
+            className="relative bg-white dark:bg-[#232323] rounded-card shadow-spatial-card p-12 md:p-20 overflow-hidden border border-black/5 dark:border-white/5"
           >
 
             <div className="relative z-10 max-w-3xl mx-auto text-center">
@@ -402,7 +402,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="w-20 h-20 rounded-[2rem] bg-coral flex items-center justify-center mx-auto mb-8"
+                className="w-20 h-20 rounded-element bg-coral flex items-center justify-center mx-auto mb-8"
               >
                 <Sparkles className="w-10 h-10 text-white" />
               </motion.div>

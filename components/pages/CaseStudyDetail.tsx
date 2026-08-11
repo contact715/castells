@@ -180,7 +180,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="relative w-full h-[500px] rounded-[2rem] overflow-hidden mb-12 group"
+          className="relative w-full h-[500px] rounded-card overflow-hidden mb-12 group"
         >
           <div className="absolute inset-0 bg-black">
             {data.video ? (
@@ -310,7 +310,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {data.results?.map((res: any, idx: number) => (
-                    <div key={idx} className="bg-white dark:bg-surface rounded-[2rem] p-6">
+                    <div key={idx} className="bg-white dark:bg-surface rounded-card p-6">
                       <div className="font-display text-3xl font-bold text-text-primary dark:text-white mb-2">
                         {res.value}
                       </div>
@@ -344,12 +344,12 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                   {data.solution}
                 </p>
                 {data.keyFeatures && (
-                  <div className="bg-white dark:bg-surface rounded-[2rem] p-6">
+                  <div className="bg-white dark:bg-surface rounded-card p-6">
                     <h3 className="font-display text-lg font-semibold text-text-primary dark:text-white mb-4">Key Deliverables</h3>
                     <ul className="space-y-3">
                       {data.keyFeatures.map((item: string, i: number) => (
                         <li key={i} className="flex items-center gap-3 text-text-primary dark:text-white">
-                          <CheckCircle2 className="w-5 h-5 text-coral flex-shrink-0" />
+                          <CheckCircle2 className="w-5 h-5 text-coral shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -364,7 +364,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                   <h2 className="font-display text-3xl font-semibold text-text-primary dark:text-white leading-tight">
                     Brand Guidelines
                   </h2>
-                  <div className="bg-white dark:bg-surface rounded-[2rem] overflow-hidden">
+                  <div className="bg-white dark:bg-surface rounded-card overflow-hidden">
                     <iframe
                       src={`${encodeURI(data.brandGuidelines)}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
                       className="w-full h-[800px] md:h-[1000px] lg:h-[1200px] border-0"
@@ -401,7 +401,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
 
               {/* Right Column: Navigation Panel */}
               <div className="lg:w-64 shrink-0">
-                <div className="sticky top-24 bg-white dark:bg-surface rounded-[2rem] p-4 flex flex-col gap-3">
+                <div className="sticky top-24 bg-white dark:bg-surface rounded-card p-4 flex flex-col gap-3">
                   {/* Header */}
                   <div className="pb-2 border-b border-black/5 dark:border-white/10">
                     <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">Navigate</span>
@@ -413,7 +413,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                       <button
                         key={item.id}
                         onClick={() => scrollToSection(item.id)}
-                        className={`shrink-0 px-3 py-2 rounded-[2rem] transition-all text-xs font-medium flex items-center justify-start gap-2 min-w-[120px] ${
+                        className={`shrink-0 px-3 py-2 rounded-pill transition-[background-color,color] text-xs font-medium flex items-center justify-start gap-2 min-w-[120px] ${
                           activeSection === item.id
                             ? 'bg-black text-white dark:bg-white dark:text-black'
                             : 'bg-ivory dark:bg-[#191919] text-text-primary dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black'
@@ -438,7 +438,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                     >
                       <button 
                         ref={assetsButtonRef}
-                        className="flex items-center gap-2 px-3 py-2 rounded-[2rem] bg-ivory dark:bg-[#191919] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all text-xs font-medium w-full justify-start"
+                        className="flex items-center gap-2 px-3 py-2 rounded-pill bg-ivory dark:bg-[#191919] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color] text-xs font-medium w-full justify-start"
                         onMouseEnter={() => {
                           if (assetsButtonRef.current) {
                             const rect = assetsButtonRef.current.getBoundingClientRect();
@@ -459,7 +459,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                   {/* Author */}
                   <button
                     onClick={() => onNavigate('author', { id: author.id, name: author.name })}
-                    className="group flex items-center gap-2 px-3 py-2 rounded-[2rem] bg-ivory dark:bg-[#191919] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all text-xs font-medium w-full justify-start"
+                    className="group flex items-center gap-2 px-3 py-2 rounded-pill bg-ivory dark:bg-[#191919] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color] text-xs font-medium w-full justify-start"
                   >
                     <div className="w-6 h-6 rounded-full overflow-hidden shrink-0">
                       <img
@@ -493,7 +493,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
           {/* Share Dropdown */}
           {shareDropdownVisible && (
             <div
-              className="fixed bg-white dark:bg-surface rounded-[2rem] p-4 transition-all duration-200 z-[100]"
+              className="fixed bg-white dark:bg-surface rounded-card p-4 transition-[opacity,transform] duration-200 z-critical"
               style={{
                 top: `${shareDropdownPos.top}px`,
                 right: `${shareDropdownPos.right}px`,
@@ -512,7 +512,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
           {/* Assets Dropdown */}
           {assetsDropdownVisible && (data.brandGuidelines || data.website) && (
             <div
-              className="fixed bg-white dark:bg-surface rounded-[2rem] p-3 min-w-[180px] transition-all duration-200 z-[100]"
+              className="fixed bg-white dark:bg-surface rounded-card p-3 min-w-[180px] transition-[opacity,transform] duration-200 z-critical"
               style={{
                 top: `${assetsDropdownPos.top}px`,
                 right: `${assetsDropdownPos.right}px`,
@@ -526,7 +526,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                     href={encodeURI(data.brandGuidelines)}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 w-full p-2 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all text-xs"
+                    className="flex items-center gap-2 w-full p-2 rounded-inner hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color] text-xs"
                   >
                     <FileText className="w-4 h-4" />
                     <span>Guidelines</span>
@@ -537,7 +537,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                     href={data.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2 w-full p-2 rounded-[2rem] hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all text-xs"
+                    className="flex items-center gap-2 w-full p-2 rounded-inner hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color] text-xs"
                   >
                     <Globe className="w-4 h-4" />
                     <span>Website</span>

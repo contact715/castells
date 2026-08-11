@@ -546,7 +546,7 @@ const ServicesMindMapSection: React.FC<ServicesMindMapSectionProps> = ({
                   ease: "easeInOut",
                 }}
               />
-              <CenterLogo className="flex-shrink-0 relative z-10" />
+              <CenterLogo className="shrink-0 relative z-10" />
               <h2 className="text-white text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight whitespace-nowrap relative z-10">
                 Caste//s
               </h2>
@@ -598,9 +598,9 @@ const ServicesMindMapSection: React.FC<ServicesMindMapSectionProps> = ({
                 >
                   <motion.div
                     className={cn(
-                      "text-center transition-all duration-300 px-3 py-2 rounded-lg",
+                      "text-center transition-[color,transform,background-color] duration-300 px-3 py-2 rounded-lg",
                       isActive
-                        ? "text-white scale-105 bg-white/5 backdrop-blur-sm"
+                        ? "text-white scale-105 bg-white/5 backdrop-blur-xs"
                         : "text-white/70"
                     )}
                     whileHover={{ scale: 1.15, y: -2 }}
@@ -609,7 +609,7 @@ const ServicesMindMapSection: React.FC<ServicesMindMapSectionProps> = ({
                       <span className="relative z-10">{cat.label}</span>
                       {isActive && (
                         <motion.span
-                          className="absolute inset-0 bg-coral/10 rounded-lg blur-sm -z-0"
+                          className="absolute inset-0 bg-coral/10 rounded-lg blur-xs -z-0"
                           initial={{ opacity: 0 }}
                           animate={{ opacity: 1 }}
                         />
@@ -683,9 +683,9 @@ const ServicesMindMapSection: React.FC<ServicesMindMapSectionProps> = ({
                   >
                     <motion.span
                       className={cn(
-                        "text-sm md:text-base font-medium transition-all duration-300 whitespace-nowrap px-3 py-1.5 rounded-md relative",
+                        "text-sm md:text-base font-medium transition-[color,transform,background-color] duration-300 whitespace-nowrap px-3 py-1.5 rounded-md relative",
                         isHovered
-                          ? "text-white scale-110 font-semibold bg-coral/20 backdrop-blur-sm"
+                          ? "text-white scale-110 font-semibold bg-coral/20 backdrop-blur-xs"
                           : isCategoryActive
                           ? "text-white/80 bg-white/5"
                           : "text-white/60",
@@ -742,9 +742,9 @@ const ServicesMindMapSection: React.FC<ServicesMindMapSectionProps> = ({
                     setHoveredCategory(null);
                   }}
                 >
-                  <div className="bg-[#1a1a1a] dark:bg-[#1a1a1a] rounded-[2rem] p-6   -white/10 backdrop-blur-sm">
+                  <div className="bg-[#1a1a1a] dark:bg-[#1a1a1a] rounded-card p-6 border border-white/10 backdrop-blur-xs">
                     <div className="flex items-center gap-3 mb-4">
-                      <div className="p-2 rounded-lg bg-coral/20 flex-shrink-0">
+                      <div className="p-2 rounded-lg bg-coral/20 shrink-0">
                         <hoveredService.service.icon className="w-5 h-5 text-coral" />
                       </div>
                       <div className="min-w-0">
@@ -776,9 +776,9 @@ const ServicesMindMapSection: React.FC<ServicesMindMapSectionProps> = ({
                     setHoveredCategory(null);
                   }}
                 >
-                  <div className="bg-[#1a1a1a] dark:bg-[#1a1a1a] rounded-[2rem] p-4   -white/10 backdrop-blur-sm">
+                  <div className="bg-[#1a1a1a] dark:bg-[#1a1a1a] rounded-card p-4 border border-white/10 backdrop-blur-xs">
                     <div className="flex items-center gap-3 mb-3">
-                      <div className="p-2 rounded-lg bg-coral/20 flex-shrink-0">
+                      <div className="p-2 rounded-lg bg-coral/20 shrink-0">
                         <hoveredService.service.icon className="w-4 h-4 text-coral" />
                       </div>
                       <div className="min-w-0">

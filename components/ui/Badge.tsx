@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '../../lib/utils';
 
 export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
-  variant?: 'default' | 'pulse' | 'outline';
+  variant?: 'default' | 'pulse' | 'outline-solid';
   size?: 'sm' | 'md';
 }
 
@@ -27,7 +27,7 @@ export const Badge: React.FC<BadgeProps> = ({
 }) => {
   return (
     <div className={cn("flex items-center gap-2", className)} {...props}>
-      {variant !== 'outline' && (
+      {variant !== 'outline-solid' && (
         <span
           className={cn(
             "w-2 h-2 rounded-full bg-coral-gradient",

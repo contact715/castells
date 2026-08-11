@@ -96,7 +96,7 @@ const NextSteps: React.FC<NextStepsProps> = React.memo(({
                   </div>
                 )}
 
-                <div className="bg-ivory dark:bg-[#191919] rounded-[2rem] p-8 h-full hover:-translate-y-1 transition-all group">
+                <div className="bg-ivory dark:bg-[#191919] rounded-card p-8 h-full hover:-translate-y-1 transition-[transform,box-shadow] group">
                   <div className="flex items-center justify-between mb-4">
                     <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
                       <Icon className="w-6 h-6 text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />

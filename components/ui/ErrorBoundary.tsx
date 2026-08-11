@@ -87,7 +87,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
               </div>
 
               {/* Main Content Card */}
-              <div className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12">
+              <div className="bg-white dark:bg-surface rounded-card p-8 md:p-12">
                 {/* Icon */}
                 <div className="flex justify-center mb-8">
                   <motion.div
@@ -124,10 +124,10 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
-                  className="bg-black/5 dark:bg-white/5 rounded-[2rem] p-6 mb-8"
+                  className="bg-black/5 dark:bg-white/5 rounded-card p-6 mb-8"
                 >
                   <div className="flex items-start gap-3 mb-4">
-                    <HelpCircle className="w-5 h-5 text-coral flex-shrink-0 mt-0.5" />
+                    <HelpCircle className="w-5 h-5 text-coral shrink-0 mt-0.5" />
                     <h3 className="font-display text-lg font-semibold text-text-primary">
                       What you can do:
                     </h3>
@@ -208,7 +208,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
                     <summary className="cursor-pointer text-sm font-semibold text-text-secondary mb-3 hover:text-coral transition-colors">
                       Error Details (Development Only)
                     </summary>
-                    <div className="bg-black/5 dark:bg-white/5 rounded-[2rem] p-6 mt-3 overflow-auto">
+                    <div className="bg-black/5 dark:bg-white/5 rounded-card p-6 mt-3 overflow-auto">
                       <p className="text-xs font-mono text-red-600 dark:text-red-400 mb-3 font-semibold">
                         {this.state.error.toString()}
                       </p>

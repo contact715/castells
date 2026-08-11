@@ -25,7 +25,7 @@ export const Spotlight = ({ className, fill = "white" }: SpotlightProps) => {
     <motion.div
       style={{ x: smoothX, y: smoothY }}
       className={cn(
-        "pointer-events-none absolute z-[1] h-[169%] w-[138%] lg:w-[84%]",
+        "pointer-events-none absolute z-content h-[169%] w-[138%] lg:w-[84%]",
         className
       )}
     >

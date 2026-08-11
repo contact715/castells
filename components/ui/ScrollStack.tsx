@@ -5,9 +5,8 @@ interface ScrollStackProps {
   children: ReactNode;
   className?: string;
   itemClassName?: string;
-  stackOffset?: number; // Distance from top where stack starts (px) or %? we'll use px or vh
-  scaleFactor?: number; // How much to scale down underlying cards
-  blurAmount?: number; // How much to blur underlying cards
+  stackOffset?: number;
+  scaleFactor?: number;
 }
 
 export const ScrollStackItem: React.FC<{ children: ReactNode; className?: string }> = ({
@@ -22,50 +21,39 @@ export const ScrollStackItem: React.FC<{ children: ReactNode; className?: string
 const ScrollStack: React.FC<ScrollStackProps> = ({
   children,
   className = '',
-  stackOffset = 120, // 120px from top
+  stackOffset = 120,
   scaleFactor = 0.05,
-  blurAmount = 4,
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [cards, setCards] = useState<HTMLElement[]>([]);
-  const cardOffsets = useRef<number[]>([]);
   const ticking = useRef(false);
   const rafId = useRef<number>(0);
   const resizeTimeout = useRef<NodeJS.Timeout | null>(null);
   const windowHeight = useRef(typeof window !== 'undefined' ? window.innerHeight : 800);
+  const prevProgress = useRef<number[]>([]);
+  const isVisible = useRef(false);
 
   useEffect(() => {
     if (!wrapperRef.current) return;
 
-    // Select only direct children cards
     const cardElements = Array.from(
       wrapperRef.current.querySelectorAll('.scroll-stack-card')
     ) as HTMLElement[];
     setCards(cardElements);
 
-    // Initial Setup: Set sticky top positions
     cardElements.forEach((card, index) => {
-      // Each card stacks slightly lower than the previous one
       card.style.top = `${stackOffset + (index * 15)}px`;
-      // Ensure proper z-index layering
       card.style.zIndex = `${index + 10}`;
     });
 
+    prevProgress.current = new Array(cardElements.length).fill(1);
   }, [children, stackOffset]);
 
-  const calculateOffsets = useCallback(() => {
-    if (!wrapperRef.current) return;
-
-    cardOffsets.current = cards.map((card) => {
-      return card.offsetTop;
-    });
-  }, [cards]);
-
   const updateCards = useCallback(() => {
-    if (!wrapperRef.current || cards.length === 0) {
-      ticking.current = false;
-      return;
-    }
+    ticking.current = false;
+
+    // Skip all work when section is not visible
+    if (!isVisible.current || !wrapperRef.current || cards.length === 0) return;
 
     if (windowHeight.current !== window.innerHeight) {
       windowHeight.current = window.innerHeight;
@@ -83,24 +71,45 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
         const range = windowHeight.current * 0.5;
         const progress = Math.min(1, Math.max(0, distance / range));
 
-        const scale = 1 - ((1 - progress) * scaleFactor);
-        const blur = (1 - progress) * blurAmount;
-        const brightness = 1 - ((1 - progress) * 0.2);
+        // Skip DOM update if progress barely changed
+        if (Math.abs(progress - (prevProgress.current[index] ?? 1)) < 0.005) return;
+        prevProgress.current[index] = progress;
 
-        card.style.transform = `scale(${scale}) translateZ(0)`;
-        card.style.filter = `blur(${blur}px) brightness(${brightness})`;
+        const scale = 1 - ((1 - progress) * scaleFactor);
+        const dim = (1 - progress) * 0.6;
+
+        card.style.transform = `scale(${scale})`;
+        card.style.setProperty('--stack-dim', `${dim}`);
       } else {
-        card.style.transform = 'scale(1) translateZ(0)';
-        card.style.filter = 'none';
+        if (prevProgress.current[index] !== 1) {
+          card.style.transform = 'scale(1)';
+          card.style.setProperty('--stack-dim', '0');
+          prevProgress.current[index] = 1;
+        }
       }
     });
+  }, [cards, stackOffset, scaleFactor]);
 
-    ticking.current = false;
-  }, [cards, stackOffset, scaleFactor, blurAmount]);
+  // IntersectionObserver — only activate scroll handler when wrapper is near viewport
+  useEffect(() => {
+    if (!wrapperRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible.current = entry.isIntersecting;
+        // Run once when becoming visible to initialize positions
+        if (entry.isIntersecting) updateCards();
+      },
+      { rootMargin: '200px' }
+    );
+
+    observer.observe(wrapperRef.current);
+    return () => observer.disconnect();
+  }, [updateCards]);
 
   useEffect(() => {
     const onScroll = () => {
-      if (!ticking.current) {
+      if (!ticking.current && isVisible.current) {
         rafId.current = requestAnimationFrame(updateCards);
         ticking.current = true;
       }
@@ -110,27 +119,22 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       if (resizeTimeout.current) clearTimeout(resizeTimeout.current);
       resizeTimeout.current = setTimeout(() => {
         windowHeight.current = window.innerHeight;
-        calculateOffsets();
-        updateCards();
+        if (isVisible.current) updateCards();
       }, 150);
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onResize, { passive: true });
 
-    // Initial call
-    calculateOffsets();
-    updateCards();
+    if (isVisible.current) updateCards();
 
     return () => {
       window.removeEventListener('scroll', onScroll);
       window.removeEventListener('resize', onResize);
       if (resizeTimeout.current) clearTimeout(resizeTimeout.current);
-      if (rafId.current) {
-        cancelAnimationFrame(rafId.current);
-      }
+      if (rafId.current) cancelAnimationFrame(rafId.current);
     };
-  }, [calculateOffsets, updateCards]);
+  }, [updateCards]);
 
   return (
     <div ref={wrapperRef} className={`scroll-stack-wrapper ${className}`}>

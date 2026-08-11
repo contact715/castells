@@ -33,11 +33,12 @@ export default function Counter({
     }, [isInView, motionValue, direction, value]);
 
     useEffect(() => {
-        springValue.on("change", (latest) => {
+        const unsubscribe = springValue.on("change", (latest) => {
             if (ref.current) {
                 ref.current.textContent = `${prefix}${latest.toFixed(decimals)}${suffix}`;
             }
         });
+        return unsubscribe;
     }, [springValue, decimals, prefix, suffix]);
 
     return <span ref={ref} className={className} />;

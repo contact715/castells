@@ -4,10 +4,9 @@
     <meta charset="UTF-8" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/castells-logo.png" />
-    <link rel="manifest" href="/manifest.webmanifest" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content="Castells Agency - We help contractors and service providers dominate their local markets through data-driven strategies." />
-    
+
     <!-- Resource Hints for Performance -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
     <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
@@ -16,16 +15,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-    
+
     <!-- Preload critical resources -->
     <link rel="preload" href="/castells-logo.png" as="image" type="image/png" />
-    
+
     <!-- Fonts with optimized loading -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,200..800;1,200..800&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet"></noscript>
-    <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&display=swap" rel="stylesheet"></noscript>
-    
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet"></noscript>
+
     <style>
       @font-face {
         font-family: 'Newsreader';
@@ -35,7 +34,7 @@
         font-family: 'Satoshi';
         font-display: swap;
       }
-      
+
       /* Critical CSS - Above the fold styles */
       body {
         margin: 0;
@@ -44,20 +43,20 @@
         background-color: #faf9f6;
         color: #1a1a1a;
       }
-      
+
       #root {
         min-height: 100vh;
       }
-      
+
       /* Prevent layout shift */
       img {
         max-width: 100%;
         height: auto;
       }
     </style>
-    
+
     <title>Castells Agency | Dominate Your Market</title>
-    
+
     <!-- Google Tag Manager — uncomment when you have a real GTM ID -->
     <!-- GTM_ID: replace GTM-XXXXXXX with your real container ID, then uncomment both blocks -->
     <!--
@@ -73,7 +72,42 @@
   <body>
     <!-- GTM noscript — uncomment when GTM is active -->
     <!-- <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript> -->
-    
+
+    <!--
+      Снимаем офлайн-режим (Service Worker) и чистим его кэш.
+      Раньше сайт ставил в браузер офлайн-копию, и посетители могли месяцами
+      видеть старую версию вместо новой. Офлайн-режим отключён, а этот код
+      добивает уже установленные копии у тех, кто заходил раньше.
+    -->
+    <script>
+      (function () {
+        if (!('serviceWorker' in navigator)) return;
+
+        var wasControlled = !!navigator.serviceWorker.controller;
+
+        var cleanup = navigator.serviceWorker.getRegistrations().then(function (regs) {
+          return Promise.all(regs.map(function (reg) { return reg.unregister(); }));
+        });
+
+        if ('caches' in window) {
+          cleanup = cleanup.then(function () {
+            return caches.keys().then(function (keys) {
+              return Promise.all(keys.map(function (k) { return caches.delete(k); }));
+            });
+          });
+        }
+
+        // Если страницу отдал старый офлайн-обработчик, один раз перезагружаемся,
+        // чтобы посетитель сразу увидел актуальную версию. Флаг не даёт зациклиться.
+        cleanup.then(function () {
+          if (wasControlled && !sessionStorage.getItem('sw-purged')) {
+            sessionStorage.setItem('sw-purged', '1');
+            location.reload();
+          }
+        }).catch(function () {});
+      })();
+    </script>
+
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
   </body>

@@ -2,6 +2,7 @@ import React, { useRef } from 'react';
 import { m as motion, useInView, useScroll, useTransform } from 'framer-motion';
 import { Calendar, TrendingUp, Users, Award, Rocket, Target } from 'lucide-react';
 import { cn } from '../../lib/utils';
+import { useReducedMotion } from '../../lib/hooks/useReducedMotion';
 
 export interface TimelineEvent {
   year: string;
@@ -36,12 +37,12 @@ const Timeline: React.FC<TimelineProps> = ({ events, className }) => {
           {/* Animated progress line */}
           <motion.div
             style={{ scaleY: lineProgress, transformOrigin: 'top' }}
-            className="absolute top-0 left-0 w-full bg-gradient-to-b from-coral via-coral/80 to-coral/40"
+            className="absolute top-0 left-0 w-full bg-linear-to-b from-coral via-coral/80 to-coral/40"
           />
         </div>
 
         {/* Mobile vertical line */}
-        <div className="md:hidden absolute left-8 top-0 bottom-0 w-0.5 bg-gradient-to-b from-coral via-coral/50 to-coral/20" />
+        <div className="md:hidden absolute left-8 top-0 bottom-0 w-0.5 bg-linear-to-b from-coral via-coral/50 to-coral/20" />
 
         {/* Events Container */}
         <div className="relative space-y-32 md:space-y-40 z-10">
@@ -73,6 +74,7 @@ interface TimelineEventItemProps {
 }
 
 const TimelineEventItem: React.FC<TimelineEventItemProps> = ({ event, Icon, isEven, index }) => {
+  const prefersReducedMotion = useReducedMotion();
   const eventRef = useRef<HTMLDivElement>(null);
   const isInView = useInView(eventRef, {
     once: true,
@@ -86,7 +88,7 @@ const TimelineEventItem: React.FC<TimelineEventItemProps> = ({ event, Icon, isEv
       initial={{ opacity: 0, y: 100 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 100 }}
       transition={{
-        duration: 0.8,
+        duration: prefersReducedMotion ? 0 : 0.8,
         ease: [0.22, 1, 0.36, 1],
       }}
       className={cn(
@@ -97,32 +99,32 @@ const TimelineEventItem: React.FC<TimelineEventItemProps> = ({ event, Icon, isEv
     >
       {/* Year Badge - centered on desktop */}
       <div className={cn(
-        'relative z-10 flex-shrink-0 flex justify-center md:justify-center',
+        'relative z-10 shrink-0 flex justify-center md:justify-center',
         isEven ? 'md:order-1' : 'md:order-2'
       )}>
         <motion.div
           initial={{ scale: 0, rotate: -180 }}
           animate={isInView ? { scale: 1, rotate: 0 } : { scale: 0, rotate: -180 }}
           transition={{
-            duration: 0.6,
-            delay: 0.2,
+            duration: prefersReducedMotion ? 0 : 0.6,
+            delay: prefersReducedMotion ? 0 : 0.2,
             ease: [0.34, 1.56, 0.64, 1],
           }}
           className="relative"
         >
           {/* Outer glow */}
           <motion.div
-            animate={isInView ? { scale: [1, 1.2, 1] } : { scale: 1 }}
+            animate={isInView && !prefersReducedMotion ? { scale: [1, 1.2, 1] } : { scale: 1 }}
             transition={{
               duration: 2,
-              repeat: Infinity,
+              repeat: prefersReducedMotion ? 0 : Infinity,
               ease: 'easeInOut',
             }}
             className="absolute inset-0 rounded-full bg-coral/30 blur-xl"
           />
           <div
             className={cn(
-              'relative w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center -2 -coral bg-white  backdrop-blur-sm',
+              'relative w-20 h-20 md:w-24 md:h-24 rounded-full flex items-center justify-center -2 -coral bg-white  backdrop-blur-xs',
               event.highlight && 'bg-coral text-white -coral '
             )}
           >
@@ -136,15 +138,15 @@ const TimelineEventItem: React.FC<TimelineEventItemProps> = ({ event, Icon, isEv
         initial={{ opacity: 0, x: isEven ? -80 : 80, scale: 0.9 }}
         animate={isInView ? { opacity: 1, x: 0, scale: 1 } : { opacity: 0, x: isEven ? -80 : 80, scale: 0.9 }}
         transition={{
-          duration: 0.8,
-          delay: 0.3,
+          duration: prefersReducedMotion ? 0 : 0.8,
+          delay: prefersReducedMotion ? 0 : 0.3,
           ease: [0.22, 1, 0.36, 1],
         }}
         whileHover={{ scale: 1.02, y: -4 }}
         className={cn(
-          'flex-1 bg-white rounded-[2rem] p-8 md:p-10  -black/5  hover: transition-all duration-500',
+          'flex-1 bg-white rounded-card shadow-spatial-card p-8 md:p-10 border border-black/5 hover:shadow-spatial-md transition-[transform,box-shadow] duration-500',
           isEven ? 'md:order-2' : 'md:order-1',
-          event.highlight && '-coral/30 bg-gradient-to-br from-coral/5 via-white to-white '
+          event.highlight && 'border-coral/30 bg-linear-to-br from-coral/5 via-white to-white '
         )}
       >
         <div className="flex items-start gap-5 mb-4">
@@ -152,12 +154,12 @@ const TimelineEventItem: React.FC<TimelineEventItemProps> = ({ event, Icon, isEv
             initial={{ rotate: -90, scale: 0 }}
             animate={isInView ? { rotate: 0, scale: 1 } : { rotate: -90, scale: 0 }}
             transition={{
-              duration: 0.5,
-              delay: 0.4,
+              duration: prefersReducedMotion ? 0 : 0.5,
+              delay: prefersReducedMotion ? 0 : 0.4,
               ease: [0.34, 1.56, 0.64, 1],
             }}
             className={cn(
-              'w-12 h-12 md:w-14 md:h-14 rounded-[2rem] flex items-center justify-center flex-shrink-0',
+              'w-12 h-12 md:w-14 md:h-14 rounded-element flex items-center justify-center shrink-0',
               event.highlight
                 ? 'bg-coral text-white '
                 : 'bg-coral/10 text-coral'
@@ -169,7 +171,7 @@ const TimelineEventItem: React.FC<TimelineEventItemProps> = ({ event, Icon, isEv
             <motion.h3
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ delay: 0.5, duration: 0.6 }}
+              transition={{ delay: prefersReducedMotion ? 0 : 0.5, duration: prefersReducedMotion ? 0 : 0.6 }}
               className="font-display text-2xl md:text-3xl font-semibold mb-4 text-text-primary"
             >
               {event.title}
@@ -177,7 +179,7 @@ const TimelineEventItem: React.FC<TimelineEventItemProps> = ({ event, Icon, isEv
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
+              transition={{ delay: prefersReducedMotion ? 0 : 0.6, duration: prefersReducedMotion ? 0 : 0.6 }}
               className="text-text-secondary text-base md:text-lg leading-relaxed space-y-3"
             >
               {event.description.split('\n').map((paragraph, pIndex) => (

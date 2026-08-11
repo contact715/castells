@@ -291,7 +291,7 @@ export const trackHeatmapEvent = (
 export const trackFormFieldInteraction = (
   formName: string,
   fieldName: string,
-  action: 'focus' | 'blur' | 'change'
+  action: 'focus' | 'blur-sm' | 'change'
 ) => {
   event({
     action: 'form_field_interaction',

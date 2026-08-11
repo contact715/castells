@@ -60,13 +60,13 @@ const GrowthAudit: React.FC = () => {
 
                         <div className="flex flex-col gap-4">
                             <div className="flex items-center gap-3 text-sm font-medium text-text-secondary">
-                                <div className="w-8 h-8 rounded-[2rem] bg-coral/10 flex items-center justify-center text-coral">
+                                <div className="w-8 h-8 rounded-element bg-coral/10 flex items-center justify-center text-coral">
                                     <span className="font-bold text-xs">01</span>
                                 </div>
                                 No credit card required
                             </div>
                             <div className="flex items-center gap-3 text-sm font-medium text-text-secondary">
-                                <div className="w-8 h-8 rounded-[2rem] bg-coral/10 flex items-center justify-center text-coral">
+                                <div className="w-8 h-8 rounded-element bg-coral/10 flex items-center justify-center text-coral">
                                     <span className="font-bold text-xs">02</span>
                                 </div>
                                 Response in 24 hours
@@ -82,7 +82,7 @@ const GrowthAudit: React.FC = () => {
                         transition={{ delay: 0.2 }}
                         className="w-full max-w-md mx-auto lg:ml-auto"
                     >
-                        <div className="bg-white  -black/5 rounded-[2rem] p-8 md:p-10 relative overflow-hidden min-h-[500px] flex flex-col ">
+                        <div className="bg-white border border-black/5 rounded-card shadow-spatial-card p-8 md:p-10 relative overflow-hidden min-h-[500px] flex flex-col ">
                             {/* Progress Bar */}
                             <div className="absolute top-0 left-0 w-full h-1 bg-black/5">
                                 <motion.div
@@ -104,7 +104,7 @@ const GrowthAudit: React.FC = () => {
                                 </div>
                             )}
 
-                            <div className="flex-grow">
+                            <div className="grow">
                                 {step === 1 && (
                                     <div className="flex flex-col gap-3">
                                         {goals.map((goal) => (
@@ -112,10 +112,10 @@ const GrowthAudit: React.FC = () => {
                                                 key={goal}
                                                 onClick={() => updateField('goal', goal)}
                                                 className={cn(
-                                                    "w-full text-left px-6 py-4 rounded-xl  transition-all duration-300 flex items-center justify-between group",
+                                                    "w-full text-left px-6 py-4 rounded-xl  transition-[background-color,color,border-color] duration-300 flex items-center justify-between group",
                                                     formData.goal === goal
-                                                        ? "bg-black text-white -black"
-                                                        : "bg-white -black/10 text-text-primary hover:bg-black/5 hover:-black/30"
+                                                        ? "bg-black text-white border border-black"
+                                                        : "bg-white border border-black/10 text-text-primary hover:bg-black/5 hover:border-black/30"
                                                 )}
                                             >
                                                 <span className="font-medium">{goal}</span>
@@ -145,10 +145,10 @@ const GrowthAudit: React.FC = () => {
                                                         key={range}
                                                         onClick={() => updateField('revenue', range)}
                                                         className={cn(
-                                                            "w-full text-left px-4 py-3 rounded-xl  transition-all duration-300 flex items-center justify-between text-sm",
+                                                            "w-full text-left px-4 py-3 rounded-xl  transition-[background-color,color,border-color] duration-300 flex items-center justify-between text-sm",
                                                             formData.revenue === range
-                                                                ? "bg-black text-white -black"
-                                                                : "bg-white -black/10 text-text-primary hover:bg-black/5 hover:-black/30"
+                                                                ? "bg-black text-white border border-black"
+                                                                : "bg-white border border-black/10 text-text-primary hover:bg-black/5 hover:border-black/30"
                                                         )}
                                                     >
                                                         {range}
@@ -183,14 +183,14 @@ const GrowthAudit: React.FC = () => {
 
                                 {step === 4 && (
                                     <div className="flex flex-col items-center justify-center h-full text-center py-10">
-                                        <div className="w-20 h-20 rounded-[2rem] bg-green-500/10 flex items-center justify-center mb-6 text-green-500">
+                                        <div className="w-20 h-20 rounded-element bg-green-500/10 flex items-center justify-center mb-6 text-green-500">
                                             <ShieldCheck className="w-10 h-10" />
                                         </div>
                                         <h3 className="font-display text-3xl font-semibold text-text-primary mb-4">Application Received</h3>
                                         <p className="text-text-secondary mb-8 max-w-xs">
                                             Thanks, {formData.name.split(' ')[0]}. We'll review your audit request and get back to you within 24 hours.
                                         </p>
-                                        <div className="w-full bg-ivory rounded-xl p-4  -black/5">
+                                        <div className="w-full bg-ivory rounded-xl p-4 border border-black/5">
                                             <div className="flex items-center justify-between text-sm text-text-secondary mb-2">
                                                 <span>Estimated Review Time</span>
                                                 <span>24 Hours</span>
@@ -213,7 +213,7 @@ const GrowthAudit: React.FC = () => {
                                     {step > 1 && (
                                         <button
                                             onClick={handleBack}
-                                            className="px-6 py-4 rounded-xl font-bold text-sm uppercase tracking-widest  -black/10 text-text-primary hover:bg-black/5 transition-all"
+                                            className="px-6 py-4 rounded-xl font-bold text-sm uppercase tracking-widest border border-black/10 text-text-primary hover:bg-black/5 transition-[background-color,color]"
                                         >
                                             Back
                                         </button>
@@ -226,7 +226,7 @@ const GrowthAudit: React.FC = () => {
                                             (step === 3 && (!formData.name || !formData.email))
                                         }
                                         className={cn(
-                                            "flex-1 py-4 rounded-xl font-bold text-sm uppercase tracking-widest transition-all duration-300 flex items-center justify-center gap-2",
+                                            "flex-1 py-4 rounded-xl font-bold text-sm uppercase tracking-widest transition-[background-color,color,transform] duration-300 flex items-center justify-center gap-2",
                                             ((step === 1 && formData.goal) ||
                                                 (step === 2 && formData.website && formData.revenue) ||
                                                 (step === 3 && formData.name && formData.email))

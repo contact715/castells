@@ -1,7 +1,6 @@
 import React from 'react';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { Highlighter } from '../ui/Highlighter';
-import ScrollFloat from '../effects/ScrollFloat';
 import { ArrowRight, Plus, Minus } from 'lucide-react';
 import { SectionHeader } from '../ui/Section';
 import { Button } from '../ui/Button';
@@ -87,7 +86,7 @@ const FAQ: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    className={`-b -black/10 ${idx === 0 ? '-t' : ''}`}
+                    className={`border-b border-black/10 ${idx === 0 ? 'border-t' : ''}`}
                   >
                     <button
                       onClick={() => setOpenIndex(isOpen ? null : idx)}
@@ -96,7 +95,7 @@ const FAQ: React.FC = () => {
                       <h3 className={`font-display font-semibold text-2xl md:text-3xl transition-colors group-hover:text-coral ${isOpen ? 'text-coral' : 'text-text-primary'}`}>
                         {faq.question}
                       </h3>
-                      <span className="flex-shrink-0 mt-1">
+                      <span className="shrink-0 mt-1">
                         {isOpen ? (
                           <Minus className="w-6 h-6 text-coral" />
                         ) : (

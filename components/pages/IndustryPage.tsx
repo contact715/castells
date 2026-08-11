@@ -43,7 +43,7 @@ const FAQAccordion: React.FC<{ faqs: Array<{ question: string; answer: string }>
                             <h3 className={`font-display font-semibold text-2xl md:text-3xl transition-colors group-hover:text-coral ${isOpen ? 'text-coral' : 'text-text-primary'}`}>
                                 {faq.question}
                             </h3>
-                            <span className="flex-shrink-0 mt-1">
+                            <span className="shrink-0 mt-1">
                                 {isOpen ? (
                                     <Minus className="w-6 h-6 text-coral" />
                                 ) : (
@@ -204,10 +204,10 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.1, duration: 0.5 }}
-                                    className="bg-white dark:bg-surface rounded-[2rem] p-8  -black/5 dark:-white/10 hover:-coral/50 transition-all duration-300 hover: group"
+                                    className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-8 border border-black/5 dark:border-white/10 hover:border-coral/50 hover:shadow-spatial-md transition-[border-color,box-shadow] duration-300 group"
                                 >
                                     <div className="flex items-start gap-4 mb-4">
-                                        <div className="w-12 h-12 rounded-[2rem] bg-coral/10 flex items-center justify-center flex-shrink-0 group-hover:bg-coral transition-colors">
+                                        <div className="w-12 h-12 rounded-element bg-coral/10 flex items-center justify-center shrink-0 group-hover:bg-coral transition-colors">
                                             <Icon className="w-6 h-6 text-coral group-hover:text-white transition-colors" />
                                         </div>
                                         <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white">
@@ -222,13 +222,13 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                         })}
                     </div>
                 ) : (
-                    <div className="bg-white dark:bg-surface rounded-[2rem] p-12  -black/5 dark:-white/10 text-center mb-20">
+                    <div className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-12 border border-black/5 dark:border-white/10 text-center mb-20">
                         <p className="text-text-secondary dark:text-white/60 text-lg">
                             No industries found for this selection.
                         </p>
                         <button
                             onClick={() => onNavigate?.('industries')}
-                            className="mt-6 inline-flex items-center justify-center px-6 py-3 rounded-xl -2 -black dark:-white text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors font-bold uppercase tracking-widest text-xs"
+                            className="mt-6 inline-flex items-center justify-center px-6 py-3 rounded-xl border-2 border-black dark:border-white text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors font-bold uppercase tracking-widest text-xs"
                         >
                             View all industries
                         </button>
@@ -241,7 +241,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 text-center mb-20"
+                    className="bg-white dark:bg-surface rounded-card p-8 md:p-12 text-center mb-20"
                 >
                     <AnimatedHeading
                         as="h2"
@@ -326,9 +326,9 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                                     initial={{ opacity: 0, y: 16 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: 0.05 * i, duration: 0.5 }}
-                                    className="group relative rounded-[2rem] overflow-hidden  -black/5 dark:-white/10 bg-white dark:bg-white/5 hover: hover:-translate-y-1 transition-all duration-300"
+                                    className="group relative rounded-card overflow-hidden border border-black/5 dark:border-white/10 bg-white dark:bg-white/5 hover:shadow-spatial-md hover:-translate-y-1 transition-[transform,box-shadow] duration-300"
                                 >
-                                    <div className="absolute inset-0 overflow-hidden rounded-[2rem]">
+                                    <div className="absolute inset-0 overflow-hidden rounded-card">
                                         <img
                                             src={cs.image}
                                             alt={cs.client}
@@ -336,11 +336,11 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                                             loading="lazy"
                                             style={{ transform: 'translateZ(0)' }}
                                         />
-                                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10 rounded-[2rem]" />
+                                        <div className="absolute inset-0 bg-linear-to-t from-black via-black/50 to-black/10 rounded-card" />
                                     </div>
 
                                     <div className="relative p-6 h-[260px] flex flex-col">
-                                        <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-70 group-hover:opacity-100 transition-opacity">
+                                        <div className="absolute top-6 right-6 w-10 h-10 rounded-full bg-white/10 backdrop-blur-xs flex items-center justify-center opacity-70 group-hover:opacity-100 transition-opacity">
                                             <ArrowUpRight className="w-4 h-4 text-white" />
                                         </div>
 
@@ -375,7 +375,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="bg-coral rounded-[2rem] p-8 md:p-12 text-center mb-20"
+                    className="bg-coral rounded-card p-8 md:p-12 text-center mb-20"
                 >
                     <AnimatedHeading
                         as="h2"
@@ -502,7 +502,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="bg-white dark:bg-surface rounded-[2rem] p-12 text-center mb-20"
+                    className="bg-white dark:bg-surface rounded-card p-12 text-center mb-20"
                 >
                     <AnimatedHeading
                         as="h2"

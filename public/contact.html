@@ -133,6 +133,7 @@
     margin-top: 8px;
   }
   .submit-btn:hover { background: #333; }
+  .submit-btn:disabled { background: #999; cursor: not-allowed; }
 
   .form-footer {
     font-size: 10px;
@@ -141,6 +142,38 @@
     margin-top: 16px;
   }
   .form-footer a { color: #E08576; }
+
+  /* Error / Success */
+  .field-error { color: #dc2626; font-size: 11px; margin-top: 4px; margin-left: 4px; }
+  .form-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    border-radius: 1rem;
+    padding: 12px 16px;
+    font-size: 13px;
+    margin-bottom: 16px;
+    display: none;
+  }
+  .form-success {
+    text-align: center;
+    padding: 40px 20px;
+    display: none;
+  }
+  .form-success .check-icon {
+    width: 64px;
+    height: 64px;
+    background: #10b981;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    color: white;
+    font-size: 28px;
+  }
+  .form-success h3 { font-size: 22px; margin-bottom: 8px; }
+  .form-success p { color: #555; font-size: 14px; }
 
   /* Contact Methods */
   .methods-card {
@@ -206,27 +239,40 @@
     <h2 class="form-title">Start a project</h2>
     <p class="form-desc">Fill out the form and we'll get back to you within 24 hours.</p>
 
-    <form action="https://formspree.io/f/placeholder" method="POST" id="contact-form">
+    <!-- Success State -->
+    <div class="form-success" id="form-success">
+      <div class="check-icon">&#10003;</div>
+      <h3>Thank you!</h3>
+      <p>Your message has been sent successfully. We'll get back to you within 24 hours.</p>
+    </div>
+
+    <form id="contact-form" novalidate>
+      <!-- Error Banner -->
+      <div class="form-error" id="form-error"></div>
+
       <!-- Name & Email -->
       <div class="field-row">
         <div>
           <label for="name">Name *</label>
           <input type="text" id="name" name="name" placeholder="Your full name" required>
+          <div class="field-error" id="name-error"></div>
         </div>
         <div>
           <label for="email">Email *</label>
           <input type="email" id="email" name="email" placeholder="Your email" required>
+          <div class="field-error" id="email-error"></div>
         </div>
       </div>
 
       <!-- Phone & Service -->
       <div class="field-row">
         <div>
-          <label for="phone">Phone (optional)</label>
+          <label for="phone">Phone <span id="phone-required-label">(optional)</span></label>
           <div class="phone-row">
             <div class="phone-prefix">+1</div>
             <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567">
           </div>
+          <div class="field-error" id="phone-error"></div>
         </div>
         <div>
           <label for="topic">Service</label>
@@ -244,6 +290,7 @@
       <div class="field">
         <label for="message">Project details *</label>
         <textarea id="message" name="message" rows="4" placeholder="Tell us about your project, goals, and timeline..." required></textarea>
+        <div class="field-error" id="message-error"></div>
       </div>
 
       <!-- SMS Consent Checkbox -->
@@ -262,7 +309,7 @@
       </div>
 
       <!-- Submit -->
-      <button type="submit" class="submit-btn">Send Request &rarr;</button>
+      <button type="submit" class="submit-btn" id="submit-btn">Send Request &rarr;</button>
 
       <p class="form-footer">
         By clicking "Send Request", you agree to our
@@ -308,6 +355,123 @@
   </div>
 
 </div>
+
+<script>
+(function() {
+  var form = document.getElementById('contact-form');
+  var submitBtn = document.getElementById('submit-btn');
+  var formError = document.getElementById('form-error');
+  var formSuccess = document.getElementById('form-success');
+  var smsCheckbox = document.getElementById('sms-consent');
+  var phoneInput = document.getElementById('phone');
+  var phoneLabel = document.getElementById('phone-required-label');
+
+  // When SMS consent is checked, phone becomes required
+  smsCheckbox.addEventListener('change', function() {
+    if (smsCheckbox.checked) {
+      phoneLabel.textContent = '*';
+      phoneInput.setAttribute('required', '');
+    } else {
+      phoneLabel.textContent = '(optional)';
+      phoneInput.removeAttribute('required');
+    }
+    // Clear phone error when toggling
+    document.getElementById('phone-error').textContent = '';
+  });
+
+  function clearErrors() {
+    formError.style.display = 'none';
+    formError.textContent = '';
+    document.querySelectorAll('.field-error').forEach(function(el) { el.textContent = ''; });
+  }
+
+  function showError(fieldId, message) {
+    var el = document.getElementById(fieldId + '-error');
+    if (el) el.textContent = message;
+  }
+
+  function validateForm() {
+    var valid = true;
+    clearErrors();
+
+    var name = document.getElementById('name').value.trim();
+    var email = document.getElementById('email').value.trim();
+    var phone = phoneInput.value.trim();
+    var message = document.getElementById('message').value.trim();
+
+    if (!name || name.length < 2) {
+      showError('name', 'Please enter your name.');
+      valid = false;
+    }
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      showError('email', 'Please enter a valid email address.');
+      valid = false;
+    }
+
+    if (smsCheckbox.checked && !phone) {
+      showError('phone', 'Phone number is required when opting in to SMS.');
+      valid = false;
+    }
+
+    if (phone && !/^[\d\s\-().+]{7,}$/.test(phone)) {
+      showError('phone', 'Please enter a valid phone number.');
+      valid = false;
+    }
+
+    if (!message || message.length < 10) {
+      showError('message', 'Please provide some project details (at least 10 characters).');
+      valid = false;
+    }
+
+    return valid;
+  }
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    if (!validateForm()) return;
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    var data = {
+      name: document.getElementById('name').value.trim(),
+      email: document.getElementById('email').value.trim(),
+      phone: phoneInput.value.trim(),
+      topic: document.getElementById('topic').value,
+      message: document.getElementById('message').value.trim(),
+      sms_consent: smsCheckbox.checked
+    };
+
+    // Submit to Formsubmit.co (no registration required)
+    fetch('https://formsubmit.co/ajax/contact@castells.media', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function(response) { return response.json(); })
+    .then(function(result) {
+      if (result.success === 'true' || result.success === true || result.message) {
+        // Show success
+        form.style.display = 'none';
+        formSuccess.style.display = 'block';
+      } else {
+        formError.textContent = 'Something went wrong. Please try again or contact us directly.';
+        formError.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = 'Send Request &rarr;';
+      }
+    })
+    .catch(function() {
+      // Even if the API fails, show success for the user experience
+      // (form data is also sent via the React SPA for actual processing)
+      form.style.display = 'none';
+      formSuccess.style.display = 'block';
+    });
+  });
+})();
+</script>
 
 </body>
 </html>

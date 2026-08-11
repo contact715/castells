@@ -70,19 +70,19 @@ const REASONS = [
 type Reason = (typeof REASONS)[number];
 
 /* ─── Hero Card (Card 1) — col-span-2, row-span-2 ────────────────────────── */
-const HeroCard: React.FC<{ item: Reason; index: number }> = ({ item, index }) => (
+const HeroCard: React.FC<{ item: Reason; index: number }> = React.memo(({ item, index }) => (
     <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-        className="relative col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/[0.06] rounded-[2rem] p-8 sm:p-10 flex flex-col justify-between overflow-hidden group cursor-pointer hover:-translate-y-1 hover:border-black/10 dark:hover:border-white/[0.12] transition-all duration-300"
+        className="relative col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2 bg-white dark:bg-white/3 border border-black/5 dark:border-white/10 rounded-card p-8 sm:p-10 flex flex-col justify-between overflow-hidden group cursor-pointer will-change-transform hover:-translate-y-1 hover:shadow-spatial-md hover:border-black/10 dark:hover:border-white/15 transition-[transform,border-color,box-shadow] duration-300"
     >
-        {/* Coral gradient glow — top-right */}
-        <div className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full glow-coral blur-3xl" />
+        {/* Coral gradient glow — top-right (reduced blur for GPU perf) */}
+        <div className="pointer-events-none absolute -top-24 -right-24 w-72 h-72 rounded-full glow-coral opacity-70 blur-2xl" />
 
         <div className="relative z-10">
-            <div className="w-12 h-12 rounded-[2rem] bg-coral-gradient-subtle flex items-center justify-center mb-6 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
+            <div className="w-12 h-12 rounded-element bg-coral-gradient-subtle flex items-center justify-center mb-6 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
                 <item.icon className="w-6 h-6 stroke-[1.5] text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />
             </div>
             <h3 className="font-display font-semibold text-2xl sm:text-3xl text-black dark:text-white leading-tight mb-3">
@@ -109,18 +109,19 @@ const HeroCard: React.FC<{ item: Reason; index: number }> = ({ item, index }) =>
             <span className="text-sm uppercase tracking-widest text-text-secondary">{item.statLabel}</span>
         </div>
     </motion.div>
-);
+));
+HeroCard.displayName = 'HeroCard';
 
 /* ─── Standard Card ───────────────────────────────────────────────────────── */
-const StandardCard: React.FC<{ item: Reason; index: number }> = ({ item, index }) => (
+const StandardCard: React.FC<{ item: Reason; index: number }> = React.memo(({ item, index }) => (
     <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.5, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
-        className="bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/[0.06] rounded-[2rem] p-6 sm:p-8 flex flex-col h-full group cursor-pointer hover:-translate-y-1 hover:border-black/10 dark:hover:border-white/[0.12] transition-all duration-300"
+        className="bg-white dark:bg-white/3 border border-black/5 dark:border-white/10 rounded-card p-6 sm:p-8 flex flex-col h-full group cursor-pointer will-change-transform hover:-translate-y-1 hover:shadow-spatial-md hover:border-black/10 dark:hover:border-white/15 transition-[transform,border-color,box-shadow] duration-300"
     >
-        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-[2rem] bg-coral-gradient-subtle flex items-center justify-center mb-4 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
+        <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-element bg-coral-gradient-subtle flex items-center justify-center mb-4 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
             <item.icon className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.5] text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />
         </div>
 
@@ -147,7 +148,8 @@ const StandardCard: React.FC<{ item: Reason; index: number }> = ({ item, index }
             <span className="text-xs uppercase tracking-widest text-text-secondary">{item.statLabel}</span>
         </div>
     </motion.div>
-);
+));
+StandardCard.displayName = 'StandardCard';
 
 /* ─── Section ─────────────────────────────────────────────────────────────── */
 const WhyChoose: React.FC = () => {

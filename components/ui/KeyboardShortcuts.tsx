@@ -79,7 +79,7 @@ const KeyboardShortcuts: React.FC<KeyboardShortcutsProps> = React.memo(({
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50"
+            className="fixed inset-0 bg-black/50 backdrop-blur-xs z-50"
             onClick={() => setShowHelp(false)}
           />
           
@@ -91,7 +91,7 @@ const KeyboardShortcuts: React.FC<KeyboardShortcutsProps> = React.memo(({
             className="fixed inset-0 z-50 flex items-center justify-center p-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="bg-white dark:bg-surface rounded-[2rem] p-8 max-w-md w-full">
+            <div className="bg-white dark:bg-surface rounded-card p-8 max-w-md w-full">
               <div className="flex items-center justify-between mb-6">
                 <div className="flex items-center gap-3">
                   <HelpCircle className="w-6 h-6 text-coral" />
@@ -101,7 +101,7 @@ const KeyboardShortcuts: React.FC<KeyboardShortcutsProps> = React.memo(({
                 </div>
                 <button
                   onClick={() => setShowHelp(false)}
-                  className="p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+                  className="p-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
                   aria-label="Close"
                 >
                   <X className="w-5 h-5" />
@@ -123,7 +123,7 @@ const KeyboardShortcuts: React.FC<KeyboardShortcutsProps> = React.memo(({
               </div>
 
               <p className="text-xs text-text-secondary mt-6 text-center">
-                Press <kbd className="px-2 py-0.5 bg-black/5 dark:bg-white/5 rounded text-xs">Esc</kbd> to close
+                Press <kbd className="px-2 py-0.5 bg-black/5 dark:bg-white/5 rounded-sm text-xs">Esc</kbd> to close
               </p>
             </div>
           </motion.div>

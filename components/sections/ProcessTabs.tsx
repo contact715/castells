@@ -17,8 +17,8 @@ interface ProcessStep {
 // --- Visual Components (The "Windows") ---
 
 const AuditVisual = () => (
-    <div className="w-full h-full bg-surface  -black/5 rounded-[2rem] p-6 flex flex-col relative overflow-hidden ">
-        <div className="flex items-center justify-between mb-6 -b -black/5 pb-4">
+    <div className="w-full h-full bg-surface border border-black/5 rounded-card p-6 flex flex-col relative overflow-hidden ">
+        <div className="flex items-center justify-between mb-6 border-b border-black/5 pb-4">
             <div className="flex items-center gap-2">
                 <div className="w-3 h-3 rounded-full bg-red-500 animate-pulse" />
                 <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">System Audit</span>
@@ -68,8 +68,8 @@ const AuditVisual = () => (
 );
 
 const StrategyVisual = () => (
-    <div className="w-full h-full bg-surface  -black/5 rounded-[2rem] p-6 flex flex-col relative overflow-hidden ">
-        <div className="flex items-center justify-between mb-6 -b -black/5 pb-4">
+    <div className="w-full h-full bg-surface border border-black/5 rounded-card p-6 flex flex-col relative overflow-hidden ">
+        <div className="flex items-center justify-between mb-6 border-b border-black/5 pb-4">
             <div className="flex items-center gap-2">
                 <Target className="w-4 h-4 text-blue-500" />
                 <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">ICP Targeting</span>
@@ -77,11 +77,11 @@ const StrategyVisual = () => (
         </div>
 
         <div className="grid grid-cols-2 gap-4 mb-6">
-            <div className="p-4 bg-ivory rounded-xl  -black/5 text-center">
+            <div className="p-4 bg-ivory rounded-xl border border-black/5 text-center">
                 <div className="text-2xl font-display font-bold text-text-primary mb-1">35-55</div>
                 <div className="text-[10px] uppercase tracking-widest text-text-secondary">Age Range</div>
             </div>
-            <div className="p-4 bg-ivory rounded-xl  -black/5 text-center">
+            <div className="p-4 bg-ivory rounded-xl border border-black/5 text-center">
                 <div className="text-2xl font-display font-bold text-text-primary mb-1">$150k+</div>
                 <div className="text-[10px] uppercase tracking-widest text-text-secondary">Household Inc.</div>
             </div>
@@ -108,8 +108,8 @@ const StrategyVisual = () => (
 );
 
 const LaunchVisual = () => (
-    <div className="w-full h-full bg-surface  -black/5 rounded-[2rem] p-6 flex flex-col relative overflow-hidden ">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-emerald-600" />
+    <div className="w-full h-full bg-surface border border-black/5 rounded-card p-6 flex flex-col relative overflow-hidden ">
+        <div className="absolute top-0 left-0 w-full h-1 bg-linear-to-r from-green-400 to-emerald-600" />
 
         <div className="flex items-center justify-between mb-8 mt-2">
             <div className="flex items-center gap-2">
@@ -120,7 +120,7 @@ const LaunchVisual = () => (
         </div>
 
         <div className="space-y-4">
-            <div className="bg-white  -black/5 text-text-primary p-4 rounded-xl  transform hover:scale-105 transition-transform duration-300">
+            <div className="bg-white border border-black/5 text-text-primary p-4 rounded-xl transform hover:scale-105 transition-transform duration-300">
                 <div className="flex justify-between items-start mb-2">
                     <div className="flex items-center gap-2">
                         <Zap className="w-4 h-4 text-yellow-400" />
@@ -130,7 +130,7 @@ const LaunchVisual = () => (
                 </div>
                 <div className="text-sm font-medium">New Lead: "Enterprise Plan Inquiry"</div>
             </div>
-            <div className="bg-white dark:bg-white/5  -black/5 p-4 rounded-xl  opacity-60">
+            <div className="bg-white dark:bg-white/5 border border-black/5 p-4 rounded-xl opacity-60">
                 <div className="flex justify-between items-start mb-2">
                     <div className="flex items-center gap-2">
                         <Users className="w-4 h-4 text-text-secondary" />
@@ -145,13 +145,13 @@ const LaunchVisual = () => (
 );
 
 const ScaleVisual = () => (
-    <div className="w-full h-full bg-surface  -black/5 rounded-[2rem] p-6 flex flex-col relative overflow-hidden ">
-        <div className="flex items-center justify-between mb-6 -b -black/5 pb-4">
+    <div className="w-full h-full bg-surface border border-black/5 rounded-card p-6 flex flex-col relative overflow-hidden ">
+        <div className="flex items-center justify-between mb-6 border-b border-black/5 pb-4">
             <div className="flex items-center gap-2">
                 <TrendingUp className="w-4 h-4 text-green-600" />
                 <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">Revenue Growth</span>
             </div>
-            <div className="px-2 py-1 rounded bg-green-100 dark:bg-green-900/20 text-green-700 text-[10px] font-bold uppercase tracking-widest">
+            <div className="px-2 py-1 rounded-sm bg-green-100 dark:bg-green-900/20 text-green-700 text-[10px] font-bold uppercase tracking-widest">
                 +124% YoY
             </div>
         </div>
@@ -171,7 +171,7 @@ const ScaleVisual = () => (
             ))}
         </div>
 
-        <div className="flex justify-between mt-4 pt-4 -t -black/5">
+        <div className="flex justify-between mt-4 pt-4 border-t border-black/5">
             <div>
                 <div className="text-[10px] uppercase tracking-widest text-text-secondary mb-1">CAC</div>
                 <div className="text-lg font-bold text-text-primary">$42.50</div>
@@ -251,20 +251,20 @@ const ProcessTabs: React.FC = () => {
         <div className="w-full">
             {/* Tabs Navigation */}
             <div className="flex justify-start md:justify-center mb-16 overflow-x-auto no-scrollbar px-4 md:px-0">
-                <div className="inline-flex p-1.5 bg-surface  -black/5 rounded-full ">
+                <div className="inline-flex p-1.5 bg-surface border border-black/5 rounded-full ">
                     {PROCESS_STEPS.map((step, idx) => (
                         <button
                             key={step.id}
                             onClick={() => setActiveTab(idx)}
                             className={cn(
-                                "relative flex items-center gap-2 px-6 py-3 rounded-[2rem] text-sm font-bold uppercase tracking-widest transition-all duration-300 whitespace-nowrap z-10",
+                                "relative flex items-center gap-2 px-6 py-3 rounded-pill text-sm font-bold uppercase tracking-widest transition-colors duration-300 whitespace-nowrap z-10",
                                 activeTab === idx ? "text-white" : "text-text-secondary hover:text-text-primary"
                             )}
                         >
                             {activeTab === idx && (
                                 <motion.div
                                     layoutId="activeTab"
-                                    className="absolute inset-0 bg-black dark:bg-white rounded-[2rem] -z-10"
+                                    className="absolute inset-0 bg-black dark:bg-white rounded-pill -z-10"
                                     transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                                 />
                             )}
@@ -333,7 +333,7 @@ const ProcessTabs: React.FC = () => {
                             className="w-full h-full"
                         >
                             {/* Background Decorative Blob */}
-                            <div className="absolute -inset-4 bg-gradient-to-tr from-coral/20 to-purple-500/20 rounded-full blur-3xl opacity-40 animate-pulse" />
+                            <div className="absolute -inset-4 bg-linear-to-tr from-coral/20 to-purple-500/20 rounded-full blur-3xl opacity-40 animate-pulse" />
 
                             {/* The Window Itself */}
                             <div className="relative w-full h-full">

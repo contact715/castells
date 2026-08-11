@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { Moon, Sun } from 'lucide-react';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { cn } from "../../lib/utils";
+import { useReducedMotion } from '../../lib/hooks/useReducedMotion';
 
 interface AnimatedThemeTogglerProps extends React.ComponentPropsWithoutRef<"button"> {
   className?: string;
@@ -12,6 +13,7 @@ export const AnimatedThemeToggler = ({
   className,
   ...props
 }: AnimatedThemeTogglerProps) => {
+  const prefersReducedMotion = useReducedMotion();
   const [isDark, setIsDark] = useState(false)
   const [isAnimating, setIsAnimating] = useState(false)
 
@@ -27,10 +29,10 @@ export const AnimatedThemeToggler = ({
     const newTheme = !isDark
     setIsDark(newTheme)
 
-    // Add a subtle fade effect during transition
+    // Enable theme transition CSS only during toggle
+    document.documentElement.classList.add("theme-transitioning");
     document.body.style.opacity = '0.95';
-    
-    // Use requestAnimationFrame for smooth transition
+
     requestAnimationFrame(() => {
       if (newTheme) {
         document.documentElement.classList.add("dark")
@@ -40,11 +42,11 @@ export const AnimatedThemeToggler = ({
         localStorage.setItem("theme", "light")
       }
 
-      // Restore opacity after a brief moment
       setTimeout(() => {
         document.body.style.opacity = '1';
+        document.documentElement.classList.remove("theme-transitioning");
         setIsAnimating(false);
-      }, 250);
+      }, 450);
     });
   }, [isDark, isAnimating])
 
@@ -74,7 +76,7 @@ export const AnimatedThemeToggler = ({
   return (
     <button
       onClick={toggleTheme}
-      className={cn("relative p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 overflow-hidden", className)}
+      className={cn("relative p-3 rounded-full hover:bg-black/5 dark:hover:bg-white/10 overflow-hidden", className)}
       aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
       aria-pressed={isDark}
       disabled={isAnimating}
@@ -88,8 +90,8 @@ export const AnimatedThemeToggler = ({
               initial={{ rotate: -90, opacity: 0, scale: 0.5 }}
               animate={{ rotate: 0, opacity: 1, scale: 1 }}
               exit={{ rotate: 90, opacity: 0, scale: 0.5 }}
-              transition={{ 
-                duration: 0.4,
+              transition={{
+                duration: prefersReducedMotion ? 0 : 0.4,
                 ease: [0.4, 0, 0.2, 1]
               }}
               className="absolute inset-0 flex items-center justify-center"
@@ -102,8 +104,8 @@ export const AnimatedThemeToggler = ({
               initial={{ rotate: 90, opacity: 0, scale: 0.5 }}
               animate={{ rotate: 0, opacity: 1, scale: 1 }}
               exit={{ rotate: -90, opacity: 0, scale: 0.5 }}
-              transition={{ 
-                duration: 0.4,
+              transition={{
+                duration: prefersReducedMotion ? 0 : 0.4,
                 ease: [0.4, 0, 0.2, 1]
               }}
               className="absolute inset-0 flex items-center justify-center"

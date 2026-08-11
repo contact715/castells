@@ -158,7 +158,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
       {/* Gradient Background Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute w-[600px] h-[600px] rounded-full bg-gradient-to-br from-coral/20 to-transparent blur-3xl"
+          className="absolute w-[600px] h-[600px] rounded-full bg-linear-to-br from-coral/20 to-transparent blur-3xl"
           style={{ top: '-200px', right: '-200px' }}
           animate={{
             scale: [1, 1.1, 1],
@@ -167,7 +167,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
           transition={{ duration: 8, repeat: Infinity }}
         />
         <motion.div
-          className="absolute w-[400px] h-[400px] rounded-full bg-gradient-to-tr from-blue-500/10 to-transparent blur-3xl"
+          className="absolute w-[400px] h-[400px] rounded-full bg-linear-to-tr from-blue-500/10 to-transparent blur-3xl"
           style={{ bottom: '-100px', left: '-100px' }}
           animate={{
             scale: [1, 1.2, 1],
@@ -206,7 +206,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
             />
             
             {/* Main circle */}
-            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full bg-gradient-to-br from-coral to-coral/80 flex items-center justify-center  ">
+            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full bg-linear-to-br from-coral to-coral/80 flex items-center justify-center  ">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
@@ -247,13 +247,13 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
             {content.features.map((feature, index) => (
               <motion.div
                 key={index}
-                className="bg-white dark:bg-white/5  -black/5 dark:-white/10 rounded-[2rem] p-6 backdrop-blur-sm"
+                className="bg-white dark:bg-white/5 border border-black/5 dark:border-white/10 rounded-card shadow-spatial-card p-6 backdrop-blur-xs"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.7 + index * 0.1 }}
                 whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
               >
-                <div className="w-10 h-10 rounded-[2rem] bg-coral/10 flex items-center justify-center text-coral mb-3 mx-auto">
+                <div className="w-10 h-10 rounded-element bg-coral/10 flex items-center justify-center text-coral mb-3 mx-auto">
                   {feature.icon}
                 </div>
                 <p className="text-sm text-text-secondary font-medium">{feature.text}</p>
@@ -287,7 +287,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
 
           {/* Social Proof */}
           <motion.div
-            className="mt-16 pt-8 -t -black/5 dark:-white/10"
+            className="mt-16 pt-8 border-t border-black/5 dark:border-white/10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.1 }}

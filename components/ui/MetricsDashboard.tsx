@@ -87,7 +87,7 @@ const MetricsDashboard: React.FC<MetricsDashboardProps> = React.memo(({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="bg-white dark:bg-surface rounded-[2rem] p-8 hover:-translate-y-1 transition-all group"
+                className="bg-white dark:bg-surface rounded-card p-8 hover:-translate-y-1 transition-[transform,box-shadow] group"
               >
                 <div className="flex items-center justify-between mb-4">
                   <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center group-hover:bg-coral dark:group-hover:bg-coral transition-colors">

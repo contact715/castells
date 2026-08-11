@@ -37,7 +37,7 @@ export const ImageRevealCard: React.FC<ImageRevealCardProps> = ({
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
             className={cn(
-                "relative overflow-hidden bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] h-full transition-all duration-300 hover: hover:-translate-y-1 group",
+                "relative overflow-hidden bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-card shadow-spatial-card h-full transition-[transform,box-shadow] duration-300 hover:shadow-spatial-md hover:-translate-y-1 group",
                 className
             )}
             {...props}
@@ -63,7 +63,7 @@ export const ImageRevealCard: React.FC<ImageRevealCardProps> = ({
           For now, we'll assume the text (which is black) might need a white glow or the image needs to be faint?
           User said "starts to shine through... shows not all but like a flashlight".
           If the text is black and image is dark, text is lost. 
-          Let's add a subtle white overlay on the image or ensure text has a shadow/glow in the parent component if needed.
+          Let's add a subtle white overlay on the image or ensure text has a shadow in the parent component if needed.
           Actually, usually this effect reveals the image *instead* of the background, but the text remains on top.
       */}
         </div>

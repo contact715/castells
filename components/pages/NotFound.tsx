@@ -53,7 +53,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
           </div>
 
           {/* Main Content Card */}
-          <div className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 lg:p-16 mb-12">
+          <div className="bg-white dark:bg-surface rounded-card p-8 md:p-12 lg:p-16 mb-12">
             {/* Large 404 Number */}
             <div className="text-center mb-8">
               <motion.h1
@@ -145,9 +145,9 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.7 + index * 0.1 }}
-                    className="bg-white dark:bg-surface rounded-[2rem] p-6 hover:-translate-y-1 transition-all duration-300 text-left group"
+                    className="bg-white dark:bg-surface rounded-card p-6 hover:-translate-y-1 transition-[transform,box-shadow] duration-300 text-left group"
                   >
-                    <div className="w-12 h-12 rounded-[2rem] bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-4 group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
+                    <div className="w-12 h-12 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-4 group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
                       <Icon className="w-6 h-6 text-coral dark:text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />
                     </div>
                     <h4 className="font-display text-xl font-semibold text-text-primary mb-2 group-hover:text-coral transition-colors">
@@ -167,7 +167,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            className="bg-black/5 dark:bg-white/5 rounded-[2rem] p-6 md:p-8 text-center"
+            className="bg-black/5 dark:bg-white/5 rounded-card p-6 md:p-8 text-center"
           >
             <div className="flex items-center justify-center gap-3 mb-4">
               <Search className="w-5 h-5 text-coral" />

@@ -37,14 +37,14 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
     const Component = as || (href ? 'a' : 'button');
     const buttonProps = href ? { href } : { type: 'button' as const };
 
-    const baseStyles = "relative flex cursor-pointer items-center justify-center overflow-hidden text-center transition-all duration-300 ease-in-out rounded-[2rem] font-bold uppercase tracking-widest";
+    const baseStyles = "relative flex cursor-pointer items-center justify-center overflow-hidden text-center transition-[background-color,color,box-shadow,border-color,filter] duration-300 ease-in-out rounded-inner font-bold uppercase tracking-widest";
 
     const variants = {
       primary: "bg-black text-white dark:bg-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90",
-      secondary: "bg-white text-black hover:bg-white/90",
+      secondary: "bg-white text-black hover:bg-white/90 dark:bg-white dark:text-black dark:hover:bg-white/90",
       coral: "bg-coral-gradient text-white hover:shadow-lg hover:shadow-coral/25 hover:brightness-110",
-      outline: "bg-transparent  -black dark:-white text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black",
-      'outline-white': "bg-transparent  -white/10 text-white hover:bg-white hover:text-black"
+      outline: "bg-transparent border border-black dark:border-white text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black",
+      'outline-white': "bg-transparent border border-white/10 text-white hover:bg-white hover:text-black"
     };
 
     const sizes = {
@@ -64,7 +64,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
           baseStyles,
           variants[variant],
           sizes[size],
-          'focus:outline-none focus:ring-2 focus:ring-coral focus:ring-offset-2',
+          'focus:outline-hidden focus:ring-2 focus:ring-coral focus:ring-offset-2',
           className
         )}
         ref={ref as any}

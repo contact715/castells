@@ -92,7 +92,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
         </div>
 
         {illustration && (
-          <div className="hidden lg:block relative h-[260px] rounded-[2rem] overflow-hidden">
+          <div className="hidden lg:block relative h-[260px] rounded-card overflow-hidden">
             <div className="absolute inset-0">
               {illustration}
             </div>

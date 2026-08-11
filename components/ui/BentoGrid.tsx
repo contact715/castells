@@ -16,7 +16,7 @@ const BentoGrid: React.FC<BentoGridProps> = ({
   return (
     <div
       className={cn(
-        "grid w-full auto-rows-[18rem] grid-cols-1 md:grid-cols-3 gap-6",
+        "grid w-full auto-rows-72 grid-cols-1 md:grid-cols-3 gap-6",
         className,
       )}
     >
@@ -48,10 +48,11 @@ const BentoCard: React.FC<BentoCardProps> = ({
     <SpotlightCard
       spotlightColor="rgba(224, 133, 118, 0.15)"
       className={cn(
-        "group relative col-span-3 flex flex-col justify-between overflow-hidden rounded-[2rem]",
-        // Light styles: White background, subtle         "bg-white  -black/5 transition-all duration-500 hover:-translate-y-1",
+        "group relative col-span-3 flex flex-col justify-between overflow-hidden rounded-card",
+        // Light styles
+        "bg-white border border-black/5 shadow-spatial-card transition-[transform,box-shadow] duration-500 hover:-translate-y-1 hover:shadow-spatial-md",
         // Dark styles
-        "dark:bg-white/5 dark:-white/10",
+        "dark:bg-white/5 dark:border-white/10",
         className,
       )}
     >
@@ -78,8 +79,8 @@ const BentoCard: React.FC<BentoCardProps> = ({
         </div>
 
         {/* Footer: Action Icon (Absolute Bottom Right) */}
-        <div className="absolute bottom-8 right-8 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-          <div className="w-10 h-10 rounded-[2rem] bg-black text-white dark:bg-white dark:text-black flex items-center justify-center">
+        <div className="absolute bottom-8 right-8 opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-300 transform translate-y-2 group-hover:translate-y-0">
+          <div className="w-10 h-10 rounded-element bg-black text-white dark:bg-white dark:text-black flex items-center justify-center">
             <ArrowUpRight className="w-5 h-5" />
           </div>
         </div>

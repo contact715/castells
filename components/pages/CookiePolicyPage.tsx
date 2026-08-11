@@ -28,7 +28,7 @@ const CookiePolicyPage: React.FC<CookiePolicyPageProps> = ({ onNavigate }) => {
           transition={{ duration: 0.5 }}
           className="max-w-4xl"
         >
-          <div className="bg-white dark:bg-white/5  rounded-[2rem] p-8 md:p-12 space-y-10">
+          <div className="bg-white dark:bg-white/5  rounded-card p-8 md:p-12 space-y-10">
             <div className="text-sm text-text-secondary">
               <p><span className="font-semibold text-text-primary">Last updated:</span> Dec 17, 2025</p>
             </div>

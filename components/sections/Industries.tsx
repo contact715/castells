@@ -47,7 +47,7 @@ const Industries: React.FC = React.memo(() => {
 
         {/* Styled Tabs */}
         <div className="flex justify-start mb-8 overflow-x-auto pb-2 -mx-6 px-6">
-          <div className="bg-surface p-1.5 rounded-[2rem]  -black/5  inline-flex flex-wrap sm:flex-nowrap gap-1 min-w-max">
+          <div className="bg-surface p-1.5 rounded-card border border-black/5 inline-flex flex-wrap sm:flex-nowrap gap-1 min-w-max">
             {INDUSTRY_CATEGORIES.map((cat) => {
               const isActive = activeTab === cat.id;
               return (
@@ -55,7 +55,7 @@ const Industries: React.FC = React.memo(() => {
                   key={cat.id}
                   onClick={() => handleTabChange(cat.id)}
                   className={cn(
-                    "relative px-4 sm:px-6 py-2.5 sm:py-3 rounded-[2rem] flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest transition-all duration-300 outline-none whitespace-nowrap",
+                    "relative px-4 sm:px-6 py-2.5 sm:py-3 rounded-pill flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest transition-colors duration-300 outline-hidden whitespace-nowrap",
                     isActive
                       ? "text-white "
                       : "text-text-secondary hover:text-text-primary hover:bg-gray-100 dark:hover:bg-neutral-800"
@@ -64,7 +64,7 @@ const Industries: React.FC = React.memo(() => {
                   {isActive && (
                     <motion.div
                       layoutId="activeIndustryTab"
-                      className="absolute inset-0 bg-black dark:bg-white rounded-[2rem]"
+                      className="absolute inset-0 bg-black dark:bg-white rounded-pill"
                       transition={{ type: "spring", bounce: 0.2, duration: 0.6 }}
                       style={{ willChange: 'transform, opacity' }}
                     />
@@ -92,17 +92,17 @@ const Industries: React.FC = React.memo(() => {
                   exit={{ opacity: 0, scale: 0.95, transition: { duration: 0.2 } }}
                   transition={{ duration: 0.4, delay: idx * 0.05 }}
                   className="col-span-1"
-                  style={{ willChange: 'opacity, transform, scale' }}
+                  style={{ willChange: 'auto' }}
                 >
                   <div className={cn(
-                    "group relative rounded-[2rem] overflow-hidden h-full min-h-[200px] sm:min-h-[220px] cursor-pointer transition-all duration-500",
+                    "group relative rounded-card overflow-hidden h-full min-h-[200px] sm:min-h-[220px] cursor-pointer transition-[transform,box-shadow] duration-500",
                     isContactCard
-                      ? "bg-surface hover: hover:-translate-y-1"
-                      : "hover: hover:-translate-y-1"
+                      ? "bg-surface hover:shadow-spatial-md hover:-translate-y-1"
+                      : "hover:shadow-spatial-md hover:-translate-y-1"
                   )}>
                     {/* Background Image */}
                     {item.type === 'industry' && item.image && !isContactCard && (
-                      <div className="absolute inset-0 overflow-hidden rounded-[2rem]">
+                      <div className="absolute inset-0 overflow-hidden rounded-card">
                         <OptimizedImage
                           src={item.image}
                           alt={item.name}
@@ -113,7 +113,7 @@ const Industries: React.FC = React.memo(() => {
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                         />
                         {/* Dark Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/30 rounded-[2rem]" />
+                        <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-black/30 rounded-card" />
                       </div>
                     )}
 
@@ -128,10 +128,10 @@ const Industries: React.FC = React.memo(() => {
                         isContactCard && "flex justify-center"
                       )}>
                         <div className={cn(
-                          "w-12 h-12 rounded-[2rem] flex items-center justify-center flex-shrink-0 transition-all duration-300",
+                          "w-12 h-12 rounded-element flex items-center justify-center shrink-0 transition-colors duration-300",
                           isContactCard
                             ? "bg-coral-gradient-subtle group-hover:bg-black"
-                            : "bg-white/0 backdrop-blur-md  -white/10 group-hover:bg-white group-hover:-white/20"
+                            : "bg-white/15 group-hover:bg-white"
                         )}>
                           <item.icon className={cn(
                             "w-5 h-5 transition-colors duration-300",
@@ -167,7 +167,7 @@ const Industries: React.FC = React.memo(() => {
 
                       {/* Arrow for non-contact cards */}
                       {!isContactCard && (
-                        <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-white/15 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                           <ArrowUpRight className="w-4 h-4 text-white" />
                         </div>
                       )}
@@ -175,7 +175,7 @@ const Industries: React.FC = React.memo(() => {
 
                     {/* Border effect (match Team CTA card) */}
                     {isContactCard && (
-                      <div className="absolute inset-0 rounded-[2rem]  -black/5 dark:-white/10 group-hover:-white/50 transition-colors duration-300 pointer-events-none" />
+                      <div className="absolute inset-0 rounded-card border border-black/5 dark:border-white/10 group-hover:border-white/50 transition-colors duration-300 pointer-events-none" />
                     )}
 
                     {/* Link overlay */}

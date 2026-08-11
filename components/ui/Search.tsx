@@ -147,7 +147,7 @@ const Search: React.FC<SearchProps> = React.memo(({ onNavigate, className = '', 
       {/* Search Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="p-2 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
+        className="p-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
         aria-label="Search"
         aria-expanded={isOpen}
       >
@@ -163,7 +163,7 @@ const Search: React.FC<SearchProps> = React.memo(({ onNavigate, className = '', 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/50 z-[9998]"
+              className="fixed inset-0 bg-black/50 z-9998"
               onClick={() => setIsOpen(false)}
             />
 
@@ -172,7 +172,7 @@ const Search: React.FC<SearchProps> = React.memo(({ onNavigate, className = '', 
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="fixed top-20 left-1/2 transform -translate-x-1/2 w-full max-w-2xl z-[9999] bg-white dark:bg-surface rounded-[2rem]"
+              className="fixed top-20 left-1/2 transform -translate-x-1/2 w-full max-w-2xl z-9999 bg-white dark:bg-surface rounded-card shadow-spatial-xl"
             >
               <div className="p-4">
                 {/* Search Input */}
@@ -184,7 +184,7 @@ const Search: React.FC<SearchProps> = React.memo(({ onNavigate, className = '', 
                     placeholder="Search..."
                     value={query}
                     onChange={(e) => handleSearch(e.target.value)}
-                    className="w-full pl-12 pr-10 py-3 bg-ivory dark:bg-black/20 rounded-xl focus:outline-none focus:ring-2 focus:ring-coral text-text-primary dark:text-white"
+                    className="w-full pl-12 pr-10 py-3 bg-ivory dark:bg-black/20 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-coral text-text-primary dark:text-white"
                     aria-label="Search input"
                   />
                   {query && (
@@ -193,7 +193,7 @@ const Search: React.FC<SearchProps> = React.memo(({ onNavigate, className = '', 
                         setQuery('');
                         setResults([]);
                       }}
-                      className="absolute right-4 top-1/2 transform -translate-y-1/2 p-1 rounded-full hover:bg-black/5 dark:hover:bg-white/10"
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 min-w-[44px] min-h-[44px] flex items-center justify-center"
                       aria-label="Clear search"
                     >
                       <X className="w-4 h-4 text-text-secondary" />
@@ -241,7 +241,7 @@ const Search: React.FC<SearchProps> = React.memo(({ onNavigate, className = '', 
                 {/* Keyboard Shortcut Hint */}
                 {!query && (
                   <div className="text-xs text-text-secondary dark:text-white/50 text-center py-4">
-                    Press <kbd className="px-2 py-1 bg-black/5 dark:bg-white/10 rounded">Esc</kbd> to close
+                    Press <kbd className="px-2 py-1 bg-black/5 dark:bg-white/10 rounded-sm">Esc</kbd> to close
                   </div>
                 )}
               </div>

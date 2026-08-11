@@ -12,25 +12,26 @@
   margin: 0 auto;
   box-sizing: border-box;
   transform-origin: center top;
-  will-change: transform, filter;
-  /* Default spacing between cards in flow */
-  margin-bottom: 4rem; 
-  /* Ensure it sits above background elements */
+  will-change: transform;
+  margin-bottom: 4rem;
   z-index: 10;
-  /* Fix for rounded corners during scale transforms */
   isolation: isolate;
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-  -webkit-perspective: 1000;
-  perspective: 1000;
-  /* Apply rounded corners at wrapper level to prevent clipping issues */
   border-radius: 32px;
   overflow: hidden;
 }
 
-/* Spacer at the bottom to allow the last card to be scrolled away properly if needed */
+/* Dark overlay — controlled via --stack-dim CSS variable from JS */
+.scroll-stack-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: black;
+  opacity: var(--stack-dim, 0);
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: 50;
+}
+
 .scroll-stack-buffer {
   height: 20vh;
   width: 100%;

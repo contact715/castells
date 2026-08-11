@@ -1,40 +1,284 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@keyframes noise-animation {
-  0% {
-    transform: translate(0, 0);
+@custom-variant dark (&:is(.dark *));
+
+@theme {
+  --color-ivory: #ebece7;
+  --color-coral: #e08576;
+  --color-coral-dark: #d67060;
+  --color-coral-from: #c95d54;
+  --color-coral-to: #f0b088;
+  --color-surface: #ffffff;
+  --color-surface-dark: #2a2a2a;
+  --color-text-primary: #000000;
+  --color-text-secondary-light: #555555;
+  --color-text-secondary-dark: #cccccc;
+
+  --font-display: Newsreader, serif;
+  --font-sans: Satoshi, sans-serif;
+
+  --radius-card: 1rem;
+  --radius-inner: 0.75rem;
+  --radius-element: 0.5rem;
+  --radius-pill: 9999px;
+
+  --shadow-spatial-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-spatial-md: 0 2px 6px rgba(0, 0, 0, 0.04);
+  --shadow-spatial-lg: 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-spatial-xl: 0 8px 20px rgba(0, 0, 0, 0.08);
+  --shadow-spatial-card: 0 2px 8px rgba(0, 0, 0, 0.04);
+
+  --z-index-base: 0;
+  --z-index-content: 1;
+  --z-index-sticky: 10;
+  --z-index-header: 30;
+  --z-index-dropdown: 40;
+  --z-index-overlay: 50;
+  --z-index-modal: 60;
+  --z-index-toast: 70;
+  --z-index-critical: 100;
+}
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
   }
-  10% {
-    transform: translate(-2%, -3%);
+}
+
+@utility text-text-primary {
+  @apply text-black dark:text-white;
+}
+
+@utility text-text-secondary {
+  @apply text-[#555555] dark:text-[#CCCCCC];
+}
+
+@utility bg-ivory {
+  @apply bg-[#EBECE7] dark:bg-[#191919];
+}
+
+@utility bg-coral {
+  @apply bg-[#E08576];
+}
+
+@utility bg-surface {
+  @apply bg-white dark:bg-[#2A2A2A];
+}
+
+@utility bg-coral-gradient {
+  /* ─── Coral gradient system ─────────────────────────────── */
+  background: linear-gradient(135deg, #c95d54 0%, #e08576 45%, #f0b088 100%);
+}
+
+@utility bg-coral-gradient-subtle {
+  background: linear-gradient(
+    135deg,
+    rgba(201, 93, 84, 0.12) 0%,
+    rgba(224, 133, 118, 0.1) 45%,
+    rgba(240, 176, 136, 0.12) 100%
+  );
+
+  .dark & {
+    background: linear-gradient(
+      135deg,
+      rgba(201, 93, 84, 0.18) 0%,
+      rgba(224, 133, 118, 0.15) 45%,
+      rgba(240, 176, 136, 0.18) 100%
+    );
   }
-  20% {
-    transform: translate(-4%, 2%);
+}
+
+@utility dark {
+  & .bg-coral-gradient-subtle {
+    background: linear-gradient(
+      135deg,
+      rgba(201, 93, 84, 0.18) 0%,
+      rgba(224, 133, 118, 0.15) 45%,
+      rgba(240, 176, 136, 0.18) 100%
+    );
   }
-  30% {
-    transform: translate(2%, -4%);
+
+  & .glow-coral {
+    background: radial-gradient(
+      circle,
+      rgba(201, 93, 84, 0.15) 0%,
+      rgba(240, 176, 136, 0.08) 50%,
+      transparent 70%
+    );
   }
-  40% {
-    transform: translate(-2%, 5%);
+
+  & .future-glass {
+    background: rgba(42, 42, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
-  50% {
-    transform: translate(-4%, 2%);
+
+  & .glass-panel {
+    background: rgba(42, 42, 42, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.06);
   }
-  60% {
-    transform: translate(3%, 0);
+
+  & .glass-card {
+    background: rgba(42, 42, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
   }
-  70% {
-    transform: translate(0, 3%);
+}
+
+@utility text-coral-gradient {
+  background: linear-gradient(135deg, #c95d54 0%, #e08576 45%, #f0b088 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@utility glow-coral {
+  background: radial-gradient(
+    circle,
+    rgba(201, 93, 84, 0.25) 0%,
+    rgba(240, 176, 136, 0.15) 50%,
+    transparent 70%
+  );
+
+  .dark & {
+    background: radial-gradient(
+      circle,
+      rgba(201, 93, 84, 0.15) 0%,
+      rgba(240, 176, 136, 0.08) 50%,
+      transparent 70%
+    );
   }
-  80% {
-    transform: translate(-3%, 0);
+}
+
+@utility border-coral-gradient {
+  border-image: linear-gradient(135deg, #c95d54, #e08576, #f0b088) 1;
+}
+
+@utility ring-coral-gradient {
+  --tw-ring-color: #e08576;
+  box-shadow:
+    0 0 0 2px #c95d54,
+    0 0 0 4px #f0b088;
+}
+
+@utility mask-linear-fade {
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 10%,
+    black 90%,
+    transparent 100%
+  );
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
-  90% {
-    transform: translate(2%, 2%);
+}
+
+@utility future-glass {
+  /* ─── THALASSA Spatial Glass Utilities ──────────────────── */
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+
+  .dark & {
+    background: rgba(42, 42, 42, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
-  100% {
-    transform: translate(1%, 0);
+}
+
+@utility glass-panel {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+
+  .dark & {
+    background: rgba(42, 42, 42, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+}
+
+@utility glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
+  .dark & {
+    background: rgba(42, 42, 42, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Safe area insets for notched devices (iPhone X+) */
+@layer base {
+  body {
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+}
+
+@layer utilities {
+  @keyframes noise-animation {
+    0% {
+      transform: translate(0, 0);
+    }
+    10% {
+      transform: translate(-2%, -3%);
+    }
+    20% {
+      transform: translate(-4%, 2%);
+    }
+    30% {
+      transform: translate(2%, -4%);
+    }
+    40% {
+      transform: translate(-2%, 5%);
+    }
+    50% {
+      transform: translate(-4%, 2%);
+    }
+    60% {
+      transform: translate(3%, 0);
+    }
+    70% {
+      transform: translate(0, 3%);
+    }
+    80% {
+      transform: translate(-3%, 0);
+    }
+    90% {
+      transform: translate(2%, 2%);
+    }
+    100% {
+      transform: translate(1%, 0);
+    }
   }
 }
 
@@ -45,26 +289,16 @@
     box-sizing: border-box;
   }
 
-  /* Theme transition — targeted to layout elements only, not every DOM node */
-  body,
-  section,
-  nav,
-  header,
-  footer,
-  main,
-  aside,
-  div,
-  span,
-  p,
-  a,
-  button,
-  input,
-  textarea,
-  select,
-  h1, h2, h3, h4, h5, h6 {
-    transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                color 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-                border-color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  /* Theme transition — only fires during dark mode toggle, not on every element */
+  .theme-transitioning body,
+  .theme-transitioning section,
+  .theme-transitioning nav,
+  .theme-transitioning header,
+  .theme-transitioning footer,
+  .theme-transitioning main {
+    transition: background-color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+                border-color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   body {
@@ -92,79 +326,6 @@
   input[type="checkbox"]:checked {
     background-color: #E08576;
     border-color: #E08576;
-  }
-}
-
-@layer utilities {
-  .text-text-primary {
-    @apply text-black dark:text-white;
-  }
-
-  .text-text-secondary {
-    @apply text-[#555555] dark:text-[#CCCCCC];
-  }
-
-  .bg-ivory {
-    @apply bg-[#EBECE7] dark:bg-[#191919];
-  }
-
-  .bg-coral {
-    @apply bg-[#E08576];
-  }
-
-  .bg-surface {
-    @apply bg-white dark:bg-[#2A2A2A];
-  }
-  
-  /* ─── Coral gradient system ─────────────────────────────── */
-  .bg-coral-gradient {
-    background: linear-gradient(135deg, #C95D54 0%, #E08576 45%, #F0B088 100%);
-  }
-
-  .bg-coral-gradient-subtle {
-    background: linear-gradient(135deg, rgba(201,93,84,0.12) 0%, rgba(224,133,118,0.10) 45%, rgba(240,176,136,0.12) 100%);
-  }
-
-  .dark .bg-coral-gradient-subtle {
-    background: linear-gradient(135deg, rgba(201,93,84,0.18) 0%, rgba(224,133,118,0.15) 45%, rgba(240,176,136,0.18) 100%);
-  }
-
-  .text-coral-gradient {
-    background: linear-gradient(135deg, #C95D54 0%, #E08576 45%, #F0B088 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .glow-coral {
-    background: radial-gradient(circle, rgba(201,93,84,0.25) 0%, rgba(240,176,136,0.15) 50%, transparent 70%);
-  }
-
-  .dark .glow-coral {
-    background: radial-gradient(circle, rgba(201,93,84,0.15) 0%, rgba(240,176,136,0.08) 50%, transparent 70%);
-  }
-
-  .border-coral-gradient {
-    border-image: linear-gradient(135deg, #C95D54, #E08576, #F0B088) 1;
-  }
-
-  .ring-coral-gradient {
-    --tw-ring-color: #E08576;
-    box-shadow: 0 0 0 2px #C95D54, 0 0 0 4px #F0B088;
-  }
-
-  .mask-linear-fade {
-    mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
-  }
-
-  .scrollbar-hide {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-
-  .scrollbar-hide::-webkit-scrollbar {
-    display: none;
   }
 }
 

@@ -28,7 +28,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
           transition={{ duration: 0.5 }}
           className="max-w-4xl"
         >
-          <div className="bg-white dark:bg-white/5  rounded-[2rem] p-8 md:p-12 space-y-10">
+          <div className="bg-white dark:bg-white/5  rounded-card p-8 md:p-12 space-y-10">
             <div className="text-sm text-text-secondary">
               <p><span className="font-semibold text-text-primary">Last updated:</span> February 7, 2026</p>
               <p className="mt-2">These Terms of Service ("Terms") govern your use of the website and services provided by Castells Agency LLC ("Castells," "we," "us," or "our"). By accessing our website or using our services, including receiving SMS/text messages, you agree to these Terms.</p>

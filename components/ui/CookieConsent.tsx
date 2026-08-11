@@ -91,16 +91,16 @@ const CookieConsent: React.FC = React.memo(() => {
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
           transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-          className="fixed bottom-0 left-0 right-0 z-[9999] p-4 md:p-6"
+          className="fixed bottom-0 left-0 right-0 z-9999 p-4 md:p-6"
           role="dialog"
           aria-labelledby="cookie-consent-title"
           aria-describedby="cookie-consent-description"
         >
-          <div className="max-w-4xl mx-auto bg-white dark:bg-surface rounded-[2rem] p-6 md:p-8">
+          <div className="max-w-4xl mx-auto bg-white dark:bg-surface rounded-card shadow-spatial-xl p-6 md:p-8">
             {!showPreferences ? (
               <>
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-coral/10 flex items-center justify-center">
+                  <div className="shrink-0 w-12 h-12 rounded-full bg-coral/10 flex items-center justify-center">
                     <Cookie className="w-6 h-6 text-coral" />
                   </div>
                   <div className="flex-1">
@@ -124,7 +124,7 @@ const CookieConsent: React.FC = React.memo(() => {
                   </div>
                   <button
                     onClick={() => setIsVisible(false)}
-                    className="flex-shrink-0 w-8 h-8 rounded-full hover:bg-black/5 dark:hover:bg-white/10 flex items-center justify-center transition-colors"
+                    className="shrink-0 w-11 h-11 rounded-full hover:bg-black/5 dark:hover:bg-white/10 flex items-center justify-center transition-colors"
                     aria-label="Close cookie consent"
                   >
                     <X className="w-5 h-5 text-text-secondary" />
@@ -176,7 +176,7 @@ const CookieConsent: React.FC = React.memo(() => {
                           type="checkbox"
                           checked={preferences.essential}
                           disabled
-                          className="w-5 h-5 rounded accent-coral cursor-not-allowed"
+                          className="w-5 h-5 rounded-sm accent-coral cursor-not-allowed"
                           aria-label="Essential cookies (required)"
                         />
                       </div>
@@ -195,7 +195,7 @@ const CookieConsent: React.FC = React.memo(() => {
                           type="checkbox"
                           checked={preferences.analytics}
                           onChange={(e) => setPreferences({ ...preferences, analytics: e.target.checked })}
-                          className="w-5 h-5 rounded accent-coral cursor-pointer"
+                          className="w-5 h-5 rounded-sm accent-coral cursor-pointer"
                           aria-label="Analytics cookies"
                         />
                       </div>
@@ -214,7 +214,7 @@ const CookieConsent: React.FC = React.memo(() => {
                           type="checkbox"
                           checked={preferences.marketing}
                           onChange={(e) => setPreferences({ ...preferences, marketing: e.target.checked })}
-                          className="w-5 h-5 rounded accent-coral cursor-pointer"
+                          className="w-5 h-5 rounded-sm accent-coral cursor-pointer"
                           aria-label="Marketing cookies"
                         />
                       </div>

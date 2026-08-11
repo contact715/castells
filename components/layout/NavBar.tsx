@@ -27,7 +27,7 @@ interface NavBarProps {
 }
 
 const CategoryCard = ({ title, icon: Icon, href }: { title: string, icon: React.ComponentType<{ className?: string }>, href: string }) => (
-    <a href={href} className="flex flex-col items-center justify-center gap-3 p-4 rounded-[2rem] bg-black/5 dark:bg-white/5 hover:bg-coral/10 hover:text-coral transition-all group text-center h-full">
+    <a href={href} className="flex flex-col items-center justify-center gap-3 p-4 rounded-card bg-black/5 dark:bg-white/5 hover:bg-coral/10 hover:text-coral transition-[background-color,color] group text-center h-full">
         <div className="bg-white dark:bg-black p-3 rounded-xl  group-hover:scale-110 transition-transform">
             <Icon className="w-6 h-6 text-text-primary group-hover:text-coral transition-colors" />
         </div>
@@ -66,7 +66,7 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Naviga
                             e.preventDefault();
                             onNavigate?.('case-study', caseStudy as any);
                         }}
-                        className="group cursor-pointer rounded-[2rem] overflow-hidden relative h-[200px]  -black/5 dark:-white/10"
+                        className="group cursor-pointer rounded-card overflow-hidden relative h-[200px] border border-black/5 dark:border-white/10"
                     >
                         {/* Background Image */}
                         <img
@@ -78,7 +78,7 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Naviga
                             style={{ transform: 'translateZ(0)' }}
                         />
                         {/* Overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                        <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
 
                         {/* Content */}
                         <div className="absolute inset-0 p-4 flex flex-col justify-end">
@@ -151,7 +151,7 @@ const CompanyMenu = ({ onNavigate }: { onNavigate?: import('../../types').Naviga
                                 handleItemClick(item);
                             }
                         }}
-                        className="flex items-center gap-2.5 w-full px-3 py-2 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all justify-between group cursor-pointer"
+                        className="flex items-center gap-2.5 w-full px-3 py-2 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color] justify-between group cursor-pointer"
                     >
                         <item.icon className="w-4 h-4 text-text-secondary group-hover:text-current" />
                         <span className="flex-1 text-[13px] font-medium">{item.label}</span>
@@ -160,7 +160,7 @@ const CompanyMenu = ({ onNavigate }: { onNavigate?: import('../../types').Naviga
                 ))}
             </div>
 
-            <div className="pt-2 -t -black/5 bg-ivory dark:bg-white/5 rounded-[2rem] p-3">
+            <div className="pt-2 border-t border-black/5 bg-ivory dark:bg-white/5 rounded-card p-3">
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
                         <div className="bg-coral/10 h-10 w-10 flex items-center justify-center rounded-full text-coral shrink-0">
@@ -213,7 +213,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
         <div className="flex flex-col gap-2">
             <div className="flex gap-2.5">
                 {/* Left Column: Categories (Vertical) */}
-                <div className="flex flex-col gap-1 bg-white dark:bg-[#2A2A2A] p-1.5 rounded-card w-[240px] flex-shrink-0">
+                <div className="flex flex-col gap-1 bg-white dark:bg-surface-dark p-1.5 rounded-card w-[240px] shrink-0">
                     <div className="px-2 py-1 mb-1">
                         <span className="text-[9px] font-bold uppercase tracking-widest text-text-secondary">Categories</span>
                     </div>
@@ -223,7 +223,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                             onMouseEnter={() => setActiveCategory(category.id)}
                             onClick={() => handleCategoryClick(category)}
                             className={`
-                                w-full px-3 py-1.5 rounded-full text-[13px] font-semibold transition-all text-left flex items-center gap-2.5 cursor-pointer relative group
+                                w-full px-3 py-1.5 rounded-full text-[13px] font-semibold transition-[background-color,color] text-left flex items-center gap-2.5 cursor-pointer relative group
                                 ${activeCategory === category.id
                                     ? 'bg-coral text-white dark:bg-coral dark:text-white'
                                     : 'text-text-primary hover:bg-black/5 dark:hover:bg-white/5'}
@@ -231,7 +231,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                         >
                             {category.icon && (
                                 <div className={`
-                                    w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-all
+                                    w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-[background-color,color]
                                     ${activeCategory === category.id
                                         ? 'bg-white/20 text-white'
                                         : 'bg-black/5 dark:bg-white/5 text-text-secondary group-hover:bg-coral/10 group-hover:text-coral'}
@@ -250,7 +250,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                 {/* Right Columns: Items (2 columns) */}
                 <div className="flex gap-2 w-fit">
                     {/* Column 2 */}
-                    <div className="w-[200px] space-y-0.5 pt-1.5 flex-shrink-0">
+                    <div className="w-[200px] space-y-0.5 pt-1.5 shrink-0">
                         {leftColumnItems.length > 0 && (
                             <div className="px-2 py-1 mb-1">
                                 <span className="text-[9px] font-bold uppercase tracking-widest text-text-secondary">
@@ -266,22 +266,22 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                                     e.preventDefault();
                                     handleItemClick(item);
                                 }}
-                                className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
+                                className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color,transform] duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-r from-coral/0 via-coral/0 to-coral/0 group-hover:from-coral/5 group-hover:via-coral/10 group-hover:to-coral/5 transition-all duration-300 opacity-0 group-hover:opacity-100" />
+                                <div className="absolute inset-0 bg-linear-to-r from-coral/0 via-coral/0 to-coral/0 group-hover:from-coral/5 group-hover:via-coral/10 group-hover:to-coral/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
                                 <div className="relative flex items-center gap-2.5 flex-1 min-w-0">
-                                    <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-all duration-300 group-hover:scale-110">
-                                        <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-all duration-300" />
+                                    <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-[background-color,transform] duration-300 group-hover:scale-110">
+                                        <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-colors duration-300" />
                                     </div>
                                     <span className="flex-1 text-[13px] font-medium truncate group-hover:translate-x-0.5 transition-transform duration-300">{item.label}</span>
                                 </div>
-                                <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-all duration-300 relative z-10 translate-x-[-4px] group-hover:translate-x-0 group-hover:rotate-45" />
+                                <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-300 relative z-10 translate-x-[-4px] group-hover:translate-x-0 group-hover:rotate-45" />
                             </a>
                         ))}
                     </div>
 
                     {/* Column 3 */}
-                    <div className="w-[200px] space-y-0.5 pt-1.5 flex-shrink-0">
+                    <div className="w-[200px] space-y-0.5 pt-1.5 shrink-0">
                         {rightColumnItems.length > 0 && (
                             <div className="px-2 py-1 mb-1">
                                 <span className="text-[9px] font-bold uppercase tracking-widest text-text-secondary opacity-0">
@@ -297,16 +297,16 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                                     e.preventDefault();
                                     handleItemClick(item);
                                 }}
-                                className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
+                                className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color,transform] duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-r from-coral/0 via-coral/0 to-coral/0 group-hover:from-coral/5 group-hover:via-coral/10 group-hover:to-coral/5 transition-all duration-300 opacity-0 group-hover:opacity-100" />
+                                <div className="absolute inset-0 bg-linear-to-r from-coral/0 via-coral/0 to-coral/0 group-hover:from-coral/5 group-hover:via-coral/10 group-hover:to-coral/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
                                 <div className="relative flex items-center gap-2.5 flex-1 min-w-0">
-                                    <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-all duration-300 group-hover:scale-110">
-                                        <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-all duration-300" />
+                                    <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-[background-color,transform] duration-300 group-hover:scale-110">
+                                        <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-colors duration-300" />
                                     </div>
                                     <span className="flex-1 text-[13px] font-medium truncate group-hover:translate-x-0.5 transition-transform duration-300">{item.label}</span>
                                 </div>
-                                <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-all duration-300 relative z-10 translate-x-[-4px] group-hover:translate-x-0 group-hover:rotate-45" />
+                                <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-300 relative z-10 translate-x-[-4px] group-hover:translate-x-0 group-hover:rotate-45" />
                             </a>
                         ))}
                     </div>
@@ -314,7 +314,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
             </div>
 
             {/* Footer CTA */}
-            <div className="mt-1 pb-1.5 bg-gradient-to-r from-coral/5 via-coral/10 to-coral/5 dark:from-coral/10 dark:via-coral/20 dark:to-coral/10 rounded-full p-2 px-3">
+            <div className="mt-1 pb-1.5 bg-linear-to-r from-coral/5 via-coral/10 to-coral/5 dark:from-coral/10 dark:via-coral/20 dark:to-coral/10 rounded-full p-2 px-3">
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
                         <div className="bg-coral h-9 w-9 flex items-center justify-center rounded-full text-white shrink-0">
@@ -364,7 +364,7 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
         <div className="flex flex-col gap-2">
             <div className="flex gap-2.5">
                 {/* Left Column: Categories (Vertical) */}
-                <div className="flex flex-col gap-1 bg-white dark:bg-[#2A2A2A] p-1.5 rounded-card w-[240px] flex-shrink-0">
+                <div className="flex flex-col gap-1 bg-white dark:bg-surface-dark p-1.5 rounded-card w-[240px] shrink-0">
                     <div className="px-2 py-1 mb-1">
                         <span className="text-[9px] font-bold uppercase tracking-widest text-text-secondary">Categories</span>
                     </div>
@@ -374,7 +374,7 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                             onMouseEnter={() => setActiveCategory(category.id)}
                             onClick={() => handleCategoryClick(category)}
                             className={`
-                                w-full px-3 py-1.5 rounded-full text-[13px] font-semibold transition-all text-left flex items-center gap-2.5 cursor-pointer relative group
+                                w-full px-3 py-1.5 rounded-full text-[13px] font-semibold transition-[background-color,color] text-left flex items-center gap-2.5 cursor-pointer relative group
                                 ${activeCategory === category.id
                                     ? 'bg-coral text-white dark:bg-coral dark:text-white'
                                     : 'text-text-primary hover:bg-black/5 dark:hover:bg-white/5'}
@@ -382,7 +382,7 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                         >
                             {category.icon && (
                                 <div className={`
-                                    w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-all
+                                    w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-[background-color,color]
                                     ${activeCategory === category.id
                                         ? 'bg-white/20 text-white'
                                         : 'bg-black/5 dark:bg-white/5 text-text-secondary group-hover:bg-coral/10 group-hover:text-coral'}
@@ -401,7 +401,7 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                 {/* Right Columns: Items (2 columns) - Enhanced Design */}
                 <div className="flex gap-2 w-fit">
                     {/* Column 2 */}
-                    <div className="w-[200px] space-y-0.5 pt-1.5 flex-shrink-0">
+                    <div className="w-[200px] space-y-0.5 pt-1.5 shrink-0">
                         {leftColumnItems.length > 0 && (
                             <div className="px-2 py-1 mb-1">
                                 <span className="text-[9px] font-bold uppercase tracking-widest text-text-secondary">
@@ -421,22 +421,22 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                                     e.preventDefault();
                                     handleItemClick(item);
                                 }}
-                                className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
+                                className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color,transform] duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-r from-coral/0 via-coral/0 to-coral/0 group-hover:from-coral/5 group-hover:via-coral/10 group-hover:to-coral/5 transition-all duration-300 opacity-0 group-hover:opacity-100" />
+                                <div className="absolute inset-0 bg-linear-to-r from-coral/0 via-coral/0 to-coral/0 group-hover:from-coral/5 group-hover:via-coral/10 group-hover:to-coral/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
                                 <div className="relative flex items-center gap-2.5 flex-1 min-w-0">
-                                    <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-all duration-300 group-hover:scale-110">
-                                        <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-all duration-300" />
+                                    <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-[background-color,transform] duration-300 group-hover:scale-110">
+                                        <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-colors duration-300" />
                                     </div>
                                     <span className="flex-1 text-[13px] font-medium truncate group-hover:translate-x-0.5 transition-transform duration-300">{item.name}</span>
                                 </div>
-                                <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-all duration-300 relative z-10 translate-x-[-4px] group-hover:translate-x-0 group-hover:rotate-45" />
+                                <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-300 relative z-10 translate-x-[-4px] group-hover:translate-x-0 group-hover:rotate-45" />
                             </a>
                         ))}
                     </div>
 
                     {/* Column 3 */}
-                    <div className="w-[200px] space-y-0.5 pt-1.5 flex-shrink-0">
+                    <div className="w-[200px] space-y-0.5 pt-1.5 shrink-0">
                         {rightColumnItems.length > 0 && (
                             <div className="px-2 py-1 mb-1">
                                 <span className="text-[9px] font-bold uppercase tracking-widest text-text-secondary opacity-0">
@@ -456,16 +456,16 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                                     e.preventDefault();
                                     handleItemClick(item);
                                 }}
-                                className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-all duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
+                                className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color,transform] duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
                             >
-                                <div className="absolute inset-0 bg-gradient-to-r from-coral/0 via-coral/0 to-coral/0 group-hover:from-coral/5 group-hover:via-coral/10 group-hover:to-coral/5 transition-all duration-300 opacity-0 group-hover:opacity-100" />
+                                <div className="absolute inset-0 bg-linear-to-r from-coral/0 via-coral/0 to-coral/0 group-hover:from-coral/5 group-hover:via-coral/10 group-hover:to-coral/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
                                 <div className="relative flex items-center gap-2.5 flex-1 min-w-0">
-                                    <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-all duration-300 group-hover:scale-110">
-                                        <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-all duration-300" />
+                                    <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-[background-color,transform] duration-300 group-hover:scale-110">
+                                        <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-colors duration-300" />
                                     </div>
                                     <span className="flex-1 text-[13px] font-medium truncate group-hover:translate-x-0.5 transition-transform duration-300">{item.name}</span>
                                 </div>
-                                <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-all duration-300 relative z-10 translate-x-[-4px] group-hover:translate-x-0 group-hover:rotate-45" />
+                                <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-300 relative z-10 translate-x-[-4px] group-hover:translate-x-0 group-hover:rotate-45" />
                             </a>
                         ))}
                     </div>
@@ -473,7 +473,7 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
             </div>
 
             {/* Footer CTA - Enhanced */}
-            <div className="mt-1 pb-1.5 bg-gradient-to-r from-coral/5 via-coral/10 to-coral/5 dark:from-coral/10 dark:via-coral/20 dark:to-coral/10 rounded-full p-2 px-3">
+            <div className="mt-1 pb-1.5 bg-linear-to-r from-coral/5 via-coral/10 to-coral/5 dark:from-coral/10 dark:via-coral/20 dark:to-coral/10 rounded-full p-2 px-3">
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
                         <div className="bg-coral h-9 w-9 flex items-center justify-center rounded-full text-white shrink-0">
@@ -607,20 +607,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                         </MenuItem>
                     </Menu>
 
-                    {/* ProjectX Button */}
-                    <Button
-                        variant="secondary"
-                        size="sm"
-                        className="hidden lg:flex"
-                        onClick={(e) => {
-                            e.preventDefault();
-                            onNavigate?.('projectx');
-                        }}
-                    >
-                        Our ProjectX
-                    </Button>
-
-                    <div className="h-6 w-[1px] bg-black/10 dark:bg-white/10 mx-2"></div>
+                    <div className="h-6 w-px bg-black/10 dark:bg-white/10 mx-2"></div>
 
                     <div className="flex items-center gap-3">
                         <Search
@@ -699,7 +686,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                 <div className="grid gap-4">
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Branding & Design</h5>
-                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Identity & Logo</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">UI/UX Design</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Brand Guidelines</a>
@@ -707,7 +694,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                     </div>
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Development</h5>
-                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Custom Web</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Mobile Apps</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">E-commerce</a>
@@ -715,7 +702,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                     </div>
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Growth</h5>
-                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Paid Media (PPC)</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">SEO Strategy</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Video Ads</a>
@@ -723,7 +710,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                     </div>
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Systems</h5>
-                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">CRM Setup</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Automation</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Analytics & BI</a>
@@ -740,7 +727,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                 <div className="grid gap-4">
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Construction</h5>
-                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">General</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Roofing</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Remodeling</a>
@@ -748,14 +735,14 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                     </div>
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Home Services</h5>
-                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">HVAC</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Solar</a>
                                         </div>
                                     </div>
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Automotive</h5>
-                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Detailing</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Wraps & PPF</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Performance</a>
@@ -763,7 +750,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                     </div>
                                     <div className="space-y-2">
                                         <h5 className="text-xs font-bold uppercase tracking-widest text-coral">Professional</h5>
-                                        <div className="flex flex-col gap-1 pl-2 -l -black/10 dark:-white/10">
+                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Legal</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Finance</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Real Estate</a>
@@ -776,9 +763,8 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
 
                         <a href="#about" onClick={(e) => { e.preventDefault(); onNavigate?.('about'); setMobileMenuOpen(false); }} className="block p-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-display text-xl font-bold text-text-primary">Agency</a>
                         <a href="#blog" onClick={(e) => { e.preventDefault(); onNavigate?.('blog'); setMobileMenuOpen(false); }} className="block p-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-display text-xl font-bold text-text-primary">Insights</a>
-                        <a href="#projectx" onClick={(e) => { e.preventDefault(); onNavigate?.('projectx'); setMobileMenuOpen(false); }} className="block p-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-display text-xl font-bold text-text-primary">Our ProjectX</a>
                     </div>
-                    <div className="pt-4 -t -black/5 dark:-white/5">
+                    <div className="pt-4 border-t border-black/5 dark:border-white/5">
                         <Button
                             href="/contact"
                             size="sm"

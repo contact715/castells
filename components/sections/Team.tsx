@@ -113,7 +113,7 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
             <motion.div
               key={idx}
               variants={cardVariants}
-              className="group relative aspect-[3/4] rounded-[2rem] overflow-hidden"
+              className="group relative aspect-3/4 rounded-card overflow-hidden hover:-translate-y-1 hover:shadow-spatial-md transition-[transform,box-shadow] duration-300"
             >
               {/* Background Image */}
               <img
@@ -126,7 +126,7 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
               />
 
               {/* Gradient Overlay - Always visible */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+              <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/10 to-transparent" />
 
               {/* Content - Bottom */}
               <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-4">
@@ -147,7 +147,7 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
           <motion.div
             variants={cardVariants}
             onClick={() => onNavigate?.('careers')}
-            className="group relative aspect-[3/4] rounded-[2rem] overflow-hidden bg-surface cursor-pointer"
+            className="group relative aspect-3/4 rounded-card overflow-hidden bg-surface cursor-pointer"
           >
             {/* Background Pattern */}
             <div className="absolute inset-0 opacity-30">
@@ -162,12 +162,12 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
             </div>
 
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-gradient-to-t from-coral/20 via-transparent to-transparent group-hover:from-coral/30 transition-all duration-500" />
+            <div className="absolute inset-0 bg-linear-to-t from-coral/20 via-transparent to-transparent group-hover:from-coral/30 transition-colors duration-500" />
 
             {/* Content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
               {/* Icon */}
-              <div className="w-16 h-16 rounded-[2rem] bg-coral flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 rounded-element bg-coral flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                 <ArrowUpRight className="w-7 h-7 text-white group-hover:rotate-45 transition-transform duration-300" />
               </div>
 
@@ -181,7 +181,7 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
             </div>
 
             {/* Border Effect */}
-            <div className="absolute inset-0 rounded-[2rem]  -black/5 dark:-white/10 group-hover:-coral/50 transition-colors duration-300" />
+            <div className="absolute inset-0 rounded-card border border-black/5 dark:border-white/10 group-hover:border-coral/50 transition-colors duration-300" />
           </motion.div>
         </motion.div>
 

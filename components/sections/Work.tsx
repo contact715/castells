@@ -3,10 +3,10 @@ import React, { useMemo, memo, useCallback } from 'react';
 import { ArrowUpRight, TrendingUp, MapPin, Layers } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
-import ScrollFloat from '../effects/ScrollFloat';
 import ScrollStack, { ScrollStackItem } from '../ui/ScrollStack';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import OptimizedImage from '../ui/OptimizedImage';
+import { useReducedMotion } from '../../lib/hooks/useReducedMotion';
 import type { NavigateFn } from '../../types';
 
 interface WorkProps {
@@ -16,8 +16,10 @@ interface WorkProps {
 import { CASE_STUDIES, CaseStudy } from '../../constants';
 
 const Work: React.FC<WorkProps> = ({ onNavigate }) => {
+  const prefersReducedMotion = useReducedMotion();
+
   // Memoize case studies to prevent unnecessary re-renders
-  const displayedCases = useMemo(() => CASE_STUDIES.slice(0, 9), []);
+  const displayedCases = useMemo(() => CASE_STUDIES.slice(0, 5), []);
 
   // Memoize click handler
   const handleCaseClick = useCallback((project: CaseStudy) => {
@@ -29,7 +31,7 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
   }, [onNavigate]);
 
   return (
-    <section id="work" className="bg-ivory relative z-[1]">
+    <section id="work" className="bg-ivory relative z-content">
       <div className="container mx-auto px-6 pt-16 md:pt-20 pb-12">
 
         {/* Header - Sticky Left Column Layout (like FAQ) */}
@@ -72,9 +74,8 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
       {/* Scroll Stack Implementation */}
       <div className="container mx-auto px-6 relative">
         <ScrollStack
-          stackOffset={140} // 140px from top
-          scaleFactor={0.08} // Stronger scaling effect
-          blurAmount={8}
+          stackOffset={140}
+          scaleFactor={prefersReducedMotion ? 0 : 0.08}
         >
           {displayedCases.map((project, idx) => (
             <ScrollStackItem key={project.id}>
@@ -106,6 +107,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
   const [shouldLoadVideo, setShouldLoadVideo] = React.useState(false);
   const [imageLoaded, setImageLoaded] = React.useState(false);
   const cardRef = React.useRef<HTMLAnchorElement>(null);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
 
   // Lazy load video when card enters viewport
   React.useEffect(() => {
@@ -120,7 +122,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
           }
         });
       },
-      { rootMargin: '200px' } // Start loading 200px before entering viewport
+      { rootMargin: '200px' }
     );
 
     observer.observe(cardRef.current);
@@ -130,6 +132,28 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
     };
   }, [project.video, shouldLoadVideo]);
 
+  // Pause/play video based on visibility to save GPU cycles
+  React.useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play().catch(() => {});
+          } else {
+            video.pause();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(video);
+    return () => observer.disconnect();
+  }, [shouldLoadVideo]);
+
   return (
     <a
       ref={cardRef}
@@ -138,29 +162,20 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
         e.preventDefault();
         onClick();
       }}
-      className="w-full h-[400px] sm:h-[500px] md:h-[600px] rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[32px] overflow-hidden   -white/10 relative group cursor-pointer transition-transform duration-500 hover:scale-[1.02] transform-gpu isolate block"
-      onMouseEnter={(e) => {
-        e.currentTarget.style.willChange = 'transform';
-      }}
-      onMouseLeave={(e) => {
-        const target = e.currentTarget;
-        setTimeout(() => {
-          if (target) target.style.willChange = 'auto';
-        }, 500);
-      }}
+      className="w-full h-[400px] sm:h-[500px] md:h-[600px] rounded-3xl sm:rounded-card md:rounded-[32px] overflow-hidden relative group cursor-pointer transition-transform duration-500 hover:scale-[1.02] transform-gpu isolate block"
     >
       {/* Full Background Media */}
-      <div className="absolute inset-0 bg-black overflow-hidden rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[32px]">
+      <div className="absolute inset-0 bg-black overflow-hidden rounded-3xl sm:rounded-card md:rounded-[32px]">
         {project.video ? (
           shouldLoadVideo ? (
             <video
+              ref={videoRef}
               autoPlay
               loop
               muted
               playsInline
               poster={project.image}
-              className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700 will-change-opacity"
-              style={{ transform: 'translateZ(0)' }}
+              className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
               preload="metadata"
               {...({ fetchPriority: 'low' } as any)}
             >
@@ -190,7 +205,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
         )}
 
         {/* Gradient Overlay for Text Readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-90 rounded-[1.5rem] sm:rounded-[2rem] md:rounded-[32px]" />
+        <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent opacity-90 rounded-3xl sm:rounded-card md:rounded-[32px]" />
       </div>
 
       {/* Content Overlay */}
@@ -198,10 +213,10 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
 
         {/* Top Row */}
         <div className="flex justify-between items-start">
-          <div className="bg-white/10 backdrop-blur-md  -white/10 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest">
+          <div className="bg-white/15 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest">
             {project.year} — {project.industry}
           </div>
-          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-[1.5rem] sm:rounded-[2rem] bg-white/0 backdrop-blur-md  -white/10 flex items-center justify-center group-hover:bg-white group-hover:-white/20 transition-all duration-300">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-3xl sm:rounded-element bg-white/10 flex items-center justify-center group-hover:bg-white transition-colors duration-300">
             <ArrowUpRight className="w-4 h-4 sm:w-5 sm:h-5 text-white/50 group-hover:text-black transition-colors" />
           </div>
         </div>
@@ -218,7 +233,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
           </div>
 
           {/* Metrics Row */}
-          <div className="flex gap-6 sm:gap-12 pt-6 sm:pt-8 -t -white/10">
+          <div className="flex gap-6 sm:gap-12 pt-6 sm:pt-8 border-t border-white/10">
             <div>
               <div className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1">{project.metric}</div>
               <div className="text-[10px] font-bold uppercase tracking-widest text-white/50">{project.metricLabel}</div>

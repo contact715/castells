@@ -75,8 +75,6 @@ export const routeFromPathname = (pathname: string): { page: PageView; data?: Na
       return { page: 'industries' };
     case '/company':
       return { page: 'company' };
-    case '/projectx':
-      return { page: 'projectx' };
     case '/thank-you':
       return { page: 'thank-you', data: { name: 'general' } };
     case '/privacy-policy':
@@ -85,6 +83,10 @@ export const routeFromPathname = (pathname: string): { page: PageView; data?: Na
       return { page: 'terms' };
     case '/cookie-policy':
       return { page: 'cookie-policy' };
+    case '/lead-form':
+      return { page: 'lead-form' };
+    case '/lead-form/thank-you':
+      return { page: 'lead-thank-you' };
     case '/404':
       return { page: 'not-found' };
     default:
@@ -124,8 +126,6 @@ export const pathnameFromRoute = (page: PageView, data?: NavigationData | null):
       return buildIndustryPath(data?.id != null ? String(data.id) : undefined);
     case 'company':
       return '/company';
-    case 'projectx':
-      return '/projectx';
     case 'thank-you':
       return '/thank-you';
     case 'privacy-policy':
@@ -134,6 +134,10 @@ export const pathnameFromRoute = (page: PageView, data?: NavigationData | null):
       return '/terms';
     case 'cookie-policy':
       return '/cookie-policy';
+    case 'lead-form':
+      return '/lead-form';
+    case 'lead-thank-you':
+      return '/lead-form/thank-you';
     case 'not-found':
       return '/404';
     default:

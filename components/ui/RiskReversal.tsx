@@ -82,7 +82,7 @@ const RiskReversal: React.FC<RiskReversalProps> = React.memo(({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="bg-white dark:bg-surface rounded-[2rem] p-8 hover:-translate-y-1 transition-all group"
+                className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-8 hover:-translate-y-1 hover:shadow-spatial-md transition-[transform,box-shadow] group"
               >
                 <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-4 group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
                   <Icon className="w-6 h-6 text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />

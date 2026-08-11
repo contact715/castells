@@ -59,7 +59,7 @@ const NewsletterSignup: React.FC<NewsletterSignupProps> = React.memo(({
 
   if (variant === 'modal') {
     return (
-      <div className={`bg-white dark:bg-surface rounded-[2rem] p-8 ${className}`}>
+      <div className={`bg-white dark:bg-surface rounded-card p-8 ${className}`}>
         <div className="text-center mb-6">
           <div className="w-16 h-16 rounded-full bg-coral/10 flex items-center justify-center mx-auto mb-4">
             <Mail className="w-8 h-8 text-coral" />

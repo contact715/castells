@@ -137,7 +137,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                             </h2>
 
                             {/* Sort By */}
-                            <div className="mb-6 pb-6 -b -black/10 dark:-white/10">
+                            <div className="mb-6 pb-6 border-b border-black/10 dark:border-white/10">
                                 <label htmlFor={filterId} className="block text-xs font-medium text-text-secondary dark:text-white/60 mb-2">
                                     Sort by
                                 </label>
@@ -145,7 +145,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                     id={filterId}
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
-                                    className="w-full bg-white dark:bg-surface  -black/10 dark:-white/10 rounded-[2rem] px-3 py-2 text-sm text-text-primary dark:text-white focus:outline-none focus:-coral"
+                                    className="w-full bg-white dark:bg-surface border border-black/10 dark:border-white/10 rounded-inner px-3 py-2 text-sm text-text-primary dark:text-white focus:outline-hidden focus:border-coral"
                                 >
                                     <option>Newest</option>
                                     <option>Alphabetically (A to Z)</option>
@@ -154,7 +154,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                             </div>
 
                             {/* Category */}
-                            <div className="mb-6 pb-6 -b -black/10 dark:-white/10">
+                            <div className="mb-6 pb-6 border-b border-black/10 dark:border-white/10">
                                 <label className="block text-xs font-medium text-text-secondary dark:text-white/60 mb-3">
                                     Category
                                 </label>
@@ -165,7 +165,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                                 type="checkbox"
                                                 checked={selectedCategories.includes(cat)}
                                                 onChange={() => toggleCategory(cat)}
-                                                className="w-4 h-4 rounded -black/20 dark:-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
+                                                className="w-4 h-4 rounded-sm border border-black/20 dark:border-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
                                             />
                                             <span className="text-sm text-text-primary dark:text-white group-hover:text-coral transition-colors">
                                                 {cat}
@@ -187,7 +187,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                                 type="checkbox"
                                                 checked={selectedIndustries.includes(industry)}
                                                 onChange={() => toggleIndustry(industry)}
-                                                className="w-4 h-4 rounded -black/20 dark:-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
+                                                className="w-4 h-4 rounded-sm border border-black/20 dark:border-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
                                             />
                                             <span className="text-sm text-text-primary dark:text-white group-hover:text-coral transition-colors">
                                                 {industry}
@@ -211,7 +211,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                         placeholder="Search cases"
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full bg-white dark:bg-surface  -black/10 dark:-white/10 rounded-[2rem] pl-10 pr-4 py-2 text-sm text-text-primary dark:text-white placeholder:text-text-secondary dark:placeholder:text-white/40 focus:outline-none focus:-coral"
+                                        className="w-full bg-white dark:bg-surface border border-black/10 dark:border-white/10 rounded-inner pl-10 pr-4 py-2 text-sm text-text-primary dark:text-white placeholder:text-text-secondary dark:placeholder:text-white/40 focus:outline-hidden focus:border-coral"
                                     />
                                 </div>
                             </div>
@@ -246,7 +246,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                     <div
                                         key={project.id}
                                         onClick={() => onNavigate('case-study', project as unknown as NavigationData)}
-                                        className="group relative aspect-[4/3] rounded-[2rem] overflow-hidden cursor-pointer bg-white dark:bg-surface hover:-translate-y-1 transition-all duration-300"
+                                        className="group relative aspect-4/3 rounded-card overflow-hidden cursor-pointer bg-white dark:bg-surface hover:-translate-y-1 transition-[transform,box-shadow] duration-300"
                                     >
                                         {/* Background Media */}
                                         <div className="absolute inset-0 bg-black">
@@ -256,6 +256,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                                     loop
                                                     muted
                                                     playsInline
+                                                    preload="metadata"
                                                     poster={project.image}
                                                     className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
                                                 >
@@ -270,16 +271,16 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                                     decoding="async"
                                                 />
                                             )}
-                                            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
+                                            <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
                                         </div>
 
                                         {/* Content */}
                                         <div className="absolute inset-0 p-6 flex flex-col justify-between z-10">
                                             <div className="flex justify-between items-start">
-                                                <span className="bg-white/10 backdrop-blur-md  -white/10 px-3 py-1 rounded-xl text-white text-[10px] font-bold uppercase tracking-widest">
+                                                <span className="bg-white/10 backdrop-blur-md border border-white/10 px-3 py-1 rounded-xl text-white text-[10px] font-bold uppercase tracking-widest">
                                                     {project.industry}
                                                 </span>
-                                                <div className="w-10 h-10 rounded-[2rem] bg-white/0 backdrop-blur-md  -white/10 flex items-center justify-center group-hover:bg-white group-hover:-white/20 transition-all duration-300">
+                                                <div className="w-10 h-10 rounded-element bg-white/0 backdrop-blur-md border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:border-white/20 transition-[background-color,border-color] duration-300">
                                                     <ArrowUpRight className="w-5 h-5 text-white/50 group-hover:text-white transition-colors" />
                                                 </div>
                                             </div>
@@ -303,15 +304,16 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                     <div
                                         key={project.id}
                                         onClick={() => onNavigate('case-study', project as unknown as NavigationData)}
-                                        className="group flex gap-4 bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-xl p-4 hover: hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                                        className="group flex gap-4 bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-xl shadow-spatial-card p-4 hover:shadow-spatial-md hover:-translate-y-0.5 transition-[transform,box-shadow] duration-300 cursor-pointer"
                                     >
-                                        <div className="w-32 h-32 rounded-lg overflow-hidden flex-shrink-0">
+                                        <div className="w-32 h-32 rounded-lg overflow-hidden shrink-0">
                                             {project.video ? (
                                                 <video
                                                     autoPlay
                                                     loop
                                                     muted
                                                     playsInline
+                                                    preload="metadata"
                                                     poster={project.image}
                                                     className="w-full h-full object-cover"
                                                 >
@@ -347,7 +349,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                                 </div>
                                             </div>
                                         </div>
-                                        <ArrowUpRight className="w-5 h-5 text-text-secondary dark:text-white/60 group-hover:text-coral transition-colors flex-shrink-0" />
+                                        <ArrowUpRight className="w-5 h-5 text-text-secondary dark:text-white/60 group-hover:text-coral transition-colors shrink-0" />
                                     </div>
                                 ))}
                             </div>

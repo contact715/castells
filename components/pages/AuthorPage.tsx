@@ -1,6 +1,7 @@
 import React from 'react';
 import { m as motion } from 'framer-motion';
-import { ArrowLeft, Mail, Linkedin, Twitter, Briefcase, User } from 'lucide-react';
+import { ArrowLeft, Mail, Briefcase, User } from 'lucide-react';
+import { Linkedin, Twitter } from '../ui/icons/SocialIcons';
 import { Button } from '../ui/Button';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
@@ -77,8 +78,8 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
         >
           {/* Header */}
           <div className="flex flex-col md:flex-row gap-8 mb-12">
-            <div className="flex-shrink-0">
-              <div className="w-32 h-32 md:w-40 md:h-40 rounded-[2rem] overflow-hidden bg-white dark:bg-surface">
+            <div className="shrink-0">
+              <div className="w-32 h-32 md:w-40 md:h-40 rounded-card overflow-hidden bg-white dark:bg-surface">
                 <img
                   src={author.avatar}
                   alt={author.name}
@@ -140,13 +141,13 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
           </div>
 
           {/* Bio */}
-          <div className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 mb-8">
+          <div className="bg-white dark:bg-surface rounded-card p-8 md:p-12 mb-8">
             <h2 className="font-display text-2xl font-semibold text-text-primary mb-4">About</h2>
             <p className="text-lg text-text-secondary leading-relaxed">{author.bio}</p>
           </div>
 
           {/* Expertise */}
-          <div className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 mb-8">
+          <div className="bg-white dark:bg-surface rounded-card p-8 md:p-12 mb-8">
             <h2 className="font-display text-2xl font-semibold text-text-primary mb-6 flex items-center gap-3">
               <Briefcase className="w-6 h-6 text-coral" />
               Expertise
@@ -155,7 +156,7 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
               {author.expertise.map((skill, index) => (
                 <span
                   key={index}
-                  className="px-4 py-2 bg-ivory dark:bg-[#191919] rounded-[2rem] text-text-primary font-medium text-sm"
+                  className="px-4 py-2 bg-ivory dark:bg-[#191919] rounded-pill text-text-primary font-medium text-sm"
                 >
                   {skill}
                 </span>
@@ -165,7 +166,7 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
 
           {/* Related Case Studies */}
           {relatedCaseStudies.length > 0 && (
-            <div className="bg-white dark:bg-surface rounded-[2rem] p-8 md:p-12 mb-8">
+            <div className="bg-white dark:bg-surface rounded-card p-8 md:p-12 mb-8">
               <h2 className="font-display text-2xl font-semibold text-text-primary mb-6 flex items-center gap-3">
                 <User className="w-6 h-6 text-coral" />
                 Case Studies
@@ -179,7 +180,7 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
                       e.preventDefault();
                       onNavigate('case-study', { id: cs.id, name: cs.client });
                     }}
-                    className="group relative rounded-[2rem] overflow-hidden hover:-translate-y-1 transition-all"
+                    className="group relative rounded-card overflow-hidden hover:-translate-y-1 transition-transform"
                   >
                     <div className="absolute inset-0 overflow-hidden">
                       <img
@@ -188,7 +189,7 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
                         className="w-full h-32 object-cover transition-transform duration-500 group-hover:scale-110"
                         loading="lazy"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-black/10" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black via-black/50 to-black/10" />
                     </div>
                     <div className="relative p-6 pt-24">
                       <h3 className="font-display text-xl font-semibold text-white mb-2 group-hover:text-coral transition-colors">

@@ -1002,10 +1002,23 @@ const PROCESS_STEPS: ProcessStep[] = [
 
 const ProcessScroll: React.FC = () => {
     const [activeStep, setActiveStep] = useState(0);
+    const [isVisible, setIsVisible] = useState(false);
+    const sectionRef = React.useRef<HTMLDivElement>(null);
     const step = PROCESS_STEPS[activeStep];
 
+    // Only run infinite SVG animations when section is in viewport
+    React.useEffect(() => {
+        if (!sectionRef.current) return;
+        const observer = new IntersectionObserver(
+            ([entry]) => setIsVisible(entry.isIntersecting),
+            { rootMargin: '100px' }
+        );
+        observer.observe(sectionRef.current);
+        return () => observer.disconnect();
+    }, []);
+
     return (
-        <div className="w-full">
+        <div ref={sectionRef} className="w-full">
             <SchemaMarkup
                 type="HowTo"
                 data={{
@@ -1041,7 +1054,7 @@ const ProcessScroll: React.FC = () => {
                 {/* Connector line (desktop) */}
                 <div className="hidden md:block absolute top-5 left-0 right-0 h-px bg-black/10 dark:bg-white/10" />
                 <div
-                    className="hidden md:block absolute top-5 left-0 h-px bg-coral-gradient transition-all duration-500"
+                    className="hidden md:block absolute top-5 left-0 h-px bg-coral-gradient transition-[width] duration-500"
                     style={{ width: `${(activeStep / (PROCESS_STEPS.length - 1)) * 100}%` }}
                 />
 
@@ -1053,11 +1066,11 @@ const ProcessScroll: React.FC = () => {
                             <button
                                 key={s.id}
                                 onClick={() => setActiveStep(idx)}
-                                className="relative flex flex-col items-center gap-2 group outline-none flex-shrink-0 md:flex-shrink min-w-[72px] md:min-w-0"
+                                className="relative flex flex-col items-center gap-2 group outline-hidden shrink-0 md:shrink min-w-[72px] md:min-w-0"
                             >
                                 {/* Circle */}
                                 <div className={cn(
-                                    "relative z-10 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-all duration-300 border-2",
+                                    "relative z-10 w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold transition-[background-color,color,border-color,transform,box-shadow] duration-300 border-2",
                                     isActive
                                         ? "bg-coral-gradient border-transparent text-white scale-110 shadow-lg shadow-coral/30"
                                         : isPast
@@ -1095,10 +1108,10 @@ const ProcessScroll: React.FC = () => {
                     <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-5">
 
                         {/* ── Illustration Card (spans 2 cols) ──────────── */}
-                        <div className="lg:col-span-2 bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/[0.06] rounded-[2rem] overflow-hidden relative">
+                        <div className="lg:col-span-2 bg-white dark:bg-white/3 border border-black/5 dark:border-white/10 rounded-card overflow-hidden relative">
                             {/* Duration badge */}
                             <div className="absolute top-5 left-5 z-10">
-                                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 dark:bg-black/50 backdrop-blur-sm border border-black/10 dark:border-white/15">
+                                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/90 dark:bg-black/50 backdrop-blur-xs border border-black/10 dark:border-white/15">
                                     <span className="w-1.5 h-1.5 rounded-full bg-coral" />
                                     <span className="font-display text-sm font-semibold text-text-primary dark:text-white">
                                         {step.duration}
@@ -1116,17 +1129,17 @@ const ProcessScroll: React.FC = () => {
                                         transition={{ duration: 0.4 }}
                                         className="w-full h-full"
                                     >
-                                        {React.createElement(STEP_ILLUSTRATIONS[step.id])}
+                                        {isVisible && React.createElement(STEP_ILLUSTRATIONS[step.id])}
                                     </motion.div>
                                 </AnimatePresence>
                             </div>
                         </div>
 
                         {/* ── Info Card (right column) ─────────────────── */}
-                        <div className="lg:col-span-1 bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/[0.06] rounded-[2rem] p-6 sm:p-8 flex flex-col">
+                        <div className="lg:col-span-1 bg-white dark:bg-white/3 border border-black/5 dark:border-white/10 rounded-card p-6 sm:p-8 flex flex-col">
                             {/* Step badge + icon */}
                             <div className="flex items-center gap-3 mb-5">
-                                <div className="w-12 h-12 rounded-[2rem] bg-coral-gradient-subtle flex items-center justify-center shrink-0">
+                                <div className="w-12 h-12 rounded-element bg-coral-gradient-subtle flex items-center justify-center shrink-0">
                                     {React.createElement(step.icon, {
                                         className: "w-6 h-6 text-coral"
                                     })}
@@ -1147,7 +1160,7 @@ const ProcessScroll: React.FC = () => {
 
                             {/* Next Steps callout */}
                             {step.nextSteps && (
-                                <div className="mb-5 p-4 bg-coral/[0.06] dark:bg-coral/10 rounded-2xl">
+                                <div className="mb-5 p-4 bg-coral/6 dark:bg-coral/10 rounded-2xl">
                                     <span className="text-[10px] font-bold uppercase tracking-widest text-coral block mb-1">
                                         Next
                                     </span>
@@ -1166,7 +1179,7 @@ const ProcessScroll: React.FC = () => {
                         </div>
 
                         {/* ── Bottom Row: Deliverables + Metrics + Detail ── */}
-                        <div className="bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/[0.06] rounded-[2rem] p-6 sm:p-8">
+                        <div className="bg-white dark:bg-white/3 border border-black/5 dark:border-white/10 rounded-card p-6 sm:p-8">
                             <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-white/50 mb-4">
                                 What You Get
                             </h4>
@@ -1191,7 +1204,7 @@ const ProcessScroll: React.FC = () => {
                         </div>
 
                         {step.keyMetrics && (
-                            <div className="bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/[0.06] rounded-[2rem] p-6 sm:p-8">
+                            <div className="bg-white dark:bg-white/3 border border-black/5 dark:border-white/10 rounded-card p-6 sm:p-8">
                                 <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-white/50 mb-4">
                                     Key Metrics
                                 </h4>
@@ -1216,7 +1229,7 @@ const ProcessScroll: React.FC = () => {
 
                         {step.longDescription && (
                             <div className={cn(
-                                "bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/[0.06] rounded-[2rem] p-6 sm:p-8",
+                                "bg-white dark:bg-white/3 border border-black/5 dark:border-white/10 rounded-card p-6 sm:p-8",
                                 !step.keyMetrics && "lg:col-span-2"
                             )}>
                                 <h4 className="text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-white/50 mb-3">

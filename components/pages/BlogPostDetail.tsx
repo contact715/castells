@@ -268,7 +268,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    className="relative w-full h-[500px] rounded-[2rem] overflow-hidden mb-12 group"
+                    className="relative w-full h-[500px] rounded-card overflow-hidden mb-12 group"
                 >
                     <div className="absolute inset-0 bg-black">
                         <OptimizedImage
@@ -365,14 +365,14 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                             ))}
 
                             {/* Conclusion */}
-                            <div className="pt-8 -t -black/10 dark:-white/10">
+                            <div className="pt-8 border-t border-black/10 dark:border-white/10">
                                 <p className="text-xl text-text-secondary dark:text-white/80 leading-relaxed font-medium">
                                     {post.content.conclusion}
                                 </p>
                             </div>
 
                             {/* Share Section */}
-                            <div className="pt-8 -t -black/10 dark:-white/10">
+                            <div className="pt-8 border-t border-black/10 dark:border-white/10">
                                 <ShareButtons
                                     url={typeof window !== 'undefined' ? window.location.href : ''}
                                     title={post.title}
@@ -396,7 +396,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                             </Button>
 
                             {/* Related Posts */}
-                            <div className="bg-white dark:bg-surface  -black/5 dark:-white/5 rounded-[2rem] p-6">
+                            <div className="bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-card p-6">
                                 <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white mb-4">
                                     Related Posts
                                 </h3>

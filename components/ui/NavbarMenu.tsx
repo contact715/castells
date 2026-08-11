@@ -40,7 +40,7 @@ export const MenuItem = ({
         onClick={handleClick}
         transition={{ duration: 0.3 }}
         className={cn(
-          "cursor-pointer transition-all font-medium text-sm flex items-center gap-1 px-3 py-2",
+          "cursor-pointer transition-colors font-medium text-sm flex items-center gap-1 px-3 py-2",
           active === item
             ? "text-black dark:text-white"
             : "text-text-secondary hover:text-black dark:hover:text-white"
@@ -63,11 +63,11 @@ export const MenuItem = ({
           transition={transition}
         >
           {active === item && (
-            <div className="absolute top-[calc(100%_+_0.5rem)] left-1/2 transform -translate-x-1/2 pt-4">
+            <div className="absolute top-[calc(100%+0.5rem)] left-1/2 transform -translate-x-1/2 pt-4">
               <motion.div
                 transition={transition}
                 layoutId="active" // layoutId ensures smooth animation
-                className="bg-white dark:bg-[#2A2A2A] backdrop-blur-sm rounded-[2rem] overflow-hidden  -black/10 dark:-white/10 "
+                className="bg-white dark:bg-surface-dark backdrop-blur-xs rounded-card overflow-hidden border border-black/10 dark:border-white/10 "
               >
                 <motion.div
                   layout // layout ensures smooth animation
@@ -125,13 +125,13 @@ export const ProductItem = ({
       onClick={onClick}
       className="flex space-x-4 group/product min-w-[300px] p-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
     >
-      <div className="relative flex-shrink-0">
+      <div className="relative shrink-0">
         <img
           src={src}
           width={120}
           height={70}
           alt={title}
-          className="flex-shrink-0 rounded-md  object-cover h-[70px] w-[120px]"
+          className="shrink-0 rounded-md  object-cover h-[70px] w-[120px]"
         />
         <div className="absolute inset-0 bg-black/0 group-hover/product:bg-black/10 transition-colors rounded-md" />
       </div>
@@ -139,7 +139,7 @@ export const ProductItem = ({
         <h4 className="text-lg font-display font-semibold mb-1 text-text-primary group-hover/product:text-coral transition-colors">
           {title}
         </h4>
-        <p className="text-text-secondary text-xs max-w-[10rem] leading-relaxed">
+        <p className="text-text-secondary text-xs max-w-40 leading-relaxed">
           {description}
         </p>
       </div>

@@ -79,18 +79,18 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const error = externalError || internalError;
     const showIcon = showValidationIcon && value && !isFocused && isValid !== undefined;
 
-    const baseStyles = "w-full focus:outline-none transition-all font-sans";
+    const baseStyles = "w-full focus:outline-hidden transition-[background-color,border-color,color] font-sans";
     
     const variants = {
-      default: "bg-black/5 dark:bg-white/5  -black/5 dark:-white/5 rounded-[2rem] focus:-coral dark:focus:-coral focus:bg-white dark:focus:bg-white/10 placeholder:text-black/20 dark:placeholder:text-white/20",
-      minimal: "bg-transparent -b -white/20 rounded-none focus:-white placeholder:text-white/20 text-white",
-      dark: "bg-ivory  -black/10 rounded-[2rem] focus:-coral placeholder:text-text-secondary/40"
+      default: "bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-inner focus:border-coral dark:focus:border-coral focus:bg-white dark:focus:bg-white/10 placeholder:text-black/20 dark:placeholder:text-white/20",
+      minimal: "bg-transparent border-b border-white/20 rounded-none focus:border-white placeholder:text-white/20 text-white",
+      dark: "bg-ivory border border-black/10 rounded-inner focus:border-coral placeholder:text-text-secondary/40"
     };
 
     const sizes = {
       sm: "px-4 py-2 text-sm",
       md: "px-4 py-3 text-base",
-      lg: "px-8 py-4 text-xl rounded-[2rem]"
+      lg: "px-8 py-4 text-xl rounded-inner"
     };
 
     const labelSizes = {
@@ -138,7 +138,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               setIsFocused(false);
               onBlur?.(e);
               if (formName) {
-                trackFormFieldInteraction(formName, props.name || label || 'field', 'blur');
+                trackFormFieldInteraction(formName, props.name || label || 'field', 'blur-sm');
               }
               // Validate on blur
               if (validationRules && value) {

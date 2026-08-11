@@ -129,13 +129,13 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
                                 viewport={{ once: true }}
                                 transition={{ delay: index * 0.1, duration: 0.5 }}
                                 className={`
-                                    group relative bg-surface rounded-[2rem] overflow-hidden  -black/5 dark:-white/5 
-                                    hover:-coral/30 transition-all duration-500 cursor-pointer
+                                    group relative bg-surface rounded-card overflow-hidden border border-black/5 dark:border-white/5
+                                    hover:border-coral/30 hover:-translate-y-1 hover:shadow-spatial-md transition-[transform,border-color,box-shadow] duration-500 cursor-pointer
                                     ${isFirst ? 'min-h-[300px] md:col-span-2 md:row-span-2 md:min-h-0' : 'h-[220px]'}
                                 `}
                             >
                                 {/* Background Media - Video for featured, Image for others */}
-                                <div className="absolute inset-0 overflow-hidden rounded-[2rem]">
+                                <div className="absolute inset-0 overflow-hidden rounded-card">
                                     <img
                                         src={post.image}
                                         alt={post.title}
@@ -145,8 +145,8 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
                                 </div>
                                 
                                 {/* Gradient Overlay for text readability */}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-black/20 rounded-[2rem]" />
-                                <div className={`absolute inset-0 bg-gradient-to-br ${post.color} opacity-0 group-hover:opacity-40 transition-opacity duration-500 rounded-[2rem]`} />
+                                <div className="absolute inset-0 bg-linear-to-t from-black via-black/60 to-black/20 rounded-card" />
+                                <div className={`absolute inset-0 bg-linear-to-br ${post.color} opacity-0 group-hover:opacity-40 transition-opacity duration-500 rounded-card`} />
                                 
                                 {/* Content */}
                                 <div className={`relative h-full flex flex-col justify-end ${isFirst ? 'p-6 sm:p-8 md:p-10' : 'p-6'}`}>

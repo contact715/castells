@@ -5,55 +5,66 @@ import 'lenis/dist/lenis.css';
 const SmoothScroll = () => {
     const lenisRef = useRef<Lenis | null>(null);
     const rafIdRef = useRef<number>();
+    const idleTimeoutRef = useRef<NodeJS.Timeout>();
+    const isRunning = useRef(false);
 
     useEffect(() => {
-        // Check for reduced motion preference
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        
-        if (prefersReducedMotion) {
-            // Disable smooth scroll for users who prefer reduced motion
-            return;
-        }
+        if (prefersReducedMotion) return;
 
-        // Check performance - disable on low-end devices
         const isLowEndDevice = navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4;
-        if (isLowEndDevice) {
-            return;
-        }
+        if (isLowEndDevice) return;
 
         const lenis = new Lenis({
             duration: 1.2,
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Exponential easing for premium feel
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             orientation: 'vertical',
             gestureOrientation: 'vertical',
             smoothWheel: true,
             wheelMultiplier: 1,
             touchMultiplier: 2,
-            // Performance optimizations
             infinite: false,
-            syncTouch: false, // Disable touch sync for better performance
+            syncTouch: false,
         });
 
         lenisRef.current = lenis;
 
-        let lastTime = 0;
+        // RAF loop that auto-stops when idle
         function raf(time: number) {
             if (lenisRef.current) {
                 lenisRef.current.raf(time);
-                
-                // Throttle to ~60fps max
-                const delta = time - lastTime;
-                if (delta >= 16) {
-                    lastTime = time;
-                }
-                
                 rafIdRef.current = requestAnimationFrame(raf);
             }
         }
 
-        rafIdRef.current = requestAnimationFrame(raf);
+        function startLoop() {
+            if (!isRunning.current) {
+                isRunning.current = true;
+                rafIdRef.current = requestAnimationFrame(raf);
+            }
+            // Auto-stop after 200ms of no scroll events
+            clearTimeout(idleTimeoutRef.current);
+            idleTimeoutRef.current = setTimeout(() => {
+                if (rafIdRef.current) {
+                    cancelAnimationFrame(rafIdRef.current);
+                    rafIdRef.current = undefined;
+                }
+                isRunning.current = false;
+            }, 200);
+        }
+
+        // Start loop on scroll/wheel/touch events
+        const onInteraction = () => startLoop();
+
+        window.addEventListener('wheel', onInteraction, { passive: true });
+        window.addEventListener('touchstart', onInteraction, { passive: true });
+        window.addEventListener('touchmove', onInteraction, { passive: true });
+
+        // Initial start for any in-progress scroll
+        startLoop();
 
         return () => {
+            clearTimeout(idleTimeoutRef.current);
             if (lenisRef.current) {
                 lenisRef.current.destroy();
                 lenisRef.current = null;
@@ -61,6 +72,9 @@ const SmoothScroll = () => {
             if (rafIdRef.current) {
                 cancelAnimationFrame(rafIdRef.current);
             }
+            window.removeEventListener('wheel', onInteraction);
+            window.removeEventListener('touchstart', onInteraction);
+            window.removeEventListener('touchmove', onInteraction);
         };
     }, []);
 

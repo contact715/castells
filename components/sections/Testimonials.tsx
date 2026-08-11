@@ -100,12 +100,12 @@ interface TestimonialCardProps {
 }
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ name, role, quote, avatar }) => (
-  <div className="w-[350px] md:w-[450px] bg-white  -black/5 p-6 md:p-8 rounded-[2rem] mx-4 flex flex-col justify-between h-[220px] md:h-[240px] hover:-coral/20 hover: transition-all duration-300">
+  <div className="w-[350px] md:w-[450px] bg-white border border-black/5 p-6 md:p-8 rounded-card mx-4 flex flex-col justify-between h-[220px] md:h-[240px] hover:border-coral/20 hover:-translate-y-1 hover:shadow-spatial-md transition-[transform,border-color,box-shadow] duration-300">
     <p className="text-lg md:text-xl text-text-secondary font-light leading-relaxed line-clamp-4">
       "{quote}"
     </p>
     <div className="flex items-center gap-4 mt-6">
-      <div className="w-10 h-10 rounded-full bg-gradient-to-br from-coral to-purple-500 flex items-center justify-center text-white font-bold text-sm ">
+      <div className="w-10 h-10 rounded-full bg-linear-to-br from-coral to-purple-500 flex items-center justify-center text-white font-bold text-sm ">
         {avatar}
       </div>
       <div>
@@ -189,8 +189,8 @@ const Testimonials: React.FC = () => {
       </div>
 
       {/* Fade Edges */}
-      <div className="absolute top-0 left-0 w-24 md:w-64 h-full bg-gradient-to-r from-ivory to-transparent z-20 pointer-events-none" />
-      <div className="absolute top-0 right-0 w-24 md:w-64 h-full bg-gradient-to-l from-ivory to-transparent z-20 pointer-events-none" />
+      <div className="absolute top-0 left-0 w-24 md:w-64 h-full bg-linear-to-r from-ivory to-transparent z-20 pointer-events-none" />
+      <div className="absolute top-0 right-0 w-24 md:w-64 h-full bg-linear-to-l from-ivory to-transparent z-20 pointer-events-none" />
 
     </section>
   );

@@ -144,7 +144,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
-                  className="bg-white dark:bg-surface rounded-[2rem] p-6 md:p-8  -black/5 dark:-white/5 hover: hover:-translate-y-1 transition-all duration-300"
+                  className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-6 md:p-8 border border-black/5 dark:border-white/5 hover:shadow-spatial-md hover:-translate-y-1 transition-[transform,box-shadow] duration-300"
                 >
                   <div className="font-display text-4xl md:text-5xl font-semibold text-text-primary mb-2">
                     <Counter value={stat.value} suffix={stat.suffix} decimals={stat.value % 1 !== 0 ? 1 : 0} />
@@ -160,7 +160,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
       </section>
 
       {/* Industry Categories Overview */}
-      <section className="py-20 md:py-32 bg-ivory dark:bg-[#191919] -y -black/5 dark:-white/5">
+      <section className="py-20 md:py-32 bg-ivory dark:bg-[#191919] border-y border-black/5 dark:border-white/5">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mb-16">
             <Badge className="mb-4">Specializations</Badge>
@@ -190,9 +190,9 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
                   onClick={() => setActiveCategory(index)}
-                  className={`relative bg-white dark:bg-surface rounded-[2rem] p-6  -black/5 dark:-white/5 cursor-pointer transition-all duration-300 hover: hover:-translate-y-1 group ${activeCategory === index ? 'ring-2 ring-coral' : ''}`}
+                  className={`relative bg-white dark:bg-surface rounded-card shadow-spatial-card p-6 border border-black/5 dark:border-white/5 cursor-pointer transition-[transform,box-shadow] duration-300 hover:shadow-spatial-md hover:-translate-y-1 group ${activeCategory === index ? 'ring-2 ring-coral' : ''}`}
                 >
-                  <div className="w-14 h-14 rounded-[2rem] bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-5 group-hover:bg-coral group-hover:scale-110 transition-all duration-300">
+                  <div className="w-14 h-14 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-5 group-hover:bg-coral group-hover:scale-110 transition-[background-color,transform] duration-300">
                     <CategoryIcon className="w-7 h-7 text-coral group-hover:text-white transition-colors" />
                   </div>
                   <h3 className="font-display text-xl font-semibold text-text-primary mb-2 group-hover:text-coral transition-colors">
@@ -201,7 +201,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                   <p className="text-sm text-text-secondary leading-relaxed mb-4">
                     {category.tagline}
                   </p>
-                  <div className="flex items-center text-coral text-sm font-bold uppercase tracking-wider group-hover:gap-2 transition-all">
+                  <div className="flex items-center text-coral text-sm font-bold uppercase tracking-wider group-hover:gap-2 transition-[gap]">
                     <span>Explore</span>
                     <ChevronRight className="w-4 h-4 ml-1" />
                   </div>
@@ -230,7 +230,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                   >
-                    <div className="w-16 h-16 rounded-[2rem] bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-6">
+                    <div className="w-16 h-16 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-6">
                       <CategoryIcon className="w-8 h-8 text-coral" />
                     </div>
                     <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-4 leading-tight">
@@ -258,10 +258,10 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                           whileInView={{ opacity: 1, y: 0 }}
                           viewport={{ once: true }}
                           transition={{ delay: industryIndex * 0.1, duration: 0.5 }}
-                          className="bg-white dark:bg-surface rounded-[2rem] p-6  -black/5 dark:-white/5 hover: hover:-translate-y-1 transition-all duration-300 group cursor-pointer"
+                          className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-6 border border-black/5 dark:border-white/5 hover:shadow-spatial-md hover:-translate-y-1 transition-[transform,box-shadow] duration-300 group cursor-pointer"
                         >
                           <div className="flex items-start gap-4">
-                            <div className="w-12 h-12 rounded-[2rem] bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-coral transition-colors duration-300">
+                            <div className="w-12 h-12 rounded-element bg-[#F4F4F2] dark:bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-coral transition-colors duration-300">
                               <IndustryIcon className="w-6 h-6 text-text-primary group-hover:text-white transition-colors duration-300" />
                             </div>
                             <div className="flex-1">
@@ -285,7 +285,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
       })}
 
       {/* Why Industry Expertise Matters */}
-      <section className="py-20 md:py-32 bg-ivory dark:bg-[#191919] -y -black/5 dark:-white/5">
+      <section className="py-20 md:py-32 bg-ivory dark:bg-[#191919] border-y border-black/5 dark:border-white/5">
         <div className="container mx-auto px-6">
           <div className="max-w-3xl mb-16">
             <Badge className="mb-4">The Advantage</Badge>
@@ -319,10 +319,10 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="bg-white dark:bg-surface rounded-[2rem] p-8  -black/5 dark:-white/5 hover: hover:-translate-y-1 transition-all duration-300 group"
+                  className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-8 border border-black/5 dark:border-white/5 hover:shadow-spatial-md hover:-translate-y-1 transition-[transform,box-shadow] duration-300 group"
                 >
                   <div className="flex items-start gap-4 mb-5">
-                    <div className="w-12 h-12 rounded-[2rem] bg-coral/10 flex items-center justify-center flex-shrink-0 group-hover:bg-coral transition-colors duration-300">
+                    <div className="w-12 h-12 rounded-element bg-coral/10 flex items-center justify-center shrink-0 group-hover:bg-coral transition-colors duration-300">
                       <ItemIcon className="w-6 h-6 text-coral group-hover:text-white transition-colors duration-300" />
                     </div>
                     <h3 className="font-display text-xl font-semibold text-text-primary">
@@ -347,7 +347,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="relative bg-white dark:bg-surface rounded-[2rem] p-12 md:p-20 overflow-hidden  -black/5 dark:-white/5"
+            className="relative bg-white dark:bg-surface rounded-card shadow-spatial-card p-12 md:p-20 overflow-hidden border border-black/5 dark:border-white/5"
           >
             <div className="relative z-10 max-w-3xl mx-auto text-center">
               <motion.div
@@ -355,7 +355,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                 whileInView={{ scale: 1, opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.2, duration: 0.5 }}
-                className="w-20 h-20 rounded-[2rem] bg-coral flex items-center justify-center mx-auto mb-8"
+                className="w-20 h-20 rounded-element bg-coral flex items-center justify-center mx-auto mb-8"
               >
                 <Sparkles className="w-10 h-10 text-white" />
               </motion.div>

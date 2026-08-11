@@ -83,12 +83,44 @@ export const shadows = {
 } as const;
 
 export const transitions = {
-  default: 'transition-all duration-300 ease-in-out',
-  fast: 'transition-all duration-200 ease-in-out',
-  slow: 'transition-all duration-500 ease-in-out',
+  default: 'transition-[transform,box-shadow,border-color] duration-300 ease-in-out',
+  fast: 'transition-[transform,box-shadow,border-color] duration-200 ease-in-out',
+  slow: 'transition-[transform,box-shadow,border-color] duration-500 ease-in-out',
   // Specific
   colors: 'transition-colors duration-300',
   transform: 'transition-transform duration-300',
+} as const;
+
+/**
+ * Framer Motion animation constants
+ * Use these for consistent animations across all components.
+ */
+export const motion = {
+  ease: {
+    /** Standard ease-out curve for entrances */
+    default: [0.22, 1, 0.36, 1] as const,
+    /** Snappy ease for small UI elements */
+    snappy: [0.4, 0, 0.2, 1] as const,
+    /** Gentle ease for large elements */
+    gentle: [0.16, 1, 0.3, 1] as const,
+  },
+  duration: {
+    /** Fast micro-interactions (100-200ms) */
+    fast: 0.2,
+    /** Standard animations (400-500ms) */
+    default: 0.5,
+    /** Entrance animations (500-600ms) */
+    entrance: 0.6,
+    /** Slow, dramatic reveals (700ms) */
+    slow: 0.7,
+  },
+  /** Standard stagger delay between list items */
+  stagger: 0.08,
+  /** Standard spring config for bouncy elements */
+  spring: {
+    stiffness: 200,
+    damping: 25,
+  },
 } as const;
 
 export const colors = {

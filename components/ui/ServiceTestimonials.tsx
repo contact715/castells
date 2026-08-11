@@ -74,13 +74,13 @@ const ServiceTestimonials: React.FC<ServiceTestimonialsProps> = React.memo(({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="bg-ivory dark:bg-[#191919] rounded-[2rem] p-8 hover:-translate-y-1 transition-all"
+              className="bg-ivory dark:bg-[#191919] rounded-card p-8 hover:-translate-y-1 transition-transform"
             >
               <p className="text-lg text-text-secondary font-light leading-relaxed mb-6">
                 "{testimonial.quote}"
               </p>
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-coral to-purple-500 flex items-center justify-center text-white font-bold text-sm">
+                <div className="w-12 h-12 rounded-full bg-linear-to-br from-coral to-purple-500 flex items-center justify-center text-white font-bold text-sm">
                   {testimonial.avatar}
                 </div>
                 <div>

@@ -65,7 +65,7 @@ const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 + i * 0.1, duration: 0.5 }}
-              className="group bg-white dark:bg-surface p-8 rounded-[2rem]  -black/5 dark:-white/10 hover:-coral/50 dark:hover:-coral/40 transition-all duration-300 hover: flex flex-col md:flex-row items-start md:items-center justify-between cursor-pointer"
+              className="group bg-white dark:bg-surface p-8 rounded-card shadow-spatial-card border border-black/5 dark:border-white/10 hover:border-coral/50 dark:hover:border-coral/40 hover:shadow-spatial-md transition-[border-color,box-shadow] duration-300 flex flex-col md:flex-row items-start md:items-center justify-between cursor-pointer"
             >
               <div>
                 <h3 className="font-display text-2xl font-semibold text-text-primary group-hover:text-coral transition-colors">{job.title}</h3>
@@ -90,7 +90,7 @@ const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1, duration: 0.6 }}
-          className="mt-20 p-12 bg-white dark:bg-surface  -black/5 dark:-white/10 rounded-[2rem] text-center "
+          className="mt-20 p-12 bg-white dark:bg-surface border border-black/5 dark:border-white/10 rounded-card shadow-spatial-card text-center"
         >
           <AnimatedHeading
             as="h3"

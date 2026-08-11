@@ -7,7 +7,7 @@ import {
   useTransform,
   useVelocity,
 } from "framer-motion";
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect, useCallback } from "react";
 import { cn } from "../../lib/utils";
 
 export const wrap = (min: number, max: number, v: number) => {
@@ -22,6 +22,8 @@ interface ParallaxProps {
 }
 
 function ParallaxText({ children, baseVelocity = 100, className }: ParallaxProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
   const baseX = useMotionValue(0);
   const { scrollY } = useScroll();
   const scrollVelocity = useVelocity(scrollY);
@@ -33,22 +35,28 @@ function ParallaxText({ children, baseVelocity = 100, className }: ParallaxProps
     clamp: false,
   });
 
-  /**
-   * The x transform wraps between 0% and -25%.
-   * This assumes there are 4 copies of the children content.
-   * As the content moves left (negative), once it reaches -25% (the width of one copy),
-   * it snaps back to 0%, creating a seamless loop.
-   */
   const x = useTransform(baseX, (v) => `${wrap(0, -25, v)}%`);
-
   const directionFactor = useRef<number>(1);
 
+  // Only observe visibility — pause animation when off-screen
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setIsVisible(entry.isIntersecting),
+      { rootMargin: '100px' }
+    );
+
+    observer.observe(containerRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   useAnimationFrame((t, delta) => {
+    // Skip all work when off-screen
+    if (!isVisible) return;
+
     let moveBy = directionFactor.current * baseVelocity * (delta / 1000);
 
-    /**
-     * Change direction based on scroll velocity polarity.
-     */
     if (velocityFactor.get() < 0) {
       directionFactor.current = -1;
     } else if (velocityFactor.get() > 0) {
@@ -56,17 +64,16 @@ function ParallaxText({ children, baseVelocity = 100, className }: ParallaxProps
     }
 
     moveBy += directionFactor.current * moveBy * velocityFactor.get();
-
     baseX.set(baseX.get() + moveBy);
   });
 
   return (
-    <div className="overflow-hidden whitespace-nowrap flex flex-nowrap">
+    <div ref={containerRef} className="overflow-hidden whitespace-nowrap flex flex-nowrap">
       <motion.div className={cn("flex flex-nowrap", className)} style={{ x }}>
-        <div className="flex items-center flex-shrink-0">{children}</div>
-        <div className="flex items-center flex-shrink-0">{children}</div>
-        <div className="flex items-center flex-shrink-0">{children}</div>
-        <div className="flex items-center flex-shrink-0">{children}</div>
+        <div className="flex items-center shrink-0">{children}</div>
+        <div className="flex items-center shrink-0">{children}</div>
+        <div className="flex items-center shrink-0">{children}</div>
+        <div className="flex items-center shrink-0">{children}</div>
       </motion.div>
     </div>
   );

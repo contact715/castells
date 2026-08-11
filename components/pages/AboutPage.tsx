@@ -2,7 +2,6 @@
 import React, { useMemo } from 'react';
 import { m as motion } from 'framer-motion';
 import { ArrowLeft, Users, Target, Zap, TrendingUp, Award, Rocket, Calendar } from 'lucide-react';
-import ScrollFloat from '../effects/ScrollFloat';
 import { Highlighter } from '../ui/Highlighter';
 import Team from '../sections/Team';
 import AnimatedHeading from '../ui/AnimatedHeading';
@@ -202,10 +201,10 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onBack, onNavigate }) 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
-                className="bg-white dark:bg-surface p-10 rounded-[2rem]  -black/5 dark:-white/10 hover:-coral/50 dark:hover:-coral/40 transition-all duration-300 hover:"
+                className="bg-white dark:bg-surface p-10 rounded-card shadow-spatial-card border border-black/5 dark:border-white/10 hover:border-coral/50 dark:hover:border-coral/40 hover:shadow-spatial-md transition-[border-color,box-shadow] duration-300"
               >
                 <div className="flex items-start gap-4 mb-6">
-                  <Icon className="w-10 h-10 text-coral flex-shrink-0" />
+                  <Icon className="w-10 h-10 text-coral shrink-0" />
                   <h3 className="font-display text-2xl font-semibold text-text-primary dark:text-white">{value.title}</h3>
                 </div>
                 <p className="text-text-secondary dark:text-white/70">{value.desc}</p>
@@ -225,15 +224,15 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onBack, onNavigate }) 
 
         {/* Image Grid */}
         <div className="grid grid-cols-12 gap-4 mb-32 h-[600px]">
-          <div className="col-span-8 h-full rounded-[2rem] overflow-hidden relative group">
+          <div className="col-span-8 h-full rounded-card overflow-hidden relative group">
             <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" alt="Office" />
-            <div className="absolute bottom-6 left-6 bg-white dark:bg-surface px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest text-text-primary dark:text-white  -black/5 dark:-white/10">Global HQ — Santa Monica</div>
+            <div className="absolute bottom-6 left-6 bg-white dark:bg-surface px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest text-text-primary dark:text-white border border-black/5 dark:border-white/10">Global HQ — Santa Monica</div>
           </div>
           <div className="col-span-4 flex flex-col gap-4 h-full">
-            <div className="h-1/2 rounded-[2rem] overflow-hidden relative group">
+            <div className="h-1/2 rounded-card overflow-hidden relative group">
               <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" alt="Meeting" />
             </div>
-            <div className="h-1/2 rounded-[2rem] overflow-hidden relative group">
+            <div className="h-1/2 rounded-card overflow-hidden relative group">
               <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" alt="Team" />
             </div>
           </div>

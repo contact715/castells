@@ -63,7 +63,7 @@ const MouseLine: React.FC = () => {
   }, []);
 
   return (
-    <svg className="pointer-events-none fixed inset-0 z-[9999] h-full w-full touch-none">
+    <svg className="pointer-events-none fixed inset-0 z-9999 h-full w-full touch-none">
       <path
         ref={pathRef}
         d=""

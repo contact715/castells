@@ -34,7 +34,7 @@ export const BackgroundRippleEffect = ({
       )}
     >
       <div className="relative h-auto w-auto overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 z-[2] h-full w-full overflow-hidden" />
+        <div className="pointer-events-none absolute inset-0 z-2 h-full w-full overflow-hidden" />
         <DivGrid
           key={`base-${rippleKey}`}
           className="opacity-100"
@@ -104,7 +104,7 @@ const DivGrid: React.FC<DivGridProps> = ({
   };
 
   return (
-    <div className={cn("relative z-[3]", className)} style={gridStyle}>
+    <div className={cn("relative z-3", className)} style={gridStyle}>
       {cells.map((idx) => {
         const rowIdx = Math.floor(idx / cols);
         const colIdx = idx % cols;
@@ -125,7 +125,7 @@ const DivGrid: React.FC<DivGridProps> = ({
           <div
             key={idx}
             className={cn(
-              "cell relative  transition-all duration-150 hover:opacity-90 hover:scale-[0.98]",
+              "cell relative  transition-[opacity,transform] duration-150 hover:opacity-90 hover:scale-[0.98]",
               clickedCell && "animate-cell-reveal [animation-fill-mode:forwards]",
               !interactive && "pointer-events-none",
             )}

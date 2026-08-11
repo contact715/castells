@@ -56,12 +56,13 @@ const IndustryPage = React.lazy(() => import('./components/pages/IndustryPage'))
 const AllServicesPage = React.lazy(() => import('./components/pages/AllServicesPage'));
 const AllIndustriesPage = React.lazy(() => import('./components/pages/AllIndustriesPage'));
 const CompanyPage = React.lazy(() => import('./components/pages/CompanyPage'));
-const ProjectXPage = React.lazy(() => import('./components/pages/ProjectXPage'));
 const ThankYouPage = React.lazy(() => import('./components/pages/ThankYouPage'));
 // NOTE: keep explicit extensions here to satisfy TS bundler resolution in some setups
 const PrivacyPolicyPage = React.lazy(() => import('./components/pages/PrivacyPolicyPage.tsx'));
 const TermsOfServicePage = React.lazy(() => import('./components/pages/TermsOfServicePage.tsx'));
 const CookiePolicyPage = React.lazy(() => import('./components/pages/CookiePolicyPage.tsx'));
+const LeadFormPage = React.lazy(() => import('./components/pages/LeadFormPage'));
+const LeadThankYouPage = React.lazy(() => import('./components/pages/LeadThankYouPage'));
 
 // Loading fallback
 const PageLoader = () => (
@@ -130,8 +131,8 @@ function App() {
         {/* Skip to main content for accessibility */}
         <SkipToContent />
         
-        {/* Cookie Consent */}
-        <CookieConsent />
+        {/* Cookie Consent — hide on standalone pages (lead-form, lead-thank-you) */}
+        {currentPage !== 'lead-form' && currentPage !== 'lead-thank-you' && <CookieConsent />}
         
         {/* Reading Progress Bar */}
         <ReadingProgress />
@@ -152,7 +153,7 @@ function App() {
         
         <div className="relative z-10">
           <LazyMotion features={domAnimation}>
-            {currentPage !== 'not-found' && currentPage !== 'thank-you' && <NavBar onNavigate={navigateTo} />}
+            {currentPage !== 'not-found' && currentPage !== 'thank-you' && currentPage !== 'lead-form' && currentPage !== 'lead-thank-you' && <NavBar onNavigate={navigateTo} />}
 
             <main id="main-content" role="main">
               <Suspense fallback={<PageLoader />}>
@@ -192,22 +193,25 @@ function App() {
                     </Suspense>
                   </LazySection>
 
-                  <LazySection rootMargin="300px">
+                  {/* HIDDEN: Team section — uncomment when ready */}
+                  {/* <LazySection rootMargin="300px">
                     <Suspense fallback={null}>
                       <Team onNavigate={navigateTo} />
                     </Suspense>
-                  </LazySection>
+                  </LazySection> */}
 
                   <LazySection rootMargin="300px">
                     <Suspense fallback={null}>
                       <FAQ />
                     </Suspense>
                   </LazySection>
-                  <LazySection rootMargin="300px">
+
+                  {/* HIDDEN: Blog section — uncomment when ready */}
+                  {/* <LazySection rootMargin="300px">
                     <Suspense fallback={null}>
                       <Blog onNavigate={navigateTo} />
                     </Suspense>
-                  </LazySection>
+                  </LazySection> */}
                 </>
               )}
 
@@ -316,12 +320,6 @@ function App() {
                 />
               )}
 
-              {currentPage === 'projectx' && (
-                <ProjectXPage
-                  onNavigate={navigateTo}
-                />
-              )}
-
               {currentPage === 'privacy-policy' && (
                 <PrivacyPolicyPage onNavigate={navigateTo} />
               )}
@@ -332,6 +330,14 @@ function App() {
 
               {currentPage === 'cookie-policy' && (
                 <CookiePolicyPage onNavigate={navigateTo} />
+              )}
+
+              {currentPage === 'lead-form' && (
+                <LeadFormPage onNavigate={navigateTo} />
+              )}
+
+              {currentPage === 'lead-thank-you' && (
+                <LeadThankYouPage />
               )}
 
               {currentPage === 'thank-you' && (
@@ -347,7 +353,7 @@ function App() {
             </Suspense>
           </main>
 
-            {currentPage !== 'not-found' && currentPage !== 'thank-you' && <Footer onNavigate={navigateTo} />}
+            {currentPage !== 'not-found' && currentPage !== 'thank-you' && currentPage !== 'lead-form' && currentPage !== 'lead-thank-you' && <Footer onNavigate={navigateTo} />}
           </LazyMotion>
         </div>
       </div>

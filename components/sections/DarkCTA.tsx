@@ -77,11 +77,11 @@ const DarkCTA: React.FC = () => {
                             key={idx}
                             href={card.href}
                             variants={cardVariants}
-                            className="group bg-white  -black/10 hover:-coral/50 hover: rounded-[2rem] p-6 md:p-8 transition-all flex flex-col justify-between min-h-[240px]"
+                            className="group bg-white border border-black/10 hover:border-coral/50 hover:shadow-spatial-md rounded-card shadow-spatial-card p-6 md:p-8 transition-[border-color,box-shadow] flex flex-col justify-between min-h-[240px]"
                         >
                             {/* Icon and Title */}
                             <div className="flex items-start gap-4 mb-6">
-                                <div className="w-10 h-10 rounded-[2rem] bg-coral/10 flex items-center justify-center text-coral flex-shrink-0">
+                                <div className="w-10 h-10 rounded-element bg-coral/10 flex items-center justify-center text-coral shrink-0">
                                     <card.icon className="w-5 h-5" />
                                 </div>
                                 <h3 className="font-display text-lg font-semibold text-text-primary">

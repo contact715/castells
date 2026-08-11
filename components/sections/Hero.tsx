@@ -7,6 +7,7 @@ import AnimatedHeading from '../ui/AnimatedHeading';
 import { ContactButtons } from '../ui/ContactButtons';
 import SchemaMarkup from '../ui/SchemaMarkup';
 import OptimizedImage from '../ui/OptimizedImage';
+import { useReducedMotion } from '../../lib/hooks/useReducedMotion';
 import '../ui/Marquee.css';
 
 // Professional logo components
@@ -96,6 +97,7 @@ const CLIENT_LOGOS = [
 ];
 
 const Hero: React.FC = () => {
+    const prefersReducedMotion = useReducedMotion();
     const [isMuted, setIsMuted] = useState(true);
     const [shouldLoadVideo, setShouldLoadVideo] = useState(false);
     const [vimeoScriptLoaded, setVimeoScriptLoaded] = useState(false);
@@ -170,7 +172,7 @@ const Hero: React.FC = () => {
 
 
     return (
-        <div className="pt-16 md:pt-20 pb-0 relative z-[2] bg-transparent">
+        <div className="pt-16 md:pt-20 pb-0 relative z-2 bg-transparent">
             <SchemaMarkup
                 type="VideoObject"
                 data={{
@@ -224,7 +226,7 @@ const Hero: React.FC = () => {
 
 
                 {/* Client Logos Section */}
-                <div className="mb-20 flex flex-col md:flex-row items-center gap-8 md:gap-12 -t -b -black/5 dark:-white/5 py-12">
+                <div className="mb-20 flex flex-col md:flex-row items-center gap-8 md:gap-12 border-t border-b border-black/5 dark:border-white/5 py-12">
                     <div className="shrink-0 max-w-sm text-center md:text-left">
                         <p className="text-lg md:text-xl font-sans leading-relaxed text-text-primary">
                             America's best brands trust <br className="hidden md:block" />
@@ -244,9 +246,9 @@ const Hero: React.FC = () => {
                 </div>
             </div>
 
-            {/* Video Section - Contained Width */}
-            <div className="container mx-auto px-4 sm:px-6 pb-12 sm:pb-20" ref={videoContainerRef}>
-                <div className="w-full aspect-video rounded-[1.5rem] sm:rounded-[2rem] overflow-hidden">
+            {/* HIDDEN: Video Section — uncomment when own video is ready */}
+            {/* <div className="container mx-auto px-4 sm:px-6 pb-12 sm:pb-20" ref={videoContainerRef}>
+                <div className="w-full aspect-video rounded-3xl sm:rounded-card overflow-hidden">
                     <div className="relative w-full h-full bg-black">
                         {shouldLoadVideo ? (
                             <>
@@ -260,10 +262,9 @@ const Hero: React.FC = () => {
                                     title="vimeo-player"
                                     loading="lazy"
                                 />
-                                {/* Sound Toggle Button */}
                                 <button
                                     onClick={toggleMute}
-                                    className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/50 hover:bg-black/70 backdrop-blur-sm border border-white/20 flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
+                                    className="absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-10 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/80 border border-white/20 flex items-center justify-center text-white transition-[transform,background-color] duration-300 hover:scale-110"
                                     aria-label={isMuted ? "Unmute video" : "Mute video"}
                                 >
                                     {isMuted ? (
@@ -275,7 +276,6 @@ const Hero: React.FC = () => {
                             </>
                         ) : (
                             <>
-                                {/* Video Thumbnail Preview */}
                                 <OptimizedImage
                                     src={`https://vumbnail.com/${videoId}.jpg`}
                                     alt="Video preview"
@@ -285,13 +285,12 @@ const Hero: React.FC = () => {
                                     width={1920}
                                     height={1080}
                                 />
-                                {/* Play Button Overlay */}
                                 <button
                                     onClick={() => setShouldLoadVideo(true)}
                                     className="absolute inset-0 flex items-center justify-center bg-black/30 hover:bg-black/20 transition-colors cursor-pointer group"
                                     aria-label="Play video"
                                 >
-                                    <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/90 hover:bg-white group-hover:scale-110 transition-all flex items-center justify-center">
+                                    <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/90 hover:bg-white group-hover:scale-110 transition-[transform,background-color] flex items-center justify-center">
                                         <ArrowRight className="w-8 h-8 sm:w-10 sm:h-10 text-black ml-1" />
                                     </div>
                                 </button>
@@ -299,7 +298,7 @@ const Hero: React.FC = () => {
                         )}
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 };

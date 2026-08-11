@@ -234,7 +234,7 @@ const ServicesConstellationSection: React.FC = React.memo(() => {
                 style={{ '--text-delay': `${i * 0.1}s` } as React.CSSProperties}
               >
                 <div className="flex items-center gap-3 md:gap-4 mb-3 md:mb-4">
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-[2rem] bg-coral-gradient-subtle flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-element bg-coral-gradient-subtle flex items-center justify-center shrink-0">
                     <b.icon className="w-5 h-5 md:w-6 md:h-6 text-coral" strokeWidth={1.5} />
                   </div>
                   <h3 className="font-display text-xl md:text-2xl font-semibold text-white">{b.title}</h3>
@@ -512,7 +512,7 @@ const ServicesConstellationSection: React.FC = React.memo(() => {
                     href={`/services/${item.slug}`}
                     className="absolute -translate-x-1/2 -translate-y-1/2 z-10"
                     style={{ left: `${s.x / 10}%`, top: `${s.y / 8}%` }}>
-                    <span className={`text-[10px] md:text-xs whitespace-nowrap cursor-pointer transition-all duration-300 ${
+                    <span className={`text-[10px] md:text-xs whitespace-nowrap cursor-pointer transition-[color,text-decoration-color] duration-300 ${
                       active ? 'underline decoration-dotted underline-offset-2' : ''
                     }`} style={{
                       color: active ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.50)',
@@ -554,7 +554,7 @@ const ServicesConstellationSection: React.FC = React.memo(() => {
                 className="absolute -translate-x-1/2 -translate-y-1/2 z-10"
                 style={{ left: `${m.x / 10}%`, top: `${m.y / 8}%` }}
                 onMouseEnter={() => onHover('solutions')} onMouseLeave={() => onHover(null)}>
-                <span className={`text-[10px] md:text-xs whitespace-nowrap cursor-pointer transition-all duration-300 ${
+                <span className={`text-[10px] md:text-xs whitespace-nowrap cursor-pointer transition-[color,text-decoration-color] duration-300 ${
                   solActive ? 'underline decoration-dotted underline-offset-2' : ''
                 }`} style={{
                   color: solActive ? 'rgba(124,156,255,0.9)' : 'rgba(124,156,255,0.55)',

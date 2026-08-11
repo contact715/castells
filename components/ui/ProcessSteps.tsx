@@ -2,6 +2,7 @@ import React from 'react';
 import { m as motion } from 'framer-motion';
 import { Search, Target, Rocket, TrendingUp, ArrowRight } from 'lucide-react';
 import AnimatedHeading from './AnimatedHeading';
+import { useReducedMotion } from '../../lib/hooks/useReducedMotion';
 
 interface ProcessStep {
   number: string;
@@ -55,6 +56,8 @@ const ProcessSteps: React.FC<ProcessStepsProps> = React.memo(({
   subtitle = 'Our proven process for driving measurable growth',
   className = ''
 }) => {
+  const prefersReducedMotion = useReducedMotion();
+
   return (
     <section className={`py-12 md:py-16 bg-white dark:bg-surface relative ${className}`}>
       <div className="container mx-auto px-6">
@@ -86,7 +89,7 @@ const ProcessSteps: React.FC<ProcessStepsProps> = React.memo(({
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
+                transition={{ delay: prefersReducedMotion ? 0 : index * 0.1, duration: prefersReducedMotion ? 0 : 0.5 }}
                 className="relative"
               >
                 {/* Connector Line (except last) */}
@@ -96,7 +99,7 @@ const ProcessSteps: React.FC<ProcessStepsProps> = React.memo(({
                   </div>
                 )}
 
-                <div className="bg-ivory dark:bg-[#191919] rounded-[2rem] p-8 h-full hover:-translate-y-1 transition-all group">
+                <div className="bg-ivory dark:bg-[#191919] rounded-card p-8 h-full hover:-translate-y-1 transition-[transform,box-shadow] group">
                   <div className="flex items-center justify-between mb-4">
                     <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
                       <Icon className="w-6 h-6 text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />

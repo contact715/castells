@@ -2,6 +2,7 @@ import React from 'react';
 import { m as motion } from 'framer-motion';
 import { Award, TrendingUp, Users, CheckCircle2, Star } from 'lucide-react';
 import AnimatedHeading from './AnimatedHeading';
+import { useReducedMotion } from '../../lib/hooks/useReducedMotion';
 
 interface TrustIndicator {
   icon: React.ComponentType<{ className?: string }>;
@@ -42,10 +43,12 @@ const DEFAULT_INDICATORS: TrustIndicator[] = [
   },
 ];
 
-const TrustIndicators: React.FC<TrustIndicatorsProps> = React.memo(({ 
+const TrustIndicators: React.FC<TrustIndicatorsProps> = React.memo(({
   className = '',
   variant = 'default'
 }) => {
+  const prefersReducedMotion = useReducedMotion();
+
   if (variant === 'compact') {
     return (
       <div className={`grid grid-cols-2 md:grid-cols-4 gap-4 ${className}`}>
@@ -57,8 +60,8 @@ const TrustIndicators: React.FC<TrustIndicatorsProps> = React.memo(({
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5 }}
-              className="bg-white dark:bg-surface rounded-[2rem] p-6 text-center transition-all"
+              transition={{ delay: prefersReducedMotion ? 0 : index * 0.1, duration: prefersReducedMotion ? 0 : 0.5 }}
+              className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-6 text-center transition-[transform,box-shadow]"
             >
               <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center mx-auto mb-3">
                 <Icon className="w-6 h-6 text-coral" />
@@ -107,8 +110,8 @@ const TrustIndicators: React.FC<TrustIndicatorsProps> = React.memo(({
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="bg-white dark:bg-surface rounded-[2rem] p-8 text-center hover:-translate-y-1 transition-all group"
+                transition={{ delay: prefersReducedMotion ? 0 : index * 0.1, duration: prefersReducedMotion ? 0 : 0.5 }}
+                className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-8 text-center hover:-translate-y-1 hover:shadow-spatial-md transition-[transform,box-shadow] group"
               >
                 <div className="w-16 h-16 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
                   <Icon className="w-8 h-8 text-coral group-hover:text-white dark:group-hover:text-black transition-colors" />

@@ -40,10 +40,10 @@ export const ContactButtons = ({ defaultExpanded = 'Book call' }: { defaultExpan
                         title={m.cta}
                         aria-label={m.cta}
                         onMouseEnter={() => setHoveredButton(m.cta)}
-                        className={`group h-10 flex-none rounded-[2rem]  transition-[width,background-color,color,border-color] duration-300 ease-in-out flex items-center justify-center overflow-hidden ${
+                        className={`group h-11 flex-none rounded-inner  transition-[width,background-color,color,border-color] duration-300 ease-in-out flex items-center justify-center overflow-hidden ${
                             isExpanded
-                                ? 'w-[120px] bg-black text-white dark:bg-white dark:text-black -transparent'
-                                : 'w-10 rounded-[2rem] bg-white/60 dark:bg-white/5 -black/5 dark:-white/10'
+                                ? 'w-[130px] bg-black text-white dark:bg-white dark:text-black border-transparent'
+                                : 'w-11 rounded-inner bg-white/60 dark:bg-white/5 border-black/5 dark:border-white/10'
                         }`}
                     >
                         <m.icon className={`w-4 h-4 shrink-0 transition-colors duration-300 ${

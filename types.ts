@@ -22,13 +22,6 @@ export enum LoadingState {
   ERROR = 'ERROR',
 }
 
-export interface GeneratedConcept {
-  title: string;
-  tagline: string;
-  description: string;
-  visualCues: string;
-}
-
 export type PageView =
   | 'home'
   | 'case-study'
@@ -46,11 +39,12 @@ export type PageView =
   | 'services'
   | 'industries'
   | 'company'
-  | 'projectx'
   | 'thank-you'
   | 'privacy-policy'
   | 'terms'
-  | 'cookie-policy';
+  | 'cookie-policy'
+  | 'lead-form'
+  | 'lead-thank-you';
 
 // Type for navigation data (project, service, industry)
 export interface NavigationData {

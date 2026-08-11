@@ -239,14 +239,14 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                             </h2>
 
                             {/* Sort By */}
-                            <div className="mb-6 pb-6 -b -black/10 dark:-white/10">
+                            <div className="mb-6 pb-6 border-b border-black/10 dark:border-white/10">
                                 <label className="block text-xs font-medium text-text-secondary dark:text-white/60 mb-2">
                                     Sort by
                                 </label>
                                 <select
                                     value={sortBy}
                                     onChange={(e) => setSortBy(e.target.value)}
-                                    className="w-full bg-white dark:bg-surface  -black/10 dark:-white/10 rounded-xl px-3 py-2 text-sm text-text-primary dark:text-white focus:outline-none focus:-coral"
+                                    className="w-full bg-white dark:bg-surface border border-black/10 dark:border-white/10 rounded-xl px-3 py-2 text-sm text-text-primary dark:text-white focus:outline-hidden focus:border-coral"
                                 >
                                     <option>Newest</option>
                                     <option>Alphabetically (A to Z)</option>
@@ -255,7 +255,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                             </div>
 
                             {/* Category */}
-                            <div className="mb-6 pb-6 -b -black/10 dark:-white/10">
+                            <div className="mb-6 pb-6 border-b border-black/10 dark:border-white/10">
                                 <label className="block text-xs font-medium text-text-secondary dark:text-white/60 mb-3">
                                     Category
                                 </label>
@@ -266,7 +266,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                 type="checkbox"
                                                 checked={selectedCategories.includes(cat)}
                                                 onChange={() => toggleCategory(cat)}
-                                                className="w-4 h-4 rounded -black/20 dark:-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
+                                                className="w-4 h-4 rounded-sm border border-black/20 dark:border-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
                                             />
                                             <span className="text-sm text-text-primary dark:text-white group-hover:text-coral transition-colors">
                                                 {cat}
@@ -277,7 +277,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                             </div>
 
                             {/* Topic */}
-                            <div className="mb-6 pb-6 -b -black/10 dark:-white/10">
+                            <div className="mb-6 pb-6 border-b border-black/10 dark:border-white/10">
                                 <label className="block text-xs font-medium text-text-secondary dark:text-white/60 mb-3">
                                     Topic
                                 </label>
@@ -288,7 +288,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                 type="checkbox"
                                                 checked={selectedTopics.includes(topic)}
                                                 onChange={() => toggleTopic(topic)}
-                                                className="w-4 h-4 rounded -black/20 dark:-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
+                                                className="w-4 h-4 rounded-sm border border-black/20 dark:border-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
                                             />
                                             <span className="text-sm text-text-primary dark:text-white group-hover:text-coral transition-colors">
                                                 {topic}
@@ -310,7 +310,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                 type="checkbox"
                                                 checked={selectedIndustries.includes(industry)}
                                                 onChange={() => toggleIndustry(industry)}
-                                                className="w-4 h-4 rounded -black/20 dark:-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
+                                                className="w-4 h-4 rounded-sm border border-black/20 dark:border-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
                                             />
                                             <span className="text-sm text-text-primary dark:text-white group-hover:text-coral transition-colors">
                                                 {industry}
@@ -334,7 +334,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                         placeholder="Search posts"
                                         value={searchQuery}
                                         onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full bg-white dark:bg-surface  -black/10 dark:-white/10 rounded-xl pl-10 pr-4 py-2 text-sm text-text-primary dark:text-white placeholder:text-text-secondary dark:placeholder:text-white/40 focus:outline-none focus:-coral"
+                                        className="w-full bg-white dark:bg-surface border border-black/10 dark:border-white/10 rounded-xl pl-10 pr-4 py-2 text-sm text-text-primary dark:text-white placeholder:text-text-secondary dark:placeholder:text-white/40 focus:outline-hidden focus:border-coral"
                                     />
                                 </div>
                             </div>
@@ -375,10 +375,10 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                 e.preventDefault();
                                                 onNavigate?.('blog-post', { id: post.id });
                                             }}
-                                            className="group relative overflow-hidden  -black/5 dark:-white/10 rounded-[2rem] p-6 h-[220px] flex flex-col justify-between hover: hover:-translate-y-1 transition-all duration-300 cursor-pointer"
+                                            className="group relative overflow-hidden border border-black/5 dark:border-white/10 rounded-card p-6 h-[220px] flex flex-col justify-between hover:shadow-spatial-md hover:-translate-y-1 transition-[transform,box-shadow] duration-300 cursor-pointer"
                                         >
                                             {/* Background image */}
-                                            <div className="absolute inset-0 overflow-hidden rounded-[2rem]">
+                                            <div className="absolute inset-0 overflow-hidden rounded-card">
                                                 <img
                                                     src={post.image}
                                                     alt={post.title}
@@ -387,7 +387,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                     decoding="async"
                                                     style={{ transform: 'translateZ(0)' }}
                                                 />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black via-black/55 to-black/10 rounded-[2rem]" />
+                                                <div className="absolute inset-0 bg-linear-to-t from-black via-black/55 to-black/10 rounded-card" />
                                             </div>
 
                                             {/* Content */}
@@ -422,18 +422,18 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                                                 e.preventDefault();
                                                 onNavigate?.('blog-post', { id: post.id });
                                             }}
-                                            className="group flex gap-4 bg-white dark:bg-surface  -black/5 dark:-white/10 rounded-xl p-4 hover: hover:-translate-y-0.5 transition-all duration-300 cursor-pointer"
+                                            className="group flex gap-4 bg-white dark:bg-surface border border-black/5 dark:border-white/10 rounded-xl p-4 hover:shadow-spatial-md hover:-translate-y-0.5 transition-[transform,box-shadow] duration-300 cursor-pointer"
                                         >
                                             {/* Thumb */}
-                                            <div className="relative w-20 h-16 rounded-lg overflow-hidden flex-shrink-0  -black/5 dark:-white/10">
+                                            <div className="relative w-20 h-16 rounded-lg overflow-hidden shrink-0 border border-black/5 dark:border-white/10">
                                                 <img
                                                     src={post.image}
                                                     alt={post.title}
                                                     className="absolute inset-0 w-full h-full object-cover"
                                                     loading="lazy"
                                                 />
-                                                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-                                                <div className="absolute bottom-1.5 left-1.5 w-8 h-8 rounded-md bg-white/10 backdrop-blur-sm  -white/10 flex items-center justify-center">
+                                                <div className="absolute inset-0 bg-linear-to-t from-black/70 via-black/30 to-transparent" />
+                                                <div className="absolute bottom-1.5 left-1.5 w-8 h-8 rounded-md bg-white/10 backdrop-blur-xs border border-white/10 flex items-center justify-center">
                                                     <Icon className="w-4 h-4 text-white" />
                                                 </div>
                                             </div>

@@ -77,7 +77,7 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = React.memo(({
           </p>
         </div>
 
-        <div className="bg-ivory dark:bg-[#191919] rounded-[2rem] p-8 md:p-12 overflow-x-auto">
+        <div className="bg-ivory dark:bg-[#191919] rounded-card p-8 md:p-12 overflow-x-auto">
           <div className="min-w-full">
             {/* Header */}
             <div className="grid grid-cols-3 gap-4 mb-6 pb-4">

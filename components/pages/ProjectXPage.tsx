@@ -139,7 +139,7 @@ const ProjectXPage: React.FC<ProjectXPageProps> = React.memo(({ onNavigate }) =>
                 transition={{ duration: 0.6 }}
                 className="mb-6"
               >
-                <span className="inline-block px-4 py-2 rounded-[2rem] bg-coral/10 text-coral text-xs font-bold uppercase tracking-widest mb-6">
+                <span className="inline-block px-4 py-2 rounded-pill bg-coral/10 text-coral text-xs font-bold uppercase tracking-widest mb-6">
                   M.O.S. Engine
                 </span>
               </motion.div>
@@ -196,7 +196,7 @@ const ProjectXPage: React.FC<ProjectXPageProps> = React.memo(({ onNavigate }) =>
                   <div
                     key={idx}
                     className={cn(
-                      "p-6 rounded-[2rem]",
+                      "p-6 rounded-card",
                       colors.background.surface,
                       colors.border.light,
                       "border text-center"
@@ -237,10 +237,10 @@ const ProjectXPage: React.FC<ProjectXPageProps> = React.memo(({ onNavigate }) =>
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                   className={cn(
-                    "p-8 rounded-[2rem]",
+                    "p-8 rounded-card",
                     colors.background.surface,
                     colors.border.light,
-                    "border hover:-translate-y-1 transition-all duration-300"
+                    "border hover:-translate-y-1 transition-[transform,box-shadow] duration-300"
                   )}
                 >
                   <div className="w-12 h-12 rounded-xl bg-coral/10 flex items-center justify-center mb-4">
@@ -280,13 +280,13 @@ const ProjectXPage: React.FC<ProjectXPageProps> = React.memo(({ onNavigate }) =>
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: idx * 0.05 }}
                   className={cn(
-                    "p-6 rounded-[2rem]",
+                    "p-6 rounded-card",
                     colors.background.surface,
                     colors.border.light,
-                    "border hover:bg-black/5 dark:hover:bg-white/5 transition-all duration-300 group cursor-pointer"
+                    "border hover:bg-black/5 dark:hover:bg-white/5 transition-[background-color] duration-300 group cursor-pointer"
                   )}
                 >
-                  <div className="w-10 h-10 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center mb-4 group-hover:bg-coral/10 group-hover:scale-110 transition-all">
+                  <div className="w-10 h-10 rounded-xl bg-black/5 dark:bg-white/5 flex items-center justify-center mb-4 group-hover:bg-coral/10 group-hover:scale-110 transition-[background-color,transform]">
                     <module.icon className="w-5 h-5 text-text-primary group-hover:text-coral transition-colors" />
                   </div>
                   <h3 className={cn(typography.heading.h4, "mb-2")}>
@@ -314,14 +314,14 @@ const ProjectXPage: React.FC<ProjectXPageProps> = React.memo(({ onNavigate }) =>
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
                 className={cn(
-                  "p-8 md:p-12 rounded-[2rem]",
+                  "p-8 md:p-12 rounded-card",
                   colors.background.surface,
                   colors.border.light,
                   "border"
                 )}
               >
                 <div className="text-center mb-8">
-                  <div className="w-16 h-16 rounded-[2rem] bg-coral/10 flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 rounded-element bg-coral/10 flex items-center justify-center mx-auto mb-4">
                     <Lock className="w-8 h-8 text-coral" />
                   </div>
                   <h2 className={cn(typography.heading.h2, "mb-2")}>
@@ -389,8 +389,8 @@ const ProjectXPage: React.FC<ProjectXPageProps> = React.memo(({ onNavigate }) =>
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
               className={cn(
-                "p-12 md:p-16 rounded-[2rem] text-center",
-                "bg-gradient-to-br from-coral/10 via-coral/5 to-transparent",
+                "p-12 md:p-16 rounded-card text-center",
+                "bg-linear-to-br from-coral/10 via-coral/5 to-transparent",
                 colors.border.light,
                 "border"
               )}

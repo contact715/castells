@@ -19,7 +19,7 @@ const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose, videoId }) => 
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4 md:p-8"
+                        className="fixed inset-0 bg-black/80 backdrop-blur-xs z-50 flex items-center justify-center p-4 md:p-8"
                     >
                         {/* Modal Container */}
                         <motion.div
@@ -27,12 +27,13 @@ const VideoModal: React.FC<VideoModalProps> = ({ isOpen, onClose, videoId }) => 
                             animate={{ scale: 1, opacity: 1 }}
                             exit={{ scale: 0.95, opacity: 0 }}
                             onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
-                            className="relative w-full max-w-5xl bg-black rounded-[2rem] overflow-hidden   -white/10"
+                            className="relative w-full max-w-5xl bg-black rounded-card overflow-hidden border-white/10 shadow-spatial-xl"
                         >
                             {/* Close Button */}
                             <button
                                 onClick={onClose}
-                                className="absolute top-4 right-4 z-10 p-2 rounded-full bg-black/50 hover:bg-white/20 text-white transition-colors"
+                                className="absolute top-4 right-4 z-10 p-2.5 rounded-full bg-black/50 hover:bg-white/20 text-white transition-colors"
+                                aria-label="Close video"
                             >
                                 <X className="w-6 h-6" />
                             </button>

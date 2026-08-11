@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { m as motion, useInView, Variants } from 'framer-motion';
 import { cn } from '../../lib/utils';
+import { useReducedMotion } from '../../lib/hooks/useReducedMotion';
 
 interface AnimatedHeadingProps {
   children: React.ReactNode;
@@ -52,6 +53,7 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
   once = true,
 }) => {
   const ref = useRef(null);
+  const prefersReducedMotion = useReducedMotion();
   const isInView = useInView(ref, {
     once,
     margin: '-100px',
@@ -60,6 +62,11 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
   const variants = directionVariants[direction] || defaultVariants;
 
   const MotionTag = motion[as] as typeof motion.h2;
+
+  if (prefersReducedMotion) {
+    const Tag = as;
+    return <Tag ref={ref} className={cn(className)}>{children}</Tag>;
+  }
 
   return (
     <MotionTag
@@ -71,7 +78,7 @@ const AnimatedHeading: React.FC<AnimatedHeadingProps> = ({
       transition={{
         duration,
         delay,
-        ease: [0.22, 1, 0.36, 1], // Custom easing for smooth, premium feel
+        ease: [0.22, 1, 0.36, 1],
       }}
     >
       {children}

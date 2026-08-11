@@ -4,40 +4,46 @@ import { m as motion } from 'framer-motion';
 import { Button } from '../ui/Button';
 import OptimizedImage from '../ui/OptimizedImage';
 import { CASE_STUDIES, CaseStudy } from '../../constants';
+import { useReducedMotion } from '../../lib/hooks/useReducedMotion';
 import type { NavigateFn } from '../../types';
 
 interface CasesGridProps {
     onNavigate?: NavigateFn;
 }
 
-const containerVariants = {
+const getContainerVariants = (reducedMotion: boolean) => ({
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
         transition: {
-            staggerChildren: 0.15,
+            staggerChildren: reducedMotion ? 0 : 0.15,
         },
     },
-};
+});
 
-const cardVariants = {
+const getCardVariants = (reducedMotion: boolean) => ({
     hidden: { opacity: 0, y: 60 },
     visible: {
         opacity: 1,
         y: 0,
         transition: {
-            duration: 0.7,
+            duration: reducedMotion ? 0 : 0.7,
             ease: [0.22, 1, 0.36, 1] as const,
         }
     },
-};
+});
 
 // Staggered offsets for the masonry-like effect
 const staggerOffsets = [0, 60, 20, 80];
 
 const CasesGrid: React.FC<CasesGridProps> = ({ onNavigate }) => {
+    const prefersReducedMotion = useReducedMotion();
+
     // Memoize case studies to prevent unnecessary re-renders
     const cases = useMemo(() => CASE_STUDIES.slice(0, 9), []);
+
+    const containerVariants = useMemo(() => getContainerVariants(prefersReducedMotion), [prefersReducedMotion]);
+    const cardVariants = useMemo(() => getCardVariants(prefersReducedMotion), [prefersReducedMotion]);
 
     const handleViewAll = useCallback(() => {
         onNavigate?.('work');
@@ -132,10 +138,10 @@ const CaseCard: React.FC<CaseCardProps> = memo(({ caseItem, onClick }) => {
         <a
             href={`/case-studies/${encodeURIComponent(caseItem.id)}`}
             onClick={handleClick}
-            className="group cursor-pointer block"
+            className="group cursor-pointer block hover:-translate-y-1 hover:shadow-spatial-md transition-[transform,box-shadow] duration-300"
         >
             {/* Image */}
-            <div className="relative aspect-[3/4] rounded-[2rem] overflow-hidden mb-4">
+            <div className="relative aspect-3/4 rounded-card overflow-hidden mb-4">
                 <OptimizedImage
                     src={caseItem.image}
                     alt={caseItem.client}
@@ -146,7 +152,7 @@ const CaseCard: React.FC<CaseCardProps> = memo(({ caseItem, onClick }) => {
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                 />
                 {/* Subtle gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-[2rem]" />
+                <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-card" />
             </div>
 
             {/* Content */}
