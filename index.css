@@ -1,13 +1,25 @@
 @import 'tailwindcss';
 
 /*
-  Newsreader лежит у нас, а не на серверах Google: так браузер не ходит на
-  чужой домен и не ждёт ответа стороннего CSS перед отрисовкой заголовков.
-  Это переменный шрифт, поэтому два файла закрывают все веса от 400 до 700.
-  Взята только латиница (сайт на английском), лицензия Open Font License.
-  Satoshi остаётся на fontshare: его лицензия прямо запрещает размещать
-  файлы шрифта на своём сервере.
+  Оба шрифта лежат у нас, а не на чужих серверах: браузер не ходит на сторонние
+  домены и не ждёт ответа их CSS перед отрисовкой текста. Оба переменные, то
+  есть один файл закрывает все веса. Взята только латиница (сайт на английском),
+  у обоих Open Font License.
+
+  Раньше основным текстом был Satoshi с fontshare: 97 КБ в четырёх файлах через
+  две внешние остановки, и его лицензия (ITF Free Font License) запрещает
+  размещать файлы у себя. Manrope закрывает те же начертания одним файлом 24 КБ.
 */
+@font-face {
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url('/fonts/manrope-variable.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
 @font-face {
   font-family: 'Newsreader';
   font-style: normal;
@@ -54,7 +66,7 @@
   --color-text-secondary-dark: #cccccc;
 
   --font-display: Newsreader, serif;
-  --font-sans: Satoshi, sans-serif;
+  --font-sans: Manrope, sans-serif;
 
   --radius-card: 1rem;
   --radius-inner: 0.75rem;
@@ -348,7 +360,7 @@
 
   body {
     @apply bg-ivory text-text-primary font-sans;
-    font-family: 'Satoshi', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1),

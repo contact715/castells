@@ -8,24 +8,15 @@
     <meta name="description" content="Castells Agency - We help contractors and service providers dominate their local markets through data-driven strategies." />
 
     <!-- Resource Hints for Performance -->
-    <!-- Newsreader теперь лежит у нас (/fonts), к Google за шрифтами не ходим.
-         Satoshi остаётся на fontshare: его лицензия запрещает свой хостинг. -->
-    <link rel="dns-prefetch" href="https://api.fontshare.com" />
+    <!-- Оба шрифта лежат у нас (/fonts). К чужим серверам за шрифтами не ходим:
+         раньше основной текст ждал двух остановок на fontshare.com -->
     <link rel="dns-prefetch" href="https://player.vimeo.com" />
-    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-    <!-- Сами файлы Satoshi лежат на cdn.fontshare.com: без этой строки браузер
-         открывает соединение только когда дочитает CSS, теряя ~330 мс до отрисовки -->
-    <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
 
     <!-- Preload critical resources -->
     <link rel="preload" href="/castells-logo.webp" as="image" type="image/webp" />
     <!-- Заголовки первого экрана набраны Newsreader: грузим его сразу,
          не дожидаясь, пока браузер дочитает CSS и наткнётся на @font-face -->
     <link rel="preload" href="/fonts/newsreader-variable.woff2" as="font" type="font/woff2" crossorigin />
-
-    <!-- Fonts with optimized loading -->
-    <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet"></noscript>
 
     <style>
       /* Critical CSS - Above the fold styles */
