@@ -22,10 +22,6 @@
     <!-- Заголовки первого экрана набраны Newsreader: грузим его сразу,
          не дожидаясь, пока браузер дочитает CSS и наткнётся на @font-face -->
     <link rel="preload" href="/fonts/newsreader-variable.woff2" as="font" type="font/woff2" crossorigin />
-    <!-- Курсивом набрано «local markets» в первом экране. Без этой строки браузер
-         узнаёт о курсиве только разобрав CSS, и файл оказывается в конце
-         критической цепочки: в замере Google это стоило 1052 мс до отрисовки -->
-    <link rel="preload" href="/fonts/newsreader-variable-italic.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Fonts with optimized loading -->
     <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
