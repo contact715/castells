@@ -54,6 +54,21 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     setHasError(true);
   };
 
+  // Подставляет нужную ширину в адрес картинки.
+  // Раньше ширина приклеивалась через "?", а у адресов Unsplash он уже есть
+  // (?w=1600&q=80), получалось два "?" — параметр игнорировался и грузилась
+  // картинка 1600px вместо 800px: 362 КБ вместо 105 КБ.
+  const withWidth = (baseSrc: string, w: number) => {
+    const [path, query = ''] = baseSrc.split('?');
+    const params = new URLSearchParams(query);
+    params.set('w', String(w));
+    // Unsplash умеет отдавать WebP, он легче примерно на 15%
+    if (path.includes('images.unsplash.com') && !params.has('fm')) {
+      params.set('fm', 'webp');
+    }
+    return `${path}?${params.toString()}`;
+  };
+
   // Generate responsive srcSet if not provided
   const generateSrcSet = (baseSrc: string) => {
     if (srcSet) return srcSet;
@@ -63,7 +78,7 @@ const OptimizedImage: React.FC<OptimizedImageProps> = ({
     const breakpoints = [400, 800, 1200, 1600];
     return breakpoints
       .filter(bp => bp <= width * 2)
-      .map(bp => `${baseSrc}?w=${bp} ${bp}w`)
+      .map(bp => `${withWidth(baseSrc, bp)} ${bp}w`)
       .join(', ');
   };
 
