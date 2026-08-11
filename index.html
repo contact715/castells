@@ -17,6 +17,10 @@
     <!-- Заголовки первого экрана набраны Newsreader: грузим его сразу,
          не дожидаясь, пока браузер дочитает CSS и наткнётся на @font-face -->
     <link rel="preload" href="/fonts/newsreader-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Главным элементом страницы (LCP) браузер считает абзац под заголовком,
+         а он набран Manrope. После обрезки шрифт весит 14 КБ, так что грузить
+         его заранее дешевле, чем ждать разбора стилей -->
+    <link rel="preload" href="/fonts/manrope-variable.woff2" as="font" type="font/woff2" crossorigin />
 
     <style>
       /* Critical CSS - Above the fold styles */

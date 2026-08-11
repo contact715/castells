@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useMemo, useDeferredValue, useId, useEffect } from 'react';
 import { Search, Grid3x3, List, ArrowUpRight } from 'lucide-react';
 import { PageHeader } from '../ui/PageHeader';
+import OptimizedImage from '../ui/OptimizedImage';
 import { CASE_STUDIES, WORK_CATEGORIES } from '../../constants';
 import { PageView } from '../../App';
 import { NavigationData } from '../../types';
@@ -263,12 +264,17 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                                     <source src={project.video} type="video/mp4" />
                                                 </video>
                                             ) : (
-                                                <img
+                                                <OptimizedImage
                                                     src={project.image}
                                                     alt={project.client}
                                                     className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
                                                     loading="lazy"
-                                                    decoding="async"
+                                                    width={800}
+                                                    height={600}
+                                                    /* Карточка занимает примерно треть ширины на десктопе.
+                                                       Без этой подсказки браузер считал её во всю ширину экрана
+                                                       и качал версию 1600px (246 КБ) вместо 800px (86 КБ) */
+                                                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 45vw, 90vw"
                                                 />
                                             )}
                                             <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
@@ -320,10 +326,15 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                                     <source src={project.video} type="video/mp4" />
                                                 </video>
                                             ) : (
-                                                <img
+                                                <OptimizedImage
                                                     src={project.image}
                                                     alt={project.client}
                                                     className="w-full h-full object-cover"
+                                                    loading="lazy"
+                                                    width={256}
+                                                    height={256}
+                                                    /* Миниатюра в списке ровно 128px, на экранах Retina нужен 256px */
+                                                    sizes="128px"
                                                 />
                                             )}
                                         </div>
