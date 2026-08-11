@@ -49,8 +49,12 @@ const TrustSection: React.FC = React.memo(() => {
             </span>
           </div>
           <div className="flex items-center gap-4">
-            {/* Клиенты из кейсов: инициалы вместо фото, ноль внешних запросов */}
-            <div className="flex -space-x-3">
+            {/*
+              Клиенты из кейсов: инициалы вместо фото, ноль внешних запросов.
+              Наложение меньше, чем было у фотографий: буквы стоят по центру,
+              и при сдвиге в 12px соседний кружок срезал вторую букву.
+            */}
+            <div className="flex -space-x-1.5">
               {CLIENT_INITIALS.map((client) => (
                 <div
                   key={client.name}
