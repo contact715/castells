@@ -8,36 +8,26 @@
     <meta name="description" content="Castells Agency - We help contractors and service providers dominate their local markets through data-driven strategies." />
 
     <!-- Resource Hints for Performance -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+    <!-- Newsreader теперь лежит у нас (/fonts), к Google за шрифтами не ходим.
+         Satoshi остаётся на fontshare: его лицензия запрещает свой хостинг. -->
     <link rel="dns-prefetch" href="https://api.fontshare.com" />
     <link rel="dns-prefetch" href="https://player.vimeo.com" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-    <!-- Сами файлы шрифтов лежат на cdn.fontshare.com: без этой строки браузер
+    <!-- Сами файлы Satoshi лежат на cdn.fontshare.com: без этой строки браузер
          открывает соединение только когда дочитает CSS, теряя ~330 мс до отрисовки -->
     <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin />
 
     <!-- Preload critical resources -->
     <link rel="preload" href="/castells-logo.png" as="image" type="image/png" />
+    <!-- Заголовки первого экрана набраны Newsreader: грузим его сразу,
+         не дожидаясь, пока браузер дочитает CSS и наткнётся на @font-face -->
+    <link rel="preload" href="/fonts/newsreader-variable.woff2" as="font" type="font/woff2" crossorigin />
 
     <!-- Fonts with optimized loading -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet"></noscript>
     <link rel="preload" href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700&display=swap" rel="stylesheet"></noscript>
 
     <style>
-      @font-face {
-        font-family: 'Newsreader';
-        font-display: swap;
-      }
-      @font-face {
-        font-family: 'Satoshi';
-        font-display: swap;
-      }
-
       /* Critical CSS - Above the fold styles */
       body {
         margin: 0;
