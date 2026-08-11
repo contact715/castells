@@ -21,6 +21,12 @@
          а он набран Manrope. После обрезки шрифт весит 14 КБ, так что грузить
          его заранее дешевле, чем ждать разбора стилей -->
     <link rel="preload" href="/fonts/manrope-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <!-- Курсив («local markets» в первом экране) оставался последним длинным
+         звеном цепочки: 986 мс по замеру PageSpeed, потому что браузер узнавал
+         о нём только разобрав стили. Предзагрузку уже пробовали, когда файл
+         весил 63 КБ — тогда он забивал канал и делал хуже. После обрезки
+         в нём 13.85 КБ, и очередь он больше не занимает. -->
+    <link rel="preload" href="/fonts/newsreader-italic.woff2" as="font" type="font/woff2" crossorigin />
 
     <style>
       /* Critical CSS - Above the fold styles */
