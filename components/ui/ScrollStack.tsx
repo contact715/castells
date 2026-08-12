@@ -32,6 +32,13 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
   const windowHeight = useRef(typeof window !== 'undefined' ? window.innerHeight : 800);
   const prevProgress = useRef<number[]>([]);
   const isVisible = useRef(false);
+  /*
+    Позиции карточек внутри контейнера при прокрутке не меняются, меняется только
+    положение самого контейнера. Раньше offsetTop читался в цикле прямо между
+    записями transform, и браузер пересчитывал макет на каждой карточке заново.
+    Теперь позиции считаются один раз и обновляются только при смене размера окна.
+  */
+  const cardOffsets = useRef<number[]>([]);
 
   useEffect(() => {
     if (!wrapperRef.current) return;
@@ -47,6 +54,8 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     });
 
     prevProgress.current = new Array(cardElements.length).fill(1);
+    // Снимаем позиции один раз, после того как карточки расставлены
+    cardOffsets.current = cardElements.map((card) => card.offsetTop);
   }, [children, stackOffset]);
 
   const updateCards = useCallback(() => {
@@ -59,12 +68,15 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       windowHeight.current = window.innerHeight;
     }
 
-    const wrapperRect = wrapperRef.current.getBoundingClientRect();
+    // Единственное чтение геометрии за кадр. Дальше только записи.
+    const wrapperTop = wrapperRef.current.getBoundingClientRect().top;
 
     cards.forEach((card, index) => {
       const nextCard = cards[index + 1];
       if (nextCard) {
-        const nextCardTopRelativeToViewport = wrapperRect.top + nextCard.offsetTop;
+        const nextOffset = cardOffsets.current[index + 1];
+        if (nextOffset === undefined) return;
+        const nextCardTopRelativeToViewport = wrapperTop + nextOffset;
         const nextTargetTop = stackOffset + ((index + 1) * 15);
 
         const distance = Math.max(0, nextCardTopRelativeToViewport - nextTargetTop);
@@ -119,6 +131,8 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       if (resizeTimeout.current) clearTimeout(resizeTimeout.current);
       resizeTimeout.current = setTimeout(() => {
         windowHeight.current = window.innerHeight;
+        // при смене размера окна карточки переверстались, позиции надо снять заново
+        cardOffsets.current = cards.map((card) => card.offsetTop);
         if (isVisible.current) updateCards();
       }, 150);
     };
