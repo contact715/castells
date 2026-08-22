@@ -6,51 +6,17 @@ import { Badge } from '../ui/Badge';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import { PageView } from '../../App';
 
-const TEAM = [
+/*
+  Здесь стояли те же выдуманные сотрудники со стоковыми фотографиями, что и на
+  странице команды. Компонент сейчас нигде не рисуется (на главной он
+  закомментирован, со страницы «О нас» убран 22 августа 2026), но выдумка в
+  файле остаётся выдумкой: её вернёт первый, кто раскомментирует блок.
+*/
+const TEAM: { name: string; role: string; image: string }[] = [
   {
     name: 'Dmitrii Z.',
-    role: 'Agency Owner',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80'
-  },
-  {
-    name: 'Sarah Mitchell',
-    role: 'Head of Paid Ads',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80'
-  },
-  {
-    name: 'David Park',
-    role: 'Data Analytics',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&q=80'
-  },
-  {
-    name: 'Elena Rodriguez',
-    role: 'Creative Director',
-    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80'
-  },
-  {
-    name: 'James Wilson',
-    role: 'Lead Developer',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=80'
-  },
-  {
-    name: 'Michael Chang',
-    role: 'Automation Specialist',
-    image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&q=80'
-  },
-  {
-    name: 'Anna Kowalski',
-    role: 'Content Strategist',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80'
-  },
-  {
-    name: 'Marcus Thorne',
-    role: 'Client Success',
-    image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80'
-  },
-  {
-    name: 'Lisa Chen',
-    role: 'SEO Specialist',
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&q=80'
+    role: 'Founder',
+    image: ''
   },
 ];
 

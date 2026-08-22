@@ -99,7 +99,7 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
                             From the trenches
                         </AnimatedHeading>
                         <p className="text-lg text-text-secondary leading-relaxed">
-                            No theory. No fluff. Just battle-tested strategies that generated $50M+ for our clients.
+                            What we learn while running ads and building sites for service businesses.
                         </p>
                     </div>
                     <Button

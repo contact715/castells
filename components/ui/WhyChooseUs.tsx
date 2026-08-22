@@ -34,7 +34,7 @@ const DEFAULT_COMPARISONS: ComparisonItem[] = [
   },
   {
     feature: 'Results',
-    us: '3.2x average ROAS, $50M+ generated',
+    us: 'Named clients with live sites you can open',
     competitors: 'Promises, no guarantees'
   },
   {

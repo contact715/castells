@@ -152,7 +152,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
     })();
 
     const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
-    const enhancedDescription = `${seoDescription} Serving businesses in Santa Monica, Los Angeles, and nationwide. Proven results with 3x average ROAS and $50M+ revenue generated.`;
+    const enhancedDescription = `${seoDescription} Castells Media, Santa Monica, California, working with businesses across the US.`;
 
     return (
         <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
@@ -163,7 +163,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                 keywords={`${displayName.toLowerCase()}, ${displayName.toLowerCase()} services, Santa Monica ${displayName.toLowerCase()}, Los Angeles marketing services, digital marketing agency, performance marketing`}
                 geoRegion="US-CA"
                 geoPlacename="Santa Monica, California"
-                summary={`${displayName} services by Castells Agency. ${seoDescription} Serving businesses in Santa Monica, Los Angeles, and nationwide with proven results: 3x average ROAS and $50M+ revenue generated.`}
+                summary={`${displayName} by Castells Media. ${seoDescription} Santa Monica, California, working with businesses across the US.`}
                 mainEntity={displayName}
             />
             <SchemaMarkup

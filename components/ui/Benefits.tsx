@@ -35,7 +35,7 @@ const DEFAULT_BENEFITS: Benefit[] = [
   {
     icon: Shield,
     title: 'Proven Methodology',
-    description: 'Battle-tested strategies that have generated $50M+ in client revenue.'
+    description: 'The same setup we run for our own clients: site, ads, follow-up.'
   },
   {
     icon: Clock,

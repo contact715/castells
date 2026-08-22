@@ -86,13 +86,13 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
   return (
     <>
       <SEO 
-        title="Company | Castells Agency - The Anti-Agency" 
-        description="The Anti-Agency. 12+ years in business, 500+ projects delivered, $50M+ revenue generated. Revenue-obsessed digital marketing agency based in Santa Monica, California, serving clients nationwide. Built for founders who think like owners."
+        title="Company | Castells Media" 
+        description="Castells Media Inc, a marketing agency in Santa Monica, California, working with home service businesses across the US."
         canonical="/company"
         keywords="digital marketing agency, revenue-focused marketing, Santa Monica marketing agency, Los Angeles marketing company, performance marketing agency, growth marketing, anti-agency, marketing company"
         geoRegion="US-CA"
         geoPlacename="Santa Monica, California"
-        summary="Castells Agency is The Anti-Agency - a revenue-obsessed digital marketing agency. Founded in 2012, we've delivered 500+ projects and generated $50M+ revenue for clients. Based in Santa Monica, California, serving clients nationwide. Built for founders who think like owners."
+        summary="Castells Media Inc is a marketing agency based in Santa Monica, California, working with home service businesses across the US."
         mainEntity="Digital Marketing Agency"
       />
       <SchemaMarkup
@@ -227,7 +227,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                     <div className="w-10 h-10 rounded-element bg-coral/10 flex items-center justify-center">
                       <Flag className="w-5 h-5 text-coral-text" />
                     </div>
-                    <span className="text-sm font-bold uppercase tracking-widest text-text-secondary">2012</span>
+                    <span className="text-sm font-bold uppercase tracking-widest text-text-secondary">Why we started</span>
                   </div>
                   <h3 className="font-display text-xl font-semibold mb-3 text-text-primary">The Beginning</h3>
                   <p className="text-text-secondary leading-relaxed">
@@ -251,8 +251,9 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                   </div>
                   <h3 className="font-display text-xl font-semibold mb-3 text-text-primary">The Reality</h3>
                   <p className="text-text-secondary leading-relaxed">
-                    Over $50M in revenue generated for our clients. 500+ projects delivered. A team of 35 specialists 
-                    who eat, sleep, and breathe performance marketing. We're not the biggest agency—we're the most effective.
+                    A small team that does the work itself. You talk to the people running your ads and building your
+                    site, not to an account manager. Our clients and the sites we built for them are listed on the work page,
+                    with names and live links.
                   </p>
                 </motion.div>
 

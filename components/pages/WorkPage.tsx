@@ -96,13 +96,13 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
     return (
         <>
             <SEO 
-                title="Our Work & Case Studies | Castells Agency - Proven Results" 
-                description="Proven results that speak for themselves: $50M+ in revenue generated, 3x average ROAS, and 250%+ growth across 200+ successful campaigns for clients from startups to Fortune 500s. View our portfolio of digital marketing case studies in Santa Monica, Los Angeles, and nationwide."
+                title="Our work | Castells Media" 
+                description="Real clients with names and live sites: HVAC, automotive, remodeling and dental businesses across the US. Work done by Castells Media, Santa Monica, California."
                 canonical="/work"
                 keywords="marketing case studies, digital marketing portfolio, successful marketing campaigns, marketing results, Santa Monica marketing agency, Los Angeles marketing services, performance marketing examples"
                 geoRegion="US-CA"
                 geoPlacename="Santa Monica, California"
-                summary="Portfolio of successful digital marketing campaigns by Castells Agency. Results include $50M+ revenue generated, 3x average ROAS, 250%+ growth across 200+ campaigns for clients ranging from startups to Fortune 500 companies."
+                summary="Work by Castells Media: websites, branding and paid media for home service and automotive businesses across the US. Every client is a real company you can look up."
                 mainEntity="Marketing Case Studies"
             />
             <SchemaMarkup
@@ -124,7 +124,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                     ]}
                     badge="Our Portfolio"
                     title="Selected Works"
-                    description="Proven results that speak for themselves: $50M+ in revenue generated, 3x average ROAS, and 250%+ growth across 200+ successful campaigns for clients from startups to Fortune 500s."
+                    description="Real companies you can look up. Where we built the site, the link opens it."
                     onNavigate={onNavigate}
                 />
 

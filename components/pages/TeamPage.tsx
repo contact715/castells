@@ -30,138 +30,26 @@ interface TeamMember {
     years?: number;
 }
 
+/*
+  Здесь стояли двенадцать человек: Sarah Mitchell «ex-Google Ads», David Park,
+  Elena Rodriguez, Michael Chang и другие — с достижениями вроде «Agency of the
+  Year 2021», «$50M+ Revenue Generated», «Managed $20M+ Ad Spend», «Google
+  Premier Partner». Все двенадцать фотографий взяты со стокового фотобанка,
+  включая фотографию основателя — то есть посторонний человек был подписан
+  именем владельца агентства.
+
+  Осталась одна карточка, и в ней нет ни одного непроверенного утверждения.
+  Настоящие люди появятся здесь, когда владелец пришлёт имена, роли и фото.
+*/
 const TEAM_MEMBERS: TeamMember[] = [
     {
         name: 'Dmitrii Z.',
-        role: 'Founder & CEO',
+        role: 'Founder',
         category: ['leadership', 'strategy'],
-        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
-        bio: '12+ years building revenue-focused marketing agencies. Former growth lead at multiple 8-figure companies.',
-        achievements: ['Agency of the Year 2021', '500+ Campaigns Launched', '$50M+ Revenue Generated'],
-        expertise: ['Growth Strategy', 'Performance Marketing', 'Team Building'],
-        location: 'Los Angeles, CA',
-        years: 12
-    },
-    {
-        name: 'Sarah Mitchell',
-        role: 'Head of Paid Media',
-        category: ['strategy', 'analytics'],
-        image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80',
-        bio: 'Ex-Google Ads specialist with 8+ years optimizing multi-million dollar ad budgets. Expert in ROAS optimization.',
-        achievements: ['3.2x Average ROAS', 'Managed $20M+ Ad Spend', 'Google Premier Partner'],
-        expertise: ['Google Ads', 'Meta Ads', 'Performance Optimization'],
-        location: 'Remote',
-        years: 8
-    },
-    {
-        name: 'David Park',
-        role: 'Head of Data & Analytics',
-        category: ['analytics', 'strategy'],
-        image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=800&q=80',
-        bio: 'Data scientist turned marketer. Built proprietary attribution models that increased client ROI by 40%.',
-        achievements: ['Custom Attribution Models', '40% ROI Increase', 'Data Science Expert'],
-        expertise: ['Attribution Modeling', 'Data Analysis', 'Machine Learning'],
-        location: 'New York, NY',
-        years: 7
-    },
-    {
-        name: 'Elena Rodriguez',
-        role: 'Creative Director',
-        category: ['creative', 'strategy'],
-        image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80',
-        bio: 'Award-winning creative strategist. Her campaigns have generated over $15M in revenue for clients.',
-        achievements: ['Award-Winning Campaigns', '$15M+ Revenue Generated', 'Creative Excellence'],
-        expertise: ['Creative Strategy', 'Brand Development', 'Video Production'],
-        location: 'Los Angeles, CA',
-        years: 10
-    },
-    {
-        name: 'James Wilson',
-        role: 'Lead Developer',
-        category: ['development', 'operations'],
-        image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=80',
-        bio: 'Full-stack developer specializing in marketing automation and conversion optimization. Built 50+ landing pages.',
-        achievements: ['50+ Landing Pages Built', '40% Avg Conversion Increase', 'Automation Expert'],
-        expertise: ['Web Development', 'Marketing Automation', 'Conversion Optimization'],
-        location: 'Remote',
-        years: 9
-    },
-    {
-        name: 'Michael Chang',
-        role: 'Automation Specialist',
-        category: ['development', 'operations'],
-        image: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&q=80',
-        bio: 'Marketing automation expert. Built systems that save clients 20+ hours per week through intelligent automation.',
-        achievements: ['20+ Hours Saved Weekly', 'Automation Systems', 'Process Optimization'],
-        expertise: ['Marketing Automation', 'CRM Integration', 'Workflow Design'],
-        location: 'Remote',
-        years: 6
-    },
-    {
-        name: 'Anna Kowalski',
-        role: 'Content Strategist',
-        category: ['creative', 'strategy'],
-        image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=800&q=80',
-        bio: 'Content strategist with expertise in high-ticket service industries. Her content has generated 500+ qualified leads.',
-        achievements: ['500+ Qualified Leads', 'Content Strategy Expert', 'SEO Specialist'],
-        expertise: ['Content Strategy', 'SEO', 'Copywriting'],
-        location: 'Remote',
-        years: 7
-    },
-    {
-        name: 'Marcus Thorne',
-        role: 'Client Success Director',
-        category: ['operations', 'strategy'],
-        image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80',
-        bio: 'Client success expert with 95% client retention rate. Ensures every client achieves their revenue goals.',
-        achievements: ['95% Client Retention', '100+ Clients Served', 'Client Success Expert'],
-        expertise: ['Account Management', 'Client Relations', 'Revenue Growth'],
-        location: 'Los Angeles, CA',
-        years: 8
-    },
-    {
-        name: 'Lisa Chen',
-        role: 'SEO Specialist',
-        category: ['strategy', 'analytics'],
-        image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=800&q=80',
-        bio: 'SEO expert who has increased organic traffic by 300%+ for multiple clients. Expert in technical SEO.',
-        achievements: ['300%+ Traffic Increase', 'SEO Expert', 'Technical SEO'],
-        expertise: ['SEO Strategy', 'Technical SEO', 'Link Building'],
-        location: 'Remote',
-        years: 6
-    },
-    {
-        name: 'Robert Martinez',
-        role: 'Head of Operations',
-        category: ['operations', 'leadership'],
-        image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80',
-        bio: 'Operations leader ensuring seamless delivery across all client projects. Expert in process optimization.',
-        achievements: ['Process Optimization', 'Team Leadership', 'Project Management'],
-        expertise: ['Operations', 'Project Management', 'Team Coordination'],
-        location: 'Los Angeles, CA',
-        years: 11
-    },
-    {
-        name: 'Jennifer Kim',
-        role: 'Senior Performance Marketer',
-        category: ['strategy', 'analytics'],
-        image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=800&q=80',
-        bio: 'Performance marketing specialist with expertise in scaling campaigns from $10K to $1M+ monthly ad spend.',
-        achievements: ['Scaled to $1M+ Ad Spend', 'Performance Marketing Expert', 'Campaign Scaling'],
-        expertise: ['Performance Marketing', 'Campaign Scaling', 'ROAS Optimization'],
-        location: 'Remote',
-        years: 7
-    },
-    {
-        name: 'Thomas Anderson',
-        role: 'UX/UI Designer',
-        category: ['creative', 'development'],
-        image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80',
-        bio: 'Designer focused on conversion-optimized experiences. His designs have increased conversion rates by 50%+.',
-        achievements: ['50%+ Conversion Increase', 'UX/UI Design Expert', 'Conversion Optimization'],
-        expertise: ['UX/UI Design', 'Conversion Design', 'User Research'],
-        location: 'Remote',
-        years: 8
+        image: '',
+        bio: 'Runs the agency and the client work. If you write to us, you are talking to him.',
+        expertise: ['Growth Strategy', 'Paid Media', 'Web Development'],
+        location: 'Santa Monica, CA',
     },
 ];
 
@@ -175,12 +63,12 @@ const CATEGORIES: { id: TeamCategory; label: string; icon: React.ComponentType<{
     { id: 'operations', label: 'Operations', icon: Briefcase },
 ];
 
-const TEAM_STATS = [
-    { value: 35, suffix: '+', label: 'Team Members', icon: Users },
-    { value: 150, suffix: '+', label: 'Years Combined Experience', icon: Award },
-    { value: 15, suffix: '', label: 'Countries Represented', icon: Globe },
-    { value: 95, suffix: '%', label: 'Client Retention Rate', icon: Heart },
-];
+/*
+  Здесь стояли четыре счётчика: «35+ Team Members», «150+ Years Combined
+  Experience», «15 Countries Represented», «95% Client Retention Rate».
+  Ни одно число не взято из наших данных. Блок не рисуется, пока считать нечего.
+*/
+const TEAM_STATS: { value: number; suffix: string; label: string; icon: React.ComponentType<{ className?: string }> }[] = [];
 
 const CULTURE_VALUES = [
     {
@@ -217,13 +105,13 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
     return (
         <>
             <SEO 
-                title="Our Team | Castells Agency - Expert Marketing Professionals" 
-                description="Meet the talented professionals behind our agency's success. World-class talent from Google, Meta, and top agencies. 35+ team members with 150+ years combined experience, serving clients from our Santa Monica headquarters and remotely across the US."
+                title="Team | Castells Media" 
+                description="The people behind Castells Media, a marketing agency in Santa Monica, California."
                 canonical="/team"
                 keywords="marketing team, digital marketing experts, Santa Monica marketing team, Los Angeles marketing professionals, Google Ads specialists, Meta Ads experts, performance marketing team"
                 geoRegion="US-CA"
                 geoPlacename="Santa Monica, California"
-                summary="Castells Agency team consists of 35+ marketing professionals with 150+ years combined experience. Team includes ex-Google and ex-Meta specialists, serving clients from Santa Monica headquarters and remotely across the US."
+                summary="The team behind Castells Media, a marketing agency based in Santa Monica, California."
                 mainEntity="Marketing Team"
             />
             <SchemaMarkup
@@ -291,7 +179,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                 <section className="pt-12 md:pt-16 pb-0 bg-ivory relative overflow-hidden">
                     <div className="container mx-auto px-6 relative z-10 pb-6">
                         <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4">
-                            {CATEGORIES.map((category) => {
+                            {TEAM_MEMBERS.length > 3 && CATEGORIES.map((category) => {
                                 const Icon = category.icon;
                                 const isActive = activeCategory === category.id;
                                 return (
@@ -339,12 +227,22 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                                     >
                                         {/* Image */}
                                         <div className="relative aspect-3/4 overflow-hidden">
-                                            <img
-                                                src={member.image}
-                                                alt={member.name}
-                                                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                                                style={{ transform: 'translateZ(0)' }}
-                                            />
+                                            {/* Нет фотографии — инициалы. Чужое лицо со стока вместо
+                                                своего человека мы больше не показываем. */}
+                                            {member.image ? (
+                                                <img
+                                                    src={member.image}
+                                                    alt={member.name}
+                                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                                    style={{ transform: 'translateZ(0)' }}
+                                                />
+                                            ) : (
+                                                <div className="w-full h-full bg-coral-gradient flex items-center justify-center">
+                                                    <span className="font-display text-5xl font-semibold text-white select-none">
+                                                        {member.name.split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]).join('')}
+                                                    </span>
+                                                </div>
+                                            )}
                                             <div className="absolute inset-0 bg-linear-to-t from-black/60 via-black/20 to-transparent rounded-xl" />
                                             
                                             {/* Category Badges */}

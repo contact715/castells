@@ -1,211 +1,110 @@
-
-import React, { useMemo } from 'react';
+import React from 'react';
 import { m as motion } from 'framer-motion';
-import { ArrowLeft, Users, Target, Zap, TrendingUp, Award, Rocket, Calendar } from 'lucide-react';
-import { Highlighter } from '../ui/Highlighter';
-import Team from '../sections/Team';
-import AnimatedHeading from '../ui/AnimatedHeading';
-import ScrollTimeline, { ScrollTimelineEntry } from '../ui/ScrollTimeline';
+import { Target, Zap, Users } from 'lucide-react';
 import { PageHeader } from '../ui/PageHeader';
+import { CASE_STUDIES } from '../../constants';
 import type { NavigateFn } from '../../types';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
+
+/*
+  Что здесь стояло до 22 августа 2026 и почему это убрано.
+
+  Лента истории на семь лет: «Agency of the Year 2021» от Growth Marketing
+  Awards, публикация в Forbes, офисы в Нью-Йорке и Лондоне, клиенты в
+  15 странах, «$500M milestone», «выросли с 5 до 25 человек», «наняли
+  людей из Google и Meta». Ни одно из этих событий не подтверждено ничем.
+
+  Плюс три стоковые фотографии с чужого фотобанка, одна из них подписана
+  «Global HQ — Santa Monica» — то есть чужой офис выдан за наш.
+
+  Плюс «основана в 2012» и «12+ years», при том что на других страницах
+  сайта стояли 2017 и 2018. Год основания владельцем не подтверждён, и
+  пока он не подтверждён, мы его не называем вовсе.
+
+  Осталось то, что можно проверить: юрлицо, город, чем занимаемся, для
+  кого, и клиенты, которых можно открыть и посмотреть.
+*/
 
 interface AboutPageProps {
   onBack: () => void;
   onNavigate: NavigateFn;
 }
 
-const TIMELINE_ENTRIES: ScrollTimelineEntry[] = [
+const HOW_WE_WORK = [
   {
-    year: '2017',
-    title: 'The Beginning',
-    icon: Rocket,
-    description: `Castells was founded with a mission to break away from traditional agency models. We started with a small team of growth hackers and data scientists, determined to prove that performance marketing could be both creative and measurable.`,
-    items: [
-      'Founded with focus on revenue, not vanity metrics',
-      'Worked with three clients in first year',
-      'Proved small budgets could generate outsized returns',
-      'Built foundation for data-driven methodology'
-    ],
-    image: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1200&q=80'
-  },
-  {
-    year: '2018',
-    title: 'First $10M in Revenue',
-    icon: TrendingUp,
-    description: `Our data-driven approach paid off spectacularly. We helped our first major client scale from $2M to $10M in annual revenue within 12 months. This milestone validated our thesis that revenue-focused marketing beats vanity metrics every time.`,
-    items: [
-      'Helped client scale from $2M to $10M in 12 months',
-      '400% increase in revenue with only 150% increase in ad spend',
-      'Built custom attribution models',
-      'Tested hundreds of creative variations'
-    ],
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80'
-  },
-  {
-    year: '2019',
-    title: 'Team Expansion',
-    icon: Users,
-    description: `We grew from 5 to 25 team members, opening our Santa Monica headquarters. We hired the best talent from Google, Meta, and top agencies, building a team of growth experts who think like owners, not employees.`,
-    items: [
-      'Grew from 5 to 25 team members',
-      'Opened Santa Monica headquarters',
-      'Hired talent from Google, Meta, and top agencies',
-      'Built proprietary analytics platforms'
-    ],
-    image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=1200&q=80'
-  },
-  {
-    year: '2020',
-    title: 'Pandemic Pivot',
     icon: Target,
-    description: `When COVID hit, we helped 50+ businesses pivot online. We launched e-commerce campaigns that generated $50M+ in new revenue for clients. Our agility and speed became our superpower.`,
-    items: [
-      'Helped 50+ businesses pivot online',
-      'Generated $50M+ in new revenue for clients',
-      'Launched campaigns in days instead of weeks',
-      'Built thriving e-commerce operations'
-    ],
-    image: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=1200&q=80'
+    title: 'We test, not guess',
+    desc: 'Small budget first, then scale what actually brings calls. No six-month contracts before the first result.',
   },
   {
-    year: '2021',
-    title: 'Industry Recognition',
-    icon: Award,
-    description: `We were named "Agency of the Year" by Growth Marketing Awards and featured in Forbes. But more importantly, our clients collectively generated over $200M in revenue through our campaigns.`,
-    items: [
-      'Named "Agency of the Year" by Growth Marketing Awards',
-      'Featured in Forbes',
-      'Clients generated over $200M in revenue',
-      'Scaled methodology across industries'
-    ],
-    image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&q=80'
+    icon: Zap,
+    title: 'We move fast',
+    desc: 'A landing page and a first campaign go live in days. Waiting a month to launch costs more than launching imperfectly.',
   },
   {
-    year: '2022',
-    title: 'Global Expansion',
-    icon: Rocket,
-    description: `Opened offices in New York and London. We now serve clients across 15 countries, from startups to Fortune 500 companies. Our remote-first culture allowed us to hire the best talent globally.`,
-    items: [
-      'Opened offices in New York and London',
-      'Serving clients across 15 countries',
-      'Remote-first culture',
-      'Global knowledge network'
-    ],
-    image: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1200&q=80'
-  },
-  {
-    year: '2023',
-    title: '$500M Milestone',
-    icon: TrendingUp,
-    description: `Our clients collectively generated over $500M in revenue through our campaigns. We launched our proprietary growth framework and began offering fractional CMO services to scale-ups.`,
-    items: [
-      'Clients generated over $500M in revenue',
-      'Launched proprietary growth framework',
-      'Began fractional CMO services',
-      'Battle-tested across hundreds of campaigns'
-    ],
-    image: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1200&q=80'
-  },
-  {
-    year: '2024',
-    title: 'AI-Powered Growth',
-    icon: Award,
-    description: `We integrated AI into every aspect of our operations. Our predictive models and automated optimization systems help clients achieve 3x better ROAS. We're not just an agency—we're a growth technology company.`,
-    items: [
-      'AI integrated into all operations',
-      '3x better ROAS for clients',
-      'Predictive models and automated optimization',
-      'Pioneering new way of growth marketing'
-    ],
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&q=80'
-  },
-  {
-    year: '2025',
-    title: 'The Future of Growth',
-    icon: Rocket,
-    description: `We're building the next generation of growth marketing tools. Our platform combines AI, automation, and human expertise to deliver unprecedented results. We're not just keeping up with the future—we're creating it.`,
-    items: [
-      'Next-gen growth platform launch',
-      'Expanded AI capabilities',
-      'Global team of 50+ experts',
-      'Revolutionizing client success'
-    ],
-    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1200&q=80'
-  },
-  {
-    year: '2026',
-    title: 'Industry Leadership',
-    icon: TrendingUp,
-    description: `As we look ahead, we're setting new standards for what a growth agency can achieve. With cutting-edge technology, world-class talent, and an unwavering focus on revenue, we're helping businesses dominate their markets.`,
-    items: [
-      'Industry-leading growth platform',
-      'Expanded global presence',
-      'Innovation in marketing technology',
-      'Setting new industry standards'
-    ],
-    image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&q=80'
+    icon: Users,
+    title: 'One team, one owner',
+    desc: 'You talk to the people doing the work, not to an account manager who forwards your questions.',
   },
 ];
 
-const AboutPage: React.FC<AboutPageProps> = React.memo(({ onBack, onNavigate }) => {
-  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
-  
+/** Клиенты, у которых есть живой сайт нашей работы — их можно открыть и проверить. */
+const CLIENTS_WITH_SITES = CASE_STUDIES.filter((cs) => cs.website);
+
+const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
+  const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://www.castells.media';
+
   return (
     <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20 animate-in fade-in duration-500">
-      <SEO 
-        title="About Us | Castells Agency - Revenue-Focused Digital Marketing" 
-        description="We are the Anti-Agency. 12+ years helping contractors and service providers in Santa Monica, Los Angeles, and across the US dominate their local markets through data-driven strategies. Obsessed with revenue, not vanity metrics."
+      <SEO
+        title="About Castells Media | Santa Monica marketing agency"
+        description="Castells Media Inc, a marketing agency in Santa Monica, California, working with home service businesses across the United States."
         canonical="/about"
-        keywords="digital marketing agency, revenue-focused marketing, Santa Monica marketing agency, Los Angeles marketing, local marketing services, performance marketing, growth marketing agency"
+        keywords="marketing agency Santa Monica, home service marketing, HVAC marketing agency, local marketing California"
         geoRegion="US-CA"
         geoPlacename="Santa Monica, California"
-        summary="Castells Agency is a revenue-focused digital marketing agency founded in 2012. We help contractors and service providers dominate their local markets through data-driven strategies. 12+ years in business, 500+ projects delivered, $50M+ revenue generated for clients."
-        mainEntity="Digital Marketing Agency"
+        summary="Castells Media Inc is a marketing agency based in Santa Monica, California. It builds websites, runs Google and Meta ads and sets up automation for home service businesses across the US."
+        mainEntity="Marketing Agency"
       />
       <SchemaMarkup
         type="BreadcrumbList"
         data={{
           itemListElement: [
             { name: 'Home', item: `${siteUrl}/` },
-            { name: 'About Us', item: `${siteUrl}/about` }
-          ]
+            { name: 'About', item: `${siteUrl}/about` },
+          ],
         }}
       />
-      <div className="container mx-auto px-6 pt-4 md:pt-6">
 
-        {/* Header */}
+      <div className="container mx-auto px-6 pt-4 md:pt-6">
         <PageHeader
           breadcrumbs={[
             { label: 'Home', action: () => onNavigate('home') },
-            { label: 'About', active: true }
+            { label: 'About', active: true },
           ]}
-          badge="About Us"
-          title="We are the Anti-Agency."
-          description="We founded Castells in 2012 with a simple thesis: Most agencies are burning their clients' money on vanity metrics. We built an infrastructure obsessed with one thing: Revenue."
+          badge="About"
+          title="A small agency for businesses that live on the phone ringing."
+          description="Castells Media Inc works out of Santa Monica, California, with home service businesses across the US: HVAC, appliance repair, plumbing, remodeling. We build the site, run the ads and set up the follow-up, so a job that was going to be lost gets booked instead."
           onNavigate={onNavigate}
         />
 
-        {/* Values Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-32">
-          {[
-            { icon: Target, title: 'Precision First', desc: "We don't guess. We test. Every decision is backed by data, not gut feelings." },
-            { icon: Zap, title: 'Velocity', desc: 'Money loves speed. We launch campaigns in days, not months.' },
-            { icon: Users, title: 'Partnership', desc: "We aren't a vendor. We are your growth department." }
-          ].map((value, index) => {
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24">
+          {HOW_WE_WORK.map((value, index) => {
             const Icon = value.icon;
             return (
               <motion.div
                 key={value.title}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 + index * 0.1, duration: 0.5 }}
+                transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
                 className="bg-white dark:bg-surface p-10 rounded-card shadow-spatial-card border border-black/5 dark:border-white/10 hover:border-coral/50 dark:hover:border-coral/40 hover:shadow-spatial-md transition-[border-color,box-shadow] duration-300"
               >
                 <div className="flex items-start gap-4 mb-6">
                   <Icon className="w-10 h-10 text-coral-text shrink-0" />
-                  <h3 className="font-display text-2xl font-semibold text-text-primary dark:text-white">{value.title}</h3>
+                  <h3 className="font-display text-2xl font-semibold text-text-primary dark:text-white">
+                    {value.title}
+                  </h3>
                 </div>
                 <p className="text-text-secondary dark:text-white/70">{value.desc}</p>
               </motion.div>
@@ -213,36 +112,70 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onBack, onNavigate }) 
           })}
         </div>
 
-        {/* Timeline Section */}
-        <div className="mb-32">
-          <ScrollTimeline
-            title="Our Journey"
-            description="From a small team in 2017 to a global growth agency. Scroll through our story and see how we've evolved, learned, and grown alongside our clients."
-            entries={TIMELINE_ENTRIES}
-          />
-        </div>
-
-        {/* Image Grid */}
-        <div className="grid grid-cols-12 gap-4 mb-32 h-[600px]">
-          <div className="col-span-8 h-full rounded-card overflow-hidden relative group">
-            <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1600&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" alt="Office" />
-            <div className="absolute bottom-6 left-6 bg-white dark:bg-surface px-4 py-2 rounded-lg text-xs font-bold uppercase tracking-widest text-text-primary dark:text-white border border-black/5 dark:border-white/10">Global HQ — Santa Monica</div>
-          </div>
-          <div className="col-span-4 flex flex-col gap-4 h-full">
-            <div className="h-1/2 rounded-card overflow-hidden relative group">
-              <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" alt="Meeting" />
+        {/*
+          Вместо ленты выдуманных достижений — то, что человек может открыть
+          в соседней вкладке и убедиться сам.
+        */}
+        <section className="mb-24">
+          <div className="max-w-3xl mb-10">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="w-2 h-2 rounded-full bg-coral-gradient shrink-0" aria-hidden="true" />
+              <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+                Check us
+              </span>
             </div>
-            <div className="h-1/2 rounded-card overflow-hidden relative group">
-              <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80" className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy" decoding="async" alt="Team" />
-            </div>
+            <h2 className="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-text-primary dark:text-white mb-3">
+              Sites we built, live right now
+            </h2>
+            <p className="text-text-secondary dark:text-white/70">
+              Open any of them. That is the whole proof we offer, and it is the kind you can verify without asking us.
+            </p>
           </div>
-        </div>
 
-        {/* Reuse Team Component */}
-        <div className="mb-20">
-          <Team onNavigate={onNavigate} />
-        </div>
+          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {CLIENTS_WITH_SITES.map((client) => (
+              <li key={client.id}>
+                <a
+                  href={client.website}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block bg-white dark:bg-surface p-6 rounded-card border border-black/5 dark:border-white/10 hover:border-coral/50 transition-colors"
+                >
+                  <span className="block font-display text-xl font-semibold text-text-primary dark:text-white">
+                    {client.client}
+                  </span>
+                  <span className="block text-sm text-text-secondary dark:text-white/60 mt-1">
+                    {client.industry}
+                    {client.location ? ` · ${client.location}` : ''}
+                  </span>
+                  <span className="block text-sm text-coral-text mt-3 break-all">
+                    {client.website?.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
 
+        <section className="mb-10">
+          <div className="bg-white dark:bg-surface p-8 md:p-10 rounded-card border border-black/5 dark:border-white/10">
+            <h2 className="font-display text-2xl font-semibold text-text-primary dark:text-white mb-4">
+              Where to find us
+            </h2>
+            <address className="not-italic text-text-secondary dark:text-white/70 leading-relaxed">
+              Castells Media Inc
+              <br />
+              Santa Monica, California
+            </address>
+            <button
+              type="button"
+              onClick={() => onNavigate('contact')}
+              className="mt-6 inline-flex items-center gap-2 text-coral-text font-semibold hover:underline"
+            >
+              Talk to us
+            </button>
+          </div>
+        </section>
       </div>
     </div>
   );

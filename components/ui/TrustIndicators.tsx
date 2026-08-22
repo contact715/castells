@@ -16,38 +16,22 @@ interface TrustIndicatorsProps {
   variant?: 'default' | 'compact';
 }
 
-const DEFAULT_INDICATORS: TrustIndicator[] = [
-  {
-    icon: TrendingUp,
-    value: '500+',
-    label: 'Projects Delivered',
-    description: 'Successful campaigns across industries'
-  },
-  {
-    icon: Award,
-    value: '$50M+',
-    label: 'Revenue Generated',
-    description: 'For our clients through our campaigns'
-  },
-  {
-    icon: Star,
-    value: '3.2x',
-    label: 'Average ROAS',
-    description: 'Return on ad spend across all campaigns'
-  },
-  {
-    icon: Users,
-    value: '98%',
-    label: 'Client Satisfaction',
-    description: 'Clients who would recommend us'
-  },
-];
+/*
+  Четыре числа без источника: «500+ Projects Delivered», «$50M+ Revenue
+  Generated», «3.2x Average ROAS», «98% Client Satisfaction». Блок стоял на
+  всех страницах услуг и ниш. Пока настоящих чисел с источником нет, блок
+  не рисуется.
+*/
+const DEFAULT_INDICATORS: TrustIndicator[] = [];
 
 const TrustIndicators: React.FC<TrustIndicatorsProps> = React.memo(({
   className = '',
   variant = 'default'
 }) => {
   const prefersReducedMotion = useReducedMotion();
+
+  // Нечего показывать — блока нет. Пустая полоса читается как поломка.
+  if (!DEFAULT_INDICATORS.length) return null;
 
   if (variant === 'compact') {
     return (

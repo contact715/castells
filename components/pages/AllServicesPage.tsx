@@ -58,12 +58,12 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
     <div className="min-h-screen bg-ivory dark:bg-[#191919]">
       <SEO
         title="Services | Castells Agency - Full-Stack Growth Marketing Services"
-        description="Full-stack growth services: branding, development, automation, analytics, paid media, and SEO. Serving businesses in Santa Monica, Los Angeles, and nationwide. 500+ projects delivered, 3.2x average ROAS, $50M+ revenue generated."
+        description="Websites and branding, Google and Meta ads, local presence, automation and CRM. Castells Media, Santa Monica, California, working with businesses across the US."
         canonical="/services"
         keywords="digital marketing services, branding services, web development, marketing automation, SEO services, paid advertising, Santa Monica marketing services, Los Angeles marketing agency, full-stack marketing"
         geoRegion="US-CA"
         geoPlacename="Santa Monica, California"
-        summary="Full-stack growth marketing services by Castells Agency including branding, web development, automation, analytics, paid media, and SEO. 500+ projects delivered with 3.2x average ROAS and $50M+ revenue generated. Serving businesses in Santa Monica, Los Angeles, and nationwide."
+        summary="Services by Castells Media: websites and branding, paid media on Google and Meta, local presence on Google and Yelp, automation and CRM. Santa Monica, California."
         mainEntity="Marketing Services"
       />
       <SchemaMarkup
@@ -287,7 +287,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                 <span className="text-text-secondary">market leader</span>
               </AnimatedHeading>
               <p className="text-lg text-text-secondary leading-relaxed mb-8">
-                Our battle-tested framework has generated over $50M in revenue for clients. 
+                We build the site, run the ads and set up the follow-up. 
                 Every step is designed for speed and measurable results.
               </p>
               <Button size="lg" onClick={() => onNavigate?.('contact')} className="group">
@@ -353,7 +353,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
               { icon: Target, title: 'Revenue Obsessed', desc: 'We optimize for profit, not vanity metrics. Every decision is backed by data.' },
               { icon: Zap, title: 'Speed to Market', desc: 'Campaigns live in 14 days. Your competition will never see it coming.' },
               { icon: Shield, title: 'Full Ownership', desc: 'You own everything we create. No hostage situations, ever.' },
-              { icon: TrendingUp, title: 'Proven Results', desc: 'Average 3.2x ROAS across 500+ campaigns. We have the receipts.' },
+              { icon: TrendingUp, title: 'Real clients', desc: 'Named clients with live sites you can open and check yourself.' },
               { icon: Clock, title: '24/7 Access', desc: 'Real-time dashboards and Slack access to your dedicated team.' },
               { icon: Sparkles, title: 'White Glove Service', desc: 'A dedicated marketing director, not just a support ticket.' },
             ].map((item, index) => {
