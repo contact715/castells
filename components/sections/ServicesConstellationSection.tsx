@@ -31,6 +31,12 @@ import type { NavigateFn } from '../../types';
   4. Карточка стала ссылкой на страницу услуг: раньше человек, которому
      стало интересно, упирался в тупик — нажимать было некуда.
 
+  Третий заход, владелец: «в ряд 1 блок, а не два». Карточки шли сеткой
+  два на два, и каждая была узкой: список входящего вытягивался в одну
+  длинную колонку, а цена жалась к названию. Теперь одна карточка на всю
+  ширину, а внутри три зоны — название с ценой, содержимое двумя
+  колонками, переход. Список стал таблицей, а не лентой.
+
   Цены подтверждены владельцем 22 августа 2026.
 */
 
@@ -101,7 +107,12 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
+        {/*
+          Одна карточка в ряд, а не две. На всю ширину помещается разбор
+          услуги: слева название и цена, в середине что входит — двумя
+          колонками, а не одной длинной лентой, справа переход.
+        */}
+        <div className="flex flex-col gap-4">
           {SERVICES.map((service) => {
             const Icon = service.icon;
             return (
@@ -109,11 +120,11 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
                 key={service.title}
                 href="/services"
                 onClick={goToServices}
-                className="group flex flex-col bg-white/[0.03] border border-white/10 rounded-card p-6 md:p-8 hover:border-white/30 hover:bg-white/[0.05] transition-colors duration-300"
+                className="group grid grid-cols-1 lg:grid-cols-[300px_1fr_auto] gap-6 lg:gap-10 items-start bg-white/[0.03] border border-white/10 rounded-card p-6 md:p-8 hover:border-white/30 hover:bg-white/[0.05] transition-colors duration-300"
               >
-                {/* Цена стоит рядом с названием: это первое, что человек ищет глазами */}
-                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 mb-5">
-                  <div className="flex items-center gap-4 min-w-0">
+                {/* Название и цена: то, ради чего человек скользит взглядом по списку */}
+                <div>
+                  <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 rounded-element bg-coral-gradient-subtle flex items-center justify-center shrink-0">
                       <Icon className="w-6 h-6 text-coral-text" aria-hidden="true" />
                     </div>
@@ -121,49 +132,45 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
                       {service.title}
                     </h3>
                   </div>
-                  {/*
-                    На узком экране заголовок и цена в одной строке жмут друг
-                    друга: «Website and branding» ломается на три строки, а
-                    подпись «one-time, from» шириной со всю колонку. Поэтому
-                    до 640px цена стоит под названием, дальше — справа от него.
-                  */}
-                  <div className="flex items-baseline gap-2 sm:block sm:text-right shrink-0">
-                    <div className="font-display text-2xl md:text-3xl text-white leading-tight sm:order-2">
+                  <div className="flex items-baseline gap-2">
+                    <span className="font-display text-2xl md:text-3xl text-white leading-tight">
                       {service.price}
-                    </div>
-                    <div className="text-[11px] uppercase tracking-widest text-white/55 whitespace-nowrap sm:order-1">
+                    </span>
+                    <span className="text-[11px] uppercase tracking-widest text-white/55">
                       {service.priceNote}
-                    </div>
+                    </span>
                   </div>
                 </div>
 
-                <p className="text-white/65 text-base leading-relaxed mb-6">{service.promise}</p>
+                {/* Что это даёт и что входит */}
+                <div className="min-w-0">
+                  <p className="text-white/65 text-base leading-relaxed mb-5">{service.promise}</p>
 
-                <ul className="space-y-2 mb-6">
-                  {service.includes.map((item) => (
-                    <li key={item} className="flex items-start gap-3 text-white/60 text-sm md:text-base">
-                      <span className="w-1.5 h-1.5 rounded-full bg-coral shrink-0 mt-2" aria-hidden="true" />
-                      {item}
-                    </li>
-                  ))}
-                </ul>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 mb-5">
+                    {service.includes.map((item) => (
+                      <li key={item} className="flex items-start gap-3 text-white/60 text-sm md:text-base">
+                        <span className="w-1.5 h-1.5 rounded-full bg-coral shrink-0 mt-2" aria-hidden="true" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
 
-                {/*
-                  Строка про ситуацию, а не про результат. Человек должен узнать
-                  здесь себя; обещать ему цифры мы не будем.
-                */}
-                <div className="mt-auto pt-5 border-t border-white/10 flex items-end justify-between gap-4">
-                  <p className="text-white/50 text-sm leading-relaxed">
+                  {/*
+                    Строка про ситуацию, а не про результат. Человек должен узнать
+                    здесь себя; обещать ему цифры мы не будем.
+                  */}
+                  <p className="text-white/50 text-sm leading-relaxed pt-4 border-t border-white/10">
                     <span className="text-white/50">This is for you if </span>
                     <span className="font-display italic text-white/70 text-base">{service.forYou}</span>
                   </p>
-                  <span
-                    className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center shrink-0 group-hover:bg-white group-hover:border-white transition-colors duration-300"
-                    aria-hidden="true"
-                  >
-                    <ArrowUpRight className="w-4 h-4 text-white/60 group-hover:text-black transition-colors duration-300" />
-                  </span>
                 </div>
+
+                <span
+                  className="hidden lg:flex w-9 h-9 rounded-full bg-white/5 border border-white/10 items-center justify-center shrink-0 group-hover:bg-white group-hover:border-white transition-colors duration-300"
+                  aria-hidden="true"
+                >
+                  <ArrowUpRight className="w-4 h-4 text-white/60 group-hover:text-black transition-colors duration-300" />
+                </span>
               </a>
             );
           })}
