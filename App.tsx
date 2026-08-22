@@ -178,7 +178,7 @@ function App() {
                   </LazySection>
                   <LazySection rootMargin="300px">
                     <Suspense fallback={null}>
-                      <ServicesConstellation />
+                      <ServicesConstellation onNavigate={navigateTo} />
                     </Suspense>
                   </LazySection>
                   <LazySection rootMargin="300px">
