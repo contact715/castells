@@ -137,7 +137,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
 
               <AnimatedHeading
                 as="h1"
-                className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] tracking-tight text-text-primary mb-6"
+                className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.05] tracking-tight text-text-primary mb-6"
                 delay={0.2}
               >
                 Built for founders<br />
@@ -202,7 +202,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
               <Badge className="mb-4">Our Story</Badge>
               <AnimatedHeading
                 as="h2"
-                className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-text-primary mb-6"
+                className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary mb-6"
                 delay={0.1}
               >
                 From frustration<br />
@@ -289,7 +289,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
             <Badge className="mb-4">Our Values</Badge>
             <AnimatedHeading
               as="h2"
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-text-primary mb-6"
+              className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary mb-6"
               delay={0.1}
             >
               What we stand for
@@ -335,7 +335,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
               <Badge className="mb-4">Leadership</Badge>
               <AnimatedHeading
                 as="h2"
-                className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-text-primary mb-6"
+                className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary mb-6"
                 delay={0.1}
               >
                 Meet the<br />
@@ -408,7 +408,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
               <Badge className="mb-4">Careers</Badge>
               <AnimatedHeading
                 as="h2"
-                className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-text-primary mb-6"
+                className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary mb-6"
                 delay={0.1}
               >
                 Join the<br />
@@ -489,7 +489,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
               <Badge className="mb-4">Blog & Insights</Badge>
               <AnimatedHeading
                 as="h2"
-                className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-text-primary mb-6"
+                className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary mb-6"
                 delay={0.1}
               >
                 Knowledge<br />
@@ -550,7 +550,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
           >
             <div className="relative z-10 max-w-2xl">
               <Badge className="mb-6">Get Started</Badge>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-text-primary mb-6">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary mb-6">
                 Ready to build your<br />
                 <span className="text-text-secondary">unfair advantage?</span>
               </h2>

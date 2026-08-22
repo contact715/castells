@@ -51,7 +51,7 @@ const FAQ: React.FC = () => {
           <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
             <div className="mb-8">
               <Badge className="mb-3">FAQ</Badge>
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight mb-4">
                 Common<br />
                 <span className="text-text-secondary">Queries</span>
               </h2>

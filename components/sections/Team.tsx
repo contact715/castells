@@ -56,7 +56,7 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
           <Badge className="mb-4">Our Team</Badge>
           <AnimatedHeading
             as="h2"
-            className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary dark:text-white leading-tight tracking-tight mb-6"
+            className="font-display text-3xl md:text-4xl lg:text-5xl font-normal text-text-primary dark:text-white leading-tight tracking-tight mb-6"
             delay={0.1}
           >
             Meet the<br />

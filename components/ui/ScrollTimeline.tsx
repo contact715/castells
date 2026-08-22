@@ -127,7 +127,7 @@ export default function ScrollTimeline({
       <div className="container mx-auto px-6 relative z-10">
         <div className="mx-auto max-w-3xl mb-16">
           <motion.h2
-            className="mb-4 font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary dark:text-white tracking-tight"
+            className="mb-4 font-display text-3xl md:text-4xl lg:text-5xl font-normal text-text-primary dark:text-white tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}

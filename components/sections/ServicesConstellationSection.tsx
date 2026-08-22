@@ -63,7 +63,7 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
             <span className="w-2 h-2 rounded-full bg-coral-gradient shrink-0" aria-hidden="true" />
             <span className="text-xs font-bold uppercase tracking-widest text-white/40">What we do</span>
           </div>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-white">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-white">
             Four things a service business
             <br />
             <span className="text-white/40">needs to get booked</span>

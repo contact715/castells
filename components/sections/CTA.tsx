@@ -27,7 +27,7 @@ const CTA: React.FC = () => {
                     <div className="max-w-xl sticky top-24">
                         <Badge className="mb-3">Limited Availability: Q1 2026</Badge>
 
-                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold mb-8 leading-none tracking-tight">
+                        <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal mb-8 leading-none tracking-tight">
                             Ready to<br />
                             <span className="text-text-secondary">Scale?</span>
                         </h2>

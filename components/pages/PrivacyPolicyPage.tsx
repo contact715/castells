@@ -35,7 +35,7 @@ const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => 
             </div>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">What we collect</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">What we collect</h2>
               <ul className="list-disc pl-6 text-text-secondary space-y-2">
                 <li><span className="font-semibold text-text-primary">Contact data</span>: name, email address, phone number, and message details you submit through our website forms.</li>
                 <li><span className="font-semibold text-text-primary">Business data</span>: website URL, company name, and marketing context you share with us.</li>
@@ -45,7 +45,7 @@ const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => 
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">How we use information</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">How we use information</h2>
               <ul className="list-disc pl-6 text-text-secondary space-y-2">
                 <li>Respond to your requests and provide proposals, audits, or consultations.</li>
                 <li>Send you service updates, appointment reminders, and project status notifications via email or SMS (with your consent).</li>
@@ -56,7 +56,7 @@ const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => 
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">SMS/Text Messaging</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">SMS/Text Messaging</h2>
               <p className="text-text-secondary">
                 By providing your phone number and checking the SMS consent checkbox on our contact form, you agree to receive text messages from Castells Agency LLC. These messages may include:
               </p>
@@ -83,21 +83,21 @@ const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => 
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">Sharing</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">Sharing</h2>
               <p className="text-text-secondary">
                 We do not sell your personal data. We may share data with vetted service providers (hosting, analytics, email, CRM, SMS delivery platforms) strictly to operate and improve our services. These providers are contractually bound to protect your information and use it only for the purposes we specify.
               </p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">Data retention</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">Data retention</h2>
               <p className="text-text-secondary">
                 We retain your personal information for as long as necessary to provide our services and fulfill the purposes described in this policy. SMS consent records are retained for the duration of your relationship with us and for a reasonable period thereafter to comply with legal obligations.
               </p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">Your choices</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">Your choices</h2>
               <ul className="list-disc pl-6 text-text-secondary space-y-2">
                 <li>Request access, correction, or deletion of your personal information at any time.</li>
                 <li>Opt out of SMS messages by replying STOP to any text message.</li>
@@ -107,7 +107,7 @@ const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => 
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">Contact</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">Contact</h2>
               <p className="text-text-secondary">
                 For privacy requests or questions about this policy, email <a className="text-coral-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a> or write to us at: Castells Agency LLC, Santa Monica, CA 90401.
               </p>

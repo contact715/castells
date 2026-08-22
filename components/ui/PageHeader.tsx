@@ -78,7 +78,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
 
           <AnimatedHeading
             as="h1"
-            className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-tight text-text-primary dark:text-white mb-4"
+            className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-[1.1] tracking-tight text-text-primary dark:text-white mb-4"
             delay={0.1}
           >
             {title}

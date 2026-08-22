@@ -467,7 +467,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                         </div>
                         <AnimatedHeading
                             as="h2"
-                            className="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-text-primary mb-3"
+                            className="font-display text-3xl md:text-4xl font-normal leading-tight tracking-tight text-text-primary mb-3"
                             delay={0.15}
                         >
                             What people say
@@ -566,7 +566,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                         </div>
                         <AnimatedHeading
                             as="h2"
-                            className="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-text-primary mb-3"
+                            className="font-display text-3xl md:text-4xl font-normal leading-tight tracking-tight text-text-primary mb-3"
                             delay={0.15}
                         >
                             Explore our world

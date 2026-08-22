@@ -50,7 +50,7 @@ const TrustIndicators: React.FC<TrustIndicatorsProps> = React.memo(({
               <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center mx-auto mb-3">
                 <Icon className="w-6 h-6 text-coral-text" />
               </div>
-              <div className="font-display text-3xl font-semibold text-text-primary mb-1">
+              <div className="font-display text-3xl font-normal text-text-primary mb-1">
                 {indicator.value}
               </div>
               <div className="text-sm text-text-secondary font-medium">
@@ -75,7 +75,7 @@ const TrustIndicators: React.FC<TrustIndicatorsProps> = React.memo(({
           </div>
           <AnimatedHeading
             as="h2"
-            className="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-text-primary mb-3"
+            className="font-display text-3xl md:text-4xl font-normal leading-tight tracking-tight text-text-primary mb-3"
             delay={0.1}
           >
             Proven results you can trust
@@ -100,7 +100,7 @@ const TrustIndicators: React.FC<TrustIndicatorsProps> = React.memo(({
                 <div className="w-16 h-16 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
                   <Icon className="w-8 h-8 text-coral-text group-hover:text-white dark:group-hover:text-black transition-colors" />
                 </div>
-                <div className="font-display text-4xl md:text-5xl font-semibold text-text-primary mb-2">
+                <div className="font-display text-4xl md:text-5xl font-normal text-text-primary mb-2">
                   {indicator.value}
                 </div>
                 <div className="text-lg font-semibold text-text-primary mb-2">

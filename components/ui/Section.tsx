@@ -61,7 +61,7 @@ export const SectionHeader: React.FC<SectionHeaderProps> = ({
 
             <AnimatedHeading
                 as="h2"
-                className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-[1.1] tracking-tight text-text-primary"
+                className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-[1.1] tracking-tight text-text-primary"
                 delay={0.1}
             >
                 {title}

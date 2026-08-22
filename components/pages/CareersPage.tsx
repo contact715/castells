@@ -94,7 +94,7 @@ const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
         >
           <AnimatedHeading
             as="h3"
-            className="font-display text-3xl font-semibold mb-4 text-text-primary dark:text-white"
+            className="font-display text-3xl font-normal mb-4 text-text-primary dark:text-white"
             delay={1.1}
           >
             Don't see your role?

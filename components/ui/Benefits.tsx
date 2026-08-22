@@ -67,7 +67,7 @@ const Benefits: React.FC<BenefitsProps> = React.memo(({
           </div>
           <AnimatedHeading
             as="h2"
-            className="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-text-primary mb-3"
+            className="font-display text-3xl md:text-4xl font-normal leading-tight tracking-tight text-text-primary mb-3"
             delay={0.1}
           >
             {title}

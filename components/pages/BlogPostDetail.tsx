@@ -316,7 +316,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
 
                         {/* Bottom: Title, Description and Category */}
                         <div className="mt-auto pt-8">
-                            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4 leading-[1.1] tracking-tight">
+                            <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal text-white mb-4 leading-[1.1] tracking-tight">
                                 {post.title}
                             </h1>
                             
@@ -355,7 +355,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                             {/* Sections */}
                             {post.content.sections.map((section, index) => (
                                 <section key={index} className="space-y-4">
-                                    <h2 className="font-display text-3xl font-semibold text-text-primary dark:text-white leading-tight">
+                                    <h2 className="font-display text-3xl font-normal text-text-primary dark:text-white leading-tight">
                                         {section.heading}
                                     </h2>
                                     <p className="text-lg text-text-secondary dark:text-white/70 leading-relaxed">

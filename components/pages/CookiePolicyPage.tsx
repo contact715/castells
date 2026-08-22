@@ -34,14 +34,14 @@ const CookiePolicyPage: React.FC<CookiePolicyPageProps> = ({ onNavigate }) => {
             </div>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">What cookies are</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">What cookies are</h2>
               <p className="text-text-secondary">
                 Cookies are small text files stored on your device. They help websites function properly and can be used for analytics and personalization.
               </p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">How we use cookies</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">How we use cookies</h2>
               <ul className="list-disc pl-6 text-text-secondary space-y-2">
                 <li><span className="font-semibold text-text-primary">Essential</span>: required for core functionality (for example, remembering certain preferences).</li>
                 <li><span className="font-semibold text-text-primary">Performance</span>: analytics to understand usage and improve UX (when enabled).</li>
@@ -49,14 +49,14 @@ const CookiePolicyPage: React.FC<CookiePolicyPageProps> = ({ onNavigate }) => {
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">How to control cookies</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">How to control cookies</h2>
               <p className="text-text-secondary">
                 You can usually control cookies via your browser settings. Blocking all cookies may impact site functionality.
               </p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">Contact</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">Contact</h2>
               <p className="text-text-secondary">
                 Questions: <a className="text-coral-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a>
               </p>

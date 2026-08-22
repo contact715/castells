@@ -69,7 +69,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
             {/* Heading */}
             <AnimatedHeading
               as="h2"
-              className="font-display text-4xl md:text-5xl font-semibold text-text-primary mb-4 text-center"
+              className="font-display text-4xl md:text-5xl font-normal text-text-primary mb-4 text-center"
               delay={0.3}
             >
               Page Not Found
@@ -127,7 +127,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
                   Popular Pages
                 </span>
               </div>
-              <h3 className="font-display text-2xl md:text-3xl font-semibold text-text-primary mb-2">
+              <h3 className="font-display text-2xl md:text-3xl font-normal text-text-primary mb-2">
                 Or explore these pages
               </h3>
               <p className="text-text-secondary">

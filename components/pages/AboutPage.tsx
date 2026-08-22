@@ -124,7 +124,7 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
                 Check us
               </span>
             </div>
-            <h2 className="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-text-primary dark:text-white mb-3">
+            <h2 className="font-display text-3xl md:text-4xl font-normal leading-tight tracking-tight text-text-primary dark:text-white mb-3">
               Sites we built, live right now
             </h2>
             <p className="text-text-secondary dark:text-white/70">

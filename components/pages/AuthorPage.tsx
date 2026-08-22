@@ -25,7 +25,7 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
       <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
         <div className="container mx-auto px-6 pt-4 md:pt-6">
           <div className="text-center">
-            <h1 className="font-display text-4xl font-semibold text-text-primary mb-4">Author not found</h1>
+            <h1 className="font-display text-4xl font-normal text-text-primary mb-4">Author not found</h1>
             <Button onClick={onBack} variant="outline">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Go Back
@@ -96,7 +96,7 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
               </div>
               <AnimatedHeading
                 as="h1"
-                className="font-display text-4xl md:text-5xl font-semibold text-text-primary mb-2"
+                className="font-display text-4xl md:text-5xl font-normal text-text-primary mb-2"
                 delay={0.1}
               >
                 {author.name}

@@ -35,14 +35,14 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
             </div>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">1. Using the site</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">1. Using the site</h2>
               <p className="text-text-secondary">
                 You may browse our site and submit inquiries through our contact forms. You agree not to misuse the site, attempt to disrupt services, or submit unlawful content. You must be at least 18 years of age to use our services.
               </p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">2. SMS/Text messaging terms</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">2. SMS/Text messaging terms</h2>
               <p className="text-text-secondary">
                 By opting in to receive SMS/text messages from Castells Agency LLC, you agree to the following:
               </p>
@@ -58,28 +58,28 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">3. No guarantees</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">3. No guarantees</h2>
               <p className="text-text-secondary">
                 Any examples, metrics, or case studies are illustrative. Marketing results vary based on market conditions, budget, competition, and many other factors. Past results do not guarantee future performance.
               </p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">4. Intellectual property</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">4. Intellectual property</h2>
               <p className="text-text-secondary">
                 Site content (text, visuals, code, branding) belongs to Castells Agency LLC or its licensors and may not be copied, reproduced, or reused without prior written permission.
               </p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">5. Links & third parties</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">5. Links & third parties</h2>
               <p className="text-text-secondary">
                 We may link to third-party websites or tools. We are not responsible for their content, privacy practices, or terms of service.
               </p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">6. Privacy</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">6. Privacy</h2>
               <p className="text-text-secondary">
                 Your use of our services is also governed by our{' '}
                 <button
@@ -94,14 +94,14 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">7. Changes to these terms</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">7. Changes to these terms</h2>
               <p className="text-text-secondary">
                 We may update these Terms from time to time. Continued use of our website or services after changes constitutes acceptance of the updated Terms.
               </p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-semibold text-text-primary">8. Contact</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">8. Contact</h2>
               <p className="text-text-secondary">
                 Questions about these terms: <a className="text-coral-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a>
               </p>

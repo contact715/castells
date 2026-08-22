@@ -238,7 +238,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                                                 />
                                             ) : (
                                                 <div className="w-full h-full bg-coral-gradient flex items-center justify-center">
-                                                    <span className="font-display text-5xl font-semibold text-white select-none">
+                                                    <span className="font-display text-5xl font-normal text-white select-none">
                                                         {member.name.split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]).join('')}
                                                     </span>
                                                 </div>

@@ -109,7 +109,7 @@ const Hero: React.FC = () => {
                         </div>
                         <AnimatedHeading
                             as="h1"
-                            className="font-display text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] tracking-tight text-text-primary mb-0"
+                            className="font-display text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.05] tracking-tight text-text-primary mb-0"
                             delay={0.2}
                             duration={0.8}
                         >

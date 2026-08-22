@@ -103,7 +103,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
                 {/* Heading */}
                 <AnimatedHeading
                   as="h1"
-                  className="font-display text-4xl md:text-5xl font-semibold text-text-primary mb-4 text-center"
+                  className="font-display text-4xl md:text-5xl font-normal text-text-primary mb-4 text-center"
                   delay={0.3}
                 >
                   Something went wrong

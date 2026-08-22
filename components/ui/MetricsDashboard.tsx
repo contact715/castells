@@ -48,7 +48,7 @@ const MetricsDashboard: React.FC<MetricsDashboardProps> = React.memo(({
           </div>
           <AnimatedHeading
             as="h2"
-            className="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-text-primary mb-3"
+            className="font-display text-3xl md:text-4xl font-normal leading-tight tracking-tight text-text-primary mb-3"
             delay={0.1}
           >
             {title}
@@ -80,7 +80,7 @@ const MetricsDashboard: React.FC<MetricsDashboardProps> = React.memo(({
                     </span>
                   )}
                 </div>
-                <div className="font-display text-4xl md:text-5xl font-semibold text-text-primary mb-2">
+                <div className="font-display text-4xl md:text-5xl font-normal text-text-primary mb-2">
                   {metric.value}
                 </div>
                 <div className="text-lg font-semibold text-text-primary mb-2">

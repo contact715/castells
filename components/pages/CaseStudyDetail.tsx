@@ -252,7 +252,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                   </span>
                 </div>
                 
-                <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-white mb-4 leading-[1.1] tracking-tight">
+                <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal text-white mb-4 leading-[1.1] tracking-tight">
                   {data.client}
                 </h1>
                 
@@ -305,7 +305,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
 
               {/* Results */}
               <section id="results" className="space-y-4">
-                <h2 className="font-display text-3xl font-semibold text-text-primary dark:text-white leading-tight">
+                <h2 className="font-display text-3xl font-normal text-text-primary dark:text-white leading-tight">
                   Results
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -327,7 +327,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
 
               {/* Challenge */}
               <section id="challenge" className="space-y-4">
-                <h2 className="font-display text-3xl font-semibold text-text-primary dark:text-white leading-tight">
+                <h2 className="font-display text-3xl font-normal text-text-primary dark:text-white leading-tight">
                   The Challenge
                 </h2>
                 <p className="text-lg text-text-secondary dark:text-white/70 leading-relaxed">
@@ -337,7 +337,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
 
               {/* Solution */}
               <section id="solution" className="space-y-4">
-                <h2 className="font-display text-3xl font-semibold text-text-primary dark:text-white leading-tight">
+                <h2 className="font-display text-3xl font-normal text-text-primary dark:text-white leading-tight">
                   The Solution
                 </h2>
                 <p className="text-lg text-text-secondary dark:text-white/70 leading-relaxed mb-6">
@@ -361,7 +361,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               {/* Brand Guidelines - Embedded PDF */}
               {data.brandGuidelines && (
                 <section id="brand-guidelines" className="space-y-4 pt-8">
-                  <h2 className="font-display text-3xl font-semibold text-text-primary dark:text-white leading-tight">
+                  <h2 className="font-display text-3xl font-normal text-text-primary dark:text-white leading-tight">
                     Brand Guidelines
                   </h2>
                   <div className="bg-white dark:bg-surface rounded-card overflow-hidden">

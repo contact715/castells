@@ -34,7 +34,7 @@ const Industries: React.FC = React.memo(() => {
           </div>
           <AnimatedHeading
             as="h2"
-            className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-6"
+            className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight mb-6"
             delay={0.1}
           >
             Industries We<br />

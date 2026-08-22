@@ -245,7 +245,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                 >
                     <AnimatedHeading
                         as="h2"
-                        className="font-display text-2xl md:text-3xl font-semibold mb-3 text-text-primary"
+                        className="font-display text-2xl md:text-3xl font-normal mb-3 text-text-primary"
                         delay={0.1}
                     >
                         Ready to dominate the {displayName.toLowerCase()} market?
@@ -304,7 +304,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                             </div>
                             <AnimatedHeading
                                 as="h2"
-                                className="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-text-primary mb-3"
+                                className="font-display text-3xl md:text-4xl font-normal leading-tight tracking-tight text-text-primary mb-3"
                                 delay={0.15}
                             >
                                 Related case studies
@@ -379,7 +379,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                 >
                     <AnimatedHeading
                         as="h2"
-                        className="font-display text-3xl md:text-4xl font-semibold mb-4 text-white"
+                        className="font-display text-3xl md:text-4xl font-normal mb-4 text-white"
                         delay={0.1}
                     >
                         Let's discuss your {displayName.toLowerCase()} marketing needs
@@ -445,7 +445,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                                                     <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
                                                     <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">FAQ</span>
                                                 </div>
-                                                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4">
+                                                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight mb-4">
                                                     Common<br />
                                                     <span className="text-text-secondary">Questions</span>
                                                 </h2>
@@ -506,7 +506,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                 >
                     <AnimatedHeading
                         as="h2"
-                        className="font-display text-3xl md:text-4xl font-semibold mb-4 text-text-primary dark:text-white"
+                        className="font-display text-3xl md:text-4xl font-normal mb-4 text-text-primary dark:text-white"
                         delay={0.1}
                     >
                         Ready to dominate your market?

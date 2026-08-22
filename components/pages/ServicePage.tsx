@@ -258,7 +258,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                 >
                     <AnimatedHeading
                         as="h2"
-                        className="font-display text-2xl md:text-3xl font-semibold mb-3 text-text-primary"
+                        className="font-display text-2xl md:text-3xl font-normal mb-3 text-text-primary"
                         delay={0.1}
                     >
                         Ready to get started with {displayName}?
@@ -310,7 +310,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                             </div>
                             <AnimatedHeading
                                 as="h2"
-                                className="font-display text-3xl md:text-4xl font-semibold leading-tight tracking-tight text-text-primary mb-3"
+                                className="font-display text-3xl md:text-4xl font-normal leading-tight tracking-tight text-text-primary mb-3"
                                 delay={0.15}
                             >
                                 Related case studies
@@ -385,7 +385,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                 >
                     <AnimatedHeading
                         as="h2"
-                        className="font-display text-3xl md:text-4xl font-semibold mb-4 text-white"
+                        className="font-display text-3xl md:text-4xl font-normal mb-4 text-white"
                         delay={0.1}
                     >
                         Let's discuss your {displayName.toLowerCase()} needs
@@ -451,7 +451,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                                                     <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
                                                     <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">FAQ</span>
                                                 </div>
-                                                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight mb-4">
+                                                <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight mb-4">
                                                     Common<br />
                                                     <span className="text-text-secondary">Questions</span>
                                                 </h2>
@@ -512,7 +512,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                 >
                     <AnimatedHeading
                         as="h2"
-                        className="font-display text-3xl md:text-4xl font-semibold mb-4 text-text-primary dark:text-white"
+                        className="font-display text-3xl md:text-4xl font-normal mb-4 text-text-primary dark:text-white"
                         delay={0.1}
                     >
                         Ready to get started?

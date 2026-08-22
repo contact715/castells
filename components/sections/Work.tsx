@@ -42,7 +42,7 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
             <Badge className="mb-3">Selected Works 2023-2025</Badge>
             <AnimatedHeading
               as="h2"
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight"
+              className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight"
               delay={0.1}
             >
               Proven<br />
@@ -226,7 +226,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
         {/* Bottom Content */}
         <div>
           <div className="mb-6 sm:mb-8">
-            <h3 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-semibold text-white mb-3 sm:mb-4 tracking-tight leading-none">
+            <h3 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-8xl font-normal text-white mb-3 sm:mb-4 tracking-tight leading-none">
               {project.client}
             </h3>
             <p className="text-white/70 text-base sm:text-lg md:text-xl font-light max-w-2xl leading-relaxed">

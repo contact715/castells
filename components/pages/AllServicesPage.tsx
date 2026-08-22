@@ -106,7 +106,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
 
             <AnimatedHeading
               as="h1"
-              className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] tracking-tight text-text-primary mb-6"
+              className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.05] tracking-tight text-text-primary mb-6"
               delay={0.2}
             >
               Everything you need<br />
@@ -149,7 +149,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
             <Badge className="mb-4">What We Do</Badge>
             <AnimatedHeading
               as="h2"
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-text-primary mb-6"
+              className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary mb-6"
               delay={0.1}
             >
               Four pillars of<br />
@@ -218,7 +218,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                     <div className="w-16 h-16 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-6">
                       <CategoryIcon className="w-8 h-8 text-coral-text" />
                     </div>
-                    <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-4 leading-tight">
+                    <h2 className="font-display text-3xl md:text-4xl font-normal text-text-primary mb-4 leading-tight">
                       {category.name}
                     </h2>
                     <p className="text-text-secondary leading-relaxed mb-8">
@@ -280,7 +280,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
               </Badge>
               <AnimatedHeading
                 as="h2"
-                className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-text-primary mb-6"
+                className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary mb-6"
                 delay={0.1}
               >
                 From zero to<br />
@@ -337,7 +337,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
             <Badge className="mb-4">The Advantage</Badge>
             <AnimatedHeading
               as="h2"
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-text-primary mb-6"
+              className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary mb-6"
               delay={0.1}
             >
               Why elite brands<br />
@@ -407,7 +407,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
                 <Sparkles className="w-10 h-10 text-white" />
               </motion.div>
 
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary mb-6 leading-tight">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal text-text-primary mb-6 leading-tight">
                 Ready to build your<br />unfair advantage?
               </h2>
 

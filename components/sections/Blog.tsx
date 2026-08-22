@@ -93,7 +93,7 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
                         </Badge>
                         <AnimatedHeading
                             as="h2"
-                            className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary leading-tight tracking-tight mb-4"
+                            className="font-display text-3xl md:text-4xl lg:text-5xl font-normal text-text-primary leading-tight tracking-tight mb-4"
                             delay={0.1}
                         >
                             From the trenches

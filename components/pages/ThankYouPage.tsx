@@ -221,7 +221,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
 
           {/* Title */}
           <motion.h1
-            className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold text-text-primary mb-4"
+            className="font-display text-4xl md:text-5xl lg:text-6xl font-normal text-text-primary mb-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}

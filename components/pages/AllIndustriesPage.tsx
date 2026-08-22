@@ -97,7 +97,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
 
               <AnimatedHeading
                 as="h1"
-                className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.05] tracking-tight text-text-primary mb-6"
+                className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.05] tracking-tight text-text-primary mb-6"
                 delay={0.2}
               >
                 Dominate your<br />
@@ -146,7 +146,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                   transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
                   className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-6 md:p-8 border border-black/5 dark:border-white/5 hover:shadow-spatial-md hover:-translate-y-1 transition-[transform,box-shadow] duration-300"
                 >
-                  <div className="font-display text-4xl md:text-5xl font-semibold text-text-primary mb-2">
+                  <div className="font-display text-4xl md:text-5xl font-normal text-text-primary mb-2">
                     <Counter value={stat.value} suffix={stat.suffix} decimals={stat.value % 1 !== 0 ? 1 : 0} />
                   </div>
                   <p className="text-sm text-text-secondary font-medium">
@@ -166,7 +166,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
             <Badge className="mb-4">Specializations</Badge>
             <AnimatedHeading
               as="h2"
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-text-primary mb-6"
+              className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary mb-6"
               delay={0.1}
             >
               Deep expertise in<br />
@@ -233,7 +233,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                     <div className="w-16 h-16 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-6">
                       <CategoryIcon className="w-8 h-8 text-coral-text" />
                     </div>
-                    <h2 className="font-display text-3xl md:text-4xl font-semibold text-text-primary mb-4 leading-tight">
+                    <h2 className="font-display text-3xl md:text-4xl font-normal text-text-primary mb-4 leading-tight">
                       {category.name}
                     </h2>
                     <p className="text-text-secondary leading-relaxed mb-8">
@@ -291,7 +291,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
             <Badge className="mb-4">The Advantage</Badge>
             <AnimatedHeading
               as="h2"
-              className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight tracking-tight text-text-primary mb-6"
+              className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary mb-6"
               delay={0.1}
             >
               Why industry expertise<br />
@@ -360,7 +360,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                 <Sparkles className="w-10 h-10 text-white" />
               </motion.div>
 
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-semibold text-text-primary mb-6 leading-tight">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal text-text-primary mb-6 leading-tight">
                 Ready to dominate<br />your market?
               </h2>
 
