@@ -1,13 +1,13 @@
 import React from 'react';
 
 interface SchemaMarkupProps {
-  type?: 'Organization' | 'WebSite' | 'Service' | 'Article' | 'BreadcrumbList' | 'FAQPage' | 'LocalBusiness' | 'HowTo' | 'VideoObject' | 'ItemList' | 'Review' | 'AggregateRating' | 'Definition' | 'Course';
+  type?: 'Organization' | 'WebSite' | 'Service' | 'Article' | 'BreadcrumbList' | 'FAQPage' | 'LocalBusiness' | 'HowTo' | 'VideoObject' | 'ItemList' | 'Review' | 'Definition' | 'Course';
   data?: Record<string, unknown>;
 }
 
 const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data }) => {
   const getSchema = () => {
-    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
+    const baseUrl = typeof window !== 'undefined' ? window.location.origin : 'https://www.castells.media';
     
     switch (type) {
       case 'Organization':
@@ -248,28 +248,22 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
           },
           author: {
             '@type': data?.author?.type || 'Person',
-            name: data?.author?.name || 'Client'
+            name: data?.author?.name
           },
-          reviewRating: {
-            '@type': 'Rating',
-            ratingValue: data?.ratingValue || '5',
-            bestRating: data?.bestRating || '5',
-            worstRating: data?.worstRating || '1'
-          },
+          // Оценка ставится только если она реально пришла с отзывом.
+          // Раньше здесь по умолчанию стояли пять звёзд — оценка без отзыва.
+          ...(data?.ratingValue
+            ? {
+                reviewRating: {
+                  '@type': 'Rating',
+                  ratingValue: data.ratingValue,
+                  bestRating: data?.bestRating || '5',
+                  worstRating: data?.worstRating || '1'
+                }
+              }
+            : {}),
           reviewBody: data?.reviewBody || '',
           datePublished: data?.datePublished || new Date().toISOString().split('T')[0],
-          ...data
-        };
-      
-      case 'AggregateRating':
-        return {
-          '@context': 'https://schema.org',
-          '@type': 'AggregateRating',
-          ratingValue: data?.ratingValue || '5',
-          bestRating: data?.bestRating || '5',
-          worstRating: data?.worstRating || '1',
-          ratingCount: data?.ratingCount || '100',
-          reviewCount: data?.reviewCount || '100',
           ...data
         };
       

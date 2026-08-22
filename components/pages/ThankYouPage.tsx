@@ -295,7 +295,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
             transition={{ delay: 1.1 }}
           >
             <p className="text-sm text-text-secondary mb-4">
-              Join 100+ satisfied clients who trust Castells
+              Thanks — we'll be in touch shortly
             </p>
             <div className="flex items-center justify-center gap-1">
               {[...Array(5)].map((_, i) => (

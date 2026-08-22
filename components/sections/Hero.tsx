@@ -2,99 +2,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import { ArrowRight, Volume2, VolumeX } from 'lucide-react';
 import { m as motion } from 'framer-motion';
 import { Button } from '../ui/Button';
-import { Marquee } from '../ui/Marquee';
 import AnimatedHeading from '../ui/AnimatedHeading';
 import { ContactButtons } from '../ui/ContactButtons';
 import SchemaMarkup from '../ui/SchemaMarkup';
 import OptimizedImage from '../ui/OptimizedImage';
 import { useReducedMotion } from '../../lib/hooks/useReducedMotion';
-import '../ui/Marquee.css';
 
-// Professional logo components
-const VortexLogo = () => (
-    <svg viewBox="0 0 120 32" fill="currentColor" className="h-8 w-auto">
-        <path d="M8 16c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8-8-3.6-8-8zm8-4c-2.2 0-4 1.8-4 4s1.8 4 4 4 4-1.8 4-4-1.8-4-4-4z" />
-        <path d="M28 8h8v16h-8V8zm2 2v12h4V10h-4z" />
-        <path d="M42 8h12v2h-10v5h8v2h-8v5h10v2H42V8z" />
-        <path d="M60 8h12v2h-5v14h-2V10h-5V8z" />
-        <path d="M78 8h12v2h-5v14h-2V10h-5V8z" />
-        <path d="M96 8h12v2h-5v6h5v2h-5v6h5v2H96V8z" />
-    </svg>
-);
-
-const LuminaLogo = () => (
-    <svg viewBox="0 0 120 32" fill="currentColor" className="h-8 w-auto">
-        <circle cx="16" cy="16" r="10" />
-        <circle cx="16" cy="16" r="6" fill="none" stroke="currentColor" strokeWidth="1.5" />
-        <path d="M32 8h8v16h-8V8zm2 2v12h4V10h-4z" />
-        <path d="M48 8h12v2h-5v5h5v2h-5v5h5v2H48V8z" />
-        <path d="M66 8h12v2h-5v14h-2V10h-5V8z" />
-        <path d="M84 8h12v2h-5v14h-2V10h-5V8z" />
-        <path d="M102 8h12v2h-5v6h5v2h-5v6h5v2H102V8z" />
-    </svg>
-);
-
-const ApexLogo = () => (
-    <svg viewBox="0 0 100 32" fill="currentColor" className="h-8 w-auto">
-        <path d="M16 6L6 26h20L16 6z" />
-        <path d="M32 8h8v16h-8V8zm2 2v12h4V10h-4z" />
-        <path d="M48 8h12v2h-5v5h5v2h-5v5h5v2H48V8z" />
-        <path d="M66 8h12v2h-5v14h-2V10h-5V8z" />
-    </svg>
-);
-
-const OrbitalLogo = () => (
-    <svg viewBox="0 0 120 32" fill="currentColor" className="h-8 w-auto">
-        <ellipse cx="16" cy="16" rx="12" ry="6" transform="rotate(-45 16 16)" />
-        <circle cx="16" cy="16" r="4" />
-        <path d="M34 8h8v16h-8V8zm2 2v12h4V10h-4z" />
-        <path d="M50 8h12v2h-5v5h5v2h-5v5h5v2H50V8z" />
-        <path d="M68 8h12v2h-5v5h5v2h-5v5h5v2H68V8z" />
-        <path d="M86 8h12v2h-5v5h5v2h-5v5h5v2H86V8z" />
-        <path d="M104 8h12v2h-5v6h5v2h-5v6h5v2H104V8z" />
-    </svg>
-);
-
-const NexusLogo = () => (
-    <svg viewBox="0 0 110 32" fill="currentColor" className="h-8 w-auto">
-        <rect x="6" y="6" width="12" height="12" rx="2" />
-        <rect x="14" y="14" width="12" height="12" rx="2" opacity="0.6" />
-        <path d="M32 8h8v16h-8V8zm2 2v12h4V10h-4z" />
-        <path d="M48 8h12v2h-5v5h5v2h-5v5h5v2H48V8z" />
-        <path d="M66 8h12v2h-5v14h-2V10h-5V8z" />
-        <path d="M84 8h12v2h-5v6h5v2h-5v6h5v2H84V8z" />
-    </svg>
-);
-
-const StratosLogo = () => (
-    <svg viewBox="0 0 120 32" fill="currentColor" className="h-8 w-auto">
-        <path d="M6 22 Q16 8 26 22 M16 22 Q26 8 36 22" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-        <path d="M44 8h8v16h-8V8zm2 2v12h4V10h-4z" />
-        <path d="M60 8h12v2h-5v5h5v2h-5v5h5v2H60V8z" />
-        <path d="M78 8h12v2h-5v5h5v2h-5v5h5v2H78V8z" />
-        <path d="M96 8h12v2h-5v5h5v2h-5v5h5v2H96V8z" />
-        <path d="M114 8h4v16h-4V8z" />
-    </svg>
-);
-
-const EchoLogo = () => (
-    <svg viewBox="0 0 100 32" fill="currentColor" className="h-8 w-auto">
-        <path d="M12 26V6l16 10-16 10z" />
-        <path d="M34 8h8v16h-8V8zm2 2v12h4V10h-4z" />
-        <path d="M50 8h12v2h-5v5h5v2h-5v5h5v2H50V8z" />
-        <path d="M68 8h12v2h-5v14h-2V10h-5V8z" />
-    </svg>
-);
-
-const CLIENT_LOGOS = [
-    { name: 'Vortex', logo: <VortexLogo /> },
-    { name: 'Lumina', logo: <LuminaLogo /> },
-    { name: 'Apex', logo: <ApexLogo /> },
-    { name: 'Orbital', logo: <OrbitalLogo /> },
-    { name: 'Nexus', logo: <NexusLogo /> },
-    { name: 'Stratos', logo: <StratosLogo /> },
-    { name: 'Echo', logo: <EchoLogo /> },
-];
 
 const Hero: React.FC = () => {
     const prefersReducedMotion = useReducedMotion();
@@ -225,25 +138,15 @@ const Hero: React.FC = () => {
                 </div>
 
 
-                {/* Client Logos Section */}
-                <div className="mb-20 flex flex-col md:flex-row items-center gap-8 md:gap-12 border-t border-b border-black/5 dark:border-white/5 py-12">
-                    <div className="shrink-0 max-w-sm text-center md:text-left">
-                        <p className="text-lg md:text-xl font-sans leading-relaxed text-text-primary">
-                            America's best brands trust <br className="hidden md:block" />
-                            <span className="text-text-secondary">Castells for Market Domination.</span>
-                        </p>
-                    </div>
+                {/*
+                    Здесь шла бегущая лента из семи логотипов под заголовком
+                    «America's best brands trust Castells»: Vortex, Lumina, Apex,
+                    Orbital, Nexus, Stratos, Echo. Ни одной такой компании не
+                    существует, нашими клиентами они не являются.
 
-                    <div className="flex-1 w-full overflow-hidden mask-linear-fade">
-                        <Marquee className="items-center" velocity={0.8}>
-                            {CLIENT_LOGOS.map((client, idx) => (
-                                <div key={idx} className="mx-8 opacity-40 hover:opacity-100 transition-opacity duration-300 text-black dark:text-white cursor-pointer hover:scale-105 transform">
-                                    {client.logo}
-                                </div>
-                            ))}
-                        </Marquee>
-                    </div>
-                </div>
+                    Настоящие клиенты показаны ниже, в блоке доверия, инициалами
+                    из наших же кейсов.
+                */}
             </div>
 
             {/* HIDDEN: Video Section — uncomment when own video is ready */}

@@ -18,43 +18,24 @@ interface MetricsDashboardProps {
   className?: string;
 }
 
-const DEFAULT_METRICS: Metric[] = [
-  {
-    icon: TrendingUp,
-    value: '3.2x',
-    label: 'Average ROAS',
-    change: '+15% YoY',
-    description: 'Return on ad spend across all campaigns'
-  },
-  {
-    icon: DollarSign,
-    value: '250%',
-    label: 'Revenue Increase',
-    change: 'Average',
-    description: 'Average revenue growth for our clients'
-  },
-  {
-    icon: Clock,
-    value: '3-6 months',
-    label: 'Time to Results',
-    change: 'Typical',
-    description: 'Time to see significant improvements'
-  },
-  {
-    icon: Users,
-    value: '98%',
-    label: 'Client Satisfaction',
-    change: 'Rating',
-    description: 'Clients who would recommend us'
-  },
-];
+/*
+  Здесь стояли четыре числа без единого источника: «3.2x средний ROAS»,
+  «250% рост выручки», «3-6 месяцев до результата», «98% довольных клиентов»,
+  под заголовком «Real metrics from real campaigns». Ни одно из них не взято
+  из нашего рекламного кабинета или CRM.
+
+  Нет подтверждённых чисел — блока нет.
+*/
 
 const MetricsDashboard: React.FC<MetricsDashboardProps> = React.memo(({
-  metrics = DEFAULT_METRICS,
+  metrics,
   title = 'Results that speak for themselves',
   subtitle = 'Real metrics from real campaigns',
   className = ''
 }) => {
+  // Числа приходят только снаружи и только с источником. Нет их — блока нет.
+  if (!metrics || metrics.length === 0) return null;
+
   return (
     <section className={`py-12 md:py-16 bg-ivory relative ${className}`}>
       <div className="container mx-auto px-6">

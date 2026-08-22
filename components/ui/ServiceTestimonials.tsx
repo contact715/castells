@@ -17,33 +17,24 @@ interface ServiceTestimonialsProps {
   className?: string;
 }
 
-const DEFAULT_TESTIMONIALS: Testimonial[] = [
-  {
-    name: "Jonathan Reed",
-    role: "CEO, Apex Architecture",
-    quote: "Castells didn't just run ads; they restructured our entire digital presence. Our inbound leads tripled in 90 days.",
-    avatar: "JR"
-  },
-  {
-    name: "Sarah Jenkins",
-    role: "Director, Lumina Health",
-    quote: "The precision of their data targeting is unmatched. We saw a 450% ROI on our first campaign. Absolutely transformative.",
-    avatar: "SJ"
-  },
-  {
-    name: "Michael Chang",
-    role: "Founder, Vanguard Solar",
-    quote: "Elegance meets performance. They elevated our brand aesthetic while driving record sales volumes. The perfect partner.",
-    avatar: "MC"
-  },
-];
+/*
+  Здесь стояли три выдуманных отзыва: Jonathan Reed из Apex Architecture,
+  Sarah Jenkins из Lumina Health, Michael Chang из Vanguard Solar — с числами
+  «leads tripled in 90 days» и «450% ROI». Ни этих людей, ни этих компаний,
+  ни этих чисел не существует, а блок стоял на всех страницах услуг и ниш.
+
+  Правило теперь общее: нет настоящих отзывов — блока нет вовсе.
+*/
 
 const ServiceTestimonials: React.FC<ServiceTestimonialsProps> = React.memo(({
-  testimonials = DEFAULT_TESTIMONIALS,
+  testimonials,
   title = 'What our clients say',
   subtitle = "Don't just take our word for it. See what our clients have to say about working with us.",
   className = ''
 }) => {
+  // Нет настоящих отзывов — блок не рисуется. Выдуманных подстановок больше нет.
+  if (!testimonials || testimonials.length === 0) return null;
+
   return (
     <section className={`py-12 md:py-16 bg-white dark:bg-surface relative ${className}`}>
       <div className="container mx-auto px-6">

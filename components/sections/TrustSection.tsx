@@ -1,6 +1,5 @@
 import React from 'react';
 import { m as motion } from 'framer-motion';
-import SchemaMarkup from '../ui/SchemaMarkup';
 import { CASE_STUDIES } from '../../constants';
 
 /*
@@ -25,16 +24,6 @@ const CLIENT_INITIALS = CASE_STUDIES.slice(0, 5).map((cs) => ({
 const TrustSection: React.FC = React.memo(() => {
   return (
     <section className="bg-ivory dark:bg-[#191919] py-8 md:py-10">
-      <SchemaMarkup
-        type="AggregateRating"
-        data={{
-          ratingValue: '5',
-          bestRating: '5',
-          worstRating: '1',
-          ratingCount: '100',
-          reviewCount: '100'
-        }}
-      />
       <div className="container mx-auto px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -66,19 +55,14 @@ const TrustSection: React.FC = React.memo(() => {
                 </div>
               ))}
             </div>
-            {/* Rating */}
-            <div className="flex flex-col items-start">
-              <div className="flex gap-0.5 mb-1">
-                {[...Array(5)].map((_, i) => (
-                  <svg key={i} className="w-4 h-4 text-coral-text fill-coral" viewBox="0 0 24 24">
-                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                  </svg>
-                ))}
-              </div>
-              <span className="text-xs font-bold text-text-primary">
-                Trusted by 100+ Owners
-              </span>
-            </div>
+            {/*
+              Здесь стояли пять звёзд и надпись «Trusted by 100+ Owners».
+              Ста отзывов не существует, звёзды не опирались ни на один
+              собранный отзыв. Осталась подпись к кружкам: кто эти люди.
+            */}
+            <span className="text-xs font-bold text-text-primary">
+              Real clients from our case studies
+            </span>
           </div>
         </motion.div>
       </div>

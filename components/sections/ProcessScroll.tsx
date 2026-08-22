@@ -940,7 +940,6 @@ const PROCESS_STEPS: ProcessStep[] = [
         icon: Send,
         duration: 'Day 1',
         deliverables: ['Initial consultation', 'Business fit assessment', 'Project scope overview'],
-        keyMetrics: ['Response time: <24 hours', 'Fit assessment accuracy: 95%', 'Initial consultation rate: 100%'],
         nextSteps: 'Discovery call scheduled within 48 hours'
     },
     {
@@ -951,7 +950,6 @@ const PROCESS_STEPS: ProcessStep[] = [
         icon: Video,
         duration: 'Day 2-3',
         deliverables: ['Goals alignment session', 'Current state analysis', 'Opportunity identification'],
-        keyMetrics: ['Call duration: 30-45 minutes', 'Data points collected: 50+', 'Opportunities identified: 5-10'],
         nextSteps: 'Comprehensive audit report delivered within 3 days'
     },
     {
@@ -962,7 +960,6 @@ const PROCESS_STEPS: ProcessStep[] = [
         icon: Search,
         duration: 'Week 1',
         deliverables: ['Full marketing audit', 'Competitor analysis', 'Revenue leak report'],
-        keyMetrics: ['Average revenue leaks found: $50K+', 'Audit depth: 100+ touchpoints', 'ROI improvement potential: 200-400%'],
         nextSteps: 'Custom strategy roadmap presented in Week 2'
     },
     {
@@ -973,7 +970,6 @@ const PROCESS_STEPS: ProcessStep[] = [
         icon: PenTool,
         duration: 'Week 2',
         deliverables: ['Custom growth roadmap', 'ICP definition', 'Messaging framework'],
-        keyMetrics: ['Roadmap accuracy: 95%+', 'ICP match rate: 80%+', 'Messaging conversion lift: 2-3x'],
         nextSteps: 'Campaign launch begins in Week 3'
     },
     {
@@ -984,7 +980,6 @@ const PROCESS_STEPS: ProcessStep[] = [
         icon: Rocket,
         duration: 'Week 3-4',
         deliverables: ['Campaign deployment', 'Landing page launch', 'Tracking setup'],
-        keyMetrics: ['Campaigns launched: 10-20', 'Landing page conversion: 3-5%', 'Tracking accuracy: 99.9%'],
         nextSteps: 'Performance optimization and scaling in Week 5'
     },
     {
@@ -995,7 +990,6 @@ const PROCESS_STEPS: ProcessStep[] = [
         icon: BarChart3,
         duration: 'Week 5-6',
         deliverables: ['Performance optimization', 'Budget scaling', 'ROAS maintenance'],
-        keyMetrics: ['Average ROAS: 4-6x', 'Budget scale: 2-5x', 'Conversion rate improvement: 50-200%'],
         nextSteps: 'Ongoing optimization and monthly strategy reviews'
     }
 ];
