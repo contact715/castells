@@ -26,6 +26,8 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
 }) => {
   const wrapperRef = useRef<HTMLDivElement>(null);
   const [cards, setCards] = useState<HTMLElement[]>([]);
+  // Секция рядом с экраном? От этого зависит, держать ли слои в видеопамяти.
+  const [isNearViewport, setIsNearViewport] = useState(false);
   const ticking = useRef(false);
   const rafId = useRef<number>(0);
   const resizeTimeout = useRef<NodeJS.Timeout | null>(null);
@@ -119,7 +121,7 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       ([entry]) => {
         isVisible.current = entry.isIntersecting;
         // Слои видеопамяти отдаём браузеру обратно, когда секция ушла с экрана
-        wrapperRef.current?.classList.toggle('is-active', entry.isIntersecting);
+        setIsNearViewport(entry.isIntersecting);
         // Run once when becoming visible to initialize positions
         if (entry.isIntersecting) updateCards();
       },
@@ -162,7 +164,10 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
   }, [updateCards]);
 
   return (
-    <div ref={wrapperRef} className={`scroll-stack-wrapper ${className}`}>
+    <div
+      ref={wrapperRef}
+      className={`scroll-stack-wrapper ${isNearViewport ? 'is-active' : ''} ${className}`}
+    >
       {children}
       <div className="scroll-stack-buffer" />
     </div>
