@@ -37,7 +37,6 @@ const TrustSection = lazyWithRetry(() => import('./components/sections/TrustSect
 
 const CTA = lazyWithRetry(() => import('./components/sections/CTA'));
 const CasesGrid = lazyWithRetry(() => import('./components/sections/CasesGrid'));
-const Process = lazyWithRetry(() => import('./components/sections/Process'));
 const FAQ = lazyWithRetry(() => import('./components/sections/FAQ'));
 const Blog = lazyWithRetry(() => import('./components/sections/Blog'));
 
@@ -180,11 +179,6 @@ function App() {
                   <LazySection rootMargin="300px">
                     <Suspense fallback={null}>
                       <ServicesConstellation onNavigate={navigateTo} />
-                    </Suspense>
-                  </LazySection>
-                  <LazySection rootMargin="300px">
-                    <Suspense fallback={null}>
-                      <Process />
                     </Suspense>
                   </LazySection>
 
