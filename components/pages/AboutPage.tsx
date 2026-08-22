@@ -2,7 +2,7 @@ import React from 'react';
 import { m as motion } from 'framer-motion';
 import { Target, Zap, Users } from 'lucide-react';
 import { PageHeader } from '../ui/PageHeader';
-import { CASE_STUDIES } from '../../constants';
+import { BUILT_SITES } from '../../constants';
 import type { NavigateFn } from '../../types';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
@@ -49,8 +49,8 @@ const HOW_WE_WORK = [
   },
 ];
 
-/** Клиенты, у которых есть живой сайт нашей работы — их можно открыть и проверить. */
-const CLIENTS_WITH_SITES = CASE_STUDIES.filter((cs) => cs.website);
+/** Список живёт в constants.ts, там же записано, кто в него не попал и почему. */
+const CLIENTS_WITH_SITES = BUILT_SITES;
 
 const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://www.castells.media';
@@ -134,7 +134,7 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
 
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {CLIENTS_WITH_SITES.map((client) => (
-              <li key={client.id}>
+              <li key={client.client}>
                 <a
                   href={client.website}
                   target="_blank"

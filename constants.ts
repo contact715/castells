@@ -326,3 +326,41 @@ export const CASE_STUDIES: CaseStudy[] = [
 ];
 
 export const MANIFESTO_TEXT = "WE BUILD LEGACIES. ELEGANCE IS NOT OPTIONAL. DATA DRIVES DESIGN. YOUR SUCCESS IS OUR METRIC. DOMINATE YOUR MARKET.";
+/**
+ * Сайты, которые построили МЫ. Не «сайты наших клиентов»: у клиента по
+ * рекламе тоже есть сайт, и он не наш.
+ *
+ * Условие попадания в список ровно одно и проверяется руками: в Monday у
+ * клиента есть карточка Web-Development, и адрес отвечает 200.
+ *
+ * Проверено 22 августа 2026:
+ *   Roman Service      — acromanservice.com, 200, North Port FL, совпадает
+ *   Five Star Comfort  — fivestarcomfort.com, 200, адрес в Bothell под Сиэтлом,
+ *                        совпадает с городом клиента в Monday
+ *
+ * Не попали и почему:
+ *   Design by Nova     — design-by-nova.com отдаёт 404, сайт не работает
+ *   ChiefHVAC          — в Monday домен с опечаткой (cheifhvac.com, не отвечает),
+ *                        chiefhvac.com показывает заглушку
+ *   United HVAC        — unitedhvac.com принадлежит другой компании, не клиенту
+ *   Detailed Exotics, HVAC & Appliance Repair Clinic, Hawaii Amazonian,
+ *   Seattle InFlow     — адреса неизвестны, спрошены у владельца
+ *
+ * НЕ добавлять сюда memaso.com, wedohvacus.com, fusefl.com, fusepsl.com и
+ * aaabrothers.com: это клиенты по рекламе, сайты строили не мы. Увидеть свой
+ * сайт в чужом портфолио — то, за что клиент перестаёт быть клиентом.
+ */
+export const BUILT_SITES = [
+  {
+    client: 'Roman Service',
+    industry: 'HVAC',
+    location: 'North Port, Florida',
+    website: 'https://www.acromanservice.com/',
+  },
+  {
+    client: 'Five Star Comfort',
+    industry: 'Heating and air conditioning',
+    location: 'Bothell, Washington',
+    website: 'https://fivestarcomfort.com/',
+  },
+];
