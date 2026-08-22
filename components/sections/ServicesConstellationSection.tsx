@@ -112,7 +112,7 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
                 className="group flex flex-col bg-white/[0.03] border border-white/10 rounded-card p-6 md:p-8 hover:border-white/30 hover:bg-white/[0.05] transition-colors duration-300"
               >
                 {/* Цена стоит рядом с названием: это первое, что человек ищет глазами */}
-                <div className="flex items-start justify-between gap-4 mb-5">
+                <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 sm:gap-4 mb-5">
                   <div className="flex items-center gap-4 min-w-0">
                     <div className="w-12 h-12 rounded-element bg-coral-gradient-subtle flex items-center justify-center shrink-0">
                       <Icon className="w-6 h-6 text-coral-text" aria-hidden="true" />
@@ -121,12 +121,18 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
                       {service.title}
                     </h3>
                   </div>
-                  <div className="text-right shrink-0">
-                    <div className="text-[11px] uppercase tracking-widest text-white/55 whitespace-nowrap">
-                      {service.priceNote}
-                    </div>
-                    <div className="font-display text-2xl md:text-3xl text-white leading-tight">
+                  {/*
+                    На узком экране заголовок и цена в одной строке жмут друг
+                    друга: «Website and branding» ломается на три строки, а
+                    подпись «one-time, from» шириной со всю колонку. Поэтому
+                    до 640px цена стоит под названием, дальше — справа от него.
+                  */}
+                  <div className="flex items-baseline gap-2 sm:block sm:text-right shrink-0">
+                    <div className="font-display text-2xl md:text-3xl text-white leading-tight sm:order-2">
                       {service.price}
+                    </div>
+                    <div className="text-[11px] uppercase tracking-widest text-white/55 whitespace-nowrap sm:order-1">
+                      {service.priceNote}
                     </div>
                   </div>
                 </div>

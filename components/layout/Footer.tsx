@@ -140,7 +140,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
       <div className="container mx-auto px-6 pb-6">
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6 border-t border-black/10 dark:border-white/10">
           <p className="text-[11px] text-text-secondary dark:text-white/55 uppercase tracking-widest">
-            © {new Date().getFullYear()} Castells Agency Inc.
+            © {new Date().getFullYear()} Castells Media Inc.
           </p>
           <div className="flex items-center gap-6 text-[11px] text-text-secondary dark:text-white/55">
             <a href="/privacy-policy" onClick={(e) => handleNav(e, 'privacy-policy')} className="hover:text-text-primary dark:hover:text-white transition-colors">Privacy</a>
