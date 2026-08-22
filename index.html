@@ -49,6 +49,50 @@
         max-width: 100%;
         height: auto;
       }
+
+      /*
+        Текст, который сборка кладёт внутрь #root: его видят робот, ChatGPT и
+        мессенджер, потому что скрипты они не выполняют. React стирает этот
+        блок в момент запуска (createRoot очищает контейнер).
+
+        Скрывать его нельзя — скрытый текст для поисковика это нарушение.
+        Поэтому оформляем как первый экран: пока грузится приложение, человек
+        видит заголовок страницы, а не голый текст на белом.
+      */
+      #prerendered-content {
+        max-width: 46rem;
+        margin: 0 auto;
+        padding: 22vh 1.5rem 0;
+        font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+        color: #1a1a1a;
+      }
+      #prerendered-content h1 {
+        font-family: 'Newsreader', Georgia, serif;
+        font-size: clamp(2.2rem, 6vw, 3.6rem);
+        font-weight: 600;
+        line-height: 1.05;
+        letter-spacing: -0.02em;
+        margin: 0 0 1rem;
+      }
+      #prerendered-content p {
+        font-size: 1.05rem;
+        line-height: 1.6;
+        color: #55534f;
+        margin: 0 0 0.9rem;
+      }
+      #prerendered-content nav,
+      #prerendered-content address {
+        display: block;
+        font-size: 0.85rem;
+        color: #8a8783;
+        font-style: normal;
+        margin-top: 1.2rem;
+      }
+      #prerendered-content nav a { color: #8a8783; margin-right: 1rem; }
+      @media (prefers-color-scheme: dark) {
+        #prerendered-content { color: #faf9f6; }
+        #prerendered-content p { color: #a8a5a0; }
+      }
     </style>
 
     <title>Castells Agency | Dominate Your Market</title>
