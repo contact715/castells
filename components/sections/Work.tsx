@@ -189,7 +189,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
               loading="lazy"
               width={1600}
               height={900}
-              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 92vw, 1200px"
+              sizes="(max-width: 768px) 100vw, 92vw"
               onLoad={() => setImageLoaded(true)}
             />
           )
@@ -201,7 +201,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
             loading="lazy"
             width={1600}
             height={900}
-            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 92vw, 1200px"
+            sizes="(max-width: 768px) 100vw, 92vw"
             onLoad={() => setImageLoaded(true)}
           />
         )}
