@@ -162,7 +162,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
         e.preventDefault();
         onClick();
       }}
-      className="w-full h-[400px] sm:h-[500px] md:h-[600px] rounded-3xl sm:rounded-card md:rounded-[32px] overflow-hidden relative group cursor-pointer transition-transform duration-500 hover:scale-[1.02] transform-gpu isolate block"
+      className="w-full h-[400px] sm:h-[500px] md:h-[600px] rounded-3xl sm:rounded-card md:rounded-[32px] overflow-hidden relative group cursor-pointer transition-transform duration-500 hover:scale-[1.02] block"
     >
       {/* Full Background Media */}
       <div className="absolute inset-0 bg-black overflow-hidden rounded-3xl sm:rounded-card md:rounded-[32px]">
@@ -189,6 +189,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
               loading="lazy"
               width={1600}
               height={900}
+              sizes="(max-width: 768px) 100vw, (max-width: 1280px) 92vw, 1200px"
               onLoad={() => setImageLoaded(true)}
             />
           )
@@ -200,6 +201,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
             loading="lazy"
             width={1600}
             height={900}
+            sizes="(max-width: 768px) 100vw, (max-width: 1280px) 92vw, 1200px"
             onLoad={() => setImageLoaded(true)}
           />
         )}

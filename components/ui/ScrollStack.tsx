@@ -76,6 +76,15 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
       if (nextCard) {
         const nextOffset = cardOffsets.current[index + 1];
         if (nextOffset === undefined) return;
+
+        /*
+          Карточка, до которой ещё целый экран прокрутки, всё равно не видна:
+          писать ей transform значит зря заставлять браузер пересобирать её
+          слой. Считаем положение из уже снятых величин, без чтения геометрии.
+        */
+        const cardTop = wrapperTop + (cardOffsets.current[index] ?? 0);
+        if (cardTop > windowHeight.current * 1.5) return;
+
         const nextCardTopRelativeToViewport = wrapperTop + nextOffset;
         const nextTargetTop = stackOffset + ((index + 1) * 15);
 
@@ -109,6 +118,8 @@ const ScrollStack: React.FC<ScrollStackProps> = ({
     const observer = new IntersectionObserver(
       ([entry]) => {
         isVisible.current = entry.isIntersecting;
+        // Слои видеопамяти отдаём браузеру обратно, когда секция ушла с экрана
+        wrapperRef.current?.classList.toggle('is-active', entry.isIntersecting);
         // Run once when becoming visible to initialize positions
         if (entry.isIntersecting) updateCards();
       },

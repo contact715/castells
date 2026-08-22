@@ -12,12 +12,24 @@
   margin: 0 auto;
   box-sizing: border-box;
   transform-origin: center top;
-  will-change: transform;
   margin-bottom: 4rem;
   z-index: 10;
   isolation: isolate;
   border-radius: 32px;
   overflow: hidden;
+}
+
+/*
+  will-change обещает браузеру, что элемент вот-вот поедет, и тот заранее
+  выносит его в отдельный слой видеопамяти. Пока это стояло в общем правиле,
+  пять карточек по 1600x600 висели слоями ВСЁ время жизни страницы — около
+  4.4 млн пикселей, даже когда секция была за три экрана отсюда.
+
+  Теперь обещание действует, только пока секция рядом с экраном: класс
+  вешает и снимает наблюдатель видимости в ScrollStack.tsx.
+*/
+.scroll-stack-wrapper.is-active .scroll-stack-card {
+  will-change: transform;
 }
 
 /* Dark overlay — controlled via --stack-dim CSS variable from JS */
