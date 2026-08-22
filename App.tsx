@@ -14,6 +14,7 @@ import CookieConsent from './components/ui/CookieConsent';
 import ReadingProgress from './components/ui/ReadingProgress';
 import BackToTop from './components/ui/BackToTop';
 import KeyboardShortcuts from './components/ui/KeyboardShortcuts';
+import { lazyWithRetry } from './lib/lazyWithRetry';
 import { initWebVitals } from './lib/webVitals';
 import { initABTesting } from './lib/abTesting';
 import { initI18n } from './lib/i18n';
@@ -25,43 +26,43 @@ import { useScrollTracking } from './lib/hooks/useScrollTracking';
 import { useTimeOnPage } from './lib/hooks/useTimeOnPage';
 
 // Lazy load components for performance
-const Hero = React.lazy(() => import('./components/sections/Hero'));
-const Services = React.lazy(() => import('./components/sections/Services'));
-const ServicesConstellation = React.lazy(() => import('./components/sections/ServicesConstellationSection'));
-const Work = React.lazy(() => import('./components/sections/Work'));
-const Industries = React.lazy(() => import('./components/sections/Industries'));
+const Hero = lazyWithRetry(() => import('./components/sections/Hero'));
+const Services = lazyWithRetry(() => import('./components/sections/Services'));
+const ServicesConstellation = lazyWithRetry(() => import('./components/sections/ServicesConstellationSection'));
+const Work = lazyWithRetry(() => import('./components/sections/Work'));
+const Industries = lazyWithRetry(() => import('./components/sections/Industries'));
 
-const Team = React.lazy(() => import('./components/sections/Team'));
-const TrustSection = React.lazy(() => import('./components/sections/TrustSection'));
+const Team = lazyWithRetry(() => import('./components/sections/Team'));
+const TrustSection = lazyWithRetry(() => import('./components/sections/TrustSection'));
 
-const CTA = React.lazy(() => import('./components/sections/CTA'));
-const CasesGrid = React.lazy(() => import('./components/sections/CasesGrid'));
-const Process = React.lazy(() => import('./components/sections/Process'));
-const FAQ = React.lazy(() => import('./components/sections/FAQ'));
-const Blog = React.lazy(() => import('./components/sections/Blog'));
+const CTA = lazyWithRetry(() => import('./components/sections/CTA'));
+const CasesGrid = lazyWithRetry(() => import('./components/sections/CasesGrid'));
+const Process = lazyWithRetry(() => import('./components/sections/Process'));
+const FAQ = lazyWithRetry(() => import('./components/sections/FAQ'));
+const Blog = lazyWithRetry(() => import('./components/sections/Blog'));
 
-const CaseStudyDetail = React.lazy(() => import('./components/pages/CaseStudyDetail'));
-const WorkPage = React.lazy(() => import('./components/pages/WorkPage'));
-const AboutPage = React.lazy(() => import('./components/pages/AboutPage'));
-const CareersPage = React.lazy(() => import('./components/pages/CareersPage'));
-const NotFound = React.lazy(() => import('./components/pages/NotFound'));
-const ContactPage = React.lazy(() => import('./components/pages/ContactPage'));
-const TeamPage = React.lazy(() => import('./components/pages/TeamPage'));
-const AuthorPage = React.lazy(() => import('./components/pages/AuthorPage'));
-const BlogPage = React.lazy(() => import('./components/pages/BlogPage'));
-const BlogPostDetail = React.lazy(() => import('./components/pages/BlogPostDetail'));
-const ServicePage = React.lazy(() => import('./components/pages/ServicePage'));
-const IndustryPage = React.lazy(() => import('./components/pages/IndustryPage'));
-const AllServicesPage = React.lazy(() => import('./components/pages/AllServicesPage'));
-const AllIndustriesPage = React.lazy(() => import('./components/pages/AllIndustriesPage'));
-const CompanyPage = React.lazy(() => import('./components/pages/CompanyPage'));
-const ThankYouPage = React.lazy(() => import('./components/pages/ThankYouPage'));
+const CaseStudyDetail = lazyWithRetry(() => import('./components/pages/CaseStudyDetail'));
+const WorkPage = lazyWithRetry(() => import('./components/pages/WorkPage'));
+const AboutPage = lazyWithRetry(() => import('./components/pages/AboutPage'));
+const CareersPage = lazyWithRetry(() => import('./components/pages/CareersPage'));
+const NotFound = lazyWithRetry(() => import('./components/pages/NotFound'));
+const ContactPage = lazyWithRetry(() => import('./components/pages/ContactPage'));
+const TeamPage = lazyWithRetry(() => import('./components/pages/TeamPage'));
+const AuthorPage = lazyWithRetry(() => import('./components/pages/AuthorPage'));
+const BlogPage = lazyWithRetry(() => import('./components/pages/BlogPage'));
+const BlogPostDetail = lazyWithRetry(() => import('./components/pages/BlogPostDetail'));
+const ServicePage = lazyWithRetry(() => import('./components/pages/ServicePage'));
+const IndustryPage = lazyWithRetry(() => import('./components/pages/IndustryPage'));
+const AllServicesPage = lazyWithRetry(() => import('./components/pages/AllServicesPage'));
+const AllIndustriesPage = lazyWithRetry(() => import('./components/pages/AllIndustriesPage'));
+const CompanyPage = lazyWithRetry(() => import('./components/pages/CompanyPage'));
+const ThankYouPage = lazyWithRetry(() => import('./components/pages/ThankYouPage'));
 // NOTE: keep explicit extensions here to satisfy TS bundler resolution in some setups
-const PrivacyPolicyPage = React.lazy(() => import('./components/pages/PrivacyPolicyPage.tsx'));
-const TermsOfServicePage = React.lazy(() => import('./components/pages/TermsOfServicePage.tsx'));
-const CookiePolicyPage = React.lazy(() => import('./components/pages/CookiePolicyPage.tsx'));
-const LeadFormPage = React.lazy(() => import('./components/pages/LeadFormPage'));
-const LeadThankYouPage = React.lazy(() => import('./components/pages/LeadThankYouPage'));
+const PrivacyPolicyPage = lazyWithRetry(() => import('./components/pages/PrivacyPolicyPage.tsx'));
+const TermsOfServicePage = lazyWithRetry(() => import('./components/pages/TermsOfServicePage.tsx'));
+const CookiePolicyPage = lazyWithRetry(() => import('./components/pages/CookiePolicyPage.tsx'));
+const LeadFormPage = lazyWithRetry(() => import('./components/pages/LeadFormPage'));
+const LeadThankYouPage = lazyWithRetry(() => import('./components/pages/LeadThankYouPage'));
 
 // Loading fallback
 const PageLoader = () => (
