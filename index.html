@@ -14,9 +14,9 @@
 
     <!-- Preload critical resources -->
     <link rel="preload" href="/castells-logo.webp" as="image" type="image/webp" />
-    <!-- Заголовки первого экрана набраны Newsreader: грузим его сразу,
+    <!-- Заголовки первого экрана набраны EB Garamond: грузим его сразу,
          не дожидаясь, пока браузер дочитает CSS и наткнётся на @font-face -->
-    <link rel="preload" href="/fonts/newsreader-variable.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/ebgaramond-variable.woff2" as="font" type="font/woff2" crossorigin />
     <!-- Главным элементом страницы (LCP) браузер считает абзац под заголовком,
          а он набран Manrope. После обрезки шрифт весит 14 КБ, так что грузить
          его заранее дешевле, чем ждать разбора стилей -->
@@ -26,7 +26,7 @@
          о нём только разобрав стили. Предзагрузку уже пробовали, когда файл
          весил 63 КБ — тогда он забивал канал и делал хуже. После обрезки
          в нём 13.85 КБ, и очередь он больше не занимает. -->
-    <link rel="preload" href="/fonts/newsreader-italic.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/ebgaramond-italic.woff2" as="font" type="font/woff2" crossorigin />
 
     <style>
       /* Critical CSS - Above the fold styles */
@@ -67,7 +67,7 @@
         color: #1a1a1a;
       }
       #prerendered-content h1 {
-        font-family: 'Newsreader', Georgia, serif;
+        font-family: 'EB Garamond', Georgia, serif;
         font-size: clamp(2.2rem, 6vw, 3.6rem);
         font-weight: 600;
         line-height: 1.05;
