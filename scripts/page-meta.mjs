@@ -95,9 +95,11 @@ export const PAGES = [
   {
     path: '/blog',
     title: 'Notes | Castells Media',
-    description: 'Notes on marketing for home service businesses.',
-    h1: 'Notes',
-    intro: 'What we learn while running ads and building sites for service businesses.',
+    description:
+      'Short, plain articles for home service business owners: what marketing costs, who should own your ad accounts, and what to fix before you spend on ads.',
+    h1: 'Things worth knowing before you hire anyone',
+    intro:
+      'Short and plain, written from our own work. No trend pieces, no numbers we cannot show you the source for.',
   },
   {
     path: '/team',
