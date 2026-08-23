@@ -74,10 +74,6 @@ export const PAGES = [
     h1: 'Talk to us',
     intro:
       'Tell us what your business does and where, and we will say plainly whether we can help. WhatsApp and Telegram get the fastest answer.',
-    // /contact обслуживается отдельной статической страницей public/contact.html
-    // (правило в vercel.json). Свой файл ей не подкладываем, иначе неясно, что
-    // победит; в карту сайта адрес по-прежнему попадает.
-    staticFile: true,
   },
   {
     path: '/industries',

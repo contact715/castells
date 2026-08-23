@@ -92,8 +92,8 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
     const contactMethods = [
         { icon: Calendar, label: 'Book a Call', value: 'Schedule a call', href: 'https://calendar.app.google/3ydSwahZK2uNw6EA8', color: 'bg-blue-500/10 text-blue-500' },
         { icon: Phone, label: 'Phone Call', value: '+1 (916) 619-6006', href: 'tel:+19166196006', color: 'bg-green-500/10 text-green-500' },
-        { icon: MessageCircle, label: 'WhatsApp', value: 'Chat with us', href: 'https://wa.me/19563153156', color: 'bg-emerald-500/10 text-emerald-500' },
-        { icon: Send, label: 'Telegram', value: 'Message us', href: 'https://t.me/+19563153156', color: 'bg-sky-500/10 text-sky-500' },
+        { icon: MessageCircle, label: 'WhatsApp', value: 'Chat with us', href: 'https://wa.me/19166196006', color: 'bg-emerald-500/10 text-emerald-500' },
+        { icon: Send, label: 'Telegram', value: 'Message us', href: 'https://t.me/+19166196006', color: 'bg-sky-500/10 text-sky-500' },
     ];
 
     const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
@@ -101,21 +101,21 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
     return (
         <>
             <SEO 
-                title="Contact Us | Castells Media - Roseville Digital Marketing" 
-                description="Ready to dominate your market? Contact Castells Media in Roseville, California. Schedule a free strategy session and let's discuss how we can help you achieve your goals. Serving clients nationwide from our Los Angeles headquarters."
+                title="Contact Castells Media | Roseville, California" 
+                description="Talk to Castells Media about your business: WhatsApp, Telegram, a call or the form. Roseville, California, working with home service businesses across the US."
                 canonical="/contact"
                 keywords="contact marketing agency, Roseville marketing agency, Los Angeles digital marketing, marketing consultation, free marketing audit, marketing strategy session, California marketing agency"
                 geoRegion="US-CA"
                 geoPlacename="1298 Antelope Creek Drive, Roseville, California"
                 geoPosition="34.0195,-118.4912"
-                summary="Contact Castells Media for digital marketing services. Located in Roseville, California. Schedule a free strategy session to discuss how we can help your business dominate its market. We serve clients nationwide."
+                summary="Contact Castells Media: WhatsApp, Telegram, phone, email or the form. Based in Roseville, California, working with home service businesses across the US."
                 mainEntity="Contact Information"
             />
             <SchemaMarkup
                 type="LocalBusiness"
                 data={{
                     name: 'Castells Media',
-                    description: 'Revenue-focused digital marketing agency helping contractors and service providers dominate their local markets.',
+                    description: 'Marketing agency for home service businesses: websites, Google and Meta ads, local presence and follow-up.',
                     telephone: '+1-916-619-6006',
                     email: 'contact@castells.media',
                     streetAddress: '1234 Main Street',
@@ -143,8 +143,8 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                         { label: 'Contact us', active: true }
                     ]}
                     badge="Get in Touch"
-                    title="Let's make something great together"
-                    description="Ready to dominate your market? Schedule a free strategy session and let's discuss how we can help you achieve your goals."
+                    title="Talk to us"
+                    description="Tell us what your business does and where. We will say plainly whether we can help, what we would start with and what it costs. WhatsApp and Telegram get the fastest answer."
                     onNavigate={onNavigate}
                 />
 
@@ -164,7 +164,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                     Start a project
                                 </h3>
                                 <p className="text-text-secondary text-sm">
-                                    Fill out the form and we'll get back to you within 24 hours.
+                                    Or write here — the message lands in our inbox, and we answer from there.
                                 </p>
                             </div>
 
@@ -393,25 +393,11 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                             <ArrowRight className="w-4 h-4 text-text-secondary/50 group-hover:text-white dark:group-hover:text-black transition-colors" />
                                         </motion.a>
                                     ))}
-                                    {/* Discord */}
-                                    <motion.div
-                                        initial={{ opacity: 0, x: -20 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: 0.8, duration: 0.4 }}
-                                        className="flex items-center justify-between p-4 -mx-4 rounded-inner group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color] cursor-pointer"
-                                    >
-                                        <div className="flex items-center gap-4">
-                                            <div className="text-text-secondary group-hover:text-white dark:group-hover:text-black transition-colors">
-                                                <MessageCircle className="w-5 h-5" />
-                                            </div>
-                                            <span className="font-medium text-base text-text-primary group-hover:text-white dark:group-hover:text-black transition-colors">
-                                                Discord
-                                            </span>
-                                        </div>
-                                        <span className="text-xs text-text-secondary group-hover:text-white/70 dark:group-hover:text-black/70 flex items-center gap-2 transition-colors">
-                                            castells_agency <span className="opacity-50">❐</span>
-                                        </span>
-                                    </motion.div>
+                                    {/*
+                                        Здесь стоял Discord (castells_agency).
+                                        Владелец: канала нет. Подрядчику по HVAC
+                                        он всё равно ни к чему.
+                                    */}
                                 </div>
                             </motion.div>
 
@@ -429,9 +415,11 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
 
                                 <div className="space-y-3">
                                     {[
-                                        { email: 'contact@castells.media', label: 'General Purpose' },
-                                        { email: 'contact@castells.media', label: 'Partnership' },
-                                        { email: 'contact@castells.media', label: 'Careers' }
+                                        /* Раньше здесь стояли три строки с
+                                           одним и тем же адресом под разными
+                                           подписями — как «Get a Quote» и
+                                           «Schedule a Call» в старом подвале. */
+                                        { email: 'contact@castells.media', label: 'Write to us' }
                                     ].map((item, index) => (
                                         <motion.a
                                             key={item.email}

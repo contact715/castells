@@ -24,8 +24,8 @@ export const BUSINESS = {
   website: 'https://www.castells.media',
 
   // Messenger links
-  whatsapp: 'https://wa.me/19563153156',
-  telegram: 'https://t.me/+19563153156',
+  whatsapp: 'https://wa.me/19166196006',
+  telegram: 'https://t.me/+19166196006',
   bookCall: 'https://calendar.app.google/3ydSwahZK2uNw6EA8',
 
   // Social media (update when real profiles exist)

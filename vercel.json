@@ -78,10 +78,6 @@
       "dest": "/api/telegram-webhook.js"
     },
     {
-      "src": "/contact",
-      "dest": "/contact.html"
-    },
-    {
       "handle": "filesystem"
     },
     {

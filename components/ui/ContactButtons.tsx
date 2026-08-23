@@ -25,8 +25,8 @@ export const ContactButtons = ({ defaultExpanded = 'Book call' }: { defaultExpan
         >
             {[
                 { label: 'Phone', cta: 'Call now', icon: Phone, href: 'tel:+19166196006', external: false },
-                { label: 'WhatsApp', cta: 'WhatsApp', icon: WhatsAppIcon, href: 'https://wa.me/19563153156', external: true },
-                { label: 'Telegram', cta: 'Telegram', icon: Send, href: 'https://t.me/+19563153156', external: true },
+                { label: 'WhatsApp', cta: 'WhatsApp', icon: WhatsAppIcon, href: 'https://wa.me/19166196006', external: true },
+                { label: 'Telegram', cta: 'Telegram', icon: Send, href: 'https://t.me/+19166196006', external: true },
                 { label: 'Email', cta: 'Email us', icon: Mail, href: 'mailto:contact@castells.media', external: false },
                 { label: 'Calendly', cta: 'Book call', icon: Calendar, href: 'https://calendar.app.google/3ydSwahZK2uNw6EA8', external: true },
             ].map((m) => {

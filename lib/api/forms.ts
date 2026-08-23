@@ -1,7 +1,23 @@
 /**
- * Form submission API utilities
- * Supports multiple form submission services
+ * Отправка форм сайта.
+ *
+ * Что было не так до 23 августа 2026. Формы шли на /api/contact и /api/quiz,
+ * а таких обработчиков в проекте нет и маршрутов в vercel.json тоже — прод
+ * отвечал 404 на оба. Запасной путь через Resend не работал: ключа в сборке
+ * нет. То есть заявки со страницы контактов и из опросника не доходили
+ * никуда, человек видел ошибку.
+ *
+ * При этом рабочий путь был рядом: статическая страница public/contact.html
+ * уже слала заявки через formsubmit.co на почту contact@castells.media.
+ * Теперь тот же путь используют все формы сайта.
+ *
+ * Порядок попыток: свой обработчик, если он появится (VITE_FORM_API_ENDPOINT),
+ * затем formsubmit. Ошибка отправки по-прежнему показывается человеку, а не
+ * прячется за ложным «спасибо».
  */
+
+/** Почта, на которую приходят заявки. Тот же адрес, что и в подвале сайта. */
+const INBOX = 'contact@castells.media';
 
 export interface FormSubmissionResult {
   success: boolean;
@@ -29,12 +45,13 @@ export const submitContactForm = async (data: {
       return await submitViaResend(data, resendApiKey);
     }
 
-    // Option 2: Use custom API endpoint
-    const apiEndpoint = import.meta.env.VITE_FORM_API_ENDPOINT || '/api/contact';
-    
-    if (apiEndpoint.startsWith('http') || apiEndpoint.startsWith('/api')) {
+    // Свой обработчик, если его когда-нибудь поднимут
+    const apiEndpoint = import.meta.env.VITE_FORM_API_ENDPOINT;
+    if (apiEndpoint) {
       return await submitViaAPI(data, apiEndpoint);
     }
+
+    return await submitViaFormsubmit(data, 'New request from the contact form');
 
     // Option 3: Fallback - log to console (for development)
     console.log('Form submission (development mode):', data);
@@ -166,7 +183,8 @@ export const submitQuizForm = async (data: {
     const apiEndpoint = import.meta.env.VITE_FORM_API_ENDPOINT || '/api/quiz';
     
     if (apiEndpoint.startsWith('http') || apiEndpoint.startsWith('/api')) {
-      return await submitViaAPI(data as any, apiEndpoint);
+      if (apiEndpoint) return await submitViaAPI(data as any, apiEndpoint);
+      return await submitViaFormsubmit(data as unknown as Record<string, unknown>, 'New request from the quiz');
     }
 
     console.log('Quiz form submission (development mode):', data);
@@ -238,3 +256,38 @@ const submitQuizViaResend = async (
   }
 };
 
+
+
+/**
+ * Отправка через formsubmit.co: сервис пересылает содержимое формы письмом
+ * на нашу почту. Ключей и своего сервера не требует, и этим путём уже
+ * пользуется статическая страница контактов.
+ */
+const submitViaFormsubmit = async (
+  data: Record<string, unknown>,
+  subject: string
+): Promise<FormSubmissionResult> => {
+  try {
+    const response = await fetch(`https://formsubmit.co/ajax/${INBOX}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({ ...data, _subject: subject, _template: 'table' }),
+    });
+
+    if (!response.ok) {
+      return { success: false, error: `Could not send the message (${response.status}). Please write to us on WhatsApp.` };
+    }
+
+    const result = await response.json();
+    // сервис отвечает строкой 'true' при успехе
+    if (String(result?.success) === 'true') {
+      return { success: true, message: 'Sent' };
+    }
+    return { success: false, error: result?.message || 'Could not send the message. Please write to us on WhatsApp.' };
+  } catch (error) {
+    return {
+      success: false,
+      error: error instanceof Error ? error.message : 'Could not send the message. Please write to us on WhatsApp.',
+    };
+  }
+};

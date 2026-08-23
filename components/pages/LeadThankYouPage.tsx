@@ -490,12 +490,12 @@ const LeadThankYouPage: React.FC = () => {
             We'll reach out to you from
           </p>
 
-          <a href="tel:+19563153156" style={{
+          <a href="tel:+19166196006" style={{
             display: 'inline-block', fontSize: 20, fontWeight: 700, color: '#FFE66D',
             textDecoration: 'none', letterSpacing: 1, marginBottom: 20,
             animation: 'ty-slide-up 0.8s 0.6s ease-out both',
           }}>
-            +1 (956) 315-3156
+            +1 (916) 619-6006
           </a>
 
           <p style={{ fontSize: 14, color: 'rgba(255,255,255,0.5)', animation: 'ty-slide-up 0.8s 0.7s ease-out both', margin: 0 }}>
