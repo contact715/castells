@@ -70,26 +70,6 @@ export interface CaseStudy {
 
 export const CASE_STUDIES: CaseStudy[] = [
   {
-    /*
-      Кейс без чисел: подтверждённых метрик по этому проекту у нас нет, а
-      выдумывать их мы перестали. Подтверждение — живой сайт, его видно и
-      проверяемо. Данные взяты из карточки Web-Development в Monday
-      (клиент, город) и проверены запросом 22 августа 2026.
-    */
-    id: '11',
-    client: 'Five Star Comfort',
-    industry: 'Heating and Air Conditioning',
-    location: 'Bothell, Washington',
-    year: '2024',
-    image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1600&q=80',
-    description:
-      'Built the website for a heating and air conditioning company in the Seattle area: service pages, quote request and a phone number that works from any screen.',
-    services: ['Web Development'],
-    color: '#E08576',
-    category: 'web-design',
-    website: 'https://fivestarcomfort.com/',
-  },
-  {
     id: '01',
     client: 'Roman Service',
     industry: 'HVAC Services',
@@ -122,6 +102,26 @@ export const CASE_STUDIES: CaseStudy[] = [
     logoSvg: "/Roman's Service - Brand Guidelines 2 copy/01_Logos/Primary_Logo/FullColor/Roman_Primary_Logo_FullColor.svg",
     brandGuidelines: "/Roman's_Brand_Guideline copy.pdf",
     website: "https://www.acromanservice.com/"
+  },
+  {
+    /*
+      Кейс без чисел: подтверждённых метрик по этому проекту у нас нет, а
+      выдумывать их мы перестали. Подтверждение — живой сайт, его видно и
+      проверяемо. Данные взяты из карточки Web-Development в Monday
+      (клиент, город) и проверены запросом 22 августа 2026.
+    */
+    id: '11',
+    client: 'Five Star Comfort',
+    industry: 'Heating and Air Conditioning',
+    location: 'Bothell, Washington',
+    year: '2024',
+    image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1600&q=80',
+    description:
+      'Built the website for a heating and air conditioning company in the Seattle area: service pages, quote request and a phone number that works from any screen.',
+    services: ['Web Development'],
+    color: '#E08576',
+    category: 'web-design',
+    website: 'https://fivestarcomfort.com/',
   },
   {
     id: '02',
