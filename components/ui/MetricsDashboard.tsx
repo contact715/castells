@@ -42,7 +42,7 @@ const MetricsDashboard: React.FC<MetricsDashboardProps> = React.memo(({
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 mb-3">
             <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
-            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+            <span className="text-xs font-semibold tracking-wide text-text-secondary">
               Metrics
             </span>
           </div>
@@ -75,7 +75,7 @@ const MetricsDashboard: React.FC<MetricsDashboardProps> = React.memo(({
                     <Icon className="w-6 h-6 text-coral-text group-hover:text-white dark:group-hover:text-black transition-colors" />
                   </div>
                   {metric.change && (
-                    <span className="text-xs font-bold uppercase tracking-widest text-coral-text">
+                    <span className="text-xs font-semibold tracking-wide text-coral-text">
                       {metric.change}
                     </span>
                   )}

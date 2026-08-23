@@ -201,7 +201,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                   <p className="text-sm text-text-secondary leading-relaxed mb-4">
                     {category.tagline}
                   </p>
-                  <div className="flex items-center text-coral-text text-sm font-bold uppercase tracking-wider group-hover:gap-2 transition-[gap]">
+                  <div className="flex items-center text-coral-text text-sm font-bold tracking-wider group-hover:gap-2 transition-[gap]">
                     <span>Explore</span>
                     <ChevronRight className="w-4 h-4 ml-1" />
                   </div>

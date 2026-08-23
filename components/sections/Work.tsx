@@ -62,7 +62,7 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
             >
               View Full Archive
             </Button>
-            <div className="flex items-center gap-2 mt-6 text-xs font-bold uppercase tracking-widest text-text-secondary">
+            <div className="flex items-center gap-2 mt-6 text-xs font-semibold tracking-wide text-text-secondary">
               <Layers className="w-4 h-4" />
               Scroll to explore stack
             </div>
@@ -209,7 +209,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
 
         {/* Top Row */}
         <div className="flex justify-between items-start">
-          <div className="bg-white/15 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl text-white text-[10px] sm:text-xs font-bold uppercase tracking-widest">
+          <div className="bg-white/15 px-3 py-1.5 sm:px-4 sm:py-2 rounded-lg sm:rounded-xl text-white text-[10px] sm:text-xs font-semibold tracking-wide">
             {project.year} — {project.industry}
           </div>
           <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-3xl sm:rounded-element bg-white/10 flex items-center justify-center group-hover:bg-white transition-colors duration-300">
@@ -234,13 +234,13 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
             {project.metric && (
               <div>
                 <div className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1">{project.metric}</div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-white/50">{project.metricLabel}</div>
+                <div className="text-[10px] font-semibold tracking-wide text-white/50">{project.metricLabel}</div>
               </div>
             )}
             {project.secondaryMetric && (
               <div>
                 <div className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1">{project.secondaryMetric}</div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-white/50">{project.secondaryLabel}</div>
+                <div className="text-[10px] font-semibold tracking-wide text-white/50">{project.secondaryLabel}</div>
               </div>
             )}
 
@@ -255,7 +255,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="ml-auto inline-flex items-center gap-1.5 px-4 py-2.5 rounded-pill bg-white/10 hover:bg-white text-white hover:text-black border border-white/15 hover:border-white transition-colors text-xs sm:text-sm font-semibold"
+                className="ml-auto inline-flex items-center gap-1.5 px-4 py-2.5 rounded-button bg-white/10 hover:bg-white text-white hover:text-black border border-white/15 hover:border-white transition-colors text-xs sm:text-sm font-semibold"
               >
                 {project.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
                 <ArrowUpRight className="w-4 h-4" aria-hidden="true" />

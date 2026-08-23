@@ -37,7 +37,7 @@ export const Badge: React.FC<BadgeProps> = ({
       )}
       <span
         className={cn(
-          "font-bold uppercase tracking-widest text-text-secondary",
+          "font-semibold tracking-wide text-text-secondary",
           size === 'sm' ? "text-[10px]" : "text-xs"
         )}
       >

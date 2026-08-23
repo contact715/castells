@@ -47,7 +47,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
           {/* Badge */}
           <div className="flex items-center gap-2 mb-6">
             <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
-            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+            <span className="text-xs font-semibold tracking-wide text-text-secondary">
               404
             </span>
           </div>
@@ -123,7 +123,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
             <div className="text-center mb-8">
               <div className="flex items-center gap-2 justify-center mb-3">
                 <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
-                <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+                <span className="text-xs font-semibold tracking-wide text-text-secondary">
                   Popular Pages
                 </span>
               </div>

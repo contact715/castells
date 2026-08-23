@@ -89,7 +89,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           {/* Разделы */}
           <nav aria-label="Footer">
-            <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-coral-text mb-4">
+            <h4 className="text-[11px] font-bold tracking-wide text-coral-text mb-4">
               Sections
             </h4>
             <div className="flex flex-col gap-2.5">
@@ -108,7 +108,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           {/* Как связаться */}
           <div>
-            <h4 className="text-[11px] font-bold uppercase tracking-[0.15em] text-coral-text mb-4">
+            <h4 className="text-[11px] font-bold tracking-wide text-coral-text mb-4">
               Contact
             </h4>
             <div className="flex flex-col gap-2.5">
@@ -144,7 +144,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         </div>
 
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-6">
-          <p className="text-[11px] text-text-secondary dark:text-white/60 uppercase tracking-widest">
+          <p className="text-[11px] text-text-secondary dark:text-white/60 tracking-wide">
             © {new Date().getFullYear()} Castells Media Inc.
           </p>
           <div className="flex items-center gap-6 text-[11px] text-text-secondary dark:text-white/60">

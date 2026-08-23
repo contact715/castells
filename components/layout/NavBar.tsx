@@ -31,7 +31,7 @@ const CategoryCard = ({ title, icon: Icon, href }: { title: string, icon: React.
         <div className="bg-white dark:bg-black p-3 rounded-xl  group-hover:scale-110 transition-transform">
             <Icon className="w-6 h-6 text-text-primary group-hover:text-coral-text transition-colors" />
         </div>
-        <span className="text-xs font-bold uppercase tracking-wide text-text-primary group-hover:text-coral-text">{title}</span>
+        <span className="text-xs font-bold tracking-wide text-text-primary group-hover:text-coral-text">{title}</span>
     </a>
 );
 
@@ -83,7 +83,7 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Naviga
                         {/* Content */}
                         <div className="absolute inset-0 p-4 flex flex-col justify-end">
                             <div className="mb-2">
-                                <span className="text-[10px] font-bold uppercase tracking-widest text-white/60">
+                                <span className="text-[10px] font-semibold tracking-wide text-white/60">
                                     {caseStudy.industry}
                                 </span>
                             </div>
@@ -215,7 +215,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                 {/* Left Column: Categories (Vertical) */}
                 <div className="flex flex-col gap-1 bg-white dark:bg-surface-dark p-1.5 rounded-card w-[240px] shrink-0">
                     <div className="px-2 py-1 mb-1">
-                        <span className="text-[9px] font-bold uppercase tracking-widest text-text-secondary">Categories</span>
+                        <span className="text-[9px] font-semibold tracking-wide text-text-secondary">Categories</span>
                     </div>
                     {SERVICES_DATA.map((category) => (
                         <button
@@ -253,7 +253,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                     <div className="w-[200px] space-y-0.5 pt-1.5 shrink-0">
                         {leftColumnItems.length > 0 && (
                             <div className="px-2 py-1 mb-1">
-                                <span className="text-[9px] font-bold uppercase tracking-widest text-text-secondary">
+                                <span className="text-[9px] font-semibold tracking-wide text-text-secondary">
                                     {activeCategoryData?.label || 'Services'}
                                 </span>
                             </div>
@@ -284,7 +284,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                     <div className="w-[200px] space-y-0.5 pt-1.5 shrink-0">
                         {rightColumnItems.length > 0 && (
                             <div className="px-2 py-1 mb-1">
-                                <span className="text-[9px] font-bold uppercase tracking-widest text-text-secondary opacity-0">
+                                <span className="text-[9px] font-semibold tracking-wide text-text-secondary opacity-0">
                                     {activeCategoryData?.label || 'Services'}
                                 </span>
                             </div>
@@ -366,7 +366,7 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                 {/* Left Column: Categories (Vertical) */}
                 <div className="flex flex-col gap-1 bg-white dark:bg-surface-dark p-1.5 rounded-card w-[240px] shrink-0">
                     <div className="px-2 py-1 mb-1">
-                        <span className="text-[9px] font-bold uppercase tracking-widest text-text-secondary">Categories</span>
+                        <span className="text-[9px] font-semibold tracking-wide text-text-secondary">Categories</span>
                     </div>
                     {INDUSTRY_CATEGORIES.map((category, idx) => (
                         <button
@@ -404,7 +404,7 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                     <div className="w-[200px] space-y-0.5 pt-1.5 shrink-0">
                         {leftColumnItems.length > 0 && (
                             <div className="px-2 py-1 mb-1">
-                                <span className="text-[9px] font-bold uppercase tracking-widest text-text-secondary">
+                                <span className="text-[9px] font-semibold tracking-wide text-text-secondary">
                                     {activeCategoryData?.label || 'Services'}
                                 </span>
                             </div>
@@ -439,7 +439,7 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                     <div className="w-[200px] space-y-0.5 pt-1.5 shrink-0">
                         {rightColumnItems.length > 0 && (
                             <div className="px-2 py-1 mb-1">
-                                <span className="text-[9px] font-bold uppercase tracking-widest text-text-secondary opacity-0">
+                                <span className="text-[9px] font-semibold tracking-wide text-text-secondary opacity-0">
                                     {activeCategoryData?.label || 'Services'}
                                 </span>
                             </div>
@@ -700,7 +700,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                             >
                                 <div className="grid gap-4">
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Branding & Design</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Branding & Design</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Identity & Logo</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">UI/UX Design</a>
@@ -708,7 +708,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Development</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Development</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Custom Web</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Mobile Apps</a>
@@ -716,7 +716,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Growth</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Growth</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Paid Media (PPC)</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">SEO Strategy</a>
@@ -724,7 +724,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Systems</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Systems</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">CRM Setup</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Automation</a>
@@ -741,7 +741,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                             >
                                 <div className="grid gap-4">
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Construction</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Construction</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">General</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Roofing</a>
@@ -749,14 +749,14 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Home Services</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Home Services</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">HVAC</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Solar</a>
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Automotive</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Automotive</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Detailing</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Wraps & PPF</a>
@@ -764,7 +764,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-bold uppercase tracking-widest text-coral-text">Professional</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Professional</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Legal</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Finance</a>

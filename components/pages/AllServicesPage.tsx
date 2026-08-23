@@ -141,7 +141,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
                       <span className="font-display text-2xl md:text-3xl text-text-primary dark:text-white leading-tight">
                         {direction.price}
                       </span>
-                      <span className="text-[11px] uppercase tracking-widest text-text-secondary dark:text-white/55">
+                      <span className="text-[11px] tracking-wide text-text-secondary dark:text-white/55">
                         {direction.priceNote}
                       </span>
                     </div>
@@ -188,7 +188,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mb-8">
               <div>
-                <div className="text-[11px] font-bold uppercase tracking-widest text-coral-text mb-3">
+                <div className="text-[11px] font-semibold tracking-wide text-coral-text mb-3">
                   Monthly
                 </div>
                 <p className="font-display text-2xl text-text-primary dark:text-white mb-1">$590 / month</p>
@@ -202,7 +202,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
               </div>
 
               <div>
-                <div className="text-[11px] font-bold uppercase tracking-widest text-coral-text mb-3">
+                <div className="text-[11px] font-semibold tracking-wide text-coral-text mb-3">
                   One-time work
                 </div>
                 <p className="font-display text-2xl text-text-primary dark:text-white mb-1">From $1,750</p>
@@ -216,7 +216,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
               </div>
 
               <div>
-                <div className="text-[11px] font-bold uppercase tracking-widest text-coral-text mb-3">
+                <div className="text-[11px] font-semibold tracking-wide text-coral-text mb-3">
                   What is not included
                 </div>
                 <p className="text-sm text-text-secondary dark:text-white/60 leading-relaxed">
@@ -234,7 +234,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={() => onNavigate('contact')}
-                className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-pill bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity cursor-pointer"
+                className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-button bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity cursor-pointer"
               >
                 Talk to us
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />

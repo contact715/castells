@@ -49,7 +49,7 @@ export const ContactButtons = ({ defaultExpanded = 'Book call' }: { defaultExpan
                         <m.icon className={`w-4 h-4 shrink-0 transition-colors duration-300 ${
                             isExpanded ? 'text-current' : 'text-text-secondary'
                         }`} />
-                        <span className={`text-[11px] font-bold uppercase tracking-widest whitespace-nowrap transition-[opacity,max-width,margin] duration-300 ease-in-out ${
+                        <span className={`text-[11px] font-semibold tracking-wide whitespace-nowrap transition-[opacity,max-width,margin] duration-300 ease-in-out ${
                             isExpanded
                                 ? 'opacity-100 max-w-[90px] ml-2'
                                 : 'opacity-0 max-w-0 ml-0'

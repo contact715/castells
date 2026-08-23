@@ -95,7 +95,7 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
         <div className="mb-12 md:mb-16 max-w-2xl">
           <div className="flex items-center gap-2 mb-4">
             <span className="w-2 h-2 rounded-full bg-coral-gradient shrink-0" aria-hidden="true" />
-            <span className="text-xs font-bold uppercase tracking-widest text-white/50">What we do</span>
+            <span className="text-xs font-semibold tracking-wide text-white/50">What we do</span>
           </div>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-white">
             Four things a service business
@@ -136,7 +136,7 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
                     <span className="font-display text-2xl md:text-3xl text-white leading-tight">
                       {service.price}
                     </span>
-                    <span className="text-[11px] uppercase tracking-widest text-white/55">
+                    <span className="text-[11px] tracking-wide text-white/55">
                       {service.priceNote}
                     </span>
                   </div>
@@ -189,7 +189,7 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
           <button
             type="button"
             onClick={() => onNavigate?.('services')}
-            className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-pill bg-white text-black font-medium text-[15px] hover:bg-white/90 transition-colors"
+            className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-button bg-white text-black font-medium text-[15px] hover:bg-white/90 transition-colors"
           >
             All services and prices
             <ArrowRight className="w-4 h-4" aria-hidden="true" />

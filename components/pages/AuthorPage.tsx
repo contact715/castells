@@ -90,7 +90,7 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
             <div className="flex-1">
               <div className="flex items-center gap-2 mb-3">
                 <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
-                <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+                <span className="text-xs font-semibold tracking-wide text-text-secondary">
                   Team Member
                 </span>
               </div>

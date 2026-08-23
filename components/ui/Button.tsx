@@ -45,7 +45,7 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPro
     const Component = as || (href ? 'a' : 'button');
     const buttonProps = href ? { href } : { type: 'button' as const };
 
-    const baseStyles = "relative flex cursor-pointer items-center justify-center overflow-hidden text-center transition-[background-color,color,box-shadow,border-color,filter] duration-300 ease-in-out rounded-inner font-medium whitespace-nowrap";
+    const baseStyles = "relative flex cursor-pointer items-center justify-center overflow-hidden text-center transition-[background-color,color,box-shadow,border-color,filter] duration-300 ease-in-out rounded-button font-medium whitespace-nowrap";
 
     const variants = {
       primary: "bg-black text-white dark:bg-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90",

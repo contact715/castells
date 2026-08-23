@@ -227,7 +227,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse" />
-                  <span className="font-bold uppercase tracking-widest text-white text-xs">
+                  <span className="font-semibold tracking-wide text-white text-xs">
                     Case Study
                   </span>
                 </div>
@@ -248,7 +248,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               <div className="mt-auto pt-8">
                 {/* Industry Category - Above Title */}
                 <div className="mb-3">
-                  <span className="text-xs font-bold uppercase tracking-widest text-white/80">
+                  <span className="text-xs font-semibold tracking-wide text-white/80">
                     {data.industry}
                   </span>
                 </div>
@@ -267,7 +267,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                   {data.services && data.services.length > 0 && (
                     <div className="flex flex-wrap items-center gap-2 shrink-0">
                       {data.services.map((s: string) => (
-                        <span key={s} className="px-4 py-2 bg-white/10 backdrop-blur-md rounded-xl text-white text-xs font-bold uppercase tracking-widest whitespace-nowrap">
+                        <span key={s} className="px-4 py-2 bg-white/10 backdrop-blur-md rounded-xl text-white text-xs font-semibold tracking-wide whitespace-nowrap">
                           {s}
                         </span>
                       ))}
@@ -315,7 +315,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                       <div className="font-display text-3xl font-bold text-text-primary dark:text-white mb-2">
                         {res.value}
                       </div>
-                      <div className="text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-white/60 mb-1">
+                      <div className="text-xs font-semibold tracking-wide text-text-secondary dark:text-white/60 mb-1">
                         {res.label}
                       </div>
                       <div className="text-coral-text text-sm font-semibold">
@@ -405,7 +405,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                 <div className="sticky top-24 bg-white dark:bg-surface rounded-card p-4 flex flex-col gap-3">
                   {/* Header */}
                   <div className="pb-2 border-b border-black/5 dark:border-white/10">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">Navigate</span>
+                    <span className="text-[10px] font-semibold tracking-wide text-text-secondary">Navigate</span>
                   </div>
 
                   {/* TOC - Vertical with Full Labels */}
@@ -428,7 +428,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
 
                   {/* Divider */}
                   <div className="border-t border-black/5 dark:border-white/10 pt-2">
-                    <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">Resources</span>
+                    <span className="text-[10px] font-semibold tracking-wide text-text-secondary">Resources</span>
                   </div>
 
                   {/* Assets */}
@@ -477,7 +477,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                   {/* Contact Buttons - Bottom */}
                   <div className="pt-2 border-t border-black/5 dark:border-white/10">
                     <div className="mb-2">
-                      <span className="text-[10px] font-bold uppercase tracking-widest text-text-secondary">Contact</span>
+                      <span className="text-[10px] font-semibold tracking-wide text-text-secondary">Contact</span>
                     </div>
                     <ContactButtons defaultExpanded={null} />
                   </div>

@@ -24,7 +24,7 @@ const Services: React.FC = React.memo(() => {
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-4">
             <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse"></span>
-            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+            <span className="text-xs font-semibold tracking-wide text-text-secondary">
               Our Expertise
             </span>
           </div>

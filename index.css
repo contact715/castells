@@ -83,6 +83,9 @@
 
   --radius-card: 1rem;
   --radius-inner: 0.75rem;
+  /* Радиус кнопок по образцу academy.claude.com: 10px. Пилюля читается
+     как рекламная плашка, малый радиус — как элемент издания. */
+  --radius-button: 0.625rem;
   --radius-element: 0.5rem;
   --radius-pill: 9999px;
 

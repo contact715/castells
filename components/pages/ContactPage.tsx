@@ -213,7 +213,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                 {/* Phone & Topic Row */}
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div className="space-y-1.5">
-                                        <label htmlFor="phone" className="text-xs font-bold uppercase tracking-wider text-text-secondary ml-1">Phone (optional)</label>
+                                        <label htmlFor="phone" className="text-xs font-bold tracking-wider text-text-secondary ml-1">Phone (optional)</label>
                                         <div className="flex gap-2">
                                             <div className="w-16 bg-ivory dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-inner flex items-center justify-center text-text-secondary font-medium text-xs">
                                                 🇺🇸 +1
@@ -230,7 +230,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                     </div>
 
                                     <div className="space-y-1.5">
-                                        <label htmlFor="topic" className="text-xs font-bold uppercase tracking-wider text-text-secondary ml-1">Service</label>
+                                        <label htmlFor="topic" className="text-xs font-bold tracking-wider text-text-secondary ml-1">Service</label>
                                         <div className="relative">
                                             <select
                                                 id="topic"
@@ -253,7 +253,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
 
                                 {/* Message */}
                                 <div className="space-y-1.5">
-                                    <label htmlFor="message" className="text-xs font-bold uppercase tracking-wider text-text-secondary ml-1">Project details *</label>
+                                    <label htmlFor="message" className="text-xs font-bold tracking-wider text-text-secondary ml-1">Project details *</label>
                                     <textarea
                                         id="message"
                                         required
@@ -462,7 +462,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                     <div className="max-w-3xl mb-10">
                         <div className="flex items-center gap-2 mb-3">
                             <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
-                            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+                            <span className="text-xs font-semibold tracking-wide text-text-secondary">
                                 Discover
                             </span>
                         </div>
@@ -498,7 +498,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                             <p className="text-text-secondary dark:text-white/60 text-sm leading-relaxed mb-6 group-hover:text-white/80 dark:group-hover:text-black/70 transition-colors">
                                 Learn more about who we are and what drives us.
                             </p>
-                            <div className="flex items-center gap-2 text-text-secondary dark:text-white/60 text-xs font-bold uppercase tracking-wider group-hover:text-white dark:group-hover:text-black transition-colors mt-auto">
+                            <div className="flex items-center gap-2 text-text-secondary dark:text-white/60 text-xs font-bold tracking-wider group-hover:text-white dark:group-hover:text-black transition-colors mt-auto">
                                 About us <ArrowRight className="w-3 h-3 -rotate-45" />
                             </div>
                         </motion.a>
@@ -522,7 +522,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                             <p className="text-text-secondary dark:text-white/60 text-sm leading-relaxed mb-6 group-hover:text-white/80 dark:group-hover:text-black/70 transition-colors">
                                 Discover our impactful projects.
                             </p>
-                            <div className="flex items-center gap-2 text-text-secondary dark:text-white/60 text-xs font-bold uppercase tracking-wider group-hover:text-white dark:group-hover:text-black transition-colors mt-auto">
+                            <div className="flex items-center gap-2 text-text-secondary dark:text-white/60 text-xs font-bold tracking-wider group-hover:text-white dark:group-hover:text-black transition-colors mt-auto">
                                 Our works <ArrowRight className="w-3 h-3 -rotate-45" />
                             </div>
                         </motion.a>
@@ -546,7 +546,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                             <p className="text-text-secondary dark:text-white/60 text-sm leading-relaxed mb-6 group-hover:text-white/80 dark:group-hover:text-black/70 transition-colors">
                                 Explore our blog for the latest insights and ideas from our team.
                             </p>
-                            <div className="flex items-center gap-2 text-text-secondary dark:text-white/60 text-xs font-bold uppercase tracking-wider group-hover:text-white dark:group-hover:text-black transition-colors mt-auto">
+                            <div className="flex items-center gap-2 text-text-secondary dark:text-white/60 text-xs font-bold tracking-wider group-hover:text-white dark:group-hover:text-black transition-colors mt-auto">
                                 Read blog <ArrowRight className="w-3 h-3 -rotate-45" />
                             </div>
                         </motion.a>

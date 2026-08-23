@@ -62,7 +62,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
 
           <article className="max-w-[43rem]">
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6">
-              <span className="text-[11px] font-bold uppercase tracking-widest text-coral-text">
+              <span className="text-[11px] font-semibold tracking-wide text-coral-text">
                 {post.category}
               </span>
               <span className="text-sm text-text-secondary dark:text-white/55">{post.date}</span>
@@ -114,7 +114,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
               <button
                 type="button"
                 onClick={() => onNavigate?.('contact')}
-                className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-pill bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity cursor-pointer"
+                className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-button bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity cursor-pointer"
               >
                 Talk to us
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />

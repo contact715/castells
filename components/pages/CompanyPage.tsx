@@ -227,7 +227,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                     <div className="w-10 h-10 rounded-element bg-coral/10 flex items-center justify-center">
                       <Flag className="w-5 h-5 text-coral-text" />
                     </div>
-                    <span className="text-sm font-bold uppercase tracking-widest text-text-secondary">Why we started</span>
+                    <span className="text-sm font-semibold tracking-wide text-text-secondary">Why we started</span>
                   </div>
                   <h3 className="font-display text-xl font-semibold mb-3 text-text-primary">The Beginning</h3>
                   <p className="text-text-secondary leading-relaxed">
@@ -247,7 +247,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                     <div className="w-10 h-10 rounded-element bg-coral/10 flex items-center justify-center">
                       <TrendingUp className="w-5 h-5 text-coral-text" />
                     </div>
-                    <span className="text-sm font-bold uppercase tracking-widest text-text-secondary">Today</span>
+                    <span className="text-sm font-semibold tracking-wide text-text-secondary">Today</span>
                   </div>
                   <h3 className="font-display text-xl font-semibold mb-3 text-text-primary">The Reality</h3>
                   <p className="text-text-secondary leading-relaxed">
@@ -268,7 +268,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                     <div className="w-10 h-10 rounded-element bg-coral/10 flex items-center justify-center">
                       <Rocket className="w-5 h-5 text-coral-text" />
                     </div>
-                    <span className="text-sm font-bold uppercase tracking-widest text-text-secondary">Mission</span>
+                    <span className="text-sm font-semibold tracking-wide text-text-secondary">Mission</span>
                   </div>
                   <h3 className="font-display text-xl font-semibold mb-3 text-text-primary">The Future</h3>
                   <p className="text-text-secondary leading-relaxed">
@@ -520,7 +520,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="flex items-center gap-3 mb-2">
-                          <span className="px-3 py-1 rounded-full bg-coral/10 text-coral-text text-xs font-bold uppercase tracking-wider">
+                          <span className="px-3 py-1 rounded-full bg-coral/10 text-coral-text text-xs font-bold tracking-wider">
                             {post.category}
                           </span>
                           <span className="text-sm text-text-secondary">{post.date}</span>

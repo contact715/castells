@@ -157,7 +157,7 @@ const QuizForm: React.FC = () => {
                         setCurrentStep(0);
                         setFormData({ goal: '', budget: '', industry: '', name: '', email: '', website: '' });
                     }}
-                    className="mt-12 text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors border-b border-white/20 pb-1"
+                    className="mt-12 text-xs font-semibold tracking-wide text-white/40 hover:text-white transition-colors border-b border-white/20 pb-1"
                 >
                     Start New Application
                 </button>
@@ -189,7 +189,7 @@ const QuizForm: React.FC = () => {
                         className="w-full"
                     >
                         <div className="mb-8">
-                            <span className="text-coral-text text-xs font-bold uppercase tracking-widest mb-2 block">
+                            <span className="text-coral-text text-xs font-semibold tracking-wide mb-2 block">
                                 Step {currentStep + 1} of {STEPS.length}
                             </span>
                             <h3 className="text-2xl md:text-3xl font-display font-semibold text-white leading-tight">
@@ -297,7 +297,7 @@ const QuizForm: React.FC = () => {
                 <div className="mt-8 flex justify-start">
                     <button
                         onClick={prevStep}
-                        className="text-xs font-bold uppercase tracking-widest text-white/40 hover:text-white transition-colors"
+                        className="text-xs font-semibold tracking-wide text-white/40 hover:text-white transition-colors"
                     >
                         ← Back
                     </button>

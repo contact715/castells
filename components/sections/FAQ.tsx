@@ -61,7 +61,7 @@ const FAQ: React.FC = () => {
             </div>
 
             <div className="flex flex-col items-start gap-4">
-              <p className="text-sm font-bold uppercase tracking-widest text-text-primary">
+              <p className="text-sm font-semibold tracking-wide text-text-primary">
                 Have another question?
               </p>
               <Button

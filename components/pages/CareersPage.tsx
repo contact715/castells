@@ -69,7 +69,7 @@ const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
             >
               <div>
                 <h3 className="font-display text-2xl font-semibold text-text-primary group-hover:text-coral-text transition-colors">{job.title}</h3>
-                <div className="flex gap-4 mt-2 text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-white/60">
+                <div className="flex gap-4 mt-2 text-xs font-semibold tracking-wide text-text-secondary dark:text-white/60">
                   <span>{job.dept}</span>
                   <span className="w-px h-3 bg-black/20 dark:bg-white/20 self-center" />
                   <span>{job.loc}</span>
@@ -78,7 +78,7 @@ const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
                 </div>
               </div>
               <div className="mt-6 md:mt-0">
-                <span className="flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-text-primary group-hover:translate-x-1 transition-transform">
+                <span className="flex items-center gap-2 text-sm font-semibold tracking-wide text-text-primary group-hover:translate-x-1 transition-transform">
                   Apply Now <ArrowUpRight className="w-4 h-4" />
                 </span>
               </div>

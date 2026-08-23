@@ -241,7 +241,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                         </p>
                         <button
                             onClick={() => onNavigate?.('services')}
-                            className="mt-6 inline-flex items-center justify-center px-6 py-3 rounded-xl border-2 border-black dark:border-white text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors font-bold uppercase tracking-widest text-xs"
+                            className="mt-6 inline-flex items-center justify-center px-6 py-3 rounded-xl border-2 border-black dark:border-white text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors font-semibold tracking-wide text-xs"
                         >
                             View all services
                         </button>
@@ -306,7 +306,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                         <div className="max-w-3xl mb-10">
                             <div className="flex items-center gap-2 mb-3">
                                 <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
-                                <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">Proof</span>
+                                <span className="text-xs font-semibold tracking-wide text-text-secondary">Proof</span>
                             </div>
                             <AnimatedHeading
                                 as="h2"
@@ -350,7 +350,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                                             <ArrowUpRight className="w-4 h-4 text-white" />
                                         </div>
 
-                                        <div className="text-[10px] font-bold uppercase tracking-widest text-white/60 mb-2">
+                                        <div className="text-[10px] font-semibold tracking-wide text-white/60 mb-2">
                                             {cs.industry} · {cs.year}
                                         </div>
 
@@ -363,7 +363,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                                             </p>
                                             <div className="mt-4 flex items-baseline gap-2">
                                                 <span className="text-coral-text font-bold text-2xl">{cs.metric}</span>
-                                                <span className="text-white/60 text-[10px] font-bold uppercase tracking-widest">
+                                                <span className="text-white/60 text-[10px] font-semibold tracking-wide">
                                                     {cs.metricLabel}
                                                 </span>
                                             </div>
@@ -449,7 +449,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                                             <div className="mb-8">
                                                 <div className="flex items-center gap-2 mb-3">
                                                     <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
-                                                    <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">FAQ</span>
+                                                    <span className="text-xs font-semibold tracking-wide text-text-secondary">FAQ</span>
                                                 </div>
                                                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight mb-4">
                                                     Common<br />
@@ -461,7 +461,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                                             </div>
 
                                             <div className="flex flex-col items-start gap-4">
-                                                <p className="text-sm font-bold uppercase tracking-widest text-text-primary">
+                                                <p className="text-sm font-semibold tracking-wide text-text-primary">
                                                     Have another question?
                                                 </p>
                                                 <Button

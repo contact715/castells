@@ -160,7 +160,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 className="flex flex-col bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-6 md:p-8"
               >
-                <div className="text-[11px] font-bold uppercase tracking-widest text-coral-text mb-4">
+                <div className="text-[11px] font-semibold tracking-wide text-coral-text mb-4">
                   {plan.name}
                 </div>
                 <div className="flex items-baseline gap-2 mb-4">
@@ -186,7 +186,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => onNavigate('contact')}
-                  className="mt-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-pill bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity cursor-pointer"
+                  className="mt-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-button bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity cursor-pointer"
                 >
                   Talk to us
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -242,7 +242,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
             <button
               type="button"
               onClick={() => onNavigate('contact')}
-              className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-pill bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity cursor-pointer"
+              className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-button bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity cursor-pointer"
             >
               Talk to us
               <ArrowRight className="w-4 h-4" aria-hidden="true" />

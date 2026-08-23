@@ -57,7 +57,7 @@ const WorkCard: React.FC<{
                     className="w-full h-full object-cover"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
-                <span className="absolute top-4 left-4 px-3 py-1.5 rounded-lg bg-black/70 text-white text-[10px] font-bold uppercase tracking-widest">
+                <span className="absolute top-4 left-4 px-3 py-1.5 rounded-lg bg-black/70 text-white text-[10px] font-semibold tracking-wide">
                     {project.year} · {project.industry}
                 </span>
             </div>
@@ -74,7 +74,7 @@ const WorkCard: React.FC<{
                 </h3>
             </button>
             {project.location && (
-                <p className="text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-white/50 mb-4">
+                <p className="text-xs font-semibold tracking-wide text-text-secondary dark:text-white/50 mb-4">
                     {project.location}
                 </p>
             )}
@@ -88,7 +88,7 @@ const WorkCard: React.FC<{
                 {project.services.map((service) => (
                     <span
                         key={service}
-                        className="px-3 py-1.5 rounded-pill bg-black/5 dark:bg-white/10 text-[11px] font-medium text-[15px] text-text-secondary dark:text-white/60"
+                        className="px-3 py-1.5 rounded-button bg-black/5 dark:bg-white/10 text-[11px] font-medium text-[15px] text-text-secondary dark:text-white/60"
                     >
                         {service}
                     </span>
@@ -99,7 +99,7 @@ const WorkCard: React.FC<{
                 <button
                     type="button"
                     onClick={onOpen}
-                    className="inline-flex items-center gap-1.5 text-sm font-bold uppercase tracking-widest text-text-primary dark:text-white hover:text-coral-text transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold tracking-wide text-text-primary dark:text-white hover:text-coral-text transition-colors cursor-pointer"
                 >
                     Read case
                     <ArrowUpRight className="w-4 h-4" aria-hidden="true" />

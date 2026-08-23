@@ -282,7 +282,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
 
                                             {member.expertise && member.expertise.length > 0 && (
                                                 <div>
-                                                    <p className="text-[10px] font-semibold text-text-secondary dark:text-white/60 mb-1 uppercase tracking-wider">
+                                                    <p className="text-[10px] font-semibold text-text-secondary dark:text-white/60 mb-1 tracking-wider">
                                                         Expertise
                                                     </p>
                                                     <div className="flex flex-wrap gap-1.5">

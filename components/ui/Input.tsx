@@ -105,7 +105,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
           <label
             htmlFor={inputId}
             className={cn(
-              "block font-bold uppercase tracking-widest",
+              "block font-semibold tracking-wide",
               labelSizes[size],
               variant === 'minimal' ? "text-white/40" : "text-text-secondary",
               "ml-1"

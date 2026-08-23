@@ -65,7 +65,7 @@ const CaseCover: React.FC<CaseCoverProps> = ({
       </span>
       <span className="font-display text-xl md:text-2xl text-white/80 leading-tight">{client}</span>
       {industry && (
-        <span className="text-[11px] font-bold uppercase tracking-widest text-white/40 mt-2">
+        <span className="text-[11px] font-semibold tracking-wide text-white/40 mt-2">
           {industry}
         </span>
       )}

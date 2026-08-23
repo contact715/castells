@@ -61,7 +61,7 @@ const NextSteps: React.FC<NextStepsProps> = React.memo(({
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 mb-3">
             <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
-            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+            <span className="text-xs font-semibold tracking-wide text-text-secondary">
               Next Steps
             </span>
           </div>
@@ -112,7 +112,7 @@ const NextSteps: React.FC<NextStepsProps> = React.memo(({
                     {step.description}
                   </p>
                   {step.duration && (
-                    <div className="text-xs font-bold uppercase tracking-widest text-coral-text">
+                    <div className="text-xs font-semibold tracking-wide text-coral-text">
                       {step.duration}
                     </div>
                   )}
