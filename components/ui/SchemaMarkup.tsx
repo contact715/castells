@@ -23,7 +23,7 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
           description: 'We help contractors and service providers dominate their local markets through data-driven strategies.',
           address: {
             '@type': 'PostalAddress',
-            addressLocality: 'Santa Monica',
+            addressLocality: 'Roseville',
             addressRegion: 'CA',
             addressCountry: 'US'
           },
@@ -148,7 +148,7 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
           address: {
             '@type': 'PostalAddress',
             streetAddress: data?.streetAddress || '1234 Main Street',
-            addressLocality: 'Santa Monica',
+            addressLocality: 'Roseville',
             addressRegion: 'CA',
             postalCode: data?.postalCode || '90401',
             addressCountry: 'US'
@@ -158,7 +158,7 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
             latitude: data?.latitude || 34.0195,
             longitude: data?.longitude || -118.4912
           },
-          telephone: data?.telephone || '+1-916-378-7121',
+          telephone: data?.telephone || '+1-916-619-6006',
           email: data?.email || 'contact@castells.media',
           priceRange: data?.priceRange || '$$$',
           areaServed: {

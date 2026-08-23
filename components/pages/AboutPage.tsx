@@ -16,7 +16,7 @@ import SchemaMarkup from '../ui/SchemaMarkup';
   людей из Google и Meta». Ни одно из этих событий не подтверждено ничем.
 
   Плюс три стоковые фотографии с чужого фотобанка, одна из них подписана
-  «Global HQ — Santa Monica» — то есть чужой офис выдан за наш.
+  «Global HQ — Roseville» — то есть чужой офис выдан за наш.
 
   Плюс «основана в 2012» и «12+ years», при том что на других страницах
   сайта стояли 2017 и 2018. Год основания владельцем не подтверждён, и
@@ -58,13 +58,13 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
   return (
     <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20 animate-in fade-in duration-500">
       <SEO
-        title="About Castells Media | Santa Monica marketing agency"
-        description="Castells Media Inc, a marketing agency in Santa Monica, California, working with home service businesses across the United States."
+        title="About Castells Media | Roseville marketing agency"
+        description="Castells Media Inc, a marketing agency in 1298 Antelope Creek Drive, Roseville, California, working with home service businesses across the United States."
         canonical="/about"
-        keywords="marketing agency Santa Monica, home service marketing, HVAC marketing agency, local marketing California"
+        keywords="marketing agency Roseville, home service marketing, HVAC marketing agency, local marketing California"
         geoRegion="US-CA"
-        geoPlacename="Santa Monica, California"
-        summary="Castells Media Inc is a marketing agency based in Santa Monica, California. It builds websites, runs Google and Meta ads and sets up automation for home service businesses across the US."
+        geoPlacename="1298 Antelope Creek Drive, Roseville, California"
+        summary="Castells Media Inc is a marketing agency based in 1298 Antelope Creek Drive, Roseville, California. It builds websites, runs Google and Meta ads and sets up automation for home service businesses across the US."
         mainEntity="Marketing Agency"
       />
       <SchemaMarkup
@@ -85,7 +85,7 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
           ]}
           badge="About"
           title="A small agency for businesses that live on the phone ringing."
-          description="Castells Media Inc works out of Santa Monica, California, with home service businesses across the US: HVAC, appliance repair, plumbing, remodeling. We build the site, run the ads and set up the follow-up, so a job that was going to be lost gets booked instead."
+          description="Castells Media Inc works out of 1298 Antelope Creek Drive, Roseville, California, with home service businesses across the US: HVAC, appliance repair, plumbing, remodeling. We build the site, run the ads and set up the follow-up, so a job that was going to be lost gets booked instead."
           onNavigate={onNavigate}
         />
 
@@ -165,7 +165,7 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
             <address className="not-italic text-text-secondary dark:text-white/70 leading-relaxed">
               Castells Media Inc
               <br />
-              Santa Monica, California
+              1298 Antelope Creek Drive, Roseville, California
             </address>
             <button
               type="button"

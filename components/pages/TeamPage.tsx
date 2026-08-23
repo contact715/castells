@@ -49,7 +49,7 @@ const TEAM_MEMBERS: TeamMember[] = [
         image: '',
         bio: 'Runs the agency and the client work. If you write to us, you are talking to him.',
         expertise: ['Growth Strategy', 'Paid Media', 'Web Development'],
-        location: 'Santa Monica, CA',
+        location: 'Roseville, CA',
     },
 ];
 
@@ -106,12 +106,12 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
         <>
             <SEO 
                 title="Team | Castells Media" 
-                description="The people behind Castells Media, a marketing agency in Santa Monica, California."
+                description="The people behind Castells Media, a marketing agency in 1298 Antelope Creek Drive, Roseville, California."
                 canonical="/team"
-                keywords="marketing team, digital marketing experts, Santa Monica marketing team, Los Angeles marketing professionals, Google Ads specialists, Meta Ads experts, performance marketing team"
+                keywords="marketing team, digital marketing experts, Roseville marketing team, Los Angeles marketing professionals, Google Ads specialists, Meta Ads experts, performance marketing team"
                 geoRegion="US-CA"
-                geoPlacename="Santa Monica, California"
-                summary="The team behind Castells Media, a marketing agency based in Santa Monica, California."
+                geoPlacename="1298 Antelope Creek Drive, Roseville, California"
+                summary="The team behind Castells Media, a marketing agency based in 1298 Antelope Creek Drive, Roseville, California."
                 mainEntity="Marketing Team"
             />
             <SchemaMarkup

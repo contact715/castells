@@ -87,12 +87,12 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
     <>
       <SEO 
         title="Company | Castells Media" 
-        description="Castells Media Inc, a marketing agency in Santa Monica, California, working with home service businesses across the US."
+        description="Castells Media Inc, a marketing agency in 1298 Antelope Creek Drive, Roseville, California, working with home service businesses across the US."
         canonical="/company"
-        keywords="digital marketing agency, revenue-focused marketing, Santa Monica marketing agency, Los Angeles marketing company, performance marketing agency, growth marketing, anti-agency, marketing company"
+        keywords="digital marketing agency, revenue-focused marketing, Roseville marketing agency, Los Angeles marketing company, performance marketing agency, growth marketing, anti-agency, marketing company"
         geoRegion="US-CA"
-        geoPlacename="Santa Monica, California"
-        summary="Castells Media Inc is a marketing agency based in Santa Monica, California, working with home service businesses across the US."
+        geoPlacename="1298 Antelope Creek Drive, Roseville, California"
+        summary="Castells Media Inc is a marketing agency based in 1298 Antelope Creek Drive, Roseville, California, working with home service businesses across the US."
         mainEntity="Digital Marketing Agency"
       />
       <SchemaMarkup

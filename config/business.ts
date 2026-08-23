@@ -8,18 +8,20 @@ export const BUSINESS = {
   legalName: 'Castells Media Inc.',
 
   // Contact
-  phone: '+19163787121',
-  phoneFormatted: '+1 (916) 378-7121',
-  phoneSchema: '+1-916-378-7121',
+  phone: '+19166196006',
+  phoneFormatted: '+1 (916) 619-6006',
+  phoneSchema: '+1-916-619-6006',
   email: 'contact@castells.media',
 
-  // Location
-  city: 'Santa Monica',
+  // Location — адрес подтверждён владельцем 22 августа 2026
+  street: '1298 Antelope Creek Drive',
+  city: 'Roseville',
   state: 'CA',
+  zip: '',
   country: 'US',
 
   // Online
-  website: 'https://castells.studio',
+  website: 'https://www.castells.media',
 
   // Messenger links
   whatsapp: 'https://wa.me/19563153156',

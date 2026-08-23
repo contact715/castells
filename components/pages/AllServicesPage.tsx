@@ -58,12 +58,12 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
     <div className="min-h-screen bg-ivory dark:bg-[#191919]">
       <SEO
         title="Services | Castells Media - Full-Stack Growth Marketing Services"
-        description="Websites and branding, Google and Meta ads, local presence, automation and CRM. Castells Media, Santa Monica, California, working with businesses across the US."
+        description="Websites and branding, Google and Meta ads, local presence, automation and CRM. Castells Media, 1298 Antelope Creek Drive, Roseville, California, working with businesses across the US."
         canonical="/services"
-        keywords="digital marketing services, branding services, web development, marketing automation, SEO services, paid advertising, Santa Monica marketing services, Los Angeles marketing agency, full-stack marketing"
+        keywords="digital marketing services, branding services, web development, marketing automation, SEO services, paid advertising, Roseville marketing services, Los Angeles marketing agency, full-stack marketing"
         geoRegion="US-CA"
-        geoPlacename="Santa Monica, California"
-        summary="Services by Castells Media: websites and branding, paid media on Google and Meta, local presence on Google and Yelp, automation and CRM. Santa Monica, California."
+        geoPlacename="1298 Antelope Creek Drive, Roseville, California"
+        summary="Services by Castells Media: websites and branding, paid media on Google and Meta, local presence on Google and Yelp, automation and CRM. 1298 Antelope Creek Drive, Roseville, California."
         mainEntity="Marketing Services"
       />
       <SchemaMarkup

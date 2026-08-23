@@ -19,7 +19,7 @@ export const SITE = {
   origin: 'https://www.castells.media',
   name: 'Castells Media',
   legalName: 'Castells Media Inc',
-  city: 'Santa Monica, California',
+  city: '1298 Antelope Creek Drive, Roseville, California',
   ogImage: '/og-image.png',
 };
 
@@ -29,10 +29,10 @@ export const PAGES = [
     path: '/',
     title: 'Castells Media | Marketing agency for home service businesses',
     description:
-      'We build websites, run ads and set up automation for HVAC, plumbing and other home service companies. Santa Monica, CA. Real clients, real sites you can open.',
+      'We build websites, run ads and set up automation for HVAC, plumbing and other home service companies. Roseville, CA. Real clients, real sites you can open.',
     h1: 'Marketing for home service businesses',
     intro:
-      'We build the website, run the ads and set up the follow-up, so the phone rings and nothing gets lost. Based in Santa Monica, California, working with contractors across the US.',
+      'We build the website, run the ads and set up the follow-up, so the phone rings and nothing gets lost. Based in 1298 Antelope Creek Drive, Roseville, California, working with contractors across the US.',
     body: [
       'What we do: websites and branding, paid ads on Google and Meta, local presence on Google and Yelp, and automation that answers and books the job.',
       'Clients whose sites we built: Roman Service (HVAC, North Port, Florida) — acromanservice.com.',
@@ -59,18 +59,18 @@ export const PAGES = [
   },
   {
     path: '/about',
-    title: 'About Castells Media | Santa Monica marketing agency',
+    title: 'About Castells Media | Roseville marketing agency',
     description:
-      'Castells Media Inc, a marketing agency in Santa Monica, California, working with home service businesses across the United States.',
+      'Castells Media Inc, a marketing agency in 1298 Antelope Creek Drive, Roseville, California, working with home service businesses across the United States.',
     h1: 'About us',
     intro:
-      'Castells Media Inc is a marketing agency based in Santa Monica, California. We work with home service businesses — HVAC, plumbing, appliance repair, remodeling — across the United States.',
+      'Castells Media Inc is a marketing agency based in 1298 Antelope Creek Drive, Roseville, California. We work with home service businesses — HVAC, plumbing, appliance repair, remodeling — across the United States.',
   },
   {
     path: '/contact',
-    title: 'Contact Castells Media | Santa Monica, CA',
+    title: 'Contact Castells Media | Roseville, CA',
     description:
-      'Talk to us about your business. WhatsApp, Telegram, phone or the form. Santa Monica, California.',
+      'Talk to us about your business. WhatsApp, Telegram, phone or the form. 1298 Antelope Creek Drive, Roseville, California.',
     h1: 'Talk to us',
     intro:
       'Tell us what your business does and where, and we will say plainly whether we can help. WhatsApp and Telegram get the fastest answer.',
@@ -97,7 +97,7 @@ export const PAGES = [
   {
     path: '/team',
     title: 'Team | Castells Media',
-    description: 'The people behind Castells Media, Santa Monica, California.',
+    description: 'The people behind Castells Media, 1298 Antelope Creek Drive, Roseville, California.',
     h1: 'Team',
     intro: 'The people who do the work.',
   },

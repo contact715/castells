@@ -46,7 +46,7 @@ const BLOG_POSTS_DATA: Record<number, {
             sections: [
                 {
                     heading: "Why Generic Targeting Fails",
-                    content: "Generic targeting assumes that all potential customers are the same. It treats a contractor in Santa Monica the same as one in rural Texas. But these are fundamentally different businesses with different pain points, different buying behaviors, and different decision-making processes. When you cast a wide net, you catch everything—including the wrong fish. The result? Wasted ad spend, low conversion rates, and frustrated marketing teams."
+                    content: "Generic targeting assumes that all potential customers are the same. It treats a contractor in Roseville the same as one in rural Texas. But these are fundamentally different businesses with different pain points, different buying behaviors, and different decision-making processes. When you cast a wide net, you catch everything—including the wrong fish. The result? Wasted ad spend, low conversion rates, and frustrated marketing teams."
                 },
                 {
                     heading: "The Hyper-Local Advantage",
@@ -172,7 +172,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
     };
 
     const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
-    const enhancedDescription = `${post.content.intro} Marketing insights and strategies from Castells Media, serving businesses in Santa Monica, Los Angeles, and nationwide.`;
+    const enhancedDescription = `${post.content.intro} Marketing insights and strategies from Castells Media, serving businesses in Roseville, Los Angeles, and nationwide.`;
 
     return (
         <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20">
@@ -180,9 +180,9 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                 title={`${post.title} | Castells Blog - Marketing Insights`} 
                 description={enhancedDescription}
                 canonical={`/blog/${post.id}`}
-                keywords={`${post.title}, marketing blog, digital marketing insights, marketing strategies, Santa Monica marketing blog, Los Angeles marketing tips`}
+                keywords={`${post.title}, marketing blog, digital marketing insights, marketing strategies, Roseville marketing blog, Los Angeles marketing tips`}
                 geoRegion="US-CA"
-                geoPlacename="Santa Monica, California"
+                geoPlacename="1298 Antelope Creek Drive, Roseville, California"
                 summary={`${post.title}: ${post.content.intro} Marketing insights and strategies from Castells Media.`}
                 mainEntity="Marketing Article"
             />

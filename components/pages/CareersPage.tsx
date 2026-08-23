@@ -14,7 +14,7 @@ interface CareersPageProps {
 
 const OPENINGS = [
   { title: "Senior Performance Marketer", dept: "Growth", loc: "Remote / LA", type: "Full-Time" },
-  { title: "Creative Strategist", dept: "Creative", loc: "Santa Monica", type: "Full-Time" },
+  { title: "Creative Strategist", dept: "Creative", loc: "Roseville", type: "Full-Time" },
   { title: "React/Next.js Developer", dept: "Engineering", loc: "Remote", type: "Contract" },
   { title: "Account Executive", dept: "Sales", loc: "New York", type: "Full-Time" },
 ];
@@ -28,12 +28,12 @@ const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
     <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20 animate-in fade-in duration-500">
       <SEO 
         title="Careers | Castells Media - Join Our Marketing Team" 
-        description="Join the elite. We hire owners, not employees. Build the future of growth marketing with Castells Media. Remote and Santa Monica, California positions available. Work with world-class talent from Google, Meta, and top agencies."
+        description="Join the elite. We hire owners, not employees. Build the future of growth marketing with Castells Media. Remote and 1298 Antelope Creek Drive, Roseville, California positions available. Work with world-class talent from Google, Meta, and top agencies."
         canonical="/careers"
-        keywords="marketing jobs, digital marketing careers, Santa Monica marketing jobs, Los Angeles marketing careers, remote marketing jobs, performance marketing careers, growth marketing jobs"
+        keywords="marketing jobs, digital marketing careers, Roseville marketing jobs, Los Angeles marketing careers, remote marketing jobs, performance marketing careers, growth marketing jobs"
         geoRegion="US-CA"
-        geoPlacename="Santa Monica, California"
-        summary="Career opportunities at Castells Media. We hire owners, not employees. Open positions for marketing professionals in Santa Monica, California and remote. Work with world-class talent from Google, Meta, and top agencies."
+        geoPlacename="1298 Antelope Creek Drive, Roseville, California"
+        summary="Career opportunities at Castells Media. We hire owners, not employees. Open positions for marketing professionals in 1298 Antelope Creek Drive, Roseville, California and remote. Work with world-class talent from Google, Meta, and top agencies."
         mainEntity="Marketing Careers"
       />
       <SchemaMarkup

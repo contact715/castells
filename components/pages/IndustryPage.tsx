@@ -150,7 +150,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
     })();
 
     const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
-    const enhancedDescription = `${seoDescription} Specialized marketing strategies for ${displayName.toLowerCase()} businesses in Santa Monica, Los Angeles, and across the US. Proven results with 3x average ROAS.`;
+    const enhancedDescription = `${seoDescription} Specialized marketing strategies for ${displayName.toLowerCase()} businesses in Roseville, Los Angeles, and across the US. Proven results with 3x average ROAS.`;
 
     return (
         <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
@@ -158,10 +158,10 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                 title={`${displayName} Marketing | Castells Media - Industry-Specific Strategies`}
                 description={enhancedDescription}
                 canonical={seoCanonical}
-                keywords={`${displayName.toLowerCase()} marketing, ${displayName.toLowerCase()} advertising, ${displayName.toLowerCase()} SEO, industry marketing, Santa Monica marketing, Los Angeles marketing services, ${displayName.toLowerCase()} growth strategies`}
+                keywords={`${displayName.toLowerCase()} marketing, ${displayName.toLowerCase()} advertising, ${displayName.toLowerCase()} SEO, industry marketing, Roseville marketing, Los Angeles marketing services, ${displayName.toLowerCase()} growth strategies`}
                 geoRegion="US-CA"
-                geoPlacename="Santa Monica, California"
-                summary={`Specialized marketing strategies for ${displayName.toLowerCase()} businesses by Castells Media. ${seoDescription} Proven results with 3x average ROAS serving businesses in Santa Monica, Los Angeles, and nationwide.`}
+                geoPlacename="1298 Antelope Creek Drive, Roseville, California"
+                summary={`Specialized marketing strategies for ${displayName.toLowerCase()} businesses by Castells Media. ${seoDescription} Proven results with 3x average ROAS serving businesses in Roseville, Los Angeles, and nationwide.`}
                 mainEntity={`${displayName} Marketing`}
             />
             <SchemaMarkup

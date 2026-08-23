@@ -1,8 +1,7 @@
 import React from 'react';
-import { ArrowRight, ArrowUpRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { ContactButtons } from '../ui/ContactButtons';
-import { BUILT_SITES } from '../../constants';
 import type { NavigateFn } from '../../types';
 
 /*
@@ -33,10 +32,8 @@ import type { NavigateFn } from '../../types';
      чего на странице нет; вместе с ней убран весь мёртвый код плеера
      (три эффекта, загрузка чужого скрипта, управление звуком).
 
-  Главный аргумент первого экрана владелец выбрал сам: живые сайты
-  клиентов, которые можно открыть и проверить за десять секунд. Список
-  живёт в constants.ts → BUILT_SITES, туда попадает только проект с
-  карточкой web-development в Monday и отвечающим адресом.
+  Живые сайты клиентов сначала стояли отдельной строкой здесь, но их место
+  в кейсах: те же клиенты идут блоком ниже. Ссылки переехали на карточки.
 */
 
 interface HeroProps {
@@ -57,7 +54,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
 
           <div>
             <div className="text-xs font-bold uppercase text-text-secondary mb-4">
-              <span className="tracking-widest">Castells Media · Santa Monica, California</span>
+              <span className="tracking-widest">Castells Media · Roseville, California</span>
             </div>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.05] tracking-tight text-text-primary mb-0">
               Marketing for
@@ -87,32 +84,12 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
         </div>
 
         {/*
-          Проверяемое отличие. Не обещание и не число без источника —
-          адреса, которые человек открывает в соседней вкладке и видит
-          нашу работу.
+          Здесь стояла строка «Sites we built, live right now» со ссылками на
+          сайты клиентов. Владелец: «это должно быть в кейсах, что за ссылки на
+          главном экране, если ниже те же самые кейсы». Он прав: те же клиенты
+          идут блоком ниже, и ссылка на живой сайт — часть кейса, а не отдельная
+          строка над ним. Ссылки переехали на карточки кейсов.
         */}
-        <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6 pb-12 md:pb-16 border-b border-black/5 dark:border-white/10">
-          <span className="text-xs font-bold uppercase tracking-widest text-text-secondary shrink-0">
-            Sites we built, live right now
-          </span>
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            {BUILT_SITES.map((site) => (
-              <a
-                key={site.client}
-                href={site.website}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group inline-flex items-center gap-1.5 text-sm md:text-base text-text-primary dark:text-white hover:text-coral-text transition-colors"
-              >
-                {site.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
-                <ArrowUpRight
-                  className="w-3.5 h-3.5 text-text-secondary group-hover:text-coral-text transition-colors"
-                  aria-hidden="true"
-                />
-              </a>
-            ))}
-          </div>
-        </div>
       </div>
     </div>
   );

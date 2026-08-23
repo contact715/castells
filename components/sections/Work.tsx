@@ -235,15 +235,38 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
           </div>
 
           {/* Metrics Row */}
-          <div className="flex gap-6 sm:gap-12 pt-6 sm:pt-8 border-t border-white/10">
-            <div>
-              <div className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1">{project.metric}</div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-white/50">{project.metricLabel}</div>
-            </div>
-            <div>
-              <div className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1">{project.secondaryMetric}</div>
-              <div className="text-[10px] font-bold uppercase tracking-widest text-white/50">{project.secondaryLabel}</div>
-            </div>
+          <div className="flex flex-wrap items-end gap-6 sm:gap-12 pt-6 sm:pt-8 border-t border-white/10">
+            {/* Пустых блоков быть не должно: у части кейсов чисел нет */}
+            {project.metric && (
+              <div>
+                <div className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1">{project.metric}</div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-white/50">{project.metricLabel}</div>
+              </div>
+            )}
+            {project.secondaryMetric && (
+              <div>
+                <div className="text-3xl sm:text-4xl md:text-5xl font-display font-bold text-white mb-1">{project.secondaryMetric}</div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-white/50">{project.secondaryLabel}</div>
+              </div>
+            )}
+
+            {/*
+              Сайт клиента — часть кейса, а не отдельная строка над блоком.
+              Ссылка открывается в новой вкладке и не срабатывает как переход
+              на страницу кейса: клик по ней останавливается здесь.
+            */}
+            {project.website && (
+              <a
+                href={project.website}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="ml-auto inline-flex items-center gap-1.5 px-4 py-2.5 rounded-pill bg-white/10 hover:bg-white text-white hover:text-black border border-white/15 hover:border-white transition-colors text-xs sm:text-sm font-semibold"
+              >
+                {project.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+                <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+              </a>
+            )}
           </div>
         </div>
 

@@ -97,11 +97,11 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
         <>
             <SEO 
                 title="Our work | Castells Media" 
-                description="Real clients with names and live sites: HVAC, automotive, remodeling and dental businesses across the US. Work done by Castells Media, Santa Monica, California."
+                description="Real clients with names and live sites: HVAC, automotive, remodeling and dental businesses across the US. Work done by Castells Media, 1298 Antelope Creek Drive, Roseville, California."
                 canonical="/work"
-                keywords="marketing case studies, digital marketing portfolio, successful marketing campaigns, marketing results, Santa Monica marketing agency, Los Angeles marketing services, performance marketing examples"
+                keywords="marketing case studies, digital marketing portfolio, successful marketing campaigns, marketing results, Roseville marketing agency, Los Angeles marketing services, performance marketing examples"
                 geoRegion="US-CA"
-                geoPlacename="Santa Monica, California"
+                geoPlacename="1298 Antelope Creek Drive, Roseville, California"
                 summary="Work by Castells Media: websites, branding and paid media for home service and automotive businesses across the US. Every client is a real company you can look up."
                 mainEntity="Marketing Case Studies"
             />
@@ -295,8 +295,8 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                                                 <h3 className="font-display text-2xl md:text-3xl text-white mb-2">{project.client}</h3>
                                                 <div className="flex gap-4 text-white/80">
                                                     <div>
-                                                        <span className="block text-xl font-bold text-white">{project.metric}</span>
-                                                        <span className="text-[10px] uppercase tracking-wider opacity-70">{project.metricLabel}</span>
+                                                        <span className="block text-xl font-bold text-white">{project.metric || project.services[0]}</span>
+                                                        <span className="text-[10px] uppercase tracking-wider opacity-70">{project.metricLabel || 'What we did'}</span>
                                                     </div>
                                                 </div>
                                             </div>

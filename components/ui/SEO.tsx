@@ -25,7 +25,7 @@ const SEO: React.FC<SEOProps> = ({
     robots = 'index, follow',
     keywords,
     geoRegion = 'US-CA',
-    geoPlacename = 'Santa Monica, California',
+    geoPlacename = '1298 Antelope Creek Drive, Roseville, California',
     geoPosition,
     summary,
     mainEntity

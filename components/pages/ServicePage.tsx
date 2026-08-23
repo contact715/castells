@@ -152,18 +152,18 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
     })();
 
     const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
-    const enhancedDescription = `${seoDescription} Castells Media, Santa Monica, California, working with businesses across the US.`;
+    const enhancedDescription = `${seoDescription} Castells Media, 1298 Antelope Creek Drive, Roseville, California, working with businesses across the US.`;
 
     return (
         <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
             <SEO
-                title={`${displayName} | Castells Media - Santa Monica Marketing Services`}
+                title={`${displayName} | Castells Media - Roseville Marketing Services`}
                 description={enhancedDescription}
                 canonical={seoCanonical}
-                keywords={`${displayName.toLowerCase()}, ${displayName.toLowerCase()} services, Santa Monica ${displayName.toLowerCase()}, Los Angeles marketing services, digital marketing agency, performance marketing`}
+                keywords={`${displayName.toLowerCase()}, ${displayName.toLowerCase()} services, Roseville ${displayName.toLowerCase()}, Los Angeles marketing services, digital marketing agency, performance marketing`}
                 geoRegion="US-CA"
-                geoPlacename="Santa Monica, California"
-                summary={`${displayName} by Castells Media. ${seoDescription} Santa Monica, California, working with businesses across the US.`}
+                geoPlacename="1298 Antelope Creek Drive, Roseville, California"
+                summary={`${displayName} by Castells Media. ${seoDescription} 1298 Antelope Creek Drive, Roseville, California, working with businesses across the US.`}
                 mainEntity={displayName}
             />
             <SchemaMarkup

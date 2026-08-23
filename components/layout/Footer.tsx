@@ -111,9 +111,9 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               Contact
             </h4>
             <div className="flex flex-col gap-2.5">
-              <a href="tel:+19163787121" className={`${linkClass} inline-flex items-center gap-2`}>
+              <a href="tel:+19166196006" className={`${linkClass} inline-flex items-center gap-2`}>
                 <Phone className="w-4 h-4 shrink-0" aria-hidden="true" />
-                +1 (916) 378-7121
+                +1 (916) 619-6006
               </a>
               <a href="mailto:contact@castells.media" className={`${linkClass} inline-flex items-center gap-2`}>
                 <Mail className="w-4 h-4 shrink-0" aria-hidden="true" />
@@ -121,7 +121,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </a>
               <p className="text-sm text-text-secondary dark:text-white/60 inline-flex items-center gap-2">
                 <MapPin className="w-4 h-4 shrink-0" aria-hidden="true" />
-                Santa Monica, California
+                1298 Antelope Creek Drive, Roseville, California
               </p>
             </div>
 

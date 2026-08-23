@@ -91,7 +91,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
 
     const contactMethods = [
         { icon: Calendar, label: 'Book a Call', value: 'Schedule a call', href: 'https://calendar.app.google/3ydSwahZK2uNw6EA8', color: 'bg-blue-500/10 text-blue-500' },
-        { icon: Phone, label: 'Phone Call', value: '+1 (916) 378-7121', href: 'tel:+19163787121', color: 'bg-green-500/10 text-green-500' },
+        { icon: Phone, label: 'Phone Call', value: '+1 (916) 619-6006', href: 'tel:+19166196006', color: 'bg-green-500/10 text-green-500' },
         { icon: MessageCircle, label: 'WhatsApp', value: 'Chat with us', href: 'https://wa.me/19563153156', color: 'bg-emerald-500/10 text-emerald-500' },
         { icon: Send, label: 'Telegram', value: 'Message us', href: 'https://t.me/+19563153156', color: 'bg-sky-500/10 text-sky-500' },
     ];
@@ -101,14 +101,14 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
     return (
         <>
             <SEO 
-                title="Contact Us | Castells Media - Santa Monica Digital Marketing" 
-                description="Ready to dominate your market? Contact Castells Media in Santa Monica, California. Schedule a free strategy session and let's discuss how we can help you achieve your goals. Serving clients nationwide from our Los Angeles headquarters."
+                title="Contact Us | Castells Media - Roseville Digital Marketing" 
+                description="Ready to dominate your market? Contact Castells Media in 1298 Antelope Creek Drive, Roseville, California. Schedule a free strategy session and let's discuss how we can help you achieve your goals. Serving clients nationwide from our Los Angeles headquarters."
                 canonical="/contact"
-                keywords="contact marketing agency, Santa Monica marketing agency, Los Angeles digital marketing, marketing consultation, free marketing audit, marketing strategy session, California marketing agency"
+                keywords="contact marketing agency, Roseville marketing agency, Los Angeles digital marketing, marketing consultation, free marketing audit, marketing strategy session, California marketing agency"
                 geoRegion="US-CA"
-                geoPlacename="Santa Monica, California"
+                geoPlacename="1298 Antelope Creek Drive, Roseville, California"
                 geoPosition="34.0195,-118.4912"
-                summary="Contact Castells Media for digital marketing services. Located in Santa Monica, California. Schedule a free strategy session to discuss how we can help your business dominate its market. We serve clients nationwide."
+                summary="Contact Castells Media for digital marketing services. Located in 1298 Antelope Creek Drive, Roseville, California. Schedule a free strategy session to discuss how we can help your business dominate its market. We serve clients nationwide."
                 mainEntity="Contact Information"
             />
             <SchemaMarkup
@@ -116,7 +116,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                 data={{
                     name: 'Castells Media',
                     description: 'Revenue-focused digital marketing agency helping contractors and service providers dominate their local markets.',
-                    telephone: '+1-916-378-7121',
+                    telephone: '+1-916-619-6006',
                     email: 'contact@castells.media',
                     streetAddress: '1234 Main Street',
                     postalCode: '90401',
