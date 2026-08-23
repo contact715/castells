@@ -49,7 +49,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
     : null;
   
   // Get author for this case study (default to first author if not specified)
-  const authorId = (caseStudy as any)?.authorId || (project as any)?.authorId || 'alex-castells';
+  const authorId = (caseStudy as any)?.authorId || (project as any)?.authorId || 'dmitrii';
   const author = findAuthorById(authorId) || AUTHORS[0];
   
   const data = caseStudy || project || {
