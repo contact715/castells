@@ -160,7 +160,7 @@ function App() {
                 <>
                   <SmoothScroll />
                   <Suspense fallback={<PageLoader />}>
-                    <Hero />
+                    <Hero onNavigate={navigateTo} />
                   </Suspense>
 
                   <Suspense fallback={<PageLoader />}>
