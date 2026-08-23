@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import { m as motion } from 'framer-motion';
-import { Calendar, Phone, MessageCircle, Send, Mail, ArrowRight, CheckCircle2, Users, Briefcase, FileText, Play } from 'lucide-react';
+import { Calendar, Phone, MessageCircle, Send, Mail, ArrowRight, CheckCircle2, Users, Briefcase, FileText } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { Input } from '../ui/Input';
 import { cn } from '../../lib/utils';
@@ -456,104 +456,18 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
 
 
 
-                {/* Testimonials Section */}
-                <div className="mb-32">
-                    <div className="max-w-3xl mb-10">
-                        <div className="flex items-center gap-2 mb-3">
-                            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
-                            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-                                Testimonials
-                            </span>
-                        </div>
-                        <AnimatedHeading
-                            as="h2"
-                            className="font-display text-3xl md:text-4xl font-normal leading-tight tracking-tight text-text-primary mb-3"
-                            delay={0.15}
-                        >
-                            What people say
-                        </AnimatedHeading>
-                        <p className="text-lg text-text-secondary leading-relaxed">
-                            Don't just take our word for it. See what our clients have to say about working with us.
-                        </p>
-                    </div>
+                {/*
+                    Здесь стоял отзыв «Sunil Chauhan, Executive at Twister Digital»
+                    с плашкой «5.0 rating · Clutch» и кнопкой «Read on Clutch»,
+                    которая вела просто на clutch.co, а не на сам отзыв. То есть
+                    проверить его было нельзя, а рейтинг 5.0 ничем не подтверждён —
+                    ровно тот случай, за который Google накладывает санкции и из-за
+                    которого мы сегодня вычистили фальшивую разметку отзывов.
 
-                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
-                        {/* Visual / Video Preview */}
-                        <div className="lg:col-span-4 relative min-h-[360px] rounded-card overflow-hidden group/image">
-                            <img
-                                src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&q=80"
-                                alt="Client testimonial"
-                                className="absolute inset-0 w-full h-full object-cover grayscale group-hover/image:grayscale-0 transition-[filter] duration-500"
-                                loading="lazy"
-                                decoding="async"
-                            />
-                            <div className="absolute inset-0 bg-linear-to-t from-black/40 via-black/10 to-transparent" />
+                    Владелец 22 августа: «убери его». Вернём, когда будет живой
+                    отзыв с прямой ссылкой на источник.
+                */}
 
-                            {/* Play Button */}
-                            <div className="absolute bottom-6 right-6 w-14 h-14 bg-white rounded-full flex items-center justify-center  group-hover/image:scale-110 transition-transform">
-                                <Play className="w-5 h-5 text-black fill-current ml-1" />
-                            </div>
-
-                            {/* Badge */}
-                            <div className="absolute top-6 left-6">
-                                <div className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-white/10 backdrop-blur-xs border border-white/20 text-white text-xs font-bold uppercase tracking-widest">
-                                    5.0 rating · Clutch
-                                </div>
-                            </div>
-                        </div>
-
-                        {/* Quote */}
-                        <div className="lg:col-span-8 bg-white dark:bg-surface rounded-card p-8 md:p-12 flex flex-col justify-between transition-shadow duration-300 relative overflow-hidden">
-                            <div className="relative">
-                                {/* Quote Icon */}
-                                <div className="text-coral-text text-5xl font-serif leading-none mb-8">“</div>
-
-                                <p className="text-xl md:text-3xl font-light leading-relaxed text-text-primary dark:text-white/90 mb-10">
-                                    Castells Agency&apos;s ability to turn ideas into solutions was outstanding.
-                                </p>
-
-                                <div className="flex items-center justify-between flex-wrap gap-4">
-                                    <div>
-                                        <h4 className="font-semibold text-text-primary dark:text-white text-lg mb-1">
-                                            Sunil Chauhan
-                                        </h4>
-                                        <div className="flex items-center gap-2 text-text-secondary dark:text-white/55 text-xs uppercase tracking-wider font-medium">
-                                            <span>Executive at</span>
-                                            <span className="text-text-primary dark:text-white/60">Twister Digital</span>
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center gap-2">
-                                        <span className="px-3 py-1.5 rounded-full bg-black/5 dark:bg-white/10 text-text-secondary dark:text-white/60 text-[10px] font-bold uppercase tracking-widest">
-                                            Project delivered
-                                        </span>
-                                        <span className="px-3 py-1.5 rounded-full bg-black/5 dark:bg-white/10 text-text-secondary dark:text-white/60 text-[10px] font-bold uppercase tracking-widest">
-                                            Fast turnaround
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Footer Link (hover like menu) */}
-                            <a
-                                href="https://clutch.co"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="mt-10 p-4 -mx-4 rounded-inner flex items-center justify-between group bg-black/5 dark:bg-black/20 hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color] cursor-pointer"
-                                aria-label="Read this review on Clutch"
-                            >
-                                <div className="flex items-center gap-3">
-                                    <div className="w-6 h-6 rounded-full bg-coral flex items-center justify-center text-white font-bold text-[10px]">
-                                        C
-                                    </div>
-                                    <span className="font-medium text-sm text-text-primary dark:text-white group-hover:text-white dark:group-hover:text-black transition-colors">
-                                        Read on Clutch
-                                    </span>
-                                </div>
-                                <ArrowRight className="w-5 h-5 text-text-secondary/50 dark:text-white/55 group-hover:text-white dark:group-hover:text-black transition-colors -rotate-45" />
-                            </a>
-                        </div>
-                    </div>
-                </div>
 
                 {/* Bottom Grid (Moved) */}
                 <div className="mb-32">
