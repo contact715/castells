@@ -138,19 +138,19 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
   }, [data]);
 
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
-  const enhancedDescription = `${data.description} Real results from Castells Agency's marketing strategies. Serving businesses in Santa Monica, Los Angeles, and nationwide.`;
+  const enhancedDescription = `${data.description} Real results from Castells Media's marketing strategies. Serving businesses in Santa Monica, Los Angeles, and nationwide.`;
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
 
   return (
     <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20">
       <SEO 
-        title={`${data.client} Case Study | Castells Agency - Marketing Results`} 
+        title={`${data.client} Case Study | Castells Media - Marketing Results`} 
         description={enhancedDescription}
         canonical={`/case-studies/${data.client?.toLowerCase().replace(/\s+/g, '-')}`}
         keywords={`${data.client} case study, ${data.industry} marketing, marketing case study, digital marketing results, Santa Monica marketing agency, Los Angeles marketing services`}
         geoRegion="US-CA"
         geoPlacename="Santa Monica, California"
-        summary={`Case study: How Castells Agency helped ${data.client} achieve marketing success. ${data.description} Real results from proven marketing strategies.`}
+        summary={`Case study: How Castells Media helped ${data.client} achieve marketing success. ${data.description} Real results from proven marketing strategies.`}
         mainEntity={`${data.client} Case Study`}
       />
       <SchemaMarkup

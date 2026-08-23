@@ -157,7 +157,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
     return (
         <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
             <SEO
-                title={`${displayName} | Castells Agency - Santa Monica Marketing Services`}
+                title={`${displayName} | Castells Media - Santa Monica Marketing Services`}
                 description={enhancedDescription}
                 canonical={seoCanonical}
                 keywords={`${displayName.toLowerCase()}, ${displayName.toLowerCase()} services, Santa Monica ${displayName.toLowerCase()}, Los Angeles marketing services, digital marketing agency, performance marketing`}

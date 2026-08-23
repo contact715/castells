@@ -57,7 +57,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onBack, onNavigate })
   return (
     <div className="min-h-screen bg-ivory dark:bg-[#191919]">
       <SEO
-        title="Services | Castells Agency - Full-Stack Growth Marketing Services"
+        title="Services | Castells Media - Full-Stack Growth Marketing Services"
         description="Websites and branding, Google and Meta ads, local presence, automation and CRM. Castells Media, Santa Monica, California, working with businesses across the US."
         canonical="/services"
         keywords="digital marketing services, branding services, web development, marketing automation, SEO services, paid advertising, Santa Monica marketing services, Los Angeles marketing agency, full-stack marketing"

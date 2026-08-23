@@ -155,13 +155,13 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
     return (
         <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
             <SEO
-                title={`${displayName} Marketing | Castells Agency - Industry-Specific Strategies`}
+                title={`${displayName} Marketing | Castells Media - Industry-Specific Strategies`}
                 description={enhancedDescription}
                 canonical={seoCanonical}
                 keywords={`${displayName.toLowerCase()} marketing, ${displayName.toLowerCase()} advertising, ${displayName.toLowerCase()} SEO, industry marketing, Santa Monica marketing, Los Angeles marketing services, ${displayName.toLowerCase()} growth strategies`}
                 geoRegion="US-CA"
                 geoPlacename="Santa Monica, California"
-                summary={`Specialized marketing strategies for ${displayName.toLowerCase()} businesses by Castells Agency. ${seoDescription} Proven results with 3x average ROAS serving businesses in Santa Monica, Los Angeles, and nationwide.`}
+                summary={`Specialized marketing strategies for ${displayName.toLowerCase()} businesses by Castells Media. ${seoDescription} Proven results with 3x average ROAS serving businesses in Santa Monica, Los Angeles, and nationwide.`}
                 mainEntity={`${displayName} Marketing`}
             />
             <SchemaMarkup

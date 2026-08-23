@@ -101,20 +101,20 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
     return (
         <>
             <SEO 
-                title="Contact Us | Castells Agency - Santa Monica Digital Marketing" 
-                description="Ready to dominate your market? Contact Castells Agency in Santa Monica, California. Schedule a free strategy session and let's discuss how we can help you achieve your goals. Serving clients nationwide from our Los Angeles headquarters."
+                title="Contact Us | Castells Media - Santa Monica Digital Marketing" 
+                description="Ready to dominate your market? Contact Castells Media in Santa Monica, California. Schedule a free strategy session and let's discuss how we can help you achieve your goals. Serving clients nationwide from our Los Angeles headquarters."
                 canonical="/contact"
                 keywords="contact marketing agency, Santa Monica marketing agency, Los Angeles digital marketing, marketing consultation, free marketing audit, marketing strategy session, California marketing agency"
                 geoRegion="US-CA"
                 geoPlacename="Santa Monica, California"
                 geoPosition="34.0195,-118.4912"
-                summary="Contact Castells Agency for digital marketing services. Located in Santa Monica, California. Schedule a free strategy session to discuss how we can help your business dominate its market. We serve clients nationwide."
+                summary="Contact Castells Media for digital marketing services. Located in Santa Monica, California. Schedule a free strategy session to discuss how we can help your business dominate its market. We serve clients nationwide."
                 mainEntity="Contact Information"
             />
             <SchemaMarkup
                 type="LocalBusiness"
                 data={{
-                    name: 'Castells Agency',
+                    name: 'Castells Media',
                     description: 'Revenue-focused digital marketing agency helping contractors and service providers dominate their local markets.',
                     telephone: '+1-916-378-7121',
                     email: 'contact@castells.media',

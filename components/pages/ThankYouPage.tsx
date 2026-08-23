@@ -133,7 +133,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
   return (
     <div className="min-h-screen bg-ivory dark:bg-[#191919] relative overflow-hidden flex items-center justify-center selection:bg-coral selection:text-white">
       <SEO
-        title="Thank you | Castells Agency"
+        title="Thank you | Castells Media"
         description="Thanks for reaching out. We’ll get back to you shortly."
         canonical="/thank-you"
         robots="noindex, nofollow"

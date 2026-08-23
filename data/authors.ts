@@ -16,7 +16,7 @@ export const AUTHORS: Author[] = [
     id: 'alex-castells',
     name: 'Alex Castells',
     role: 'Founder & CEO',
-    bio: 'Alex is the visionary behind Castells Agency, with over 10 years of experience in digital marketing and growth strategy. He specializes in revenue-first marketing approaches and has helped 200+ businesses achieve remarkable growth.',
+    bio: 'Alex is the visionary behind Castells Media, with over 10 years of experience in digital marketing and growth strategy. He specializes in revenue-first marketing approaches and has helped 200+ businesses achieve remarkable growth.',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&q=80',
     email: 'alex@castells.media',
     linkedin: 'https://linkedin.com/in/alexcastells',

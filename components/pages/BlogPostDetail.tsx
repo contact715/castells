@@ -172,7 +172,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
     };
 
     const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
-    const enhancedDescription = `${post.content.intro} Marketing insights and strategies from Castells Agency, serving businesses in Santa Monica, Los Angeles, and nationwide.`;
+    const enhancedDescription = `${post.content.intro} Marketing insights and strategies from Castells Media, serving businesses in Santa Monica, Los Angeles, and nationwide.`;
 
     return (
         <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20">
@@ -183,7 +183,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                 keywords={`${post.title}, marketing blog, digital marketing insights, marketing strategies, Santa Monica marketing blog, Los Angeles marketing tips`}
                 geoRegion="US-CA"
                 geoPlacename="Santa Monica, California"
-                summary={`${post.title}: ${post.content.intro} Marketing insights and strategies from Castells Agency.`}
+                summary={`${post.title}: ${post.content.intro} Marketing insights and strategies from Castells Media.`}
                 mainEntity="Marketing Article"
             />
             <SchemaMarkup
@@ -209,7 +209,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                     },
                     publisher: {
                         '@type': 'Organization',
-                        name: 'Castells Agency',
+                        name: 'Castells Media',
                         logo: {
                             '@type': 'ImageObject',
                             url: typeof window !== 'undefined' ? `${window.location.origin}/castells-logo.png` : 'https://castells.studio/castells-logo.png'
@@ -225,7 +225,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                     description: post.content.intro,
                     provider: {
                         '@type': 'Organization',
-                        name: 'Castells Agency',
+                        name: 'Castells Media',
                         url: siteUrl
                     },
                     educationalCredentialAwarded: 'Marketing Knowledge',

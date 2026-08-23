@@ -27,13 +27,13 @@ const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
   return (
     <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20 animate-in fade-in duration-500">
       <SEO 
-        title="Careers | Castells Agency - Join Our Marketing Team" 
-        description="Join the elite. We hire owners, not employees. Build the future of growth marketing with Castells Agency. Remote and Santa Monica, California positions available. Work with world-class talent from Google, Meta, and top agencies."
+        title="Careers | Castells Media - Join Our Marketing Team" 
+        description="Join the elite. We hire owners, not employees. Build the future of growth marketing with Castells Media. Remote and Santa Monica, California positions available. Work with world-class talent from Google, Meta, and top agencies."
         canonical="/careers"
         keywords="marketing jobs, digital marketing careers, Santa Monica marketing jobs, Los Angeles marketing careers, remote marketing jobs, performance marketing careers, growth marketing jobs"
         geoRegion="US-CA"
         geoPlacename="Santa Monica, California"
-        summary="Career opportunities at Castells Agency. We hire owners, not employees. Open positions for marketing professionals in Santa Monica, California and remote. Work with world-class talent from Google, Meta, and top agencies."
+        summary="Career opportunities at Castells Media. We hire owners, not employees. Open positions for marketing professionals in Santa Monica, California and remote. Work with world-class talent from Google, Meta, and top agencies."
         mainEntity="Marketing Careers"
       />
       <SchemaMarkup

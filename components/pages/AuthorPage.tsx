@@ -45,10 +45,10 @@ const AuthorPage: React.FC<AuthorPageProps> = ({ onBack, onNavigate, authorId })
   return (
     <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
       <SEO
-        title={`${author.name} | Castells Agency Team`}
+        title={`${author.name} | Castells Media Team`}
         description={author.bio}
         canonical={`/team/${author.id}`}
-        keywords={`${author.name}, ${author.role}, Castells Agency team, ${author.expertise.join(', ')}`}
+        keywords={`${author.name}, ${author.role}, Castells Media team, ${author.expertise.join(', ')}`}
       />
       <SchemaMarkup
         type="BreadcrumbList"

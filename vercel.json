@@ -85,6 +85,30 @@
       "handle": "filesystem"
     },
     {
+      "src": "/services/(.*)",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/industries/(.*)",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/blog/(.*)",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/team/(.*)",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/careers",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/company",
+      "dest": "/index.html"
+    },
+    {
       "src": "/.*",
       "status": 404,
       "dest": "/404.html"

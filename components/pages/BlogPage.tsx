@@ -174,13 +174,13 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
     return (
         <>
             <SEO 
-                title="Blog & Insights | Castells Agency - Marketing Strategies & Case Studies" 
+                title="Blog & Insights | Castells Media - Marketing Strategies & Case Studies" 
                 description="Explore our latest insights, strategies, and case studies on digital marketing, growth, automation, and revenue optimization. Learn from proven marketing tactics used by successful businesses in Santa Monica, Los Angeles, and nationwide."
                 canonical="/blog"
                 keywords="marketing blog, digital marketing insights, marketing strategies, marketing case studies, growth marketing tips, marketing automation, SEO strategies, paid advertising tips, Santa Monica marketing blog"
                 geoRegion="US-CA"
                 geoPlacename="Santa Monica, California"
-                summary="Marketing blog and insights from Castells Agency covering digital marketing strategies, growth tactics, automation, SEO, paid advertising, and revenue optimization. Learn from proven tactics used by successful businesses."
+                summary="Marketing blog and insights from Castells Media covering digital marketing strategies, growth tactics, automation, SEO, paid advertising, and revenue optimization. Learn from proven tactics used by successful businesses."
                 mainEntity="Marketing Blog"
             />
             <SchemaMarkup

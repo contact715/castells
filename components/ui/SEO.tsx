@@ -17,7 +17,7 @@ interface SEOProps {
 }
 
 const SEO: React.FC<SEOProps> = ({
-    title = 'Castells Agency | Dominate Your Market',
+    title = 'Castells Media | Dominate Your Market',
     description = 'We help contractors and service providers dominate their local markets through data-driven strategies.',
     canonical,
     image = 'https://castells.studio/og-image.svg',
@@ -56,7 +56,7 @@ const SEO: React.FC<SEOProps> = ({
             <meta property="og:image" content={fullImageUrl} />
             <meta property="og:image:width" content="1200" />
             <meta property="og:image:height" content="630" />
-            <meta property="og:site_name" content="Castells Agency" />
+            <meta property="og:site_name" content="Castells Media" />
             <meta property="og:locale" content="en_US" />
             <meta property="og:locale:alternate" content="en_US" />
             
@@ -67,7 +67,7 @@ const SEO: React.FC<SEOProps> = ({
             <meta name="twitter:image" content={fullImageUrl} />
             
             {/* Additional SEO */}
-            <meta name="author" content="Castells Agency" />
+            <meta name="author" content="Castells Media" />
             <meta name="robots" content={robots} />
             <link rel="canonical" href={fullCanonical} />
             

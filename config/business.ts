@@ -4,8 +4,8 @@
  */
 
 export const BUSINESS = {
-  name: 'Castells Agency',
-  legalName: 'Castells Agency Inc.',
+  name: 'Castells Media',
+  legalName: 'Castells Media Inc.',
 
   // Contact
   phone: '+19163787121',

@@ -14,9 +14,9 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
         return {
           '@context': 'https://schema.org',
           '@type': 'Organization',
-          name: 'Castells Agency',
+          name: 'Castells Media',
           // Официальное имя компании: владелец подтвердил 22 августа 2026.
-          // В юридических текстах сайта до этого стояло «Castells Agency LLC».
+          // В юридических текстах сайта до этого стояло «Castells Media LLC».
           legalName: 'Castells Media Inc',
           url: baseUrl,
           logo: `${baseUrl}/castells-logo.png`,
@@ -44,7 +44,7 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
         return {
           '@context': 'https://schema.org',
           '@type': 'WebSite',
-          name: 'Castells Agency',
+          name: 'Castells Media',
           url: baseUrl,
           potentialAction: {
             '@type': 'SearchAction',
@@ -65,7 +65,7 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
           description: data?.description || 'Full-stack digital marketing solutions',
           provider: {
             '@type': 'Organization',
-            name: 'Castells Agency',
+            name: 'Castells Media',
             url: baseUrl
           },
           areaServed: {
@@ -91,11 +91,11 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
           dateModified: data?.dateModified || new Date().toISOString().split('T')[0],
           author: data?.author || {
             '@type': 'Organization',
-            name: 'Castells Agency'
+            name: 'Castells Media'
           },
           publisher: data?.publisher || {
             '@type': 'Organization',
-            name: 'Castells Agency',
+            name: 'Castells Media',
             logo: {
               '@type': 'ImageObject',
               url: `${baseUrl}/castells-logo.png`
@@ -140,7 +140,7 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
         return {
           '@context': 'https://schema.org',
           '@type': 'ProfessionalService',
-          name: data?.name || 'Castells Agency',
+          name: data?.name || 'Castells Media',
           description: data?.description || 'Revenue-focused digital marketing agency helping contractors and service providers dominate their local markets.',
           url: baseUrl,
           logo: `${baseUrl}/castells-logo.png`,
@@ -186,8 +186,8 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
         return {
           '@context': 'https://schema.org',
           '@type': 'HowTo',
-          name: data?.name || 'How to Work with Castells Agency',
-          description: data?.description || 'Step-by-step process for working with Castells Agency to grow your business.',
+          name: data?.name || 'How to Work with Castells Media',
+          description: data?.description || 'Step-by-step process for working with Castells Media to grow your business.',
           image: data?.image || `${baseUrl}/castells-logo.png`,
           totalTime: data?.totalTime || 'PT6W',
           step: steps.map((step, index) => ({
@@ -205,7 +205,7 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
         return {
           '@context': 'https://schema.org',
           '@type': 'VideoObject',
-          name: data?.name || 'Castells Agency Video',
+          name: data?.name || 'Castells Media Video',
           description: data?.description || '',
           thumbnailUrl: data?.thumbnailUrl || `${baseUrl}/castells-logo.png`,
           uploadDate: data?.uploadDate || new Date().toISOString(),
@@ -214,7 +214,7 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
           embedUrl: data?.embedUrl,
           publisher: {
             '@type': 'Organization',
-            name: 'Castells Agency',
+            name: 'Castells Media',
             logo: {
               '@type': 'ImageObject',
               url: `${baseUrl}/castells-logo.png`
@@ -247,7 +247,7 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
           '@type': 'Review',
           itemReviewed: {
             '@type': 'Organization',
-            name: data?.itemReviewed?.name || 'Castells Agency'
+            name: data?.itemReviewed?.name || 'Castells Media'
           },
           author: {
             '@type': data?.author?.type || 'Person',
@@ -291,7 +291,7 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
           description: data?.description || '',
           provider: {
             '@type': 'Organization',
-            name: 'Castells Agency',
+            name: 'Castells Media',
             url: baseUrl
           },
           courseCode: data?.courseCode,

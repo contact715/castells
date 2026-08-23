@@ -20,7 +20,7 @@ interface SearchProps {
 const searchIndex: SearchResult[] = [
   // Pages
   { title: 'Home', url: '/', type: 'page' },
-  { title: 'About Us', url: '/about', type: 'page', description: 'Learn about Castells Agency' },
+  { title: 'About Us', url: '/about', type: 'page', description: 'Learn about Castells Media' },
   { title: 'Services', url: '/services', type: 'page', description: 'Our marketing services' },
   { title: 'Work', url: '/work', type: 'page', description: 'Case studies and portfolio' },
   { title: 'Blog', url: '/blog', type: 'page', description: 'Marketing insights and strategies' },
