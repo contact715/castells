@@ -15,6 +15,9 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
           '@context': 'https://schema.org',
           '@type': 'Organization',
           name: 'Castells Agency',
+          // Официальное имя компании: владелец подтвердил 22 августа 2026.
+          // В юридических текстах сайта до этого стояло «Castells Agency LLC».
+          legalName: 'Castells Media Inc',
           url: baseUrl,
           logo: `${baseUrl}/castells-logo.png`,
           description: 'We help contractors and service providers dominate their local markets through data-driven strategies.',

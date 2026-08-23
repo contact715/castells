@@ -275,7 +275,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                             className="mt-1 w-4 h-4 rounded-sm border-black/20 dark:border-white/20 text-coral-text focus:ring-coral focus:ring-offset-0 cursor-pointer shrink-0"
                                         />
                                         <span className="text-xs text-text-secondary leading-relaxed">
-                                            I agree to receive SMS/text messages from Castells Agency LLC at the phone number provided. I understand that message and data rates may apply, message frequency varies (typically 1–5/month), and I can opt out at any time by replying STOP. Reply HELP for help. See our{' '}
+                                            I agree to receive SMS/text messages from Castells Media Inc at the phone number provided. I understand that message and data rates may apply, message frequency varies (typically 1–5/month), and I can opt out at any time by replying STOP. Reply HELP for help. See our{' '}
                                             <button
                                                 type="button"
                                                 onClick={(e) => { e.preventDefault(); onNavigate?.('privacy-policy'); }}

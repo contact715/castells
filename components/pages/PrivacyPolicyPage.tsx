@@ -31,7 +31,7 @@ const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => 
           <div className="bg-white dark:bg-white/5  rounded-card p-8 md:p-12 space-y-10">
             <div className="text-sm text-text-secondary">
               <p><span className="font-semibold text-text-primary">Last updated:</span> February 7, 2026</p>
-              <p className="mt-2">This Privacy Policy describes how Castells Agency LLC ("Castells," "we," "us," or "our") collects, uses, and protects your personal information when you visit our website, submit forms, or interact with our services, including SMS/text messaging communications.</p>
+              <p className="mt-2">This Privacy Policy describes how Castells Media Inc ("Castells," "we," "us," or "our") collects, uses, and protects your personal information when you visit our website, submit forms, or interact with our services, including SMS/text messaging communications.</p>
             </div>
 
             <section className="space-y-3">
@@ -58,7 +58,7 @@ const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => 
             <section className="space-y-3">
               <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">SMS/Text Messaging</h2>
               <p className="text-text-secondary">
-                By providing your phone number and checking the SMS consent checkbox on our contact form, you agree to receive text messages from Castells Agency LLC. These messages may include:
+                By providing your phone number and checking the SMS consent checkbox on our contact form, you agree to receive text messages from Castells Media Inc. These messages may include:
               </p>
               <ul className="list-disc pl-6 text-text-secondary space-y-2">
                 <li>Service updates and appointment reminders</li>
@@ -109,7 +109,7 @@ const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => 
             <section className="space-y-3">
               <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">Contact</h2>
               <p className="text-text-secondary">
-                For privacy requests or questions about this policy, email <a className="text-coral-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a> or write to us at: Castells Agency LLC, Santa Monica, CA 90401.
+                For privacy requests or questions about this policy, email <a className="text-coral-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a> or write to us at: Castells Media Inc, Santa Monica, CA 90401.
               </p>
             </section>
           </div>

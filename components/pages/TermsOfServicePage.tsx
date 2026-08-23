@@ -31,7 +31,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
           <div className="bg-white dark:bg-white/5  rounded-card p-8 md:p-12 space-y-10">
             <div className="text-sm text-text-secondary">
               <p><span className="font-semibold text-text-primary">Last updated:</span> February 7, 2026</p>
-              <p className="mt-2">These Terms of Service ("Terms") govern your use of the website and services provided by Castells Agency LLC ("Castells," "we," "us," or "our"). By accessing our website or using our services, including receiving SMS/text messages, you agree to these Terms.</p>
+              <p className="mt-2">These Terms of Service ("Terms") govern your use of the website and services provided by Castells Media Inc ("Castells," "we," "us," or "our"). By accessing our website or using our services, including receiving SMS/text messages, you agree to these Terms.</p>
             </div>
 
             <section className="space-y-3">
@@ -44,10 +44,10 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
             <section className="space-y-3">
               <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">2. SMS/Text messaging terms</h2>
               <p className="text-text-secondary">
-                By opting in to receive SMS/text messages from Castells Agency LLC, you agree to the following:
+                By opting in to receive SMS/text messages from Castells Media Inc, you agree to the following:
               </p>
               <ul className="list-disc pl-6 text-text-secondary space-y-2">
-                <li><span className="font-semibold text-text-primary">Consent:</span> You consent to receive text messages from Castells Agency LLC at the phone number you provided. Consent is not a condition of any purchase.</li>
+                <li><span className="font-semibold text-text-primary">Consent:</span> You consent to receive text messages from Castells Media Inc at the phone number you provided. Consent is not a condition of any purchase.</li>
                 <li><span className="font-semibold text-text-primary">Types of messages:</span> You may receive service updates, appointment reminders, project notifications, and occasional promotional offers related to our digital marketing services.</li>
                 <li><span className="font-semibold text-text-primary">Message frequency:</span> Message frequency varies. Typically 1–5 messages per month.</li>
                 <li><span className="font-semibold text-text-primary">Costs:</span> Message and data rates may apply. You are responsible for any charges from your mobile carrier.</li>
@@ -67,7 +67,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
             <section className="space-y-3">
               <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">4. Intellectual property</h2>
               <p className="text-text-secondary">
-                Site content (text, visuals, code, branding) belongs to Castells Agency LLC or its licensors and may not be copied, reproduced, or reused without prior written permission.
+                Site content (text, visuals, code, branding) belongs to Castells Media Inc or its licensors and may not be copied, reproduced, or reused without prior written permission.
               </p>
             </section>
 
@@ -106,7 +106,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
                 Questions about these terms: <a className="text-coral-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a>
               </p>
               <p className="text-text-secondary">
-                Castells Agency LLC, Santa Monica, CA 90401
+                Castells Media Inc, Santa Monica, CA 90401
               </p>
             </section>
           </div>

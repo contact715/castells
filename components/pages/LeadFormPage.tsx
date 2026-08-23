@@ -256,7 +256,7 @@ const LeadFormPage: React.FC<{ onNavigate: NavigateFn }> = ({ onNavigate }) => {
                   )}
                 </div>
                 <span className="lf-consent-text">
-                  By checking this box, I consent to receive calls and SMS/text messages from Castells Agency LLC at the phone number provided, including messages sent by autodialer. Message and data rates may apply. Message frequency varies (typically 1–5/month). Reply STOP to opt out, HELP for help. Consent is not a condition of purchase. See our{' '}
+                  By checking this box, I consent to receive calls and SMS/text messages from Castells Media Inc at the phone number provided, including messages sent by autodialer. Message and data rates may apply. Message frequency varies (typically 1–5/month). Reply STOP to opt out, HELP for help. Consent is not a condition of purchase. See our{' '}
                   <button type="button" onClick={(e) => { e.stopPropagation(); onNavigate('privacy-policy'); }}>Privacy Policy</button>{' '}and{' '}
                   <button type="button" onClick={(e) => { e.stopPropagation(); onNavigate('terms'); }}>Terms of Service</button>.
                 </span>
