@@ -97,7 +97,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       'Capture demand across search, social, and video with conversion-first creative and advanced measurement.',
     items: [
       { slug: 'google-ads-ppc', name: 'Google Ads (PPC)', description: 'Capture high-intent search traffic with precision keyword targeting.', icon: Search },
-      { slug: 'seo-content', name: 'SEO & Content', description: 'Dominating organic search results and local map packs.', icon: LineChart },
+      { slug: 'seo-content', name: 'SEO & Content', description: 'Being found in search and on the map when someone nearby needs your service.', icon: LineChart },
       { slug: 'meta-ads', name: 'Meta Ads', description: 'Scale revenue with advanced audience segmentation on FB & Instagram.', icon: Megaphone },
       { slug: 'youtube-ads', name: 'YouTube Ads', description: 'Build authority and retarget users with high-quality video campaigns.', icon: Video },
       { slug: 'tiktok-social', name: 'TikTok & Social', description: 'Tap into viral organic reach and younger demographics.', icon: Smartphone },
