@@ -68,7 +68,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               We build the site, run the ads on Google and Meta, and set up the follow-up, so the
               phone rings and no job gets lost. HVAC, plumbing, appliance repair, remodeling.
             </p>
-            <div className="flex gap-4 items-center">
+            <div className="flex flex-wrap gap-4 items-center">
               <Button
                 href="/contact"
                 onClick={goToContact}
