@@ -1,803 +1,208 @@
-
 import React, { useState, useCallback } from 'react';
-import { m as motion } from "framer-motion";
-import {
-    Briefcase, Users, Zap, Globe, Search as SearchIcon, Cpu, Home, Car, PenTool,
-    Layout, FileText, MessageSquare, LineChart, Megaphone,
-    Hammer, Activity, Building2, Sparkles, Palette, Terminal, Scale, Flag, Mail, Factory, BarChart3, ArrowRight,
-    Shield, Smartphone, ShoppingBag, Video, MousePointer2, Database, BarChart, Settings, Wrench, PaintBucket,
-    HardHat, Truck, Stethoscope, Landmark, Coins, Droplets, LayoutGrid, Frame, Ruler, ShieldCheck, Sun, ArrowUpRight, MapPin,
-    Book, Layers, Code, ShoppingCart, Calendar, Phone, Send
-} from 'lucide-react';
+import { m as motion } from 'framer-motion';
 import AnimatedThemeToggler from '../ui/AnimatedThemeToggler';
 import { Button } from '../ui/Button';
 import { PageView } from '../../App';
 import { NavigationData } from '../../types';
-import { Menu, MenuItem, HoveredLink, ProductItem } from '../ui/NavbarMenu';
-import { Navbar, NavBody, MobileNav, MobileNavHeader, MobileNavToggle, MobileNavMenu, MobileAccordion, MobileAccordionItem } from '../ui/ResizableNavbar';
-import { CASE_STUDIES } from '../../constants';
-import { INDUSTRY_CATEGORIES, type IndustryCategory, type IndustryItem } from '../../data/industries';
-import { cn } from '../../lib/utils';
-import { SERVICE_CATEGORIES, type ServiceCategory, type ServiceItem } from '../../data/services';
-import { ContactButtons } from '../ui/ContactButtons';
+import { Navbar, NavBody, MobileNav, MobileNavHeader, MobileNavToggle, MobileNavMenu } from '../ui/ResizableNavbar';
 import Search from '../ui/Search';
+import { cn } from '../../lib/utils';
+
+/*
+  Шапка, переписана 23 августа 2026.
+
+  Что было. Пять пунктов с выпадающими списками: Cases, Services, Industries,
+  Company, Prices. Внутри Services раскрывались двадцать услуг, внутри
+  Industries двадцать ниш, внутри Company ещё пять ссылок. Файл на 805 строк.
+
+  Три причины переписать:
+
+  1. Названия не совпадали с сайтом. «Cases» вело на /work, «Company» на
+     страницу компании, а разделов About и Contact в шапке не было вовсе, хотя
+     в подвале они есть. Человек ищет «контакты» и не находит их наверху.
+
+  2. Выпадающие списки раздавали то, чего мы сами не индексируем. Из двадцати
+     ниш нашими клиентами обеспечены две, из двадцати услуг в поиск идут восемь.
+     Меню предлагало все сорок как равные.
+
+  3. В мобильном меню десятки пунктов вели на якоря #services и #industries,
+     которых на странице нет. То есть на телефоне меню выглядело богатым, а
+     нажатия не делали ничего. Проверено: таких мёртвых ссылок было больше
+     двадцати.
+
+  Стало пять пунктов без вложенности, одинаковых на всех экранах: Work,
+  Services, Prices, About, Contact. Ровно те же разделы, что в подвале. До
+  конкретной услуги или ниши человек доходит через хаб, как и задумано.
+*/
 
 interface NavBarProps {
-    onNavigate?: (page: PageView, data?: NavigationData) => void;
+  onNavigate?: (page: PageView, data?: NavigationData) => void;
 }
 
-const CategoryCard = ({ title, icon: Icon, href }: { title: string, icon: React.ComponentType<{ className?: string }>, href: string }) => (
-    <a href={href} className="flex flex-col items-center justify-center gap-3 p-4 rounded-card bg-black/5 dark:bg-white/5 hover:bg-accent/10 hover:text-accent-text transition-[background-color,color] group text-center h-full">
-        <div className="bg-white dark:bg-black p-3 rounded-xl  group-hover:scale-110 transition-transform">
-            <Icon className="w-6 h-6 text-text-primary group-hover:text-accent-text transition-colors" />
-        </div>
-        <span className="text-xs font-bold tracking-wide text-text-primary group-hover:text-accent-text">{title}</span>
-    </a>
-);
-
-// --- CASES MENU (Featured Case Studies) ---
-const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: NavigationData) => void }) => {
-    // Take first 3 case studies as featured
-    const featuredCases = CASE_STUDIES.slice(0, 3);
-
-    return (
-        <div className="flex flex-col gap-6">
-            {/* Header with View All Button */}
-            <div className="flex items-center justify-between">
-                <div>
-                    <h3 className="font-display text-xl font-semibold text-text-primary mb-1">Featured Work</h3>
-                    <p className="text-xs text-text-secondary">Explore {CASE_STUDIES.length}+ case studies & success stories.</p>
-                </div>
-                <Button
-                    onClick={() => onNavigate?.('work')}
-                    size="sm"
-                >
-                    View All Cases
-                </Button>
-            </div>
-
-            {/* Featured Cases Grid */}
-            <div className="grid grid-cols-3 gap-4">
-                {featuredCases.map((caseStudy) => (
-                    <a
-                        key={caseStudy.id}
-                        href={`/case-studies/${encodeURIComponent(caseStudy.id)}`}
-                        onClick={(e) => {
-                            e.preventDefault();
-                            onNavigate?.('case-study', caseStudy as any);
-                        }}
-                        className="group cursor-pointer rounded-card overflow-hidden relative h-[200px] border border-black/5 dark:border-white/10"
-                    >
-                        {/* Background Image */}
-                        <img
-                            src={caseStudy.image}
-                            alt={caseStudy.client}
-                            className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                            loading="lazy"
-                            decoding="async"
-                            style={{ transform: 'translateZ(0)' }}
-                        />
-                        {/* Overlay */}
-                        <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
-
-                        {/* Content */}
-                        <div className="absolute inset-0 p-4 flex flex-col justify-end">
-                            <div className="mb-2">
-                                <span className="text-[10px] font-semibold tracking-wide text-white/60">
-                                    {caseStudy.industry}
-                                </span>
-                            </div>
-                            <h4 className="text-white font-semibold text-sm mb-1 group-hover:text-accent-text transition-colors">
-                                {caseStudy.client}
-                            </h4>
-                            <div className="flex items-baseline gap-1">
-                                <span className="text-accent-text font-bold text-lg">{caseStudy.metric}</span>
-                                <span className="text-white/50 text-[10px] uppercase">{caseStudy.metricLabel}</span>
-                            </div>
-                        </div>
-                    </a>
-                ))}
-            </div>
-        </div>
-    );
-};
-
-
-// --- COMPANY DATA & COMPONENT ---
-const COMPANY_DATA = [
-    {
-        id: 'about',
-        label: 'About',
-        icon: Flag,
-        items: [
-            { label: 'Our Story', icon: Flag, href: '/about', page: 'about' as PageView },
-            { label: 'Leadership', icon: Users, href: '/team', page: 'team' as PageView },
-            { label: 'Careers', icon: Briefcase, href: '/careers', page: 'careers' as PageView },
-        ]
-    },
-    {
-        id: 'connect',
-        label: 'Connect',
-        icon: MessageSquare,
-        items: [
-            { label: 'Blog & Insights', icon: FileText, href: '/blog', page: 'blog' as PageView },
-            { label: 'Contact Us', icon: Mail, href: '/contact', page: 'contact' as PageView },
-            { label: 'Press', icon: Megaphone, href: '#press' },
-        ]
-    }
+const РАЗДЕЛЫ: { label: string; page: PageView; href: string }[] = [
+  { label: 'Work', page: 'work', href: '/work' },
+  { label: 'Services', page: 'services', href: '/services' },
+  { label: 'Prices', page: 'pricing', href: '/pricing' },
+  { label: 'About', page: 'about', href: '/about' },
+  { label: 'Contact', page: 'contact', href: '/contact' },
 ];
 
-const CompanyMenu = ({ onNavigate }: { onNavigate?: import('../../types').NavigateFn }) => {
-    // Flatten items from all categories
-    const allItems = COMPANY_DATA.flatMap(category => category.items);
-
-    const handleItemClick = (item: typeof allItems[0]) => {
-        if (item.page && onNavigate) {
-            onNavigate(item.page);
-        }
-    };
-
-    return (
-        <div className="flex flex-col gap-2">
-            {/* Items Grid */}
-            <div className="grid grid-cols-2 gap-x-2 gap-y-1">
-                {allItems.map((item) => (
-                    <a
-                        key={item.label}
-                        href={item.page ? undefined : item.href}
-                        onClick={(e) => {
-                            if (item.page) {
-                                e.preventDefault();
-                                handleItemClick(item);
-                            }
-                        }}
-                        className="flex items-center gap-2.5 w-full px-3 py-2 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color] justify-between group cursor-pointer"
-                    >
-                        <item.icon className="w-4 h-4 text-text-secondary group-hover:text-current" />
-                        <span className="flex-1 text-[13px] font-medium">{item.label}</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 opacity-20 group-hover:opacity-100 transition-opacity" />
-                    </a>
-                ))}
-            </div>
-
-            <div className="pt-2 border-t border-black/5 bg-ivory dark:bg-white/5 rounded-card p-3">
-                <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3 min-w-0">
-                        <div className="bg-accent/10 h-10 w-10 flex items-center justify-center rounded-full text-accent-text shrink-0">
-                            <Phone className="w-4 h-4" />
-                        </div>
-                        <div className="min-w-0 flex items-center">
-                            <h5 className="font-sans font-bold text-sm text-text-primary truncate">Contact us</h5>
-                        </div>
-                    </div>
-
-                    <ContactButtons />
-                </div>
-            </div>
-        </div>
-    );
-};
-
-// --- SERVICES DATA & COMPONENT ---
-const SERVICES_DATA = SERVICE_CATEGORIES.map((category) => ({
-    id: category.id,
-    label: category.label,
-    icon: category.icon,
-    items: category.items.map((item) => ({ label: item.name, icon: item.icon, slug: item.slug })),
-}));
-
-// --- SERVICES MENU ---
-const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: NavigationData) => void }) => {
-    const [activeCategory, setActiveCategory] = useState(SERVICES_DATA[0].id);
-
-    const handleCategoryClick = (category: { id: string; label: string }) => {
-        if (onNavigate) {
-            onNavigate('service', { name: category.label, id: category.id });
-        }
-    };
-
-    const handleItemClick = (item: { label: string; slug: string }) => {
-        if (onNavigate) {
-            onNavigate('service', { name: item.label, id: item.slug });
-        }
-    };
-
-    const activeCategoryData = SERVICES_DATA.find(c => c.id === activeCategory);
-    const items = activeCategoryData?.items || [];
-    // Split items into two columns
-    const midPoint = Math.ceil(items.length / 2);
-    const leftColumnItems = items.slice(0, midPoint);
-    const rightColumnItems = items.slice(midPoint);
-
-    return (
-        <div className="flex flex-col gap-2">
-            <div className="flex gap-2.5">
-                {/* Left Column: Categories (Vertical) */}
-                <div className="flex flex-col gap-1 bg-white dark:bg-surface-dark p-1.5 rounded-card w-[240px] shrink-0">
-                    <div className="px-2 py-1 mb-1">
-                        <span className="text-[9px] font-semibold tracking-wide text-text-secondary">Categories</span>
-                    </div>
-                    {SERVICES_DATA.map((category) => (
-                        <button
-                            key={category.id}
-                            onMouseEnter={() => setActiveCategory(category.id)}
-                            onClick={() => handleCategoryClick(category)}
-                            className={`
-                                w-full px-3 py-1.5 rounded-full text-[13px] font-semibold transition-[background-color,color] text-left flex items-center gap-2.5 cursor-pointer relative group
-                                ${activeCategory === category.id
-                                    ? 'bg-accent text-white dark:bg-accent dark:text-white'
-                                    : 'text-text-primary hover:bg-black/5 dark:hover:bg-white/5'}
-                            `}
-                        >
-                            {category.icon && (
-                                <div className={`
-                                    w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-[background-color,color]
-                                    ${activeCategory === category.id
-                                        ? 'bg-white/20 text-white'
-                                        : 'bg-black/5 dark:bg-white/5 text-text-secondary group-hover:bg-accent/10 group-hover:text-accent-text'}
-                                `}>
-                                    <category.icon className="w-3.5 h-3.5" />
-                                </div>
-                            )}
-                            <span className="flex-1 min-w-0 truncate">{category.label}</span>
-                            {activeCategory === category.id && (
-                                <div className="absolute right-3 w-1.5 h-1.5 rounded-full bg-white/80" />
-                            )}
-                        </button>
-                    ))}
-                </div>
-
-                {/* Right Columns: Items (2 columns) */}
-                <div className="flex gap-2 w-fit">
-                    {/* Column 2 */}
-                    <div className="w-[200px] space-y-0.5 pt-1.5 shrink-0">
-                        {leftColumnItems.length > 0 && (
-                            <div className="px-2 py-1 mb-1">
-                                <span className="text-[9px] font-semibold tracking-wide text-text-secondary">
-                                    {activeCategoryData?.label || 'Services'}
-                                </span>
-                            </div>
-                        )}
-                        {leftColumnItems.map((item) => (
-                            <a
-                                key={item.label}
-                                href={`/services/${encodeURIComponent(item.slug)}`}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    handleItemClick(item);
-                                }}
-                                className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color,transform] duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
-                            >
-                                <div className="absolute inset-0 bg-linear-to-r from-accent/0 via-accent/0 to-accent/0 group-hover:from-accent/5 group-hover:via-accent/10 group-hover:to-accent/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
-                                <div className="relative flex items-center gap-2.5 flex-1 min-w-0">
-                                    <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-[background-color,transform] duration-300 group-hover:scale-110">
-                                        <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-colors duration-300" />
-                                    </div>
-                                    <span className="flex-1 text-[13px] font-medium truncate group-hover:translate-x-0.5 transition-transform duration-300">{item.label}</span>
-                                </div>
-                                <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-300 relative z-10 translate-x-[-4px] group-hover:translate-x-0 group-hover:rotate-45" />
-                            </a>
-                        ))}
-                    </div>
-
-                    {/* Column 3 */}
-                    <div className="w-[200px] space-y-0.5 pt-1.5 shrink-0">
-                        {rightColumnItems.length > 0 && (
-                            <div className="px-2 py-1 mb-1">
-                                <span className="text-[9px] font-semibold tracking-wide text-text-secondary opacity-0">
-                                    {activeCategoryData?.label || 'Services'}
-                                </span>
-                            </div>
-                        )}
-                        {rightColumnItems.map((item) => (
-                            <a
-                                key={item.label}
-                                href={`/services/${encodeURIComponent(item.slug)}`}
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    handleItemClick(item);
-                                }}
-                                className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color,transform] duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
-                            >
-                                <div className="absolute inset-0 bg-linear-to-r from-accent/0 via-accent/0 to-accent/0 group-hover:from-accent/5 group-hover:via-accent/10 group-hover:to-accent/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
-                                <div className="relative flex items-center gap-2.5 flex-1 min-w-0">
-                                    <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-[background-color,transform] duration-300 group-hover:scale-110">
-                                        <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-colors duration-300" />
-                                    </div>
-                                    <span className="flex-1 text-[13px] font-medium truncate group-hover:translate-x-0.5 transition-transform duration-300">{item.label}</span>
-                                </div>
-                                <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-300 relative z-10 translate-x-[-4px] group-hover:translate-x-0 group-hover:rotate-45" />
-                            </a>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            {/* Footer CTA */}
-            <div className="mt-1 pb-1.5 bg-linear-to-r from-accent/5 via-accent/10 to-accent/5 dark:from-accent/10 dark:via-accent/20 dark:to-accent/10 rounded-full p-2 px-3">
-                <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3 min-w-0">
-                        <div className="bg-accent h-9 w-9 flex items-center justify-center rounded-full text-white shrink-0">
-                            <Sparkles className="w-4 h-4" />
-                        </div>
-                        <div className="min-w-0 flex items-center gap-2">
-                            <h5 className="font-sans font-bold text-[13px] text-text-primary whitespace-nowrap">Need a custom solution?</h5>
-                            <span className="text-[11px] text-text-secondary truncate hidden xl:inline opacity-60">— We build bespoke strategies for complex needs</span>
-                        </div>
-                    </div>
-                    <ContactButtons />
-                </div>
-            </div>
-        </div >
-    );
-};
-
-// --- INDUSTRIES MENU ---
-const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: NavigationData) => void }) => {
-    const [activeCategory, setActiveCategory] = useState(INDUSTRY_CATEGORIES[0].id);
-
-    const handleCategoryClick = (category: IndustryCategory) => {
-        if (onNavigate) {
-            onNavigate('industry', { name: category.label, id: category.id });
-        }
-    };
-
-    const handleItemClick = (item: IndustryItem) => {
-        if (!onNavigate) return;
-
-        if (item.type === 'cta') {
-            onNavigate('contact');
-            return;
-        }
-
-        onNavigate('industry', { name: item.name, id: item.slug });
-    };
-
-    const activeCategoryData = INDUSTRY_CATEGORIES.find(c => c.id === activeCategory);
-    const items = activeCategoryData?.items || [];
-    // Split items into two columns
-    const midPoint = Math.ceil(items.length / 2);
-    const leftColumnItems = items.slice(0, midPoint);
-    const rightColumnItems = items.slice(midPoint);
-
-    return (
-        <div className="flex flex-col gap-2">
-            <div className="flex gap-2.5">
-                {/* Left Column: Categories (Vertical) */}
-                <div className="flex flex-col gap-1 bg-white dark:bg-surface-dark p-1.5 rounded-card w-[240px] shrink-0">
-                    <div className="px-2 py-1 mb-1">
-                        <span className="text-[9px] font-semibold tracking-wide text-text-secondary">Categories</span>
-                    </div>
-                    {INDUSTRY_CATEGORIES.map((category, idx) => (
-                        <button
-                            key={category.id}
-                            onMouseEnter={() => setActiveCategory(category.id)}
-                            onClick={() => handleCategoryClick(category)}
-                            className={`
-                                w-full px-3 py-1.5 rounded-full text-[13px] font-semibold transition-[background-color,color] text-left flex items-center gap-2.5 cursor-pointer relative group
-                                ${activeCategory === category.id
-                                    ? 'bg-accent text-white dark:bg-accent dark:text-white'
-                                    : 'text-text-primary hover:bg-black/5 dark:hover:bg-white/5'}
-                            `}
-                        >
-                            {category.icon && (
-                                <div className={`
-                                    w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-[background-color,color]
-                                    ${activeCategory === category.id
-                                        ? 'bg-white/20 text-white'
-                                        : 'bg-black/5 dark:bg-white/5 text-text-secondary group-hover:bg-accent/10 group-hover:text-accent-text'}
-                                `}>
-                                    <category.icon className="w-3.5 h-3.5" />
-                                </div>
-                            )}
-                            <span className="flex-1 min-w-0 truncate">{category.label}</span>
-                            {activeCategory === category.id && (
-                                <div className="absolute right-3 w-1.5 h-1.5 rounded-full bg-white/80" />
-                            )}
-                        </button>
-                    ))}
-                </div>
-
-                {/* Right Columns: Items (2 columns) - Enhanced Design */}
-                <div className="flex gap-2 w-fit">
-                    {/* Column 2 */}
-                    <div className="w-[200px] space-y-0.5 pt-1.5 shrink-0">
-                        {leftColumnItems.length > 0 && (
-                            <div className="px-2 py-1 mb-1">
-                                <span className="text-[9px] font-semibold tracking-wide text-text-secondary">
-                                    {activeCategoryData?.label || 'Services'}
-                                </span>
-                            </div>
-                        )}
-                        {leftColumnItems.map((item) => (
-                            <a
-                                key={item.name}
-                                href={
-                                    item.type === 'cta'
-                                        ? item.href
-                                        : `/industries/${encodeURIComponent(item.slug)}`
-                                }
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    handleItemClick(item);
-                                }}
-                                className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color,transform] duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
-                            >
-                                <div className="absolute inset-0 bg-linear-to-r from-accent/0 via-accent/0 to-accent/0 group-hover:from-accent/5 group-hover:via-accent/10 group-hover:to-accent/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
-                                <div className="relative flex items-center gap-2.5 flex-1 min-w-0">
-                                    <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-[background-color,transform] duration-300 group-hover:scale-110">
-                                        <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-colors duration-300" />
-                                    </div>
-                                    <span className="flex-1 text-[13px] font-medium truncate group-hover:translate-x-0.5 transition-transform duration-300">{item.name}</span>
-                                </div>
-                                <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-300 relative z-10 translate-x-[-4px] group-hover:translate-x-0 group-hover:rotate-45" />
-                            </a>
-                        ))}
-                    </div>
-
-                    {/* Column 3 */}
-                    <div className="w-[200px] space-y-0.5 pt-1.5 shrink-0">
-                        {rightColumnItems.length > 0 && (
-                            <div className="px-2 py-1 mb-1">
-                                <span className="text-[9px] font-semibold tracking-wide text-text-secondary opacity-0">
-                                    {activeCategoryData?.label || 'Services'}
-                                </span>
-                            </div>
-                        )}
-                        {rightColumnItems.map((item) => (
-                            <a
-                                key={item.name}
-                                href={
-                                    item.type === 'cta'
-                                        ? item.href
-                                        : `/industries/${encodeURIComponent(item.slug)}`
-                                }
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    handleItemClick(item);
-                                }}
-                                className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color,transform] duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
-                            >
-                                <div className="absolute inset-0 bg-linear-to-r from-accent/0 via-accent/0 to-accent/0 group-hover:from-accent/5 group-hover:via-accent/10 group-hover:to-accent/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
-                                <div className="relative flex items-center gap-2.5 flex-1 min-w-0">
-                                    <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-[background-color,transform] duration-300 group-hover:scale-110">
-                                        <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-colors duration-300" />
-                                    </div>
-                                    <span className="flex-1 text-[13px] font-medium truncate group-hover:translate-x-0.5 transition-transform duration-300">{item.name}</span>
-                                </div>
-                                <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-[opacity,transform] duration-300 relative z-10 translate-x-[-4px] group-hover:translate-x-0 group-hover:rotate-45" />
-                            </a>
-                        ))}
-                    </div>
-                </div>
-            </div>
-
-            {/* Footer CTA - Enhanced */}
-            <div className="mt-1 pb-1.5 bg-linear-to-r from-accent/5 via-accent/10 to-accent/5 dark:from-accent/10 dark:via-accent/20 dark:to-accent/10 rounded-full p-2 px-3">
-                <div className="flex items-center justify-between gap-3">
-                    <div className="flex items-center gap-3 min-w-0">
-                        <div className="bg-accent h-9 w-9 flex items-center justify-center rounded-full text-white shrink-0">
-                            <Activity className="w-4 h-4" />
-                        </div>
-                        <div className="min-w-0 flex items-center gap-2">
-                            <h5 className="font-sans font-bold text-[13px] text-text-primary whitespace-nowrap">Don't see your industry?</h5>
-                            <span className="text-[11px] text-text-secondary truncate hidden xl:inline opacity-60">— We work with businesses across all sectors</span>
-                        </div>
-                    </div>
-                    <ContactButtons />
-                </div>
-            </div>
-        </div>
-    );
-};
-
 const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
-    const [activeTab, setActiveTab] = useState<string | null>(null);
-    const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [openMobileCategory, setOpenMobileCategory] = useState<string | null>(null);
-    const toggleMobileCategory = useCallback((category: string) => {
-        setOpenMobileCategory(prev => prev === category ? null : category);
-    }, []);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-    const handleLinkClick = useCallback((e: React.MouseEvent, href?: string, page?: PageView) => {
-        if (!href) return;
+  const перейти = useCallback(
+    (event: React.MouseEvent, page: PageView) => {
+      event.preventDefault();
+      onNavigate?.(page);
+      setMobileMenuOpen(false);
+    },
+    [onNavigate]
+  );
 
-        if (page && onNavigate) {
-            e.preventDefault();
-            onNavigate(page);
-            setActiveTab(null);
-            setMobileMenuOpen(false);
-            return;
-        }
+  const домой = useCallback(
+    (event: React.MouseEvent) => {
+      event.preventDefault();
+      onNavigate?.('home');
+      setMobileMenuOpen(false);
+    },
+    [onNavigate]
+  );
 
-        if (href.startsWith('#')) {
-            setMobileMenuOpen(false);
-        }
-    }, [onNavigate]);
+  /* Поиск умеет открывать любую страницу, включая те, которых нет в меню. */
+  const изПоиска = useCallback(
+    (url: string) => {
+      if (url === '/') return onNavigate?.('home');
+      if (url.startsWith('/services/')) return onNavigate?.('service', { id: url.replace('/services/', '') });
+      if (url.startsWith('/industries/')) return onNavigate?.('industry', { id: url.replace('/industries/', '') });
+      if (url.startsWith('/blog/')) return onNavigate?.('blog-post', { id: url.replace('/blog/', '') });
+      if (url.startsWith('/case-studies/')) return onNavigate?.('case-study', { id: url.replace('/case-studies/', '') });
+      const карта: Record<string, PageView> = {
+        '/about': 'about',
+        '/work': 'work',
+        '/services': 'services',
+        '/pricing': 'pricing',
+        '/blog': 'blog',
+        '/contact': 'contact',
+        '/team': 'team',
+        '/careers': 'careers',
+        '/company': 'company',
+        '/industries': 'industries',
+      };
+      const page = карта[url];
+      if (page) onNavigate?.(page);
+    },
+    [onNavigate]
+  );
 
-    const handleHomeClick = useCallback((e: React.MouseEvent) => {
-        e.preventDefault();
-        onNavigate?.('home');
-    }, [onNavigate]);
+  const пунктКласс =
+    'text-sm font-medium text-text-secondary hover:text-text-primary dark:hover:text-white transition-colors px-3 py-2 cursor-pointer';
 
-    return (
-        <Navbar>
-            {/* Desktop Navigation Body */}
-            <NavBody>
-                <motion.div
-                    className="flex items-center gap-2 group cursor-pointer"
-                    onClick={handleHomeClick}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                >
-                    <motion.img
-                        src="/castells-logo.webp"
-                        alt="Castells Logo"
-                        width={127}
-                        height={144}
-                        className="w-12 h-12 object-contain brightness-0 dark:brightness-0 dark:invert"
-                        initial={{ rotate: 0 }}
-                        whileHover={{ rotate: 180 }}
-                        transition={{ duration: 0.5, ease: "easeInOut" }}
-                        loading="eager"
-                        fetchPriority="high"
-                    />
-                    <span className="font-display text-4xl font-bold text-black dark:text-white tracking-tight transition-colors leading-none flex items-center">Caste//s</span>
-                </motion.div>
+  return (
+    <Navbar>
+      {/* ── Десктоп ── */}
+      <NavBody>
+        <motion.div
+          className="flex items-center gap-2 group cursor-pointer"
+          onClick={домой}
+          whileHover={{ scale: 1.04 }}
+          whileTap={{ scale: 0.96 }}
+        >
+          <motion.img
+            src="/castells-logo.webp"
+            alt="Castells Logo"
+            width={127}
+            height={144}
+            className="w-12 h-12 object-contain brightness-0 dark:brightness-0 dark:invert"
+            whileHover={{ rotate: 180 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
+            loading="eager"
+            fetchPriority="high"
+          />
+          <span className="font-display text-4xl font-bold text-black dark:text-white tracking-tight leading-none flex items-center">
+            Caste//s
+          </span>
+        </motion.div>
 
-                <div className="flex items-center gap-6">
-                    <Menu setActive={setActiveTab} className="-none  bg-transparent dark:bg-transparent backdrop-blur-none">
+        <div className="flex items-center gap-6">
+          <nav className="flex items-center" aria-label="Основные разделы">
+            {РАЗДЕЛЫ.map((раздел) => (
+              <a
+                key={раздел.page}
+                href={раздел.href}
+                onClick={(e) => перейти(e, раздел.page)}
+                className={пунктКласс}
+              >
+                {раздел.label}
+              </a>
+            ))}
+          </nav>
 
-                        {/* CASES MENU */}
-                        <MenuItem
-                            setActive={setActiveTab}
-                            active={activeTab}
-                            item="Cases"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onNavigate?.('work');
-                            }}
-                        >
-                            <div className="w-[720px] p-3">
-                                <CasesMenu onNavigate={onNavigate} />
-                            </div>
-                        </MenuItem>
+          <div className="h-6 w-px bg-black/10 dark:bg-white/10 mx-1" />
 
-                        {/* SERVICES MENU - RESTRUCTURED */}
-                        <MenuItem
-                            setActive={setActiveTab}
-                            active={activeTab}
-                            item="Services"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onNavigate?.('services');
-                            }}
-                        >
-                            <div className="w-[660px] p-2">
-                                <ServicesMenu onNavigate={onNavigate} />
-                            </div>
-                        </MenuItem>
+          <div className="flex items-center gap-3">
+            <Search onNavigate={изПоиска} />
+            <AnimatedThemeToggler className="w-8 h-8 flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 rounded-full" />
+            <Button
+              href="/contact"
+              size="sm"
+              className="hidden lg:flex"
+              onClick={(e) => перейти(e, 'contact')}
+            >
+              Talk to us
+            </Button>
+          </div>
+        </div>
+      </NavBody>
 
-                        {/* PRICES — простой пункт, без вложенного меню:
-                            цена это то, за чем человек приходит, и прятать её
-                            во вложенный список незачем */}
-                        <MenuItem
-                            setActive={setActiveTab}
-                            active={activeTab}
-                            item="Prices"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onNavigate?.('pricing');
-                            }}
-                        />
+      {/* ── Телефон ── */}
+      <MobileNav>
+        <MobileNavHeader>
+          <div className="flex items-center gap-2 cursor-pointer" onClick={домой}>
+            <img
+              src="/castells-logo.webp"
+              alt="Castells Logo"
+              width="127"
+              height="144"
+              className="w-8 h-8 object-contain"
+              loading="eager"
+              fetchPriority="high"
+            />
+            <span className="font-display text-2xl font-bold text-text-primary tracking-tight">Caste//s</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <AnimatedThemeToggler className="w-8 h-8 flex items-center justify-center" />
+            <MobileNavToggle isOpen={mobileMenuOpen} onClick={() => setMobileMenuOpen(!mobileMenuOpen)} />
+          </div>
+        </MobileNavHeader>
 
-                        {/* INDUSTRIES MENU - RESTRUCTURED */}
-                        <MenuItem
-                            setActive={setActiveTab}
-                            active={activeTab}
-                            item="Industries"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onNavigate?.('industries');
-                            }}
-                        >
-                            <div className="w-fit max-w-[720px] p-2">
-                                <IndustriesMenu onNavigate={onNavigate} />
-                            </div>
-                        </MenuItem>
+        <MobileNavMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)}>
+          {/* Те же пять разделов, что и на десктопе. Раньше здесь было
+              двадцать с лишним пунктов, ведущих на несуществующие якоря. */}
+          <nav className="grid gap-1" aria-label="Основные разделы">
+            {РАЗДЕЛЫ.map((раздел) => (
+              <a
+                key={раздел.page}
+                href={раздел.href}
+                onClick={(e) => перейти(e, раздел.page)}
+                className={cn(
+                  'block p-3 rounded-inner font-display text-xl text-text-primary',
+                  'hover:bg-black/5 dark:hover:bg-white/5 transition-colors'
+                )}
+              >
+                {раздел.label}
+              </a>
+            ))}
+          </nav>
 
-                        {/* COMPANY MENU */}
-                        <MenuItem
-                            setActive={setActiveTab}
-                            active={activeTab}
-                            item="Company"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onNavigate?.('company');
-                            }}
-                        >
-                            <div className="w-[400px] p-2">
-                                <CompanyMenu onNavigate={onNavigate} />
-                            </div>
-                        </MenuItem>
-                    </Menu>
-
-                    <div className="h-6 w-px bg-black/10 dark:bg-white/10 mx-2"></div>
-
-                    <div className="flex items-center gap-3">
-                        <Search
-                            onNavigate={(url) => {
-                                // Parse URL and navigate
-                                if (url === '/') {
-                                    onNavigate?.('home');
-                                } else if (url.startsWith('/services/')) {
-                                    const slug = url.replace('/services/', '');
-                                    onNavigate?.('service', { id: slug });
-                                } else if (url.startsWith('/industries/')) {
-                                    const slug = url.replace('/industries/', '');
-                                    onNavigate?.('industry', { id: slug });
-                                } else if (url.startsWith('/blog/')) {
-                                    const id = url.replace('/blog/', '');
-                                    onNavigate?.('blog-post', { id });
-                                } else if (url.startsWith('/case-studies/')) {
-                                    const id = url.replace('/case-studies/', '');
-                                    onNavigate?.('case-study', { id });
-                                } else {
-                                    const pageMap: Record<string, PageView> = {
-                                        '/about': 'about',
-                                        '/work': 'work',
-                                        '/blog': 'blog',
-                                        '/contact': 'contact',
-                                        '/team': 'team',
-                                        '/careers': 'careers',
-                                        '/company': 'company',
-                                    };
-                                    const page = pageMap[url];
-                                    if (page) {
-                                        onNavigate?.(page);
-                                    }
-                                }
-                            }}
-                        />
-                        <AnimatedThemeToggler className="w-8 h-8 flex items-center justify-center hover:bg-black/5 dark:hover:bg-white/10 rounded-full" />
-                        <Button
-                            href="/contact"
-                            size="sm"
-                            className="hidden lg:flex"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onNavigate?.('contact');
-                            }}
-                        >
-                            Get Audit
-                        </Button>
-                    </div>
-                </div>
-            </NavBody>
-
-            {/* Mobile Navigation */}
-            <MobileNav>
-                <MobileNavHeader>
-                    <div className="flex items-center gap-2" onClick={(e) => { e.preventDefault(); handleHomeClick(e); setMobileMenuOpen(false); }}>
-                        <img src="/castells-logo.webp" alt="Castells Logo" width="127" height="144" className="w-8 h-8 object-contain" loading="eager" fetchPriority="high" />
-                        <span className="font-display text-2xl font-bold text-text-primary tracking-tight">Caste//s</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                        <AnimatedThemeToggler className="w-8 h-8 flex items-center justify-center" />
-                        <MobileNavToggle isOpen={mobileMenuOpen} onClick={() => setMobileMenuOpen(!mobileMenuOpen)} />
-                    </div>
-                </MobileNavHeader>
-
-                <MobileNavMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)}>
-                    <div className="grid gap-2">
-                        <a href="#work" onClick={(e) => { e.preventDefault(); onNavigate?.('work'); setMobileMenuOpen(false); }} className="block p-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-display text-xl font-bold text-text-primary">Work</a>
-
-                        <MobileAccordion>
-                            <MobileAccordionItem
-                                title="Services"
-                                isOpen={openMobileCategory === 'services'}
-                                onToggle={() => toggleMobileCategory('services')}
-                            >
-                                <div className="grid gap-4">
-                                    <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Branding & Design</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
-                                            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Identity & Logo</a>
-                                            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">UI/UX Design</a>
-                                            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Brand Guidelines</a>
-                                        </div>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Development</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
-                                            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Custom Web</a>
-                                            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Mobile Apps</a>
-                                            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">E-commerce</a>
-                                        </div>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Growth</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
-                                            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Paid Media (PPC)</a>
-                                            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">SEO Strategy</a>
-                                            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Video Ads</a>
-                                        </div>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Systems</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
-                                            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">CRM Setup</a>
-                                            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Automation</a>
-                                            <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Analytics & BI</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </MobileAccordionItem>
-
-                            <MobileAccordionItem
-                                title="Industries"
-                                isOpen={openMobileCategory === 'industries'}
-                                onToggle={() => toggleMobileCategory('industries')}
-                            >
-                                <div className="grid gap-4">
-                                    <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Construction</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
-                                            <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">General</a>
-                                            <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Roofing</a>
-                                            <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Remodeling</a>
-                                        </div>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Home Services</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
-                                            <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">HVAC</a>
-                                            <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Solar</a>
-                                        </div>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Automotive</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
-                                            <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Detailing</a>
-                                            <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Wraps & PPF</a>
-                                            <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Performance</a>
-                                        </div>
-                                    </div>
-                                    <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Professional</h5>
-                                        <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
-                                            <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Legal</a>
-                                            <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Finance</a>
-                                            <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Real Estate</a>
-                                            <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Medical</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </MobileAccordionItem>
-                        </MobileAccordion>
-
-                        <a href="#about" onClick={(e) => { e.preventDefault(); onNavigate?.('about'); setMobileMenuOpen(false); }} className="block p-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-display text-xl font-bold text-text-primary">Agency</a>
-                        <a href="#blog" onClick={(e) => { e.preventDefault(); onNavigate?.('blog'); setMobileMenuOpen(false); }} className="block p-3 rounded-lg hover:bg-black/5 dark:hover:bg-white/5 font-display text-xl font-bold text-text-primary">Insights</a>
-                    </div>
-                    <div className="pt-4 border-t border-black/5 dark:border-white/5">
-                        <Button
-                            href="/contact"
-                            size="sm"
-                            className="w-full"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                onNavigate?.('contact');
-                                setMobileMenuOpen(false);
-                            }}
-                        >
-                            Get Free Audit
-                        </Button>
-                    </div>
-                </MobileNavMenu>
-            </MobileNav>
-
-        </Navbar>
-    );
+          <div className="pt-4 mt-2 border-t border-black/5 dark:border-white/10">
+            <Button href="/contact" size="sm" className="w-full" onClick={(e) => перейти(e, 'contact')}>
+              Talk to us
+            </Button>
+          </div>
+        </MobileNavMenu>
+      </MobileNav>
+    </Navbar>
+  );
 });
 
 NavBar.displayName = 'NavBar';

@@ -167,56 +167,10 @@ export const MobileNavMenu = ({
   );
 };
 
-export const MobileAccordion = ({
-  children,
-  className,
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => {
-  return <div className={cn("flex flex-col gap-2", className)}>{children}</div>;
-};
+/*
+  Здесь жили MobileAccordion и MobileAccordionItem — раскрывающиеся списки в
+  мобильном меню. Меню переписано 23 августа: пять разделов без вложенности,
+  вложенные пункты вели на несуществующие якоря. Компоненты больше никем не
+  используются.
+*/
 
-export const MobileAccordionItem = ({
-  title,
-  children,
-  isOpen,
-  onToggle,
-}: {
-  title: string;
-  children: React.ReactNode;
-  isOpen: boolean;
-  onToggle: () => void;
-}) => {
-  return (
-    <div className="border border-black/5 dark:border-white/5 rounded-xl overflow-hidden bg-white/50 dark:bg-white/5">
-      <button
-        onClick={onToggle}
-        className="flex items-center justify-between w-full p-4 text-left font-display font-bold text-lg text-text-primary hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
-      >
-        {title}
-        <ChevronDown
-          className={cn(
-            "w-5 h-5 text-text-secondary transition-transform duration-300",
-            isOpen ? "rotate-180" : "rotate-0"
-          )}
-        />
-      </button>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.3, ease: "easeInOut" }}
-            className="overflow-hidden"
-          >
-            <div className="p-4 pt-0 flex flex-col gap-3 bg-black/5 dark:bg-black/20">
-              {children}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-};
