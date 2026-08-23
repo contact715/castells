@@ -44,9 +44,9 @@ export const PAGES = [
     title: 'Our work | Castells Media',
     description:
       'Real clients with names and live sites: HVAC, automotive, remodeling and dental businesses across the US. Open any of them and see the work.',
-    h1: 'Work we have done',
+    h1: 'Clients you can look up',
     intro:
-      'Every client here is a real company you can look up. Where we built the site, the link opens it.',
+      'Every company here is real. Where we built the site, the link opens it — check it yourself before you talk to us.',
   },
   {
     path: '/services',
