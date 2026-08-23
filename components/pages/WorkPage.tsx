@@ -1,105 +1,145 @@
-import React, { useState, useCallback, useMemo, useDeferredValue, useId, useEffect } from 'react';
-import { Search, Grid3x3, List, ArrowUpRight } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { ArrowUpRight, ExternalLink } from 'lucide-react';
+import { m as motion } from 'framer-motion';
 import { PageHeader } from '../ui/PageHeader';
-import OptimizedImage from '../ui/OptimizedImage';
-import { CASE_STUDIES, WORK_CATEGORIES } from '../../constants';
+import CaseCover from '../ui/CaseCover';
+import { CASE_STUDIES, WORK_CATEGORIES, CaseStudy } from '../../constants';
 import { PageView } from '../../App';
 import { NavigationData } from '../../types';
-import { m as motion } from 'framer-motion';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
-import Pagination from '../ui/Pagination';
+
+/*
+  Страница работ, переписана 23 августа 2026. Владелец: «оформи кейсы нормально».
+
+  Что было. Одиннадцать кейсов и вокруг них: поиск по названию, сортировка,
+  пять галочек категорий, шесть галочек ниш, переключатель сетка/список и
+  постраничная навигация. Инструментов для поиска больше, чем самих работ.
+  Колонка фильтров занимала четверть ширины, кейсам оставалось три четверти.
+
+  Плюс на карточках стояли числа без источника ($850K, $620K, 14x ROAS) и
+  фотографии со стокового банка, причём у двух кейсов — одна и та же картинка.
+
+  Что стало. Кейсы во всю ширину, над ними один ряд кнопок по типу работы.
+  На карточке то, что можно проверить: клиент, ниша и город, год, что мы
+  делали, и ссылка на живой сайт там, где мы его построили. Числа убраны по
+  решению владельца: подтверждать их было нечем.
+*/
 
 interface WorkPageProps {
     onBack: () => void;
     onNavigate: (page: PageView, data?: NavigationData) => void;
 }
 
-const CATEGORIES = WORK_CATEGORIES.map(cat => cat.label);
-const INDUSTRIES = Array.from(new Set(CASE_STUDIES.map(cs => cs.industry)));
+const WorkCard: React.FC<{
+    project: CaseStudy;
+    index: number;
+    onOpen: () => void;
+}> = ({ project, index, onOpen }) => (
+    <motion.article
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-60px' }}
+        transition={{ duration: 0.4, delay: Math.min(index, 4) * 0.05 }}
+        className="group flex flex-col bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card overflow-hidden hover:border-black/20 dark:hover:border-white/30 transition-colors duration-300"
+    >
+        <button
+            type="button"
+            onClick={onOpen}
+            className="block text-left cursor-pointer"
+            aria-label={`Open case study: ${project.client}`}
+        >
+            <div className="relative aspect-[16/10] overflow-hidden">
+                <CaseCover
+                    image={project.image}
+                    client={project.client}
+                    industry={project.industry}
+                    className="w-full h-full object-cover"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                />
+                <span className="absolute top-4 left-4 px-3 py-1.5 rounded-lg bg-black/70 text-white text-[10px] font-bold uppercase tracking-widest">
+                    {project.year} · {project.industry}
+                </span>
+            </div>
+        </button>
 
-const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) => {
-    const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
-    const [searchQuery, setSearchQuery] = useState('');
-    const [sortBy, setSortBy] = useState('Newest');
-    const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-    const [selectedIndustries, setSelectedIndustries] = useState<string[]>([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const projectsPerPage = 9;
-    
-    // useDeferredValue для отложенного обновления поиска (не блокирует UI)
-    const deferredSearchQuery = useDeferredValue(searchQuery);
-    const deferredCategories = useDeferredValue(selectedCategories);
-    const deferredIndustries = useDeferredValue(selectedIndustries);
-    
-    // useId для стабильных ID
-    const searchId = useId();
-    const filterId = useId();
+        <div className="flex flex-col grow p-6 md:p-7">
+            <button
+                type="button"
+                onClick={onOpen}
+                className="text-left cursor-pointer"
+            >
+                <h3 className="font-display text-2xl md:text-3xl font-normal text-text-primary dark:text-white mb-1 group-hover:text-coral-text transition-colors">
+                    {project.client}
+                </h3>
+            </button>
+            {project.location && (
+                <p className="text-xs font-bold uppercase tracking-widest text-text-secondary dark:text-white/50 mb-4">
+                    {project.location}
+                </p>
+            )}
 
-    const toggleCategory = useCallback((category: string) => {
-        setSelectedCategories(prev => 
-            prev.includes(category) 
-                ? prev.filter(c => c !== category)
-                : [...prev, category]
-        );
-    }, []);
+            <p className="text-text-secondary dark:text-white/60 leading-relaxed mb-5 grow">
+                {project.description}
+            </p>
 
-    const toggleIndustry = useCallback((industry: string) => {
-        setSelectedIndustries(prev => 
-            prev.includes(industry) 
-                ? prev.filter(i => i !== industry)
-                : [...prev, industry]
-        );
-    }, []);
+            {/* Что делали: услуги вместо чисел, которые нечем подтвердить */}
+            <div className="flex flex-wrap gap-2 mb-5">
+                {project.services.map((service) => (
+                    <span
+                        key={service}
+                        className="px-3 py-1.5 rounded-pill bg-black/5 dark:bg-white/10 text-[11px] font-bold uppercase tracking-widest text-text-secondary dark:text-white/60"
+                    >
+                        {service}
+                    </span>
+                ))}
+            </div>
 
-    const filteredProjects = useMemo(() => {
-        return CASE_STUDIES.filter(project => {
-            const matchesSearch = project.client.toLowerCase().includes(deferredSearchQuery.toLowerCase()) ||
-                               project.description.toLowerCase().includes(deferredSearchQuery.toLowerCase());
-            const matchesCategory = deferredCategories.length === 0 || 
-                                   deferredCategories.some(cat => {
-                                       const categoryId = WORK_CATEGORIES.find(c => c.label === cat)?.id;
-                                       return project.category === categoryId;
-                                   });
-            const matchesIndustry = deferredIndustries.length === 0 || 
-                                   deferredIndustries.includes(project.industry);
-            return matchesSearch && matchesCategory && matchesIndustry;
-        });
-    }, [deferredSearchQuery, deferredCategories, deferredIndustries]);
+            <div className="flex items-center justify-between gap-4 pt-4 border-t border-black/5 dark:border-white/10">
+                <button
+                    type="button"
+                    onClick={onOpen}
+                    className="inline-flex items-center gap-1.5 text-sm font-bold uppercase tracking-widest text-text-primary dark:text-white hover:text-coral-text transition-colors cursor-pointer"
+                >
+                    Read case
+                    <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
+                </button>
 
-    const sortedProjects = useMemo(() => {
-        return [...filteredProjects].sort((a, b) => {
-            if (sortBy === 'Newest') {
-                return parseInt(b.year) - parseInt(a.year);
-            } else if (sortBy === 'Alphabetically (A to Z)') {
-                return a.client.localeCompare(b.client);
-            } else {
-                return b.client.localeCompare(a.client);
-            }
-        });
-    }, [filteredProjects, sortBy]);
+                {/* Живой сайт — самое проверяемое, что есть у кейса */}
+                {project.website && (
+                    <a
+                        href={project.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={(e) => e.stopPropagation()}
+                        className="inline-flex items-center gap-1.5 text-sm text-text-secondary dark:text-white/60 hover:text-coral-text transition-colors"
+                    >
+                        {project.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
+                        <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />
+                    </a>
+                )}
+            </div>
+        </div>
+    </motion.article>
+);
 
-    // Pagination
-    const totalPages = Math.ceil(sortedProjects.length / projectsPerPage);
-    const paginatedProjects = useMemo(() => {
-        const startIndex = (currentPage - 1) * projectsPerPage;
-        return sortedProjects.slice(startIndex, startIndex + projectsPerPage);
-    }, [sortedProjects, currentPage, projectsPerPage]);
+const WorkPage: React.FC<WorkPageProps> = React.memo(({ onNavigate }) => {
+    const [category, setCategory] = useState<string>('all');
 
-    // Reset to page 1 when filters change
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [searchQuery, selectedCategories, selectedIndustries, sortBy]);
+    const projects = useMemo(
+        () => (category === 'all' ? CASE_STUDIES : CASE_STUDIES.filter((c) => c.category === category)),
+        [category]
+    );
 
-    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
+    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://www.castells.media';
 
     return (
         <>
-            <SEO 
-                title="Our work | Castells Media" 
-                description="Real clients with names and live sites: HVAC, automotive, remodeling and dental businesses across the US. Work done by Castells Media, 1298 Antelope Creek Drive, Roseville, California."
+            <SEO
+                title="Our work | Castells Media"
+                description="Real clients with names and live sites: HVAC, automotive, remodeling and dental businesses across the US. Work done by Castells Media, Roseville, California."
                 canonical="/work"
-                keywords="marketing case studies, digital marketing portfolio, successful marketing campaigns, marketing results, Roseville marketing agency, Los Angeles marketing services, performance marketing examples"
+                keywords="marketing case studies, home service marketing portfolio, HVAC marketing case study, Roseville marketing agency"
                 geoRegion="US-CA"
                 geoPlacename="1298 Antelope Creek Drive, Roseville, California"
                 summary="Work by Castells Media: websites, branding and paid media for home service and automotive businesses across the US. Every client is a real company you can look up."
@@ -110,276 +150,72 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onBack, onNavigate }) =>
                 data={{
                     itemListElement: [
                         { name: 'Home', item: `${siteUrl}/` },
-                        { name: 'Our Work', item: `${siteUrl}/work` }
-                    ]
+                        { name: 'Our Work', item: `${siteUrl}/work` },
+                    ],
                 }}
             />
-        <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
-            <div className="container mx-auto px-6 pt-4 md:pt-6">
-                {/* Header */}
-                <PageHeader
-                    breadcrumbs={[
-                        { label: 'Home', action: () => onNavigate('home') },
-                        { label: 'Work', active: true }
-                    ]}
-                    badge="Our Portfolio"
-                    title="Selected Works"
-                    description="Real companies you can look up. Where we built the site, the link opens it."
-                    onNavigate={onNavigate}
-                />
 
-                {/* Main Content: Two Columns */}
-                <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-                    {/* Left Column: Filters */}
-                    <div className="lg:col-span-1">
-                        <div className="sticky top-32">
-                            <h2 className="text-sm font-semibold uppercase tracking-widest text-text-primary dark:text-white mb-6">
-                                Filter and sort
-                            </h2>
+            <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
+                <div className="container mx-auto px-6 pt-4 md:pt-6">
+                    <PageHeader
+                        breadcrumbs={[
+                            { label: 'Home', action: () => onNavigate('home') },
+                            { label: 'Work', active: true },
+                        ]}
+                        badge="Our work"
+                        title="Clients you can look up"
+                        description="Every company here is real. Where we built the site, the link opens it — check it yourself before you talk to us."
+                        onNavigate={onNavigate}
+                    />
 
-                            {/* Sort By */}
-                            <div className="mb-6 pb-6 border-b border-black/10 dark:border-white/10">
-                                <label htmlFor={filterId} className="block text-xs font-medium text-text-secondary dark:text-white/60 mb-2">
-                                    Sort by
-                                </label>
-                                <select
-                                    id={filterId}
-                                    value={sortBy}
-                                    onChange={(e) => setSortBy(e.target.value)}
-                                    className="w-full bg-white dark:bg-surface border border-black/10 dark:border-white/10 rounded-inner px-3 py-2 text-sm text-text-primary dark:text-white focus:outline-hidden focus:border-coral"
-                                >
-                                    <option>Newest</option>
-                                    <option>Alphabetically (A to Z)</option>
-                                    <option>Alphabetically (Z to A)</option>
-                                </select>
-                            </div>
-
-                            {/* Category */}
-                            <div className="mb-6 pb-6 border-b border-black/10 dark:border-white/10">
-                                <label className="block text-xs font-medium text-text-secondary dark:text-white/60 mb-3">
-                                    Category
-                                </label>
-                                <div className="space-y-2">
-                                    {CATEGORIES.map(cat => (
-                                        <label key={cat} className="flex items-center gap-2 cursor-pointer group">
-                                            <input
-                                                type="checkbox"
-                                                checked={selectedCategories.includes(cat)}
-                                                onChange={() => toggleCategory(cat)}
-                                                className="w-4 h-4 rounded-sm border border-black/20 dark:border-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
-                                            />
-                                            <span className="text-sm text-text-primary dark:text-white group-hover:text-coral-text transition-colors">
-                                                {cat}
-                                            </span>
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
-
-                            {/* Industry */}
-                            <div className="mb-6">
-                                <label className="block text-xs font-medium text-text-secondary dark:text-white/60 mb-3">
-                                    Industry
-                                </label>
-                                <div className="space-y-2">
-                                    {INDUSTRIES.map(industry => (
-                                        <label key={industry} className="flex items-center gap-2 cursor-pointer group">
-                                            <input
-                                                type="checkbox"
-                                                checked={selectedIndustries.includes(industry)}
-                                                onChange={() => toggleIndustry(industry)}
-                                                className="w-4 h-4 rounded-sm border border-black/20 dark:border-white/20 bg-white dark:bg-surface accent-coral focus:ring-coral focus:ring-offset-0 cursor-pointer"
-                                            />
-                                            <span className="text-sm text-text-primary dark:text-white group-hover:text-coral-text transition-colors">
-                                                {industry}
-                                            </span>
-                                        </label>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Right Column: Content */}
-                    <div className="lg:col-span-3">
-                        {/* Search and View Toggle */}
-                        <div className="flex items-center justify-between mb-8">
-                            <div className="flex-1 max-w-md">
-                                <div className="relative">
-                                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-text-secondary dark:text-white/60" />
-                                    <input
-                                        type="text"
-                                        placeholder="Search cases"
-                                        value={searchQuery}
-                                        onChange={(e) => setSearchQuery(e.target.value)}
-                                        className="w-full bg-white dark:bg-surface border border-black/10 dark:border-white/10 rounded-inner pl-10 pr-4 py-2 text-sm text-text-primary dark:text-white placeholder:text-text-secondary dark:placeholder:text-white/40 focus:outline-hidden focus:border-coral"
-                                    />
-                                </div>
-                            </div>
-                            <div className="flex items-center gap-2 ml-4">
+                    {/*
+                        Один ряд кнопок вместо колонки фильтров с поиском,
+                        сортировкой и одиннадцатью галочками на одиннадцать работ.
+                    */}
+                    <div className="flex flex-wrap gap-2 mb-10">
+                        {WORK_CATEGORIES.map((cat) => {
+                            const active = category === cat.id || (cat.id === 'all' && category === 'all');
+                            const count =
+                                cat.id === 'all'
+                                    ? CASE_STUDIES.length
+                                    : CASE_STUDIES.filter((c) => c.category === cat.id).length;
+                            if (count === 0) return null;
+                            return (
                                 <button
-                                    onClick={() => setViewMode('grid')}
-                                    className={`p-2 rounded-xl transition-colors ${
-                                        viewMode === 'grid'
-                                            ? 'bg-coral text-white'
-                                            : 'bg-white dark:bg-surface text-text-secondary dark:text-white/60 hover:bg-black/5 dark:hover:bg-white/10'
+                                    key={cat.id}
+                                    type="button"
+                                    onClick={() => setCategory(cat.id)}
+                                    className={`px-4 py-2.5 rounded-pill text-xs font-bold uppercase tracking-widest transition-colors cursor-pointer ${
+                                        active
+                                            ? 'bg-black text-white dark:bg-white dark:text-black'
+                                            : 'bg-black/5 dark:bg-white/10 text-text-secondary dark:text-white/60 hover:bg-black/10 dark:hover:bg-white/20'
                                     }`}
                                 >
-                                    <Grid3x3 className="w-4 h-4" />
+                                    {cat.label}
+                                    <span className="ml-2 opacity-60">{count}</span>
                                 </button>
-                                <button
-                                    onClick={() => setViewMode('list')}
-                                    className={`p-2 rounded-xl transition-colors ${
-                                        viewMode === 'list'
-                                            ? 'bg-coral text-white'
-                                            : 'bg-white dark:bg-surface text-text-secondary dark:text-white/60 hover:bg-black/5 dark:hover:bg-white/10'
-                                    }`}
-                                >
-                                    <List className="w-4 h-4" />
-                                </button>
-                            </div>
-                        </div>
-
-                        {/* Projects Grid/List */}
-                        {viewMode === 'grid' ? (
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                {paginatedProjects.map((project) => (
-                                    <div
-                                        key={project.id}
-                                        onClick={() => onNavigate('case-study', project as unknown as NavigationData)}
-                                        className="group relative aspect-4/3 rounded-card overflow-hidden cursor-pointer bg-white dark:bg-surface hover:-translate-y-1 transition-[transform,box-shadow] duration-300"
-                                    >
-                                        {/* Background Media */}
-                                        <div className="absolute inset-0 bg-black">
-                                            {project.video ? (
-                                                <video
-                                                    autoPlay
-                                                    loop
-                                                    muted
-                                                    playsInline
-                                                    preload="metadata"
-                                                    poster={project.image}
-                                                    className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
-                                                >
-                                                    <source src={project.video} type="video/mp4" />
-                                                </video>
-                                            ) : (
-                                                <OptimizedImage
-                                                    src={project.image}
-                                                    alt={project.client}
-                                                    className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
-                                                    loading="lazy"
-                                                    width={800}
-                                                    height={600}
-                                                    /* Карточка занимает примерно треть ширины на десктопе.
-                                                       Без этой подсказки браузер считал её во всю ширину экрана
-                                                       и качал версию 1600px (246 КБ) вместо 800px (86 КБ) */
-                                                    sizes="(min-width: 1024px) 33vw, (min-width: 768px) 45vw, 90vw"
-                                                />
-                                            )}
-                                            <div className="absolute inset-0 bg-linear-to-t from-black via-black/40 to-transparent" />
-                                        </div>
-
-                                        {/* Content */}
-                                        <div className="absolute inset-0 p-6 flex flex-col justify-between z-10">
-                                            <div className="flex justify-between items-start">
-                                                <span className="bg-white/10 backdrop-blur-md border border-white/10 px-3 py-1 rounded-xl text-white text-[10px] font-bold uppercase tracking-widest">
-                                                    {project.industry}
-                                                </span>
-                                                <div className="w-10 h-10 rounded-element bg-white/0 backdrop-blur-md border border-white/10 flex items-center justify-center group-hover:bg-white group-hover:border-white/20 transition-[background-color,border-color] duration-300">
-                                                    <ArrowUpRight className="w-5 h-5 text-white/50 group-hover:text-white transition-colors" />
-                                                </div>
-                                            </div>
-
-                                            <div>
-                                                <h3 className="font-display text-2xl md:text-3xl text-white mb-2">{project.client}</h3>
-                                                <div className="flex gap-4 text-white/80">
-                                                    <div>
-                                                        <span className="block text-xl font-bold text-white">{project.metric || project.services[0]}</span>
-                                                        <span className="text-[10px] uppercase tracking-wider opacity-70">{project.metricLabel || 'What we did'}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="space-y-4">
-                                {paginatedProjects.map((project) => (
-                                    <div
-                                        key={project.id}
-                                        onClick={() => onNavigate('case-study', project as unknown as NavigationData)}
-                                        className="group flex gap-4 bg-white dark:bg-surface border border-black/5 dark:border-white/5 rounded-xl shadow-spatial-card p-4 hover:shadow-spatial-md hover:-translate-y-0.5 transition-[transform,box-shadow] duration-300 cursor-pointer"
-                                    >
-                                        <div className="w-32 h-32 rounded-lg overflow-hidden shrink-0">
-                                            {project.video ? (
-                                                <video
-                                                    autoPlay
-                                                    loop
-                                                    muted
-                                                    playsInline
-                                                    preload="metadata"
-                                                    poster={project.image}
-                                                    className="w-full h-full object-cover"
-                                                >
-                                                    <source src={project.video} type="video/mp4" />
-                                                </video>
-                                            ) : (
-                                                <OptimizedImage
-                                                    src={project.image}
-                                                    alt={project.client}
-                                                    className="w-full h-full object-cover"
-                                                    loading="lazy"
-                                                    width={256}
-                                                    height={256}
-                                                    /* Миниатюра в списке ровно 128px, на экранах Retina нужен 256px */
-                                                    sizes="128px"
-                                                />
-                                            )}
-                                        </div>
-                                        <div className="flex-1 min-w-0">
-                                            <div className="flex items-center gap-2 mb-2">
-                                                <span className="px-2 py-1 bg-coral/10 text-coral-text rounded-lg text-[10px] font-bold uppercase tracking-widest">
-                                                    {project.industry}
-                                                </span>
-                                                <span className="text-xs text-text-secondary dark:text-white/60">
-                                                    {project.year}
-                                                </span>
-                                            </div>
-                                            <h3 className="font-display text-lg font-semibold text-text-primary dark:text-white mb-2 group-hover:text-coral-text transition-colors">
-                                                {project.client}
-                                            </h3>
-                                            <p className="text-sm text-text-secondary dark:text-white/70 mb-2 line-clamp-2">
-                                                {project.description}
-                                            </p>
-                                            <div className="flex items-center gap-4 text-sm">
-                                                <div>
-                                                    <span className="font-bold text-text-primary dark:text-white">{project.metric}</span>
-                                                    <span className="text-text-secondary dark:text-white/60 text-xs ml-1">{project.metricLabel}</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <ArrowUpRight className="w-5 h-5 text-text-secondary dark:text-white/60 group-hover:text-coral-text transition-colors shrink-0" />
-                                    </div>
-                                ))}
-                            </div>
-                        )}
-
-                        {/* Pagination */}
-                        {totalPages > 1 && (
-                            <div className="mt-12 pt-8">
-                                <Pagination
-                                    currentPage={currentPage}
-                                    totalPages={totalPages}
-                                    onPageChange={setCurrentPage}
-                                />
-                            </div>
-                        )}
+                            );
+                        })}
                     </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                        {projects.map((project, index) => (
+                            <WorkCard
+                                key={project.id}
+                                project={project}
+                                index={index}
+                                onOpen={() => onNavigate('case-study', { id: project.id, name: project.client })}
+                            />
+                        ))}
+                    </div>
+
+                    {projects.length === 0 && (
+                        <p className="text-text-secondary dark:text-white/60 py-16 text-center">
+                            No work in this category yet.
+                        </p>
+                    )}
                 </div>
             </div>
-        </div>
         </>
     );
 });

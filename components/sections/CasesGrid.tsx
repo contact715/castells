@@ -2,7 +2,7 @@ import React, { useMemo, memo, useCallback } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { m as motion } from 'framer-motion';
 import { Button } from '../ui/Button';
-import OptimizedImage from '../ui/OptimizedImage';
+import CaseCover from '../ui/CaseCover';
 import { CASE_STUDIES, CaseStudy } from '../../constants';
 import { useReducedMotion } from '../../lib/hooks/useReducedMotion';
 import type { NavigateFn } from '../../types';
@@ -142,14 +142,12 @@ const CaseCard: React.FC<CaseCardProps> = memo(({ caseItem, onClick }) => {
         >
             {/* Image */}
             <div className="relative aspect-3/4 rounded-card overflow-hidden mb-4">
-                <OptimizedImage
-                    src={caseItem.image}
-                    alt={caseItem.client}
+                <CaseCover
+                    image={caseItem.image}
+                    client={caseItem.client}
+                    industry={caseItem.industry}
                     className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                    loading="lazy"
-                    width={800}
-                    height={1067}
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    sizes="(max-width: 768px) 100vw, 33vw"
                 />
                 {/* Subtle gradient overlay */}
                 <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-card" />

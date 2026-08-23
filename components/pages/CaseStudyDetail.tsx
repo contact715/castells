@@ -13,6 +13,7 @@ import { findAuthorById, AUTHORS } from '../../data/authors';
 import ShareButtons from '../ui/ShareButtons';
 import { ContactButtons } from '../ui/ContactButtons';
 import OptimizedImage from '../ui/OptimizedImage';
+import CaseCover from '../ui/CaseCover';
 
 interface CaseStudyDetailProps {
   onBack: () => void;
@@ -189,7 +190,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                 loop
                 muted
                 playsInline
-                poster={data.image}
+                {...(data.image ? { poster: data.image } : {})}
                 className="w-full h-full object-cover opacity-70 transition-opacity duration-700"
                 preload="metadata"
                 loading="lazy"
@@ -197,13 +198,13 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                 <source src={data.video} type="video/mp4" />
               </video>
             ) : (
-              <OptimizedImage
-                src={data.image}
-                alt={data.client}
-                loading="lazy"
-                width={1600}
-                height={900}
-                className="w-full h-full object-cover opacity-70 transition-opacity duration-700"
+              <CaseCover
+                image={data.image}
+                client={data.client}
+                industry={data.industry}
+                className="w-full h-full object-cover"
+                sizes="100vw"
+                priority
               />
             )}
           </div>

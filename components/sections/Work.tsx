@@ -5,7 +5,7 @@ import { Button } from '../ui/Button';
 import { Badge } from '../ui/Badge';
 import ScrollStack, { ScrollStackItem } from '../ui/ScrollStack';
 import AnimatedHeading from '../ui/AnimatedHeading';
-import OptimizedImage from '../ui/OptimizedImage';
+import CaseCover from '../ui/CaseCover';
 import { useReducedMotion } from '../../lib/hooks/useReducedMotion';
 import type { NavigateFn } from '../../types';
 
@@ -174,7 +174,7 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
               loop
               muted
               playsInline
-              poster={project.image}
+              poster={project.image || undefined}
               className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
               preload="metadata"
               {...({ fetchPriority: 'low' } as any)}
@@ -182,27 +182,21 @@ const StackCard: React.FC<{ project: CaseStudy; index: number; onClick: () => vo
               <source src={project.video} type="video/mp4" />
             </video>
           ) : (
-            <OptimizedImage
-              src={project.image}
-              alt={project.client}
-              className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
-              loading="lazy"
-              width={1600}
-              height={900}
-              sizes="(max-width: 768px) 100vw, 92vw"
-              onLoad={() => setImageLoaded(true)}
-            />
+            <CaseCover
+            image={project.image}
+            client={project.client}
+            industry={project.industry}
+            className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
+            sizes="(max-width: 768px) 100vw, 92vw"
+          />
           )
         ) : (
-          <OptimizedImage
-            src={project.image}
-            alt={project.client}
+          <CaseCover
+            image={project.image}
+            client={project.client}
+            industry={project.industry}
             className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-700"
-            loading="lazy"
-            width={1600}
-            height={900}
             sizes="(max-width: 768px) 100vw, 92vw"
-            onLoad={() => setImageLoaded(true)}
           />
         )}
 
