@@ -59,7 +59,7 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.05] tracking-tight text-text-primary mb-0">
               Marketing for
               <br />
-              <span className="text-coral-text italic font-semibold">home service businesses</span>
+              <span className="text-accent-text italic font-semibold">home service businesses</span>
             </h1>
           </div>
 

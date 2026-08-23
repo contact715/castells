@@ -81,7 +81,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     video: '',
     description: 'Took an HVAC company off a single lead source and onto its own site, Google and Meta, with a CRM that catches every request.',
     services: ['Lead Gen', 'Google Ads', 'Meta Ads'],
-    color: '#E08576',
+    color: '#089662',
     category: 'paid-media',
     challenge: "Roman Service relied entirely on Angie's List for leads, making the business dependent on a single, unpredictable source. The owner was skeptical about digital advertising after previous failures.",
     solution: "We launched a 'Digital Dominance' ecosystem, starting with a low-risk test on Meta Ads. We built a high-conversion landing page with A/B testing and integrated a custom CRM to automate lead processing.",
@@ -111,7 +111,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     description:
       'Built the website for a heating and air conditioning company in the Seattle area: service pages, quote request and a phone number that works from any screen.',
     services: ['Web Development'],
-    color: '#E08576',
+    color: '#089662',
     category: 'web-design',
     website: 'https://fivestarcomfort.com/',
   },

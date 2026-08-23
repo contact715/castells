@@ -13,7 +13,7 @@ export const Highlighter: React.FC<HighlighterProps> = ({
   children,
   className,
   action = "highlight",
-  color = "#E08576",
+  color = "var(--color-accent)",
 }) => {
   return (
     <span className={cn("relative inline-block", className)}>

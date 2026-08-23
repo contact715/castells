@@ -10,8 +10,8 @@ export interface BadgeProps extends React.HTMLAttributes<HTMLSpanElement> {
  * Standardized Badge component for section labels and tags
  * 
  * Variants:
- * - default: Coral dot + text
- * - pulse: Coral dot with pulse animation + text
+ * - default: Accent dot + text
+ * - pulse: Accent dot with pulse animation + text
  * - outline: Border only, no dot
  * 
  * Sizes:
@@ -30,7 +30,7 @@ export const Badge: React.FC<BadgeProps> = ({
       {variant !== 'outline-solid' && (
         <span
           className={cn(
-            "w-2 h-2 rounded-full bg-coral-gradient",
+            "w-2 h-2 rounded-full bg-accent-gradient",
             variant === 'pulse' && "animate-pulse"
           )}
         />

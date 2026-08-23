@@ -23,7 +23,7 @@ const Services: React.FC = React.memo(() => {
         {/* Header Section */}
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-4">
-            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse"></span>
             <span className="text-xs font-semibold tracking-wide text-text-secondary">
               Our Expertise
             </span>
@@ -90,8 +90,8 @@ const Services: React.FC = React.memo(() => {
                 >
                   <div className="bg-white dark:bg-surface p-6 sm:p-8 rounded-card shadow-spatial-card h-full flex flex-col items-start hover:-translate-y-1 hover:shadow-spatial-md transition-[transform,border-color,box-shadow] duration-300 border border-black/5 dark:border-white/5 group cursor-pointer">
                     <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
-                        <service.icon className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.5] text-coral-text group-hover:text-white dark:group-hover:text-black transition-colors" />
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-element bg-accent/10 dark:bg-accent/20 flex items-center justify-center shrink-0 group-hover:bg-black group-hover:text-white dark:group-hover:bg-white dark:group-hover:text-black transition-colors duration-300">
+                        <service.icon className="w-5 h-5 sm:w-6 sm:h-6 stroke-[1.5] text-accent-text group-hover:text-white dark:group-hover:text-black transition-colors" />
                       </div>
                       <h3 className="font-display font-semibold text-xl sm:text-2xl text-black dark:text-white leading-tight">
                         {service.name}

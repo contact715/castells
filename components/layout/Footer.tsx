@@ -89,7 +89,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           {/* Разделы */}
           <nav aria-label="Footer">
-            <h4 className="text-[11px] font-bold tracking-wide text-coral-text mb-4">
+            <h4 className="text-[11px] font-bold tracking-wide text-accent-text mb-4">
               Sections
             </h4>
             <div className="flex flex-col gap-2.5">
@@ -108,7 +108,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           {/* Как связаться */}
           <div>
-            <h4 className="text-[11px] font-bold tracking-wide text-coral-text mb-4">
+            <h4 className="text-[11px] font-bold tracking-wide text-accent-text mb-4">
               Contact
             </h4>
             <div className="flex flex-col gap-2.5">

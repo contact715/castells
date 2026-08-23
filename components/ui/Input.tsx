@@ -82,9 +82,9 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     const baseStyles = "w-full focus:outline-hidden transition-[background-color,border-color,color] font-sans";
     
     const variants = {
-      default: "bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-inner focus:border-coral dark:focus:border-coral focus:bg-white dark:focus:bg-white/10 placeholder:text-black/20 dark:placeholder:text-white/20",
+      default: "bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-inner focus:border-accent dark:focus:border-accent focus:bg-white dark:focus:bg-white/10 placeholder:text-black/20 dark:placeholder:text-white/20",
       minimal: "bg-transparent border-b border-white/20 rounded-none focus:border-white placeholder:text-white/20 text-white",
-      dark: "bg-ivory border border-black/10 rounded-inner focus:border-coral placeholder:text-text-secondary/40"
+      dark: "bg-ivory border border-black/10 rounded-inner focus:border-accent placeholder:text-text-secondary/40"
     };
 
     const sizes = {
@@ -112,7 +112,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             )}
           >
             {label}
-            {props.required && <span className="text-coral-text ml-1">*</span>}
+            {props.required && <span className="text-accent-text ml-1">*</span>}
           </label>
         )}
         <div className="relative">

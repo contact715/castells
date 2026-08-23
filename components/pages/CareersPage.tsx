@@ -65,10 +65,10 @@ const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 + i * 0.1, duration: 0.5 }}
-              className="group bg-white dark:bg-surface p-8 rounded-card shadow-spatial-card border border-black/5 dark:border-white/10 hover:border-coral/50 dark:hover:border-coral/40 hover:shadow-spatial-md transition-[border-color,box-shadow] duration-300 flex flex-col md:flex-row items-start md:items-center justify-between cursor-pointer"
+              className="group bg-white dark:bg-surface p-8 rounded-card shadow-spatial-card border border-black/5 dark:border-white/10 hover:border-accent/50 dark:hover:border-accent/40 hover:shadow-spatial-md transition-[border-color,box-shadow] duration-300 flex flex-col md:flex-row items-start md:items-center justify-between cursor-pointer"
             >
               <div>
-                <h3 className="font-display text-2xl font-semibold text-text-primary group-hover:text-coral-text transition-colors">{job.title}</h3>
+                <h3 className="font-display text-2xl font-semibold text-text-primary group-hover:text-accent-text transition-colors">{job.title}</h3>
                 <div className="flex gap-4 mt-2 text-xs font-semibold tracking-wide text-text-secondary dark:text-white/60">
                   <span>{job.dept}</span>
                   <span className="w-px h-3 bg-black/20 dark:bg-white/20 self-center" />

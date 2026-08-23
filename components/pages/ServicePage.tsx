@@ -41,14 +41,14 @@ const FAQAccordion: React.FC<{ faqs: Array<{ question: string; answer: string }>
                             onClick={() => setOpenIndex(isOpen ? null : idx)}
                             className="w-full py-8 flex items-start justify-between gap-6 text-left group"
                         >
-                            <h3 className={`font-display font-semibold text-2xl md:text-3xl transition-colors group-hover:text-coral-text ${isOpen ? 'text-coral-text' : 'text-text-primary'}`}>
+                            <h3 className={`font-display font-semibold text-2xl md:text-3xl transition-colors group-hover:text-accent-text ${isOpen ? 'text-accent-text' : 'text-text-primary'}`}>
                                 {faq.question}
                             </h3>
                             <span className="shrink-0 mt-1">
                                 {isOpen ? (
-                                    <Minus className="w-6 h-6 text-coral-text" />
+                                    <Minus className="w-6 h-6 text-accent-text" />
                                 ) : (
-                                    <Plus className="w-6 h-6 text-text-secondary group-hover:text-coral-text transition-colors" />
+                                    <Plus className="w-6 h-6 text-text-secondary group-hover:text-accent-text transition-colors" />
                                 )}
                             </span>
                         </button>
@@ -217,11 +217,11 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                                     initial={{ opacity: 0, y: 20 }}
                                     animate={{ opacity: 1, y: 0 }}
                                     transition={{ delay: index * 0.1, duration: 0.5 }}
-                                    className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-8 border border-black/5 dark:border-white/10 hover:border-coral/50 dark:hover:border-coral/40 hover:shadow-spatial-md transition-[border-color,box-shadow] duration-300 group"
+                                    className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-8 border border-black/5 dark:border-white/10 hover:border-accent/50 dark:hover:border-accent/40 hover:shadow-spatial-md transition-[border-color,box-shadow] duration-300 group"
                                 >
                                     <div className="flex items-start gap-4 mb-4">
-                                        <div className="w-12 h-12 rounded-element bg-coral/10 dark:bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-coral dark:group-hover:bg-white transition-colors">
-                                            <Icon className="w-6 h-6 text-coral-text dark:text-white group-hover:text-white dark:group-hover:text-black transition-colors" />
+                                        <div className="w-12 h-12 rounded-element bg-accent/10 dark:bg-white/10 flex items-center justify-center shrink-0 group-hover:bg-accent dark:group-hover:bg-white transition-colors">
+                                            <Icon className="w-6 h-6 text-accent-text dark:text-white group-hover:text-white dark:group-hover:text-black transition-colors" />
                                         </div>
                                         <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white">
                                             {service.name}
@@ -305,7 +305,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                     <section className="mb-20">
                         <div className="max-w-3xl mb-10">
                             <div className="flex items-center gap-2 mb-3">
-                                <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
+                                <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse shrink-0" aria-hidden="true" />
                                 <span className="text-xs font-semibold tracking-wide text-text-secondary">Proof</span>
                             </div>
                             <AnimatedHeading
@@ -355,14 +355,14 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                                         </div>
 
                                         <div className="mt-auto">
-                                            <h3 className="font-display text-2xl font-semibold text-white leading-tight group-hover:text-coral-text transition-colors mb-2">
+                                            <h3 className="font-display text-2xl font-semibold text-white leading-tight group-hover:text-accent-text transition-colors mb-2">
                                                 {cs.client}
                                             </h3>
                                             <p className="text-sm text-white/70 leading-relaxed max-h-[2.8em] overflow-hidden">
                                                 {cs.description}
                                             </p>
                                             <div className="mt-4 flex items-baseline gap-2">
-                                                <span className="text-coral-text font-bold text-2xl">{cs.metric}</span>
+                                                <span className="text-accent-text font-bold text-2xl">{cs.metric}</span>
                                                 <span className="text-white/60 text-[10px] font-semibold tracking-wide">
                                                     {cs.metricLabel}
                                                 </span>
@@ -381,7 +381,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
-                    className="bg-coral rounded-card p-8 md:p-12 text-center mb-20"
+                    className="bg-accent rounded-card p-8 md:p-12 text-center mb-20"
                 >
                     <AnimatedHeading
                         as="h2"
@@ -448,7 +448,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                                         <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
                                             <div className="mb-8">
                                                 <div className="flex items-center gap-2 mb-3">
-                                                    <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
+                                                    <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse shrink-0" aria-hidden="true" />
                                                     <span className="text-xs font-semibold tracking-wide text-text-secondary">FAQ</span>
                                                 </div>
                                                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight mb-4">

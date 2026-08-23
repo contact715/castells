@@ -27,11 +27,11 @@ interface NavBarProps {
 }
 
 const CategoryCard = ({ title, icon: Icon, href }: { title: string, icon: React.ComponentType<{ className?: string }>, href: string }) => (
-    <a href={href} className="flex flex-col items-center justify-center gap-3 p-4 rounded-card bg-black/5 dark:bg-white/5 hover:bg-coral/10 hover:text-coral-text transition-[background-color,color] group text-center h-full">
+    <a href={href} className="flex flex-col items-center justify-center gap-3 p-4 rounded-card bg-black/5 dark:bg-white/5 hover:bg-accent/10 hover:text-accent-text transition-[background-color,color] group text-center h-full">
         <div className="bg-white dark:bg-black p-3 rounded-xl  group-hover:scale-110 transition-transform">
-            <Icon className="w-6 h-6 text-text-primary group-hover:text-coral-text transition-colors" />
+            <Icon className="w-6 h-6 text-text-primary group-hover:text-accent-text transition-colors" />
         </div>
-        <span className="text-xs font-bold tracking-wide text-text-primary group-hover:text-coral-text">{title}</span>
+        <span className="text-xs font-bold tracking-wide text-text-primary group-hover:text-accent-text">{title}</span>
     </a>
 );
 
@@ -87,11 +87,11 @@ const CasesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Naviga
                                     {caseStudy.industry}
                                 </span>
                             </div>
-                            <h4 className="text-white font-semibold text-sm mb-1 group-hover:text-coral-text transition-colors">
+                            <h4 className="text-white font-semibold text-sm mb-1 group-hover:text-accent-text transition-colors">
                                 {caseStudy.client}
                             </h4>
                             <div className="flex items-baseline gap-1">
-                                <span className="text-coral-text font-bold text-lg">{caseStudy.metric}</span>
+                                <span className="text-accent-text font-bold text-lg">{caseStudy.metric}</span>
                                 <span className="text-white/50 text-[10px] uppercase">{caseStudy.metricLabel}</span>
                             </div>
                         </div>
@@ -163,7 +163,7 @@ const CompanyMenu = ({ onNavigate }: { onNavigate?: import('../../types').Naviga
             <div className="pt-2 border-t border-black/5 bg-ivory dark:bg-white/5 rounded-card p-3">
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
-                        <div className="bg-coral/10 h-10 w-10 flex items-center justify-center rounded-full text-coral-text shrink-0">
+                        <div className="bg-accent/10 h-10 w-10 flex items-center justify-center rounded-full text-accent-text shrink-0">
                             <Phone className="w-4 h-4" />
                         </div>
                         <div className="min-w-0 flex items-center">
@@ -225,7 +225,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                             className={`
                                 w-full px-3 py-1.5 rounded-full text-[13px] font-semibold transition-[background-color,color] text-left flex items-center gap-2.5 cursor-pointer relative group
                                 ${activeCategory === category.id
-                                    ? 'bg-coral text-white dark:bg-coral dark:text-white'
+                                    ? 'bg-accent text-white dark:bg-accent dark:text-white'
                                     : 'text-text-primary hover:bg-black/5 dark:hover:bg-white/5'}
                             `}
                         >
@@ -234,7 +234,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                                     w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-[background-color,color]
                                     ${activeCategory === category.id
                                         ? 'bg-white/20 text-white'
-                                        : 'bg-black/5 dark:bg-white/5 text-text-secondary group-hover:bg-coral/10 group-hover:text-coral-text'}
+                                        : 'bg-black/5 dark:bg-white/5 text-text-secondary group-hover:bg-accent/10 group-hover:text-accent-text'}
                                 `}>
                                     <category.icon className="w-3.5 h-3.5" />
                                 </div>
@@ -268,7 +268,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                                 }}
                                 className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color,transform] duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
                             >
-                                <div className="absolute inset-0 bg-linear-to-r from-coral/0 via-coral/0 to-coral/0 group-hover:from-coral/5 group-hover:via-coral/10 group-hover:to-coral/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+                                <div className="absolute inset-0 bg-linear-to-r from-accent/0 via-accent/0 to-accent/0 group-hover:from-accent/5 group-hover:via-accent/10 group-hover:to-accent/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
                                 <div className="relative flex items-center gap-2.5 flex-1 min-w-0">
                                     <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-[background-color,transform] duration-300 group-hover:scale-110">
                                         <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-colors duration-300" />
@@ -299,7 +299,7 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
                                 }}
                                 className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color,transform] duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
                             >
-                                <div className="absolute inset-0 bg-linear-to-r from-coral/0 via-coral/0 to-coral/0 group-hover:from-coral/5 group-hover:via-coral/10 group-hover:to-coral/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+                                <div className="absolute inset-0 bg-linear-to-r from-accent/0 via-accent/0 to-accent/0 group-hover:from-accent/5 group-hover:via-accent/10 group-hover:to-accent/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
                                 <div className="relative flex items-center gap-2.5 flex-1 min-w-0">
                                     <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-[background-color,transform] duration-300 group-hover:scale-110">
                                         <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-colors duration-300" />
@@ -314,10 +314,10 @@ const ServicesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: Nav
             </div>
 
             {/* Footer CTA */}
-            <div className="mt-1 pb-1.5 bg-linear-to-r from-coral/5 via-coral/10 to-coral/5 dark:from-coral/10 dark:via-coral/20 dark:to-coral/10 rounded-full p-2 px-3">
+            <div className="mt-1 pb-1.5 bg-linear-to-r from-accent/5 via-accent/10 to-accent/5 dark:from-accent/10 dark:via-accent/20 dark:to-accent/10 rounded-full p-2 px-3">
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
-                        <div className="bg-coral h-9 w-9 flex items-center justify-center rounded-full text-white shrink-0">
+                        <div className="bg-accent h-9 w-9 flex items-center justify-center rounded-full text-white shrink-0">
                             <Sparkles className="w-4 h-4" />
                         </div>
                         <div className="min-w-0 flex items-center gap-2">
@@ -376,7 +376,7 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                             className={`
                                 w-full px-3 py-1.5 rounded-full text-[13px] font-semibold transition-[background-color,color] text-left flex items-center gap-2.5 cursor-pointer relative group
                                 ${activeCategory === category.id
-                                    ? 'bg-coral text-white dark:bg-coral dark:text-white'
+                                    ? 'bg-accent text-white dark:bg-accent dark:text-white'
                                     : 'text-text-primary hover:bg-black/5 dark:hover:bg-white/5'}
                             `}
                         >
@@ -385,7 +385,7 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                                     w-7 h-7 rounded-full flex items-center justify-center shrink-0 transition-[background-color,color]
                                     ${activeCategory === category.id
                                         ? 'bg-white/20 text-white'
-                                        : 'bg-black/5 dark:bg-white/5 text-text-secondary group-hover:bg-coral/10 group-hover:text-coral-text'}
+                                        : 'bg-black/5 dark:bg-white/5 text-text-secondary group-hover:bg-accent/10 group-hover:text-accent-text'}
                                 `}>
                                     <category.icon className="w-3.5 h-3.5" />
                                 </div>
@@ -423,7 +423,7 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                                 }}
                                 className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color,transform] duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
                             >
-                                <div className="absolute inset-0 bg-linear-to-r from-coral/0 via-coral/0 to-coral/0 group-hover:from-coral/5 group-hover:via-coral/10 group-hover:to-coral/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+                                <div className="absolute inset-0 bg-linear-to-r from-accent/0 via-accent/0 to-accent/0 group-hover:from-accent/5 group-hover:via-accent/10 group-hover:to-accent/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
                                 <div className="relative flex items-center gap-2.5 flex-1 min-w-0">
                                     <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-[background-color,transform] duration-300 group-hover:scale-110">
                                         <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-colors duration-300" />
@@ -458,7 +458,7 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
                                 }}
                                 className="flex items-center gap-2 w-full px-3 py-1.5 rounded-full hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color,transform] duration-300 justify-between group cursor-pointer relative overflow-hidden hover:-translate-y-0.5"
                             >
-                                <div className="absolute inset-0 bg-linear-to-r from-coral/0 via-coral/0 to-coral/0 group-hover:from-coral/5 group-hover:via-coral/10 group-hover:to-coral/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
+                                <div className="absolute inset-0 bg-linear-to-r from-accent/0 via-accent/0 to-accent/0 group-hover:from-accent/5 group-hover:via-accent/10 group-hover:to-accent/5 transition-opacity duration-300 opacity-0 group-hover:opacity-100" />
                                 <div className="relative flex items-center gap-2.5 flex-1 min-w-0">
                                     <div className="w-7 h-7 rounded-full bg-black/5 dark:bg-white/5 flex items-center justify-center shrink-0 group-hover:bg-white/20 dark:group-hover:bg-black/20 transition-[background-color,transform] duration-300 group-hover:scale-110">
                                         <item.icon className="w-3.5 h-3.5 text-text-secondary group-hover:text-current transition-colors duration-300" />
@@ -473,10 +473,10 @@ const IndustriesMenu = ({ onNavigate }: { onNavigate?: (page: PageView, data?: N
             </div>
 
             {/* Footer CTA - Enhanced */}
-            <div className="mt-1 pb-1.5 bg-linear-to-r from-coral/5 via-coral/10 to-coral/5 dark:from-coral/10 dark:via-coral/20 dark:to-coral/10 rounded-full p-2 px-3">
+            <div className="mt-1 pb-1.5 bg-linear-to-r from-accent/5 via-accent/10 to-accent/5 dark:from-accent/10 dark:via-accent/20 dark:to-accent/10 rounded-full p-2 px-3">
                 <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3 min-w-0">
-                        <div className="bg-coral h-9 w-9 flex items-center justify-center rounded-full text-white shrink-0">
+                        <div className="bg-accent h-9 w-9 flex items-center justify-center rounded-full text-white shrink-0">
                             <Activity className="w-4 h-4" />
                         </div>
                         <div className="min-w-0 flex items-center gap-2">
@@ -700,7 +700,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                             >
                                 <div className="grid gap-4">
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Branding & Design</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Branding & Design</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Identity & Logo</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">UI/UX Design</a>
@@ -708,7 +708,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Development</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Development</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Custom Web</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Mobile Apps</a>
@@ -716,7 +716,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Growth</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Growth</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Paid Media (PPC)</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">SEO Strategy</a>
@@ -724,7 +724,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Systems</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Systems</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">CRM Setup</a>
                                             <a href="#services" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Automation</a>
@@ -741,7 +741,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                             >
                                 <div className="grid gap-4">
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Construction</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Construction</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">General</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Roofing</a>
@@ -749,14 +749,14 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Home Services</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Home Services</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">HVAC</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Solar</a>
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Automotive</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Automotive</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Detailing</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Wraps & PPF</a>
@@ -764,7 +764,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                                         </div>
                                     </div>
                                     <div className="space-y-2">
-                                        <h5 className="text-xs font-semibold tracking-wide text-coral-text">Professional</h5>
+                                        <h5 className="text-xs font-semibold tracking-wide text-accent-text">Professional</h5>
                                         <div className="flex flex-col gap-1 pl-2 border-l border-black/10 dark:border-white/10">
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Legal</a>
                                             <a href="#industries" onClick={() => setMobileMenuOpen(false)} className="block py-1 px-2 text-sm text-text-secondary hover:text-text-primary">Finance</a>

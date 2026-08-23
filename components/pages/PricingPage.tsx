@@ -160,7 +160,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                 transition={{ duration: 0.4, delay: index * 0.05 }}
                 className="flex flex-col bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-6 md:p-8"
               >
-                <div className="text-[11px] font-semibold tracking-wide text-coral-text mb-4">
+                <div className="text-[11px] font-semibold tracking-wide text-accent-text mb-4">
                   {plan.name}
                 </div>
                 <div className="flex items-baseline gap-2 mb-4">
@@ -178,7 +178,7 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
                       key={item}
                       className="flex items-start gap-3 text-text-secondary dark:text-white/65 text-sm md:text-base"
                     >
-                      <Check className="w-4 h-4 text-coral-text shrink-0 mt-1" aria-hidden="true" />
+                      <Check className="w-4 h-4 text-accent-text shrink-0 mt-1" aria-hidden="true" />
                       {item}
                     </li>
                   ))}

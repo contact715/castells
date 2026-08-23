@@ -92,14 +92,14 @@ const FAQ: React.FC = () => {
                       onClick={() => setOpenIndex(isOpen ? null : idx)}
                       className="w-full py-8 flex items-start justify-between gap-6 text-left group"
                     >
-                      <h3 className={`font-display font-semibold text-2xl md:text-3xl transition-colors group-hover:text-coral-text ${isOpen ? 'text-coral-text' : 'text-text-primary'}`}>
+                      <h3 className={`font-display font-semibold text-2xl md:text-3xl transition-colors group-hover:text-accent-text ${isOpen ? 'text-accent-text' : 'text-text-primary'}`}>
                         {faq.question}
                       </h3>
                       <span className="shrink-0 mt-1">
                         {isOpen ? (
-                          <Minus className="w-6 h-6 text-coral-text" />
+                          <Minus className="w-6 h-6 text-accent-text" />
                         ) : (
-                          <Plus className="w-6 h-6 text-text-secondary group-hover:text-coral-text transition-colors" />
+                          <Plus className="w-6 h-6 text-text-secondary group-hover:text-accent-text transition-colors" />
                         )}
                       </span>
                     </button>

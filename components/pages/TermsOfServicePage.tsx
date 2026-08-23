@@ -9,7 +9,7 @@ interface TermsOfServicePageProps {
 
 const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) => {
   return (
-    <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20 selection:bg-coral selection:text-white">
+    <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20 selection:bg-accent selection:text-white">
       <div className="container mx-auto px-6 pt-4 md:pt-6">
         <PageHeader
           breadcrumbs={[
@@ -52,7 +52,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
                 <li><span className="font-semibold text-text-primary">Message frequency:</span> Message frequency varies. Typically 1–5 messages per month.</li>
                 <li><span className="font-semibold text-text-primary">Costs:</span> Message and data rates may apply. You are responsible for any charges from your mobile carrier.</li>
                 <li><span className="font-semibold text-text-primary">Opt-out:</span> You may opt out at any time by replying <span className="font-mono font-semibold text-text-primary">STOP</span> to any message. You will receive a confirmation and no further messages.</li>
-                <li><span className="font-semibold text-text-primary">Help:</span> Reply <span className="font-mono font-semibold text-text-primary">HELP</span> for assistance or email <a className="text-coral-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a>.</li>
+                <li><span className="font-semibold text-text-primary">Help:</span> Reply <span className="font-mono font-semibold text-text-primary">HELP</span> for assistance or email <a className="text-accent-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a>.</li>
                 <li><span className="font-semibold text-text-primary">Carriers supported:</span> Compatible with major US carriers including AT&T, T-Mobile, Verizon, and others. Carrier participation may vary.</li>
               </ul>
             </section>
@@ -85,7 +85,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
                 <button
                   type="button"
                   onClick={() => onNavigate?.('privacy-policy')}
-                  className="text-coral-text hover:underline cursor-pointer"
+                  className="text-accent-text hover:underline cursor-pointer"
                 >
                   Privacy Policy
                 </button>
@@ -103,7 +103,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
             <section className="space-y-3">
               <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">8. Contact</h2>
               <p className="text-text-secondary">
-                Questions about these terms: <a className="text-coral-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a>
+                Questions about these terms: <a className="text-accent-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a>
               </p>
               <p className="text-text-secondary">
                 Castells Media Inc, Roseville, CA 90401

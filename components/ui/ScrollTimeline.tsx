@@ -105,7 +105,7 @@ export default function ScrollTimeline({
       {/* Gradient Background Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute w-[600px] h-[600px] rounded-full bg-linear-to-br from-coral/15 to-transparent blur-3xl"
+          className="absolute w-[600px] h-[600px] rounded-full bg-linear-to-br from-accent/15 to-transparent blur-3xl"
           style={{ top: '10%', left: '-10%' }}
           animate={{
             scale: [1, 1.1, 1],
@@ -169,7 +169,7 @@ export default function ScrollTimeline({
                   transformOrigin: 'top'
                 }}
               >
-                <div className="absolute inset-0 bg-linear-to-b from-coral via-coral/60 to-coral/30 rounded-full" />
+                <div className="absolute inset-0 bg-linear-to-b from-accent via-accent/60 to-accent/30 rounded-full" />
               </div>
             </div>
 
@@ -193,8 +193,8 @@ export default function ScrollTimeline({
                         className={cn(
                           "w-20 h-20 rounded-card flex items-center justify-center font-display text-xl font-bold transition-[background-color,color,transform,box-shadow] duration-300 relative",
                           isActive
-                            ? "bg-coral text-white scale-110 ring-4 ring-coral/20"
-                            : "bg-coral/10 dark:bg-coral/20 text-coral-text border-2 border-coral/20 dark:border-coral/30"
+                            ? "bg-accent text-white scale-110 ring-4 ring-accent/20"
+                            : "bg-accent/10 dark:bg-accent/20 text-accent-text border-2 border-accent/20 dark:border-accent/30"
                         )}
                         whileHover={{ scale: 1.05 }}
                         animate={isActive ? {
@@ -214,7 +214,7 @@ export default function ScrollTimeline({
                         {isActive && (
                           <>
                             <motion.div
-                              className="absolute inset-0 rounded-card bg-coral/30"
+                              className="absolute inset-0 rounded-card bg-accent/30"
                               animate={{
                                 scale: [1, 1.3, 1.3],
                                 opacity: [0.5, 0, 0],
@@ -225,7 +225,7 @@ export default function ScrollTimeline({
                               }}
                             />
                             <motion.div
-                              className="absolute inset-0 rounded-card bg-coral/20"
+                              className="absolute inset-0 rounded-card bg-accent/20"
                               animate={{
                                 scale: [1, 1.5, 1.5],
                                 opacity: [0.3, 0, 0],
@@ -264,8 +264,8 @@ export default function ScrollTimeline({
                       "flex flex-col rounded-card transition-[border-color,background-color,transform,box-shadow] duration-500 flex-1 relative overflow-hidden min-h-[400px]",
                       isActive
                         ? (entry.image || entry.video)
-                          ? "-coral/30 dark:-coral/40 scale-100"
-                          : "-coral/30 dark:-coral/40 bg-white dark:bg-[#191919] scale-100"
+                          ? "-accent/30 dark:-accent/40 scale-100"
+                          : "-accent/30 dark:-accent/40 bg-white dark:bg-[#191919] scale-100"
                         : (entry.image || entry.video)
                           ? "-black/5 dark:-white/10"
                           : "-black/5 dark:-white/10 bg-white dark:bg-[#191919]"
@@ -384,7 +384,7 @@ export default function ScrollTimeline({
                                           key={itemIndex}
                                           className="flex items-start gap-3 text-sm leading-relaxed text-white/90"
                                         >
-                                          <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-coral shrink-0" />
+                                          <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
                                           <span>{item}</span>
                                         </li>
                                       ))}
@@ -463,14 +463,14 @@ export default function ScrollTimeline({
                           <div className="overflow-hidden">
                             <div className="space-y-4 pt-4">
                               {entry.items && entry.items.length > 0 && (
-                                <div className="rounded-xl border border-black/5 dark:border-white/10 bg-coral/5 dark:bg-coral/10 p-6">
+                                <div className="rounded-xl border border-black/5 dark:border-white/10 bg-accent/5 dark:bg-accent/10 p-6">
                                   <ul className="space-y-3">
                                     {entry.items.map((item, itemIndex) => (
                                       <li
                                         key={itemIndex}
                                         className="flex items-start gap-3 text-sm text-text-secondary dark:text-white/80 leading-relaxed"
                                       >
-                                        <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-coral shrink-0" />
+                                        <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-accent shrink-0" />
                                         <span>{item}</span>
                                       </li>
                                     ))}
@@ -501,7 +501,7 @@ export default function ScrollTimeline({
                     {/* Subtle gradient overlay for active cards without image */}
                     {isActive && !entry.image && !entry.video && (
                       <motion.div
-                        className="absolute inset-0 bg-linear-to-br from-coral/5 via-transparent to-transparent pointer-events-none"
+                        className="absolute inset-0 bg-linear-to-br from-accent/5 via-transparent to-transparent pointer-events-none"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ duration: 0.5 }}
@@ -512,7 +512,7 @@ export default function ScrollTimeline({
                     {isActive && (
                       <>
                         <motion.div
-                          className="absolute top-4 right-4 text-coral-text/20"
+                          className="absolute top-4 right-4 text-accent-text/20"
                           animate={{
                             y: [0, -10, 0],
                             opacity: [0.2, 0.4, 0.2],
@@ -526,7 +526,7 @@ export default function ScrollTimeline({
                           <Sparkles className="w-4 h-4" />
                         </motion.div>
                         <motion.div
-                          className="absolute bottom-4 right-8 text-coral-text/15"
+                          className="absolute bottom-4 right-8 text-accent-text/15"
                           animate={{
                             y: [0, 10, 0],
                             opacity: [0.15, 0.3, 0.15],

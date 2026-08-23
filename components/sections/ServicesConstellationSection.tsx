@@ -94,7 +94,7 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
       <div className="container mx-auto px-6 relative z-content">
         <div className="mb-12 md:mb-16 max-w-2xl">
           <div className="flex items-center gap-2 mb-4">
-            <span className="w-2 h-2 rounded-full bg-coral-gradient shrink-0" aria-hidden="true" />
+            <span className="w-2 h-2 rounded-full bg-accent-gradient shrink-0" aria-hidden="true" />
             <span className="text-xs font-semibold tracking-wide text-white/50">What we do</span>
           </div>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-white">
@@ -125,8 +125,8 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
                 {/* Название и цена: то, ради чего человек скользит взглядом по списку */}
                 <div>
                   <div className="flex items-center gap-4 mb-4">
-                    <div className="w-12 h-12 rounded-element bg-coral-gradient-subtle flex items-center justify-center shrink-0">
-                      <Icon className="w-6 h-6 text-coral-text" aria-hidden="true" />
+                    <div className="w-12 h-12 rounded-element bg-accent-gradient-subtle flex items-center justify-center shrink-0">
+                      <Icon className="w-6 h-6 text-accent-text" aria-hidden="true" />
                     </div>
                     <h3 className="font-display text-xl md:text-2xl font-semibold text-white">
                       {service.title}
@@ -149,7 +149,7 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 mb-5">
                     {service.includes.map((item) => (
                       <li key={item} className="flex items-start gap-3 text-white/60 text-sm md:text-base">
-                        <span className="w-1.5 h-1.5 rounded-full bg-coral shrink-0 mt-2" aria-hidden="true" />
+                        <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 mt-2" aria-hidden="true" />
                         {item}
                       </li>
                     ))}

@@ -74,7 +74,7 @@ const BlogPage: React.FC<{ onNavigate?: (page: PageView, data?: NavigationData) 
                     className="group w-full text-left grid grid-cols-1 lg:grid-cols-[180px_1fr_auto] gap-4 lg:gap-10 items-start bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-6 md:p-8 hover:border-black/20 dark:hover:border-white/30 transition-colors cursor-pointer"
                   >
                     <div className="flex lg:flex-col gap-3 lg:gap-2 items-center lg:items-start">
-                      <span className="text-[11px] font-semibold tracking-wide text-coral-text">
+                      <span className="text-[11px] font-semibold tracking-wide text-accent-text">
                         {post.category}
                       </span>
                       <span className="text-sm text-text-secondary dark:text-white/55">{post.date}</span>

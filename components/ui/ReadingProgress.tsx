@@ -7,7 +7,7 @@ interface ReadingProgressProps {
 
 const ReadingProgress: React.FC<ReadingProgressProps> = React.memo(({
   className = '',
-  color = 'bg-coral'
+  color = 'bg-accent'
 }) => {
   const [progress, setProgress] = useState(0);
   const rafId = useRef(0);

@@ -61,7 +61,7 @@ const CasesGrid: React.FC<CasesGridProps> = ({ onNavigate }) => {
                 <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-16">
                     <div className="max-w-2xl">
                         <div className="flex items-center gap-2 mb-4">
-                            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse"></span>
+                            <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse"></span>
                             <span className="text-xs font-semibold tracking-wide text-text-secondary">
                                 Case Studies
                             </span>
@@ -161,12 +161,12 @@ const CaseCard: React.FC<CaseCardProps> = memo(({ caseItem, onClick }) => {
                 </span>
 
                 {/* Title */}
-                <h3 className="font-display text-lg md:text-xl font-semibold text-text-primary dark:text-white mb-3 leading-snug group-hover:text-coral-text transition-colors">
+                <h3 className="font-display text-lg md:text-xl font-semibold text-text-primary dark:text-white mb-3 leading-snug group-hover:text-accent-text transition-colors">
                     {caseItem.client} — {caseItem.description?.slice(0, 60)}...
                 </h3>
 
                 {/* View Link */}
-                <div className="flex items-center gap-2 text-sm font-medium text-text-secondary dark:text-white/60 group-hover:text-coral-text transition-colors">
+                <div className="flex items-center gap-2 text-sm font-medium text-text-secondary dark:text-white/60 group-hover:text-accent-text transition-colors">
                     <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     <span>View Case</span>
                 </div>

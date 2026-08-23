@@ -91,7 +91,7 @@ export const Pagination: React.FC<PaginationProps> = React.memo(({
               className={cn(
                 'min-w-[40px] h-10 px-3 rounded-xl font-semibold text-sm transition-[background-color,color]',
                 isActive
-                  ? 'bg-coral text-white'
+                  ? 'bg-accent text-white'
                   : 'bg-white dark:bg-surface text-text-primary dark:text-white hover:bg-black/5 dark:hover:bg-white/10'
               )}
               aria-label={`Go to page ${pageNum}`}

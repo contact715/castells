@@ -47,8 +47,8 @@ const TrustIndicators: React.FC<TrustIndicatorsProps> = React.memo(({
               transition={{ delay: prefersReducedMotion ? 0 : index * 0.1, duration: prefersReducedMotion ? 0 : 0.5 }}
               className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-6 text-center transition-[transform,box-shadow]"
             >
-              <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center mx-auto mb-3">
-                <Icon className="w-6 h-6 text-coral-text" />
+              <div className="w-12 h-12 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center mx-auto mb-3">
+                <Icon className="w-6 h-6 text-accent-text" />
               </div>
               <div className="font-display text-3xl font-normal text-text-primary mb-1">
                 {indicator.value}
@@ -68,7 +68,7 @@ const TrustIndicators: React.FC<TrustIndicatorsProps> = React.memo(({
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mb-10">
           <div className="flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
+            <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse shrink-0" aria-hidden="true" />
             <span className="text-xs font-semibold tracking-wide text-text-secondary">
               Trust & Results
             </span>
@@ -97,8 +97,8 @@ const TrustIndicators: React.FC<TrustIndicatorsProps> = React.memo(({
                 transition={{ delay: prefersReducedMotion ? 0 : index * 0.1, duration: prefersReducedMotion ? 0 : 0.5 }}
                 className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-8 text-center hover:-translate-y-1 hover:shadow-spatial-md transition-[transform,box-shadow] group"
               >
-                <div className="w-16 h-16 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
-                  <Icon className="w-8 h-8 text-coral-text group-hover:text-white dark:group-hover:text-black transition-colors" />
+                <div className="w-16 h-16 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center mx-auto mb-4 group-hover:bg-accent dark:group-hover:bg-accent transition-colors">
+                  <Icon className="w-8 h-8 text-accent-text group-hover:text-white dark:group-hover:text-black transition-colors" />
                 </div>
                 <div className="font-display text-4xl md:text-5xl font-normal text-text-primary mb-2">
                   {indicator.value}

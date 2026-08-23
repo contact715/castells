@@ -133,7 +133,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                     ]
                 }}
             />
-            <div className="min-h-screen bg-ivory pt-16 md:pt-20 pb-20 font-sans selection:bg-coral selection:text-white transition-colors duration-500">
+            <div className="min-h-screen bg-ivory pt-16 md:pt-20 pb-20 font-sans selection:bg-accent selection:text-white transition-colors duration-500">
             <div className="container mx-auto px-6 pt-4 md:pt-6">
 
                 {/* Header */}
@@ -224,7 +224,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                                 placeholder="(555) 123-4567"
                                                 value={formState.phone}
                                                 onChange={e => setFormState({ ...formState, phone: e.target.value })}
-                                                className="flex-1 bg-ivory dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-inner px-4 py-3 text-sm focus:outline-hidden focus:border-coral transition-[border-color] placeholder:text-text-secondary/50"
+                                                className="flex-1 bg-ivory dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-inner px-4 py-3 text-sm focus:outline-hidden focus:border-accent transition-[border-color] placeholder:text-text-secondary/50"
                                             />
                                         </div>
                                     </div>
@@ -234,7 +234,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                         <div className="relative">
                                             <select
                                                 id="topic"
-                                                className="w-full bg-ivory dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-inner px-4 py-3 text-sm focus:outline-hidden focus:border-coral transition-[border-color] appearance-none cursor-pointer text-text-primary"
+                                                className="w-full bg-ivory dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-inner px-4 py-3 text-sm focus:outline-hidden focus:border-accent transition-[border-color] appearance-none cursor-pointer text-text-primary"
                                                 value={formState.topic}
                                                 onChange={e => setFormState({ ...formState, topic: e.target.value })}
                                             >
@@ -258,7 +258,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                         id="message"
                                         required
                                         rows={4}
-                                        className="w-full bg-ivory dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-inner px-4 py-3 text-sm focus:outline-hidden focus:border-coral transition-[border-color] placeholder:text-text-secondary/50 resize-none"
+                                        className="w-full bg-ivory dark:bg-white/5 border border-black/5 dark:border-white/5 rounded-inner px-4 py-3 text-sm focus:outline-hidden focus:border-accent transition-[border-color] placeholder:text-text-secondary/50 resize-none"
                                         placeholder="Tell us about your project, goals, and timeline..."
                                         value={formState.message}
                                         onChange={e => setFormState({ ...formState, message: e.target.value })}
@@ -272,21 +272,21 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                             type="checkbox"
                                             checked={formState.smsConsent}
                                             onChange={e => setFormState({ ...formState, smsConsent: e.target.checked })}
-                                            className="mt-1 w-4 h-4 rounded-sm border-black/20 dark:border-white/20 text-coral-text focus:ring-coral focus:ring-offset-0 cursor-pointer shrink-0"
+                                            className="mt-1 w-4 h-4 rounded-sm border-black/20 dark:border-white/20 text-accent-text focus:ring-accent focus:ring-offset-0 cursor-pointer shrink-0"
                                         />
                                         <span className="text-xs text-text-secondary leading-relaxed">
                                             I agree to receive SMS/text messages from Castells Media Inc at the phone number provided. I understand that message and data rates may apply, message frequency varies (typically 1–5/month), and I can opt out at any time by replying STOP. Reply HELP for help. See our{' '}
                                             <button
                                                 type="button"
                                                 onClick={(e) => { e.preventDefault(); onNavigate?.('privacy-policy'); }}
-                                                className="text-coral-text hover:underline"
+                                                className="text-accent-text hover:underline"
                                             >
                                                 Privacy Policy
                                             </button>{' '}and{' '}
                                             <button
                                                 type="button"
                                                 onClick={(e) => { e.preventDefault(); onNavigate?.('terms'); }}
-                                                className="text-coral-text hover:underline"
+                                                className="text-accent-text hover:underline"
                                             >
                                                 Terms of Service
                                             </button>. Consent is not a condition of purchase.
@@ -331,14 +331,14 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                         <button
                                             type="button"
                                             onClick={() => onNavigate?.('privacy-policy')}
-                                            className="text-coral-text hover:underline cursor-pointer"
+                                            className="text-accent-text hover:underline cursor-pointer"
                                         >
                                             Privacy Policy
                                         </button>{' '}and{' '}
                                         <button
                                             type="button"
                                             onClick={() => onNavigate?.('terms')}
-                                            className="text-coral-text hover:underline cursor-pointer"
+                                            className="text-accent-text hover:underline cursor-pointer"
                                         >
                                             Terms of Service
                                         </button>
@@ -366,7 +366,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                 className="bg-white dark:bg-surface rounded-card p-8 md:p-12 hover:-translate-y-1 transition-[transform] duration-300"
                             >
                                 <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
-                                    <Phone className="w-5 h-5 text-coral-text" /> Let's talk
+                                    <Phone className="w-5 h-5 text-accent-text" /> Let's talk
                                 </h3>
                                 <p className="text-text-secondary dark:text-white/70 text-sm mb-8">Pick what works best for you.</p>
 
@@ -409,7 +409,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                 className="bg-white dark:bg-surface rounded-card p-8 md:p-12 hover:-translate-y-1 transition-[transform] duration-300"
                             >
                                 <h3 className="font-display text-xl font-semibold mb-2 text-text-primary flex items-center gap-3">
-                                    <Mail className="w-5 h-5 text-coral-text" /> Drop a message
+                                    <Mail className="w-5 h-5 text-accent-text" /> Drop a message
                                 </h3>
                                 <p className="text-text-secondary dark:text-white/70 text-sm mb-8">We'll get back soon.</p>
 
@@ -430,7 +430,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                             className="flex items-center justify-between p-4 -mx-4 rounded-inner group hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-[background-color,color] cursor-pointer"
                                         >
                                             <div className="flex items-center gap-4">
-                                                <span className="text-coral-text group-hover:text-white dark:group-hover:text-black text-lg transition-colors">@</span>
+                                                <span className="text-accent-text group-hover:text-white dark:group-hover:text-black text-lg transition-colors">@</span>
                                                 <span className="font-medium text-base text-text-primary group-hover:text-white dark:group-hover:text-black transition-colors">{item.label}</span>
                                             </div>
                                             <ArrowRight className="w-4 h-4 text-text-secondary/50 group-hover:text-white dark:group-hover:text-black transition-colors" />
@@ -461,7 +461,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                 <div className="mb-32">
                     <div className="max-w-3xl mb-10">
                         <div className="flex items-center gap-2 mb-3">
-                            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
+                            <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse shrink-0" aria-hidden="true" />
                             <span className="text-xs font-semibold tracking-wide text-text-secondary">
                                 Discover
                             </span>

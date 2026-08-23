@@ -94,10 +94,10 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
-                className="bg-white dark:bg-surface p-10 rounded-card shadow-spatial-card border border-black/5 dark:border-white/10 hover:border-coral/50 dark:hover:border-coral/40 hover:shadow-spatial-md transition-[border-color,box-shadow] duration-300"
+                className="bg-white dark:bg-surface p-10 rounded-card shadow-spatial-card border border-black/5 dark:border-white/10 hover:border-accent/50 dark:hover:border-accent/40 hover:shadow-spatial-md transition-[border-color,box-shadow] duration-300"
               >
                 <div className="flex items-start gap-4 mb-6">
-                  <Icon className="w-10 h-10 text-coral-text shrink-0" />
+                  <Icon className="w-10 h-10 text-accent-text shrink-0" />
                   <h3 className="font-display text-2xl font-semibold text-text-primary dark:text-white">
                     {value.title}
                   </h3>
@@ -118,7 +118,7 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
           <button
             type="button"
             onClick={() => onNavigate('work')}
-            className="group text-left bg-white dark:bg-surface p-8 rounded-card border border-black/5 dark:border-white/10 hover:border-coral/50 transition-colors cursor-pointer"
+            className="group text-left bg-white dark:bg-surface p-8 rounded-card border border-black/5 dark:border-white/10 hover:border-accent/50 transition-colors cursor-pointer"
           >
             <span className="text-xs font-semibold tracking-wide text-text-secondary">
               Our work
@@ -130,7 +130,7 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
               Real companies with names and cities. Where we built the site, the link on the case opens
               it — check the work before you talk to us.
             </p>
-            <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-text-primary dark:text-white group-hover:text-coral-text transition-colors">
+            <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-text-primary dark:text-white group-hover:text-accent-text transition-colors">
               See the work
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </span>
@@ -139,7 +139,7 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
           <button
             type="button"
             onClick={() => onNavigate('services')}
-            className="group text-left bg-white dark:bg-surface p-8 rounded-card border border-black/5 dark:border-white/10 hover:border-coral/50 transition-colors cursor-pointer"
+            className="group text-left bg-white dark:bg-surface p-8 rounded-card border border-black/5 dark:border-white/10 hover:border-accent/50 transition-colors cursor-pointer"
           >
             <span className="text-xs font-semibold tracking-wide text-text-secondary">
               Services and prices
@@ -151,7 +151,7 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
               Websites, ads on Google and Meta, local presence, and follow-up that catches every request.
               Prices are on the page: monthly from $590, websites from $1,750.
             </p>
-            <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-text-primary dark:text-white group-hover:text-coral-text transition-colors">
+            <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-text-primary dark:text-white group-hover:text-accent-text transition-colors">
               See prices
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </span>
@@ -174,14 +174,14 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
                 <div className="flex flex-col gap-3">
                   <a
                     href="tel:+19166196006"
-                    className="inline-flex items-center gap-3 text-text-primary dark:text-white hover:text-coral-text transition-colors"
+                    className="inline-flex items-center gap-3 text-text-primary dark:text-white hover:text-accent-text transition-colors"
                   >
                     <Phone className="w-4 h-4 shrink-0 text-text-secondary" aria-hidden="true" />
                     +1 (916) 619-6006
                   </a>
                   <a
                     href="mailto:contact@castells.media"
-                    className="inline-flex items-center gap-3 text-text-primary dark:text-white hover:text-coral-text transition-colors"
+                    className="inline-flex items-center gap-3 text-text-primary dark:text-white hover:text-accent-text transition-colors"
                   >
                     <Mail className="w-4 h-4 shrink-0 text-text-secondary" aria-hidden="true" />
                     contact@castells.media

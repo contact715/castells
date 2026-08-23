@@ -100,8 +100,8 @@ const CookieConsent: React.FC = React.memo(() => {
             {!showPreferences ? (
               <>
                 <div className="flex items-start gap-4 mb-6">
-                  <div className="shrink-0 w-12 h-12 rounded-full bg-coral/10 flex items-center justify-center">
-                    <Cookie className="w-6 h-6 text-coral-text" />
+                  <div className="shrink-0 w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center">
+                    <Cookie className="w-6 h-6 text-accent-text" />
                   </div>
                   <div className="flex-1">
                     <h3 id="cookie-consent-title" className="font-display text-xl font-semibold text-text-primary dark:text-white mb-2">
@@ -112,7 +112,7 @@ const CookieConsent: React.FC = React.memo(() => {
                       By clicking "Accept All", you consent to our use of cookies.{' '}
                       <a
                         href="/cookie-policy"
-                        className="text-coral-text hover:underline"
+                        className="text-accent-text hover:underline"
                         onClick={(e) => {
                           e.preventDefault();
                           setShowPreferences(true);
@@ -176,7 +176,7 @@ const CookieConsent: React.FC = React.memo(() => {
                           type="checkbox"
                           checked={preferences.essential}
                           disabled
-                          className="w-5 h-5 rounded-sm accent-coral cursor-not-allowed"
+                          className="w-5 h-5 rounded-sm accent-accent cursor-not-allowed"
                           aria-label="Essential cookies (required)"
                         />
                       </div>
@@ -195,7 +195,7 @@ const CookieConsent: React.FC = React.memo(() => {
                           type="checkbox"
                           checked={preferences.analytics}
                           onChange={(e) => setPreferences({ ...preferences, analytics: e.target.checked })}
-                          className="w-5 h-5 rounded-sm accent-coral cursor-pointer"
+                          className="w-5 h-5 rounded-sm accent-accent cursor-pointer"
                           aria-label="Analytics cookies"
                         />
                       </div>
@@ -214,7 +214,7 @@ const CookieConsent: React.FC = React.memo(() => {
                           type="checkbox"
                           checked={preferences.marketing}
                           onChange={(e) => setPreferences({ ...preferences, marketing: e.target.checked })}
-                          className="w-5 h-5 rounded-sm accent-coral cursor-pointer"
+                          className="w-5 h-5 rounded-sm accent-accent cursor-pointer"
                           aria-label="Marketing cookies"
                         />
                       </div>

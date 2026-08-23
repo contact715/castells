@@ -157,7 +157,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                                         className="bg-surface rounded-card shadow-spatial-card p-6 border border-black/5 dark:border-white/10"
                                     >
                                         <div className="flex items-center gap-4">
-                                            <div className="w-12 h-12 rounded-element bg-coral/10 flex items-center justify-center text-coral-text shrink-0">
+                                            <div className="w-12 h-12 rounded-element bg-accent/10 flex items-center justify-center text-accent-text shrink-0">
                                                 <Icon className="w-6 h-6" />
                                             </div>
                                             <div className="flex-1 min-w-0">
@@ -189,8 +189,8 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                                         className={`
                                             flex items-center gap-2 px-4 md:px-6 py-2.5 md:py-3 rounded-xl font-medium text-sm md:text-base transition-[background-color,color,border-color] duration-300
                                             ${isActive
-                                                ? 'bg-coral text-white'
-                                                : 'bg-surface text-text-secondary hover:bg-coral/10 hover:text-coral-text border border-black/5 dark:border-white/5'
+                                                ? 'bg-accent text-white'
+                                                : 'bg-surface text-text-secondary hover:bg-accent/10 hover:text-accent-text border border-black/5 dark:border-white/5'
                                             }
                                         `}
                                         whileHover={{ scale: 1.05 }}
@@ -237,7 +237,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                                                     style={{ transform: 'translateZ(0)' }}
                                                 />
                                             ) : (
-                                                <div className="w-full h-full bg-coral-gradient flex items-center justify-center">
+                                                <div className="w-full h-full bg-accent-gradient flex items-center justify-center">
                                                     <span className="font-display text-5xl font-normal text-white select-none">
                                                         {member.name.split(' ').filter(Boolean).slice(0, 2).map((w) => w[0]).join('')}
                                                     </span>
@@ -289,7 +289,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                                                         {member.expertise.slice(0, 2).map((skill, idx) => (
                                                             <span
                                                                 key={idx}
-                                                                className="px-2 py-0.5 rounded-md bg-coral/10 text-coral-text text-[10px] font-medium"
+                                                                className="px-2 py-0.5 rounded-md bg-accent/10 text-accent-text text-[10px] font-medium"
                                                             >
                                                                 {skill}
                                                             </span>
@@ -315,7 +315,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                                             <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                                                 <defs>
                                                     <pattern id="teamGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-                                                        <circle cx="1" cy="1" r="0.5" fill="#E08576" opacity="0.3" />
+                                                        <circle cx="1" cy="1" r="0.5" fill="var(--color-accent)" opacity="0.3" />
                                                     </pattern>
                                                 </defs>
                                                 <rect width="100%" height="100%" fill="url(#teamGrid)" />
@@ -323,12 +323,12 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                                         </div>
 
                                         {/* Gradient Overlay */}
-                                        <div className="absolute inset-0 bg-linear-to-br from-coral/10 via-transparent to-coral/5 group-hover:from-coral/20 group-hover:to-coral/10 transition-[background-image] duration-500" />
+                                        <div className="absolute inset-0 bg-linear-to-br from-accent/10 via-transparent to-accent/5 group-hover:from-accent/20 group-hover:to-accent/10 transition-[background-image] duration-500" />
 
                                         {/* Content */}
                                         <div className="relative p-4 md:p-6 flex flex-col items-center justify-center text-center min-h-[300px]">
                                             {/* Icon */}
-                                            <div className="w-12 h-12 rounded-element bg-coral flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                                            <div className="w-12 h-12 rounded-element bg-accent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                                                 <ArrowUpRight className="w-6 h-6 text-white group-hover:rotate-45 transition-transform duration-300" />
                                             </div>
 
@@ -339,14 +339,14 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                                             <p className="text-xs md:text-sm text-text-secondary dark:text-white/70 leading-relaxed mb-4 max-w-xs">
                                                 We're always looking for talented professionals who share our passion for revenue-focused marketing.
                                             </p>
-                                            <div className="flex items-center gap-2 text-coral-text font-semibold text-xs group-hover:gap-3 transition-[gap] duration-300">
+                                            <div className="flex items-center gap-2 text-accent-text font-semibold text-xs group-hover:gap-3 transition-[gap] duration-300">
                                                 View Open Positions
                                                 <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                                             </div>
                                         </div>
 
                                         {/* Border Effect */}
-                                        <div className="absolute inset-0 rounded-card border border-black/5 dark:border-white/10 group-hover:border-coral/50 transition-colors duration-300 pointer-events-none" />
+                                        <div className="absolute inset-0 rounded-card border border-black/5 dark:border-white/10 group-hover:border-accent/50 transition-colors duration-300 pointer-events-none" />
                                     </motion.div>
                                 )}
                             </motion.div>
@@ -379,7 +379,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                                         transition={{ delay: index * 0.1, duration: 0.5 }}
                                         className="bg-surface rounded-card shadow-spatial-card p-6 md:p-8 border border-black/5 dark:border-white/10 hover:-translate-y-1 hover:shadow-spatial-md transition-[transform,box-shadow] duration-300"
                                     >
-                                        <div className="w-12 h-12 rounded-element bg-coral/10 flex items-center justify-center text-coral-text mb-4">
+                                        <div className="w-12 h-12 rounded-element bg-accent/10 flex items-center justify-center text-accent-text mb-4">
                                             <Icon className="w-6 h-6" />
                                         </div>
                                         <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white mb-3">

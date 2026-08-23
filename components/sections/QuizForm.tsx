@@ -170,7 +170,7 @@ const QuizForm: React.FC = () => {
             {/* Progress Bar */}
             <div className="w-full h-1 bg-white/5 mb-8 rounded-full overflow-hidden">
                 <motion.div
-                    className="h-full bg-coral"
+                    className="h-full bg-accent"
                     initial={{ width: 0 }}
                     animate={{ width: `${progress}%` }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -189,7 +189,7 @@ const QuizForm: React.FC = () => {
                         className="w-full"
                     >
                         <div className="mb-8">
-                            <span className="text-coral-text text-xs font-semibold tracking-wide mb-2 block">
+                            <span className="text-accent-text text-xs font-semibold tracking-wide mb-2 block">
                                 Step {currentStep + 1} of {STEPS.length}
                             </span>
                             <h3 className="text-2xl md:text-3xl font-display font-semibold text-white leading-tight">
@@ -213,7 +213,7 @@ const QuizForm: React.FC = () => {
                                             )}
                                         >
                                             <span className="font-medium">{option}</span>
-                                            {isSelected && <Check className="w-5 h-5 text-coral-text" />}
+                                            {isSelected && <Check className="w-5 h-5 text-accent-text" />}
                                             {!isSelected && <ChevronRight className="w-5 h-5 opacity-0 group-hover:opacity-50 transition-opacity" />}
                                         </button>
                                     );

@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '../../lib/utils';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'coral' | 'outline' | 'outline-white';
+  variant?: 'primary' | 'secondary' | 'accent' | 'outline' | 'outline-white';
   size?: 'sm' | 'md' | 'lg';
   as?: 'button' | 'a';
   href?: string;
@@ -14,7 +14,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
  * 
  * Variants:
  * - primary: Black background, white text (default)
- * - secondary: Coral background, white text
+ * - secondary: Accent background, white text
  * - outline: Transparent background, black  * 
  * Sizes:
  * - sm: px-5 py-2.5 text-sm (small buttons)
@@ -50,7 +50,7 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPro
     const variants = {
       primary: "bg-black text-white dark:bg-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90",
       secondary: "bg-white text-black hover:bg-white/90 dark:bg-white dark:text-black dark:hover:bg-white/90",
-      coral: "bg-coral-gradient text-white hover:shadow-lg hover:shadow-coral/25 hover:brightness-110",
+      accent: "bg-accent-gradient text-white hover:shadow-lg hover:shadow-accent/25 hover:brightness-110",
       outline: "bg-transparent border border-black dark:border-white text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black",
       'outline-white': "bg-transparent border border-white/10 text-white hover:bg-white hover:text-black"
     };
@@ -72,7 +72,7 @@ const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonPro
           baseStyles,
           variants[variant],
           sizes[size],
-          'focus:outline-hidden focus:ring-2 focus:ring-coral focus:ring-offset-2',
+          'focus:outline-hidden focus:ring-2 focus:ring-accent focus:ring-offset-2',
           className
         )}
         ref={ref as any}

@@ -69,7 +69,7 @@ const WorkCard: React.FC<{
                 onClick={onOpen}
                 className="text-left cursor-pointer"
             >
-                <h3 className="font-display text-2xl md:text-3xl font-normal text-text-primary dark:text-white mb-1 group-hover:text-coral-text transition-colors">
+                <h3 className="font-display text-2xl md:text-3xl font-normal text-text-primary dark:text-white mb-1 group-hover:text-accent-text transition-colors">
                     {project.client}
                 </h3>
             </button>
@@ -99,7 +99,7 @@ const WorkCard: React.FC<{
                 <button
                     type="button"
                     onClick={onOpen}
-                    className="inline-flex items-center gap-1.5 text-sm font-semibold tracking-wide text-text-primary dark:text-white hover:text-coral-text transition-colors cursor-pointer"
+                    className="inline-flex items-center gap-1.5 text-sm font-semibold tracking-wide text-text-primary dark:text-white hover:text-accent-text transition-colors cursor-pointer"
                 >
                     Read case
                     <ArrowUpRight className="w-4 h-4" aria-hidden="true" />
@@ -112,7 +112,7 @@ const WorkCard: React.FC<{
                         target="_blank"
                         rel="noopener noreferrer"
                         onClick={(e) => e.stopPropagation()}
-                        className="inline-flex items-center gap-1.5 text-sm text-text-secondary dark:text-white/60 hover:text-coral-text transition-colors"
+                        className="inline-flex items-center gap-1.5 text-sm text-text-secondary dark:text-white/60 hover:text-accent-text transition-colors"
                     >
                         {project.website.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
                         <ExternalLink className="w-3.5 h-3.5" aria-hidden="true" />

@@ -184,7 +184,7 @@ const Search: React.FC<SearchProps> = React.memo(({ onNavigate, className = '', 
                     placeholder="Search..."
                     value={query}
                     onChange={(e) => handleSearch(e.target.value)}
-                    className="w-full pl-12 pr-10 py-3 bg-ivory dark:bg-black/20 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-coral text-text-primary dark:text-white"
+                    className="w-full pl-12 pr-10 py-3 bg-ivory dark:bg-black/20 rounded-xl focus:outline-hidden focus:ring-2 focus:ring-accent text-text-primary dark:text-white"
                     aria-label="Search input"
                   />
                   {query && (

@@ -70,7 +70,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
       const isDev = import.meta.env?.DEV;
 
       return (
-        <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20 font-sans selection:bg-coral selection:text-white transition-colors duration-500">
+        <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20 font-sans selection:bg-accent selection:text-white transition-colors duration-500">
           <div className="container mx-auto px-6 pt-4 md:pt-6">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -80,7 +80,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
             >
               {/* Badge */}
               <div className="flex items-center gap-2 mb-6">
-                <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
+                <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse shrink-0" aria-hidden="true" />
                 <span className="text-xs font-semibold tracking-wide text-text-secondary">
                   Error
                 </span>
@@ -94,9 +94,9 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-                    className="w-20 h-20 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center"
+                    className="w-20 h-20 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center"
                   >
-                    <AlertTriangle className="w-10 h-10 text-coral-text" />
+                    <AlertTriangle className="w-10 h-10 text-accent-text" />
                   </motion.div>
                 </div>
 
@@ -127,26 +127,26 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
                   className="bg-black/5 dark:bg-white/5 rounded-card p-6 mb-8"
                 >
                   <div className="flex items-start gap-3 mb-4">
-                    <HelpCircle className="w-5 h-5 text-coral-text shrink-0 mt-0.5" />
+                    <HelpCircle className="w-5 h-5 text-accent-text shrink-0 mt-0.5" />
                     <h3 className="font-display text-lg font-semibold text-text-primary">
                       What you can do:
                     </h3>
                   </div>
                   <ul className="space-y-2 text-text-secondary">
                     <li className="flex items-start gap-3">
-                      <span className="text-coral-text mt-1">•</span>
+                      <span className="text-accent-text mt-1">•</span>
                       <span>Try refreshing the page - this often resolves temporary issues</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-coral-text mt-1">•</span>
+                      <span className="text-accent-text mt-1">•</span>
                       <span>Check your internet connection and try again</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-coral-text mt-1">•</span>
+                      <span className="text-accent-text mt-1">•</span>
                       <span>Clear your browser cache if the problem persists</span>
                     </li>
                     <li className="flex items-start gap-3">
-                      <span className="text-coral-text mt-1">•</span>
+                      <span className="text-accent-text mt-1">•</span>
                       <span>Go back to the previous page and try a different path</span>
                     </li>
                   </ul>
@@ -205,7 +205,7 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
                     transition={{ delay: 0.7 }}
                     className="mt-8"
                   >
-                    <summary className="cursor-pointer text-sm font-semibold text-text-secondary mb-3 hover:text-coral-text transition-colors">
+                    <summary className="cursor-pointer text-sm font-semibold text-text-secondary mb-3 hover:text-accent-text transition-colors">
                       Error Details (Development Only)
                     </summary>
                     <div className="bg-black/5 dark:bg-white/5 rounded-card p-6 mt-3 overflow-auto">

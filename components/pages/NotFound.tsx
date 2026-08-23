@@ -29,7 +29,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
   ];
 
   return (
-    <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20 font-sans selection:bg-coral selection:text-white transition-colors duration-500">
+    <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20 font-sans selection:bg-accent selection:text-white transition-colors duration-500">
       <SEO
         title="404 | Page not found"
         description="The page you're looking for doesn't exist."
@@ -46,7 +46,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
         >
           {/* Badge */}
           <div className="flex items-center gap-2 mb-6">
-            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
+            <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse shrink-0" aria-hidden="true" />
             <span className="text-xs font-semibold tracking-wide text-text-secondary">
               404
             </span>
@@ -60,7 +60,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2, type: 'spring', stiffness: 200 }}
-                className="font-display text-[8rem] md:text-[12rem] lg:text-[16rem] font-semibold leading-none text-coral-text/20 dark:text-coral-text/10 mb-4"
+                className="font-display text-[8rem] md:text-[12rem] lg:text-[16rem] font-semibold leading-none text-accent-text/20 dark:text-accent-text/10 mb-4"
               >
                 404
               </motion.h1>
@@ -122,7 +122,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
           >
             <div className="text-center mb-8">
               <div className="flex items-center gap-2 justify-center mb-3">
-                <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
+                <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse shrink-0" aria-hidden="true" />
                 <span className="text-xs font-semibold tracking-wide text-text-secondary">
                   Popular Pages
                 </span>
@@ -147,10 +147,10 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
                     transition={{ delay: 0.7 + index * 0.1 }}
                     className="bg-white dark:bg-surface rounded-card p-6 hover:-translate-y-1 transition-[transform,box-shadow] duration-300 text-left group"
                   >
-                    <div className="w-12 h-12 rounded-element bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-4 group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
-                      <Icon className="w-6 h-6 text-coral-text dark:text-coral-text group-hover:text-white dark:group-hover:text-black transition-colors" />
+                    <div className="w-12 h-12 rounded-element bg-accent/10 dark:bg-accent/20 flex items-center justify-center mb-4 group-hover:bg-accent dark:group-hover:bg-accent transition-colors">
+                      <Icon className="w-6 h-6 text-accent-text dark:text-accent-text group-hover:text-white dark:group-hover:text-black transition-colors" />
                     </div>
-                    <h4 className="font-display text-xl font-semibold text-text-primary mb-2 group-hover:text-coral-text transition-colors">
+                    <h4 className="font-display text-xl font-semibold text-text-primary mb-2 group-hover:text-accent-text transition-colors">
                       {page.name}
                     </h4>
                     <p className="text-sm text-text-secondary">
@@ -170,7 +170,7 @@ const NotFound: React.FC<NotFoundProps> = ({ onNavigate }) => {
             className="bg-black/5 dark:bg-white/5 rounded-card p-6 md:p-8 text-center"
           >
             <div className="flex items-center justify-center gap-3 mb-4">
-              <Search className="w-5 h-5 text-coral-text" />
+              <Search className="w-5 h-5 text-accent-text" />
               <h3 className="font-display text-xl font-semibold text-text-primary">
                 Can't find what you're looking for?
               </h3>

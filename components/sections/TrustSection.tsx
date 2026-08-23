@@ -49,7 +49,7 @@ const TrustSection: React.FC = React.memo(() => {
                   key={client.name}
                   title={client.name}
                   aria-label={client.name}
-                  className="w-10 h-10 rounded-full bg-coral-gradient ring-2 ring-ivory dark:ring-[#191919] flex items-center justify-center text-[11px] font-bold text-white select-none"
+                  className="w-10 h-10 rounded-full bg-accent-gradient ring-2 ring-ivory dark:ring-[#191919] flex items-center justify-center text-[11px] font-bold text-white select-none"
                 >
                   {client.initials}
                 </div>

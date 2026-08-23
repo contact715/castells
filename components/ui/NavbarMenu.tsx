@@ -137,7 +137,7 @@ export const ProductItem = ({
         <div className="absolute inset-0 bg-black/0 group-hover/product:bg-black/10 transition-colors rounded-md" />
       </div>
       <div>
-        <h4 className="text-lg font-display font-semibold mb-1 text-text-primary group-hover/product:text-coral-text transition-colors">
+        <h4 className="text-lg font-display font-semibold mb-1 text-text-primary group-hover/product:text-accent-text transition-colors">
           {title}
         </h4>
         <p className="text-text-secondary text-xs max-w-40 leading-relaxed">
@@ -166,7 +166,7 @@ export const HoveredLink = ({
     <a
       href={href}
       onClick={onClick}
-      className={cn("text-text-secondary hover:text-coral-text transition-colors text-base font-medium flex items-center gap-2 group", className)}
+      className={cn("text-text-secondary hover:text-accent-text transition-colors text-base font-medium flex items-center gap-2 group", className)}
     >
       {Icon && <Icon className="w-5 h-5 opacity-50 group-hover:opacity-100 transition-opacity" />}
       {children}

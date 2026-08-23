@@ -60,7 +60,7 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = React.memo(({
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
+            <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse shrink-0" aria-hidden="true" />
             <span className="text-xs font-semibold tracking-wide text-text-secondary">
               Comparison
             </span>
@@ -84,7 +84,7 @@ const WhyChooseUs: React.FC<WhyChooseUsProps> = React.memo(({
               <div className="font-display text-lg font-semibold text-text-primary">
                 Feature
               </div>
-              <div className="font-display text-lg font-semibold text-coral-text text-center">
+              <div className="font-display text-lg font-semibold text-accent-text text-center">
                 Castells
               </div>
               <div className="font-display text-lg font-semibold text-text-secondary text-center">

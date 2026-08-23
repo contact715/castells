@@ -32,7 +32,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = React.memo(({ items, className =
               ) : item.href ? (
                 <a
                   href={item.href}
-                  className="text-text-secondary hover:text-coral-text transition-colors"
+                  className="text-text-secondary hover:text-accent-text transition-colors"
                   onClick={(e) => {
                     if (item.action) {
                       e.preventDefault();
@@ -45,7 +45,7 @@ const Breadcrumbs: React.FC<BreadcrumbsProps> = React.memo(({ items, className =
               ) : item.action ? (
                 <button
                   onClick={item.action}
-                  className="text-text-secondary hover:text-coral-text transition-colors"
+                  className="text-text-secondary hover:text-accent-text transition-colors"
                 >
                   {item.label}
                 </button>

@@ -48,7 +48,7 @@ const Confetti: React.FC<{ delay: number; x: number }> = ({ delay, x }) => {
 // Floating icon component
 const FloatingIcon: React.FC<{ icon: React.ReactNode; delay: number; x: number; y: number }> = ({ icon, delay, x, y }) => (
   <motion.div
-    className="absolute text-coral-text/20 dark:text-coral-text/30"
+    className="absolute text-accent-text/20 dark:text-accent-text/30"
     style={{ left: `${x}%`, top: `${y}%` }}
     initial={{ opacity: 0, scale: 0 }}
     animate={{ 
@@ -131,7 +131,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
   const content = contentByType[type];
 
   return (
-    <div className="min-h-screen bg-ivory dark:bg-[#191919] relative overflow-hidden flex items-center justify-center selection:bg-coral selection:text-white">
+    <div className="min-h-screen bg-ivory dark:bg-[#191919] relative overflow-hidden flex items-center justify-center selection:bg-accent selection:text-white">
       <SEO
         title="Thank you | Castells Media"
         description="Thanks for reaching out. We’ll get back to you shortly."
@@ -160,7 +160,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
       {/* Gradient Background Orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div
-          className="absolute w-[600px] h-[600px] rounded-full bg-linear-to-br from-coral/20 to-transparent blur-3xl"
+          className="absolute w-[600px] h-[600px] rounded-full bg-linear-to-br from-accent/20 to-transparent blur-3xl"
           style={{ top: '-200px', right: '-200px' }}
           animate={{
             scale: [1, 1.1, 1],
@@ -197,18 +197,18 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
           >
             {/* Pulse rings */}
             <motion.div
-              className="absolute inset-0 rounded-full bg-coral/20"
+              className="absolute inset-0 rounded-full bg-accent/20"
               animate={{ scale: [1, 1.5, 1.5], opacity: [0.5, 0, 0] }}
               transition={{ duration: 2, repeat: Infinity }}
             />
             <motion.div
-              className="absolute inset-0 rounded-full bg-coral/20"
+              className="absolute inset-0 rounded-full bg-accent/20"
               animate={{ scale: [1, 1.8, 1.8], opacity: [0.3, 0, 0] }}
               transition={{ duration: 2, repeat: Infinity, delay: 0.3 }}
             />
             
             {/* Main circle */}
-            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full bg-linear-to-br from-coral to-coral/80 flex items-center justify-center  ">
+            <div className="relative w-24 h-24 md:w-32 md:h-32 rounded-full bg-linear-to-br from-accent to-accent/80 flex items-center justify-center  ">
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
@@ -255,7 +255,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
                 transition={{ delay: 0.7 + index * 0.1 }}
                 whileHover={{ y: -4, boxShadow: '0 20px 40px rgba(0,0,0,0.1)' }}
               >
-                <div className="w-10 h-10 rounded-element bg-coral/10 flex items-center justify-center text-coral-text mb-3 mx-auto">
+                <div className="w-10 h-10 rounded-element bg-accent/10 flex items-center justify-center text-accent-text mb-3 mx-auto">
                   {feature.icon}
                 </div>
                 <p className="text-sm text-text-secondary font-medium">{feature.text}</p>
@@ -305,7 +305,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 1.2 + i * 0.1 }}
                 >
-                  <Star className="w-5 h-5 text-coral-text fill-coral" />
+                  <Star className="w-5 h-5 text-accent-text fill-accent" />
                 </motion.div>
               ))}
               <span className="ml-2 text-sm font-semibold text-text-primary">5.0</span>

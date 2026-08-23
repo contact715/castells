@@ -63,20 +63,32 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --color-ivory: #ebece7;
-  --color-coral: #e08576;
+  --color-ivory: #EEF1F0;
+  --color-accent: #089662;
   /*
     Коралловый как ТЕКСТ на светлом фоне давал контраст 2.27 при норме 4.5 —
     подписи и заголовки читались плохо, проверка доступности не проходила.
     Этот оттенок того же тона, но темнее: 4.76 на ivory и 5.66 на белом.
-    Фирменный --color-coral остаётся прежним для кнопок, границ и градиентов,
+    Акцент выбран владельцем 23 августа 2026 из стенда подбора. Зелёный, а не
+    синий: замер поля показал, что синий занят нашими же клиентами (Five Star
+    Comfort #456990, Roman's Service #325699), а у главного конкурента
+    prosbuddy.com бордовый #5C0104. Зелёный в нише свободен и совпадает по
+    смыслу с тем, что мы продаём: рост и деньги.
+
+    Прежний рыжий #E08576 отличался от фирменного цвета Anthropic всего на 35
+    пунктов из 441, а фон — на 5. Сходство держалось на фоне, поэтому фон тоже
+    выведен заново: тон взят у акцента и почти обесцвечен (#EEF1F0).
+
+    Переменные называются accent, а не по цвету: имя описывает роль и переживёт
+    следующую смену. Фирменный --color-accent используется для кнопок, границ и
+    градиентов,
     где контраст текста ни при чём. В тёмной теме исходный коралловый даёт
     6.52 и уже проходит, поэтому там значение возвращается к нему (ниже).
   */
-  --color-coral-text: #b73d29;
-  --color-coral-dark: #d67060;
-  --color-coral-from: #c95d54;
-  --color-coral-to: #f0b088;
+  --color-accent-text: #06794F;
+  --color-accent-dark: #278663;
+  --color-accent-from: #1F7A59;
+  --color-accent-to: #59C09A;
   --color-surface: #ffffff;
   --color-surface-dark: #2a2a2a;
   --color-text-primary: #000000;
@@ -131,7 +143,7 @@
   /* На тёмном фоне исходный коралловый читается хорошо (контраст 6.52),
      затемнённый вариант там не нужен и выглядел бы грязно. */
   .dark {
-    --color-coral-text: #e08576;
+    --color-accent-text: #089662;
   }
 }
 
@@ -144,10 +156,10 @@
 }
 
 @utility bg-ivory {
-  @apply bg-[#EBECE7] dark:bg-[#191919];
+  @apply bg-[#EEF1F0] dark:bg-[#191919];
 }
 
-@utility bg-coral {
+@utility bg-accent {
   @apply bg-[#E08576];
 }
 
@@ -155,12 +167,12 @@
   @apply bg-white dark:bg-[#2A2A2A];
 }
 
-@utility bg-coral-gradient {
-  /* ─── Coral gradient system ─────────────────────────────── */
+@utility bg-accent-gradient {
+  /* ─── Accent gradient system ─────────────────────────────── */
   background: linear-gradient(135deg, #c95d54 0%, #e08576 45%, #f0b088 100%);
 }
 
-@utility bg-coral-gradient-subtle {
+@utility bg-accent-gradient-subtle {
   background: linear-gradient(
     135deg,
     rgba(201, 93, 84, 0.12) 0%,
@@ -179,7 +191,7 @@
 }
 
 @utility dark {
-  & .bg-coral-gradient-subtle {
+  & .bg-accent-gradient-subtle {
     background: linear-gradient(
       135deg,
       rgba(201, 93, 84, 0.18) 0%,
@@ -188,7 +200,7 @@
     );
   }
 
-  & .glow-coral {
+  & .glow-accent {
     background: radial-gradient(
       circle,
       rgba(201, 93, 84, 0.15) 0%,
@@ -213,14 +225,14 @@
   }
 }
 
-@utility text-coral-gradient {
+@utility text-accent-gradient {
   background: linear-gradient(135deg, #c95d54 0%, #e08576 45%, #f0b088 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-@utility glow-coral {
+@utility glow-accent {
   background: radial-gradient(
     circle,
     rgba(201, 93, 84, 0.25) 0%,
@@ -238,11 +250,11 @@
   }
 }
 
-@utility border-coral-gradient {
+@utility border-accent-gradient {
   border-image: linear-gradient(135deg, #c95d54, #e08576, #f0b088) 1;
 }
 
-@utility ring-coral-gradient {
+@utility ring-accent-gradient {
   --tw-ring-color: #e08576;
   box-shadow:
     0 0 0 2px #c95d54,
@@ -398,7 +410,7 @@
 
   /* Custom checkbox styling to match site theme */
   input[type="checkbox"] {
-    accent-color: #E08576;
+    accent-color: #089662;
   }
 
   input[type="checkbox"]:checked {

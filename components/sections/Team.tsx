@@ -120,7 +120,7 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
               <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
                 <defs>
                   <pattern id="teamGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-                    <circle cx="1" cy="1" r="0.5" fill="#E08576" opacity="0.3" />
+                    <circle cx="1" cy="1" r="0.5" fill="var(--color-accent)" opacity="0.3" />
                   </pattern>
                 </defs>
                 <rect width="100%" height="100%" fill="url(#teamGrid)" />
@@ -128,12 +128,12 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
             </div>
 
             {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-linear-to-t from-coral/20 via-transparent to-transparent group-hover:from-coral/30 transition-colors duration-500" />
+            <div className="absolute inset-0 bg-linear-to-t from-accent/20 via-transparent to-transparent group-hover:from-accent/30 transition-colors duration-500" />
 
             {/* Content */}
             <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
               {/* Icon */}
-              <div className="w-16 h-16 rounded-element bg-coral flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-16 h-16 rounded-element bg-accent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                 <ArrowUpRight className="w-7 h-7 text-white group-hover:rotate-45 transition-transform duration-300" />
               </div>
 
@@ -147,7 +147,7 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
             </div>
 
             {/* Border Effect */}
-            <div className="absolute inset-0 rounded-card border border-black/5 dark:border-white/10 group-hover:border-coral/50 transition-colors duration-300" />
+            <div className="absolute inset-0 rounded-card border border-black/5 dark:border-white/10 group-hover:border-accent/50 transition-colors duration-300" />
           </motion.div>
         </motion.div>
 

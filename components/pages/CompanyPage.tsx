@@ -224,8 +224,8 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                   className="bg-surface rounded-card shadow-spatial-card p-8 border border-black/5 dark:border-white/10"
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-element bg-coral/10 flex items-center justify-center">
-                      <Flag className="w-5 h-5 text-coral-text" />
+                    <div className="w-10 h-10 rounded-element bg-accent/10 flex items-center justify-center">
+                      <Flag className="w-5 h-5 text-accent-text" />
                     </div>
                     <span className="text-sm font-semibold tracking-wide text-text-secondary">Why we started</span>
                   </div>
@@ -244,8 +244,8 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                   className="bg-surface rounded-card shadow-spatial-card p-8 border border-black/5 dark:border-white/10"
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-element bg-coral/10 flex items-center justify-center">
-                      <TrendingUp className="w-5 h-5 text-coral-text" />
+                    <div className="w-10 h-10 rounded-element bg-accent/10 flex items-center justify-center">
+                      <TrendingUp className="w-5 h-5 text-accent-text" />
                     </div>
                     <span className="text-sm font-semibold tracking-wide text-text-secondary">Today</span>
                   </div>
@@ -265,8 +265,8 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                   className="bg-surface rounded-card shadow-spatial-card p-8 border border-black/5 dark:border-white/10"
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-element bg-coral/10 flex items-center justify-center">
-                      <Rocket className="w-5 h-5 text-coral-text" />
+                    <div className="w-10 h-10 rounded-element bg-accent/10 flex items-center justify-center">
+                      <Rocket className="w-5 h-5 text-accent-text" />
                     </div>
                     <span className="text-sm font-semibold tracking-wide text-text-secondary">Mission</span>
                   </div>
@@ -310,11 +310,11 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.1 }}
-                  className="bg-surface rounded-card shadow-spatial-card p-8 border border-black/5 dark:border-white/10 hover:border-coral/30 transition-[border-color,box-shadow] group"
+                  className="bg-surface rounded-card shadow-spatial-card p-8 border border-black/5 dark:border-white/10 hover:border-accent/30 transition-[border-color,box-shadow] group"
                 >
                   <div className="flex items-start gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-element bg-coral/10 flex items-center justify-center shrink-0 group-hover:bg-coral/20 transition-colors">
-                      <Icon className="w-6 h-6 text-coral-text" />
+                    <div className="w-12 h-12 rounded-element bg-accent/10 flex items-center justify-center shrink-0 group-hover:bg-accent/20 transition-colors">
+                      <Icon className="w-6 h-6 text-accent-text" />
                     </div>
                     <h3 className="font-display text-xl font-semibold text-text-primary">{value.title}</h3>
                   </div>
@@ -362,7 +362,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                     transition={{ delay: i * 0.1 }}
                     className="bg-surface rounded-card shadow-spatial-card p-6 border border-black/5 dark:border-white/10"
                   >
-                    <div className="font-display text-4xl font-bold text-coral-text mb-2">{item.count}</div>
+                    <div className="font-display text-4xl font-bold text-accent-text mb-2">{item.count}</div>
                     <div className="text-text-secondary font-medium">{item.label}</div>
                   </motion.div>
                 ))}
@@ -375,8 +375,8 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                 className="bg-surface rounded-card shadow-spatial-card p-8 border border-black/5 dark:border-white/10"
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 rounded-element bg-coral/10 flex items-center justify-center">
-                    <Award className="w-5 h-5 text-coral-text" />
+                  <div className="w-10 h-10 rounded-element bg-accent/10 flex items-center justify-center">
+                    <Award className="w-5 h-5 text-accent-text" />
                   </div>
                   <span className="font-display text-lg font-semibold text-text-primary">Why We're Different</span>
                 </div>
@@ -388,7 +388,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                     'Continuous education: $10k/year per team member for certifications',
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
-                      <CheckCircle className="w-5 h-5 text-coral-text shrink-0 mt-0.5" />
+                      <CheckCircle className="w-5 h-5 text-accent-text shrink-0 mt-0.5" />
                       <span className="text-text-secondary">{item}</span>
                     </li>
                   ))}
@@ -434,11 +434,11 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
                     onClick={() => onNavigate?.('careers')}
-                    className="bg-surface rounded-card shadow-spatial-card p-6 border border-black/5 dark:border-white/10 hover:border-coral/30 transition-[border-color,box-shadow] cursor-pointer group"
+                    className="bg-surface rounded-card shadow-spatial-card p-6 border border-black/5 dark:border-white/10 hover:border-accent/30 transition-[border-color,box-shadow] cursor-pointer group"
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <h3 className="font-display text-lg font-semibold text-text-primary group-hover:text-coral-text transition-colors">
+                        <h3 className="font-display text-lg font-semibold text-text-primary group-hover:text-accent-text transition-colors">
                           {position.title}
                         </h3>
                         <div className="flex items-center gap-4 mt-2">
@@ -452,7 +452,7 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                           </span>
                         </div>
                       </div>
-                      <ArrowUpRight className="w-5 h-5 text-text-secondary group-hover:text-coral-text transition-colors" />
+                      <ArrowUpRight className="w-5 h-5 text-text-secondary group-hover:text-accent-text transition-colors" />
                     </div>
                   </motion.div>
                 ))}
@@ -462,10 +462,10 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="mt-8 bg-coral/10 rounded-card p-6 border border-coral/20"
+                className="mt-8 bg-accent/10 rounded-card p-6 border border-accent/20"
               >
                 <div className="flex items-center gap-3 mb-3">
-                  <Star className="w-5 h-5 text-coral-text" />
+                  <Star className="w-5 h-5 text-accent-text" />
                   <span className="font-display font-semibold text-text-primary">Don't see your role?</span>
                 </div>
                 <p className="text-text-secondary text-sm mb-4">
@@ -515,21 +515,21 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.1 }}
                     onClick={() => onNavigate?.('blog')}
-                    className="bg-surface rounded-card shadow-spatial-card p-6 border border-black/5 dark:border-white/10 hover:border-coral/30 transition-[border-color,box-shadow] cursor-pointer group"
+                    className="bg-surface rounded-card shadow-spatial-card p-6 border border-black/5 dark:border-white/10 hover:border-accent/30 transition-[border-color,box-shadow] cursor-pointer group"
                   >
                     <div className="flex items-center justify-between">
                       <div>
                         <div className="flex items-center gap-3 mb-2">
-                          <span className="px-3 py-1 rounded-full bg-coral/10 text-coral-text text-xs font-bold tracking-wider">
+                          <span className="px-3 py-1 rounded-full bg-accent/10 text-accent-text text-xs font-bold tracking-wider">
                             {post.category}
                           </span>
                           <span className="text-sm text-text-secondary">{post.date}</span>
                         </div>
-                        <h3 className="font-display text-lg font-semibold text-text-primary group-hover:text-coral-text transition-colors">
+                        <h3 className="font-display text-lg font-semibold text-text-primary group-hover:text-accent-text transition-colors">
                           {post.title}
                         </h3>
                       </div>
-                      <ArrowUpRight className="w-5 h-5 text-text-secondary group-hover:text-coral-text transition-colors shrink-0 ml-4" />
+                      <ArrowUpRight className="w-5 h-5 text-text-secondary group-hover:text-accent-text transition-colors shrink-0 ml-4" />
                     </div>
                   </motion.div>
                 ))}
@@ -571,8 +571,8 @@ const CompanyPage: React.FC<CompanyPageProps> = ({ onBack, onNavigate }) => {
 
             {/* Decorative elements */}
             <div className="absolute top-0 right-0 w-1/2 h-full opacity-10 dark:opacity-20">
-              <div className="absolute top-20 right-20 w-40 h-40 rounded-full border-2 border-coral" />
-              <div className="absolute bottom-20 right-40 w-60 h-60 rounded-full border border-coral" />
+              <div className="absolute top-20 right-20 w-40 h-40 rounded-full border-2 border-accent" />
+              <div className="absolute bottom-20 right-40 w-60 h-60 rounded-full border border-accent" />
             </div>
           </motion.div>
         </div>

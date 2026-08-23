@@ -226,7 +226,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               {/* Top: Badge (Left) and Meta (Right Top) */}
               <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-2">
-                  <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse" />
+                  <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse" />
                   <span className="font-semibold tracking-wide text-white text-xs">
                     Case Study
                   </span>
@@ -288,7 +288,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                 {/* Reading Progress Line */}
                 <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-black/5 dark:bg-white/10 rounded-full hidden lg:block">
                   <motion.div
-                    className="w-full bg-coral rounded-full origin-top"
+                    className="w-full bg-accent rounded-full origin-top"
                     style={{ height: `${scrollProgress}%` }}
                   />
                 </div>
@@ -318,7 +318,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                       <div className="text-xs font-semibold tracking-wide text-text-secondary dark:text-white/60 mb-1">
                         {res.label}
                       </div>
-                      <div className="text-coral-text text-sm font-semibold">
+                      <div className="text-accent-text text-sm font-semibold">
                         {res.growth}
                       </div>
                     </div>
@@ -350,7 +350,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
                     <ul className="space-y-3">
                       {data.keyFeatures.map((item: string, i: number) => (
                         <li key={i} className="flex items-center gap-3 text-text-primary dark:text-white">
-                          <CheckCircle2 className="w-5 h-5 text-coral-text shrink-0" />
+                          <CheckCircle2 className="w-5 h-5 text-accent-text shrink-0" />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -378,12 +378,12 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
               {/* Testimonial */}
               {data.testimonial && (
                 <div className="pt-8">
-                  <div className="text-coral-text text-5xl font-serif leading-none mb-4">"</div>
+                  <div className="text-accent-text text-5xl font-serif leading-none mb-4">"</div>
                   <blockquote className="font-display text-xl md:text-2xl font-medium leading-relaxed mb-6 text-text-primary dark:text-white">
                     {data.testimonial.quote}
                   </blockquote>
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center text-coral-text font-bold text-lg">
+                    <div className="w-12 h-12 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center text-accent-text font-bold text-lg">
                       {data.testimonial.author.charAt(0)}
                     </div>
                     <div>

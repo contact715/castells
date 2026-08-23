@@ -28,7 +28,7 @@ const BLOG_POSTS: BlogPost[] = [
         readTime: "8 min",
         category: "Marketing",
         icon: TrendingUp,
-        color: "from-coral/20 to-orange-500/10",
+        color: "from-accent/20 to-orange-500/10",
         image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&q=80"
     },
     {
@@ -130,7 +130,7 @@ const Blog: React.FC<BlogProps> = ({ onNavigate }) => {
                                 transition={{ delay: index * 0.1, duration: 0.5 }}
                                 className={`
                                     group relative bg-surface rounded-card overflow-hidden border border-black/5 dark:border-white/5
-                                    hover:border-coral/30 hover:-translate-y-1 hover:shadow-spatial-md transition-[transform,border-color,box-shadow] duration-500 cursor-pointer
+                                    hover:border-accent/30 hover:-translate-y-1 hover:shadow-spatial-md transition-[transform,border-color,box-shadow] duration-500 cursor-pointer
                                     ${isFirst ? 'min-h-[300px] md:col-span-2 md:row-span-2 md:min-h-0' : 'h-[220px]'}
                                 `}
                             >

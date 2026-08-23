@@ -63,7 +63,7 @@ const ProcessSteps: React.FC<ProcessStepsProps> = React.memo(({
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
+            <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse shrink-0" aria-hidden="true" />
             <span className="text-xs font-semibold tracking-wide text-text-secondary">
               Process
             </span>
@@ -94,28 +94,28 @@ const ProcessSteps: React.FC<ProcessStepsProps> = React.memo(({
               >
                 {/* Connector Line (except last) */}
                 {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-coral/20 -z-10" style={{ width: 'calc(100% - 2rem)' }}>
-                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-coral/30" />
+                  <div className="hidden lg:block absolute top-16 left-full w-full h-0.5 bg-accent/20 -z-10" style={{ width: 'calc(100% - 2rem)' }}>
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-accent/30" />
                   </div>
                 )}
 
                 <div className="bg-ivory dark:bg-[#191919] rounded-card p-8 h-full hover:-translate-y-1 transition-[transform,box-shadow] group">
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
-                      <Icon className="w-6 h-6 text-coral-text group-hover:text-white dark:group-hover:text-black transition-colors" />
+                    <div className="w-12 h-12 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center group-hover:bg-accent dark:group-hover:bg-accent transition-colors">
+                      <Icon className="w-6 h-6 text-accent-text group-hover:text-white dark:group-hover:text-black transition-colors" />
                     </div>
-                    <span className="text-2xl font-display font-bold text-coral-text/30 dark:text-coral-text/20">
+                    <span className="text-2xl font-display font-bold text-accent-text/30 dark:text-accent-text/20">
                       {step.number}
                     </span>
                   </div>
-                  <h3 className="font-display text-xl font-semibold text-text-primary mb-2 group-hover:text-coral-text transition-colors">
+                  <h3 className="font-display text-xl font-semibold text-text-primary mb-2 group-hover:text-accent-text transition-colors">
                     {step.title}
                   </h3>
                   <p className="text-text-secondary leading-relaxed mb-4">
                     {step.description}
                   </p>
                   {step.duration && (
-                    <div className="text-xs font-semibold tracking-wide text-coral-text">
+                    <div className="text-xs font-semibold tracking-wide text-accent-text">
                       {step.duration}
                     </div>
                   )}

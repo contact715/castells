@@ -130,8 +130,8 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
                 >
                   <div>
                     <div className="flex items-center gap-4 mb-4">
-                      <div className="w-12 h-12 rounded-element bg-coral-gradient-subtle flex items-center justify-center shrink-0">
-                        <Icon className="w-6 h-6 text-coral-text" aria-hidden="true" />
+                      <div className="w-12 h-12 rounded-element bg-accent-gradient-subtle flex items-center justify-center shrink-0">
+                        <Icon className="w-6 h-6 text-accent-text" aria-hidden="true" />
                       </div>
                       <h2 className="font-display text-xl md:text-2xl font-semibold text-text-primary dark:text-white">
                         {direction.title}
@@ -161,7 +161,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
                             className="group flex items-start gap-3 text-left text-text-secondary dark:text-white/60 hover:text-text-primary dark:hover:text-white transition-colors cursor-pointer"
                           >
                             <span
-                              className="w-1.5 h-1.5 rounded-full bg-coral shrink-0 mt-2"
+                              className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 mt-2"
                               aria-hidden="true"
                             />
                             <span className="text-sm md:text-base">
@@ -188,7 +188,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mb-8">
               <div>
-                <div className="text-[11px] font-semibold tracking-wide text-coral-text mb-3">
+                <div className="text-[11px] font-semibold tracking-wide text-accent-text mb-3">
                   Monthly
                 </div>
                 <p className="font-display text-2xl text-text-primary dark:text-white mb-1">$590 / month</p>
@@ -202,7 +202,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
               </div>
 
               <div>
-                <div className="text-[11px] font-semibold tracking-wide text-coral-text mb-3">
+                <div className="text-[11px] font-semibold tracking-wide text-accent-text mb-3">
                   One-time work
                 </div>
                 <p className="font-display text-2xl text-text-primary dark:text-white mb-1">From $1,750</p>
@@ -216,7 +216,7 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
               </div>
 
               <div>
-                <div className="text-[11px] font-semibold tracking-wide text-coral-text mb-3">
+                <div className="text-[11px] font-semibold tracking-wide text-accent-text mb-3">
                   What is not included
                 </div>
                 <p className="text-sm text-text-secondary dark:text-white/60 leading-relaxed">

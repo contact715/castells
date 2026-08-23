@@ -55,7 +55,7 @@ const RiskReversal: React.FC<RiskReversalProps> = React.memo(({
       <div className="container mx-auto px-6">
         <div className="max-w-3xl mb-12">
           <div className="flex items-center gap-2 mb-3">
-            <span className="w-2 h-2 rounded-full bg-coral-gradient animate-pulse shrink-0" aria-hidden="true" />
+            <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse shrink-0" aria-hidden="true" />
             <span className="text-xs font-semibold tracking-wide text-text-secondary">
               Guarantees
             </span>
@@ -84,10 +84,10 @@ const RiskReversal: React.FC<RiskReversalProps> = React.memo(({
                 transition={{ delay: index * 0.1, duration: 0.5 }}
                 className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-8 hover:-translate-y-1 hover:shadow-spatial-md transition-[transform,box-shadow] group"
               >
-                <div className="w-12 h-12 rounded-full bg-coral/10 dark:bg-coral/20 flex items-center justify-center mb-4 group-hover:bg-coral dark:group-hover:bg-coral transition-colors">
-                  <Icon className="w-6 h-6 text-coral-text group-hover:text-white dark:group-hover:text-black transition-colors" />
+                <div className="w-12 h-12 rounded-full bg-accent/10 dark:bg-accent/20 flex items-center justify-center mb-4 group-hover:bg-accent dark:group-hover:bg-accent transition-colors">
+                  <Icon className="w-6 h-6 text-accent-text group-hover:text-white dark:group-hover:text-black transition-colors" />
                 </div>
-                <h3 className="font-display text-lg font-semibold text-text-primary mb-2 group-hover:text-coral-text transition-colors">
+                <h3 className="font-display text-lg font-semibold text-text-primary mb-2 group-hover:text-accent-text transition-colors">
                   {guarantee.title}
                 </h3>
                 <p className="text-sm text-text-secondary leading-relaxed">

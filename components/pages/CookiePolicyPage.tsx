@@ -9,7 +9,7 @@ interface CookiePolicyPageProps {
 
 const CookiePolicyPage: React.FC<CookiePolicyPageProps> = ({ onNavigate }) => {
   return (
-    <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20 selection:bg-coral selection:text-white">
+    <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20 selection:bg-accent selection:text-white">
       <div className="container mx-auto px-6 pt-4 md:pt-6">
         <PageHeader
           breadcrumbs={[
@@ -58,7 +58,7 @@ const CookiePolicyPage: React.FC<CookiePolicyPageProps> = ({ onNavigate }) => {
             <section className="space-y-3">
               <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">Contact</h2>
               <p className="text-text-secondary">
-                Questions: <a className="text-coral-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a>
+                Questions: <a className="text-accent-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a>
               </p>
             </section>
           </div>
