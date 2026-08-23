@@ -120,7 +120,7 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
                 key={service.title}
                 href="/services"
                 onClick={goToServices}
-                className="group grid grid-cols-1 lg:grid-cols-[300px_1fr_auto] gap-6 lg:gap-10 items-start bg-white/[0.03] border border-white/10 rounded-card p-6 md:p-8 hover:border-white/30 hover:bg-white/[0.05] transition-colors duration-300"
+                className="group grid grid-cols-1 lg:grid-cols-[220px_1fr_auto] gap-6 lg:gap-10 items-start bg-white/[0.03] border border-white/10 rounded-card p-6 md:p-8 hover:border-white/30 hover:bg-white/[0.05] transition-colors duration-300"
               >
                 {/* Название и цена: то, ради чего человек скользит взглядом по списку */}
                 <div>
