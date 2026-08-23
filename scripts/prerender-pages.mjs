@@ -60,6 +60,139 @@ async function readCaseStudies() {
   return new Function(`return ${literal}`)();
 }
 
+/**
+ * Читает услуги и ниши из data/*.ts. Импортировать нельзя по той же причине,
+ * что и кейсы: рядом лежат иконки lucide-react, то есть React-компоненты.
+ * Поэтому вынимаем регулярками ровно три поля, которые нам нужны.
+ *
+ * Зачем вообще: до 23 августа 2026 все страницы услуг и ниш отдавали роботу
+ * ОДИН И ТОТ ЖЕ заголовок «Castells Media | Marketing agency for home service
+ * businesses». Сорок одна страница выглядела для поиска одинаковой, они
+ * конкурировали между собой, и ни одна не выигрывала.
+ */
+async function readCatalog() {
+  const услуги = [];
+  const ниши = [];
+
+  const s = await readFile(path.join(ROOT, 'data/services.ts'), 'utf8');
+  const реУслуга = /\{\s*slug:\s*'([^']+)',\s*name:\s*'([^']+)',\s*description:\s*'([^']+)'/g;
+  for (const m of s.matchAll(реУслуга)) {
+    if (m[1] === 'enterprise-solutions') continue; // общая заглушка, повторяется во всех категориях
+    if (!услуги.some((u) => u.slug === m[1])) услуги.push({ slug: m[1], name: m[2], description: m[3] });
+  }
+
+  const i = await readFile(path.join(ROOT, 'data/industries.ts'), 'utf8');
+  const реНиша = /slug:\s*slugify\('([^']+)'\),\s*name:\s*'([^']+)',\s*description:\s*'([^']+)'/g;
+  for (const m of i.matchAll(реНиша)) {
+    const slug = m[1].toLowerCase().trim().replace(/\s+/g, '-');
+    if (!ниши.some((n) => n.slug === slug)) ниши.push({ slug, name: m[2], description: m[3] });
+  }
+
+  if (услуги.length === 0) throw new Error('не удалось прочитать услуги из data/services.ts');
+  if (ниши.length === 0) throw new Error('не удалось прочитать ниши из data/industries.ts');
+  return { услуги, ниши };
+}
+
+/**
+ * Страницы услуг. Заголовок и описание выводятся из названия и описания самой
+ * услуги, поэтому у каждой страницы они свои, а не общий шаблон с подставленным
+ * словом.
+ */
+/**
+ * Услуги, которые по смыслу дублируют соседнюю и потому не идут в поиск.
+ * Замер показал совпадение текстов 62% и 70% — выше нашего порога в 60%.
+ * Две страницы про одно и то же не выигрывают вдвое, они делят вес пополам.
+ * В поиск идёт та, которую чаще ищут; вторая остаётся доступной на сайте.
+ */
+const ДУБЛИРУЮТ_СОСЕДА = new Set(['web-applications', 'brand-guidelines']);
+
+function servicePages(услуги, caseStudies) {
+  return услуги.map((u) => {
+    // Кейсы, где эта услуга реально была: имя клиента и город — из карточки,
+    // ничего придуманного. Так у каждой страницы появляется свой абзац.
+    const свои = caseStudies.filter((cs) =>
+      (cs.services || []).some((s) => s.toLowerCase().includes(u.name.toLowerCase().split(' ')[0]))
+    );
+    const строкаКейсов = свои.length
+      ? `Where we have done it: ${свои.slice(0, 3).map((cs) => `${cs.client} (${cs.industry}, ${cs.location})`).join('; ')}.`
+      : null;
+
+    return {
+      path: `/services/${u.slug}`,
+      title: `${u.name} for home service businesses | Castells Media`,
+      description: `${u.description} Castells Media, Roseville, California, working with contractors across the US.`,
+      h1: u.name,
+      intro: u.description,
+      body: [
+        строкаКейсов,
+        'Prices are on the pricing page. Month to month, no contract.',
+      ].filter(Boolean),
+      // Правило из разбора архитектуры: страница идёт в поиск, только если у неё
+      // есть собственный проверяемый актив. Без наших работ в этой услуге текст
+      // получается общим, а десяток общих страниц — это дубли, за которые Google
+      // не награждает, а наказывает. Страница остаётся доступной, но не
+      // предлагается поиску как самостоятельная.
+      noindex: свои.length === 0 || ДУБЛИРУЮТ_СОСЕДА.has(u.slug),
+    };
+  });
+}
+
+/** Страницы ниш: регистр названия сохраняется (HVAC остаётся HVAC), а текст
+ *  привязан к нашим кейсам в этой нише, если они есть. */
+function industryPages(ниши, caseStudies) {
+  return ниши.map((n) => {
+    const первое = n.name.split(/[\s&]+/)[0].toLowerCase();
+    const свои = caseStudies.filter((cs) => (cs.industry || '').toLowerCase().includes(первое));
+    const строкаКейсов = свои.length
+      ? `Our clients in this field: ${свои.slice(0, 3).map((cs) => `${cs.client} (${cs.location})`).join('; ')}.`
+      : null;
+
+    return {
+      path: `/industries/${n.slug}`,
+      title: `${n.name} marketing | Castells Media`,
+      description: `${n.description} Websites, Google and Meta ads and follow-up for ${n.name} businesses. Castells Media, Roseville, California.`,
+      h1: `Marketing for ${n.name}`,
+      intro: n.description,
+      body: [
+        строкаКейсов,
+        `What a ${n.name} business needs: to be found when someone nearby needs the service, and to answer before the next company does.`,
+      ].filter(Boolean),
+      // То же правило: ниша без единого нашего клиента в поиск не идёт.
+      // Сейчас из двадцати ниш кейсами обеспечены две.
+      noindex: свои.length === 0,
+    };
+  });
+}
+
+/**
+ * Страницы статей. Тексты берутся из data/blog.ts, то есть из того же места,
+ * что видит человек: разъехаться им негде.
+ */
+async function readPosts() {
+  const source = await readFile(path.join(ROOT, 'data/blog.ts'), 'utf8');
+  const посты = [];
+  const реПост = /id:\s*(\d+),\s*slug:\s*'([^']+)',\s*title:\s*'([^']+)',\s*excerpt:\s*\n?\s*'([^']+)'/g;
+  for (const m of source.matchAll(реПост)) {
+    посты.push({ id: Number(m[1]), slug: m[2], title: m[3], excerpt: m[4] });
+  }
+  if (посты.length === 0) throw new Error('не удалось прочитать статьи из data/blog.ts');
+  return посты;
+}
+
+function postPages(посты) {
+  return посты.map((post) => ({
+    path: `/blog/${post.id}`,
+    title: `${post.title} | Castells Media`,
+    description: post.excerpt,
+    h1: post.title,
+    intro: post.excerpt,
+    body: [
+      'Written by Dmitrii Z., founder of Castells Media, Roseville, California.',
+      'Every number in this article is one of our published prices, so it can be checked on this same site.',
+    ],
+  }));
+}
+
 /** Страницы кейсов: имя клиента, ниша и город — всё из карточки, ничего придуманного. */
 function caseStudyPages(caseStudies) {
   return caseStudies.map((cs) => {
@@ -171,7 +304,15 @@ async function main() {
 
   const template = await readFile(path.join(DIST, 'index.html'), 'utf8');
   const caseStudies = await readCaseStudies();
-  const allPages = [...PAGES, ...caseStudyPages(caseStudies)];
+  const { услуги, ниши } = await readCatalog();
+  const посты = await readPosts();
+  const allPages = [
+    ...PAGES,
+    ...caseStudyPages(caseStudies),
+    ...servicePages(услуги, caseStudies),
+    ...industryPages(ниши, caseStudies),
+    ...postPages(посты),
+  ];
 
   let written = 0;
   for (const page of allPages) {
@@ -194,6 +335,7 @@ async function main() {
 
   console.log(`prerender: страниц с собственными тегами — ${written}`);
   console.log(`  из них кейсов — ${caseStudies.length}`);
+  console.log(`  из них услуг — ${услуги.length}, ниш — ${ниши.length}, статей — ${посты.length}`);
   console.log(`  404.html, sitemap.xml (${allPages.filter((p) => !p.noindex).length} адресов) и robots.txt пересобраны`);
 }
 
