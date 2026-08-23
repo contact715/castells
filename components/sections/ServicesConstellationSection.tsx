@@ -37,6 +37,11 @@ import type { NavigateFn } from '../../types';
   ширину, а внутри три зоны — название с ценой, содержимое двумя
   колонками, переход. Список стал таблицей, а не лентой.
 
+  Четвёртый заход, 23 августа: секция была тёмной в ОБЕИХ темах. В светлой
+  теме она стояла чёрным прямоугольником посреди светлой страницы, как чужой
+  блок. Владелец: «также не адаптировано под светлую версию». Все цвета
+  переведены на пары «светлая тема / тёмная», как в остальных секциях.
+
   Цены подтверждены владельцем 22 августа 2026.
 */
 
@@ -90,19 +95,19 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
   };
 
   return (
-    <section className="pt-12 md:pt-16 pb-24 md:pb-32 bg-[#191919] dark:bg-[#191919] relative">
+    <section className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory dark:bg-[#191919] relative">
       <div className="container mx-auto px-6 relative z-content">
         <div className="mb-12 md:mb-16 max-w-2xl">
           <div className="flex items-center gap-2 mb-4">
             <span className="w-2 h-2 rounded-full bg-accent-gradient shrink-0" aria-hidden="true" />
-            <span className="text-xs font-semibold tracking-wide text-white/50">What we do</span>
+            <span className="text-xs font-semibold tracking-wide text-text-secondary dark:text-white/50">What we do</span>
           </div>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-white">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary dark:text-white">
             Four things a service business
             <br />
-            <span className="text-white/50">needs to get booked</span>
+            <span className="text-text-secondary dark:text-white/50">needs to get booked</span>
           </h2>
-          <p className="text-lg text-white/60 leading-relaxed mt-4">
+          <p className="text-lg text-text-secondary dark:text-white/60 leading-relaxed mt-4">
             Take one of them or all four. Prices are right here, you do not need a call to hear them.
           </p>
         </div>
@@ -120,7 +125,7 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
                 key={service.title}
                 href="/services"
                 onClick={goToServices}
-                className="group grid grid-cols-1 lg:grid-cols-[220px_1fr_auto] gap-6 lg:gap-10 items-start bg-white/[0.03] border border-white/10 rounded-card p-6 md:p-8 hover:border-white/30 hover:bg-white/[0.05] transition-colors duration-300"
+                className="group grid grid-cols-1 lg:grid-cols-[220px_1fr_auto] gap-6 lg:gap-10 items-start bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-6 md:p-8 hover:border-black/20 dark:hover:border-white/30 transition-colors duration-300"
               >
                 {/* Название и цена: то, ради чего человек скользит взглядом по списку */}
                 <div>
@@ -128,15 +133,15 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
                     <div className="w-12 h-12 rounded-element bg-accent-gradient-subtle flex items-center justify-center shrink-0">
                       <Icon className="w-6 h-6 text-accent-text" aria-hidden="true" />
                     </div>
-                    <h3 className="font-display text-xl md:text-2xl font-semibold text-white">
+                    <h3 className="font-display text-xl md:text-2xl font-semibold text-text-primary dark:text-white">
                       {service.title}
                     </h3>
                   </div>
                   <div className="flex items-baseline gap-2">
-                    <span className="font-display text-2xl md:text-3xl text-white leading-tight">
+                    <span className="font-display text-2xl md:text-3xl text-text-primary dark:text-white leading-tight">
                       {service.price}
                     </span>
-                    <span className="text-[11px] tracking-wide text-white/55">
+                    <span className="text-[11px] tracking-wide text-text-secondary dark:text-white/55">
                       {service.priceNote}
                     </span>
                   </div>
@@ -144,11 +149,11 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
 
                 {/* Что это даёт и что входит */}
                 <div className="min-w-0">
-                  <p className="text-white/65 text-base leading-relaxed mb-5">{service.promise}</p>
+                  <p className="text-text-secondary dark:text-white/65 text-base leading-relaxed mb-5">{service.promise}</p>
 
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 mb-5">
                     {service.includes.map((item) => (
-                      <li key={item} className="flex items-start gap-3 text-white/60 text-sm md:text-base">
+                      <li key={item} className="flex items-start gap-3 text-text-secondary dark:text-white/60 text-sm md:text-base">
                         <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 mt-2" aria-hidden="true" />
                         {item}
                       </li>
@@ -159,17 +164,17 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
                     Строка про ситуацию, а не про результат. Человек должен узнать
                     здесь себя; обещать ему цифры мы не будем.
                   */}
-                  <p className="text-white/50 text-sm leading-relaxed pt-4 border-t border-white/10">
-                    <span className="text-white/50">This is for you if </span>
-                    <span className="font-display italic text-white/70 text-base">{service.forYou}</span>
+                  <p className="text-text-secondary dark:text-white/50 text-sm leading-relaxed pt-4 border-t border-black/5 dark:border-white/10">
+                    <span className="text-text-secondary dark:text-white/50">This is for you if </span>
+                    <span className="font-display italic text-text-primary dark:text-white/70 text-base">{service.forYou}</span>
                   </p>
                 </div>
 
                 <span
-                  className="hidden lg:flex w-9 h-9 rounded-full bg-white/5 border border-white/10 items-center justify-center shrink-0 group-hover:bg-white group-hover:border-white transition-colors duration-300"
+                  className="hidden lg:flex w-9 h-9 rounded-full bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10 items-center justify-center shrink-0 group-hover:bg-black dark:group-hover:bg-white group-hover:border-black dark:group-hover:border-white transition-colors duration-300"
                   aria-hidden="true"
                 >
-                  <ArrowUpRight className="w-4 h-4 text-white/60 group-hover:text-black transition-colors duration-300" />
+                  <ArrowUpRight className="w-4 h-4 text-text-secondary dark:text-white/60 group-hover:text-white dark:group-hover:text-black transition-colors duration-300" />
                 </span>
               </a>
             );
@@ -182,14 +187,14 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
           здесь, а не на звонке.
         */}
         <div className="mt-8 md:mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-          <p className="text-white/50 text-sm leading-relaxed max-w-xl">
+          <p className="text-text-secondary dark:text-white/50 text-sm leading-relaxed max-w-xl">
             Monthly plans are $590 and $1,490 depending on how many channels we run. Ad budget goes
             straight to Google, Meta and Yelp and is not part of this.
           </p>
           <button
             type="button"
             onClick={() => onNavigate?.('services')}
-            className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-button bg-white text-black font-medium text-[15px] hover:bg-white/90 transition-colors"
+            className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-button bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity"
           >
             All services and prices
             <ArrowRight className="w-4 h-4" aria-hidden="true" />
