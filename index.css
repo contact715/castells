@@ -169,7 +169,7 @@
 
 @utility bg-accent-gradient {
   /* ─── Accent gradient system ─────────────────────────────── */
-  background: linear-gradient(135deg, #c95d54 0%, #e08576 45%, #f0b088 100%);
+  background: linear-gradient(135deg, var(--color-accent-from) 0%, var(--color-accent) 45%, var(--color-accent-to) 100%);
 }
 
 @utility bg-accent-gradient-subtle {
@@ -226,7 +226,7 @@
 }
 
 @utility text-accent-gradient {
-  background: linear-gradient(135deg, #c95d54 0%, #e08576 45%, #f0b088 100%);
+  background: linear-gradient(135deg, var(--color-accent-from) 0%, var(--color-accent) 45%, var(--color-accent-to) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -251,14 +251,14 @@
 }
 
 @utility border-accent-gradient {
-  border-image: linear-gradient(135deg, #c95d54, #e08576, #f0b088) 1;
+  border-image: linear-gradient(135deg, var(--color-accent-from), var(--color-accent), var(--color-accent-to)) 1;
 }
 
 @utility ring-accent-gradient {
-  --tw-ring-color: #e08576;
+  --tw-ring-color: var(--color-accent);
   box-shadow:
-    0 0 0 2px #c95d54,
-    0 0 0 4px #f0b088;
+    0 0 0 2px var(--color-accent-from),
+    0 0 0 4px var(--color-accent-to);
 }
 
 @utility mask-linear-fade {
