@@ -32,7 +32,7 @@ export const PAGES = [
       'We build websites, run ads and set up automation for HVAC, plumbing and other home service companies. Roseville, CA. Real clients, real sites you can open.',
     h1: 'Marketing for home service businesses',
     intro:
-      'We build the website, run the ads and set up the follow-up, so the phone rings and nothing gets lost. Based in 1298 Antelope Creek Drive, Roseville, California, working with contractors across the US.',
+      'We build the website, run the ads and set up the follow-up, so the phone rings and nothing gets lost. Based in Roseville, California, working with contractors across the US.',
     body: [
       'What we do: websites and branding, paid ads on Google and Meta, local presence on Google and Yelp, and automation that answers and books the job.',
       'Clients whose sites we built: Roman Service (HVAC, North Port, Florida) — acromanservice.com.',
@@ -61,10 +61,10 @@ export const PAGES = [
     path: '/about',
     title: 'About Castells Media | Roseville marketing agency',
     description:
-      'Castells Media Inc, a marketing agency in 1298 Antelope Creek Drive, Roseville, California, working with home service businesses across the United States.',
-    h1: 'About us',
+      'Castells Media Inc, a marketing agency in Roseville, California, working with home service businesses across the United States.',
+    h1: 'A small agency for businesses that live on the phone ringing',
     intro:
-      'Castells Media Inc is a marketing agency based in 1298 Antelope Creek Drive, Roseville, California. We work with home service businesses — HVAC, plumbing, appliance repair, remodeling — across the United States.',
+      'Castells Media Inc works out of Roseville, California, with home service businesses across the US: HVAC, appliance repair, plumbing, remodeling. We build the site, run the ads and set up the follow-up, so a job that was going to be lost gets booked instead.',
   },
   {
     path: '/contact',

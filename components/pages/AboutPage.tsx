@@ -1,8 +1,7 @@
 import React from 'react';
 import { m as motion } from 'framer-motion';
-import { Target, Zap, Users } from 'lucide-react';
+import { Target, Zap, Users, ArrowRight, Phone, Mail, MapPin } from 'lucide-react';
 import { PageHeader } from '../ui/PageHeader';
-import { BUILT_SITES } from '../../constants';
 import type { NavigateFn } from '../../types';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
@@ -16,7 +15,7 @@ import SchemaMarkup from '../ui/SchemaMarkup';
   людей из Google и Meta». Ни одно из этих событий не подтверждено ничем.
 
   Плюс три стоковые фотографии с чужого фотобанка, одна из них подписана
-  «Global HQ — Roseville» — то есть чужой офис выдан за наш.
+  «Global HQ — Santa Monica» — то есть чужой офис выдан за наш.
 
   Плюс «основана в 2012» и «12+ years», при том что на других страницах
   сайта стояли 2017 и 2018. Год основания владельцем не подтверждён, и
@@ -49,9 +48,6 @@ const HOW_WE_WORK = [
   },
 ];
 
-/** Список живёт в constants.ts, там же записано, кто в него не попал и почему. */
-const CLIENTS_WITH_SITES = BUILT_SITES;
-
 const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://www.castells.media';
 
@@ -59,12 +55,12 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
     <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20 animate-in fade-in duration-500">
       <SEO
         title="About Castells Media | Roseville marketing agency"
-        description="Castells Media Inc, a marketing agency in 1298 Antelope Creek Drive, Roseville, California, working with home service businesses across the United States."
+        description="Castells Media Inc, a marketing agency in Roseville, California, working with home service businesses across the United States."
         canonical="/about"
         keywords="marketing agency Roseville, home service marketing, HVAC marketing agency, local marketing California"
         geoRegion="US-CA"
         geoPlacename="1298 Antelope Creek Drive, Roseville, California"
-        summary="Castells Media Inc is a marketing agency based in 1298 Antelope Creek Drive, Roseville, California. It builds websites, runs Google and Meta ads and sets up automation for home service businesses across the US."
+        summary="Castells Media Inc is a marketing agency based in Roseville, California. It builds websites, runs Google and Meta ads and sets up automation for home service businesses across the US."
         mainEntity="Marketing Agency"
       />
       <SchemaMarkup
@@ -85,7 +81,7 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
           ]}
           badge="About"
           title="A small agency for businesses that live on the phone ringing."
-          description="Castells Media Inc works out of 1298 Antelope Creek Drive, Roseville, California, with home service businesses across the US: HVAC, appliance repair, plumbing, remodeling. We build the site, run the ads and set up the follow-up, so a job that was going to be lost gets booked instead."
+          description="Castells Media Inc works out of Roseville, California, with home service businesses across the US: HVAC, appliance repair, plumbing, remodeling. We build the site, run the ads and set up the follow-up, so a job that was going to be lost gets booked instead."
           onNavigate={onNavigate}
         />
 
@@ -113,67 +109,103 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
         </div>
 
         {/*
-          Вместо ленты выдуманных достижений — то, что человек может открыть
-          в соседней вкладке и убедиться сам.
+          Здесь стоял список сайтов клиентов со ссылками. Он повторял кейсы:
+          те же клиенты, те же адреса. Владелец на главной уже поймал этот
+          дубль («это должно быть в кейсах»), и здесь ровно то же самое.
+          Теперь страница «о нас» связывает разделы, а не пересказывает их.
         */}
-        <section className="mb-24">
-          <div className="max-w-3xl mb-10">
-            <div className="flex items-center gap-2 mb-3">
-              <span className="w-2 h-2 rounded-full bg-coral-gradient shrink-0" aria-hidden="true" />
-              <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
-                Check us
-              </span>
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl font-normal leading-tight tracking-tight text-text-primary dark:text-white mb-3">
-              Sites we built, live right now
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-16">
+          <button
+            type="button"
+            onClick={() => onNavigate('work')}
+            className="group text-left bg-white dark:bg-surface p-8 rounded-card border border-black/5 dark:border-white/10 hover:border-coral/50 transition-colors cursor-pointer"
+          >
+            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+              Our work
+            </span>
+            <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary dark:text-white mt-3 mb-3">
+              Clients you can look up
             </h2>
-            <p className="text-text-secondary dark:text-white/70">
-              Open any of them. That is the whole proof we offer, and it is the kind you can verify without asking us.
+            <p className="text-text-secondary dark:text-white/65 leading-relaxed mb-5">
+              Real companies with names and cities. Where we built the site, the link on the case opens
+              it — check the work before you talk to us.
             </p>
-          </div>
+            <span className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-text-primary dark:text-white group-hover:text-coral-text transition-colors">
+              See the work
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </span>
+          </button>
 
-          <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {CLIENTS_WITH_SITES.map((client) => (
-              <li key={client.client}>
-                <a
-                  href={client.website}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block bg-white dark:bg-surface p-6 rounded-card border border-black/5 dark:border-white/10 hover:border-coral/50 transition-colors"
-                >
-                  <span className="block font-display text-xl font-semibold text-text-primary dark:text-white">
-                    {client.client}
-                  </span>
-                  <span className="block text-sm text-text-secondary dark:text-white/60 mt-1">
-                    {client.industry}
-                    {client.location ? ` · ${client.location}` : ''}
-                  </span>
-                  <span className="block text-sm text-coral-text mt-3 break-all">
-                    {client.website?.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '')}
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
+          <button
+            type="button"
+            onClick={() => onNavigate('services')}
+            className="group text-left bg-white dark:bg-surface p-8 rounded-card border border-black/5 dark:border-white/10 hover:border-coral/50 transition-colors cursor-pointer"
+          >
+            <span className="text-xs font-bold uppercase tracking-widest text-text-secondary">
+              Services and prices
+            </span>
+            <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary dark:text-white mt-3 mb-3">
+              What we do and what it costs
+            </h2>
+            <p className="text-text-secondary dark:text-white/65 leading-relaxed mb-5">
+              Websites, ads on Google and Meta, local presence, and follow-up that catches every request.
+              Prices are on the page: monthly from $590, websites from $1,750.
+            </p>
+            <span className="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-widest text-text-primary dark:text-white group-hover:text-coral-text transition-colors">
+              See prices
+              <ArrowRight className="w-4 h-4" aria-hidden="true" />
+            </span>
+          </button>
         </section>
 
+        {/*
+          Контакты целиком, а не одна строка адреса: человек, дочитавший
+          страницу «о нас», уже решает, писать нам или нет, и искать телефон
+          в подвале ему не нужно.
+        */}
         <section className="mb-10">
           <div className="bg-white dark:bg-surface p-8 md:p-10 rounded-card border border-black/5 dark:border-white/10">
-            <h2 className="font-display text-2xl font-semibold text-text-primary dark:text-white mb-4">
-              Where to find us
-            </h2>
-            <address className="not-italic text-text-secondary dark:text-white/70 leading-relaxed">
-              Castells Media Inc
-              <br />
-              1298 Antelope Creek Drive, Roseville, California
-            </address>
-            <button
-              type="button"
-              onClick={() => onNavigate('contact')}
-              className="mt-6 inline-flex items-center gap-2 text-coral-text font-semibold hover:underline"
-            >
-              Talk to us
-            </button>
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-start">
+              <div>
+                <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary dark:text-white mb-5">
+                  Where to find us
+                </h2>
+
+                <div className="flex flex-col gap-3">
+                  <a
+                    href="tel:+19166196006"
+                    className="inline-flex items-center gap-3 text-text-primary dark:text-white hover:text-coral-text transition-colors"
+                  >
+                    <Phone className="w-4 h-4 shrink-0 text-text-secondary" aria-hidden="true" />
+                    +1 (916) 619-6006
+                  </a>
+                  <a
+                    href="mailto:contact@castells.media"
+                    className="inline-flex items-center gap-3 text-text-primary dark:text-white hover:text-coral-text transition-colors"
+                  >
+                    <Mail className="w-4 h-4 shrink-0 text-text-secondary" aria-hidden="true" />
+                    contact@castells.media
+                  </a>
+                  <address className="not-italic inline-flex items-start gap-3 text-text-secondary dark:text-white/70 leading-relaxed">
+                    <MapPin className="w-4 h-4 shrink-0 mt-1" aria-hidden="true" />
+                    <span>
+                      Castells Media Inc
+                      <br />
+                      1298 Antelope Creek Drive, Roseville, California
+                    </span>
+                  </address>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => onNavigate('contact')}
+                className="inline-flex items-center gap-2 shrink-0 px-6 py-3 rounded-pill bg-black text-white dark:bg-white dark:text-black font-bold text-sm uppercase tracking-widest hover:opacity-90 transition-opacity cursor-pointer"
+              >
+                Talk to us
+                <ArrowRight className="w-4 h-4" aria-hidden="true" />
+              </button>
+            </div>
           </div>
         </section>
       </div>

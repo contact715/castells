@@ -102,13 +102,13 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
         <>
             <SEO 
                 title="Contact Us | Castells Media - Roseville Digital Marketing" 
-                description="Ready to dominate your market? Contact Castells Media in 1298 Antelope Creek Drive, Roseville, California. Schedule a free strategy session and let's discuss how we can help you achieve your goals. Serving clients nationwide from our Los Angeles headquarters."
+                description="Ready to dominate your market? Contact Castells Media in Roseville, California. Schedule a free strategy session and let's discuss how we can help you achieve your goals. Serving clients nationwide from our Los Angeles headquarters."
                 canonical="/contact"
                 keywords="contact marketing agency, Roseville marketing agency, Los Angeles digital marketing, marketing consultation, free marketing audit, marketing strategy session, California marketing agency"
                 geoRegion="US-CA"
                 geoPlacename="1298 Antelope Creek Drive, Roseville, California"
                 geoPosition="34.0195,-118.4912"
-                summary="Contact Castells Media for digital marketing services. Located in 1298 Antelope Creek Drive, Roseville, California. Schedule a free strategy session to discuss how we can help your business dominate its market. We serve clients nationwide."
+                summary="Contact Castells Media for digital marketing services. Located in Roseville, California. Schedule a free strategy session to discuss how we can help your business dominate its market. We serve clients nationwide."
                 mainEntity="Contact Information"
             />
             <SchemaMarkup

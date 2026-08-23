@@ -106,12 +106,12 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
         <>
             <SEO 
                 title="Team | Castells Media" 
-                description="The people behind Castells Media, a marketing agency in 1298 Antelope Creek Drive, Roseville, California."
+                description="The people behind Castells Media, a marketing agency in Roseville, California."
                 canonical="/team"
                 keywords="marketing team, digital marketing experts, Roseville marketing team, Los Angeles marketing professionals, Google Ads specialists, Meta Ads experts, performance marketing team"
                 geoRegion="US-CA"
                 geoPlacename="1298 Antelope Creek Drive, Roseville, California"
-                summary="The team behind Castells Media, a marketing agency based in 1298 Antelope Creek Drive, Roseville, California."
+                summary="The team behind Castells Media, a marketing agency based in Roseville, California."
                 mainEntity="Marketing Team"
             />
             <SchemaMarkup

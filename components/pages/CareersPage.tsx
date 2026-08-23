@@ -33,7 +33,7 @@ const CareersPage: React.FC<CareersPageProps> = ({ onBack, onNavigate }) => {
         keywords="marketing jobs, digital marketing careers, Roseville marketing jobs, Los Angeles marketing careers, remote marketing jobs, performance marketing careers, growth marketing jobs"
         geoRegion="US-CA"
         geoPlacename="1298 Antelope Creek Drive, Roseville, California"
-        summary="Career opportunities at Castells Media. We hire owners, not employees. Open positions for marketing professionals in 1298 Antelope Creek Drive, Roseville, California and remote. Work with world-class talent from Google, Meta, and top agencies."
+        summary="Career opportunities at Castells Media. We hire owners, not employees. Open positions for marketing professionals in Roseville, California and remote. Work with world-class talent from Google, Meta, and top agencies."
         mainEntity="Marketing Careers"
       />
       <SchemaMarkup
