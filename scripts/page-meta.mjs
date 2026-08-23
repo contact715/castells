@@ -55,7 +55,7 @@ export const PAGES = [
       'Websites and branding, Google and Meta ads, local presence, automation and CRM. Monthly plans from $590. Project work from $1,750.',
     h1: 'What we do and what it costs',
     intro:
-      'Four things a home service business needs to get booked: a site that converts, ads that bring calls, a local profile people find, and automation that answers.',
+      'Take one direction or all four. Prices are on this page, you do not need a call to hear them.',
   },
   {
     path: '/about',
