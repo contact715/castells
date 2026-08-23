@@ -23,11 +23,11 @@
     U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
-  font-family: 'EB Garamond';
+  font-family: 'Literata';
   font-style: normal;
   font-weight: 400 700;
   font-display: swap;
-  src: url('/fonts/ebgaramond-variable.woff2') format('woff2');
+  src: url('/fonts/literata-variable.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
     U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
     U+2212, U+2215, U+FEFF, U+FFFD;
@@ -38,18 +38,23 @@
   символов, которые реально встречаются на сайте: 48 КБ → 26 КБ, и остаётся
   переменным, чтобы курсив можно было ставить любым весом.
 
-  Шрифт заголовков выбран владельцем 22 августа 2026 по образцу wisprflow.ai:
-  там заголовки набраны EB Garamond обычного начертания, крупно, с плотной
-  посадкой букв. До этого стоял Newsreader.
+  Шрифт заголовков. 22 августа по образцу wisprflow.ai поставили EB Garamond,
+  23 августа владелец его забраковал: «цифры вообще не очень красивые, они всё
+  портят». Выбран Literata — она рисовалась для чтения с экрана, у неё крупные
+  ровные цифры и спокойный рисунок.
+
+  Файл переменный по двум осям сразу, оптический размер и вес, и весил вдвое
+  больше нужного. Оптический размер зафиксирован на 24 (кегль заголовков),
+  осталась одна ось: 84 КБ → 23 КБ.
   Если появится курсив другого веса или язык с другими буквами — пересобрать
   шрифты: scripts/subset-fonts.sh
 */
 @font-face {
-  font-family: 'EB Garamond';
+  font-family: 'Literata';
   font-style: italic;
   font-weight: 400 700;
   font-display: swap;
-  src: url('/fonts/ebgaramond-italic.woff2') format('woff2');
+  src: url('/fonts/literata-italic.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
     U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
     U+2212, U+2215, U+FEFF, U+FFFD;
@@ -78,7 +83,7 @@
   --color-text-secondary-light: #555555;
   --color-text-secondary-dark: #cccccc;
 
-  --font-display: 'EB Garamond', Georgia, serif;
+  --font-display: 'Literata', Georgia, serif;
   --font-sans: Figtree, sans-serif;
 
   --radius-card: 1rem;
@@ -384,7 +389,7 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'EB Garamond', Georgia, serif;
+    font-family: 'Literata', Georgia, serif;
   }
 
   .dark {

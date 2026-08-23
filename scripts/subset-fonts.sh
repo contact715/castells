@@ -5,6 +5,11 @@
 # Курсив весил 63 КБ ради двух слов «local markets» и был самым
 # длинным звеном критической цепочки (1192 мс в замере PageSpeed).
 #
+# ВНИМАНИЕ: Literata переменная по ДВУМ осям (оптический размер и вес) и весит
+# вдвое больше нужного. Перед обрезкой оптический размер фиксируется на 24:
+#   instancer.instantiateVariableFont(font, {'opsz': 24})
+# Иначе шрифт вернётся к 84 КБ вместо 23.
+#
 # Когда запускать: если на сайте появился новый язык, новые символы или курсив
 # другого начертания. Обычные правки текста на английском пересборки не требуют.
 #
@@ -30,16 +35,16 @@ if [ ! -x "$ENV_DIR/bin/pyftsubset" ]; then
 fi
 
 # ИСХОДНИКИ: положите сюда полные файлы шрифтов перед пересборкой.
-# EB Garamond и Figtree — Google Fonts, оба под Open Font License.
+# Literata и Figtree — Google Fonts, оба под Open Font License.
 SRC="${1:-}"
 if [ -z "$SRC" ]; then
   echo "использование: scripts/subset-fonts.sh <папка-с-полными-woff2>"
-  echo "ожидаются файлы: ebgaramond-variable.woff2, ebgaramond-variable-italic.woff2, figtree-variable.woff2"
+  echo "ожидаются файлы: literata-variable.woff2, literata-variable-italic.woff2, figtree-variable.woff2"
   exit 1
 fi
 
 echo "обрезаю обычные начертания (веса сохраняются переменными)"
-for name in ebgaramond-variable figtree-variable; do
+for name in literata-variable figtree-variable; do
   "$ENV_DIR/bin/pyftsubset" "$SRC/$name.woff2" \
     --output-file="public/fonts/$name.woff2" \
     --flavor=woff2 --layout-features="$FEATURES" \
@@ -48,7 +53,7 @@ for name in ebgaramond-variable figtree-variable; do
 done
 
 echo "обрезаю курсив и фиксирую вес 600 (единственный курсив на сайте — полужирный)"
-"$ENV_DIR/bin/python" - "$SRC/ebgaramond-variable-italic.woff2" <<'PY'
+"$ENV_DIR/bin/python" - "$SRC/literata-variable-italic.woff2" <<'PY'
 import sys
 from fontTools.ttLib import TTFont
 from fontTools.varLib import instancer
@@ -58,9 +63,9 @@ inst.flavor = 'woff2'
 inst.save('/tmp/_italic_w600.woff2')
 PY
 "$ENV_DIR/bin/pyftsubset" /tmp/_italic_w600.woff2 \
-  --output-file=public/fonts/ebgaramond-italic.woff2 \
+  --output-file=public/fonts/literata-italic.woff2 \
   --flavor=woff2 --layout-features="$FEATURES" \
   --unicodes="$UNICODES" --no-hinting --desubroutinize
-printf "  %-22s %6.1f КБ\n" "ebgaramond-italic" "$(stat -f%z public/fonts/ebgaramond-italic.woff2 | awk '{print $1/1024}')"
+printf "  %-22s %6.1f КБ\n" "ebgaramond-italic" "$(stat -f%z public/fonts/literata-italic.woff2 | awk '{print $1/1024}')"
 
 echo "готово. Проверьте сайт на отсутствие «квадратиков» вместо букв."
