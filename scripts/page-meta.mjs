@@ -58,6 +58,15 @@ export const PAGES = [
       'Take one direction or all four. Prices are on this page, you do not need a call to hear them.',
   },
   {
+    path: '/pricing',
+    title: 'Prices | Castells Media',
+    description:
+      'Monthly plans at $590 and $1,490, websites from $1,750, CRM setup from $1,500. Month to month, no contract. The ad budget goes straight to Google, Meta and Yelp.',
+    h1: 'What this costs',
+    intro:
+      'Month to month, no contract. The ad budget is yours and goes straight to Google, Meta and Yelp — we never take a cut of it.',
+  },
+  {
     path: '/about',
     title: 'About Castells Media | Roseville marketing agency',
     description:

@@ -578,6 +578,19 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
                             </div>
                         </MenuItem>
 
+                        {/* PRICES — простой пункт, без вложенного меню:
+                            цена это то, за чем человек приходит, и прятать её
+                            во вложенный список незачем */}
+                        <MenuItem
+                            setActive={setActiveTab}
+                            active={activeTab}
+                            item="Prices"
+                            onClick={(e) => {
+                                e.preventDefault();
+                                onNavigate?.('pricing');
+                            }}
+                        />
+
                         {/* INDUSTRIES MENU - RESTRUCTURED */}
                         <MenuItem
                             setActive={setActiveTab}

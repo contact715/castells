@@ -33,6 +33,7 @@ interface FooterProps {
 const SECTIONS: { label: string; page: PageView; href: string }[] = [
   { label: 'Work', page: 'work', href: '/work' },
   { label: 'Services', page: 'services', href: '/services' },
+  { label: 'Prices', page: 'pricing', href: '/pricing' },
   { label: 'Industries', page: 'industries', href: '/industries' },
   { label: 'About', page: 'about', href: '/about' },
   { label: 'Contact', page: 'contact', href: '/contact' },

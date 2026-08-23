@@ -56,7 +56,8 @@ export const MenuItem = ({
           />
         )}
       </motion.div>
-      {active !== null && (
+      {/* Пункт без вложенного меню (например «Prices») панель не открывает */}
+      {children && active !== null && (
         <motion.div
           initial={{ opacity: 0, scale: 0.85, y: 10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}

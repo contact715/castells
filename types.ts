@@ -37,6 +37,7 @@ export type PageView =
   | 'service'
   | 'industry'
   | 'services'
+  | 'pricing'
   | 'industries'
   | 'company'
   | 'thank-you'
