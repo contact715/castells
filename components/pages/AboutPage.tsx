@@ -200,7 +200,7 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
               <button
                 type="button"
                 onClick={() => onNavigate('contact')}
-                className="inline-flex items-center gap-2 shrink-0 px-6 py-3 rounded-pill bg-black text-white dark:bg-white dark:text-black font-bold text-sm uppercase tracking-widest hover:opacity-90 transition-opacity cursor-pointer"
+                className="inline-flex items-center gap-2 shrink-0 px-6 py-3 rounded-pill bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity cursor-pointer"
               >
                 Talk to us
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />

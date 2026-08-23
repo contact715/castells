@@ -88,7 +88,7 @@ const WorkCard: React.FC<{
                 {project.services.map((service) => (
                     <span
                         key={service}
-                        className="px-3 py-1.5 rounded-pill bg-black/5 dark:bg-white/10 text-[11px] font-bold uppercase tracking-widest text-text-secondary dark:text-white/60"
+                        className="px-3 py-1.5 rounded-pill bg-black/5 dark:bg-white/10 text-[11px] font-medium text-[15px] text-text-secondary dark:text-white/60"
                     >
                         {service}
                     </span>
@@ -185,7 +185,7 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onNavigate }) => {
                                     key={cat.id}
                                     type="button"
                                     onClick={() => setCategory(cat.id)}
-                                    className={`px-4 py-2.5 rounded-pill text-xs font-bold uppercase tracking-widest transition-colors cursor-pointer ${
+                                    className={`px-4 py-2.5 rounded-pill text-xs font-medium text-[15px] transition-colors cursor-pointer ${
                                         active
                                             ? 'bg-black text-white dark:bg-white dark:text-black'
                                             : 'bg-black/5 dark:bg-white/10 text-text-secondary dark:text-white/60 hover:bg-black/10 dark:hover:bg-white/20'

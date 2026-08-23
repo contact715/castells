@@ -17,11 +17,19 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
  * - secondary: Coral background, white text
  * - outline: Transparent background, black  * 
  * Sizes:
- * - sm: px-6 py-2.5 text-xs (small buttons)
- * - md: px-6 py-3 text-xs (default, medium buttons)
+ * - sm: px-5 py-2.5 text-sm (small buttons)
+ * - md: px-5 py-3 text-[15px] (default, medium buttons)
  * - lg: px-8 py-4 text-sm (large buttons, CTAs)
  */
-export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
+export /*
+  23 августа 2026 кнопки переведены на редакторский стиль по образцу, который
+  выбрал владелец (academy.claude.com). Там кнопка набрана обычным регистром,
+  средним весом, 15 пикселей. У нас было ЗАГЛАВНЫМИ, жирным, 12 пикселей и с
+  широкой разрядкой — от этого интерфейс читался как рекламный баннер, а не
+  как издание. Разрядка на заглавных ещё и мешает читать: глаз собирает слово
+  по буквам.
+*/
+const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, ButtonProps>(
   (
     {
       variant = 'primary',
@@ -37,7 +45,7 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
     const Component = as || (href ? 'a' : 'button');
     const buttonProps = href ? { href } : { type: 'button' as const };
 
-    const baseStyles = "relative flex cursor-pointer items-center justify-center overflow-hidden text-center transition-[background-color,color,box-shadow,border-color,filter] duration-300 ease-in-out rounded-inner font-bold uppercase tracking-widest";
+    const baseStyles = "relative flex cursor-pointer items-center justify-center overflow-hidden text-center transition-[background-color,color,box-shadow,border-color,filter] duration-300 ease-in-out rounded-inner font-medium";
 
     const variants = {
       primary: "bg-black text-white dark:bg-white dark:text-black hover:bg-black/90 dark:hover:bg-white/90",
@@ -48,8 +56,8 @@ export const Button = React.forwardRef<HTMLButtonElement | HTMLAnchorElement, Bu
     };
 
     const sizes = {
-      sm: "px-6 py-2.5 text-xs",
-      md: "px-6 py-3 text-xs",
+      sm: "px-5 py-2.5 text-sm",
+      md: "px-5 py-3 text-[15px]",
       lg: "px-8 py-4 text-sm"
     };
 

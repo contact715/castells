@@ -189,7 +189,7 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
           <button
             type="button"
             onClick={() => onNavigate?.('services')}
-            className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-pill bg-white text-black font-bold text-sm uppercase tracking-widest hover:bg-white/90 transition-colors"
+            className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-pill bg-white text-black font-medium text-[15px] hover:bg-white/90 transition-colors"
           >
             All services and prices
             <ArrowRight className="w-4 h-4" aria-hidden="true" />

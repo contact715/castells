@@ -60,7 +60,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
             All notes
           </button>
 
-          <article className="max-w-3xl">
+          <article className="max-w-[43rem]">
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6">
               <span className="text-[11px] font-bold uppercase tracking-widest text-coral-text">
                 {post.category}
@@ -99,7 +99,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
                 {section.body.map((paragraph) => (
                   <p
                     key={paragraph.slice(0, 40)}
-                    className="text-text-secondary dark:text-white/70 text-base md:text-lg leading-relaxed mb-4"
+                    className="text-text-secondary dark:text-white/75 text-[17px] md:text-lg leading-[1.65] mb-5"
                   >
                     {paragraph}
                   </p>
@@ -114,7 +114,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
               <button
                 type="button"
                 onClick={() => onNavigate?.('contact')}
-                className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-pill bg-black text-white dark:bg-white dark:text-black font-bold text-sm uppercase tracking-widest hover:opacity-90 transition-opacity cursor-pointer"
+                className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-pill bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity cursor-pointer"
               >
                 Talk to us
                 <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -123,7 +123,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
           </article>
 
           {others.length > 0 && (
-            <section className="max-w-3xl mt-16">
+            <section className="max-w-[43rem] mt-16">
               <h2 className="font-display text-xl md:text-2xl font-normal text-text-primary dark:text-white mb-6">
                 Read next
               </h2>

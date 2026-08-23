@@ -50,7 +50,7 @@ const Services: React.FC = React.memo(() => {
                       key={cat.id}
                       onClick={() => handleTabChange(cat.id)}
                     className={cn(
-                      "relative px-4 sm:px-6 py-2.5 sm:py-3 rounded-pill flex items-center gap-2 text-xs sm:text-sm font-bold uppercase tracking-widest transition-colors duration-300 outline-hidden whitespace-nowrap",
+                      "relative px-4 sm:px-6 py-2.5 sm:py-3 rounded-pill flex items-center gap-2 text-xs sm:text-sm font-medium text-[15px] transition-colors duration-300 outline-hidden whitespace-nowrap",
                       isActive
                         ? "text-white"
                         : "text-text-secondary hover:text-text-primary hover:bg-gray-100 dark:hover:bg-neutral-800"
