@@ -53,8 +53,8 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 mb-12">
 
           <div>
-            <div className="text-xs font-bold uppercase text-text-secondary mb-4">
-              <span className="tracking-widest">Castells Media · Roseville, California</span>
+            <div className="text-sm font-medium text-text-secondary mb-4">
+              <span className="tracking-wide">Castells Media · Roseville, California</span>
             </div>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.05] tracking-tight text-text-primary mb-0">
               Marketing for

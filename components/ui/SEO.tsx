@@ -17,7 +17,9 @@ interface SEOProps {
 }
 
 const SEO: React.FC<SEOProps> = ({
-    title = 'Castells Media | Dominate Your Market',
+    // Заголовок по умолчанию: он подставлялся страницам без своего и
+    // перебивал правильный заголовок из HTML уже после загрузки
+    title = 'Castells Media | Marketing agency for home service businesses',
     description = 'We help contractors and service providers dominate their local markets through data-driven strategies.',
     canonical,
     image = 'https://castells.studio/og-image.svg',
