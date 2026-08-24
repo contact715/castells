@@ -1,5 +1,16 @@
-import React from 'react';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import type React from 'react';
+
+/*
+  Найдено 24 августа 2026: этот компонент через react-helmet-async менял
+  <title>, description, canonical и OG-теги в document.head ПОСЛЕ загрузки
+  скриптов — то есть перебивал собственными, часто старыми и с выдуманными
+  цифрами тегами то, что scripts/prerender-pages.mjs кладёт в HTML для
+  каждой из 74 страниц. Проверено headless-браузером на собранной сборке:
+  /industries/hvac-systems после гидратации отдавал другой заголовок и
+  другое описание, чем в HTML. Раз собственные теги уже есть в HTML на
+  каждой странице, которая рендерит этот компонент, — компонент отключён,
+  а не переписан текстами: переписывать нечего, разметка уже верная.
+*/
 
 interface SEOProps {
     title?: string;
@@ -16,70 +27,6 @@ interface SEOProps {
     mainEntity?: string; // Main topic/entity for AI understanding
 }
 
-const SEO: React.FC<SEOProps> = ({
-    // Заголовок по умолчанию: он подставлялся страницам без своего и
-    // перебивал правильный заголовок из HTML уже после загрузки
-    title = 'Castells Media | Marketing agency for home service businesses',
-    description = 'We help contractors and service providers dominate their local markets through data-driven strategies.',
-    canonical,
-    image = 'https://castells.studio/og-image.svg',
-    type = 'website',
-    robots = 'index, follow',
-    keywords,
-    geoRegion = 'US-CA',
-    geoPlacename = '1298 Antelope Creek Drive, Roseville, California',
-    geoPosition,
-    summary,
-    mainEntity
-}) => {
-    const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
-    const fullImageUrl = image.startsWith('http') ? image : `${siteUrl}${image}`;
-    const fullCanonical = canonical
-        ? (canonical.startsWith('http') ? canonical : `${siteUrl}${canonical.startsWith('/') ? '' : '/'}${canonical}`)
-        : (typeof window !== 'undefined' ? window.location.href : siteUrl);
-
-    return (
-        <Helmet>
-            <title>{title}</title>
-            <meta name="description" content={description} />
-            {keywords && <meta name="keywords" content={keywords} />}
-            
-            {/* GEO Meta Tags */}
-            <meta name="geo.region" content={geoRegion} />
-            <meta name="geo.placename" content={geoPlacename} />
-            {geoPosition && <meta name="geo.position" content={geoPosition} />}
-            <meta name="ICBM" content={geoPosition || "34.0195,-118.4912"} />
-            
-            {/* Open Graph */}
-            <meta property="og:title" content={title} />
-            <meta property="og:description" content={description} />
-            <meta property="og:type" content={type} />
-            <meta property="og:url" content={fullCanonical} />
-            <meta property="og:image" content={fullImageUrl} />
-            <meta property="og:image:width" content="1200" />
-            <meta property="og:image:height" content="630" />
-            <meta property="og:site_name" content="Castells Media" />
-            <meta property="og:locale" content="en_US" />
-            <meta property="og:locale:alternate" content="en_US" />
-            
-            {/* Twitter */}
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta name="twitter:title" content={title} />
-            <meta name="twitter:description" content={description} />
-            <meta name="twitter:image" content={fullImageUrl} />
-            
-            {/* Additional SEO */}
-            <meta name="author" content="Castells Media" />
-            <meta name="robots" content={robots} />
-            <link rel="canonical" href={fullCanonical} />
-            
-            {/* AI/LLM Optimization (GEO - Generative Engine Optimization) */}
-            {summary && <meta name="summary" content={summary} />}
-            {mainEntity && <meta name="main-entity" content={mainEntity} />}
-            <meta name="content-type" content="text/html; charset=UTF-8" />
-            <meta name="language" content="en-US" />
-        </Helmet>
-    );
-};
+const SEO: React.FC<SEOProps> = () => null;
 
 export default SEO;

@@ -38,10 +38,10 @@ const Industries: React.FC = React.memo(() => {
             delay={0.1}
           >
             Industries We<br />
-            <span className="text-text-secondary">Dominate</span>
+            <span className="text-text-secondary">Work With</span>
           </AnimatedHeading>
           <p className="text-lg text-text-secondary leading-relaxed">
-            We don't dabble. We specialize in high-ticket service industries where trust and authority drive revenue.
+            High-ticket service industries where a single job is worth the marketing that brought it.
           </p>
         </div>
 

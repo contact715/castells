@@ -142,7 +142,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     color: '#10B981',
     category: 'paid-media',
     challenge: "Detailed Exotics needed to capture high-value customers in Portland's competitive luxury automotive services market.",
-    solution: "We implemented a comprehensive local SEO strategy combined with hyper-targeted Google Ads campaigns focusing on premium keywords and luxury positioning.",
+    solution: "We implemented a local SEO strategy combined with hyper-targeted Google Ads campaigns focusing on premium keywords and luxury positioning.",
     keyFeatures: ['Local SEO Optimization', 'Premium Keyword Targeting', 'High-Converting Landing Pages']
   },
   {
@@ -152,7 +152,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     location: 'Los Angeles, California',
     year: '2024',
     video: '',
-    description: 'Built a comprehensive lead generation system for appliance repair services, capturing high-intent customers through strategic local advertising and SEO.',
+    description: 'Built a lead generation system for appliance repair services, capturing high-intent customers through strategic local advertising and SEO.',
     services: ['Local SEO', 'Google Ads', 'Lead Generation'],
     color: '#8B5CF6',
     category: 'paid-media',
@@ -172,7 +172,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     color: '#F59E0B',
     category: 'paid-media',
     challenge: "Cool Doc was unknown in the competitive LA market and needed to quickly establish credibility and generate leads in a highly competitive space.",
-    solution: "We launched a comprehensive digital marketing campaign focusing on seasonal HVAC needs, combined with automated review generation that built trust and improved local rankings.",
+    solution: "We launched a digital marketing campaign focusing on seasonal HVAC needs, combined with automated review generation that built trust and improved local rankings.",
     keyFeatures: ['Seasonal Campaign Strategy', 'Automated Review System', 'Hyper-Local Targeting']
   },
   {
@@ -212,7 +212,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     location: 'Various',
     year: '2024',
     video: '',
-    description: 'Built a comprehensive digital presence for Radix Flooring, focusing on showcasing premium flooring options and generating qualified leads through strategic SEO and paid advertising.',
+    description: 'Built a digital presence for Radix Flooring, focusing on showcasing premium flooring options and generating qualified leads through strategic SEO and paid advertising.',
     services: ['SEO', 'Google Ads', 'Web Design'],
     color: '#2563EB',
     category: 'seo-content',
@@ -232,7 +232,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     color: '#10B981',
     category: 'seo-content',
     challenge: "Star Dental Implants needed to build trust in a sensitive medical procedure market where patients research extensively before making decisions.",
-    solution: "We created comprehensive educational content about dental implants, showcased patient success stories, and implemented a sophisticated remarketing strategy for high-intent prospects.",
+    solution: "We created educational content about dental implants, showcased patient success stories, and implemented a sophisticated remarketing strategy for high-intent prospects.",
     keyFeatures: ['Educational Content Hub', 'Patient Success Stories', 'Trust-Building Campaigns']
   },
   {
@@ -247,7 +247,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     color: '#8B5CF6',
     category: 'seo-content',
     challenge: "Design by Nova needed to stand out in the competitive New York HVAC market while helping customers access government assistance programs like HEAP Cooling Assistance.",
-    solution: "We developed comprehensive content about HVAC systems and government programs, optimized for local SEO targeting Manhattan, Brooklyn, Staten Island, and Queens, and created educational resources about mini-split systems.",
+    solution: "We developed content about HVAC systems and government programs, optimized for local SEO targeting Manhattan, Brooklyn, Staten Island, and Queens, and created educational resources about mini-split systems.",
     keyFeatures: ['Government Program Integration', 'Educational HVAC Content', 'Multi-Borough SEO Strategy']
   }
 ];

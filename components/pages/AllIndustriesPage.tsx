@@ -6,7 +6,6 @@ import { Badge } from '../ui/Badge';
 import { Button } from '../ui/Button';
 import { Breadcrumbs } from '../ui/Breadcrumbs';
 import AnimatedHeading from '../ui/AnimatedHeading';
-import Counter from '../ui/Counter';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
 import {
@@ -31,13 +30,6 @@ const INDUSTRIES_CATEGORIES = INDUSTRY_CATEGORIES.map((category) => ({
     .filter((i) => i.type === 'industry')
     .map((i) => ({ name: i.name, desc: i.description, icon: i.icon, slug: i.slug })),
 }));
-
-const STATS = [
-  { value: 500, suffix: '+', label: 'Campaigns Launched' },
-  { value: 47, suffix: '+', label: 'Industries Served' },
-  { value: 3.2, suffix: 'x', label: 'Average ROAS' },
-  { value: 50, suffix: 'M+', label: 'Revenue Generated' },
-];
 
 const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigate }) => {
   const [activeCategory, setActiveCategory] = useState(0);
@@ -84,8 +76,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
             />
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            {/* Left: Content */}
+          <div className="max-w-2xl">
             <div>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -100,8 +91,8 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.05] tracking-tight text-text-primary mb-6"
                 delay={0.2}
               >
-                Dominate your<br />
-                <span className="text-text-secondary">market.</span>
+                Industries we<br />
+                <span className="text-text-secondary">work with.</span>
               </AnimatedHeading>
 
               <motion.p
@@ -110,8 +101,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                 transition={{ delay: 0.3, duration: 0.5 }}
                 className="text-lg md:text-xl text-text-secondary leading-relaxed max-w-xl mb-8"
               >
-                Proven growth strategies tailored to your industry's unique challenges. 
-                We've helped businesses like yours generate millions in revenue.
+                High-ticket service businesses where a single job is worth the marketing that brought it.
               </motion.p>
 
               <motion.div
@@ -130,31 +120,6 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                 </Button>
               </motion.div>
             </div>
-
-            {/* Right: Stats Grid */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3, duration: 0.6 }}
-              className="grid grid-cols-2 gap-4"
-            >
-              {STATS.map((stat, index) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4 + index * 0.1, duration: 0.5 }}
-                  className="bg-white dark:bg-surface rounded-card shadow-spatial-card p-6 md:p-8 border border-black/5 dark:border-white/5 hover:shadow-spatial-md hover:-translate-y-1 transition-[transform,box-shadow] duration-300"
-                >
-                  <div className="font-display text-4xl md:text-5xl font-normal text-text-primary mb-2">
-                    <Counter value={stat.value} suffix={stat.suffix} decimals={stat.value % 1 !== 0 ? 1 : 0} />
-                  </div>
-                  <p className="text-sm text-text-secondary font-medium">
-                    {stat.label}
-                  </p>
-                </motion.div>
-              ))}
-            </motion.div>
           </div>
         </div>
       </section>
@@ -361,11 +326,11 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
               </motion.div>
 
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal text-text-primary mb-6 leading-tight">
-                Ready to dominate<br />your market?
+                Want to talk about your business?
               </h2>
 
               <p className="text-lg text-text-secondary mb-10 max-w-xl mx-auto">
-                Get a free industry analysis. We'll show you exactly where the opportunities are in your market.
+                Tell us what you do and where, and we will say plainly whether we can help.
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -374,7 +339,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                   onClick={() => onNavigate?.('contact')}
                   className="group"
                 >
-                  Get Free Analysis
+                  Talk to us
                   <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                 </Button>
                 <Button

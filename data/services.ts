@@ -49,7 +49,7 @@ export const SERVICE_CATEGORIES: ServiceCategory[] = [
       'We craft distinctive brand identities that resonate with your audience and differentiate you from the competition. Every pixel is purposeful.',
     items: [
       { slug: 'brand-identity', name: 'Brand Identity', description: 'Complete visual systems: Logo, Typography, and Color Theory.', icon: Palette },
-      { slug: 'brand-guidelines', name: 'Brand Guidelines', description: 'Comprehensive rulebooks to ensure consistency across all channels.', icon: Book },
+      { slug: 'brand-guidelines', name: 'Brand Guidelines', description: 'A rulebook so your brand looks the same across every channel.', icon: Book },
       { slug: 'logobook', name: 'Logobook', description: 'Strategic logo variations for every digital and print application.', icon: Layers },
       { slug: 'ui-ux-design', name: 'UI/UX Design', description: 'User-centric interfaces for web and mobile products.', icon: Layout },
       { slug: 'print-packaging', name: 'Print & Packaging', description: 'Business cards, brochures, and physical collateral design.', icon: FileText },

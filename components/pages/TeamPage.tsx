@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { m as motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Users, Award, TrendingUp, Zap, Target, Heart, Globe, Briefcase, Code, PenTool, BarChart3, MessageSquare, ArrowUpRight } from 'lucide-react';
+import { Users, Award, TrendingUp, Zap, Target, Heart, Globe, Briefcase, Code, PenTool, BarChart3, MessageSquare } from 'lucide-react';
 import { PageView } from '../../App';
 import { PageHeader } from '../ui/PageHeader';
 import { Badge } from '../ui/Badge';
@@ -301,54 +301,6 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                                     </motion.div>
                                 ))}
 
-                                {/* Join Team CTA Card */}
-                                {activeCategory === 'all' && (
-                                    <motion.div
-                                        initial={{ opacity: 0, y: 30 }}
-                                        animate={{ opacity: 1, y: 0 }}
-                                        transition={{ delay: filteredMembers.length * 0.05, duration: 0.5 }}
-                                        onClick={() => onNavigate?.('careers')}
-                                        className="group bg-surface rounded-card overflow-hidden border border-black/5 dark:border-white/10 hover:-translate-y-1 transition-[transform,box-shadow] duration-300 cursor-pointer relative"
-                                    >
-                                        {/* Background Pattern */}
-                                        <div className="absolute inset-0 opacity-30">
-                                            <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                                                <defs>
-                                                    <pattern id="teamGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-                                                        <circle cx="1" cy="1" r="0.5" fill="var(--color-accent)" opacity="0.3" />
-                                                    </pattern>
-                                                </defs>
-                                                <rect width="100%" height="100%" fill="url(#teamGrid)" />
-                                            </svg>
-                                        </div>
-
-                                        {/* Gradient Overlay */}
-                                        <div className="absolute inset-0 bg-linear-to-br from-accent/10 via-transparent to-accent/5 group-hover:from-accent/20 group-hover:to-accent/10 transition-[background-image] duration-500" />
-
-                                        {/* Content */}
-                                        <div className="relative p-4 md:p-6 flex flex-col items-center justify-center text-center min-h-[300px]">
-                                            {/* Icon */}
-                                            <div className="w-12 h-12 rounded-element bg-accent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                                                <ArrowUpRight className="w-6 h-6 text-white group-hover:rotate-45 transition-transform duration-300" />
-                                            </div>
-
-                                            {/* Text */}
-                                            <h3 className="font-display text-xl md:text-2xl font-bold text-text-primary dark:text-white mb-2">
-                                                Join Our Team
-                                            </h3>
-                                            <p className="text-xs md:text-sm text-text-secondary dark:text-white/70 leading-relaxed mb-4 max-w-xs">
-                                                We're always looking for talented professionals who share our passion for revenue-focused marketing.
-                                            </p>
-                                            <div className="flex items-center gap-2 text-accent-text font-semibold text-xs group-hover:gap-3 transition-[gap] duration-300">
-                                                View Open Positions
-                                                <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
-                                            </div>
-                                        </div>
-
-                                        {/* Border Effect */}
-                                        <div className="absolute inset-0 rounded-card border border-black/5 dark:border-white/10 group-hover:border-accent/50 transition-colors duration-300 pointer-events-none" />
-                                    </motion.div>
-                                )}
                             </motion.div>
                         </AnimatePresence>
                     </SectionContainer>

@@ -184,7 +184,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                     ]}
                     badge="Industries"
                     title={displayName}
-                    description={`Dominating the ${displayName.toLowerCase()} market with proven strategies.`}
+                    description={`Marketing for ${displayName.toLowerCase()} businesses.`}
                     onNavigate={onNavigate}
                 />
             </div>
@@ -248,10 +248,10 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                         className="font-display text-2xl md:text-3xl font-normal mb-3 text-text-primary"
                         delay={0.1}
                     >
-                        Ready to dominate the {displayName.toLowerCase()} market?
+                        Want to talk about your {displayName.toLowerCase()} business?
                     </AnimatedHeading>
                     <p className="text-text-secondary mb-6 max-w-xl mx-auto">
-                        Schedule a free strategy session to discuss how we can help you achieve your goals.
+                        Tell us what you do and where, and we will say plainly whether we can help.
                     </p>
                     <Button
                         onClick={() => onNavigate?.('contact')}
@@ -385,7 +385,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                         Let's discuss your {displayName.toLowerCase()} marketing needs
                     </AnimatedHeading>
                     <p className="text-white/90 mb-8 max-w-2xl mx-auto text-lg">
-                        Get a free strategy session and discover how we can help you dominate your market.
+                        Tell us about your business and we will say plainly whether we can help.
                     </p>
                     <Button
                         onClick={() => onNavigate?.('contact')}
@@ -509,10 +509,10 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                         className="font-display text-3xl md:text-4xl font-normal mb-4 text-text-primary dark:text-white"
                         delay={0.1}
                     >
-                        Ready to dominate your market?
+                        Want to talk about your business?
                     </AnimatedHeading>
                     <p className="text-text-secondary dark:text-white/60 mb-8 max-w-2xl mx-auto text-lg">
-                        Let's discuss how we can help you achieve your goals in the {displayName.toLowerCase()} industry.
+                        Tell us what your {displayName.toLowerCase()} business does and where, and we will say plainly whether we can help.
                     </p>
                     <Button
                         onClick={() => onNavigate?.('contact')}

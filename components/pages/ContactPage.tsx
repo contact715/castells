@@ -114,14 +114,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
             <SchemaMarkup
                 type="LocalBusiness"
                 data={{
-                    name: 'Castells Media',
                     description: 'Marketing agency for home service businesses: websites, Google and Meta ads, local presence and follow-up.',
-                    telephone: '+1-916-619-6006',
-                    email: 'contact@castells.media',
-                    streetAddress: '1234 Main Street',
-                    postalCode: '90401',
-                    latitude: 34.0195,
-                    longitude: -118.4912
                 }}
             />
             <SchemaMarkup

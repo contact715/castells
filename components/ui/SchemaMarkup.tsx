@@ -1,4 +1,5 @@
 import React from 'react';
+import { BUSINESS } from '../../config/business';
 
 interface SchemaMarkupProps {
   type?: 'Organization' | 'WebSite' | 'Service' | 'Article' | 'BreadcrumbList' | 'FAQPage' | 'LocalBusiness' | 'HowTo' | 'VideoObject' | 'ItemList' | 'Review' | 'Definition' | 'Course';
@@ -20,12 +21,13 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
           legalName: 'Castells Media Inc',
           url: baseUrl,
           logo: `${baseUrl}/castells-logo.png`,
-          description: 'We help contractors and service providers dominate their local markets through data-driven strategies.',
+          description: 'We build websites, run ads and set up follow-up automation for home service businesses.',
           address: {
             '@type': 'PostalAddress',
-            addressLocality: 'Roseville',
-            addressRegion: 'CA',
-            addressCountry: 'US'
+            streetAddress: BUSINESS.street,
+            addressLocality: BUSINESS.city,
+            addressRegion: BUSINESS.state,
+            addressCountry: BUSINESS.country
           },
           contactPoint: {
             '@type': 'ContactPoint',
@@ -136,51 +138,40 @@ const SchemaMarkup: React.FC<SchemaMarkupProps> = ({ type = 'Organization', data
           }))
         };
       
-      case 'LocalBusiness':
+      case 'LocalBusiness': {
+        const postalCode = (data?.postalCode as string | undefined) || BUSINESS.zip || undefined;
+        const latitude = data?.latitude as number | undefined;
+        const longitude = data?.longitude as number | undefined;
         return {
           '@context': 'https://schema.org',
           '@type': 'ProfessionalService',
-          name: data?.name || 'Castells Media',
-          description: data?.description || 'Revenue-focused digital marketing agency helping contractors and service providers dominate their local markets.',
+          name: data?.name || BUSINESS.name,
+          description: data?.description || 'We build websites, run ads and set up follow-up automation for home service businesses.',
           url: baseUrl,
           logo: `${baseUrl}/castells-logo.png`,
           image: data?.image || `${baseUrl}/castells-logo.png`,
           address: {
             '@type': 'PostalAddress',
-            streetAddress: data?.streetAddress || '1234 Main Street',
-            addressLocality: 'Roseville',
-            addressRegion: 'CA',
-            postalCode: data?.postalCode || '90401',
-            addressCountry: 'US'
+            streetAddress: data?.streetAddress || BUSINESS.street,
+            addressLocality: BUSINESS.city,
+            addressRegion: BUSINESS.state,
+            ...(postalCode ? { postalCode } : {}),
+            addressCountry: BUSINESS.country
           },
-          geo: {
-            '@type': 'GeoCoordinates',
-            latitude: data?.latitude || 34.0195,
-            longitude: data?.longitude || -118.4912
-          },
-          telephone: data?.telephone || '+1-916-619-6006',
-          email: data?.email || 'contact@castells.media',
-          priceRange: data?.priceRange || '$$$',
+          // Координаты не подтверждены владельцем — без источника не публикуем.
+          ...(latitude != null && longitude != null
+            ? { geo: { '@type': 'GeoCoordinates', latitude, longitude } }
+            : {}),
+          telephone: data?.telephone || BUSINESS.phoneSchema,
+          email: data?.email || BUSINESS.email,
           areaServed: {
             '@type': 'Country',
             name: 'United States'
           },
-          serviceArea: {
-            '@type': 'GeoCircle',
-            geoMidpoint: {
-              '@type': 'GeoCoordinates',
-              latitude: 34.0195,
-              longitude: -118.4912
-            },
-            geoRadius: {
-              '@type': 'Distance',
-              value: '50000',
-              unitCode: 'KM'
-            }
-          },
           ...data
         };
-      
+      }
+
       case 'HowTo':
         const steps = (data?.step as Array<{ name: string; text: string; image?: string; url?: string }>) || [];
         return {

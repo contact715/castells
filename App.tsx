@@ -43,7 +43,6 @@ const Blog = lazyWithRetry(() => import('./components/sections/Blog'));
 const CaseStudyDetail = lazyWithRetry(() => import('./components/pages/CaseStudyDetail'));
 const WorkPage = lazyWithRetry(() => import('./components/pages/WorkPage'));
 const AboutPage = lazyWithRetry(() => import('./components/pages/AboutPage'));
-const CareersPage = lazyWithRetry(() => import('./components/pages/CareersPage'));
 const NotFound = lazyWithRetry(() => import('./components/pages/NotFound'));
 const ContactPage = lazyWithRetry(() => import('./components/pages/ContactPage'));
 const TeamPage = lazyWithRetry(() => import('./components/pages/TeamPage'));
@@ -58,7 +57,6 @@ const AnswersPage = lazyWithRetry(() => import('./components/pages/AnswersPage')
 const AnswerPage = lazyWithRetry(() => import('./components/pages/AnswerPage'));
 const PricingPage = lazyWithRetry(() => import('./components/pages/PricingPage'));
 const AllIndustriesPage = lazyWithRetry(() => import('./components/pages/AllIndustriesPage'));
-const CompanyPage = lazyWithRetry(() => import('./components/pages/CompanyPage'));
 const ThankYouPage = lazyWithRetry(() => import('./components/pages/ThankYouPage'));
 // NOTE: keep explicit extensions here to satisfy TS bundler resolution in some setups
 const PrivacyPolicyPage = lazyWithRetry(() => import('./components/pages/PrivacyPolicyPage.tsx'));
@@ -230,13 +228,6 @@ function App() {
                 />
               )}
 
-              {currentPage === 'careers' && (
-                <CareersPage
-                  onBack={() => navigateTo('home')}
-                  onNavigate={navigateTo}
-                />
-              )}
-
               {currentPage === 'contact' && (
                 <ContactPage onNavigate={navigateTo} />
               )}
@@ -317,13 +308,6 @@ function App() {
 
               {currentPage === 'industries' && (
                 <AllIndustriesPage
-                  onBack={() => navigateTo('home')}
-                  onNavigate={navigateTo}
-                />
-              )}
-
-              {currentPage === 'company' && (
-                <CompanyPage
                   onBack={() => navigateTo('home')}
                   onNavigate={navigateTo}
                 />

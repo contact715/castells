@@ -26,8 +26,7 @@ const searchIndex: SearchResult[] = [
   { title: 'Blog', url: '/blog', type: 'page', description: 'Marketing insights and strategies' },
   { title: 'Contact', url: '/contact', type: 'page', description: 'Get in touch with us' },
   { title: 'Team', url: '/team', type: 'page', description: 'Meet our team' },
-  { title: 'Careers', url: '/careers', type: 'page', description: 'Join our team' },
-  
+
   // Services (add more as needed)
   { title: 'Web Development', url: '/services/web-development', type: 'service' },
   { title: 'Meta Ads', url: '/services/meta-ads', type: 'service' },

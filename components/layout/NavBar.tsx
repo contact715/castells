@@ -84,8 +84,6 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
         '/blog': 'blog',
         '/contact': 'contact',
         '/team': 'team',
-        '/careers': 'careers',
-        '/company': 'company',
         '/industries': 'industries',
       };
       const page = карта[url];

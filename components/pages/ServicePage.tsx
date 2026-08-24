@@ -92,7 +92,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
     const seoDescription =
         matched?.item.description ||
         category?.description ||
-        `Comprehensive ${displayName.toLowerCase()} solutions for your business.`;
+        `${displayName} for home service businesses.`;
 
     const relatedCases = (() => {
         const norm = (v: string) => v.toLowerCase().trim();
@@ -197,7 +197,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                     ]}
                     badge="Services"
                     title={displayName}
-                    description={`Comprehensive ${displayName.toLowerCase()} solutions for your business.`}
+                    description={`${displayName} for home service businesses.`}
                     onNavigate={onNavigate}
                 />
             </div>
@@ -411,23 +411,23 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                         const faqs = [
                             {
                                 question: `What is ${displayName}?`,
-                                answer: `${displayName} is a comprehensive digital marketing service that helps businesses grow their revenue through data-driven strategies and proven methodologies.`
+                                answer: `${displayName} is one of the services we run for home service businesses: websites and branding, paid ads on Google and Meta, local presence, and automation that answers and books the job.`
                             },
                             {
-                                question: `How long does it take to see results with ${displayName}?`,
-                                answer: `Typically, you'll see initial results within 2-4 weeks, with significant improvements in 3-6 months. Results vary based on your industry, budget, and current marketing infrastructure.`
+                                question: `How long does ${displayName} take to set up?`,
+                                answer: `It depends on the scope. We'll tell you a real timeline once we know your business — we don't quote one before that.`
                             },
                             {
-                                question: `What's included in ${displayName} services?`,
-                                answer: `Our ${displayName.toLowerCase()} services include strategy development, campaign setup, creative development, tracking implementation, ongoing optimization, and monthly reporting.`
+                                question: `What's included in ${displayName}?`,
+                                answer: `What's included and what it costs are both on the pricing page — no call needed to see them.`
                             },
                             {
                                 question: `Do you work with businesses in my industry?`,
-                                answer: `Yes, we work with businesses across multiple industries including construction, home services, professional services, automotive, retail, and healthcare.`
+                                answer: `We work with home service businesses: HVAC, plumbing, appliance repair, remodeling, auto detailing and similar trades. Tell us what your business does and we'll say plainly whether we can help.`
                             },
                             {
-                                question: `What's the minimum budget required for ${displayName}?`,
-                                answer: `We recommend a minimum ad spend of $3,000/month, excluding our agency fee, to see significant results with our systems.`
+                                question: `What's the budget for ${displayName}?`,
+                                answer: `Plans and prices are on the pricing page. The ad budget is separate and goes straight to Google, Meta or Yelp from your own account — we never take a cut of it.`
                             }
                         ];
 

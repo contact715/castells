@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { ArrowUpRight } from 'lucide-react';
 import { m as motion } from 'framer-motion';
 import { Badge } from '../ui/Badge';
 import AnimatedHeading from '../ui/AnimatedHeading';
@@ -108,47 +107,6 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
 
             </motion.div>
           ))}
-
-          {/* Join Team CTA Card */}
-          <motion.div
-            variants={cardVariants}
-            onClick={() => onNavigate?.('careers')}
-            className="group relative aspect-3/4 rounded-card overflow-hidden bg-surface cursor-pointer"
-          >
-            {/* Background Pattern */}
-            <div className="absolute inset-0 opacity-30">
-              <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                <defs>
-                  <pattern id="teamGrid" width="20" height="20" patternUnits="userSpaceOnUse">
-                    <circle cx="1" cy="1" r="0.5" fill="var(--color-accent)" opacity="0.3" />
-                  </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#teamGrid)" />
-              </svg>
-            </div>
-
-            {/* Gradient Overlay */}
-            <div className="absolute inset-0 bg-linear-to-t from-accent/20 via-transparent to-transparent group-hover:from-accent/30 transition-colors duration-500" />
-
-            {/* Content */}
-            <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center">
-              {/* Icon */}
-              <div className="w-16 h-16 rounded-element bg-accent flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                <ArrowUpRight className="w-7 h-7 text-white group-hover:rotate-45 transition-transform duration-300" />
-              </div>
-
-              {/* Text */}
-              <h3 className="font-display text-xl font-semibold text-text-primary mb-2">
-                Join Our Team
-              </h3>
-              <p className="text-sm text-text-secondary leading-relaxed">
-                We're always looking for talented people
-              </p>
-            </div>
-
-            {/* Border Effect */}
-            <div className="absolute inset-0 rounded-card border border-black/5 dark:border-white/10 group-hover:border-accent/50 transition-colors duration-300" />
-          </motion.div>
         </motion.div>
 
       </div>

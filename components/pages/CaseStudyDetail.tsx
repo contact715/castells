@@ -52,35 +52,24 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
   const authorId = (caseStudy as any)?.authorId || (project as any)?.authorId || 'dmitrii';
   const author = findAuthorById(authorId) || AUTHORS[0];
   
-  const data = caseStudy || project || {
-    client: 'Apex Architecture',
-    industry: 'Construction',
-    year: '2024',
-    services: ['Brand Identity', 'Web Development', 'SEO'],
-    description: 'A complete digital transformation for a leading sustainable architecture firm looking to dominate the luxury residential market.',
-    challenge: "Apex was losing market share to younger, digital-native firms. Their legacy website didn't reflect their premium status, and their lead pipeline was dependent on referrals.",
-    solution: "We rebuilt their brand identity to emphasize 'Sustainability as Luxury'. We deployed a headless CMS website optimized for local SEO and launched a targeted Meta Ads campaign focusing on high-net-worth individuals.",
-    results: [
-      { label: "Monthly Revenue", value: "$697k", growth: "+210%" },
-      { label: "Cost Per Lead", value: "$42", growth: "-65%" },
-      { label: "Organic Traffic", value: "12k", growth: "+400%" },
-    ],
-    image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1600&q=80',
-    keyFeatures: ['Custom Headless Architecture', 'Granular Conversion Tracking', 'Sales Funnel Automation'],
-    testimonial: {
-      quote: "The results speak for themselves. We've never seen this level of growth in such a short period.",
-      author: "Sarah Jenkins",
-      role: "CEO, Apex Architecture"
-    }
-  };
+  /*
+    Раньше здесь стоял целиком выдуманный кейс: клиент «Apex Architecture»,
+    которого нет ни в одной базе, вымышленные результаты ($697k выручки,
+    +210%) и вымышленный отзыв от несуществующего человека. Он подставлялся
+    для любого /case-studies/:id, которого нет в CASE_STUDIES — то есть
+    любой мог открыть придуманную историю успеха. Найдено и убрано 24
+    августа 2026. Нет кейса — страница показывает, что его нет, а не
+    выдумывает его.
+  */
+  const data = caseStudy || project;
 
   const tableOfContents = useMemo(() => [
     { id: 'overview', label: 'Overview' },
     { id: 'results', label: 'Results' },
     { id: 'challenge', label: 'Challenge' },
     { id: 'solution', label: 'Solution' },
-    ...(data.brandGuidelines ? [{ id: 'brand-guidelines', label: 'Brand Guidelines' }] : []),
-  ], [data.brandGuidelines]);
+    ...(data?.brandGuidelines ? [{ id: 'brand-guidelines', label: 'Brand Guidelines' }] : []),
+  ], [data?.brandGuidelines]);
 
   // Track active section on scroll
   useEffect(() => {
@@ -139,8 +128,27 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onBack, onNavigate, p
   }, [data]);
 
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
-  const enhancedDescription = `${data.description} Real results from Castells Media's marketing strategies. Serving businesses in Roseville, Los Angeles, and nationwide.`;
   const currentUrl = typeof window !== 'undefined' ? window.location.href : '';
+
+  if (!data) {
+    return (
+      <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20 flex items-center justify-center">
+        <div className="container mx-auto px-6 text-center max-w-xl">
+          <h1 className="font-display text-3xl md:text-4xl font-normal text-text-primary mb-4">
+            This case study does not exist
+          </h1>
+          <p className="text-text-secondary mb-8">
+            The work we can show you is on the work page.
+          </p>
+          <Button onClick={() => onNavigate('work')} size="lg">
+            View our work
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
+  const enhancedDescription = `${data.description} Real results from Castells Media's marketing strategies. Serving businesses in Roseville, Los Angeles, and nationwide.`;
 
   return (
     <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20">

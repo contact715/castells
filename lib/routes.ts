@@ -67,8 +67,6 @@ export const routeFromPathname = (pathname: string): { page: PageView; data?: Na
       return { page: 'work' };
     case '/about':
       return { page: 'about' };
-    case '/careers':
-      return { page: 'careers' };
     case '/blog':
       return { page: 'blog' };
     case '/contact':
@@ -85,8 +83,6 @@ export const routeFromPathname = (pathname: string): { page: PageView; data?: Na
       return { page: 'learn' };
     case '/industries':
       return { page: 'industries' };
-    case '/company':
-      return { page: 'company' };
     case '/thank-you':
       return { page: 'thank-you', data: { name: 'general' } };
     case '/privacy-policy':
@@ -124,8 +120,6 @@ export const pathnameFromRoute = (page: PageView, data?: NavigationData | null):
       return '/learn';
     case 'answer':
       return data?.id ? `/learn/${encodeURIComponent(String(data.id))}` : '/learn';
-    case 'careers':
-      return '/careers';
     case 'blog':
       return '/blog';
     case 'blog-post':
@@ -144,8 +138,6 @@ export const pathnameFromRoute = (page: PageView, data?: NavigationData | null):
       return '/industries';
     case 'industry':
       return buildIndustryPath(data?.id != null ? String(data.id) : undefined);
-    case 'company':
-      return '/company';
     case 'thank-you':
       return '/thank-you';
     case 'privacy-policy':
