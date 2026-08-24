@@ -5,7 +5,7 @@ export const SERVICES: Service[] = [
   {
     id: '1',
     title: 'Digital Marketing',
-    description: 'Data-driven strategies that dominate local markets and deliver measurable ROI.',
+    description: 'Advertising built around calls, with numbers you can check yourself.',
     icon: Megaphone,
   },
   {
@@ -84,7 +84,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     color: '#089662',
     category: 'paid-media',
     challenge: "Roman Service relied entirely on Angie's List for leads, making the business dependent on a single, unpredictable source. The owner was skeptical about digital advertising after previous failures.",
-    solution: "We launched a 'Digital Dominance' ecosystem, starting with a low-risk test on Meta Ads. We built a high-conversion landing page with A/B testing and integrated a custom CRM to automate lead processing.",
+    solution: "We started small: one test campaign on Meta Ads, so the risk was a few hundred dollars and not a season. It brought calls, so we built the landing page it deserved and put a CRM behind it, and now every request lands somewhere instead of in a phone that was busy.",
     keyFeatures: ['Meta Ads (FB & Insta)', 'High-Conversion Landing Page', 'CRM Integration'],
     testimonial: {
       quote: "I honestly didn't expect it to work so fast. I was always skeptical about advertising because before it just ate up the budget with no result. But here I see real calls, requests, people who leave contacts and really need HVAC system installation.",
@@ -122,7 +122,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     location: 'Los Angeles, California',
     year: '2024',
     video: '',
-    description: 'Built a premium brand presence for luxury automotive services, dominating the LA market with high-end visual content and strategic social media marketing.',
+    description: 'Built the brand and the visual content for a luxury automotive service in Los Angeles and strategic social media marketing.',
     services: ['Brand Strategy', 'Web Design', 'Social Media'],
     color: '#3B82F6',
     category: 'web-design',
@@ -137,7 +137,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     location: 'Portland, Oregon',
     year: '2024',
     video: '',
-    description: 'Established a dominant online presence in Portland\'s luxury automotive market through targeted local SEO and high-converting paid advertising campaigns.',
+    description: 'Put a luxury automotive service in Portland where people search for it: local listings, the site, and paid campaigns aimed at the city rather than the whole state.',
     services: ['Local SEO', 'Google Ads', 'PPC'],
     color: '#10B981',
     category: 'paid-media',
