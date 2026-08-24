@@ -87,7 +87,13 @@ export default async function handler(req, res) {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        from: 'Lead Form <onboarding@resend.dev>',
+        /*
+         * onboarding@resend.dev это общий тестовый адрес сервиса: письма с
+         * него доходят только на почту владельца аккаунта. То есть даже после
+         * появления ключа доставка могла не заработать. Отправитель берётся из
+         * переменной, чтобы подставить свой домен после его подтверждения.
+         */
+        from: process.env.RESEND_FROM || 'Castells Media <onboarding@resend.dev>',
         to: ['contact@castells.media'],
         subject: `🔥 New Lead: ${firstName}${companyName ? ` (${companyName})` : ''} — ${serviceInterest}`,
         html: emailHtml,

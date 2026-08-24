@@ -34,7 +34,15 @@ const TrustSection: React.FC = React.memo(() => {
         >
           <div className="flex items-center gap-4">
             <span className="text-sm md:text-base text-text-secondary">
-              Partnering with contractors & service businesses since 2018.
+              {/*
+                Здесь стояло «since 2018». Год основания владельцем не
+                подтверждён: страницу «о нас» от него вычистили 22 августа с
+                прямой записью «пока он не подтверждён, мы его не называем
+                вовсе», а на главной ту же дату оставили. Аудит 24 августа это
+                поймал. Юрлицо зарегистрировано в феврале 2025, и до
+                подтверждения года мы говорим о том, что проверяется.
+              */}
+              Working with contractors and home service businesses across the US.
             </span>
           </div>
           <div className="flex items-center gap-4">
