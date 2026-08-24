@@ -1,4 +1,4 @@
-import { PAGES, TITLE, DESCRIPTION, SITE } from '../scripts/page-meta.mjs';
+import { PAGES, TITLE, DESCRIPTION, SITE, NOT_FOUND } from '../scripts/page-meta.mjs';
 import { findServiceBySlug } from '../data/services';
 import { findIndustryBySlug } from '../data/industries';
 import { findPostById } from '../data/blog';
@@ -56,8 +56,21 @@ const ХАБ_ОТВЕТОВ: СтатическаяСтраница = {
     'Straight answers to the questions home service business owners ask us: whether a website is needed at all, what an agency does every month, and whether a long contract is normal.',
 };
 
-const ПО_УМОЛЧАНИЮ: СтатическаяСтраница =
-  СТАТИЧЕСКИЕ.get('/') ?? { path: '/', title: 'Castells Media', description: '' };
+/*
+  Неизвестный адрес. Первая версия возвращала здесь данные ГЛАВНОЙ, и проверка
+  на живом сайте это поймала: по несуществующему адресу сервер отдавал «Page
+  not found», а браузер писал во вкладку название главной. То есть при
+  клиентском переходе на битую ссылку человек видел бы, что попал на главную,
+  хотя не попал никуда.
+
+  Правильный ответ — то же, что говорит сервер. Молчать о ненайденной странице
+  хуже, чем показать её честно.
+*/
+const НЕ_НАЙДЕНО: СтатическаяСтраница = {
+  path: NOT_FOUND.path,
+  title: NOT_FOUND.title,
+  description: NOT_FOUND.description,
+};
 
 /**
  * Отрезает завершающую косую черту, кроме корня: /work/ и /work — один адрес.
@@ -68,8 +81,8 @@ const нормализовать = (pathname: string): string => {
 };
 
 /**
- * Заголовок и описание для пути. Неизвестный путь возвращает данные главной:
- * лучше показать верное имя сайта, чем чужое имя страницы.
+ * Заголовок и описание для пути. Неизвестный путь возвращает «страница не
+ * найдена» — то же, что отдаёт по нему сервер.
  */
 export function metaForPath(pathname: string): PageMeta {
   const путь = нормализовать(pathname);
@@ -138,7 +151,7 @@ export function metaForPath(pathname: string): PageMeta {
     }
   }
 
-  return { title: ПО_УМОЛЧАНИЮ.title, description: ПО_УМОЛЧАНИЮ.description, canonical: адрес };
+  return { title: НЕ_НАЙДЕНО.title, description: НЕ_НАЙДЕНО.description, canonical: адрес };
 }
 
 /**
