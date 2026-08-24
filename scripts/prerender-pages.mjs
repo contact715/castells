@@ -548,10 +548,49 @@ async function main() {
     `User-agent: *\nAllow: /\n\nSitemap: ${SITE.origin}/sitemap.xml\n`
   );
 
+  await проверитьМаршруты(allPages);
+
   console.log(`prerender: страниц с собственными тегами — ${written}`);
   console.log(`  из них кейсов — ${caseStudies.length}`);
   console.log(`  из них услуг — ${услуги.length}, ниш — ${ниши.length}, статей — ${посты.length}, ответов — ${ответы.length}`);
   console.log(`  404.html, sitemap.xml (${allPages.filter((p) => !p.noindex).length} адресов) и robots.txt пересобраны`);
+}
+
+/**
+ * Сторож маршрутов в vercel.json.
+ *
+ * До 24 августа 2026 там лежали правила вида `/blog/(.*)` → `/index.html`,
+ * оставшиеся с тех пор, когда сайт был одностраничным и весь HTML рисовали
+ * скрипты. После появления предрендера каждая настоящая страница лежит на
+ * диске отдельным файлом, и Vercel отдаёт её раньше этих правил. Значит
+ * сработать они могли только на адресе, которого НЕ существует, — и отвечали
+ * на него кодом 200 и копией главной с разрешением индексировать. Удалённая
+ * статья `/blog/7` так превращалась в дубль главной вместо честного 404.
+ *
+ * Проверка простая: если у префикса все страницы предрендерены, правило
+ * «что угодно под этим префиксом → index.html» может поймать только мёртвый
+ * адрес, и его быть не должно. Сборка на этом падает.
+ */
+async function проверитьМаршруты(allPages) {
+  const файл = path.join(ROOT, 'vercel.json');
+  if (!existsSync(файл)) return;
+
+  const { routes = [] } = JSON.parse(await readFile(файл, 'utf8'));
+  const предрендерены = new Set(allPages.map((p) => p.path));
+
+  const плохие = routes
+    .filter((r) => r.dest === '/index.html' && typeof r.src === 'string' && r.src.includes('(.*)'))
+    .map((r) => r.src.replace('(.*)', ''))
+    .filter((префикс) => [...предрендерены].some((p) => p.startsWith(префикс) && p !== префикс));
+
+  if (плохие.length) {
+    console.error(
+      'prerender: в vercel.json остались правила, которые отдают копию главной\n' +
+      'на несуществующих адресах вместо 404. Уберите их или замените на 301:\n' +
+      плохие.map((p) => `  ${p}(.*) → /index.html`).join('\n')
+    );
+    process.exit(1);
+  }
 }
 
 /* --- самопроверка: гоняется без сборки и ничего не пишет в dist --- */
