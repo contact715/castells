@@ -172,6 +172,70 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    id: 4,
+    slug: 'is-your-site-in-google',
+    title: 'We checked whether our own site was in Google. It was not.',
+    excerpt:
+      'A five-minute check any owner can run on their own site, and what we found when we ran it on ours: not a single page in the index.',
+    date: 'August 24, 2026',
+    readingMinutes: 5,
+    category: 'Search',
+    author: 'Dmitrii Z.',
+    authorRole: 'Founder, Castells Media',
+    sections: [
+      {
+        heading: 'The check takes five minutes',
+        body: [
+          'Open Google and type site: followed by your domain, with no space. For us that is site:castells.media. What comes back is roughly what Google has stored about your site.',
+          'If you see your pages, fine. If you see a handful when you have thirty, most of your site is invisible. If you see nothing at all, your site is not in the index, and every dollar you spend on content is going into a room nobody can enter.',
+        ],
+      },
+      {
+        heading: 'What we found on ours',
+        body: [
+          'Nothing. Not one page. The results were a book about a sociologist with the same surname, Catalan human towers, and our own company filing in the California business registry.',
+          'Our name found the registry entry and a few other agencies called Castells. Our site was not there. Searching for what we actually do, marketing for HVAC contractors in our area, returned two competitors and no us.',
+          'This is an agency that sells search work. It is not a comfortable thing to publish. It is also the reason this article exists: the same three problems sit on a lot of contractor sites, and they are easier to find in someone else\'s house than your own.',
+        ],
+      },
+      {
+        heading: 'Problem one: the site answered on two addresses',
+        body: [
+          'Our site loaded at castells.media and at www.castells.media, both returning a normal page, with nothing telling anyone which one was real. To a search engine that is two sites with identical content competing with each other.',
+          'Check yours: type your domain with www and without. If both open and neither jumps to the other, that is the same problem. It is fixed in one line of server configuration.',
+        ],
+      },
+      {
+        heading: 'Problem two: every page had the same title',
+        body: [
+          'Forty of our pages shared one title. Services, industries, all of them identical in the eyes of a crawler. Forty pages that look the same are not forty chances to be found, they are forty pages competing for the same slot and none of them winning.',
+          'Check yours: open two different service pages and look at the browser tab. Different text? Good. Same text? There is your problem.',
+        ],
+      },
+      {
+        heading: 'Problem three: the links only existed for humans',
+        body: [
+          'Our menu worked perfectly when you clicked it, because it was built with scripts. A crawler that does not run scripts saw five pages out of seventy-four. Everything else had no way in.',
+          'This one is harder to check yourself, but there is a rough version: open your site with JavaScript disabled in your browser settings. Whatever disappears is roughly what a crawler may be missing.',
+        ],
+      },
+      {
+        heading: 'What we still do not know',
+        body: [
+          'Whether Google ever tried to crawl us and failed, or simply has not come around yet. That answer lives in Google Search Console, and we do not have access to it on this domain yet. Anyone telling you they know the cause without looking at Search Console is guessing.',
+          'So this is not a story with a happy ending attached. We found three real problems, we fixed all three, and now we wait and check again in a month. If it works, we will publish that too, with the same screenshots and the same dates.',
+        ],
+      },
+      {
+        heading: 'If you run the check on your own site',
+        body: [
+          'Three things worth looking at, in order: does site:yourdomain.com return your pages, do two different pages have two different titles, and does your site load on one address instead of two.',
+          'None of that requires an agency. If the answers come back badly and you want a hand, our prices are on this site and the phone number is at the bottom of every page.',
+        ],
+      },
+    ],
+  },
 ];
 
 export const findPostBySlug = (slug: string) => BLOG_POSTS.find((p) => p.slug === slug);
