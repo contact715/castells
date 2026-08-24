@@ -216,8 +216,11 @@ function answerPages(ответы) {
       'Straight answers to the questions home service business owners ask us: whether a website is needed at all, what an agency does every month, and whether a long contract is normal.',
     h1: 'Questions we get asked',
     intro:
-      'Written from what we actually do, with our own prices and our own clients inside. No question goes up here unless we have something of our own to say about it.',
-    body: ответы.map((о) => `${о.question} ${о.short}`),
+      'Written from what we actually do, with our own prices and our own clients inside. Nothing goes up here unless we have something of our own to say about it.',
+    body: [
+      ...ответы.map((о) => `${о.question} ${о.short}`),
+      'The journal is here too: what we ran into and what we did about it, with dates.',
+    ],
   };
 
   return [
@@ -442,7 +445,33 @@ function relatedLinks(page, все) {
   return ссылки.slice(0, 26);
 }
 
-function buildBody(page, все = []) {
+/**
+ * Разделы сайта. Читаются из data/navigation.ts — того же файла, из которого
+ * их берут шапка и подвал. До 24 августа 2026 этот список был вписан сюда
+ * руками, и за сутки разъехался с шапкой на три пункта: робот видел восемь
+ * разделов, человек пять. Копия правды разъезжается всегда, вопрос срока.
+ */
+async function readNavigation() {
+  const source = await readFile(path.join(ROOT, 'data/navigation.ts'), 'utf8');
+  const границаLegal = source.indexOf('export const LEGAL');
+  if (границаLegal === -1) throw new Error('в data/navigation.ts нет списка LEGAL');
+
+  const разбор = (кусок) => {
+    const из = [];
+    const ре = /\{\s*label:\s*'([^']+)',\s*page:\s*'[^']+',\s*href:\s*'([^']+)'/g;
+    for (const m of кусок.matchAll(ре)) из.push({ label: m[1], href: m[2] });
+    return из;
+  };
+
+  const sections = разбор(source.slice(0, границаLegal));
+  const legal = разбор(source.slice(границаLegal));
+
+  if (sections.length === 0) throw new Error('не удалось прочитать разделы из data/navigation.ts');
+  if (legal.length === 0) throw new Error('не удалось прочитать юридические страницы из data/navigation.ts');
+  return { sections, legal };
+}
+
+function buildBody(page, все = [], меню = null) {
   const paragraphs = [page.intro, ...(page.body ?? [])]
     .filter(Boolean)
     .map((p) => `      <p>${escape(p)}</p>`)
@@ -460,26 +489,17 @@ function buildBody(page, все = []) {
 ${paragraphs}
       <nav aria-label="Main">
         <a href="/">Home</a>
-        <a href="/work">Work</a>
-        <a href="/services">Services</a>
-        <a href="/industries">Industries</a>
-        <a href="/pricing">Prices</a>
-        <a href="/learn">Answers</a>
-        <a href="/blog">Notes</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
+${(меню?.sections ?? []).map((р) => `        <a href="${р.href}">${escape(р.label)}</a>`).join('\n')}
       </nav>${блокСвязей}
       <nav aria-label="Legal">
-        <a href="/privacy-policy">Privacy</a>
-        <a href="/terms">Terms</a>
-        <a href="/cookie-policy">Cookies</a>
+${(меню?.legal ?? []).map((р) => `        <a href="${р.href}">${escape(р.label)}</a>`).join('\n')}
       </nav>
       <address>${escape(SITE.legalName)}, ${escape(SITE.city)}</address>
     </div>`;
 }
 
 /** Вставляет голову и тело в шаблон сборки. */
-export function renderPage(template, page, все = []) {
+export function renderPage(template, page, все = [], меню = null) {
   let html = template;
 
   // Заголовок и описание из шаблона убираем: у страницы теперь свои
@@ -489,7 +509,7 @@ export function renderPage(template, page, все = []) {
   html = html.replace('</head>', `${buildHead(page)}\n  </head>`);
   html = html.replace(
     /(<div id="root">)(\s*)(<\/div>)/,
-    (_m, open, _ws, close) => `${open}\n${buildBody(page, все)}\n    ${close}`
+    (_m, open, _ws, close) => `${open}\n${buildBody(page, все, меню)}\n    ${close}`
   );
 
   return html;
@@ -520,6 +540,7 @@ async function main() {
   const { услуги, ниши } = await readCatalog();
   const посты = await readPosts();
   const ответы = await readAnswers();
+  const меню = await readNavigation();
   const allPages = [
     ...PAGES,
     ...caseStudyPages(caseStudies),
@@ -532,7 +553,7 @@ async function main() {
   let written = 0;
   for (const page of allPages) {
     if (page.staticFile) continue; // у страницы уже есть свой готовый файл
-    const html = renderPage(template, page, allPages);
+    const html = renderPage(template, page, allPages, меню);
     const dir = page.path === '/' ? DIST : path.join(DIST, page.path);
     await mkdir(dir, { recursive: true });
     await writeFile(path.join(dir, 'index.html'), html);
@@ -540,7 +561,7 @@ async function main() {
   }
 
   // Страница, которой нет. Vercel отдаёт её с кодом 404.
-  await writeFile(path.join(DIST, '404.html'), renderPage(template, NOT_FOUND));
+  await writeFile(path.join(DIST, '404.html'), renderPage(template, NOT_FOUND, [], меню));
 
   await writeFile(path.join(DIST, 'sitemap.xml'), buildSitemap(allPages));
   await writeFile(
@@ -608,7 +629,8 @@ async function selfTest() {
   const template =
     '<!DOCTYPE html><html><head><meta name="description" content="old" /><title>Old</title></head><body><div id="root"></div></body></html>';
   const page = PAGES[0];
-  const out = renderPage(template, page);
+  const меню = await readNavigation();
+  const out = renderPage(template, page, [], меню);
 
   t('старый заголовок убран', () => !out.includes('<title>Old</title>'));
   t('старое описание убрано', () => !out.includes('content="old"'));
@@ -636,6 +658,32 @@ async function selfTest() {
     PAGES.every((p) => p.title?.length > 10 && p.description?.length > 30));
   t('заголовки не длиннее 70 знаков', () => PAGES.every((p) => p.title.length <= 70));
   t('описания не длиннее 165 знаков', () => PAGES.every((p) => p.description.length <= 165));
+
+  // ── Одно меню на весь сайт ────────────────────────────────────────────
+  // Проверки ниже стерегут конкретный дефект 24 августа 2026: списки разделов
+  // жили в трёх файлах и разъехались за сутки. Робот видел восемь разделов,
+  // человек пять, три страницы нельзя было найти сверху ни с одной страницы.
+  t('разделы читаются из data/navigation.ts', () => меню.sections.length >= 7);
+  t('юридические страницы читаются оттуда же', () => меню.legal.length === 3);
+  t('каждый раздел попал в разметку для робота', () =>
+    меню.sections.every((р) => out.includes(`href="${р.href}"`)));
+  t('каждая юридическая страница попала туда же', () =>
+    меню.legal.every((р) => out.includes(`href="${р.href}"`)));
+  t('журнал есть в меню', () => меню.sections.some((р) => р.href === '/blog'));
+  t('страница команды есть в меню', () => меню.sections.some((р) => р.href === '/team'));
+  // Хаб /learn собирается на лету, поэтому сверяем с полным списком страниц,
+  // а не только со статическим.
+  const всеПути = new Set([...PAGES, ...answerPages(await readAnswers())].map((p) => p.path));
+  t('каждый раздел меню — живая страница сайта', () =>
+    меню.sections.every((р) => всеПути.has(р.href)));
+
+  // Шапка и подвал обязаны брать список оттуда же, а не заводить свой.
+  const шапка = await readFile(path.join(ROOT, 'components/layout/NavBar.tsx'), 'utf8');
+  const подвал = await readFile(path.join(ROOT, 'components/layout/Footer.tsx'), 'utf8');
+  t('шапка читает общий список', () => шапка.includes("from '../../data/navigation'"));
+  t('подвал читает общий список', () => подвал.includes("from '../../data/navigation'"));
+  t('в шапке нет своего списка разделов', () => !/const\s+\S+:\s*\{\s*label:/.test(шапка));
+  t('в подвале нет своего списка разделов', () => !/const\s+SECTIONS\s*[:=]/.test(подвал));
 
   const failed = checks.filter(([, ok]) => !ok);
   for (const [name, ok] of checks) console.log(`${ok ? '  ok' : 'FAIL'}  ${name}`);

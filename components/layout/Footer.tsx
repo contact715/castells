@@ -3,6 +3,7 @@ import { Phone, Mail, MapPin } from 'lucide-react';
 import { Instagram, Threads, Facebook } from '../ui/icons/SocialIcons';
 import { PageView } from '../../App';
 import { NavigationData } from '../../types';
+import { SECTIONS, LEGAL } from '../../data/navigation';
 
 /*
   Подвал, переписанный 22 августа 2026. Владелец: «подвал тоже почисти».
@@ -19,32 +20,23 @@ import { NavigationData } from '../../types';
   а такого обработчика в проекте нет и маршрута в vercel.json тоже.
   Проверено на живом сайте — 404. То есть человек оставлял почту в никуда.
 
-  Стало 13 ссылок: пять разделов, телефон, почта, три соцсети и три
-  юридические страницы. Поисковику дорогу к посадочным страницам даёт
-  карта сайта, человеку — хабы /services и /work. Перегруженный подвал
-  был одним из главных дефектов, за которые мы ругали старый сайт, и
-  лечить его ещё одним перегруженным подвалом смысла не было.
+  Стало: разделы верхнего уровня, телефон, почта, адрес, три соцсети и три
+  юридические страницы. До конкретной услуги или ниши человек доходит через
+  хаб, а не через список из двадцати пунктов в подвале.
+
+  Правка 24 августа: список разделов больше не лежит здесь. Он один на весь
+  сайт, в data/navigation.ts, и его же читают шапка и генератор статических
+  страниц. До этой правки подвал знал о семи разделах, шапка о пяти, а робот
+  о восьми — три копии одного факта разъехались за сутки.
+
+  Подвал показывает ВСЕ разделы, включая те, что не влезли в шапку: журнал,
+  страницу команды и локальную страницу Roseville. Здесь места сколько угодно,
+  и здесь же для робота лежит полный путь к каждому разделу с любой страницы.
 */
 
 interface FooterProps {
   onNavigate?: (page: PageView, data?: NavigationData) => void;
 }
-
-const SECTIONS: { label: string; page: PageView; href: string }[] = [
-  { label: 'Work', page: 'work', href: '/work' },
-  { label: 'Services', page: 'services', href: '/services' },
-  { label: 'Prices', page: 'pricing', href: '/pricing' },
-  { label: 'Industries', page: 'industries', href: '/industries' },
-  { label: 'About', page: 'about', href: '/about' },
-  { label: 'Answers', page: 'learn', href: '/learn' },
-  { label: 'Contact', page: 'contact', href: '/contact' },
-];
-
-const LEGAL: { label: string; page: PageView; href: string }[] = [
-  { label: 'Privacy', page: 'privacy-policy', href: '/privacy-policy' },
-  { label: 'Terms', page: 'terms', href: '/terms' },
-  { label: 'Cookies', page: 'cookie-policy', href: '/cookie-policy' },
-];
 
 const SOCIAL = [
   { label: 'Castells in Instagram', href: 'https://www.instagram.com/castells.media/', Icon: Instagram },
@@ -66,7 +58,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   return (
     <footer className="relative bg-ivory dark:bg-[#191919] text-black dark:text-white">
       <div className="container mx-auto px-6 pt-16 pb-10">
-        <div className="grid grid-cols-1 md:grid-cols-[1.4fr_1fr_1fr] gap-10 md:gap-12 pb-10 border-b border-black/10 dark:border-white/10">
+        <div className="grid grid-cols-1 md:grid-cols-[1.2fr_1.2fr_1fr] gap-10 md:gap-12 pb-10 border-b border-black/10 dark:border-white/10">
 
           {/* Кто мы */}
           <div>
@@ -93,7 +85,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <h4 className="text-[11px] font-bold tracking-wide text-accent-text mb-4">
               Sections
             </h4>
-            <div className="flex flex-col gap-2.5">
+            <div className="grid grid-cols-2 gap-x-6 gap-y-2.5">
               {SECTIONS.map((item) => (
                 <a
                   key={item.page}
@@ -121,10 +113,16 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 <Mail className="w-4 h-4 shrink-0" aria-hidden="true" />
                 contact@castells.media
               </a>
-              <p className="text-sm text-text-secondary dark:text-white/60 inline-flex items-center gap-2">
-                <MapPin className="w-4 h-4 shrink-0" aria-hidden="true" />
+              {/* Адрес ведёт на страницу города: для человека это самый
+                  естественный вход, для поиска — связь конторы с местом. */}
+              <a
+                href="/roseville-marketing-agency"
+                onClick={(e) => handleNav(e, 'roseville')}
+                className={`${linkClass} inline-flex items-start gap-2`}
+              >
+                <MapPin className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true" />
                 1298 Antelope Creek Drive, Roseville, California
-              </p>
+              </a>
             </div>
 
             <div className="flex gap-1 mt-5 -ml-2.5">

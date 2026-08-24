@@ -70,7 +70,7 @@ export const PAGES = [
     path: '/roseville-marketing-agency',
     title: 'Marketing agency in Roseville, California | Castells Media',
     description:
-      'Castells Media is a marketing agency at 1298 Antelope Creek Drive, Roseville, CA. Websites, Google and Meta ads, local presence and follow-up for home service businesses. Monthly plans from $590.',
+      'Marketing agency in Roseville, California: websites, Google and Meta ads, local presence and follow-up for home service businesses. Monthly plans from $590.',
     h1: 'Marketing agency in Roseville',
     intro:
       'We work out of Roseville and run websites, ads and follow-up for home service businesses. You can walk in, call, or write — all three reach the same people.',

@@ -6,46 +6,30 @@ import { PageView } from '../../App';
 import { NavigationData } from '../../types';
 import { Navbar, NavBody, MobileNav, MobileNavHeader, MobileNavToggle, MobileNavMenu } from '../ui/ResizableNavbar';
 import Search from '../ui/Search';
+import { HEADER_SECTIONS } from '../../data/navigation';
 import { cn } from '../../lib/utils';
 
 /*
-  Шапка, переписана 23 августа 2026.
+  Шапка.
 
-  Что было. Пять пунктов с выпадающими списками: Cases, Services, Industries,
-  Company, Prices. Внутри Services раскрывались двадцать услуг, внутри
-  Industries двадцать ниш, внутри Company ещё пять ссылок. Файл на 805 строк.
+  23 августа 2026 её переписали с пяти выпадающих списков на плоский ряд.
+  Причина была верной: списки раздавали сорок страниц услуг и ниш как равные,
+  а в мобильной версии два десятка пунктов вели на якоря #services и
+  #industries, которых на странице нет.
 
-  Три причины переписать:
+  Но перевес получился в другую сторону. За следующий день на сайте появились
+  /industries, /learn и /blog, их добавили в подвал и в разметку для робота, а
+  шапку не тронули. Робот видел восемь разделов, человек пять. Три раздела
+  нельзя было найти сверху ни на одной странице.
 
-  1. Названия не совпадали с сайтом. «Cases» вело на /work, «Company» на
-     страницу компании, а разделов About и Contact в шапке не было вовсе, хотя
-     в подвале они есть. Человек ищет «контакты» и не находит их наверху.
-
-  2. Выпадающие списки раздавали то, чего мы сами не индексируем. Из двадцати
-     ниш нашими клиентами обеспечены две, из двадцати услуг в поиск идут восемь.
-     Меню предлагало все сорок как равные.
-
-  3. В мобильном меню десятки пунктов вели на якоря #services и #industries,
-     которых на странице нет. То есть на телефоне меню выглядело богатым, а
-     нажатия не делали ничего. Проверено: таких мёртвых ссылок было больше
-     двадцати.
-
-  Стало пять пунктов без вложенности, одинаковых на всех экранах: Work,
-  Services, Prices, About, Contact. Ровно те же разделы, что в подвале. До
-  конкретной услуги или ниши человек доходит через хаб, как и задумано.
+  Поэтому список пунктов больше не живёт здесь. Он один на весь сайт и лежит в
+  data/navigation.ts, откуда его читают шапка, подвал и генератор статических
+  страниц. Разъехаться им теперь нечем.
 */
 
 interface NavBarProps {
   onNavigate?: (page: PageView, data?: NavigationData) => void;
 }
-
-const РАЗДЕЛЫ: { label: string; page: PageView; href: string }[] = [
-  { label: 'Work', page: 'work', href: '/work' },
-  { label: 'Services', page: 'services', href: '/services' },
-  { label: 'Prices', page: 'pricing', href: '/pricing' },
-  { label: 'About', page: 'about', href: '/about' },
-  { label: 'Contact', page: 'contact', href: '/contact' },
-];
 
 const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -76,6 +60,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
       if (url.startsWith('/industries/')) return onNavigate?.('industry', { id: url.replace('/industries/', '') });
       if (url.startsWith('/blog/')) return onNavigate?.('blog-post', { id: url.replace('/blog/', '') });
       if (url.startsWith('/case-studies/')) return onNavigate?.('case-study', { id: url.replace('/case-studies/', '') });
+      if (url.startsWith('/learn/')) return onNavigate?.('answer', { id: url.replace('/learn/', '') });
       const карта: Record<string, PageView> = {
         '/about': 'about',
         '/work': 'work',
@@ -85,6 +70,8 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
         '/contact': 'contact',
         '/team': 'team',
         '/industries': 'industries',
+        '/learn': 'learn',
+        '/roseville-marketing-agency': 'roseville',
       };
       const page = карта[url];
       if (page) onNavigate?.(page);
@@ -93,7 +80,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
   );
 
   const пунктКласс =
-    'text-sm font-medium text-text-secondary hover:text-text-primary dark:hover:text-white transition-colors px-3 py-2 cursor-pointer';
+    'text-sm font-medium text-text-secondary hover:text-text-primary dark:hover:text-white transition-colors px-2.5 py-2 cursor-pointer';
 
   return (
     <Navbar>
@@ -123,7 +110,7 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
 
         <div className="flex items-center gap-6">
           <nav className="flex items-center" aria-label="Основные разделы">
-            {РАЗДЕЛЫ.map((раздел) => (
+            {HEADER_SECTIONS.map((раздел) => (
               <a
                 key={раздел.page}
                 href={раздел.href}
@@ -174,10 +161,9 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
         </MobileNavHeader>
 
         <MobileNavMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)}>
-          {/* Те же пять разделов, что и на десктопе. Раньше здесь было
-              двадцать с лишним пунктов, ведущих на несуществующие якоря. */}
+          {/* Те же разделы, что и на настольной версии: один список на всех. */}
           <nav className="grid gap-1" aria-label="Основные разделы">
-            {РАЗДЕЛЫ.map((раздел) => (
+            {HEADER_SECTIONS.map((раздел) => (
               <a
                 key={раздел.page}
                 href={раздел.href}
