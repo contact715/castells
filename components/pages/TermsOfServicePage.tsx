@@ -106,7 +106,7 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
                 Questions about these terms: <a className="text-accent-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a>
               </p>
               <p className="text-text-secondary">
-                Castells Media Inc, Roseville, CA 90401
+                Castells Media Inc, Roseville, CA 95661
               </p>
             </section>
           </div>

@@ -152,8 +152,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
               baseStyles,
               variants[variant],
               sizes[size],
-              error && "-red-500 focus:-red-500",
-              showIcon && isValid && "-green-500",
+              error && "border-red-500 focus:border-red-500",
+              showIcon && isValid && "border-green-500",
               showIcon && "pr-10",
               className
             )}

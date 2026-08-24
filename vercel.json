@@ -91,13 +91,6 @@
       "status": 308
     },
     {
-      "src": "/blog/(5|6|7|8|9)",
-      "status": 301,
-      "headers": {
-        "Location": "/blog"
-      }
-    },
-    {
       "src": "/case-studies",
       "status": 301,
       "headers": {

@@ -11,14 +11,18 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   /*
-   * Ключа почтового сервиса в проде нет, и обработчик из-за этого отвечал 500
-   * на каждую заявку: человек проходил всю форму и упирался в ошибку. Найдено
-   * аудитом 24 августа 2026, проверено запросом к живому сайту.
+   * Почтовый ключ в проде не задан, и обработчик отвечал 500 на каждую заявку.
+   * Найдено аудитом 24 августа.
    *
-   * Теперь при отсутствии ключа заявка уходит тем же путём, что и с формы
-   * контактов — через formsubmit на почту компании. Медленнее и проще, но
-   * доходит. Терять заявки, пока кто-то не пропишет переменную окружения,
-   * нельзя.
+   * Первая попытка лечения была неверной: я направил заявку в formsubmit, тот
+   * же сервис, что и у формы контактов. Проверка показала, что он отказывает
+   * запросам, пришедшим не из браузера («Make sure you open this page through
+   * a web server»), и вдобавок требует одноразовой активации по письму. То
+   * есть с сервера этот путь не заработает никогда.
+   *
+   * Поэтому здесь честно: пока ключа нет, заявку принять нечем. Человеку
+   * возвращается понятное сообщение с рабочим каналом вместо технической
+   * ошибки, и это единственное, что можно сделать без действия владельца.
    */
   const apiKey = process.env.RESEND_API_KEY;
 
@@ -65,26 +69,15 @@ export default async function handler(req, res) {
     `;
 
     if (!apiKey) {
-      const запасной = await fetch('https://formsubmit.co/ajax/contact@castells.media', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          _subject: `New lead: ${firstName}${companyName ? ` (${companyName})` : ''} — ${serviceInterest}`,
-          _template: 'table',
-          name: firstName,
-          company: companyName || '',
-          phone,
-          city: cityState || '',
-          service: serviceInterest,
-          source: 'lead-form page',
-        }),
+      // Заявку видно хотя бы в логах Vercel, пока канал не настроен
+      console.error('LEAD RECEIVED BUT NOT DELIVERED (no RESEND_API_KEY):', JSON.stringify({
+        firstName, companyName, phone, cityState, serviceInterest, at: new Date().toISOString(),
+      }));
+      return res.status(503).json({
+        error: 'We could not submit the form right now. Please text us on WhatsApp at +1 (916) 619-6006 or call — we answer there fastest.',
+        whatsapp: 'https://wa.me/19166196006',
+        phone: '+19166196006',
       });
-
-      if (!запасной.ok) {
-        console.error('formsubmit fallback failed', запасной.status);
-        return res.status(500).json({ error: 'Could not send the request. Please write to us on WhatsApp.' });
-      }
-      return res.status(200).json({ success: true, via: 'formsubmit' });
     }
 
     const response = await fetch('https://api.resend.com/emails', {

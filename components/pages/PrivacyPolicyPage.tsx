@@ -109,7 +109,7 @@ const PrivacyPolicyPage: React.FC<PrivacyPolicyPageProps> = ({ onNavigate }) => 
             <section className="space-y-3">
               <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">Contact</h2>
               <p className="text-text-secondary">
-                For privacy requests or questions about this policy, email <a className="text-accent-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a> or write to us at: Castells Media Inc, Roseville, CA 90401.
+                For privacy requests or questions about this policy, email <a className="text-accent-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a> or write to us at: Castells Media Inc, Roseville, CA 95661.
               </p>
             </section>
           </div>

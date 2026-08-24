@@ -86,7 +86,7 @@ const FAQ: React.FC = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: idx * 0.1 }}
-                    className={`border-b border-black/10 ${idx === 0 ? 'border-t' : ''}`}
+                    className={`border-b border-black/10 dark:border-white/15 ${idx === 0 ? 'border-t' : ''}`}
                   >
                     <button
                       onClick={() => setOpenIndex(isOpen ? null : idx)}
