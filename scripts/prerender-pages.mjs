@@ -228,6 +228,7 @@ function answerPages(ответы) {
       description: о.short,
       h1: о.question,
       intro: о.short,
+      faq: { question: о.question, answer: о.short },
       body: [
         'Answered by Castells Media, a marketing agency at 1298 Antelope Creek Drive, Roseville, California, working with home service businesses across the US.',
         'Every number in this answer is one of our published prices, so it can be checked on this same site.',
@@ -299,6 +300,26 @@ function buildSchema(page) {
   };
 
   const блоки = [организация];
+
+  /*
+    Страницы-ответы объявляют вопрос и ответ. Поиск показывает такие страницы
+    развёрнутым блоком, но только если ответ действительно есть на странице.
+    Он здесь есть: в разметку идёт тот же текст, что человек читает вводным
+    абзацем, а не приманка ради красивой выдачи.
+  */
+  if (page.faq) {
+    блоки.push({
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: page.faq.question,
+          acceptedAnswer: { '@type': 'Answer', text: page.faq.answer },
+        },
+      ],
+    });
+  }
 
   // Хлебные крошки: помогают поиску понять, где страница в структуре сайта
   if (page.path !== '/') {
