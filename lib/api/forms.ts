@@ -11,6 +11,11 @@
  * уже слала заявки через formsubmit.co на почту contact@castells.media.
  * Теперь тот же путь используют все формы сайта.
  *
+ * Поправка от 24 августа: «все формы» было неправдой. Ветка опросника
+ * содержала запасное значение '/api/quiz', из-за которого путь через
+ * formsubmit оказался недостижим, и запросы шли на несуществующий адрес.
+ * Аудит это нашёл, ветка исправлена.
+ *
  * Порядок попыток: свой обработчик, если он появится (VITE_FORM_API_ENDPOINT),
  * затем formsubmit. Ошибка отправки по-прежнему показывается человеку, а не
  * прячется за ложным «спасибо».
@@ -180,18 +185,23 @@ export const submitQuizForm = async (data: {
       return await submitQuizViaResend(data, resendApiKey);
     }
 
-    const apiEndpoint = import.meta.env.VITE_FORM_API_ENDPOINT || '/api/quiz';
-    
-    if (apiEndpoint.startsWith('http') || apiEndpoint.startsWith('/api')) {
-      if (apiEndpoint) return await submitViaAPI(data as any, apiEndpoint);
-      return await submitViaFormsubmit(data as unknown as Record<string, unknown>, 'New request from the quiz');
+    /*
+     * Здесь стояло `VITE_FORM_API_ENDPOINT || '/api/quiz'`, и из-за запасного
+     * значения условие ниже было истинным ВСЕГДА. Значит отправка через
+     * formsubmit была недостижима, а запросы уходили на /api/quiz, которого
+     * не существует: прод отвечает 404. Контактную форму я 23 августа починил,
+     * а эту ветку пропустил — комментарий в шапке файла утверждал, что
+     * починены обе. Найдено аудитом 24 августа.
+     */
+    const apiEndpoint = import.meta.env.VITE_FORM_API_ENDPOINT;
+    if (apiEndpoint) {
+      return await submitViaAPI(data as never, apiEndpoint);
     }
 
-    console.log('Quiz form submission (development mode):', data);
-    return {
-      success: true,
-      message: 'Form submitted successfully (development mode)',
-    };
+    return await submitViaFormsubmit(
+      data as unknown as Record<string, unknown>,
+      'New request from the quiz'
+    );
   } catch (error) {
     console.error('Quiz form submission error:', error);
     return {

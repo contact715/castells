@@ -10,11 +10,17 @@ export default async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
+  /*
+   * Ключа почтового сервиса в проде нет, и обработчик из-за этого отвечал 500
+   * на каждую заявку: человек проходил всю форму и упирался в ошибку. Найдено
+   * аудитом 24 августа 2026, проверено запросом к живому сайту.
+   *
+   * Теперь при отсутствии ключа заявка уходит тем же путём, что и с формы
+   * контактов — через formsubmit на почту компании. Медленнее и проще, но
+   * доходит. Терять заявки, пока кто-то не пропишет переменную окружения,
+   * нельзя.
+   */
   const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    console.error('RESEND_API_KEY is not set');
-    return res.status(500).json({ error: 'Email service not configured' });
-  }
 
   try {
     const { firstName, phone, cityState, serviceInterest, companyName } = req.body;
@@ -57,6 +63,29 @@ export default async function handler(req, res) {
         </div>
       </div>
     `;
+
+    if (!apiKey) {
+      const запасной = await fetch('https://formsubmit.co/ajax/contact@castells.media', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          _subject: `New lead: ${firstName}${companyName ? ` (${companyName})` : ''} — ${serviceInterest}`,
+          _template: 'table',
+          name: firstName,
+          company: companyName || '',
+          phone,
+          city: cityState || '',
+          service: serviceInterest,
+          source: 'lead-form page',
+        }),
+      });
+
+      if (!запасной.ok) {
+        console.error('formsubmit fallback failed', запасной.status);
+        return res.status(500).json({ error: 'Could not send the request. Please write to us on WhatsApp.' });
+      }
+      return res.status(200).json({ success: true, via: 'formsubmit' });
+    }
 
     const response = await fetch('https://api.resend.com/emails', {
       method: 'POST',
