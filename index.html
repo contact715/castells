@@ -90,6 +90,9 @@
       }
       #prerendered-content nav a { color: #8a8783; margin-right: 1rem; }
       @media (prefers-color-scheme: dark) {
+        /* Пока стили не загрузились, страница красится этим блоком. Без строки
+           про body человек с тёмной темой видел вспышку светлого фона. */
+        body { background-color: #191919; color: #EEF1F0; }
         #prerendered-content { color: #EEF1F0; }
         #prerendered-content p { color: #a8a5a0; }
       }
