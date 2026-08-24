@@ -73,6 +73,8 @@ export const routeFromPathname = (pathname: string): { page: PageView; data?: Na
       return { page: 'services' };
     case '/pricing':
       return { page: 'pricing' };
+    case '/roseville-marketing-agency':
+      return { page: 'roseville' };
     case '/industries':
       return { page: 'industries' };
     case '/company':
@@ -108,6 +110,8 @@ export const pathnameFromRoute = (page: PageView, data?: NavigationData | null):
       return '/about';
     case 'pricing':
       return '/pricing';
+    case 'roseville':
+      return '/roseville-marketing-agency';
     case 'careers':
       return '/careers';
     case 'blog':

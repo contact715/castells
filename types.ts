@@ -38,6 +38,7 @@ export type PageView =
   | 'industry'
   | 'services'
   | 'pricing'
+  | 'roseville'
   | 'industries'
   | 'company'
   | 'thank-you'

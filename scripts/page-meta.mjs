@@ -67,6 +67,21 @@ export const PAGES = [
       'Month to month, no contract. The ad budget is yours and goes straight to Google, Meta and Yelp — we never take a cut of it.',
   },
   {
+    path: '/roseville-marketing-agency',
+    title: 'Marketing agency in Roseville, California | Castells Media',
+    description:
+      'Castells Media is a marketing agency at 1298 Antelope Creek Drive, Roseville, CA. Websites, Google and Meta ads, local presence and follow-up for home service businesses. Monthly plans from $590.',
+    h1: 'Marketing agency in Roseville',
+    intro:
+      'We work out of Roseville and run websites, ads and follow-up for home service businesses. You can walk in, call, or write — all three reach the same people.',
+    body: [
+      'Castells Media Inc, 1298 Antelope Creek Drive, Roseville, California. Phone +1 (916) 619-6006, email contact@castells.media. The fastest answer is WhatsApp or Telegram on the same number.',
+      'Who we work with: heating and air conditioning, plumbing, appliance repair, remodeling, auto detailing — companies where the money arrives as a phone call.',
+      'Our clients in California: Cool Doc (HVAC, Los Angeles); Appliance Repair Clinic (home services, Los Angeles); Drive Car Studio (automotive, Los Angeles). None of them are in Roseville itself, and we are not going to pretend otherwise.',
+      'Prices: monthly plans from $590, websites from $1,750, automation setup from $1,500. Month to month, no contract. The ad budget goes straight to Google, Meta and Yelp from your own account.',
+    ],
+  },
+  {
     path: '/about',
     title: 'About Castells Media | Roseville marketing agency',
     description:
