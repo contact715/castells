@@ -44,7 +44,7 @@ const DEFAULT_COMPARISONS: ComparisonItem[] = [
   },
   {
     feature: 'Support',
-    us: '24/7 access, responsive',
+    us: 'You write to the person doing the work',
     competitors: 'Business hours only'
   },
 ];

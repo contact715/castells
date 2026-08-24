@@ -413,7 +413,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                             },
                             {
                                 question: `What results can I expect for my ${displayName} business?`,
-                                answer: `Results vary, but our ${displayName.toLowerCase()} clients typically see 2-4x ROAS, 200-400% increase in qualified leads, and significant revenue growth within 3-6 months.`
+                                answer: `We do not publish typical numbers, because we do not have a measurement we could show you the source for. What we can say: the work is the site people land on, the ads that bring them, the local profile they find, and the follow-up that answers. Ask us for the account of a ${displayName.toLowerCase()} client and we will show you the real one.`
                             },
                             {
                                 question: `Do you understand the ${displayName} industry?`,
@@ -488,7 +488,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
 
             {/* Risk Reversal */}
             <RiskReversal
-                title="No risk, all reward"
+                title="How we work"
                 subtitle={`We're confident in our ability to deliver ${displayName.toLowerCase()} marketing results. Here's how we reduce your risk.`}
                 ctaText="Start Your Free Consultation"
                 onCtaClick={() => onNavigate?.('contact')}

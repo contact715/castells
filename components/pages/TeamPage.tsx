@@ -134,8 +134,8 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                                 { label: 'Our Team', active: true },
                             ]}
                             badge="Our Team"
-                            title="Meet the Experts."
-                            description="The talented professionals behind our agency's success. World-class talent from Google, Meta, and top agencies."
+                            title="Who you will be working with."
+                            description="One person runs this agency and does the client work. When you write to us, you are talking to him."
                             onNavigate={onNavigate}
                         />
 
@@ -315,7 +315,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ onBack, onNavigate }) => {
                             centered
                         >
                             <p className="text-lg text-text-secondary leading-relaxed mt-4">
-                                Our team culture drives our results. We've built an environment where top talent thrives and delivers exceptional work.
+                                Small on purpose. Nothing is passed to a junior you never met, and nothing waits for a manager to relay it.
                             </p>
                         </SectionHeader>
 

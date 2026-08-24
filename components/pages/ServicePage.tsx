@@ -494,7 +494,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
 
             {/* Risk Reversal */}
             <RiskReversal
-                title="No risk, all reward"
+                title="How we work"
                 subtitle={`We're confident in our ability to deliver ${displayName.toLowerCase()} results. Here's how we reduce your risk.`}
                 ctaText="Start Your Free Consultation"
                 onCtaClick={() => onNavigate?.('contact')}

@@ -19,32 +19,50 @@ interface RiskReversalProps {
   className?: string;
 }
 
+/*
+  Блок стоял на 47 страницах услуг и ниш под заголовком «Guarantees» и
+  подзаголовком «No risk, all reward». Аудит 24 августа разобрал каждое из
+  четырёх утверждений:
+
+    «Performance-Based Pricing»  — неправда: цена фиксированная месячная,
+                                    а не от результата
+    «No risk»                    — неправда: рекламный бюджет клиента под
+                                    риском по устройству услуги, о чём честно
+                                    написано на странице цен
+    «Dedicated team is always
+     available», «24/7 access»   — агентство из одного человека
+    само слово «Guarantees»      — превращает рекламный текст в перечень
+                                    гарантий, за которые придётся отвечать
+
+  Заменено на то, что мы действительно делаем и можем подтвердить на этом же
+  сайте. Заголовок раздела теперь описывает условия работы, а не гарантии.
+*/
 const DEFAULT_GUARANTEES: Guarantee[] = [
   {
     icon: Shield,
-    title: 'Performance-Based Pricing',
-    description: 'We align our success with yours. No long-term contracts, just results.'
+    title: 'Month to month',
+    description: 'No contract and no cancellation fee. If a month goes badly, you stop and owe nothing further.'
   },
   {
     icon: CheckCircle2,
-    title: 'Transparent Reporting',
-    description: 'Real-time access to all campaign data. No secrets, no surprises.'
+    title: 'The accounts are yours',
+    description: 'Ad accounts, website and data are in your name from day one. Leaving costs you nothing but the notice.'
   },
   {
     icon: Clock,
-    title: 'Free Strategy Session',
-    description: 'Get a free consultation to discuss your goals with no obligation.'
+    title: 'Prices are published',
+    description: 'They are on our prices page, so you know the number before the first call.'
   },
   {
     icon: Headphones,
-    title: 'Dedicated Support',
-    description: 'Your dedicated team is always available to answer questions and optimize.'
+    title: 'You talk to the person doing the work',
+    description: 'Not an account manager relaying it. Fastest answer is WhatsApp on our main number.'
   },
 ];
 
 const RiskReversal: React.FC<RiskReversalProps> = React.memo(({
   guarantees = DEFAULT_GUARANTEES,
-  title = 'No risk, all reward',
+  title = 'How we work',
     subtitle = "We're confident in our ability to deliver results. Here's how we reduce your risk.",
   ctaText = 'Start Your Free Consultation',
   onCtaClick,
@@ -57,7 +75,7 @@ const RiskReversal: React.FC<RiskReversalProps> = React.memo(({
           <div className="flex items-center gap-2 mb-3">
             <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse shrink-0" aria-hidden="true" />
             <span className="text-xs font-semibold tracking-wide text-text-secondary">
-              Guarantees
+              How we work
             </span>
           </div>
           <AnimatedHeading

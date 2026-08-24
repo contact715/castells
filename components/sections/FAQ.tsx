@@ -10,15 +10,15 @@ import SchemaMarkup from '../ui/SchemaMarkup';
 const FAQS = [
   {
     question: "Do you guarantee results?",
-    answer: "We guarantee our work. While no agency can legally guarantee specific ad platform returns due to market volatility, we work on a performance basis for qualified partners. If we don't hit our agreed-upon KPIs, we work for free until we do."
+    answer: "We do not promise a number, because nobody can promise what a market will do. What we do instead: month to month, no contract, so if a month goes badly you stop and owe nothing further. The ad accounts stay in your name, so leaving costs you nothing but the notice."
   },
   {
     question: "What is your minimum engagement?",
-    answer: "We typically require a 3-month initial commitment. Real growth takes time to optimize. However, we do not lock you into long-term yearly contracts. We believe our results should keep you staying, not a piece of paper."
+    answer: "None. It is month to month, and that is the same answer on our prices page. We ask for nothing up front beyond the first month, and there is no notice period and no cancellation fee. Two or three months is usually what it takes to see whether a channel works, but that is our advice, not a term you sign."
   },
   {
     question: "How much budget do I need?",
-    answer: "To see significant results with our systems, we recommend a minimum ad spend of $3,000/month, excluding our agency fee. This ensures we have enough data to optimize algorithms effectively."
+    answer: "It depends on your city and your trade, and anyone who names a number before asking those two things is guessing. What we can say: the budget is paid by you straight to Google, Meta or Yelp, we never take a cut of it, and we will tell you before we start whether your budget is enough for the area you want to cover."
   },
   {
     question: "Do you handle the creative work?",

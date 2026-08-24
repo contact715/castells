@@ -93,15 +93,46 @@ const TermsOfServicePage: React.FC<TermsOfServicePageProps> = ({ onNavigate }) =
               </p>
             </section>
 
+            {/*
+              Разделы 7 и 8 возвращены 24 августа 2026. Они жили в статической
+              копии public/terms-of-service.html, которую я накануне удалил как
+              дубль, не сверив содержимое. В этой, живой версии их не было
+              вовсе: соглашение стояло без единой защитной оговорки. Аудит это
+              нашёл, текст восстановлен из истории репозитория.
+            */}
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">7. Changes to these terms</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">7. Limitation of liability</h2>
+              <p className="text-text-secondary leading-relaxed">
+                To the maximum extent permitted by law, Castells Media Inc provides its services on an
+                &quot;as is&quot; basis, without warranties of any kind. We are not liable for indirect,
+                incidental or consequential damages arising from the use of our services. Our total
+                liability shall not exceed the fees you paid us for the services during the twelve months
+                preceding the claim.
+              </p>
+              <p className="text-text-secondary leading-relaxed">
+                Advertising results depend on your market, your pricing and your capacity to answer the
+                calls we generate. Any examples on this site are illustrative, and past results do not
+                guarantee future performance.
+              </p>
+            </section>
+
+            <section className="space-y-3">
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">8. Governing law</h2>
+              <p className="text-text-secondary leading-relaxed">
+                These terms are governed by the laws of the State of California, United States, without
+                regard to conflict of law principles.
+              </p>
+            </section>
+
+            <section className="space-y-3">
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">9. Changes to these terms</h2>
               <p className="text-text-secondary">
                 We may update these Terms from time to time. Continued use of our website or services after changes constitutes acceptance of the updated Terms.
               </p>
             </section>
 
             <section className="space-y-3">
-              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">8. Contact</h2>
+              <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary">10. Contact</h2>
               <p className="text-text-secondary">
                 Questions about these terms: <a className="text-accent-text hover:underline" href="mailto:contact@castells.media">contact@castells.media</a>
               </p>
