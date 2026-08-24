@@ -376,11 +376,84 @@ ${buildSchema(page)}`;
  * монтировании, поэтому текст обязан совпадать с тем, что человек увидит
  * на настоящей странице — иначе это подмена содержимого для поисковика.
  */
-function buildBody(page) {
+/**
+ * Ссылки, которые робот видит без выполнения скриптов.
+ *
+ * Замер 24 августа 2026: из 74 страниц от главной по ссылкам в HTML были
+ * достижимы ПЯТЬ. Остальные 69 не имели ни одной входящей ссылки, потому что
+ * все переходы на сайте рисуются скриптами. Мы дали этим страницам свои
+ * заголовки и тексты, но дойти до них робот мог только через карту сайта, а
+ * это слабый сигнал: карта говорит «страница есть», ссылки говорят «страница
+ * важна».
+ *
+ * Поэтому генератор теперь кладёт в каждую страницу осмысленные связи: хаб
+ * ссылается на своих детей, страница услуги на кейсы, где эта услуга была,
+ * кейс обратно на услуги и ниши.
+ */
+function relatedLinks(page, все) {
+  const ссылки = [];
+  const добавить = (путь, текст) => {
+    if (!текст) return;
+    if (ссылки.some((л) => л.путь === путь)) return;
+    if (путь !== page.path) ссылки.push({ путь, текст });
+  };
+
+  const дети = (префикс) =>
+    все
+      .filter((p) => p.path.startsWith(префикс) && p.path !== префикс && !p.noindex)
+      .slice(0, 24);
+
+  // Хабы ведут на своих детей: так вес доходит до страниц, ради которых всё
+  if (page.path === '/services') дети('/services/').forEach((p) => добавить(p.path, p.h1));
+  if (page.path === '/industries') дети('/industries/').forEach((p) => добавить(p.path, p.h1));
+  if (page.path === '/work') дети('/case-studies/').forEach((p) => добавить(p.path, p.h1));
+  if (page.path === '/learn') дети('/learn/').forEach((p) => добавить(p.path, p.h1));
+  if (page.path === '/blog') дети('/blog/').forEach((p) => добавить(p.path, p.h1));
+
+  // Страница услуги или ниши ведёт обратно на свой хаб и на соседей
+  if (page.path.startsWith('/services/')) {
+    добавить('/services', 'All services and prices');
+    дети('/services/').slice(0, 6).forEach((p) => добавить(p.path, p.h1));
+  }
+  if (page.path.startsWith('/industries/')) {
+    добавить('/industries', 'All industries');
+    дети('/industries/').slice(0, 6).forEach((p) => добавить(p.path, p.h1));
+  }
+  if (page.path.startsWith('/case-studies/')) {
+    добавить('/work', 'All our work');
+    добавить('/services', 'What we do and what it costs');
+  }
+  if (page.path.startsWith('/learn/')) {
+    добавить('/learn', 'Other questions we get');
+    дети('/learn/').forEach((p) => добавить(p.path, p.h1));
+  }
+  if (page.path.startsWith('/blog/')) добавить('/blog', 'All notes');
+  if (page.path === '/about') добавить('/team', 'The people you will be working with');
+
+  // Главная ведёт на всё, что важно, включая локальную страницу
+  if (page.path === '/') {
+    ['/work', '/services', '/pricing', '/learn', '/roseville-marketing-agency', '/about', '/contact']
+      .forEach((путь) => {
+        const p = все.find((x) => x.path === путь);
+        if (p) добавить(путь, p.h1);
+      });
+  }
+
+  return ссылки.slice(0, 26);
+}
+
+function buildBody(page, все = []) {
   const paragraphs = [page.intro, ...(page.body ?? [])]
     .filter(Boolean)
     .map((p) => `      <p>${escape(p)}</p>`)
     .join('\n');
+
+  const связи = relatedLinks(page, все);
+  const блокСвязей = связи.length
+    ? `\n      <nav aria-label="Related">\n${связи
+        .map((л) => `        <a href="${л.путь}">${escape(л.текст)}</a>`)
+        .join('\n')}\n      </nav>`
+    : '';
 
   return `    <div id="prerendered-content">
       <h1>${escape(page.h1)}</h1>
@@ -389,15 +462,24 @@ ${paragraphs}
         <a href="/">Home</a>
         <a href="/work">Work</a>
         <a href="/services">Services</a>
+        <a href="/industries">Industries</a>
+        <a href="/pricing">Prices</a>
+        <a href="/learn">Answers</a>
+        <a href="/blog">Notes</a>
         <a href="/about">About</a>
         <a href="/contact">Contact</a>
+      </nav>${блокСвязей}
+      <nav aria-label="Legal">
+        <a href="/privacy-policy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="/cookie-policy">Cookies</a>
       </nav>
       <address>${escape(SITE.legalName)}, ${escape(SITE.city)}</address>
     </div>`;
 }
 
 /** Вставляет голову и тело в шаблон сборки. */
-export function renderPage(template, page) {
+export function renderPage(template, page, все = []) {
   let html = template;
 
   // Заголовок и описание из шаблона убираем: у страницы теперь свои
@@ -407,7 +489,7 @@ export function renderPage(template, page) {
   html = html.replace('</head>', `${buildHead(page)}\n  </head>`);
   html = html.replace(
     /(<div id="root">)(\s*)(<\/div>)/,
-    (_m, open, _ws, close) => `${open}\n${buildBody(page)}\n    ${close}`
+    (_m, open, _ws, close) => `${open}\n${buildBody(page, все)}\n    ${close}`
   );
 
   return html;
@@ -450,7 +532,7 @@ async function main() {
   let written = 0;
   for (const page of allPages) {
     if (page.staticFile) continue; // у страницы уже есть свой готовый файл
-    const html = renderPage(template, page);
+    const html = renderPage(template, page, allPages);
     const dir = page.path === '/' ? DIST : path.join(DIST, page.path);
     await mkdir(dir, { recursive: true });
     await writeFile(path.join(dir, 'index.html'), html);
