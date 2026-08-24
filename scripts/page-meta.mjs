@@ -171,6 +171,44 @@ export const PAGES = [
 ];
 
 /** Страница, которой нет. Отдаётся с кодом 404, в карту сайта не попадает. */
+/*
+  Заголовки и описания страниц, которых нет в списке PAGES: услуги, ниши,
+  статьи, ответы, кейсы. Они создаются на лету из данных проекта.
+
+  Почему шаблоны вынесены сюда, 24 августа 2026. Раньше они были вписаны прямо
+  в генератор статических страниц, и приложение в браузере не могло их знать.
+  Из-за этого при переходе по меню название вкладки, описание и канонический
+  адрес оставались от той страницы, с которой человек начал: открыл главную,
+  дошёл до контактов — во вкладке по-прежнему главная, и canonical объявляет
+  контакты главной страницей.
+
+  Чинить это возвратом старого компонента SEO было нельзя: 24 августа его
+  отключили ровно потому, что он перебивал верные теги своими устаревшими.
+  Вторая копия заголовков разошлась бы с первой так же, как разошлись три меню
+  днём раньше. Поэтому шаблон один, и его читают обе стороны: генератор
+  статических страниц и приложение.
+*/
+
+const МАРКА = 'Castells Media';
+
+export const TITLE = {
+  service: (name) => `${name} for home service businesses | ${МАРКА}`,
+  industry: (name) => `${name} marketing | ${МАРКА}`,
+  post: (title) => `${title} | ${МАРКА}`,
+  answer: (question) => `${question} | ${МАРКА}`,
+  caseStudy: (client, industry) => `${client} — ${industry} | ${МАРКА}`,
+};
+
+export const DESCRIPTION = {
+  service: (description) =>
+    `${description} ${МАРКА}, Roseville, California, working with contractors across the US.`,
+  industry: (description, name) =>
+    `${description} Websites, Google and Meta ads and follow-up for ${name} businesses. ${МАРКА}, Roseville, California.`,
+  post: (excerpt) => excerpt,
+  answer: (short) => short,
+  caseStudy: (description, client, where) => description || `${client}: ${where}.`,
+};
+
 export const NOT_FOUND = {
   path: '/404',
   title: 'Page not found | Castells Media',

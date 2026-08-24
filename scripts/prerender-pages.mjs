@@ -24,7 +24,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { SITE, PAGES, NOT_FOUND } from './page-meta.mjs';
+import { SITE, PAGES, NOT_FOUND, TITLE, DESCRIPTION } from './page-meta.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist');
@@ -119,8 +119,8 @@ function servicePages(услуги, caseStudies) {
 
     return {
       path: `/services/${u.slug}`,
-      title: `${u.name} for home service businesses | Castells Media`,
-      description: `${u.description} Castells Media, Roseville, California, working with contractors across the US.`,
+      title: TITLE.service(u.name),
+      description: DESCRIPTION.service(u.description),
       h1: u.name,
       intro: u.description,
       body: [
@@ -149,8 +149,8 @@ function industryPages(ниши, caseStudies) {
 
     return {
       path: `/industries/${n.slug}`,
-      title: `${n.name} marketing | Castells Media`,
-      description: `${n.description} Websites, Google and Meta ads and follow-up for ${n.name} businesses. Castells Media, Roseville, California.`,
+      title: TITLE.industry(n.name),
+      description: DESCRIPTION.industry(n.description, n.name),
       h1: `Marketing for ${n.name}`,
       intro: n.description,
       body: [
@@ -182,8 +182,8 @@ async function readPosts() {
 function postPages(посты) {
   return посты.map((post) => ({
     path: `/blog/${post.id}`,
-    title: `${post.title} | Castells Media`,
-    description: post.excerpt,
+    title: TITLE.post(post.title),
+    description: DESCRIPTION.post(post.excerpt),
     h1: post.title,
     intro: post.excerpt,
     body: [
@@ -227,8 +227,8 @@ function answerPages(ответы) {
     хаб,
     ...ответы.map((о) => ({
       path: `/learn/${о.slug}`,
-      title: `${о.question} | Castells Media`,
-      description: о.short,
+      title: TITLE.answer(о.question),
+      description: DESCRIPTION.answer(о.short),
       h1: о.question,
       intro: о.short,
       faq: { question: о.question, answer: о.short },
@@ -246,8 +246,8 @@ function caseStudyPages(caseStudies) {
     const where = [cs.industry, cs.location].filter(Boolean).join(', ');
     return {
       path: `/case-studies/${cs.id}`,
-      title: `${cs.client} — ${cs.industry} | Castells Media`,
-      description: cs.description || `${cs.client}: ${where}.`,
+      title: TITLE.caseStudy(cs.client, cs.industry),
+      description: DESCRIPTION.caseStudy(cs.description, cs.client, where),
       h1: cs.client,
       intro: `${where}${cs.year ? `, ${cs.year}` : ''}.`,
       body: [
@@ -684,6 +684,30 @@ async function selfTest() {
   t('подвал читает общий список', () => подвал.includes("from '../../data/navigation'"));
   t('в шапке нет своего списка разделов', () => !/const\s+\S+:\s*\{\s*label:/.test(шапка));
   t('в подвале нет своего списка разделов', () => !/const\s+SECTIONS\s*[:=]/.test(подвал));
+
+  // ── Заголовки: один источник на обе стороны (2026-08-24) ─────────────
+  // До этой правки шаблоны заголовков были вписаны здесь, и приложение в
+  // браузере их не знало. Из-за этого при переходе по меню название вкладки,
+  // описание и canonical оставались от первой открытой страницы: человек
+  // доходил до контактов, а страница объявляла себя главной.
+  //
+  // Полное доказательство совпадения даёт scripts/meta-parity.mjs (75 из 75),
+  // но ему нужен сборщик TypeScript. Здесь стоит его дешёвая половина: следим,
+  // чтобы шаблоны не расползлись обратно по коду. Расползание — вероятная
+  // поломка, её и ловим на каждой сборке.
+  const этотФайл = await readFile(path.join(ROOT, 'scripts/prerender-pages.mjs'), 'utf8');
+  const сторонаБраузера = await readFile(path.join(ROOT, 'lib/pageMeta.ts'), 'utf8');
+
+  t('генератор берёт шаблоны заголовков из общего файла', () =>
+    этотФайл.includes('TITLE, DESCRIPTION') && /TITLE\.(service|industry|post|answer|caseStudy)\(/.test(этотФайл));
+  t('в генераторе не осталось вписанных шаблонов заголовка', () =>
+    !/title:\s*`[^`]*\| Castells Media`/.test(этотФайл));
+  t('сторона браузера читает те же шаблоны', () =>
+    сторонаБраузера.includes("from '../scripts/page-meta.mjs'"));
+  t('сторона браузера не завела своих шаблонов', () =>
+    !/`[^`]*\| Castells Media`/.test(сторонаБраузера));
+  t('шаблоны покрывают все виды страниц, создаваемых на лету', () =>
+    ['service', 'industry', 'post', 'answer', 'caseStudy'].every((в) => typeof TITLE[в] === 'function'));
 
   const failed = checks.filter(([, ok]) => !ok);
   for (const [name, ok] of checks) console.log(`${ok ? '  ok' : 'FAIL'}  ${name}`);

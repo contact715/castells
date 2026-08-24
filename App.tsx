@@ -22,6 +22,7 @@ import { initI18n } from './lib/i18n';
 import type { NavigationData, PageView } from './types';
 export type { PageView } from './types';
 import { pathnameFromRoute, routeFromPathname } from './lib/routes';
+import { applyPageMeta } from './lib/pageMeta';
 import { useScrollTracking } from './lib/hooks/useScrollTracking';
 import { useTimeOnPage } from './lib/hooks/useTimeOnPage';
 
@@ -86,6 +87,19 @@ function App() {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, [currentPage]);
+
+  /*
+    Голова документа при переходе внутри сайта. До 24 августа 2026 она не
+    менялась вовсе: человек шёл по меню с главной до контактов, а во вкладке
+    оставалось название главной, и canonical объявлял контакты главной.
+
+    Считается по АДРЕСУ, а не по названию страницы, и из тех же шаблонов, что
+    у генератора статических страниц. Второй копии заголовков не заводим:
+    ровно из-за такой копии днём раньше на сайте оказалось три разных меню.
+  */
+  useEffect(() => {
+    applyPageMeta(pathnameFromRoute(currentPage, selectedProject) ?? window.location.pathname);
+  }, [currentPage, selectedProject]);
 
   const navigateTo = useCallback((page: PageView, data?: NavigationData) => {
     // Use transition for non-critical page changes to keep UI responsive

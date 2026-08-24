@@ -8,7 +8,8 @@
     "build": "node scripts/prerender-pages.mjs --self-test && vite build && node scripts/inline-css.mjs && node scripts/prerender-pages.mjs",
     "build:analyze": "ANALYZE=true vite build",
     "preview": "vite preview",
-    "check": "node scripts/prerender-pages.mjs --self-test"
+    "check": "node scripts/prerender-pages.mjs --self-test",
+    "check:meta": "node scripts/meta-parity.mjs"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.1.16",
