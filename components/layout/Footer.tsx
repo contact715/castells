@@ -36,6 +36,7 @@ const SECTIONS: { label: string; page: PageView; href: string }[] = [
   { label: 'Prices', page: 'pricing', href: '/pricing' },
   { label: 'Industries', page: 'industries', href: '/industries' },
   { label: 'About', page: 'about', href: '/about' },
+  { label: 'Answers', page: 'learn', href: '/learn' },
   { label: 'Contact', page: 'contact', href: '/contact' },
 ];
 

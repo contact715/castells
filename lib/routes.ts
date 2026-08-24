@@ -45,6 +45,12 @@ export const routeFromPathname = (pathname: string): { page: PageView; data?: Na
     return { page: 'industries' };
   }
 
+  if (clean.startsWith('/learn/')) {
+    const id = decodeURIComponent(clean.replace('/learn/', ''));
+    if (id) return { page: 'answer', data: { id, name: titleize(id) } };
+    return { page: 'learn' };
+  }
+
   if (clean.startsWith('/team/')) {
     const id = decodeURIComponent(clean.replace('/team/', ''));
     if (id) return { page: 'author', data: { id, name: titleize(id) } };
@@ -75,6 +81,8 @@ export const routeFromPathname = (pathname: string): { page: PageView; data?: Na
       return { page: 'pricing' };
     case '/roseville-marketing-agency':
       return { page: 'roseville' };
+    case '/learn':
+      return { page: 'learn' };
     case '/industries':
       return { page: 'industries' };
     case '/company':
@@ -112,6 +120,10 @@ export const pathnameFromRoute = (page: PageView, data?: NavigationData | null):
       return '/pricing';
     case 'roseville':
       return '/roseville-marketing-agency';
+    case 'learn':
+      return '/learn';
+    case 'answer':
+      return data?.id ? `/learn/${encodeURIComponent(String(data.id))}` : '/learn';
     case 'careers':
       return '/careers';
     case 'blog':

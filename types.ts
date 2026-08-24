@@ -39,6 +39,8 @@ export type PageView =
   | 'services'
   | 'pricing'
   | 'roseville'
+  | 'learn'
+  | 'answer'
   | 'industries'
   | 'company'
   | 'thank-you'

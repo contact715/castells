@@ -54,6 +54,8 @@ const ServicePage = lazyWithRetry(() => import('./components/pages/ServicePage')
 const IndustryPage = lazyWithRetry(() => import('./components/pages/IndustryPage'));
 const AllServicesPage = lazyWithRetry(() => import('./components/pages/AllServicesPage'));
 const RosevillePage = lazyWithRetry(() => import('./components/pages/RosevillePage'));
+const AnswersPage = lazyWithRetry(() => import('./components/pages/AnswersPage'));
+const AnswerPage = lazyWithRetry(() => import('./components/pages/AnswerPage'));
 const PricingPage = lazyWithRetry(() => import('./components/pages/PricingPage'));
 const AllIndustriesPage = lazyWithRetry(() => import('./components/pages/AllIndustriesPage'));
 const CompanyPage = lazyWithRetry(() => import('./components/pages/CompanyPage'));
@@ -303,6 +305,14 @@ function App() {
 
               {currentPage === 'roseville' && (
                 <RosevillePage onNavigate={navigateTo} />
+              )}
+
+              {currentPage === 'learn' && (
+                <AnswersPage onNavigate={navigateTo} />
+              )}
+
+              {currentPage === 'answer' && (
+                <AnswerPage slug={selectedProject?.id ? String(selectedProject.id) : undefined} onNavigate={navigateTo} />
               )}
 
               {currentPage === 'industries' && (

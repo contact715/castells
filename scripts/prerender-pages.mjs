@@ -193,6 +193,49 @@ function postPages(посты) {
   }));
 }
 
+/**
+ * Страницы-ответы: хаб /learn и три вопроса под ним. Тексты берутся из
+ * data/answers.ts, то есть из того же места, что видит человек.
+ */
+async function readAnswers() {
+  const source = await readFile(path.join(ROOT, 'data/answers.ts'), 'utf8');
+  const ответы = [];
+  const реОтвет = /slug:\s*'([^']+)',\s*question:\s*'([^']+)',\s*short:\s*\n?\s*'([^']+)'/g;
+  for (const m of source.matchAll(реОтвет)) {
+    ответы.push({ slug: m[1], question: m[2], short: m[3] });
+  }
+  if (ответы.length === 0) throw new Error('не удалось прочитать страницы-ответы из data/answers.ts');
+  return ответы;
+}
+
+function answerPages(ответы) {
+  const хаб = {
+    path: '/learn',
+    title: 'Questions we get asked | Castells Media',
+    description:
+      'Straight answers to the questions home service business owners ask us: whether a website is needed at all, what an agency does every month, and whether a long contract is normal.',
+    h1: 'Questions we get asked',
+    intro:
+      'Written from what we actually do, with our own prices and our own clients inside. No question goes up here unless we have something of our own to say about it.',
+    body: ответы.map((о) => `${о.question} ${о.short}`),
+  };
+
+  return [
+    хаб,
+    ...ответы.map((о) => ({
+      path: `/learn/${о.slug}`,
+      title: `${о.question} | Castells Media`,
+      description: о.short,
+      h1: о.question,
+      intro: о.short,
+      body: [
+        'Answered by Castells Media, a marketing agency at 1298 Antelope Creek Drive, Roseville, California, working with home service businesses across the US.',
+        'Every number in this answer is one of our published prices, so it can be checked on this same site.',
+      ],
+    })),
+  ];
+}
+
 /** Страницы кейсов: имя клиента, ниша и город — всё из карточки, ничего придуманного. */
 function caseStudyPages(caseStudies) {
   return caseStudies.map((cs) => {
@@ -373,12 +416,14 @@ async function main() {
   const caseStudies = await readCaseStudies();
   const { услуги, ниши } = await readCatalog();
   const посты = await readPosts();
+  const ответы = await readAnswers();
   const allPages = [
     ...PAGES,
     ...caseStudyPages(caseStudies),
     ...servicePages(услуги, caseStudies),
     ...industryPages(ниши, caseStudies),
     ...postPages(посты),
+    ...answerPages(ответы),
   ];
 
   let written = 0;
@@ -402,7 +447,7 @@ async function main() {
 
   console.log(`prerender: страниц с собственными тегами — ${written}`);
   console.log(`  из них кейсов — ${caseStudies.length}`);
-  console.log(`  из них услуг — ${услуги.length}, ниш — ${ниши.length}, статей — ${посты.length}`);
+  console.log(`  из них услуг — ${услуги.length}, ниш — ${ниши.length}, статей — ${посты.length}, ответов — ${ответы.length}`);
   console.log(`  404.html, sitemap.xml (${allPages.filter((p) => !p.noindex).length} адресов) и robots.txt пересобраны`);
 }
 
