@@ -1,22 +1,51 @@
-# Castells Agency
+# Castells Media
 
-Digital marketing agency working with contractors, home service companies and
-local businesses in the United States. We build the systems that bring in work:
-websites, Google Business Profile, paid advertising, and tracking that ties every
-call and form back to revenue.
+Marketing agency for home service businesses in the United States. We build the
+website, run the ads on Google, Meta and Yelp, set up the local profiles and the
+follow-up, so the phone rings and no request is left unanswered.
 
-## Services
+Castells Media Inc, 1298 Antelope Creek Drive, Roseville, California.
+Phone +1 (916) 619-6006. Email contact@castells.media.
 
-- [All services](https://www.castells.media/services): branding and design, development, automation and analytics, advertising and SEO
-- [Industries we serve](https://www.castells.media/industries): HVAC, plumbing, roofing, remodeling, automotive services, healthcare
-- [Selected work](https://www.castells.media/work): case studies with revenue and return figures
-- [Blog](https://www.castells.media/blog): articles on local marketing, lead generation and automation
+## Prices
+
+Published on the site, no call needed to hear them:
+
+- Monthly plans from $590 for one channel, $1,490 for several channels with local presence
+- Websites from $1,750 as a one-time project
+- CRM and follow-up setup from $1,500
+- Month to month, no contract
+- The ad budget is billed by Google, Meta and Yelp directly to the client, and we take no cut of it
+
+## What we do
+
+- [Services and prices](https://www.castells.media/services): websites and branding, Google and Meta ads, local presence on Google and Yelp, automation and CRM
+- [Prices](https://www.castells.media/pricing): the plans and one-time work in full
+- [Our work](https://www.castells.media/work): named clients with live sites you can open
+- [Industries](https://www.castells.media/industries): HVAC, plumbing, appliance repair, remodeling, automotive services
+
+## Answers to common questions
+
+- [Do I need a website if I already have a Facebook page?](https://www.castells.media/learn/website-or-facebook-page)
+- [What does a marketing agency actually do every month?](https://www.castells.media/learn/what-an-agency-does-every-month)
+- [Do I have to sign a long contract with a marketing agency?](https://www.castells.media/learn/contract-with-a-marketing-agency)
+- [All answers](https://www.castells.media/learn)
+
+## Notes
+
+- [What marketing actually costs for a home service business](https://www.castells.media/blog/1)
+- [Who should own your Google Ads account, and why it is you](https://www.castells.media/blog/2)
+- [The phone went quiet. What to fix first](https://www.castells.media/blog/3)
+
+## Sites we built, live right now
+
+- acromanservice.com — Roman Service, HVAC, North Port, Florida
+- fivestarcomfort.com — heating and air conditioning, Bothell, Washington
 
 ## Company
 
+- [Roseville, California](https://www.castells.media/roseville-marketing-agency): our office, address and how to reach us
 - [About](https://www.castells.media/about)
-- [Team](https://www.castells.media/team)
-- [Careers](https://www.castells.media/careers)
 - [Contact](https://www.castells.media/contact)
 
 ## Legal
@@ -24,3 +53,8 @@ call and form back to revenue.
 - [Privacy policy](https://www.castells.media/privacy-policy)
 - [Terms of service](https://www.castells.media/terms)
 - [Cookie policy](https://www.castells.media/cookie-policy)
+
+## What is not on this site
+
+No review counts, star ratings or campaign statistics. Every number published
+here is one of our own prices, and it can be checked on the prices page.

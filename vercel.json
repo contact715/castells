@@ -78,6 +78,19 @@
       "dest": "/api/telegram-webhook.js"
     },
     {
+      "src": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "castells.media"
+        }
+      ],
+      "headers": {
+        "Location": "https://www.castells.media/$1"
+      },
+      "status": 308
+    },
+    {
       "handle": "filesystem"
     },
     {
