@@ -214,6 +214,72 @@ function caseStudyPages(caseStudies) {
 }
 
 /** Голова страницы: то, что читают Google, ChatGPT и WhatsApp. */
+/**
+ * Разметка для поисковиков прямо в HTML.
+ *
+ * До 24 августа 2026 её на сайте не было ни на одной странице: компонент
+ * SchemaMarkup добавляет её скриптами, и робот, который скрипты не выполняет,
+ * не видел ничего. Проверено запросом к проду: ноль блоков ld+json на главной,
+ * контактах и локальной странице.
+ *
+ * Кладём три вещи и только проверяемые: кто мы, где мы, как связаться. Числа,
+ * рейтинги и отзывы сюда не идут — за выдуманный AggregateRating мы этот сайт
+ * уже чистили.
+ */
+function buildSchema(page) {
+  const url = `${SITE.origin}${page.path === '/' ? '/' : page.path}`;
+  const адрес = {
+    '@type': 'PostalAddress',
+    streetAddress: '1298 Antelope Creek Drive',
+    addressLocality: 'Roseville',
+    addressRegion: 'CA',
+    addressCountry: 'US',
+  };
+
+  const организация = {
+    '@context': 'https://schema.org',
+    // Локальная страница объявляет нас местным бизнесом, остальные — организацией
+    '@type': page.path === '/roseville-marketing-agency' ? 'LocalBusiness' : 'Organization',
+    name: SITE.name,
+    legalName: SITE.legalName,
+    url: SITE.origin,
+    logo: `${SITE.origin}/castells-logo.png`,
+    email: 'contact@castells.media',
+    telephone: '+1-916-619-6006',
+    address: адрес,
+    areaServed: 'United States',
+    sameAs: [
+      'https://www.instagram.com/castells.media/',
+      'https://www.threads.com/@castells.media',
+      'https://www.facebook.com/castells.media',
+    ],
+  };
+
+  const блоки = [организация];
+
+  // Хлебные крошки: помогают поиску понять, где страница в структуре сайта
+  if (page.path !== '/') {
+    const части = page.path.split('/').filter(Boolean);
+    блоки.push({
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE.origin}/` },
+        ...части.map((часть, i) => ({
+          '@type': 'ListItem',
+          position: i + 2,
+          name: часть.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()),
+          item: `${SITE.origin}/${части.slice(0, i + 1).join('/')}`,
+        })),
+      ],
+    });
+  }
+
+  return блоки
+    .map((б) => `    <script type="application/ld+json">${JSON.stringify(б)}</script>`)
+    .join('\n');
+}
+
 function buildHead(page) {
   const url = `${SITE.origin}${page.path === '/' ? '/' : page.path}`;
   const image = `${SITE.origin}${SITE.ogImage}`;
@@ -237,7 +303,8 @@ function buildHead(page) {
     <meta name="twitter:description" content="${escape(page.description)}" />
     <meta name="twitter:image" content="${image}" />
     <meta name="geo.region" content="US-CA" />
-    <meta name="geo.placename" content="${escape(SITE.city)}" />`;
+    <meta name="geo.placename" content="${escape(SITE.city)}" />
+${buildSchema(page)}`;
 }
 
 /**
