@@ -35,23 +35,23 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
       <div className="container mx-auto px-6 pt-16 md:pt-20 pb-12">
 
         {/* Header - Sticky Left Column Layout (like FAQ) */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24 mb-20">
 
           {/* Left: Badge + Title (Sticky) */}
-          <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
+          <div className="lg:sticky lg:top-32 h-fit">
             <Badge className="mb-3">Selected Works 2023-2025</Badge>
             <AnimatedHeading
               as="h2"
               className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight"
               delay={0.1}
             >
-              Proven<br />
+              Proven{' '}<br />
               <span className="text-text-secondary">Dominance.</span>
             </AnimatedHeading>
           </div>
 
           {/* Right: Description + CTA Button */}
-          <div className="lg:col-span-8 flex flex-col justify-start">
+          <div className="flex flex-col justify-start">
             <p className="text-lg text-text-secondary leading-relaxed mb-6">
               We track every click, call, and conversion. Our portfolio isn't just a gallery of pretty pictures — it's a ledger of market conquests.
             </p>

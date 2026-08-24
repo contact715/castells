@@ -45,14 +45,14 @@ const FAQ: React.FC = () => {
         }}
       />
       <div className="container mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-24">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 md:gap-24">
 
           {/* Left Column: Header & CTA */}
-          <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
+          <div className="lg:sticky lg:top-32 h-fit">
             <div className="mb-8">
               <Badge className="mb-3">FAQ</Badge>
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight mb-4">
-                Common<br />
+                Common{' '}<br />
                 <span className="text-text-secondary">Queries</span>
               </h2>
               <p className="text-lg text-text-secondary leading-relaxed">
@@ -75,7 +75,7 @@ const FAQ: React.FC = () => {
           </div>
 
           {/* Right Column: Q&A List */}
-          <div className="lg:col-span-8">
+          <div className="">
             <div className="flex flex-col">
               {FAQS.map((faq, idx) => {
                 const isOpen = openIndex === idx;

@@ -33,7 +33,7 @@ const Services: React.FC = React.memo(() => {
             className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight mb-6"
             delay={0.1}
           >
-            Full-Stack Solutions For<br />
+            Full-Stack Solutions For{' '}<br />
             <span className="text-text-secondary">Modern Growth</span>
           </AnimatedHeading>
           <p className="text-lg text-text-secondary leading-relaxed mb-8">

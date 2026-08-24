@@ -58,7 +58,7 @@ const Team: React.FC<TeamProps> = ({ onNavigate }) => {
             className="font-display text-3xl md:text-4xl lg:text-5xl font-normal text-text-primary dark:text-white leading-tight tracking-tight mb-6"
             delay={0.1}
           >
-            Meet the<br />
+            Meet the{' '}<br />
             <span className="text-text-secondary">Minds</span>
           </AnimatedHeading>
           <p className="text-lg text-text-secondary leading-relaxed">

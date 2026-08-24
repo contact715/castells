@@ -67,7 +67,7 @@ const CasesGrid: React.FC<CasesGridProps> = ({ onNavigate }) => {
                             </span>
                         </div>
                         <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal text-text-primary dark:text-white leading-tight tracking-tight">
-                            Real results that drive<br />
+                            Real results that drive{' '}<br />
                             <span className="text-text-secondary">business growth.</span>
                         </h2>
                     </div>

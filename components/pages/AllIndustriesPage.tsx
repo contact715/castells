@@ -91,7 +91,10 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.05] tracking-tight text-text-primary mb-6"
                 delay={0.2}
               >
-                Industries we<br />
+                {/* Пробел перед переносом обязателен: без него читалка экрана
+                    и любой сборщик текста склеивают «Industries wework with». */}
+                Industries we{' '}
+                <br />
                 <span className="text-text-secondary">work with.</span>
               </AnimatedHeading>
 
@@ -134,7 +137,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
               className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary mb-6"
               delay={0.1}
             >
-              Deep expertise in<br />
+              Deep expertise in{' '}<br />
               <span className="text-text-secondary">high-value industries</span>
             </AnimatedHeading>
             <p className="text-lg text-text-secondary leading-relaxed">
@@ -186,9 +189,9 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
             className="py-20 md:py-32 bg-ivory"
           >
             <div className="container mx-auto px-6">
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+              <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-20">
                 {/* Left: Category Info (Sticky) */}
-                <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
+                <div className="lg:sticky lg:top-32 h-fit">
                   <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     whileInView={{ opacity: 1, x: 0 }}
@@ -212,7 +215,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
                 </div>
 
                 {/* Right: Industries Grid */}
-                <div className="lg:col-span-8">
+                <div className="">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     {category.industries.map((industry, industryIndex) => {
                       const IndustryIcon = industry.icon;
@@ -259,7 +262,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
               className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary mb-6"
               delay={0.1}
             >
-              Why industry expertise<br />
+              Why industry expertise{' '}<br />
               <span className="text-text-secondary">matters</span>
             </AnimatedHeading>
             <p className="text-lg text-text-secondary leading-relaxed">

@@ -141,14 +141,14 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                     onNavigate={onNavigate}
                 />
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 mb-32">
+                <div className="grid grid-cols-1 lg:grid-cols-[7fr_5fr] gap-12 lg:gap-16 mb-32">
 
                     {/* Left Column: Form */}
                     <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.6 }}
-                        className="lg:col-span-7 lg:sticky lg:top-32 h-fit"
+                        className="lg:sticky lg:top-32 h-fit"
                     >
                         <div className="bg-white dark:bg-surface rounded-card p-8 md:p-12">
                             {/* Form Header */}
@@ -347,7 +347,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
-                        className="lg:col-span-5 space-y-6"
+                        className="space-y-6"
                     >
                         {/* Contact Methods Grid */}
                         <div className="grid grid-cols-1 gap-6 lg:gap-8">

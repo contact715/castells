@@ -443,16 +443,16 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                                     }}
                                 />
                                 <div className="container mx-auto px-6">
-                                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-24">
+                                    <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 md:gap-24">
                                         {/* Left Column: Header & CTA */}
-                                        <div className="lg:col-span-4 lg:sticky lg:top-32 h-fit">
+                                        <div className="lg:sticky lg:top-32 h-fit">
                                             <div className="mb-8">
                                                 <div className="flex items-center gap-2 mb-3">
                                                     <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse shrink-0" aria-hidden="true" />
                                                     <span className="text-xs font-semibold tracking-wide text-text-secondary">FAQ</span>
                                                 </div>
                                                 <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight mb-4">
-                                                    Common<br />
+                                                    Common{' '}<br />
                                                     <span className="text-text-secondary">Questions</span>
                                                 </h2>
                                                 <p className="text-lg text-text-secondary leading-relaxed">
@@ -475,7 +475,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                                         </div>
 
                                         {/* Right Column: Q&A List */}
-                                        <div className="lg:col-span-8">
+                                        <div className="">
                                             <FAQAccordion faqs={faqs} />
                                         </div>
                                     </div>
