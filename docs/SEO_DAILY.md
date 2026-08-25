@@ -371,4 +371,11 @@ General Contractor (Sacramento) — там уже расписаны разде�
   нечего, закрыто без правки. До выкатки собрано локально: `dist/industries/
   int-ext-painting/index.html` и `adu-and-additions` — отдельные файлы без
   вложенности, `node scripts/prerender-pages.mjs --self-test` 51/51.
-  Подтверждение на проде — следующей записью, после выкатки.
+  Подтверждение на проде после выкатки (коммит 30d8087): `/industries/int-ext-painting`
+  и `/industries/adu-and-additions` отдают 200 со своим заголовком и
+  каноническим адресом на себя; старые кривые адреса
+  `/industries/int/ext-painting` и `/industries/adu-&-additions` теперь
+  ведут (301) на новые и в итоге показывают тот же контент с верным
+  canonical, а не старую страницу с canonical на битый адрес, как было до
+  правки. `/industries/hvac-systems`, `/industries/fencing-and-gates` и хаб
+  `/industries` — без регрессии, живые, со своими тегами.
