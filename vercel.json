@@ -119,6 +119,34 @@
       }
     },
     {
+      "src": "/industries/adu-&-additions",
+      "status": 301,
+      "headers": {
+        "Location": "/industries/adu-and-additions"
+      }
+    },
+    {
+      "src": "/industries/fencing-&-gates",
+      "status": 301,
+      "headers": {
+        "Location": "/industries/fencing-and-gates"
+      }
+    },
+    {
+      "src": "/industries/flooring-&-tile",
+      "status": 301,
+      "headers": {
+        "Location": "/industries/flooring-and-tile"
+      }
+    },
+    {
+      "src": "/industries/int/ext-painting",
+      "status": 301,
+      "headers": {
+        "Location": "/industries/int-ext-painting"
+      }
+    },
+    {
       "src": "/.*",
       "status": 404,
       "dest": "/404.html"

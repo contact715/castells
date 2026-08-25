@@ -110,7 +110,17 @@ async function readCatalog() {
   const i = await readFile(path.join(ROOT, 'data/industries.ts'), 'utf8');
   const реНиша = new RegExp(String.raw`slug:\s*slugify\(${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}\),\s*name:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*description:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g');
   for (const m of i.matchAll(реНиша)) {
-    const slug = m[1].toLowerCase().trim().replace(/\s+/g, '-');
+    // Та же логика, что в lib/routes.ts slugify() — этот скрипт не может
+    // импортировать .ts напрямую, поэтому копия. Менять оба места вместе.
+    const slug = m[1]
+      .toLowerCase()
+      .trim()
+      .replace(/&/g, ' and ')
+      .replace(/\//g, ' ')
+      .replace(/[^a-z0-9\s-]/g, '')
+      .trim()
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-');
     if (!ниши.some((n) => n.slug === slug)) ниши.push({ slug, name: подставитьЦены(m[2]), description: подставитьЦены(m[3]) });
   }
 

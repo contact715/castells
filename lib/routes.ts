@@ -1,6 +1,15 @@
 import type { NavigationData, PageView } from '../types';
 
-export const slugify = (value: string) => value.toLowerCase().trim().replace(/\s+/g, '-');
+export const slugify = (value: string) =>
+  value
+    .toLowerCase()
+    .trim()
+    .replace(/&/g, ' and ')
+    .replace(/\//g, ' ')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    .replace(/-+/g, '-');
 
 export const titleize = (value: string) =>
   value
