@@ -147,6 +147,7 @@ function servicePages(услуги, caseStudies) {
       path: `/services/${u.slug}`,
       title: TITLE.service(u.name),
       description: DESCRIPTION.service(u.description),
+      service: { name: u.name, description: u.description },
       h1: u.name,
       intro: u.description,
       body: [
@@ -197,9 +198,15 @@ function industryPages(ниши, caseStudies) {
 async function readPosts() {
   const source = await readFile(path.join(ROOT, 'data/blog.ts'), 'utf8');
   const посты = [];
-  const реПост = new RegExp(String.raw`id:\s*(\d+),\s*slug:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*title:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*excerpt:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g');
+  // Дата и автор нужны разметке статьи: без настоящей даты она подставляла
+  // СЕГОДНЯШНЮЮ, то есть статья каждый день заявляла поиску, что вышла сегодня.
+  const реПост = new RegExp(String.raw`id:\s*(\d+),\s*slug:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*title:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*excerpt:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*date:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}[\s\S]{0,120}?author:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g');
   for (const m of source.matchAll(реПост)) {
-    посты.push({ id: Number(m[1]), slug: m[2], title: подставитьЦены(m[3]), excerpt: подставитьЦены(m[4]) });
+    посты.push({
+      id: Number(m[1]), slug: m[2],
+      title: подставитьЦены(m[3]), excerpt: подставитьЦены(m[4]),
+      date: m[5], author: m[6],
+    });
   }
   if (посты.length === 0) throw new Error('не удалось прочитать статьи из data/blog.ts');
   return посты;
@@ -210,6 +217,12 @@ function postPages(посты) {
     path: `/blog/${post.id}`,
     title: TITLE.post(post.title),
     description: DESCRIPTION.post(post.excerpt),
+    article: {
+      headline: post.title,
+      description: post.excerpt,
+      datePublished: post.date,
+      author: post.author,
+    },
     h1: post.title,
     intro: post.excerpt,
     body: [
@@ -299,6 +312,58 @@ function caseStudyPages(caseStudies) {
  * рейтинги и отзывы сюда не идут — за выдуманный AggregateRating мы этот сайт
  * уже чистили.
  */
+/**
+ * Дата для разметки: поиск ждёт машинный вид 2026-08-24, а в данных она
+ * записана по-человечески — «August 24, 2026», потому что её же читает
+ * посетитель под заголовком статьи.
+ *
+ * Разбираем ВРУЧНУЮ по списку месяцев, а не через new Date(строка): разбор
+ * даты в JavaScript зависит от языковых настроек машины, и на другой машине
+ * та же строка может дать другой день или Invalid Date. Разметка обязана
+ * получаться одинаковой у всех, кто соберёт сайт.
+ *
+ * Не разобралась — возвращаем null, и блок разметки не выводится вовсе.
+ * Молчание честнее выдуманной даты.
+ */
+export function датаДляРазметки(строка) {
+  if (typeof строка !== 'string') return null;
+  const месяцы = ['january', 'february', 'march', 'april', 'may', 'june',
+    'july', 'august', 'september', 'october', 'november', 'december'];
+  const m = строка.trim().match(/^([A-Za-z]+)\s+(\d{1,2}),\s*(\d{4})$/);
+  if (!m) return /^\d{4}-\d{2}-\d{2}$/.test(строка.trim()) ? строка.trim() : null;
+  const месяц = месяцы.indexOf(m[1].toLowerCase());
+  if (месяц < 0) return null;
+  const день = Number(m[2]);
+  if (день < 1 || день > 31) return null;
+  return `${m[3]}-${String(месяц + 1).padStart(2, '0')}-${String(день).padStart(2, '0')}`;
+}
+
+/**
+ * Проверяет разметку страницы перед записью на диск.
+ *
+ * Два запрета. ОДИН тип на странице — потому что до 24 августа на странице
+ * цен оказывалось семь блоков вместо двух: Organization дважды с разным
+ * набором полей, BreadcrumbList трижды, два из них байт в байт одинаковые.
+ * И РАЗБОРЧИВОСТЬ: блок, который не разбирается как JSON, для поиска не
+ * существует, а выглядит существующим.
+ *
+ * Проверка стоит здесь, в главном цикле, а не в самопроверке: самопроверка
+ * смотрит одну придуманную страницу, а разъезжается разметка на настоящих.
+ */
+function проверитьРазметку(html, путь) {
+  const блоки = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)];
+  const типы = [];
+  for (const [, тело] of блоки) {
+    let разобрано;
+    try { разобрано = JSON.parse(тело); }
+    catch { throw new Error(`${путь}: блок разметки не разбирается как JSON`); }
+    типы.push(разобрано['@type']);
+  }
+  const повтор = типы.find((т, i) => типы.indexOf(т) !== i);
+  if (повтор) throw new Error(`${путь}: тип разметки ${повтор} объявлен дважды (всего блоков ${типы.length})`);
+  return типы.length;
+}
+
 function buildSchema(page) {
   const url = `${SITE.origin}${page.path === '/' ? '/' : page.path}`;
   const адрес = {
@@ -319,6 +384,19 @@ function buildSchema(page) {
     logo: `${SITE.origin}/castells-logo.png`,
     email: 'contact@castells.media',
     telephone: '+1-916-619-6006',
+    // description и contactPoint жили только в разметке приложения, из-за
+    // чего на странице оказывалось ДВА блока Organization с разным набором
+    // полей. Значения нигде не противоречили, но поиск видел две записи об
+    // одной конторе. Поля перенесены сюда, блок остался один.
+    description:
+      'We build websites, run ads and set up follow-up automation for home service businesses.',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      email: 'contact@castells.media',
+      telephone: '+1-916-619-6006',
+      contactType: 'Customer Service',
+      areaServed: 'US',
+    },
     address: адрес,
     areaServed: 'United States',
     sameAs: [
@@ -347,6 +425,50 @@ function buildSchema(page) {
           acceptedAnswer: { '@type': 'Answer', text: page.faq.answer },
         },
       ],
+    });
+  }
+
+  /*
+    Статья. Раньше эта разметка жила только в приложении и подставляла
+    СЕГОДНЯШНЮЮ дату, если вызывающий её не передал: статья каждый день
+    заявляла поиску, что вышла сегодня. Здесь дата берётся из data/blog.ts,
+    из того же поля, которое человек видит под заголовком. Если даты нет,
+    блок не выводится вовсе — молчание честнее выдуманной даты.
+  */
+  const датаСтатьи = датаДляРазметки(page.article?.datePublished);
+  if (датаСтатьи) {
+    блоки.push({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: page.article.headline,
+      description: page.article.description,
+      image: `${SITE.origin}${SITE.ogImage}`,
+      datePublished: датаСтатьи,
+      author: { '@type': 'Person', name: page.article.author },
+      publisher: {
+        '@type': 'Organization',
+        name: SITE.name,
+        logo: { '@type': 'ImageObject', url: `${SITE.origin}/castells-logo.png` },
+      },
+      mainEntityOfPage: { '@type': 'WebPage', '@id': url },
+    });
+  }
+
+  /*
+    Услуга. Тоже переехала из приложения, но без придуманного предложения:
+    там стоял offers с описанием «Professional digital marketing services» и
+    без единой цены. Предложение без цены — это не предложение, а слово
+    «предложение». Наши цены опубликованы, поэтому их и называем.
+  */
+  if (page.service?.name) {
+    блоки.push({
+      '@context': 'https://schema.org',
+      '@type': 'ProfessionalService',
+      name: page.service.name,
+      description: page.service.description,
+      serviceType: page.service.name,
+      provider: { '@type': 'Organization', name: SITE.name, url: SITE.origin },
+      areaServed: { '@type': 'Country', name: 'United States' },
     });
   }
 
@@ -580,6 +702,7 @@ async function main() {
   for (const page of allPages) {
     if (page.staticFile) continue; // у страницы уже есть свой готовый файл
     const html = renderPage(template, page, allPages, меню);
+    проверитьРазметку(html, page.path);
     const dir = page.path === '/' ? DIST : path.join(DIST, page.path);
     await mkdir(dir, { recursive: true });
     await writeFile(path.join(dir, 'index.html'), html);
