@@ -11,9 +11,9 @@ Phone +1 (916) 619-6006. Email contact@castells.media.
 
 Published on the site, no call needed to hear them:
 
-- Monthly plans from $590 for one channel, $1,490 for several channels with local presence
-- Websites from $1,750 as a one-time project
-- CRM and follow-up setup from $1,500
+- Monthly plans from ${PRICES.monthlyOneChannel} for one channel, ${PRICES.monthlySeveralChannels} for several channels with local presence
+- Websites from ${PRICES.websiteFrom} as a one-time project
+- CRM and follow-up setup from ${PRICES.crmSetupFrom}
 - Month to month, no contract
 - The ad budget is billed by Google, Meta and Yelp directly to the client, and we take no cut of it
 

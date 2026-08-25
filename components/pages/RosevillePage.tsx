@@ -8,6 +8,7 @@ import { BUSINESS } from '../../config/business';
 import { CASE_STUDIES } from '../../constants';
 import { PageView } from '../../App';
 import { NavigationData } from '../../types';
+import { PRICES } from '../../config/pricing.mjs';
 
 /*
   Локальная страница, 23 августа 2026.
@@ -67,7 +68,7 @@ const RosevillePage: React.FC<RosevillePageProps> = ({ onNavigate }) => {
     <>
       <SEO
         title="Marketing agency in Roseville, California | Castells Media"
-        description={`Castells Media is a marketing agency at ${адрес}. Websites, Google and Meta ads, local presence and follow-up for home service businesses. Monthly plans from $590.`}
+        description={`Castells Media is a marketing agency at ${адрес}. Websites, Google and Meta ads, local presence and follow-up for home service businesses. Monthly plans from ${PRICES.monthlyOneChannel}.`}
         canonical="/roseville-marketing-agency"
         keywords="marketing agency Roseville, Roseville CA marketing, HVAC marketing Roseville, Google Ads Roseville, local SEO Roseville"
         geoRegion="US-CA"
@@ -246,7 +247,7 @@ const RosevillePage: React.FC<RosevillePageProps> = ({ onNavigate }) => {
                   What it costs
                 </h2>
                 <p className="text-text-secondary dark:text-white/65 text-base leading-relaxed max-w-2xl">
-                  Monthly plans start at $590, websites at $1,750, automation setup at $1,500. Month to
+                  Monthly plans start at {PRICES.monthlyOneChannel}, websites at {PRICES.websiteFrom}, automation setup at {PRICES.crmSetupFrom}. Month to
                   month, no contract. The ad budget goes straight to Google, Meta and Yelp from your own
                   account and we never take a cut of it.
                 </p>

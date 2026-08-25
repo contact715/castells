@@ -15,6 +15,8 @@
  * вычистили полсайта.
  */
 
+import { PRICES, PRICING_SENTENCE } from '../config/pricing.mjs';
+
 export const SITE = {
   origin: 'https://www.castells.media',
   name: 'Castells Media',
@@ -52,7 +54,7 @@ export const PAGES = [
     path: '/services',
     title: 'Services and prices | Castells Media',
     description:
-      'Websites and branding, Google and Meta ads, local presence, automation and CRM. Monthly plans from $590. Project work from $1,750.',
+      `Websites and branding, Google and Meta ads, local presence, automation and CRM. Monthly plans from ${PRICES.monthlyOneChannel}. Project work from ${PRICES.websiteFrom}.`,
     h1: 'What we do and what it costs',
     intro:
       'Take one direction or all four. Prices are on this page, you do not need a call to hear them.',
@@ -61,7 +63,7 @@ export const PAGES = [
     path: '/pricing',
     title: 'Prices | Castells Media',
     description:
-      'Monthly plans at $590 and $1,490, websites from $1,750, CRM setup from $1,500. Month to month, no contract. The ad budget goes straight to Google, Meta and Yelp.',
+      `Monthly plans at ${PRICES.monthlyOneChannel} and ${PRICES.monthlySeveralChannels}, websites from ${PRICES.websiteFrom}, CRM setup from ${PRICES.crmSetupFrom}. Month to month, no contract. The ad budget goes straight to Google, Meta and Yelp.`,
     h1: 'What this costs',
     intro:
       'Month to month, no contract. The ad budget is yours and goes straight to Google, Meta and Yelp — we never take a cut of it.',
@@ -70,7 +72,7 @@ export const PAGES = [
     path: '/roseville-marketing-agency',
     title: 'Marketing agency in Roseville, California | Castells Media',
     description:
-      'Marketing agency in Roseville, California: websites, Google and Meta ads, local presence and follow-up for home service businesses. Monthly plans from $590.',
+      `Marketing agency in Roseville, California: websites, Google and Meta ads, local presence and follow-up for home service businesses. Monthly plans from ${PRICES.monthlyOneChannel}.`,
     h1: 'Marketing agency in Roseville',
     intro:
       'We work out of Roseville and run websites, ads and follow-up for home service businesses. You can walk in, call, or write — all three reach the same people.',
@@ -78,7 +80,7 @@ export const PAGES = [
       'Castells Media Inc, 1298 Antelope Creek Drive, Roseville, California. Phone +1 (916) 619-6006, email contact@castells.media. The fastest answer is WhatsApp or Telegram on the same number.',
       'Who we work with: heating and air conditioning, plumbing, appliance repair, remodeling, auto detailing — companies where the money arrives as a phone call.',
       'Our clients in California: Cool Doc (HVAC, Los Angeles); Appliance Repair Clinic (home services, Los Angeles); Drive Car Studio (automotive, Los Angeles). None of them are in Roseville itself, and we are not going to pretend otherwise.',
-      'Prices: monthly plans from $590, websites from $1,750, automation setup from $1,500. Month to month, no contract. The ad budget goes straight to Google, Meta and Yelp from your own account.',
+      `Prices: monthly plans from ${PRICES.monthlyOneChannel}, websites from ${PRICES.websiteFrom}, automation setup from ${PRICES.crmSetupFrom}. Month to month, no contract. The ad budget goes straight to Google, Meta and Yelp from your own account.`,
     ],
   },
   {

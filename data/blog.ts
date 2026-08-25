@@ -1,3 +1,4 @@
+import { PRICES } from '../config/pricing.mjs';
 /**
  * Статьи блога.
  *
@@ -58,9 +59,9 @@ export const BLOG_POSTS: BlogPost[] = [
       {
         heading: 'What we charge',
         body: [
-          'Running one channel for you, whether that is Google, Meta or Yelp, is $590 a month. That covers building the campaigns, launching them, checking them every week and sending you a report you can read without a glossary.',
-          'Running several channels together, plus your Google Business Profile and reviews, is $1,490 a month.',
-          'A website is one-time work, from $1,750, depending on how many pages you need and whether we also write the text and handle photos. Setting up a CRM so calls and forms stop getting lost is from $1,500.',
+          `Running one channel for you, whether that is Google, Meta or Yelp, is ${PRICES.monthlyOneChannel} a month. That covers building the campaigns, launching them, checking them every week and sending you a report you can read without a glossary.`,
+          `Running several channels together, plus your Google Business Profile and reviews, is ${PRICES.monthlySeveralChannels} a month.`,
+          `A website is one-time work, from ${PRICES.websiteFrom}, depending on how many pages you need and whether we also write the text and handle photos. Setting up a CRM so calls and forms stop getting lost is from ${PRICES.crmSetupFrom}.`,
         ],
       },
       {

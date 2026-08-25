@@ -7,6 +7,7 @@ import { PageView } from '../../App';
 import { NavigationData } from '../../types';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
+import { PRICES } from '../../config/pricing.mjs';
 
 /*
   Страница услуг, переписана 23 августа 2026.
@@ -44,7 +45,7 @@ const DIRECTIONS: {
     icon: Globe,
     title: 'Website that gets you called',
     promise: 'A site where a visitor sees what you do, where you work, and calls you in two taps.',
-    price: '$1,750',
+    price: PRICES.websiteFrom,
     priceNote: 'one-time, from',
   },
   {
@@ -52,7 +53,7 @@ const DIRECTIONS: {
     icon: Megaphone,
     title: 'Ads that bring calls',
     promise: 'Google, Meta and Yelp running for your service area, checked every week.',
-    price: '$590',
+    price: PRICES.monthlyOneChannel,
     priceNote: 'monthly, from',
   },
   {
@@ -68,7 +69,7 @@ const DIRECTIONS: {
     icon: Workflow,
     title: 'Nothing gets lost',
     promise: 'Calls, forms and messages land in one place, and no request sits unanswered.',
-    price: '$1,500',
+    price: PRICES.crmSetupFrom,
     priceNote: 'setup, from',
   },
 ];
@@ -80,12 +81,12 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
     <>
       <SEO
         title="Services and prices | Castells Media"
-        description="Websites, Google and Meta ads, local presence, automation and CRM for home service businesses. Monthly plans from $590, websites from $1,750."
+        description={`Websites, Google and Meta ads, local presence, automation and CRM for home service businesses. Monthly plans from ${PRICES.monthlyOneChannel}, websites from ${PRICES.websiteFrom}.`}
         canonical="/services"
         keywords="marketing services for contractors, HVAC marketing, Google Ads management, Meta Ads management, local SEO, CRM setup"
         geoRegion="US-CA"
         geoPlacename="1298 Antelope Creek Drive, Roseville, California"
-        summary="Services by Castells Media: websites and branding, paid media on Google and Meta, local presence on Google and Yelp, automation and CRM. Monthly plans from $590, project work from $1,750."
+        summary={`Services by Castells Media: websites and branding, paid media on Google and Meta, local presence on Google and Yelp, automation and CRM. Monthly plans from ${PRICES.monthlyOneChannel}, project work from ${PRICES.websiteFrom}.`}
         mainEntity="Marketing Services"
       />
       <SchemaMarkup
@@ -191,11 +192,11 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
                 <div className="text-[11px] font-semibold tracking-wide text-accent-text mb-3">
                   Monthly
                 </div>
-                <p className="font-display text-2xl text-text-primary dark:text-white mb-1">$590 / month</p>
+                <p className="font-display text-2xl text-text-primary dark:text-white mb-1">{PRICES.monthlyOneChannel} / month</p>
                 <p className="text-sm text-text-secondary dark:text-white/60 mb-4">
                   One channel, run and reported weekly.
                 </p>
-                <p className="font-display text-2xl text-text-primary dark:text-white mb-1">$1,490 / month</p>
+                <p className="font-display text-2xl text-text-primary dark:text-white mb-1">{PRICES.monthlySeveralChannels} / month</p>
                 <p className="text-sm text-text-secondary dark:text-white/60">
                   Several channels at once, with local presence and reviews.
                 </p>
@@ -205,11 +206,11 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
                 <div className="text-[11px] font-semibold tracking-wide text-accent-text mb-3">
                   One-time work
                 </div>
-                <p className="font-display text-2xl text-text-primary dark:text-white mb-1">From $1,750</p>
+                <p className="font-display text-2xl text-text-primary dark:text-white mb-1">From {PRICES.websiteFrom}</p>
                 <p className="text-sm text-text-secondary dark:text-white/60 mb-4">
                   Website or landing page, depending on how many pages you need.
                 </p>
-                <p className="font-display text-2xl text-text-primary dark:text-white mb-1">From $1,500</p>
+                <p className="font-display text-2xl text-text-primary dark:text-white mb-1">From {PRICES.crmSetupFrom}</p>
                 <p className="text-sm text-text-secondary dark:text-white/60">
                   CRM and follow-up set up on our own platform, Mosco.
                 </p>

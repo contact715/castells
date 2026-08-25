@@ -6,6 +6,7 @@ import { PageView } from '../../App';
 import { NavigationData } from '../../types';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
+import { PRICES, FROM } from '../../config/pricing.mjs';
 
 /*
   Страница цен, создана 23 августа 2026.
@@ -35,7 +36,7 @@ interface PricingPageProps {
 const PLANS = [
   {
     name: 'One channel',
-    price: '$590',
+    price: PRICES.monthlyOneChannel,
     period: 'per month',
     forWhom: 'You want to start with one thing and see whether the calls come.',
     includes: [
@@ -47,7 +48,7 @@ const PLANS = [
   },
   {
     name: 'Several channels',
-    price: '$1,490',
+    price: PRICES.monthlySeveralChannels,
     period: 'per month',
     forWhom: 'You already have a flow of jobs and want more, from several places at once.',
     includes: [
@@ -63,7 +64,7 @@ const PLANS = [
 const PROJECTS = [
   {
     name: 'Website or landing page',
-    price: 'from $1,750',
+    price: FROM.website,
     note: 'Depends on how many pages and whether you need texts and photos.',
   },
   {
@@ -73,7 +74,7 @@ const PROJECTS = [
   },
   {
     name: 'CRM and follow-up setup',
-    price: 'from $1,500',
+    price: FROM.crmSetup,
     note: 'Calls, forms and messages in one inbox, on our own platform, Mosco.',
   },
 ];
@@ -81,7 +82,7 @@ const PROJECTS = [
 const MONEY_QUESTIONS = [
   {
     q: 'How much does it usually come to per month?',
-    a: 'Most of the businesses we work with land between $590 and $1,490 a month for the work, plus whatever they decide to spend on ads. If you tell us your city and your service, we will say which of the two makes sense for you.',
+    a: `Most of the businesses we work with land between ${PRICES.monthlyOneChannel} and ${PRICES.monthlySeveralChannels} a month for the work, plus whatever they decide to spend on ads. If you tell us your city and your service, we will say which of the two makes sense for you.`,
   },
   {
     q: 'Is there a contract or a minimum term?',
@@ -108,12 +109,12 @@ const PricingPage: React.FC<PricingPageProps> = ({ onNavigate }) => {
     <>
       <SEO
         title="Prices | Castells Media"
-        description="What marketing costs with Castells Media: monthly plans at $590 and $1,490, websites from $1,750, CRM setup from $1,500. Month to month, no contract, ad budget paid straight to Google and Meta."
+        description={`What marketing costs with Castells Media: monthly plans at ${PRICES.monthlyOneChannel} and ${PRICES.monthlySeveralChannels}, websites from ${PRICES.websiteFrom}, CRM setup from ${PRICES.crmSetupFrom}. Month to month, no contract, ad budget paid straight to Google and Meta.`}
         canonical="/pricing"
         keywords="marketing agency prices, how much does marketing cost per month, Google Ads management cost, HVAC marketing cost"
         geoRegion="US-CA"
         geoPlacename="1298 Antelope Creek Drive, Roseville, California"
-        summary="Castells Media prices: monthly plans $590 and $1,490, websites from $1,750, CRM setup from $1,500. Month to month with no contract. The ad budget is paid directly to Google, Meta and Yelp and is not part of the fee."
+        summary={`Castells Media prices: monthly plans ${PRICES.monthlyOneChannel} and ${PRICES.monthlySeveralChannels}, websites from ${PRICES.websiteFrom}, CRM setup from ${PRICES.crmSetupFrom}. Month to month with no contract. The ad budget is paid directly to Google, Meta and Yelp and is not part of the fee.`}
         mainEntity="Pricing"
       />
       <SchemaMarkup

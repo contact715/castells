@@ -25,6 +25,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { SITE, PAGES, NOT_FOUND, TITLE, DESCRIPTION } from './page-meta.mjs';
+import { PRICES } from '../config/pricing.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist');
@@ -70,22 +71,47 @@ async function readCaseStudies() {
  * businesses». Сорок одна страница выглядела для поиска одинаковой, они
  * конкурировали между собой, и ни одна не выигрывала.
  */
+/**
+ * Тексты сайта читаются отсюда РАЗБОРОМ ФАЙЛА, а не импортом: data/*.ts —
+ * это TypeScript, Node его не исполняет. Разбор терпит, пока строка обычная,
+ * и ломается, как только в ней появляется подстановка.
+ *
+ * Так и вышло 24 августа: цены свели в один источник, и предложения в статьях
+ * стали шаблонными — `... ${PRICES.websiteFrom} ...`. В тот раз пронесло,
+ * потому что подстановки попали в тела текстов, а разбор читает заголовки и
+ * короткие описания. Но это была удача, а не устройство: первая же цена,
+ * попавшая в поле short или excerpt, ушла бы в HTML словами «${PRICES.x}».
+ *
+ * Поэтому два изменения. Кавычки принимаются любые, включая обратные. И
+ * подстановка цен вычисляется здесь же, из того же источника, что у сайта.
+ * Всё, что осталось невычисленным, ловит отдельная самопроверка: текст с
+ * «${» в готовом HTML — это утёкший код, а не текст.
+ */
+const КАВЫЧКА = String.raw`['\`]`;
+const ТЕКСТ = String.raw`([^'\`]+)`;
+
+/** Подставляет цены в текст, извлечённый разбором. */
+export function подставитьЦены(текст) {
+  return текст.replace(/\$\{PRICES\.([a-zA-Z]+)\}/g, (всё, имя) =>
+    Object.prototype.hasOwnProperty.call(PRICES, имя) ? PRICES[имя] : всё);
+}
+
 async function readCatalog() {
   const услуги = [];
   const ниши = [];
 
   const s = await readFile(path.join(ROOT, 'data/services.ts'), 'utf8');
-  const реУслуга = /\{\s*slug:\s*'([^']+)',\s*name:\s*'([^']+)',\s*description:\s*'([^']+)'/g;
+  const реУслуга = new RegExp(String.raw`\{\s*slug:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*name:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*description:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g');
   for (const m of s.matchAll(реУслуга)) {
     if (m[1] === 'enterprise-solutions') continue; // общая заглушка, повторяется во всех категориях
-    if (!услуги.some((u) => u.slug === m[1])) услуги.push({ slug: m[1], name: m[2], description: m[3] });
+    if (!услуги.some((u) => u.slug === m[1])) услуги.push({ slug: m[1], name: подставитьЦены(m[2]), description: подставитьЦены(m[3]) });
   }
 
   const i = await readFile(path.join(ROOT, 'data/industries.ts'), 'utf8');
-  const реНиша = /slug:\s*slugify\('([^']+)'\),\s*name:\s*'([^']+)',\s*description:\s*'([^']+)'/g;
+  const реНиша = new RegExp(String.raw`slug:\s*slugify\(${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}\),\s*name:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*description:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g');
   for (const m of i.matchAll(реНиша)) {
     const slug = m[1].toLowerCase().trim().replace(/\s+/g, '-');
-    if (!ниши.some((n) => n.slug === slug)) ниши.push({ slug, name: m[2], description: m[3] });
+    if (!ниши.some((n) => n.slug === slug)) ниши.push({ slug, name: подставитьЦены(m[2]), description: подставитьЦены(m[3]) });
   }
 
   if (услуги.length === 0) throw new Error('не удалось прочитать услуги из data/services.ts');
@@ -171,9 +197,9 @@ function industryPages(ниши, caseStudies) {
 async function readPosts() {
   const source = await readFile(path.join(ROOT, 'data/blog.ts'), 'utf8');
   const посты = [];
-  const реПост = /id:\s*(\d+),\s*slug:\s*'([^']+)',\s*title:\s*'([^']+)',\s*excerpt:\s*\n?\s*'([^']+)'/g;
+  const реПост = new RegExp(String.raw`id:\s*(\d+),\s*slug:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*title:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*excerpt:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g');
   for (const m of source.matchAll(реПост)) {
-    посты.push({ id: Number(m[1]), slug: m[2], title: m[3], excerpt: m[4] });
+    посты.push({ id: Number(m[1]), slug: m[2], title: подставитьЦены(m[3]), excerpt: подставитьЦены(m[4]) });
   }
   if (посты.length === 0) throw new Error('не удалось прочитать статьи из data/blog.ts');
   return посты;
@@ -200,9 +226,9 @@ function postPages(посты) {
 async function readAnswers() {
   const source = await readFile(path.join(ROOT, 'data/answers.ts'), 'utf8');
   const ответы = [];
-  const реОтвет = /slug:\s*'([^']+)',\s*question:\s*'([^']+)',\s*short:\s*\n?\s*'([^']+)'/g;
+  const реОтвет = new RegExp(String.raw`slug:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*question:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*short:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g');
   for (const m of source.matchAll(реОтвет)) {
-    ответы.push({ slug: m[1], question: m[2], short: m[3] });
+    ответы.push({ slug: m[1], question: подставитьЦены(m[2]), short: подставитьЦены(m[3]) });
   }
   if (ответы.length === 0) throw new Error('не удалось прочитать страницы-ответы из data/answers.ts');
   return ответы;
@@ -563,6 +589,22 @@ async function main() {
   // Страница, которой нет. Vercel отдаёт её с кодом 404.
   await writeFile(path.join(DIST, '404.html'), renderPage(template, NOT_FOUND, [], меню));
 
+  /*
+    Файл для нейросетей — шаблон. Цены в нём не вписаны, а подставляются здесь
+    из того же источника, что и на страницах. Раньше они были вписаны руками, и
+    это ровно то место, куда никто не заглянет в день смены цены: он лежит в
+    public/, его не видно ни на одной странице, и увидят его только машины.
+  */
+  const llmsПуть = path.join(DIST, 'llms.txt');
+  try {
+    const шаблон = await readFile(llmsПуть, 'utf8');
+    const готовый = подставитьЦены(шаблон);
+    if (готовый.includes('${')) throw new Error('в llms.txt осталась невычисленная подстановка');
+    await writeFile(llmsПуть, готовый);
+  } catch (e) {
+    if (e.code !== 'ENOENT') throw e; // нет файла — не беда, есть с ошибкой — беда
+  }
+
   await writeFile(path.join(DIST, 'sitemap.xml'), buildSitemap(allPages));
   await writeFile(
     path.join(DIST, 'robots.txt'),
@@ -615,6 +657,54 @@ async function проверитьМаршруты(allPages) {
 }
 
 /* --- самопроверка: гоняется без сборки и ничего не пишет в dist --- */
+/**
+ * Ищет цены, вписанные в код руками. Источник — config/pricing.mjs, всё
+ * остальное обязано брать их оттуда.
+ *
+ * Комментарии не считаются: в них цены называются при объяснении того, что
+ * чинили и почему. Это история, а не вторая копия правды, и заставлять её
+ * подставляться из переменной значило бы сделать объяснение нечитаемым.
+ *
+ * Состояние блочного комментария приходится ВЕСТИ, а не угадывать по началу
+ * строки. Первая версия проверяла, начинается ли строка со звёздочки, и
+ * поэтому считала кодом четыре строки внутри блоков /* ... *\/ — там объяснено,
+ * какие цены и почему были вписаны руками до этой правки. Сторож, который
+ * ругается на собственное объяснение, быстро перестают читать целиком.
+ */
+async function найтиГолыеЦены() {
+  const { readdir } = await import('node:fs/promises');
+  const суммы = Object.values(PRICES);
+  const пропустить = new Set(['node_modules', 'dist', '.git', '.vercel', 'config']);
+  const найдено = [];
+
+  const обойти = async (папка, отн = '') => {
+    for (const e of await readdir(папка, { withFileTypes: true })) {
+      if (пропустить.has(e.name)) continue;
+      const п = path.join(папка, e.name);
+      const о = отн ? `${отн}/${e.name}` : e.name;
+      if (e.isDirectory()) { await обойти(п, о); continue; }
+      if (!/\.(ts|tsx|mjs|js|txt)$/.test(e.name)) continue;
+      const текст = await readFile(п, 'utf8');
+      let вБлоке = false;
+      текст.split('\n').forEach((строка, i) => {
+        const обрезка = строка.trim();
+        const открыт = обрезка.includes('/*');
+        const закрыт = обрезка.includes('*/');
+        const этоКомментарий = вБлоке || открыт || обрезка.startsWith('//');
+        if (открыт && !закрыт) вБлоке = true;
+        if (закрыт) вБлоке = false;
+        if (этоКомментарий) return;
+        for (const сумма of суммы) {
+          if (строка.includes(сумма)) найдено.push(`${о}:${i + 1}  ${обрезка.slice(0, 72)}`);
+        }
+      });
+    }
+  };
+
+  await обойти(ROOT);
+  return найдено;
+}
+
 async function selfTest() {
   const checks = [];
   const t = (name, fn) => {
@@ -708,6 +798,34 @@ async function selfTest() {
     !/`[^`]*\| Castells Media`/.test(сторонаБраузера));
   t('шаблоны покрывают все виды страниц, создаваемых на лету', () =>
     ['service', 'industry', 'post', 'answer', 'caseStudy'].every((в) => typeof TITLE[в] === 'function'));
+
+  // ── Цены: один источник, и код не течёт в текст (2026-08-24) ─────────
+  // Четыре наши цены были вписаны руками примерно в шестьдесят мест девяти
+  // файлов. Пока цена одна и та же везде, это безобидно; разъедется в день,
+  // когда цена изменится: карточки поправят, потому что их видно, а
+  // предложение в середине статьи не поправит никто.
+  //
+  // Вторая проверка страхует от собственного лечения. Тексты читаются
+  // РАЗБОРОМ файла, и подстановка внутри строки может уехать в HTML словами
+  // «${PRICES.x}» вместо числа. В готовой странице такого быть не должно.
+  const ценник = await readFile(path.join(ROOT, 'config/pricing.mjs'), 'utf8');
+  t('источник цен на месте и называет четыре суммы', () =>
+    ['monthlyOneChannel', 'monthlySeveralChannels', 'websiteFrom', 'crmSetupFrom']
+      .every((имя) => ценник.includes(имя) && typeof PRICES[имя] === 'string'));
+  t('подстановка цен вычисляется, а не уезжает в текст', () =>
+    подставитьЦены('от ${PRICES.websiteFrom}') === `от ${PRICES.websiteFrom}`);
+  t('неизвестное имя цены остаётся как есть, а не становится пустым', () =>
+    подставитьЦены('${PRICES.нетТакого}') === '${PRICES.нетТакого}');
+  // Сторож против возврата: голая цена в коде — это вторая копия правды.
+  // Ищем по ВСЕМУ дереву исходников, кроме самого источника, и не считаем
+  // упоминания внутри комментариев: там цены называются в объяснении того,
+  // что и почему чинили, и это не копия, а история.
+  const голыеЦены = await найтиГолыеЦены();
+  t(`голых цен в коде нет (нашлось ${голыеЦены.length})`, () => голыеЦены.length === 0);
+  if (голыеЦены.length) for (const г of голыеЦены.slice(0, 8)) console.log(`        ${г}`);
+
+  t('разбор принимает и обратные кавычки', () =>
+    new RegExp(String.raw`short:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`).test("short: `текст`"));
 
   const failed = checks.filter(([, ok]) => !ok);
   for (const [name, ok] of checks) console.log(`${ok ? '  ok' : 'FAIL'}  ${name}`);

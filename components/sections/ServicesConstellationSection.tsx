@@ -1,6 +1,7 @@
 import React from 'react';
 import { Globe, Megaphone, MapPin, Workflow, ArrowUpRight, ArrowRight } from 'lucide-react';
 import type { NavigateFn } from '../../types';
+import { PRICES } from '../../config/pricing.mjs';
 
 /*
   Здесь была схема-созвездие: SVG на 1000x800 с центром, четырьмя лучами,
@@ -55,7 +56,7 @@ const SERVICES = [
     title: 'Website and branding',
     promise: 'A site where a visitor can see what you do and call you in two taps.',
     includes: ['Website or landing page', 'Brand identity and logo', 'Brand guidelines', 'Photo and copy for the pages'],
-    price: '$1,750',
+    price: PRICES.websiteFrom,
     priceNote: 'one-time, from',
     forYou: 'people find you on Facebook or Yelp and there is nowhere to send them',
   },
@@ -64,7 +65,7 @@ const SERVICES = [
     title: 'Ads that bring calls',
     promise: 'Google and Meta running for your service area, watched every week.',
     includes: ['Google Ads', 'Meta Ads (Facebook, Instagram)', 'Yelp Ads', 'Weekly reports in plain numbers'],
-    price: '$590',
+    price: PRICES.monthlyOneChannel,
     priceNote: 'monthly, from',
     forYou: 'the phone goes quiet out of season and you just wait it out',
   },
@@ -73,7 +74,7 @@ const SERVICES = [
     title: 'Found nearby',
     promise: 'People searching for your service in your city find you, not a competitor.',
     includes: ['Google Business Profile', 'Yelp profile', 'Local search pages', 'Getting and answering reviews'],
-    price: '$590',
+    price: PRICES.monthlyOneChannel,
     priceNote: 'monthly, from',
     forYou: 'someone two blocks away searches for your service and finds someone else',
   },
@@ -82,7 +83,7 @@ const SERVICES = [
     title: 'Nothing gets lost',
     promise: 'Calls, forms and messages land in one place, and no request sits unanswered.',
     includes: ['CRM setup', 'Calls and forms in one inbox', 'Follow-up reminders', 'Set up on our own platform, Mosco'],
-    price: '$1,500',
+    price: PRICES.crmSetupFrom,
     priceNote: 'setup, from',
     forYou: 'a missed call means a lost job and nobody calls back',
   },
@@ -188,7 +189,7 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
         */}
         <div className="mt-8 md:mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
           <p className="text-text-secondary dark:text-white/50 text-sm leading-relaxed max-w-xl">
-            Monthly plans are $590 and $1,490 depending on how many channels we run. Ad budget goes
+            Monthly plans are {PRICES.monthlyOneChannel} and {PRICES.monthlySeveralChannels} depending on how many channels we run. Ad budget goes
             straight to Google, Meta and Yelp and is not part of this.
           </p>
           <button

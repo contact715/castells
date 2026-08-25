@@ -5,6 +5,7 @@ import { PageHeader } from '../ui/PageHeader';
 import type { NavigateFn } from '../../types';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
+import { PRICES } from '../../config/pricing.mjs';
 
 /*
   Что здесь стояло до 22 августа 2026 и почему это убрано.
@@ -149,7 +150,7 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
             </h2>
             <p className="text-text-secondary dark:text-white/65 leading-relaxed mb-5">
               Websites, ads on Google and Meta, local presence, and follow-up that catches every request.
-              Prices are on the page: monthly from $590, websites from $1,750.
+              Prices are on the page: monthly from {PRICES.monthlyOneChannel}, websites from {PRICES.websiteFrom}.
             </p>
             <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-text-primary dark:text-white group-hover:text-accent-text transition-colors">
               See prices

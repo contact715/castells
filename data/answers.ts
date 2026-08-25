@@ -1,3 +1,4 @@
+import { PRICES } from '../config/pricing.mjs';
 /**
  * Страницы-ответы: /learn/{вопрос}.
  *
@@ -55,7 +56,7 @@ export const ANSWERS: Answer[] = [
       {
         heading: 'What it costs',
         body: [
-          'Ours start at $1,750 as a one-time project, depending on how many pages you need. Month to month after that, no contract. It is the same number published on our prices page, not something invented for this article.',
+          `Ours start at ${PRICES.websiteFrom} as a one-time project, depending on how many pages you need. Month to month after that, no contract. It is the same number published on our prices page, not something invented for this article.`,
         ],
       },
     ],
@@ -73,13 +74,13 @@ export const ANSWERS: Answer[] = [
         heading: 'The honest answer',
         body: [
           'Most of the month is not creative work. It is checking which searches brought calls and which burned budget, turning off the second kind, and moving money to the first. On a small account that is a few hours a week done properly, not forty.',
-          'Anyone promising daily heroics on a $590 plan is either not doing them or not doing them on your account.',
+          `Anyone promising daily heroics on a ${PRICES.monthlyOneChannel} plan is either not doing them or not doing them on your account.`,
         ],
       },
       {
         heading: 'What is in our monthly plans',
         body: [
-          'The $590 plan is one channel, Google or Meta or Yelp, built, launched, checked weekly and adjusted. The $1,490 plan is several channels at once, plus the local presence: Google Business Profile, Yelp, and getting and answering reviews.',
+          `The ${PRICES.monthlyOneChannel} plan is one channel, Google or Meta or Yelp, built, launched, checked weekly and adjusted. The ${PRICES.monthlySeveralChannels} plan is several channels at once, plus the local presence: Google Business Profile, Yelp, and getting and answering reviews.`,
           'Both are month to month with no contract, and the ad budget goes straight to Google, Meta and Yelp from your own account. We never take a cut of it, so we have no reason to talk you into spending more.',
         ],
       },
@@ -92,7 +93,7 @@ export const ANSWERS: Answer[] = [
       },
     ],
     ourEvidence:
-      'Our plans and what is inside them are published on the prices page: $590 for one channel, $1,490 for several channels with local presence, month to month, ad budget paid directly by you. Nothing on this page is a number invented for the article.',
+      `Our plans and what is inside them are published on the prices page: ${PRICES.monthlyOneChannel} for one channel, ${PRICES.monthlySeveralChannels} for several channels with local presence, month to month, ad budget paid directly by you. Nothing on this page is a number invented for the article.`,
     next: { label: 'See the plans', page: 'pricing' },
   },
   {
