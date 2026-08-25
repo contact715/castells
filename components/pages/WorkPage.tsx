@@ -192,7 +192,9 @@ const WorkPage: React.FC<WorkPageProps> = React.memo(({ onNavigate }) => {
                                     }`}
                                 >
                                     {cat.label}
-                                    <span className="ml-2 opacity-60">{count}</span>
+                                    {/* Без opacity: приглушение вторым цветом уже есть, а прозрачность
+    сверху опускала контраст до 2.57 при норме 4.5. Замер 24.08. */}
+                                    <span className="ml-2 text-text-secondary dark:text-white/60">{count}</span>
                                 </button>
                             );
                         })}
