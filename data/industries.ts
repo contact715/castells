@@ -16,6 +16,7 @@ import {
   Scale,
   FileText,
   MessageSquare,
+  HeartPulse,
 } from 'lucide-react';
 import { slugify } from '../lib/routes';
 
@@ -256,6 +257,28 @@ export const INDUSTRY_CATEGORIES: IndustryCategory[] = [
         description: 'Lead gen for agents, brokers, and property managers ready to grow.',
         icon: Home,
         image: '/images/real-estate.png',
+      },
+      {
+        /*
+          Добавлено 25 августа 2026 по просьбе владельца. Категория
+          «Professional» выбрана потому, что медспа — это лицензированные
+          специалисты, как страховые агенты и юристы рядом; в стройку, дом
+          или авто она не попадает ни по одному признаку.
+
+          Поле image не заполнено намеренно: у ниш оно нигде не выводится
+          (проверено — используется только image кейса), а вписать имя
+          несуществующего файла значило бы завести в данных адрес, за
+          которым ничего нет.
+
+          Страница /industries/med-spas закрыта от поиска автоматически:
+          правило «нет кейса — нет индекса» действует для всех ниш, и снимется
+          оно само, когда появится клиент из этой ниши.
+        */
+        type: 'industry',
+        slug: slugify('Med Spas'),
+        name: 'Med Spas',
+        description: 'Bookings for injectables, laser and skin treatments.',
+        icon: HeartPulse,
       },
       ctaItem,
     ],
