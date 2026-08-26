@@ -1,155 +1,75 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "headers": [
     {
       "source": "/(.*)",
       "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
-        }
+        { "key": "X-Content-Type-Options", "value": "nosniff" },
+        { "key": "X-Frame-Options", "value": "DENY" },
+        { "key": "X-XSS-Protection", "value": "0" },
+        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
+        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
       ]
     },
     {
       "source": "/assets/(.*)",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
     },
     {
       "source": "/sw.js",
       "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
-        },
-        {
-          "key": "Content-Type",
-          "value": "application/javascript; charset=utf-8"
-        },
-        {
-          "key": "Service-Worker-Allowed",
-          "value": "/"
-        }
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
+        { "key": "Content-Type", "value": "application/javascript; charset=utf-8" },
+        { "key": "Service-Worker-Allowed", "value": "/" }
       ]
     }
   ],
-  "routes": [
+  "redirects": [
     {
-      "src": "/auth/thumbtack/callback",
-      "dest": "/api/thumbtack.py"
+      "source": "/(.*)",
+      "has": [{ "type": "host", "value": "castells.media" }],
+      "destination": "https://www.castells.media/$1",
+      "permanent": true
+    },
+    { "source": "/case-studies", "destination": "/work", "permanent": true },
+    { "source": "/careers", "destination": "/about", "permanent": true },
+    { "source": "/company", "destination": "/about", "permanent": true },
+    {
+      "source": "/industries/adu-&-additions",
+      "destination": "/industries/adu-and-additions",
+      "permanent": true
     },
     {
-      "src": "/webhook/thumbtack/(.*)",
-      "dest": "/api/thumbtack.py"
+      "source": "/industries/fencing-&-gates",
+      "destination": "/industries/fencing-and-gates",
+      "permanent": true
     },
     {
-      "src": "/api/health",
-      "dest": "/api/health.py"
+      "source": "/industries/flooring-&-tile",
+      "destination": "/industries/flooring-and-tile",
+      "permanent": true
     },
     {
-      "src": "/api/lead-form",
-      "dest": "/api/lead-form.js"
-    },
-    {
-      "src": "/api/whatsapp-webhook",
-      "dest": "/api/whatsapp-webhook.js"
-    },
-    {
-      "src": "/api/telegram-webhook",
-      "dest": "/api/telegram-webhook.js"
-    },
-    {
-      "src": "/(.*)",
-      "has": [
-        {
-          "type": "host",
-          "value": "castells.media"
-        }
-      ],
-      "headers": {
-        "Location": "https://www.castells.media/$1"
-      },
-      "status": 308
-    },
-    {
-      "src": "/case-studies",
-      "status": 301,
-      "headers": {
-        "Location": "/work"
-      }
-    },
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/team/(.*)",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/careers",
-      "status": 301,
-      "headers": {
-        "Location": "/about"
-      }
-    },
-    {
-      "src": "/company",
-      "status": 301,
-      "headers": {
-        "Location": "/about"
-      }
-    },
-    {
-      "src": "/industries/adu-&-additions",
-      "status": 301,
-      "headers": {
-        "Location": "/industries/adu-and-additions"
-      }
-    },
-    {
-      "src": "/industries/fencing-&-gates",
-      "status": 301,
-      "headers": {
-        "Location": "/industries/fencing-and-gates"
-      }
-    },
-    {
-      "src": "/industries/flooring-&-tile",
-      "status": 301,
-      "headers": {
-        "Location": "/industries/flooring-and-tile"
-      }
-    },
-    {
-      "src": "/industries/int/ext-painting",
-      "status": 301,
-      "headers": {
-        "Location": "/industries/int-ext-painting"
-      }
-    },
-    {
-      "src": "/.*",
-      "status": 404,
-      "dest": "/404.html"
+      "source": "/industries/int/ext-painting",
+      "destination": "/industries/int-ext-painting",
+      "permanent": true
     }
+  ],
+  "rewrites": [
+    { "source": "/auth/thumbtack/callback", "destination": "/api/thumbtack.py" },
+    { "source": "/webhook/thumbtack/:path*", "destination": "/api/thumbtack.py" },
+    { "source": "/api/health", "destination": "/api/health.py" },
+    { "source": "/api/lead-form", "destination": "/api/lead-form.js" },
+    { "source": "/api/whatsapp-webhook", "destination": "/api/whatsapp-webhook.js" },
+    { "source": "/api/telegram-webhook", "destination": "/api/telegram-webhook.js" },
+    { "source": "/team/:path*", "destination": "/index.html" }
   ]
 }
