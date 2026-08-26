@@ -96,6 +96,30 @@ export function подставитьЦены(текст) {
     Object.prototype.hasOwnProperty.call(PRICES, имя) ? PRICES[имя] : всё);
 }
 
+/**
+ * Разбор одной строки в кавычках, с экранированием (`\'` или `` \` ``) —
+ * в отличие от КАВЫЧКА/ТЕКСТ выше, нужен для текста статей, где встречаются
+ * апострофы («someone else\'s house» в data/blog.ts).
+ */
+const СТРОКА = String.raw`(?:'((?:\\'|[^'])*)'|\`((?:\\\`|[^\`])*)\`)`;
+function разобратьСтроку(m) {
+  const текст = m[1] !== undefined ? m[1].replace(/\\'/g, "'") : m[2].replace(/\\`/g, '`');
+  return подставитьЦены(текст);
+}
+
+/** Разделы статьи (heading + body) из блока исходника, относящегося к одному посту. */
+function readSections(блок) {
+  const реРаздел = new RegExp(String.raw`heading:\s*${СТРОКА}\s*,\s*body:\s*\[([\s\S]*?)\]\s*,?\s*\}`, 'g');
+  const разделы = [];
+  for (const m of блок.matchAll(реРаздел)) {
+    const heading = разобратьСтроку(m);
+    const реАбзац = new RegExp(СТРОКА, 'g');
+    const body = [...m[3].matchAll(реАбзац)].map((a) => разобратьСтроку(a));
+    разделы.push({ heading, body });
+  }
+  return разделы;
+}
+
 async function readCatalog() {
   const услуги = [];
   const ниши = [];
@@ -211,14 +235,25 @@ async function readPosts() {
   // Дата и автор нужны разметке статьи: без настоящей даты она подставляла
   // СЕГОДНЯШНЮЮ, то есть статья каждый день заявляла поиску, что вышла сегодня.
   const реПост = new RegExp(String.raw`id:\s*(\d+),\s*slug:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*title:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*excerpt:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*date:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}[\s\S]{0,120}?author:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g');
-  for (const m of source.matchAll(реПост)) {
+  // До 26 августа 2026 отсюда читались только эти шесть полей. Готовая
+  // страница несла дату и подпись, а сам текст статьи — заголовки и абзацы
+  // из sections — оставался только в клиентском рендере: робот без JS видел
+  // название и одно предложение вместо всей статьи. Поэтому ниже блок
+  // каждого поста вырезается целиком и из него разбираются sections тоже.
+  const заголовки = [...source.matchAll(реПост)];
+  for (let i = 0; i < заголовки.length; i++) {
+    const m = заголовки[i];
+    const конец = i + 1 < заголовки.length ? заголовки[i + 1].index : source.length;
+    const блок = source.slice(m.index, конец);
     посты.push({
       id: Number(m[1]), slug: m[2],
       title: подставитьЦены(m[3]), excerpt: подставитьЦены(m[4]),
       date: m[5], author: m[6],
+      sections: readSections(блок),
     });
   }
   if (посты.length === 0) throw new Error('не удалось прочитать статьи из data/blog.ts');
+  if (посты.some((p) => p.sections.length === 0)) throw new Error('у статьи не разобрались разделы из data/blog.ts');
   return посты;
 }
 
@@ -237,7 +272,7 @@ function postPages(посты) {
     intro: post.excerpt,
     body: [
       'Written by Dmitrii Z., founder of Castells Media, Roseville, California.',
-      'Every number in this article is one of our published prices, so it can be checked on this same site.',
+      ...post.sections.flatMap((s) => [s.heading, ...s.body]),
     ],
   }));
 }
@@ -1007,6 +1042,18 @@ async function selfTest() {
 
   t('разбор принимает и обратные кавычки', () =>
     new RegExp(String.raw`short:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`).test("short: `текст`"));
+
+  // ── Текст статей блога доходит до готовой страницы (2026-08-26) ─────
+  // До этой правки readPosts() читал только id/slug/title/excerpt/date/author:
+  // сам текст статьи (sections — заголовки и абзацы) в готовый HTML не попадал
+  // вовсе, только в клиентский рендер. Робот без JS видел название и одно
+  // предложение вместо всей статьи, на всех статьях без исключения.
+  const посты = await readPosts();
+  t('у каждой статьи блога разобрались свои разделы', () =>
+    посты.length > 0 && посты.every((p) => p.sections.length > 0 && p.sections.every((s) => s.heading && s.body.length > 0)));
+  const страницыПостов = postPages(посты);
+  t('текст разделов статьи попадает в готовую страницу, а не только дата и подпись', () =>
+    страницыПостов.every((стр, i) => посты[i].sections.every((s) => стр.body.includes(s.heading))));
 
   const failed = checks.filter(([, ok]) => !ok);
   for (const [name, ok] of checks) console.log(`${ok ? '  ok' : 'FAIL'}  ${name}`);
