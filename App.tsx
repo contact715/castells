@@ -39,7 +39,6 @@ const TrustSection = lazyWithRetry(() => import('./components/sections/TrustSect
 const CTA = lazyWithRetry(() => import('./components/sections/CTA'));
 const CasesGrid = lazyWithRetry(() => import('./components/sections/CasesGrid'));
 const FAQ = lazyWithRetry(() => import('./components/sections/FAQ'));
-const Blog = lazyWithRetry(() => import('./components/sections/Blog'));
 
 const CaseStudyDetail = lazyWithRetry(() => import('./components/pages/CaseStudyDetail'));
 const WorkPage = lazyWithRetry(() => import('./components/pages/WorkPage'));
@@ -211,12 +210,6 @@ function App() {
                     </Suspense>
                   </LazySection>
 
-                  {/* HIDDEN: Blog section — uncomment when ready */}
-                  {/* <LazySection rootMargin="300px">
-                    <Suspense fallback={null}>
-                      <Blog onNavigate={navigateTo} />
-                    </Suspense>
-                  </LazySection> */}
                 </>
               )}
 

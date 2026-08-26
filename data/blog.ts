@@ -237,6 +237,54 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    id: 5,
+    slug: 'local-services-ads-moving-into-google-ads',
+    title: 'Local Services Ads are moving into Google Ads. Check this first',
+    excerpt:
+      'Google is folding Local Services Ads into regular Google Ads this month, starting with plumbing, HVAC and roofing. One part of the change is easy to miss.',
+    date: 'August 26, 2026',
+    readingMinutes: 4,
+    category: 'Ads',
+    author: 'Dmitrii Z.',
+    authorRole: 'Founder, Castells Media',
+    sections: [
+      {
+        heading: 'What is changing',
+        body: [
+          'Local Services Ads, the pay-per-lead program behind the Google Guaranteed badge, is moving inside regular Google Ads. Google describes the change in its own Ads Help documentation, at support.google.com/google-ads/answer/17213585, and the rollout started in early August 2026.',
+          'The separate Local Services app and dashboard goes away for migrated accounts. Campaigns continue as a Google Ads campaign type built for pay-per-lead, managed from the same place as any other Google Ads campaign.',
+        ],
+      },
+      {
+        heading: 'Who is first',
+        body: [
+          'The first wave is a set of US home and storefront trades: plumbing, HVAC, electrical, appliance repair, house cleaning, lawn care, roofing, pest control and moving. Most of the industries this agency works in are on that list.',
+          'Service-area businesses without a storefront, and accounts with custom bidding, come later in 2026. Everything outside the US follows in 2027.',
+        ],
+      },
+      {
+        heading: 'What stays the same',
+        body: [
+          'The parts that made Local Services Ads simple are not changing. Ads still only show on Search and Maps. Campaigns are still built from your Google Business Profile instead of keywords you pick. You still pay for a lead, a call, a message or a booking, not for a click that goes nowhere.',
+        ],
+      },
+      {
+        heading: 'The one thing to do this week',
+        body: [
+          'Google says historical performance reports do not carry over in the migration. Budgets, settings and creative move automatically. Your record of what already happened does not.',
+          'If you or whoever runs your ads has a Local Services account in one of the trades above, download the reporting now, before the account switches. Waiting until after the migration means that history is simply gone.',
+        ],
+      },
+      {
+        heading: 'Our take',
+        body: [
+          'Local Services Ads was built to be the easy option: Google runs it, you barely touch the settings. Folding it into Google Ads puts it next to a platform with a lot more knobs, which is either an upgrade or a way to make a simple thing complicated, depending on who is managing the account.',
+          'If an agency runs your ads, ask them directly whether your account has received the migration yet and whether they pulled your report history. If nobody runs it but you, the ten minutes it takes to check and export is worth more than the ten minutes it takes to read this paragraph.',
+        ],
+      },
+    ],
+  },
 ];
 
 export const findPostBySlug = (slug: string) => BLOG_POSTS.find((p) => p.slug === slug);
