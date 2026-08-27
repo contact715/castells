@@ -269,32 +269,32 @@ export const КАРТИНКИ = [
   {
     slug: 'track-contractors',
     сюжет:
-      'A flat house frame of bare structural beams, drawn in green outline on a dark background, unfinished with no walls. Square composition, subject centred and filling most of the frame. No text, no people.',
-    alt: 'A bare house frame of structural beams',
+      'A wide construction scene spanning the full frame from the left edge to the right edge: three house frames of bare structural beams at different stages of completion, standing side by side on one flat ground line. All subject matter sits in the central horizontal band of the frame, nothing important near the top or bottom edge. No text, no people.',
+    alt: 'Three bare house frames at different stages, side by side',
   },
   {
     slug: 'track-hvac',
     сюжет:
-      'A flat green outdoor air conditioning condenser unit with a circular fan grille on its front, standing on a dark background. Square composition, subject centred and filling most of the frame. No text.',
-    alt: 'An outdoor air conditioning unit with a fan grille',
+      'A wide scene spanning the full frame from the left edge to the right edge: a row of four outdoor air conditioning condenser units of equal size standing side by side on one flat ground line, each with a circular fan grille on its front. All subject matter sits in the central horizontal band, nothing important near the top or bottom edge. No text.',
+    alt: 'A row of four outdoor air conditioning units side by side',
   },
   {
     slug: 'track-remodeling',
     сюжет:
-      'A flat room interior split vertically down the middle: the left half plain off-white and empty, the right half green and fitted with simple cabinet and counter shapes. Square composition, dark background. No text.',
-    alt: 'A room split down the middle, empty on one side and fitted on the other',
+      'A wide interior elevation spanning the full frame from the left edge to the right edge: the left third is bare wall studs, the middle third is partly finished, the right third is a completed fitted kitchen with cabinets and a counter. All subject matter sits in the central horizontal band, nothing important near the top or bottom edge. No text.',
+    alt: 'A wall shown in three stages across the frame, from bare studs to finished kitchen',
   },
   {
     slug: 'track-automotive',
     сюжет:
-      'A flat green car seen from a three-quarter front angle, drawn as simple geometric shapes on a dark background. Square composition, subject centred and filling most of the frame. No text, no wheels detail.',
-    alt: 'A car seen from a three-quarter front angle',
+      'A wide workshop scene spanning the full frame from the left edge to the right edge: three cars seen from the side, evenly spaced in a row inside a service bay, standing on one flat floor line. All subject matter sits in the central horizontal band, nothing important near the top or bottom edge. No text, no people.',
+    alt: 'Three cars in a row inside a service bay',
   },
   {
     slug: 'track-professional',
     сюжет:
-      'A flat off-white document with a green certification seal or badge shape in its lower corner, standing upright on a dark background. Square composition, subject centred and filling most of the frame. No text.',
-    alt: 'A document with a certification seal in the corner',
+      'A wide street scene spanning the full frame from the left edge to the right edge: five small office and clinic storefronts standing side by side along one pavement line, each with a plain rectangular sign board above its door and a window beside it. All subject matter sits in the central horizontal band, nothing important near the top or bottom edge. No text, no lettering on the signs, no people.',
+    alt: 'A row of five small office and clinic storefronts along a street',
   },
 ];
 

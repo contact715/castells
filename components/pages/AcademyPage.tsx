@@ -15,6 +15,12 @@ import { NavigationData } from '../../types';
   Владелец: «сделай на всю ширину сайта, как кейсы на главной, только без
   анимации, просто карточка так же красиво».
 
+  Высоты 400/500/600 взяты ОТТУДА ЖЕ, а не назначены своими. Первая версия
+  ставила 300/360/420, и обложка при этом обрезалась до 49% по высоте: у дома
+  срезало крышу, у документа оставалась одна белая плита. Владелец назвал это
+  обрубками и был прав. При 600 точках на широком экране остаётся около 70%
+  картинки.
+
   Форма СКОПИРОВАНА с components/sections/Work.tsx, а не придумана заново:
   картинка фоном, тёмная заливка снизу вверх, значок слева сверху, стрелка
   справа, заголовок и описание внизу. Так карточки академии читаются как часть
@@ -116,7 +122,7 @@ const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
                   key={раздел.slug}
                   type="button"
                   onClick={() => onNavigate('academy-track', { id: раздел.slug })}
-                  className="group relative block w-full h-[300px] sm:h-[360px] md:h-[420px] rounded-card overflow-hidden text-left"
+                  className="group relative block w-full h-[400px] sm:h-[500px] md:h-[600px] rounded-card overflow-hidden text-left"
                 >
                   <div className="absolute inset-0 bg-black">
                     {раздел.cover && (
