@@ -99,14 +99,14 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
       {
         heading: 'The legal form you register under',
         body: [
-          'Sole proprietor, LLC, corporation — the choice changes three things: what happens to your personal assets if a job goes wrong, how you file taxes, and how easy it is to bring on a partner or sell later.',
+          'Sole proprietor, LLC, corporation. The choice changes three things: what happens to your personal assets if a job goes wrong, how you file taxes, and how easy it is to bring on a partner or sell later.',
           'We are not lawyers and the rules differ by state, so we will not tell you which to pick. What we will say is that this is one of the few decisions that is expensive to reverse, and it is worth an hour with an accountant before you register rather than after.',
         ],
       },
       {
         heading: 'The license, and why customers check it',
         body: [
-          'Most trades need a state license to work legally above a certain job size. In California that is the CSLB; other states have their own board. Look up your state board directly rather than trusting a summary, including this one — requirements change.',
+          'Most trades need a state license to work legally above a certain job size. In California that is the CSLB. Other states have their own board. Look it up directly rather than trusting a summary, including this one, because requirements change.',
           'The reason this belongs in a marketing course: your license number is a trust signal. Customers comparing three quotes will check the number on the state site. A contractor whose license is current and searchable wins that comparison against one who left it off the website.',
         ],
       },
@@ -114,7 +114,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         heading: 'Insurance',
         body: [
           'General liability, and workers comp if you have employees. Some commercial clients will not accept a bid without a certificate. Some ad platforms and lead marketplaces ask for it too.',
-          'It is also the thing that decides whether one bad day ends the business or is just a bad day.',
+          'It is what decides whether one bad day ends the business or is just a bad day.',
         ],
       },
       {
@@ -134,7 +134,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
       },
     ],
     takeaway:
-      'Before you budget a dollar for ads, check the six things above. If any is missing, fix that first — it will make every dollar after it work harder.',
+      'Before you budget a dollar for ads, check the six things above. If any is missing, fix that first. It will make every dollar after it work harder.',
   },
   {
     slug: 'what-a-brand-is-for-a-contractor',
@@ -175,7 +175,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
       },
     ],
     takeaway:
-      'Open the last five places your business name appears — truck, invoice, Google listing, website, a shirt. If they do not match, that is the first job, before any new design.',
+      'Open the last five places your business name appears: truck, invoice, Google listing, website, a shirt. If they do not match, that is the first job, before any new design.',
   },
   {
     slug: 'three-kinds-of-website',
@@ -188,7 +188,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         heading: 'The one-page card',
         body: [
           'What you do, where you work, a phone number, a few photos of your own jobs, and the license number. One screen of scrolling.',
-          'It is for the customer who already has your name — from a neighbor, a truck, a yard sign — and is checking that you are real before calling. That is a large share of how home service work is actually won, and this page does that job completely.',
+          'It is for the customer who already has your name, from a neighbor or a truck or a yard sign, and is checking that you are real before calling. That is a large share of how home service work is actually won, and this page does that job completely.',
           'What it cannot do: bring you people who have never heard of you. It is not built to rank in search and it is not built to convert paid traffic.',
         ],
       },
@@ -212,7 +212,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         heading: 'What all three need',
         body: [
           'The phone number visible without scrolling, and tappable on a phone. Most home service traffic is on a phone, often standing in the problem.',
-          'What you do and where, in words a person would actually search. Not "comprehensive residential solutions" — "AC repair in Roseville".',
+          'What you do and where, in words a person would actually search. Not "comprehensive residential solutions". "AC repair in Roseville".',
           'Proof: your own photos, your license number, your real reviews if you have them. If you have none of these yet, say less rather than making something up. A thin honest page outperforms a padded one, because the padding is recognizable.',
         ],
       },
@@ -240,14 +240,14 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         body: [
           'The first is the ad budget: money you hand to Google, Meta or Yelp, which they turn into clicks or impressions. It scales with how much you want.',
           'The second is the work: someone builds the pages, writes the ads, watches what happens, and changes it. That cost is roughly flat whether you spend five hundred a month on ads or five thousand.',
-          'They should be billed separately and visibly. When they are bundled into one number, you cannot tell whether a bad month was a bad ad budget or bad work — and neither can whoever you hired.',
+          'They should be billed separately and visibly. When they are bundled into one number, you cannot tell whether a bad month was a bad ad budget or bad work. Neither can whoever you hired.',
         ],
       },
       {
         heading: 'Who should own the ad account',
         body: [
           'You. The account should be in your name, with your billing, and whoever runs it gets access to it.',
-          'The reason is simple: the account holds the history — which keywords converted, which audiences worked, what a lead cost across two years. That history is worth more than any single month of management. If the account belongs to the agency, you start from zero when you leave, and the cost of leaving is exactly what keeps people in bad arrangements.',
+          'The account holds the history: which keywords converted, which audiences worked, what a lead cost across two years. That history is worth more than any single month of management. If the account belongs to the agency, you start from zero when you leave, and the cost of leaving is exactly what keeps people in bad arrangements.',
           'This is our own rule and we apply it to our own clients. We have written about it separately in the notes.',
         ],
       },
@@ -263,7 +263,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
       {
         heading: 'Why "leads" alone is the wrong number',
         body: [
-          'A lead count can be moved by lowering quality. Broader keywords, looser targeting, a form with fewer fields — all of them produce more leads and can produce less work.',
+          'A lead count can be moved by lowering quality. Broader keywords, looser targeting, a form with fewer fields. All of them produce more leads and can produce less work.',
           'The numbers worth watching are further down: how many leads turned into booked jobs, and what those jobs were worth. That requires knowing what happened after the phone rang, which is the subject of module 6.',
         ],
       },
@@ -290,7 +290,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         heading: 'Someone they know',
         body: [
           'Referrals and repeat customers are still the largest source of work for most home service businesses, and they cost nothing per job.',
-          'They are also the channel owners neglect, because there is nothing to buy. What there is to do: ask, at the moment the customer is happiest, which is when the job is finished and works. And make it easy to pass your name along — a card left behind, a magnet, a yard sign.',
+          'They are also the channel owners neglect, because there is nothing to buy. What there is to do: ask, at the moment the customer is happiest, which is when the job is finished and works. And make it easy to pass your name along with a card left behind, a magnet, a yard sign.',
         ],
       },
       {
@@ -319,7 +319,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
       {
         heading: 'Social and marketplaces',
         body: [
-          'Paid social reaches people who were not looking. It works better for jobs people can be talked into — remodels, upgrades, cosmetic work — than for emergencies.',
+          'Paid social reaches people who were not looking. It works better for jobs people can be talked into, like remodels and upgrades, than for emergencies.',
           'Lead marketplaces sell the same lead to several contractors. That can be worth it when you are starting and have capacity to fill, and it gets expensive once you are established, because you are competing on speed and price with everyone else who bought the same name.',
         ],
       },
@@ -345,7 +345,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
       {
         heading: 'The gap where jobs disappear',
         body: [
-          'A customer with a problem calls three contractors. The one who answers, or calls back first, has an advantage that price often cannot overcome — because the customer wants the problem gone more than they want to shop.',
+          'A customer with a problem calls three contractors. The one who answers, or calls back first, has an advantage that price often cannot overcome, because the customer wants the problem gone more than they want to shop.',
           'You are on a roof. You cannot answer. That is not the failure. The failure is that nothing happened afterward.',
         ],
       },
@@ -359,7 +359,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
       {
         heading: 'One place where every request lives',
         body: [
-          'Calls, texts, form submissions, marketplace leads — they arrive in four different places and that is why they get lost. Pick one place where every one of them is written down.',
+          'Calls, texts, form submissions, marketplace leads. They arrive in four different places and that is why they get lost. Pick one place where every one of them is written down.',
           'It can start as a notebook. It works better as a simple CRM, because a CRM can remind you, and a notebook cannot.',
           'What it needs to hold: who, what they want, when they contacted you, what you said last, and what happens next with a date. Five fields. Anything more elaborate than that will not get filled in on a Tuesday.',
         ],
@@ -367,9 +367,9 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
       {
         heading: 'Follow-up is where the money is',
         body: [
-          'A quote sent and never mentioned again is a quote the customer forgot about. Not rejected — forgotten. Those are different, and the second one is recoverable.',
+          'A quote sent and never mentioned again is a quote the customer forgot about. Not rejected. Forgotten. Those are different, and the second one is recoverable.',
           'A simple rhythm most owners can keep: follow up the day after the quote, again about a week later, and once more a few weeks after that. Then stop. Three touches, politely, and then it is a no and you move on.',
-          'This is unglamorous and it is the highest-return work in this entire course, because the customers are already yours and already interested.',
+          'None of this is interesting work. It is also the cheapest work in this course, because those customers are already yours and already interested.',
         ],
       },
       {
