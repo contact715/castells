@@ -2,7 +2,7 @@ import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { Breadcrumbs } from '../ui/Breadcrumbs';
 import SEO from '../ui/SEO';
-import { ACADEMY_TRACKS, lessonsOfTrack } from '../../data/academy';
+import { ACADEMY_MODULES, ACADEMY_TRACKS, ACADEMY_LESSONS, lessonsOfTrack } from '../../data/academy';
 import { PageView } from '../../App';
 import { NavigationData } from '../../types';
 
@@ -37,7 +37,20 @@ const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
 
       <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
         <div className="container mx-auto px-6 pt-4 md:pt-6">
-          <div className="w-full max-w-3xl">
+          {/*
+            ДВЕ КОЛОНКИ, как на страницах курса и урока.
+
+            До 27 августа хаб был единственной страницей академии, где правая
+            сторона пустовала: оглавление курса сюда не подходит, а карточки
+            занимают половину ширины. Владелец это заметил.
+
+            Справа поставлен список модулей — он отвечает на вопрос, который
+            карточки не отвечают: что именно внутри ЛЮБОГО из курсов. Не
+            украшение и не повтор: карточки говорят, ДЛЯ КОГО курс, а модули —
+            ИЗ ЧЕГО он состоит.
+          */}
+          <div className="flex gap-10 xl:justify-between">
+            <div className="w-full max-w-3xl min-w-0">
             <Breadcrumbs
               className="mb-6"
               items={[{ label: 'Home', action: () => onNavigate('home') }, { label: 'Academy' }]}
@@ -52,12 +65,30 @@ const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
               numbers we cannot show you the source of, and nothing here is behind a form.
             </p>
             {/*
-              Число сказано вслух. Пять разделов и один написанный — это честная
-              картина, а не недоделка, которую надо замять.
+              Строка считается, а не пишется под сегодняшнее состояние.
+
+              Первая версия говорила «остальные перечислены ниже, чтобы вы
+              видели, что готовится». Это было верно при двух написанных курсах
+              из пяти и повисло враньём, когда написали все пять: остальных не
+              осталось. Такую строку нельзя чинить переписыванием — через месяц
+              добавится шестой раздел, и она соврёт снова, уже в другую сторону.
+
+              Поэтому: пока есть ненаписанные — называем их число вслух; когда
+              написаны все — говорим, сколько всего уроков. Соврать в обоих
+              случаях нечем.
             */}
             <p className="text-text-secondary dark:text-white/50 text-sm mb-10">
-              {сУроками.length} of {ACADEMY_TRACKS.length} courses are written so far. The rest are
-              listed below so you can see what is coming.
+              {сУроками.length < ACADEMY_TRACKS.length ? (
+                <>
+                  {сУроками.length} of {ACADEMY_TRACKS.length} courses are written so far. The rest
+                  are listed below so you can see what is coming.
+                </>
+              ) : (
+                <>
+                  {ACADEMY_TRACKS.length} courses, {ACADEMY_LESSONS.length} lessons. Free, no
+                  sign-up, nothing behind a form.
+                </>
+              )}
             </p>
 
             <div className="space-y-4">
@@ -103,6 +134,30 @@ const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
                 );
               })}
             </div>
+            </div>
+
+            <aside className="hidden xl:block w-72 shrink-0" aria-label="What every course covers">
+              <div className="sticky top-28">
+                <h2 className="text-[11px] font-semibold tracking-wide text-accent-text mb-4">
+                  What every course covers
+                </h2>
+                <ol className="space-y-4">
+                  {ACADEMY_MODULES.map((модуль) => (
+                    <li key={модуль.number}>
+                      <span className="block text-[10px] font-semibold tracking-wide text-text-secondary dark:text-white/40 mb-1">
+                        MODULE {модуль.number}
+                      </span>
+                      <span className="block text-sm font-medium text-text-primary dark:text-white leading-snug">
+                        {модуль.name}
+                      </span>
+                      <span className="block text-sm text-text-secondary dark:text-white/55 leading-snug mt-0.5">
+                        {модуль.about}
+                      </span>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </aside>
           </div>
         </div>
       </div>
