@@ -23,6 +23,58 @@
   нельзя.
 */
 
+/*
+  РАЗДЕЛЫ ПО РЕМЕСЛУ, заведены 26 августа 2026 по решению владельца: «разделение
+  на констракшен, хвак и прочее, а курс для контрактора уже в разделе
+  контрактор, и там всё, что касается этой ниши, от и до».
+
+  Названия взяты так, как подрядчики называют СЕБЯ, а не по внутренней
+  разбивке сайта. У нас ниши сгруппированы в четыре категории (Construction,
+  Home Services, Automotive, Professional), и HVAC там внутри Home Services.
+  Но человек, который ставит кондиционеры, ищет курс для HVAC, а не для
+  «домашних услуг», поэтому HVAC вынесен отдельным разделом.
+
+  СОДЕРЖАНИЕ СЕГОДНЯ ЕСТЬ ОДНО, и это названо вслух на самой странице. Раздел
+  без уроков показывается с пометкой, а не прячется: спрятанный раздел создаёт
+  впечатление, что программа перед вами целиком.
+*/
+export interface AcademyTrack {
+  slug: string;
+  name: string;
+  /** Кому этот раздел, одной строкой. */
+  about: string;
+}
+
+export const ACADEMY_TRACKS: AcademyTrack[] = [
+  {
+    slug: 'contractors',
+    name: 'General contractors',
+    about: 'The foundation every trade needs: setting the business up, getting found, and not losing the work you already have.',
+  },
+  {
+    slug: 'hvac',
+    name: 'HVAC',
+    about: 'Heating and air conditioning: seasonal demand, emergency calls, and maintenance plans.',
+  },
+  {
+    slug: 'remodeling',
+    name: 'Remodeling and construction',
+    about: 'Kitchens, bathrooms, additions, roofing: long sales cycles and large tickets.',
+  },
+  {
+    slug: 'automotive',
+    name: 'Automotive services',
+    about: 'Detailing, wraps, tint, ceramic coating: a shop with a physical location and repeat customers.',
+  },
+  {
+    slug: 'professional',
+    name: 'Professional services',
+    about: 'Insurance, legal, consulting, financial planning, med spas: licensed practices selling trust.',
+  },
+];
+
+export const findTrack = (slug?: string) => ACADEMY_TRACKS.find((t) => t.slug === slug);
+
 export interface AcademySection {
   heading: string;
   body: string[];
@@ -30,6 +82,8 @@ export interface AcademySection {
 
 export interface AcademyLesson {
   slug: string;
+  /** Раздел по ремеслу, к которому относится урок. */
+  track: string;
   /** Номер модуля, к которому относится урок. */
   module: number;
   /** Заголовок урока — он же заголовок страницы. */
@@ -103,6 +157,7 @@ export const ACADEMY_MODULES: AcademyModule[] = [
 export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'before-you-spend-on-marketing',
+    track: 'contractors',
     module: 1,
     title: 'What has to be in place before marketing can work',
     summary:
@@ -162,6 +217,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   },
   {
     slug: 'what-a-brand-is-for-a-contractor',
+    track: 'contractors',
     module: 2,
     title: 'What a brand actually is for a contractor',
     summary:
@@ -210,6 +266,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   },
   {
     slug: 'three-kinds-of-website',
+    track: 'contractors',
     module: 3,
     title: 'Three kinds of website, and which one you need',
     summary:
@@ -268,6 +325,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   },
   {
     slug: 'where-the-marketing-money-goes',
+    track: 'contractors',
     module: 4,
     title: 'Where the marketing money actually goes',
     summary:
@@ -324,6 +382,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   },
   {
     slug: 'how-people-find-a-contractor',
+    track: 'contractors',
     module: 5,
     title: 'How people actually find a contractor',
     summary:
@@ -387,6 +446,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   },
   {
     slug: 'the-job-you-lose',
+    track: 'contractors',
     module: 6,
     title: 'The job you lose is usually the one nobody called back',
     summary:
@@ -443,8 +503,11 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
 export const findLesson = (slug?: string) =>
   ACADEMY_LESSONS.find((l) => l.slug === slug);
 
-export const lessonsOfModule = (module: number) =>
-  ACADEMY_LESSONS.filter((l) => l.module === module);
+export const lessonsOfTrack = (track: string) =>
+  ACADEMY_LESSONS.filter((l) => l.track === track);
+
+export const lessonsOfModule = (track: string, module: number) =>
+  ACADEMY_LESSONS.filter((l) => l.track === track && l.module === module);
 
 /**
  * Время чтения считается по тексту, а не назначается. Назначенное число рано

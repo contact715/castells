@@ -1,105 +1,113 @@
 import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
-import { PageHeader } from '../ui/PageHeader';
+import { Breadcrumbs } from '../ui/Breadcrumbs';
 import SEO from '../ui/SEO';
-import { ACADEMY_MODULES, lessonsOfModule, readingMinutes } from '../../data/academy';
+import { ACADEMY_TRACKS, lessonsOfTrack } from '../../data/academy';
 import { PageView } from '../../App';
 import { NavigationData } from '../../types';
 
 /*
-  Хаб академии, /academy. Заведён 26 августа 2026.
+  Хаб академии, /academy. С 26 августа 2026 это список РЕМЁСЕЛ, а не список
+  уроков: владелец попросил разделить академию по нишам, чтобы в разделе своего
+  ремесла подрядчик находил всё, что его касается, от и до.
 
-  Модули показываются ВСЕ, включая те, где урок ещё не написан, и такой модуль
-  честно помечен. Прятать ненаписанное нельзя: человек, увидев шесть модулей и
-  шесть уроков, решит, что программа целиком перед ним. Показать модуль без
-  урока и сказать об этом — честно; показать и промолчать — нет.
+  Разделы без уроков показываются с пометкой, а не прячутся. Спрятанный раздел
+  создаёт впечатление, что программа перед вами целиком, и человек не узнает,
+  что для его ремесла курс ещё пишется. Сегодня содержание есть у одного
+  раздела из пяти, и число названо прямо на странице.
 
-  Разметку для поиска эта страница не рисует: она уже есть в готовом HTML,
-  который отдаёт scripts/prerender-pages.mjs. Вторая копия дала бы дубли —
-  ровно то, что убирали 26 августа на семи блоках.
+  Разметку для поиска страница не рисует: она уже в готовом HTML.
 */
 
 interface AcademyPageProps {
   onNavigate: (page: PageView, data?: NavigationData) => void;
 }
 
-const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => (
-  <>
-    <SEO
-      title="Academy for contractors | Castells Media"
-      description="A free course for home service business owners: registering the business, brand, website, marketing budgets, getting found, and following up on the work you already have."
-      canonical="/academy"
-      summary="Free plain-text course from Castells Media for contractors and home service business owners, covering business setup, brand, websites, marketing budgets, lead sources and follow-up."
-    />
+const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
+  const сУроками = ACADEMY_TRACKS.filter((т) => lessonsOfTrack(т.slug).length > 0);
 
-    <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
-      <div className="container mx-auto px-6 pt-4 md:pt-6">
-        <PageHeader
-          breadcrumbs={[
-            { label: 'Home', action: () => onNavigate('home') },
-            { label: 'Academy' },
-          ]}
-          badge="Academy"
-          title="A course for contractors"
-          description="Written from the work we do for clients, not from someone else's textbook. No numbers we cannot show you the source of, and nothing here is behind a form."
-          onNavigate={onNavigate}
-        />
+  return (
+    <>
+      <SEO
+        title="Academy for contractors | Castells Media"
+        description="A free course for home service business owners: registering the business, brand, website, marketing budgets, getting found, and following up on the work you already have."
+        canonical="/academy"
+        summary="Free plain-text course from Castells Media for contractors and home service business owners, covering business setup, brand, websites, marketing budgets, lead sources and follow-up."
+      />
 
-        <div className="max-w-4xl space-y-10">
-          {ACADEMY_MODULES.map((модуль) => {
-            const уроки = lessonsOfModule(модуль.number);
-            return (
-              <section key={модуль.number}>
-                <div className="flex items-baseline gap-3 mb-1">
-                  <span className="text-[11px] font-semibold tracking-wide text-accent-text">
-                    Module {модуль.number}
-                  </span>
-                  <h2 className="font-display text-xl md:text-2xl font-normal text-text-primary dark:text-white">
-                    {модуль.name}
-                  </h2>
-                </div>
-                <p className="text-text-secondary dark:text-white/65 mb-4">{модуль.about}</p>
+      <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
+        <div className="container mx-auto px-6 pt-4 md:pt-6">
+          <div className="w-full max-w-3xl">
+            <Breadcrumbs
+              className="mb-6"
+              items={[{ label: 'Home', action: () => onNavigate('home') }, { label: 'Academy' }]}
+            />
 
-                {уроки.length === 0 ? (
-                  /* Модуль без урока называется вслух, а не прячется */
-                  <p className="text-sm text-text-secondary dark:text-white/50 border border-dashed border-black/15 dark:border-white/15 rounded-card px-5 py-4">
-                    Not written yet.
-                  </p>
-                ) : (
-                  <div className="space-y-3">
-                    {уроки.map((урок) => (
-                      <button
-                        key={урок.slug}
-                        type="button"
-                        onClick={() => onNavigate('academy-lesson', { id: урок.slug })}
-                        className="group w-full text-left bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-6 hover:border-black/20 dark:hover:border-white/30 transition-colors"
+            <span className="text-[11px] font-semibold tracking-wide text-accent-text">Academy</span>
+            <h1 className="font-display text-3xl md:text-4xl font-normal text-text-primary dark:text-white mt-2 mb-4 leading-tight">
+              Courses by trade
+            </h1>
+            <p className="text-text-secondary dark:text-white/70 text-base md:text-[17px] leading-relaxed mb-3">
+              Written from the work we do for clients, not from someone else&apos;s textbook. No
+              numbers we cannot show you the source of, and nothing here is behind a form.
+            </p>
+            {/*
+              Число сказано вслух. Пять разделов и один написанный — это честная
+              картина, а не недоделка, которую надо замять.
+            */}
+            <p className="text-text-secondary dark:text-white/50 text-sm mb-10">
+              {сУроками.length} of {ACADEMY_TRACKS.length} courses are written so far. The rest are
+              listed below so you can see what is coming.
+            </p>
+
+            <div className="space-y-4">
+              {ACADEMY_TRACKS.map((раздел) => {
+                const уроки = lessonsOfTrack(раздел.slug);
+                const готов = уроки.length > 0;
+                return (
+                  <button
+                    key={раздел.slug}
+                    type="button"
+                    disabled={!готов}
+                    onClick={() => готов && onNavigate('academy-track', { id: раздел.slug })}
+                    className={
+                      готов
+                        ? 'group w-full text-left bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-6 hover:border-black/20 dark:hover:border-white/30 transition-colors'
+                        : 'w-full text-left border border-dashed border-black/15 dark:border-white/15 rounded-card p-6 cursor-default'
+                    }
+                  >
+                    <div className="flex items-start justify-between gap-4 mb-2">
+                      <h2
+                        className={`font-display text-lg md:text-xl font-semibold ${
+                          готов ? 'text-text-primary dark:text-white' : 'text-text-secondary dark:text-white/55'
+                        }`}
                       >
-                        <div className="flex items-start justify-between gap-4 mb-2">
-                          <h3 className="font-display text-lg font-semibold text-text-primary dark:text-white">
-                            {урок.title}
-                          </h3>
-                          <ArrowUpRight
-                            className="w-4 h-4 shrink-0 mt-1 text-text-secondary dark:text-white/50 group-hover:text-accent-text transition-colors"
-                            aria-hidden="true"
-                          />
-                        </div>
-                        <p className="text-text-secondary dark:text-white/65 leading-relaxed mb-3">
-                          {урок.summary}
-                        </p>
-                        <span className="text-xs text-text-secondary dark:text-white/45">
-                          {readingMinutes(урок)} min read
-                        </span>
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </section>
-            );
-          })}
+                        {раздел.name}
+                      </h2>
+                      {готов && (
+                        <ArrowUpRight
+                          className="w-4 h-4 shrink-0 mt-1 text-text-secondary dark:text-white/50 group-hover:text-accent-text transition-colors"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </div>
+                    <p className="text-text-secondary dark:text-white/65 leading-relaxed mb-3">
+                      {раздел.about}
+                    </p>
+                    <span
+                      className={`text-xs ${готов ? 'text-accent-text' : 'text-text-secondary dark:text-white/40'}`}
+                    >
+                      {готов ? `${уроки.length} lessons` : 'Not written yet'}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </>
-);
+    </>
+  );
+};
 
 export default AcademyPage;

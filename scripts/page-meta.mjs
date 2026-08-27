@@ -200,6 +200,7 @@ export const TITLE = {
   answer: (question) => `${question} | ${МАРКА}`,
   caseStudy: (client, industry) => `${client} — ${industry} | ${МАРКА}`,
   academyLesson: (title) => `${title} | ${МАРКА} Academy`,
+  academyTrack: (name) => `${name} marketing course | ${МАРКА}`,
 };
 
 /*
@@ -231,6 +232,7 @@ export const DESCRIPTION = {
   answer: (short) => short,
   caseStudy: (description, client, where) => description || `${client}: ${where}.`,
   academyLesson: (summary) => summary,
+  academyTrack: (about) => about,
 };
 
 export const NOT_FOUND = {

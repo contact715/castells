@@ -334,6 +334,14 @@ function answerPages(ответы) {
 async function readAcademy() {
   const source = await readFile(path.join(ROOT, 'data/academy.ts'), 'utf8');
 
+  const разделы = [];
+  const реРаздел = new RegExp(String.raw`slug:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*name:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*about:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g');
+  const блокРазделов = source.slice(source.indexOf('ACADEMY_TRACKS'), source.indexOf('AcademySection'));
+  for (const m of блокРазделов.matchAll(реРаздел)) {
+    разделы.push({ slug: m[1], name: m[2], about: подставитьЦены(m[3]) });
+  }
+  if (разделы.length === 0) throw new Error('не удалось прочитать разделы академии из data/academy.ts');
+
   const модули = [];
   const реМодуль = new RegExp(String.raw`number:\s*(\d+),\s*name:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*about:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g');
   for (const m of source.matchAll(реМодуль)) {
@@ -341,9 +349,9 @@ async function readAcademy() {
   }
 
   const уроки = [];
-  const реУрок = new RegExp(String.raw`slug:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*module:\s*(\d+),\s*title:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*summary:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g');
+  const реУрок = new RegExp(String.raw`slug:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*track:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*module:\s*(\d+),\s*title:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*summary:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g');
   for (const m of source.matchAll(реУрок)) {
-    уроки.push({ slug: m[1], module: Number(m[2]), title: подставитьЦены(m[3]), summary: подставитьЦены(m[4]) });
+    уроки.push({ slug: m[1], track: m[2], module: Number(m[3]), title: подставитьЦены(m[4]), summary: подставитьЦены(m[5]) });
   }
   if (модули.length === 0) throw new Error('не удалось прочитать модули академии из data/academy.ts');
   if (уроки.length === 0) throw new Error('не удалось прочитать уроки академии из data/academy.ts');
@@ -357,27 +365,47 @@ async function readAcademy() {
     const т = кусок.match(new RegExp(String.raw`takeaway:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`));
     урок.takeaway = т ? подставитьЦены(т[1]) : null;
   }
-  return { модули, уроки };
+  return { разделы, модули, уроки };
 }
 
-function academyPages({ модули, уроки }) {
+function academyPages({ разделы, модули, уроки }) {
   const хаб = {
     ...HUBS.academy,
     h1: 'A course for contractors',
     intro:
       "Written from the work we do for clients, not from someone else's textbook. No numbers we cannot show you the source of, and nothing here is behind a form.",
     body: [
+      ...разделы.map((т) => `${т.name}: ${т.about}`),
       ...модули.map((m) => `Module ${m.number}. ${m.name}: ${m.about}`),
-      ...уроки.map((u) => `${u.title} — ${u.summary}`),
     ],
   };
 
+  /*
+    Страница раздела делается только для тех ремёсел, где уроки ЕСТЬ. Пустая
+    страница курса хуже отсутствующей: она выглядит поломкой, а не планом, и
+    попала бы в поиск как страница ни о чём.
+  */
+  const страницыРазделов = разделы
+    .filter((т) => уроки.some((u) => u.track === т.slug))
+    .map((т) => ({
+      path: `/academy/${т.slug}`,
+      title: TITLE.academyTrack(т.name),
+      description: DESCRIPTION.academyTrack(т.about),
+      h1: т.name,
+      intro: т.about,
+      body: [
+        ...уроки.filter((u) => u.track === т.slug).map((u) => `${u.title}. ${u.summary}`),
+        'Free, no sign-up, written by Castells Media in Roseville, California.',
+      ],
+    }));
+
   return [
     хаб,
+    ...страницыРазделов,
     ...уроки.map((u) => {
       const модуль = модули.find((m) => m.number === u.module);
       return {
-        path: `/academy/${u.slug}`,
+        path: `/academy/${u.track}/${u.slug}`,
         title: TITLE.academyLesson(u.title),
         description: DESCRIPTION.academyLesson(u.summary),
         h1: u.title,
@@ -874,11 +902,22 @@ async function main() {
   const сколько = (префикс) =>
     allPages.filter((p) => p.path.startsWith(префикс) && p.path !== префикс).length;
 
+  /*
+    У академии два уровня адресов: /academy/<ремесло> и
+    /academy/<ремесло>/<урок>. Первая версия сводки считала оба одним числом и
+    напечатала «уроков 7» при шести — страница раздела попала в счёт уроков.
+    Считаем по числу косых черт, а не по началу пути.
+  */
+  const глубина = (p, n) => p.path.split('/').filter(Boolean).length === n;
+  const разделовАкадемии = allPages.filter((p) => p.path.startsWith('/academy/') && глубина(p, 2)).length;
+  const уроковАкадемии = allPages.filter((p) => p.path.startsWith('/academy/') && глубина(p, 3)).length;
+
   console.log(`prerender: страниц с собственными тегами — ${written}`);
   console.log(`  из них кейсов — ${сколько('/case-studies/')}`);
   console.log(
     `  из них услуг — ${сколько('/services/')}, ниш — ${сколько('/industries/')}, ` +
-    `статей — ${сколько('/blog/')}, ответов — ${сколько('/learn/')}, уроков — ${сколько('/academy/')}`,
+    `статей — ${сколько('/blog/')}, ответов — ${сколько('/learn/')}, ` +
+    `курсов — ${разделовАкадемии}, уроков — ${уроковАкадемии}`,
   );
   console.log(`  404.html, sitemap.xml (${allPages.filter((p) => !p.noindex).length} адресов) и robots.txt пересобраны`);
 }

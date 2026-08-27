@@ -119,6 +119,36 @@
       "source": "/industries/int/ext-painting",
       "destination": "/industries/int-ext-painting",
       "permanent": true
+    },
+    {
+      "source": "/academy/before-you-spend-on-marketing",
+      "destination": "/academy/contractors/before-you-spend-on-marketing",
+      "permanent": true
+    },
+    {
+      "source": "/academy/what-a-brand-is-for-a-contractor",
+      "destination": "/academy/contractors/what-a-brand-is-for-a-contractor",
+      "permanent": true
+    },
+    {
+      "source": "/academy/three-kinds-of-website",
+      "destination": "/academy/contractors/three-kinds-of-website",
+      "permanent": true
+    },
+    {
+      "source": "/academy/where-the-marketing-money-goes",
+      "destination": "/academy/contractors/where-the-marketing-money-goes",
+      "permanent": true
+    },
+    {
+      "source": "/academy/how-people-find-a-contractor",
+      "destination": "/academy/contractors/how-people-find-a-contractor",
+      "permanent": true
+    },
+    {
+      "source": "/academy/the-job-you-lose",
+      "destination": "/academy/contractors/the-job-you-lose",
+      "permanent": true
     }
   ],
   "rewrites": [

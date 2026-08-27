@@ -81,12 +81,12 @@ const AnswerPage: React.FC<AnswerPageProps> = ({ slug, onNavigate }) => {
           />
 
           {/*
-            mx-auto добавлен 26 августа: колонка прижималась к левому краю, и
-            справа оставалось больше половины ширины пустой. Замер при окне
-            1615 показал 824 точки пустоты. Ширина колонки не меняется, меняется
-            только положение.
-          */}
-          <article className="max-w-3xl mx-auto">
+            По ЛЕВОМУ краю — решение владельца 26 августа. Промежуточная правка
+            в тот же день центрировала колонку, чтобы убрать пустоту справа
+            (замер: 840 точек мертвы при окне 1615). Владелец посмотрел и
+            вернул как было. Пустое поле справа его устраивает больше, чем
+            колонка посреди экрана.
+          */}          <article className="max-w-3xl">
             {answer.sections.map((section) => (
               <section key={section.heading} className="mb-10">
                 <h2 className="font-display text-xl md:text-2xl font-semibold text-text-primary dark:text-white mb-4">

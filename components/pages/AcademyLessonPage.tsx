@@ -4,9 +4,10 @@ import { Breadcrumbs } from '../ui/Breadcrumbs';
 import AcademyDiagram from '../ui/AcademyDiagram';
 import SEO from '../ui/SEO';
 import {
-  ACADEMY_LESSONS,
   ACADEMY_MODULES,
   findLesson,
+  findTrack,
+  lessonsOfTrack,
   readingMinutes,
 } from '../../data/academy';
 import { PageView } from '../../App';
@@ -34,11 +35,12 @@ interface AcademyLessonPageProps {
 }
 
 const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate }) => {
-  const урок = findLesson(slug) || ACADEMY_LESSONS[0];
+  const урок = findLesson(slug) || lessonsOfTrack('contractors')[0];
   const модуль = ACADEMY_MODULES.find((m) => m.number === урок.module);
+  const раздел = findTrack(урок.track);
 
-  // Следующий урок — по порядку модулей, а не по порядку в файле.
-  const порядок = [...ACADEMY_LESSONS].sort((a, b) => a.module - b.module);
+  // Следующий урок — внутри СВОЕГО раздела, по порядку модулей.
+  const порядок = [...lessonsOfTrack(урок.track)].sort((a, b) => a.module - b.module);
   const место = порядок.findIndex((l) => l.slug === урок.slug);
   const следующий = порядок[место + 1];
 
@@ -47,19 +49,19 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
       <SEO
         title={`${урок.title} | Castells Media Academy`}
         description={урок.summary}
-        canonical={`/academy/${урок.slug}`}
+        canonical={`/academy/${урок.track}/${урок.slug}`}
         summary={урок.summary}
       />
 
       <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
         {/*
-          ОДНА колонка на всю страницу, по центру.
+          ОДНА колонка на всю страницу, по ЛЕВОМУ краю.
 
-          До 26 августа вечера содержимое прижималось к левому краю широкого
-          контейнера. Замер на живом сайте при окне 1615: колонка текста 672
-          точки, справа 840 точек пустоты — больше половины ширины мертво. То
-          же самое было на статьях блога и на страницах-ответах, то есть это
-          не беда академии, а общая раскладка чтения.
+          Колонку в тот же день попробовали центрировать: справа при окне 1615
+          пустовало 840 точек, больше половины ширины. Владелец посмотрел и
+          вернул выравнивание по левому краю — пустое поле справа устраивает
+          его больше, чем колонка посреди экрана. Это его решение, не забыть
+          при следующей правке раскладки.
 
           Ширина 2xl (672) выбрана по длине строки, а не по вкусу: при 17px
           это около 70 знаков в строке, что и считается удобным для чтения.
@@ -69,12 +71,15 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
           край. Раньше шапка была шире текста, и края не совпадали.
         */}
         <div className="container mx-auto px-6 pt-4 md:pt-6">
-          <div className="mx-auto w-full max-w-2xl">
+          <div className="w-full max-w-2xl">
           <Breadcrumbs
             className="mb-6"
             items={[
               { label: 'Home', action: () => onNavigate('home') },
               { label: 'Academy', action: () => onNavigate('academy') },
+              ...(раздел
+                ? [{ label: раздел.name, action: () => onNavigate('academy-track', { id: раздел.slug }) }]
+                : []),
               { label: `Module ${урок.module}` },
             ]}
           />
@@ -187,7 +192,7 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
               {следующий ? (
                 <button
                   type="button"
-                  onClick={() => onNavigate('academy-lesson', { id: следующий.slug })}
+                  onClick={() => onNavigate('academy-lesson', { id: следующий.slug, track: следующий.track })}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-button bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity"
                 >
                   Next: {следующий.title}
@@ -196,7 +201,7 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
               ) : (
                 <button
                   type="button"
-                  onClick={() => onNavigate('academy')}
+                  onClick={() => onNavigate('academy-track', { id: урок.track })}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-button bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity"
                 >
                   Back to the course
@@ -224,7 +229,7 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
                   <button
                     key={l.slug}
                     type="button"
-                    onClick={() => onNavigate('academy-lesson', { id: l.slug })}
+                    onClick={() => onNavigate('academy-lesson', { id: l.slug, track: l.track })}
                     className="group text-left bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-6 hover:border-black/20 dark:hover:border-white/30 transition-colors"
                   >
                     <span className="text-[11px] font-semibold tracking-wide text-accent-text">

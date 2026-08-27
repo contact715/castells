@@ -55,8 +55,13 @@ export const routeFromPathname = (pathname: string): { page: PageView; data?: Na
   }
 
   if (clean.startsWith('/academy/')) {
-    const id = decodeURIComponent(clean.replace('/academy/', ''));
-    if (id) return { page: 'academy-lesson', data: { id, name: titleize(id) } };
+    // /academy/<раздел> и /academy/<раздел>/<урок>
+    const хвост = decodeURIComponent(clean.replace('/academy/', ''));
+    const [раздел, урок] = хвост.split('/').filter(Boolean);
+    if (раздел && урок) {
+      return { page: 'academy-lesson', data: { id: урок, track: раздел, name: titleize(урок) } };
+    }
+    if (раздел) return { page: 'academy-track', data: { id: раздел, name: titleize(раздел) } };
     return { page: 'academy' };
   }
 
@@ -139,8 +144,12 @@ export const pathnameFromRoute = (page: PageView, data?: NavigationData | null):
       return data?.id ? `/learn/${encodeURIComponent(String(data.id))}` : '/learn';
     case 'academy':
       return '/academy';
-    case 'academy-lesson':
+    case 'academy-track':
       return data?.id ? `/academy/${encodeURIComponent(String(data.id))}` : '/academy';
+    case 'academy-lesson':
+      return data?.id && data?.track
+        ? `/academy/${encodeURIComponent(String(data.track))}/${encodeURIComponent(String(data.id))}`
+        : '/academy';
     case 'blog':
       return '/blog';
     case 'blog-post':

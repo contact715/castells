@@ -56,6 +56,7 @@ const RosevillePage = lazyWithRetry(() => import('./components/pages/RosevillePa
 const AnswersPage = lazyWithRetry(() => import('./components/pages/AnswersPage'));
 const AnswerPage = lazyWithRetry(() => import('./components/pages/AnswerPage'));
 const AcademyPage = lazyWithRetry(() => import('./components/pages/AcademyPage'));
+const AcademyTrackPage = lazyWithRetry(() => import('./components/pages/AcademyTrackPage'));
 const AcademyLessonPage = lazyWithRetry(() => import('./components/pages/AcademyLessonPage'));
 const PricingPage = lazyWithRetry(() => import('./components/pages/PricingPage'));
 const AllIndustriesPage = lazyWithRetry(() => import('./components/pages/AllIndustriesPage'));
@@ -317,6 +318,10 @@ function App() {
 
               {currentPage === 'academy' && (
                 <AcademyPage onNavigate={navigateTo} />
+              )}
+
+              {currentPage === 'academy-track' && (
+                <AcademyTrackPage slug={selectedProject?.id ? String(selectedProject.id) : undefined} onNavigate={navigateTo} />
               )}
 
               {currentPage === 'academy-lesson' && (

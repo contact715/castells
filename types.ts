@@ -41,6 +41,7 @@ export type PageView =
   | 'learn'
   | 'answer'
   | 'academy'
+  | 'academy-track'
   | 'academy-lesson'
   | 'industries'
   | 'thank-you'

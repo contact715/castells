@@ -3,7 +3,7 @@ import { findServiceBySlug } from '../data/services';
 import { findIndustryBySlug } from '../data/industries';
 import { findPostById } from '../data/blog';
 import { findAnswer } from '../data/answers';
-import { findLesson } from '../data/academy';
+import { findLesson, findTrack } from '../data/academy';
 import { CASE_STUDIES } from '../constants';
 
 /*
@@ -141,13 +141,26 @@ export function metaForPath(pathname: string): PageMeta {
   }
 
   if (путь.startsWith('/academy/')) {
-    const урок = findLesson(путь.slice('/academy/'.length));
-    if (урок) {
-      return {
-        title: TITLE.academyLesson(урок.title),
-        description: DESCRIPTION.academyLesson(урок.summary),
-        canonical: адрес,
-      };
+    // /academy/<раздел> и /academy/<раздел>/<урок>
+    const [ремесло, урокСлаг] = путь.slice('/academy/'.length).split('/').filter(Boolean);
+    if (ремесло && урокСлаг) {
+      const урок = findLesson(урокСлаг);
+      if (урок) {
+        return {
+          title: TITLE.academyLesson(урок.title),
+          description: DESCRIPTION.academyLesson(урок.summary),
+          canonical: адрес,
+        };
+      }
+    } else if (ремесло) {
+      const раздел = findTrack(ремесло);
+      if (раздел) {
+        return {
+          title: TITLE.academyTrack(раздел.name),
+          description: DESCRIPTION.academyTrack(раздел.about),
+          canonical: адрес,
+        };
+      }
     }
   }
 
