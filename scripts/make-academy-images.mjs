@@ -236,6 +236,36 @@ export const КАРТИНКИ = [
       'A small flat green circle placed precisely inside a much larger plain off-white circular outline on a dark background, the small circle off to one side rather than centred. No text.',
     alt: 'A small circle placed off-centre inside a much larger outline',
   },
+  {
+    slug: 'automation-what-to-automate-first',
+    сюжет:
+      'A green funnel shape on a dark background with several small off-white dots falling into its wide top, and a few dots escaping through small gaps in its sides. Flat shapes, no text.',
+    alt: 'A funnel with dots falling in and a few escaping through gaps in its sides',
+  },
+  {
+    slug: 'automation-hvac-after-hours',
+    сюжет:
+      'A dark frame split into a light left half and a very dark right half, with a small green phone shape sitting in the dark half. Flat simple shapes, no text.',
+    alt: 'A frame split into day and night, with a phone in the dark half',
+  },
+  {
+    slug: 'automation-remodel-the-long-follow-up',
+    сюжет:
+      'A long horizontal green line across a dark frame with five small off-white vertical marks along it at widening intervals. Flat shapes, no text, no labels.',
+    alt: 'A long line with five marks along it at widening intervals',
+  },
+  {
+    slug: 'automation-auto-booking-and-return',
+    сюжет:
+      'A green calendar grid filling the centre of a dark frame with two of its squares marked by small off-white circles far apart from each other. Flat shapes, no text or numbers.',
+    alt: 'A calendar grid with two squares marked far apart',
+  },
+  {
+    slug: 'automation-pro-intake-and-privacy',
+    сюжет:
+      'A flat green envelope shape at the centre of a dark frame, enclosed by a plain off-white circular outline that surrounds it completely. No text.',
+    alt: 'An envelope enclosed inside a protective circle',
+  },
 ];
 
 async function ключ() {

@@ -180,6 +180,11 @@ export const ACADEMY_MODULES: AcademyModule[] = [
     name: 'Sales and follow-up',
     about: 'The work that turns a phone call into a paid job.',
   },
+  {
+    number: 8,
+    name: 'Automation',
+    about: 'Making the previous seven modules happen without you remembering to do them.',
+  },
 ];
 
 export const ACADEMY_LESSONS: AcademyLesson[] = [
@@ -2326,6 +2331,366 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     },
     takeaway:
       'Read your regulator current advertising rules, then write the one sentence you want referrers to use. Check that the sentence is inside the rules before you publish it anywhere.',
+  },
+  {
+    slug: 'automation-what-to-automate-first',
+    track: 'contractors',
+    module: 8,
+    title: 'Automate the losses first, not the growth',
+    summary:
+      'Every automation list starts with the exciting things. The ones that pay are boring: answering, reminding, and following up on work you already have.',
+    image: {
+      src: '/academy/automation-what-to-automate-first.webp',
+      alt: 'A funnel with dots falling in and a few escaping through gaps in its sides',
+    },
+    diagram: 'follow-up',
+    sections: [
+      {
+        heading: 'The rule that decides the order',
+        body: [
+          'Automate what you are already losing before you automate what you hope to gain. A missed call is a job that was yours and left; a better ad is a job that might exist.',
+          'That single rule puts the list in order and it is almost always the reverse of the order people start in.',
+        ],
+      },
+      {
+        heading: 'First: nobody waits without an answer',
+        body: [
+          'An automatic reply within seconds on whatever channel they used, saying you got it and when a human will call. Then the request lands somewhere a human will actually see it.',
+          'This is the cheapest automation there is and the one that recovers the most, because the customer with a problem is calling three companies and the first reply wins an advantage price rarely overcomes.',
+        ],
+      },
+      {
+        heading: 'Second: the appointment does not get forgotten',
+        body: [
+          'A confirmation when it is booked, a reminder the day before, and a message when the crew is on the way. Each one removes a no-show, and a no-show is a paid hour thrown away.',
+        ],
+      },
+      {
+        heading: 'Third: the quote gets followed up',
+        body: [
+          'Two or three scheduled touches after an estimate, spaced out, that stop when the customer answers. Quotes are forgotten far more often than they are refused, and forgotten is recoverable.',
+        ],
+      },
+      {
+        heading: 'Fourth: the review gets asked for',
+        body: [
+          'A request sent at the moment the job is finished, not weeks later, with a link that takes one tap. Reviews decide who gets called next, and asking manually means asking sometimes.',
+        ],
+      },
+      {
+        heading: 'What not to automate',
+        body: [
+          'The quote itself, on anything but the simplest repeat work. A number produced without seeing the job is a number you will regret.',
+          'The apology when something goes wrong. Automated regret reads as no regret at all.',
+          'And anything that pretends to be a person when it is not. Say plainly that it is an automatic reply; people mind being handled far more than they mind a robot.',
+        ],
+      },
+      {
+        heading: 'What it connects to',
+        body: [
+          'Automation is only worth having if it writes into the place your work already lives: the scheduling and invoicing system you use, the calendar the crew looks at, the phone number customers already call.',
+          'An automation that lives in its own separate app produces a second place to check, which is a new way to lose things rather than a way to stop losing them.',
+        ],
+      },
+      {
+        heading: 'What we use, and the disclosure that goes with it',
+        body: [
+          'When we set this up for clients we use Mosco, which is our own product. We say that plainly rather than presenting it as a neutral recommendation.',
+          'What it does: one inbox for calls, texts, WhatsApp, email and the social channels; automatic first replies and follow-up sequences; booking and reminders; review requests after a finished job; and connections into the tools home service businesses already run, including Jobber, Housecall Pro, Zoho, Google Calendar, Google Reviews, Google Ads and Meta.',
+          'You do not need us or it to do any of this. The order in the sections above is what matters, and a notebook plus a phone reminder beats a platform nobody set up.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'Which automation to build first',
+      rows: [
+        { label: 'Requests last month that got no reply within an hour', value: 'count it' },
+        { label: 'Appointments that no-showed', value: 'count it' },
+        { label: 'Quotes sent with no answer either way', value: 'count it' },
+      ],
+      result: { label: 'Build in that order', value: 'largest number first' },
+      after:
+        'Put your own three numbers in. Whichever is biggest is the automation to build this month, and it is almost never the one that sounded most interesting.',
+    },
+    takeaway:
+      'Count those three numbers before buying any tool. The biggest one is your first automation, and you may find a phone reminder fixes it.',
+  },
+  {
+    slug: 'automation-hvac-after-hours',
+    track: 'hvac',
+    module: 8,
+    title: 'The calls that arrive while you are on a roof',
+    summary:
+      'HVAC demand ignores office hours, and the emergency customer calls three companies. Automation here is mostly about the hours you are away.',
+    image: {
+      src: '/academy/automation-hvac-after-hours.webp',
+      alt: 'A frame split into day and night, with a phone in the dark half',
+    },
+    diagram: 'follow-up',
+    sections: [
+      {
+        heading: 'After hours is where the trade is lost',
+        body: [
+          'A system dies at seven in the evening in August. The homeowner searches, calls, and takes whoever responds. If your phone rings out, the automation you needed was an instant reply, not a smarter ad.',
+          'An automatic text within seconds — we have your request, here is when someone will call, here is what to do meanwhile if water is leaking — holds the customer long enough for a human to reach them.',
+        ],
+      },
+      {
+        heading: 'Triage before dispatch',
+        body: [
+          'Not every after-hours call is an emergency, and sending a technician out at night to a problem that could wait until morning costs more than it earns.',
+          'A few automated questions on the first reply — no cooling at all or weak, water present, system age — sort urgent from tomorrow before anyone gets in a van.',
+        ],
+      },
+      {
+        heading: 'The seasonal reminders that fill the quiet months',
+        body: [
+          'Maintenance visits scheduled from the last visit date, sent automatically before each season rather than when someone remembers.',
+          'This is the automation with the clearest return in the trade, because it produces booked work in the exact weeks when nothing else is happening.',
+        ],
+      },
+      {
+        heading: 'The replacement conversation, followed up over months',
+        body: [
+          'A quote for a system replacement is a four-figure decision that a household takes weeks over. Two or three scheduled touches, stopping the moment they reply, recover work that was deferred rather than refused.',
+        ],
+      },
+      {
+        heading: 'The review, at the right minute',
+        body: [
+          'Sent when the job is closed and the house is cooling down. In a trade where the map result decides who gets called, recent reviews are the asset, and asking automatically means asking every time.',
+        ],
+      },
+      {
+        heading: 'What we use, and the disclosure',
+        body: [
+          'We set this up with Mosco, our own product. Saying so plainly is the point: this is not a neutral recommendation.',
+          'For HVAC it covers the after-hours reply on calls, texts and WhatsApp, the triage questions, seasonal maintenance reminders from the last visit, follow-up on replacement quotes, and review requests on job close. It connects into Jobber and Housecall Pro, which is where most HVAC businesses already keep their jobs, plus Google Calendar and Google Reviews.',
+          'The order above matters more than the tool. A pre-written text you send by hand within two minutes beats a platform you never configured.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What after hours is costing',
+      rows: [
+        { label: 'Calls outside business hours last month', value: 'count it' },
+        { label: 'How many got a reply that evening', value: 'count it' },
+        { label: 'Your average emergency job', value: 'say $450' },
+      ],
+      result: { label: 'The gap, times your average job', value: 'your after-hours cost' },
+      after:
+        'Put your own numbers in. This is usually the single largest recoverable number in an HVAC business, and it is recovered by an automatic text rather than by any advertising.',
+    },
+    takeaway:
+      'Look at your call log for last month after six in the evening. Count how many got any response that night. That count is your first automation.',
+  },
+  {
+    slug: 'automation-remodel-the-long-follow-up',
+    track: 'remodeling',
+    module: 8,
+    title: 'Automating a decision that takes months',
+    summary:
+      'Remodel estimates are deferred, not refused, and the contractor still in the conversation three months later is the one who signs. Nobody keeps that up by memory.',
+    image: {
+      src: '/academy/automation-remodel-the-long-follow-up.webp',
+      alt: 'A long line with five marks along it at widening intervals',
+    },
+    diagram: 'follow-up',
+    sections: [
+      {
+        heading: 'Memory is the thing that fails',
+        body: [
+          'A remodeler sends an estimate in March and means to check in. Two jobs start, a supplier lets them down, and it is June. The customer signed with somebody who called in April.',
+          'This is not a discipline problem, it is a memory problem, and memory is exactly what should be automated.',
+        ],
+      },
+      {
+        heading: 'The sequence that works',
+        body: [
+          'A few days after the estimate: did anything need explaining. A couple of weeks later: still available for the dates discussed. Then monthly with something useful rather than a nudge — a similar job just finished, a material now in stock.',
+          'Every touch stops the moment they reply, because the point is to stay present, not to pester. After a few months, mark it closed and stop.',
+        ],
+      },
+      {
+        heading: 'Capturing the enquiry properly in the first place',
+        body: [
+          'A form that asks the four things that decide whether this is your customer: what job, roughly when, roughly what budget, and where. It saves a site visit to a project that was never yours.',
+          'Then an instant reply confirming it arrived and when you will call. Remodel buyers are patient, but not with silence.',
+        ],
+      },
+      {
+        heading: 'After the job, which most contractors skip entirely',
+        body: [
+          'A review request while the site is clean and they are happy. Photographs filed against the project rather than lost in a phone. And a note to check back in a year, because the customer who did the kitchen has a bathroom.',
+        ],
+      },
+      {
+        heading: 'What not to automate here',
+        body: [
+          'The estimate. A remodel quote produced without seeing the house is a number you will lose money on, and the customer knows it.',
+          'The relationship with designers and realtors who refer you. That is a phone call and a coffee, and automating it is how it stops working.',
+        ],
+      },
+      {
+        heading: 'What we use, and the disclosure',
+        body: [
+          'Mosco, our own product, stated plainly rather than dressed up as a recommendation.',
+          'For remodeling it covers the qualifying form, the instant reply, the multi-month follow-up sequence that stops on any answer, review requests on completion, and the reminder to check back later. It connects into Jobber, Housecall Pro and Zoho, plus Google Calendar, Google Reviews, Google Ads and Meta.',
+          'A spreadsheet with a date column and a weekly habit does the same job. The automation matters because the habit is the part that fails in a busy month.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'The estimates still waiting',
+      rows: [
+        { label: 'Estimates sent in the last six months', value: 'count it' },
+        { label: 'Signed', value: 'count it' },
+        { label: 'Refused outright', value: 'count it' },
+      ],
+      result: { label: 'Neither signed nor refused', value: 'the remainder, still open' },
+      after:
+        'Put your own numbers in. That remainder is not a lost pile, it is a queue nobody is working. It is also, for most remodelers, larger than the signed column.',
+    },
+    takeaway:
+      'List every estimate from the last six months with no yes and no no. Contact all of them this week, then set up the sequence so it never builds up again.',
+  },
+  {
+    slug: 'automation-auto-booking-and-return',
+    track: 'automotive',
+    module: 8,
+    title: 'Booking, reminding, and getting the car back',
+    summary:
+      'A shop lives on booked bay hours and returning customers. Both are automation problems, and both are usually handled by memory and a paper diary.',
+    image: {
+      src: '/academy/automation-auto-booking-and-return.webp',
+      alt: 'A calendar grid with two squares marked far apart',
+    },
+    diagram: 'follow-up',
+    sections: [
+      {
+        heading: 'Booking at eleven at night',
+        body: [
+          'A significant share of this audience decides after an hour of looking at photographs, long after you have closed. If the only way to book is a phone call in the morning, some of them are gone by morning.',
+          'Online booking with your real availability, plus an instant confirmation, captures the decision at the moment it is made.',
+        ],
+      },
+      {
+        heading: 'The reminder that protects the bay',
+        body: [
+          'A confirmation when booked, a reminder the day before, and instructions if there are any. A no-show in a shop is not a missed appointment, it is a paid empty bay, and the reminder is the cheapest insurance against it.',
+        ],
+      },
+      {
+        heading: 'Quotes for expensive work, followed up',
+        body: [
+          'A full correction or a coating is a considered purchase. Somebody who asked in March and went quiet was usually waiting for money or a season. Two or three scheduled touches recover a real share of them.',
+        ],
+      },
+      {
+        heading: 'The maintenance return, which the trade is built for',
+        body: [
+          'Coatings need maintenance, often annually, and many warranties depend on it. That is a booking you are entitled to ask for, on a date you already know.',
+          'Scheduling that reminder from the service date is the highest-return automation in this trade, and almost no shop does it.',
+        ],
+      },
+      {
+        heading: 'The review, at handover',
+        body: [
+          'While they are looking at their own car looking better than it has in years. Not an email a week later, when the feeling has faded and the car is dirty again.',
+        ],
+      },
+      {
+        heading: 'What we use, and the disclosure',
+        body: [
+          'Mosco is our own product and we say so plainly.',
+          'For a shop it covers online booking against real availability, confirmations and reminders, follow-up on high-value quotes, maintenance reminders scheduled from the service date, and a review request at handover. Calls, texts, WhatsApp, email, Instagram and Facebook messages land in one inbox rather than five apps, and it connects to Google Calendar, Google Reviews, Google Ads and Meta.',
+          'None of this requires us. A calendar with reminders set on the day of service does the maintenance part, which is the part that pays.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'The returns you are entitled to ask for',
+      rows: [
+        { label: 'Coating or protection jobs last year', value: 'count it' },
+        { label: 'How many came back for maintenance', value: 'count it' },
+        { label: 'Your maintenance service price', value: 'count it' },
+      ],
+      result: { label: 'The gap, times the price', value: 'money you were owed and did not ask for' },
+      after:
+        'Put your own numbers in. Unlike almost every other line in this course, this one requires no marketing at all: the customers already chose you and the visit is already part of what they bought.',
+    },
+    takeaway:
+      'Pull every coating job from last year and set a reminder for each one twelve months from its service date. That single afternoon is worth more than a month of advertising.',
+  },
+  {
+    slug: 'automation-pro-intake-and-privacy',
+    track: 'professional',
+    module: 8,
+    title: 'Automating intake without breaking the rules',
+    summary:
+      'The first response is the service and can be automated. What people send in that first message often cannot be stored anywhere you like.',
+    image: {
+      src: '/academy/automation-pro-intake-and-privacy.webp',
+      alt: 'An envelope enclosed inside a protective circle',
+    },
+    diagram: 'follow-up',
+    sections: [
+      {
+        heading: 'The acknowledgement that has to be instant',
+        body: [
+          'Somebody contacting a professional is worried and comparing responsiveness, because it is the only thing they can assess. An automatic acknowledgement within seconds, stating a real response time you meet, is the highest-value automation in a practice.',
+          'It has to state a time you actually keep. A promise of one hour, missed, is worse than a promise of one business day, kept.',
+        ],
+      },
+      {
+        heading: 'What the first message may collect',
+        body: [
+          'This is where these professions differ from every other trade in the course. A form that asks for medical details, financial details or the specifics of a legal matter is collecting regulated information, and where it is stored and who can read it is subject to obligations your practice carries.',
+          'The safe pattern is to collect the minimum that lets a human call back — name, contact, and the general area of the matter — and take the detail in the conversation.',
+          'Confirm the specifics with your regulator and, where health information is involved, with somebody who knows the privacy rules. We are not that authority.',
+        ],
+      },
+      {
+        heading: 'Consultations that do not get forgotten',
+        body: [
+          'Confirmation, reminder, and a way to reschedule without a phone call. A missed consultation in a practice is an hour of the most expensive time in the business.',
+        ],
+      },
+      {
+        heading: 'Following up on the deferred',
+        body: [
+          'A consultation that did not become an engagement is usually waiting, not refused. A polite check some weeks later recovers work, and the tone matters more here than anywhere else in this course.',
+        ],
+      },
+      {
+        heading: 'The referral loop, which is not automatable',
+        body: [
+          'Thanking whoever sent you a client is a personal act. What can be automated is the reminder to do it, and the record of who sent what, which is the part that gets lost.',
+          'Reviews follow the same rule: whether you may ask at all depends on your profession. Check before automating the request.',
+        ],
+      },
+      {
+        heading: 'What we use, and the disclosure',
+        body: [
+          'Mosco is our own product. Stating that is not a formality: a course that quietly recommends its own author is not a course.',
+          'For a practice it covers the instant acknowledgement across calls, texts, WhatsApp and email in one inbox, consultation booking with confirmations and reminders, follow-up sequences that stop on any reply, and a record of who referred whom. It connects to Zoho, Google Calendar and Google Reviews.',
+          'The compliance question is yours regardless of the tool. Any platform can be configured in a way your regulator would not accept, and the obligation sits with the practice, not the software.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'Where the practice is losing people',
+      rows: [
+        { label: 'Enquiries last month', value: 'count it' },
+        { label: 'Acknowledged within an hour', value: 'count it' },
+        { label: 'Became a consultation', value: 'count it' },
+      ],
+      result: { label: 'Lost before anyone spoke to them', value: 'the first gap' },
+      after:
+        'Put your own numbers in. In most practices the largest single loss happens before any professional judgement is involved, and it is closed by an automatic acknowledgement rather than by anything expensive.',
+    },
+    takeaway:
+      'Decide the response time you can actually keep, then automate an acknowledgement that promises exactly that. Keeping a modest promise beats missing an ambitious one.',
   },
 ];
 
