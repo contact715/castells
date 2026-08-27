@@ -2395,7 +2395,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
       {
         heading: 'What we use, and the disclosure that goes with it',
         body: [
-          'When we set this up for clients we use Mosco, which is our own product. We say that plainly rather than presenting it as a neutral recommendation.',
+          'When we set this up for clients we use Mosco, which is our own product. We say that plainly rather than presenting it as a neutral recommendation. It describes itself as AI agents that answer every call, book the job and follow up, on top of the tools you already use.',
           'What it does: one inbox for calls, texts, WhatsApp, email and the social channels; automatic first replies and follow-up sequences; booking and reminders; review requests after a finished job; and connections into the tools home service businesses already run, including Jobber, Housecall Pro, Zoho, Google Calendar, Google Reviews, Google Ads and Meta.',
           'You do not need us or it to do any of this. The order in the sections above is what matters, and a notebook plus a phone reminder beats a platform nobody set up.',
         ],
@@ -2464,7 +2464,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
       {
         heading: 'What we use, and the disclosure',
         body: [
-          'We set this up with Mosco, our own product. Saying so plainly is the point: this is not a neutral recommendation.',
+          'We set this up with Mosco, our own product. Saying so plainly is the point: this is not a neutral recommendation. It runs on top of the tools you already use rather than replacing them.',
           'For HVAC it covers the after-hours reply on calls, texts and WhatsApp, the triage questions, seasonal maintenance reminders from the last visit, follow-up on replacement quotes, and review requests on job close. It connects into Jobber and Housecall Pro, which is where most HVAC businesses already keep their jobs, plus Google Calendar and Google Reviews.',
           'The order above matters more than the tool. A pre-written text you send by hand within two minutes beats a platform you never configured.',
         ],
