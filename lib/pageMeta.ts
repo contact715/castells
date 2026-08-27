@@ -1,8 +1,9 @@
-import { PAGES, TITLE, DESCRIPTION, SITE, NOT_FOUND } from '../scripts/page-meta.mjs';
+import { PAGES, TITLE, DESCRIPTION, SITE, NOT_FOUND, HUBS } from '../scripts/page-meta.mjs';
 import { findServiceBySlug } from '../data/services';
 import { findIndustryBySlug } from '../data/industries';
 import { findPostById } from '../data/blog';
 import { findAnswer } from '../data/answers';
+import { findLesson } from '../data/academy';
 import { CASE_STUDIES } from '../constants';
 
 /*
@@ -48,13 +49,14 @@ const СТАТИЧЕСКИЕ = new Map<string, СтатическаяСтран�
   (PAGES as СтатическаяСтраница[]).map((p) => [p.path, p])
 );
 
-/** Хаб ответов создаётся генератором на лету, поэтому его нет в PAGES. */
-const ХАБ_ОТВЕТОВ: СтатическаяСтраница = {
-  path: '/learn',
-  title: 'Questions we get asked | Castells Media',
-  description:
-    'Straight answers to the questions home service business owners ask us: whether a website is needed at all, what an agency does every month, and whether a long contract is normal.',
-};
+/*
+  Хабы генератор собирает на лету, поэтому в PAGES их нет. Заголовки берём из
+  того же общего источника, что и генератор: 26 августа они были вписаны здесь
+  вручную, и сверка поймала расхождение на академии.
+*/
+const ХАБЫ = new Map<string, СтатическаяСтраница>(
+  Object.values(HUBS as Record<string, СтатическаяСтраница>).map((h) => [h.path, h])
+);
 
 /*
   Неизвестный адрес. Первая версия возвращала здесь данные ГЛАВНОЙ, и проверка
@@ -88,7 +90,7 @@ export function metaForPath(pathname: string): PageMeta {
   const путь = нормализовать(pathname);
   const адрес = `${SITE.origin}${путь === '/' ? '/' : путь}`;
 
-  const готовая = путь === '/learn' ? ХАБ_ОТВЕТОВ : СТАТИЧЕСКИЕ.get(путь);
+  const готовая = ХАБЫ.get(путь) ?? СТАТИЧЕСКИЕ.get(путь);
   if (готовая) {
     return { title: готовая.title, description: готовая.description, canonical: адрес };
   }
@@ -133,6 +135,17 @@ export function metaForPath(pathname: string): PageMeta {
       return {
         title: TITLE.answer(ответ.question),
         description: DESCRIPTION.answer(ответ.short),
+        canonical: адрес,
+      };
+    }
+  }
+
+  if (путь.startsWith('/academy/')) {
+    const урок = findLesson(путь.slice('/academy/'.length));
+    if (урок) {
+      return {
+        title: TITLE.academyLesson(урок.title),
+        description: DESCRIPTION.academyLesson(урок.summary),
         canonical: адрес,
       };
     }

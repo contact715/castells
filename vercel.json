@@ -4,44 +4,102 @@
     {
       "source": "/(.*)",
       "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "X-Frame-Options", "value": "DENY" },
-        { "key": "X-XSS-Protection", "value": "0" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "Permissions-Policy", "value": "camera=(), microphone=(), geolocation=()" }
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "0"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
       ]
     },
     {
       "source": "/assets/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/fonts/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
       ]
     },
     {
       "source": "/sw.js",
       "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" },
-        { "key": "Content-Type", "value": "application/javascript; charset=utf-8" },
-        { "key": "Service-Worker-Allowed", "value": "/" }
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        },
+        {
+          "key": "Content-Type",
+          "value": "application/javascript; charset=utf-8"
+        },
+        {
+          "key": "Service-Worker-Allowed",
+          "value": "/"
+        }
       ]
     }
   ],
   "redirects": [
     {
       "source": "/(.*)",
-      "has": [{ "type": "host", "value": "castells.media" }],
+      "has": [
+        {
+          "type": "host",
+          "value": "castells.media"
+        }
+      ],
       "destination": "https://www.castells.media/$1",
       "permanent": true
     },
-    { "source": "/case-studies", "destination": "/work", "permanent": true },
-    { "source": "/careers", "destination": "/about", "permanent": true },
-    { "source": "/company", "destination": "/about", "permanent": true },
+    {
+      "source": "/(.*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "academy.castells.media"
+        }
+      ],
+      "destination": "https://www.castells.media/academy/$1",
+      "permanent": false
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/work",
+      "permanent": true
+    },
+    {
+      "source": "/careers",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/company",
+      "destination": "/about",
+      "permanent": true
+    },
     {
       "source": "/industries/adu-&-additions",
       "destination": "/industries/adu-and-additions",
@@ -64,12 +122,33 @@
     }
   ],
   "rewrites": [
-    { "source": "/auth/thumbtack/callback", "destination": "/api/thumbtack.py" },
-    { "source": "/webhook/thumbtack/:path*", "destination": "/api/thumbtack.py" },
-    { "source": "/api/health", "destination": "/api/health.py" },
-    { "source": "/api/lead-form", "destination": "/api/lead-form.js" },
-    { "source": "/api/whatsapp-webhook", "destination": "/api/whatsapp-webhook.js" },
-    { "source": "/api/telegram-webhook", "destination": "/api/telegram-webhook.js" },
-    { "source": "/team/:path*", "destination": "/index.html" }
+    {
+      "source": "/auth/thumbtack/callback",
+      "destination": "/api/thumbtack.py"
+    },
+    {
+      "source": "/webhook/thumbtack/:path*",
+      "destination": "/api/thumbtack.py"
+    },
+    {
+      "source": "/api/health",
+      "destination": "/api/health.py"
+    },
+    {
+      "source": "/api/lead-form",
+      "destination": "/api/lead-form.js"
+    },
+    {
+      "source": "/api/whatsapp-webhook",
+      "destination": "/api/whatsapp-webhook.js"
+    },
+    {
+      "source": "/api/telegram-webhook",
+      "destination": "/api/telegram-webhook.js"
+    },
+    {
+      "source": "/team/:path*",
+      "destination": "/index.html"
+    }
   ]
 }

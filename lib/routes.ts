@@ -54,6 +54,12 @@ export const routeFromPathname = (pathname: string): { page: PageView; data?: Na
     return { page: 'industries' };
   }
 
+  if (clean.startsWith('/academy/')) {
+    const id = decodeURIComponent(clean.replace('/academy/', ''));
+    if (id) return { page: 'academy-lesson', data: { id, name: titleize(id) } };
+    return { page: 'academy' };
+  }
+
   if (clean.startsWith('/learn/')) {
     const id = decodeURIComponent(clean.replace('/learn/', ''));
     if (id) return { page: 'answer', data: { id, name: titleize(id) } };
@@ -90,6 +96,8 @@ export const routeFromPathname = (pathname: string): { page: PageView; data?: Na
       return { page: 'roseville' };
     case '/learn':
       return { page: 'learn' };
+    case '/academy':
+      return { page: 'academy' };
     case '/industries':
       return { page: 'industries' };
     case '/thank-you':
@@ -129,6 +137,10 @@ export const pathnameFromRoute = (page: PageView, data?: NavigationData | null):
       return '/learn';
     case 'answer':
       return data?.id ? `/learn/${encodeURIComponent(String(data.id))}` : '/learn';
+    case 'academy':
+      return '/academy';
+    case 'academy-lesson':
+      return data?.id ? `/academy/${encodeURIComponent(String(data.id))}` : '/academy';
     case 'blog':
       return '/blog';
     case 'blog-post':

@@ -199,6 +199,27 @@ export const TITLE = {
   post: (title) => `${title} | ${МАРКА}`,
   answer: (question) => `${question} | ${МАРКА}`,
   caseStudy: (client, industry) => `${client} — ${industry} | ${МАРКА}`,
+  academyLesson: (title) => `${title} | ${МАРКА} Academy`,
+};
+
+/*
+  Хабы, которых нет в списке PAGES: их страницы генератор собирает на лету.
+  Раньше их заголовки были вписаны ДВАЖДЫ — в генераторе и в стороне браузера,
+  и 26 августа сверка это поймала на академии. Держим здесь, читают обе стороны.
+*/
+export const HUBS = {
+  learn: {
+    path: '/learn',
+    title: `Questions we get asked | ${МАРКА}`,
+    description:
+      'Straight answers to the questions home service business owners ask us: whether a website is needed at all, what an agency does every month, and whether a long contract is normal.',
+  },
+  academy: {
+    path: '/academy',
+    title: `Academy for contractors | ${МАРКА}`,
+    description:
+      'A free course for home service business owners: registering the business, brand, website, marketing budgets, getting found, and following up on the work you already have.',
+  },
 };
 
 export const DESCRIPTION = {
@@ -209,6 +230,7 @@ export const DESCRIPTION = {
   post: (excerpt) => excerpt,
   answer: (short) => short,
   caseStudy: (description, client, where) => description || `${client}: ${where}.`,
+  academyLesson: (summary) => summary,
 };
 
 export const NOT_FOUND = {

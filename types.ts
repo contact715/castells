@@ -40,6 +40,8 @@ export type PageView =
   | 'roseville'
   | 'learn'
   | 'answer'
+  | 'academy'
+  | 'academy-lesson'
   | 'industries'
   | 'thank-you'
   | 'privacy-policy'

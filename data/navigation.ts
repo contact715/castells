@@ -45,6 +45,11 @@ export const SECTIONS: Раздел[] = [
   { label: 'Contact', page: 'contact', href: '/contact', header: true },
 
   // Ниже — только подвал и разметка для робота.
+  //
+  // Академия добавлена 26 августа 2026. В шапку не влезает: там уже семь
+  // пунктов и 453 точки из примерно 470 доступных при ширине окна 1024.
+  // Восьмой пункт сломал бы строку — это замер, а не осторожность.
+  { label: 'Academy', page: 'academy', href: '/academy', header: false },
   { label: 'Notes', page: 'blog', href: '/blog', header: false },
   { label: 'Team', page: 'team', href: '/team', header: false },
   { label: 'Roseville', page: 'roseville', href: '/roseville-marketing-agency', header: false },

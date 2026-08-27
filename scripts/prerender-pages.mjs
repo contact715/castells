@@ -24,7 +24,7 @@ import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { SITE, PAGES, NOT_FOUND, TITLE, DESCRIPTION } from './page-meta.mjs';
+import { SITE, PAGES, NOT_FOUND, TITLE, DESCRIPTION, HUBS } from './page-meta.mjs';
 import { PRICES } from '../config/pricing.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -294,10 +294,7 @@ async function readAnswers() {
 
 function answerPages(ответы) {
   const хаб = {
-    path: '/learn',
-    title: 'Questions we get asked | Castells Media',
-    description:
-      'Straight answers to the questions home service business owners ask us: whether a website is needed at all, what an agency does every month, and whether a long contract is normal.',
+    ...HUBS.learn,
     h1: 'Questions we get asked',
     intro:
       'Written from what we actually do, with our own prices and our own clients inside. Nothing goes up here unless we have something of our own to say about it.',
@@ -321,6 +318,107 @@ function answerPages(ответы) {
         'Every number in this answer is one of our published prices, so it can be checked on this same site.',
       ],
     })),
+  ];
+}
+
+/*
+  Уроки академии. Полный текст урока в готовый HTML не переносим — там его
+  тысяча слов, а вшитые стили уже дают 101 КБ на страницу. Роботу нужен
+  заголовок, описание и достаточно текста, чтобы понять, о чём страница;
+  остальное он получит, выполнив код страницы.
+
+  ВАЖНО: это НЕ приманка. Всё, что здесь объявлено, на странице действительно
+  есть — заголовок, описание и заголовки разделов взяты из того же файла
+  данных, из которого страница рисуется.
+*/
+async function readAcademy() {
+  const source = await readFile(path.join(ROOT, 'data/academy.ts'), 'utf8');
+
+  const модули = [];
+  const реМодуль = new RegExp(String.raw`number:\s*(\d+),\s*name:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*about:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g');
+  for (const m of source.matchAll(реМодуль)) {
+    модули.push({ number: Number(m[1]), name: m[2], about: подставитьЦены(m[3]) });
+  }
+
+  const уроки = [];
+  const реУрок = new RegExp(String.raw`slug:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*module:\s*(\d+),\s*title:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА},\s*summary:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g');
+  for (const m of source.matchAll(реУрок)) {
+    уроки.push({ slug: m[1], module: Number(m[2]), title: подставитьЦены(m[3]), summary: подставитьЦены(m[4]) });
+  }
+  if (модули.length === 0) throw new Error('не удалось прочитать модули академии из data/academy.ts');
+  if (уроки.length === 0) throw new Error('не удалось прочитать уроки академии из data/academy.ts');
+
+  // Заголовки разделов каждого урока — по ним робот видит содержание.
+  for (const урок of уроки) {
+    const начало = source.indexOf(`slug: '${урок.slug}'`);
+    const конец = source.indexOf("    slug: '", начало + 10);
+    const кусок = source.slice(начало, конец === -1 ? source.length : конец);
+    урок.headings = [...кусок.matchAll(new RegExp(String.raw`heading:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g'))].map((h) => h[1]);
+    const т = кусок.match(new RegExp(String.raw`takeaway:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`));
+    урок.takeaway = т ? подставитьЦены(т[1]) : null;
+  }
+  return { модули, уроки };
+}
+
+function academyPages({ модули, уроки }) {
+  const хаб = {
+    ...HUBS.academy,
+    h1: 'A course for contractors',
+    intro:
+      "Written from the work we do for clients, not from someone else's textbook. No numbers we cannot show you the source of, and nothing here is behind a form.",
+    body: [
+      ...модули.map((m) => `Module ${m.number}. ${m.name}: ${m.about}`),
+      ...уроки.map((u) => `${u.title} — ${u.summary}`),
+    ],
+  };
+
+  return [
+    хаб,
+    ...уроки.map((u) => {
+      const модуль = модули.find((m) => m.number === u.module);
+      return {
+        path: `/academy/${u.slug}`,
+        title: TITLE.academyLesson(u.title),
+        description: DESCRIPTION.academyLesson(u.summary),
+        h1: u.title,
+        intro: u.summary,
+        body: [
+          модуль ? `Module ${u.module} of the Castells Media academy for contractors: ${модуль.name}.` : null,
+          ...(u.headings || []),
+          u.takeaway ? `Do this next: ${u.takeaway}` : null,
+          'Written by Castells Media, a marketing agency at 1298 Antelope Creek Drive, Roseville, California, working with home service businesses across the US.',
+        ].filter(Boolean),
+      };
+    }),
+  ];
+}
+
+/*
+  ВЕСЬ список страниц сайта, одной функцией.
+
+  Появилась 26 августа 2026, когда самопроверка «каждый раздел меню — живая
+  страница» покраснела на добавлении академии. Покраснела справедливо, но
+  причина была не в академии: список страниц собирался в ДВУХ местах — в
+  сборке полностью, а в самопроверке из двух семейств из шести. Значит любое
+  новое семейство страниц ломало проверку, пока о нём не вспомнят вручную.
+
+  Теперь место одно. Добавить семейство можно только здесь, и обе стороны
+  увидят его сразу.
+*/
+async function собратьВсеСтраницы() {
+  const caseStudies = await readCaseStudies();
+  const { услуги, ниши } = await readCatalog();
+  const посты = await readPosts();
+  const ответы = await readAnswers();
+  const академия = await readAcademy();
+  return [
+    ...PAGES,
+    ...caseStudyPages(caseStudies),
+    ...servicePages(услуги, caseStudies),
+    ...industryPages(ниши, caseStudies),
+    ...postPages(посты),
+    ...answerPages(ответы),
+    ...academyPages(академия),
   ];
 }
 
@@ -729,19 +827,8 @@ async function main() {
   }
 
   const template = await readFile(path.join(DIST, 'index.html'), 'utf8');
-  const caseStudies = await readCaseStudies();
-  const { услуги, ниши } = await readCatalog();
-  const посты = await readPosts();
-  const ответы = await readAnswers();
   const меню = await readNavigation();
-  const allPages = [
-    ...PAGES,
-    ...caseStudyPages(caseStudies),
-    ...servicePages(услуги, caseStudies),
-    ...industryPages(ниши, caseStudies),
-    ...postPages(посты),
-    ...answerPages(ответы),
-  ];
+  const allPages = await собратьВсеСтраницы();
 
   let written = 0;
   for (const page of allPages) {
@@ -781,9 +868,18 @@ async function main() {
 
   await проверитьМаршруты(allPages);
 
+  // Сводка считается по ФАКТИЧЕСКИ собранным страницам, а не по отдельным
+  // переменным. Переменная может разойтись с тем, что записано на диск;
+  // список страниц — это и есть то, что записано.
+  const сколько = (префикс) =>
+    allPages.filter((p) => p.path.startsWith(префикс) && p.path !== префикс).length;
+
   console.log(`prerender: страниц с собственными тегами — ${written}`);
-  console.log(`  из них кейсов — ${caseStudies.length}`);
-  console.log(`  из них услуг — ${услуги.length}, ниш — ${ниши.length}, статей — ${посты.length}, ответов — ${ответы.length}`);
+  console.log(`  из них кейсов — ${сколько('/case-studies/')}`);
+  console.log(
+    `  из них услуг — ${сколько('/services/')}, ниш — ${сколько('/industries/')}, ` +
+    `статей — ${сколько('/blog/')}, ответов — ${сколько('/learn/')}, уроков — ${сколько('/academy/')}`,
+  );
   console.log(`  404.html, sitemap.xml (${allPages.filter((p) => !p.noindex).length} адресов) и robots.txt пересобраны`);
 }
 
@@ -968,9 +1064,10 @@ async function selfTest() {
     меню.legal.every((р) => out.includes(`href="${р.href}"`)));
   t('журнал есть в меню', () => меню.sections.some((р) => р.href === '/blog'));
   t('страница команды есть в меню', () => меню.sections.some((р) => р.href === '/team'));
-  // Хаб /learn собирается на лету, поэтому сверяем с полным списком страниц,
-  // а не только со статическим.
-  const всеПути = new Set([...PAGES, ...answerPages(await readAnswers())].map((p) => p.path));
+  // Сверяем с ПОЛНЫМ списком страниц, тем же, что собирает сборка. Раньше
+  // здесь стоял свой короткий список из двух семейств, и он отставал от
+  // сборки при каждом новом семействе страниц.
+  const всеПути = new Set((await собратьВсеСтраницы()).map((p) => p.path));
   t('каждый раздел меню — живая страница сайта', () =>
     меню.sections.every((р) => всеПути.has(р.href)));
 

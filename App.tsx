@@ -55,6 +55,8 @@ const AllServicesPage = lazyWithRetry(() => import('./components/pages/AllServic
 const RosevillePage = lazyWithRetry(() => import('./components/pages/RosevillePage'));
 const AnswersPage = lazyWithRetry(() => import('./components/pages/AnswersPage'));
 const AnswerPage = lazyWithRetry(() => import('./components/pages/AnswerPage'));
+const AcademyPage = lazyWithRetry(() => import('./components/pages/AcademyPage'));
+const AcademyLessonPage = lazyWithRetry(() => import('./components/pages/AcademyLessonPage'));
 const PricingPage = lazyWithRetry(() => import('./components/pages/PricingPage'));
 const AllIndustriesPage = lazyWithRetry(() => import('./components/pages/AllIndustriesPage'));
 const ThankYouPage = lazyWithRetry(() => import('./components/pages/ThankYouPage'));
@@ -311,6 +313,14 @@ function App() {
 
               {currentPage === 'answer' && (
                 <AnswerPage slug={selectedProject?.id ? String(selectedProject.id) : undefined} onNavigate={navigateTo} />
+              )}
+
+              {currentPage === 'academy' && (
+                <AcademyPage onNavigate={navigateTo} />
+              )}
+
+              {currentPage === 'academy-lesson' && (
+                <AcademyLessonPage slug={selectedProject?.id ? String(selectedProject.id) : undefined} onNavigate={navigateTo} />
               )}
 
               {currentPage === 'industries' && (
