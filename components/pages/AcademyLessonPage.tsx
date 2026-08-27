@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Breadcrumbs } from '../ui/Breadcrumbs';
 import AcademyDiagram from '../ui/AcademyDiagram';
+import AcademyOutline from '../ui/AcademyOutline';
 import SEO from '../ui/SEO';
 import {
   ACADEMY_MODULES,
@@ -71,7 +72,22 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
           край. Раньше шапка была шире текста, и края не совпадали.
         */}
         <div className="container mx-auto px-6 pt-4 md:pt-6">
-          <div className="w-full max-w-2xl">
+          {/*
+            ДВЕ КОЛОНКИ, разнесённые по краям.
+
+            Владелец дважды сказал про пустую правую сторону. Первый раз я
+            ответил центрированием — он вернул выравнивание влево, и правильно:
+            центрирование не заняло правую сторону, а размазало пустоту на обе.
+
+            Пустоту нельзя убрать раскладкой, её можно только ЗАНЯТЬ. Текст
+            слева, оглавление курса справа, justify-between разводит их по
+            краям — теперь содержание есть у обоих краёв.
+
+            Ниже 1280 точек оглавление прячется: там оно отняло бы ширину у
+            текста, а текст важнее.
+          */}
+          <div className="flex gap-10 xl:justify-between">
+            <div className="w-full max-w-2xl min-w-0">
           <Breadcrumbs
             className="mb-6"
             items={[
@@ -162,6 +178,56 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
               </section>
             ))}
 
+            {урок.numbers && (
+              /*
+                Счёт. Стоит ПОСЛЕ текста и ПЕРЕД примером из практики: сначала
+                человек понял мысль, потом видит её в числах, потом видит, что
+                мы это правда делаем.
+
+                Оговорка про примерные числа стоит прямо в блоке, а не в
+                подвале страницы. Числа без такой оговорки читаются как
+                статистика, и через неделю кто-нибудь процитирует «по данным
+                Castells, подрядчик теряет 31 тысячу в год». Мы этого не
+                измеряли и не утверждаем.
+              */
+              <section className="border border-black/10 dark:border-white/15 rounded-card p-6 md:p-7 mb-10">
+                <h2 className="font-display text-lg font-semibold text-text-primary dark:text-white mb-1">
+                  {урок.numbers.title}
+                </h2>
+                <p className="text-xs text-text-secondary dark:text-white/45 mb-5">
+                  Example figures, not averages. Put your own in.
+                </p>
+
+                <dl className="mb-5">
+                  {урок.numbers.rows.map((строка) => (
+                    <div
+                      key={строка.label}
+                      className="flex items-baseline justify-between gap-4 py-2 border-b border-black/5 dark:border-white/10"
+                    >
+                      <dt className="text-text-secondary dark:text-white/65 text-[15px]">
+                        {строка.label}
+                      </dt>
+                      <dd className="text-text-primary dark:text-white text-[15px] font-medium shrink-0 tabular-nums">
+                        {строка.value}
+                      </dd>
+                    </div>
+                  ))}
+                  <div className="flex items-baseline justify-between gap-4 pt-4">
+                    <dt className="text-text-primary dark:text-white text-[15px] font-medium">
+                      {урок.numbers.result.label}
+                    </dt>
+                    <dd className="text-accent-text text-base font-semibold shrink-0 tabular-nums">
+                      {урок.numbers.result.value}
+                    </dd>
+                  </div>
+                </dl>
+
+                <p className="text-text-secondary dark:text-white/70 text-[15px] leading-relaxed">
+                  {урок.numbers.after}
+                </p>
+              </section>
+            )}
+
             {урок.ourWork && (
               /*
                 Пример из собственной практики. Стоит ПЕРЕД «что делать
@@ -248,6 +314,9 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
                 ))}
             </div>
           </section>
+            </div>
+
+            <AcademyOutline track={урок.track} current={урок.slug} onNavigate={onNavigate} />
           </div>
         </div>
       </div>

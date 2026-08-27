@@ -1,3 +1,5 @@
+import { PRICES } from '../config/pricing.mjs';
+
 /*
   Академия для подрядчиков. Заведена 26 августа 2026 по решению владельца:
   раздел на сайте, статьи простым текстом, адрес academy.castells.media.
@@ -110,6 +112,27 @@ export interface AcademyLesson {
    * Оба адреса проверены 26 августа 2026, оба отвечают 200.
    */
   ourWork?: string;
+  /**
+   * Счёт: арифметика урока на числах.
+   *
+   * ЭТО НЕ СТАТИСТИКА И НЕ ОБЕЩАНИЕ. Все числа здесь либо НАШИ опубликованные
+   * цены, либо явно названные примерными, чтобы читатель подставил свои. На
+   * странице так и написано. Придумать «средний подрядчик получает X» нельзя:
+   * замеров у нас нет, а на учебной странице выдуманное число опаснее всего —
+   * по нему человек примет решение о своих деньгах.
+   *
+   * Показывать формулу с примерными числами честно и полезно: так учат считать.
+   * Выдавать пример за среднее по рынку — нет.
+   */
+  numbers?: {
+    title: string;
+    /** Строки расчёта: что берём и откуда. */
+    rows: { label: string; value: string }[];
+    /** Итог расчёта. */
+    result: { label: string; value: string };
+    /** Что это число означает и что с ним делать. */
+    after: string;
+  };
   /** Что сделать после чтения. Одно действие, а не список пожеланий. */
   takeaway: string;
 }
@@ -212,6 +235,17 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         ],
       },
     ],
+    numbers: {
+      title: 'What one missed call costs',
+      rows: [
+        { label: 'Your average job, before costs', value: 'say $600' },
+        { label: 'Calls you miss in a week', value: 'say 3' },
+        { label: 'Of those, how many would have booked', value: 'say 1' },
+      ],
+      result: { label: 'One booked job a week, not taken', value: '$600 × 52 = $31,200 a year' },
+      after:
+        'Put your own three numbers in. Whatever comes out is what you are paying, every year, for a phone nobody answers — before you have spent a dollar on advertising.',
+    },
     takeaway:
       'Before you budget a dollar for ads, check the six things above. If any is missing, fix that first. It will make every dollar after it work harder.',
   },
@@ -261,6 +295,19 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     ],
     ourWork:
       'Open acromanservice.com and fivestarcomfort.com. Both are sites we built, and on both the business name is spelled the same way in the header, the page title and the footer. That sounds too obvious to mention until you check your own five places and find three spellings.',
+    numbers: {
+      title: 'The five-places count',
+      rows: [
+        { label: 'Truck or van', value: 'match / does not' },
+        { label: 'Invoice or estimate', value: 'match / does not' },
+        { label: 'Google Business Profile', value: 'match / does not' },
+        { label: 'Website header', value: 'match / does not' },
+        { label: 'Shirt, card or yard sign', value: 'match / does not' },
+      ],
+      result: { label: 'Your score', value: 'out of 5' },
+      after:
+        'Count the places where the name is spelled and styled identically. Anything under five means a customer who saw you twice may not know it was twice. This is the cheapest number on this page to fix.',
+    },
     takeaway:
       'Open the last five places your business name appears: truck, invoice, Google listing, website, a shirt. If they do not match, that is the first job, before any new design.',
   },
@@ -320,6 +367,17 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     ],
     ourWork:
       'Two of ours are live if you want to see the third kind up close: acromanservice.com for Roman Service, an HVAC company in North Port, Florida, and fivestarcomfort.com for a heating and air conditioning business in Bothell, Washington. Both have pages for individual services rather than one page listing everything, which is what makes them findable in search.',
+    numbers: {
+      title: 'How many jobs pay for a site',
+      rows: [
+        { label: 'Our published price for a website', value: `from ${PRICES.websiteFrom}, one time` },
+        { label: 'Your average job, before costs', value: 'say $600' },
+        { label: 'What you keep from a job', value: 'say a third, $200' },
+      ],
+      result: { label: 'Jobs needed to cover the site', value: `${PRICES.websiteFrom} ÷ $200 ≈ 9` },
+      after:
+        'Nine jobs across the life of the site, and a site lives for years. The price is on our prices page, so this line can be checked. The other two numbers are yours to fill in.',
+    },
     takeaway:
       'Decide which of the three jobs you need done this quarter, and build only that one. Building all three at once is how a website takes eight months and launches wrong.',
   },
@@ -377,6 +435,17 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         ],
       },
     ],
+    numbers: {
+      title: 'What a booked job actually cost you',
+      rows: [
+        { label: 'Ad budget last month', value: 'say $1,000' },
+        { label: 'What you paid for the work', value: `our plans start at ${PRICES.monthlyOneChannel}` },
+        { label: 'Jobs booked from it', value: 'say 4' },
+      ],
+      result: { label: 'Cost per booked job', value: `($1,000 + ${PRICES.monthlyOneChannel}) ÷ 4 ≈ $398` },
+      after:
+        'Compare that with what you keep from a job. If a job leaves you $200, this month lost money; if it leaves you $900, it made money. That single comparison decides the budget, and almost nobody runs it.',
+    },
     takeaway:
       'Ask whoever runs your marketing for two separate numbers this month: what went to the platforms, and what went to the work. If they cannot separate them, that is the first thing to fix.',
   },
@@ -441,6 +510,19 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     ],
     ourWork:
       'Our own clients are spread across HVAC in Florida and Washington, appliance repair and automotive work in California and Oregon, and remodeling in Florida. The mix of channels that works is not the same in a Los Angeles suburb and a small Florida town, and the only way to know which is yours is to search your own service in your own city and look at what comes up.',
+    numbers: {
+      title: 'What each channel charges you for',
+      rows: [
+        { label: 'Referrals and repeat customers', value: 'nothing per job' },
+        { label: 'Google Business Profile', value: 'nothing, takes an hour to set up' },
+        { label: 'Paid search', value: 'per click, whether or not they call' },
+        { label: 'Paid social', value: 'per view or per click' },
+        { label: 'Lead marketplaces', value: 'per lead, shared with competitors' },
+      ],
+      result: { label: 'The only two that cost nothing per job', value: 'the first two' },
+      after:
+        'This is the structure, not the price: what a click costs depends on your trade and your city, and anybody quoting you a single number for that is guessing. Start with the two that charge nothing.',
+    },
     takeaway:
       'Open Google and search your main service plus your city, on a phone, not a computer. Whatever you see above the regular results is where your next customer is looking. Start there.',
   },
@@ -495,6 +577,18 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         ],
       },
     ],
+    numbers: {
+      title: 'The four numbers worth counting',
+      rows: [
+        { label: 'Requests that came in last month', value: 'say 20' },
+        { label: 'Answered within an hour', value: 'say 12' },
+        { label: 'Turned into a quote', value: 'say 10' },
+        { label: 'Turned into a job', value: 'say 3' },
+      ],
+      result: { label: 'Quotes sent and never followed up', value: '10 − 3 = 7 to chase' },
+      after:
+        'Two problems live in these four numbers and they have opposite fixes. If few requests come in, spend on being found. If plenty come in and few become jobs, spending more is throwing money at the wrong end. Count yours before deciding.',
+    },
     takeaway:
       'Look at every request you got in the last two weeks and mark which ones you never replied to again. That number is your cheapest source of new work.',
   },

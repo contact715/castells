@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import { Breadcrumbs } from '../ui/Breadcrumbs';
 import SEO from '../ui/SEO';
+import AcademyOutline from '../ui/AcademyOutline';
 import { TITLE, DESCRIPTION } from '../../scripts/page-meta.mjs';
 import {
   ACADEMY_MODULES,
@@ -47,7 +48,22 @@ const AcademyTrackPage: React.FC<AcademyTrackPageProps> = ({ slug, onNavigate })
 
       <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
         <div className="container mx-auto px-6 pt-4 md:pt-6">
-          <div className="w-full max-w-3xl">
+          {/*
+            ДВЕ КОЛОНКИ, разнесённые по краям.
+
+            Владелец дважды сказал про пустую правую сторону. Первый раз я
+            ответил центрированием — он вернул выравнивание влево, и правильно:
+            центрирование не заняло правую сторону, а размазало пустоту на обе.
+
+            Пустоту нельзя убрать раскладкой, её можно только ЗАНЯТЬ. Текст
+            слева, оглавление курса справа, justify-between разводит их по
+            краям — теперь содержание есть у обоих краёв.
+
+            Ниже 1280 точек оглавление прячется: там оно отняло бы ширину у
+            текста, а текст важнее.
+          */}
+          <div className="flex gap-10 xl:justify-between">
+            <div className="w-full max-w-3xl min-w-0">
             <Breadcrumbs
               className="mb-6"
               items={[
@@ -124,6 +140,9 @@ const AcademyTrackPage: React.FC<AcademyTrackPageProps> = ({ slug, onNavigate })
                 );
               })}
             </div>
+            </div>
+
+            <AcademyOutline track={раздел.slug} onNavigate={onNavigate} />
           </div>
         </div>
       </div>
