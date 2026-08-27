@@ -592,6 +592,355 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     takeaway:
       'Look at every request you got in the last two weeks and mark which ones you never replied to again. That number is your cheapest source of new work.',
   },
+  {
+    slug: 'hvac-what-you-need-before-the-first-call',
+    track: 'hvac',
+    module: 1,
+    title: 'What an HVAC business needs before the first call',
+    summary:
+      'Two licences, one of them federal, and a cash cycle that punishes anyone who plans for an average month. This is what has to be true before advertising can do anything for you.',
+    image: {
+      src: '/academy/hvac-what-you-need-before-the-first-call.webp',
+      alt: 'Twelve bars for a year, two of them far taller than the rest',
+    },
+    diagram: 'six-things',
+    sections: [
+      {
+        heading: 'The federal one people forget',
+        body: [
+          'Anyone who buys, handles or disposes of refrigerant needs EPA Section 608 certification. It is federal, it does not expire, and it is separate from whatever your state requires. Type II covers high-pressure systems, which is most residential air conditioning; Universal covers all of them.',
+          'Check the current requirement on the EPA site itself rather than trusting a summary, including this one. Rules change and we are not the authority on them.',
+        ],
+      },
+      {
+        heading: 'The state one, which is where the money is',
+        body: [
+          'Most states also license HVAC contractors, usually above a job-size threshold, and the licence number is what a customer types into the state lookup while deciding between you and two others.',
+          'This matters more in HVAC than in most trades because the jobs are large and the customer is often replacing a system that cost thousands. They check. Put the number on the site, on the estimate, and in the Google profile.',
+        ],
+      },
+      {
+        heading: 'The cash cycle nobody warns you about',
+        body: [
+          'HVAC does not earn evenly. The first hot week and the first cold week produce more calls than the six weeks before them combined, and the shoulder seasons are quiet.',
+          'That means a business planned around an average month runs out of money in April and turns down work in July because it cannot staff up fast enough. The planning unit in this trade is the year, not the month.',
+          'Everything in module 6 about maintenance plans exists because of this paragraph: they are the part of the revenue that does not care what the weather did.',
+        ],
+      },
+      {
+        heading: 'The rest of the list',
+        body: [
+          'General liability and workers comp, because you are working in people homes with equipment that can flood a basement.',
+          'A business number that can be forwarded and answered by someone other than you, because in this trade the calls arrive when you are on a roof in August.',
+          'A separate bank account, so that when you decide whether an advertising month worked you can actually tell what a job left you.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What a seasonal year does to a monthly plan',
+      rows: [
+        { label: 'What you expect in an average month', value: 'say $40,000' },
+        { label: 'What the two peak months do', value: 'say $80,000 each' },
+        { label: 'What the four quiet months do', value: 'say $15,000 each' },
+      ],
+      result: { label: 'Two months carry the year', value: '$160,000 of $480,000, a third' },
+      after:
+        'Put your own months in. If a third of the year arrives in two months, the question is not how to spend evenly, it is how to be visible before the peak and how to earn something during the quiet part. That is the whole marketing problem in this trade.',
+    },
+    ourWork:
+      'Two HVAC sites we built are live right now: acromanservice.com for Roman Service in North Port, Florida, and fivestarcomfort.com in Bothell, Washington. Two very different climates, and the seasonal shape of the business is the first thing that differs between them.',
+    takeaway:
+      'Write down your last twelve months by month, from the bank account, not from memory. Everything else in this course is easier once you can see the shape of your own year.',
+  },
+  {
+    slug: 'hvac-the-van-is-the-billboard',
+    track: 'hvac',
+    module: 2,
+    title: 'In HVAC the van is the billboard',
+    summary:
+      'Your van parks in a driveway for three hours, in the exact neighbourhood where you want the next job. No other trade gets an advertising surface that well targeted, and most waste it.',
+    image: {
+      src: '/academy/hvac-the-van-is-the-billboard.webp',
+      alt: 'A service van parked in a driveway with houses behind it',
+    },
+    diagram: 'three-encounters',
+    sections: [
+      {
+        heading: 'Why the van matters more here than elsewhere',
+        body: [
+          'An HVAC call is not fifteen minutes. A repair is hours, an install can be a full day, and the whole time the van sits in a driveway in a neighbourhood of houses with systems of the same age, installed by the same builder, failing on roughly the same schedule.',
+          'The neighbours see it. Some of them are two months from the same problem. That is a targeted advertisement that you are already paying for, and it costs nothing extra to make it work.',
+        ],
+      },
+      {
+        heading: 'What has to be on it',
+        body: [
+          'The phone number, big enough to read from across a street. This is the most common mistake: beautiful wrap, phone number in small type near the wheel arch.',
+          'What you do, in words, not just a logo. "Heating and air conditioning" reads at a glance; a stylised flame does not.',
+          'The licence number, because it is required in some states and because it signals the same thing to a neighbour that it signals on the website.',
+        ],
+      },
+      {
+        heading: 'The rest of the surface',
+        body: [
+          'A shirt with the same name and the same colour as the van. A customer who lets a stranger into the house is looking for exactly one thing at the door: that this person matches the company they called.',
+          'Shoe covers and a floor mat. This is not decoration, it is the detail people mention in reviews, and reviews are how the next customer chooses you.',
+          'A yard sign after an install, if the customer agrees. The system is now invisible; the sign is the only evidence that the work happened at all.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'The five-surface count',
+      rows: [
+        { label: 'Van', value: 'name, phone, trade readable' },
+        { label: 'Shirt or uniform', value: 'matches the van' },
+        { label: 'Estimate and invoice', value: 'same name, same look' },
+        { label: 'Google Business Profile', value: 'same name exactly' },
+        { label: 'Website header', value: 'same name exactly' },
+      ],
+      result: { label: 'Your score', value: 'out of 5' },
+      after:
+        'Anything under five means a homeowner who saw your van on Tuesday and your search result on Friday may not know it was the same company. In a trade where the buying decision takes weeks of dread about a dying system, that gap is expensive.',
+    },
+    takeaway:
+      'Stand across the street from your own van and read the phone number. If you cannot, that is the first thing to fix, before any website work.',
+  },
+  {
+    slug: 'hvac-what-your-site-must-answer',
+    track: 'hvac',
+    module: 3,
+    title: 'The five questions an HVAC site has to answer in ten seconds',
+    summary:
+      'Someone is standing in a hot house with a dead system. They are not reading your About page. Here is what they need to find, in the order they look for it.',
+    image: {
+      src: '/academy/hvac-what-your-site-must-answer.webp',
+      alt: 'A phone shape with five stacked bars inside, the top one widest',
+    },
+    diagram: 'three-sites',
+    sections: [
+      {
+        heading: 'Can you come today',
+        body: [
+          'The most valuable HVAC visitor is the one whose system just died. They are not comparing three companies on craftsmanship. They want to know whether someone will come out.',
+          'Say it plainly and near the top: whether you do emergency calls, what hours, and how fast you usually get there. If you do not do same-day, say that too — an honest no costs you a call you could not have served anyway.',
+        ],
+      },
+      {
+        heading: 'Do you serve my area',
+        body: [
+          'Name the towns. Not "the greater metro area" — the actual list of towns and, if it helps, the zip codes.',
+          'This is also the single easiest thing to get right for search: those town names are exactly what people type, and a page that names them can be found for them.',
+        ],
+      },
+      {
+        heading: 'Are you licensed and insured',
+        body: [
+          'Licence number, visible, not buried in the footer. Insurance stated. For a job that costs several thousand dollars in a stranger house, this is the second thing a careful buyer checks after price.',
+        ],
+      },
+      {
+        heading: 'What does it cost, roughly',
+        body: [
+          'You cannot quote a system replacement from a web page, and nobody expects you to. What you can publish is the diagnostic fee, whether it is waived if they go ahead, and whether you offer financing.',
+          'Financing belongs on the page in this trade specifically. A failed system is an unplanned four-figure expense, and for many households the question is not which company, it is whether they can afford it this month.',
+        ],
+      },
+      {
+        heading: 'Have you done this before',
+        body: [
+          'Photographs of your own installs. Reviews with names and towns. The brands you service, because a homeowner with a Trane wants to know you work on Trane.',
+          'Not stock photos of somebody else equipment. In a trade where the customer cannot judge the work quality themselves, the evidence they can judge is whether you look like you have done it.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'The ten-second test',
+      rows: [
+        { label: 'Emergency availability visible without scrolling', value: 'yes / no' },
+        { label: 'Towns named on the page', value: 'yes / no' },
+        { label: 'Licence number visible', value: 'yes / no' },
+        { label: 'Diagnostic fee or financing stated', value: 'yes / no' },
+        { label: 'Your own photos and real reviews', value: 'yes / no' },
+      ],
+      result: { label: 'Your score', value: 'out of 5' },
+      after:
+        'Open your site on a phone, count out ten seconds, and mark what you found in that time. Whatever is missing is what a panicking homeowner did not find either.',
+    },
+    ourWork:
+      'Both HVAC sites we built are live: acromanservice.com and fivestarcomfort.com. Open either on a phone and time how long it takes to find the phone number and the service area.',
+    takeaway:
+      'Do the ten-second test on your own site, on a phone, not a computer. Fix whatever you could not find in time before touching anything else.',
+  },
+  {
+    slug: 'hvac-when-to-spend',
+    track: 'hvac',
+    module: 4,
+    title: 'When to spend in a business with two seasons',
+    summary:
+      'Every HVAC owner eventually asks whether to advertise into the peak, when everyone is searching, or during the quiet months, when nobody is competing. Here is how to think about it, and what the money is actually buying in each case.',
+    image: {
+      src: '/academy/hvac-when-to-spend.webp',
+      alt: 'Two wave curves, one peaking slightly before the other',
+    },
+    diagram: 'two-costs',
+    sections: [
+      {
+        heading: 'What the peak buys',
+        body: [
+          'During the first hot week, people are searching whether or not you advertise. Ads put you in front of demand that already exists. Clicks cost more because every competitor is bidding for the same searches, and the calls convert quickly because the problem is urgent.',
+          'The trap is capacity. If you are already booked out a week, buying more emergency calls produces annoyed strangers and one-star reviews about a company that never called back.',
+        ],
+      },
+      {
+        heading: 'What the quiet season buys',
+        body: [
+          'Nobody is searching for emergency repair in a mild October. What people can be persuaded to buy in that window is the thing that prevents the emergency: a tune-up, a maintenance plan, a system replaced on a schedule rather than on a Sunday in August.',
+          'That is a different message and a different kind of ad. Running your July emergency ads in October produces clicks and no calls, and the owner concludes advertising does not work.',
+        ],
+      },
+      {
+        heading: 'The two costs, again',
+        body: [
+          'The ad budget scales with how much demand you want to buy. The work of running it is roughly flat. In a seasonal trade the temptation is to cancel everything during the quiet months, which saves the smaller of the two numbers and loses the accumulated learning of the account.',
+          'A better shape: keep the account running with a small budget and a maintenance message during the quiet part, and raise the budget going into the peak — before the first hot week, not after it, because by then the searches are already happening.',
+        ],
+      },
+      {
+        heading: 'The account is yours either way',
+        body: [
+          'Whoever runs it, the account should be in your name with your billing. Two seasons of data about which searches turn into installs is worth more than any single month of management, and in a seasonal business it takes a full year to accumulate one usable cycle of it.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What a booked job cost you, by season',
+      rows: [
+        { label: 'Peak month ad budget', value: 'say $2,000' },
+        { label: 'Jobs booked from it', value: 'say 8' },
+        { label: 'Quiet month ad budget', value: 'say $500' },
+        { label: 'Jobs booked from it', value: 'say 1' },
+      ],
+      result: { label: 'Cost per job', value: 'peak $250, quiet $500' },
+      after:
+        'The quiet month looks worse per job and may still be worth it, because a maintenance plan sold in October is a customer who calls you in July instead of searching. Compare against what a job leaves you, not against the other month.',
+    },
+    takeaway:
+      'Look at your last twelve months and mark the two weeks when the phone went from quiet to loud. Your budget should rise before those weeks, not during them.',
+  },
+  {
+    slug: 'hvac-how-they-find-you-in-an-emergency',
+    track: 'hvac',
+    module: 5,
+    title: 'How people find an HVAC company when the system just died',
+    summary:
+      'Emergency search behaves differently from every other kind. The decision takes minutes, the map decides most of it, and the reviews do the rest.',
+    image: {
+      src: '/academy/hvac-how-they-find-you-in-an-emergency.webp',
+      alt: 'A map pin with rings spreading out and houses on the outer ring',
+    },
+    diagram: 'channels',
+    sections: [
+      {
+        heading: 'The map, and why it decides more here',
+        body: [
+          'Someone with a dead system searches on a phone, sees the map results first, and calls one of the top few. There is no comparison shopping, no reading of About pages, no second visit a week later.',
+          'That makes the Google Business Profile the single most valuable unpaid asset an HVAC company has. Claimed, verified, the right categories, correct hours including whether you are open now, the service area right, and photographs that are yours.',
+        ],
+      },
+      {
+        heading: 'Reviews are the tiebreaker, and they decay',
+        body: [
+          'Between three companies in the map, the one with recent reviews wins. Recent matters: a five-star average from three years ago reads as a company that stopped working.',
+          'In HVAC the moment to ask is exact: the system is running again, the house is cooling down, and the customer is relieved. Ask then, in person, before you leave. An email two weeks later asks someone who has already forgotten the discomfort.',
+        ],
+      },
+      {
+        heading: 'Paid search, and what it is for',
+        body: [
+          'Ads on emergency searches are expensive because everyone wants them and the job is worth a lot. They are worth it when you have capacity and want it filled today.',
+          'They are not the channel for maintenance plans or replacements — those buyers are not in a hurry and will not convert from an emergency ad.',
+        ],
+      },
+      {
+        heading: 'The customers you already have',
+        body: [
+          'The cheapest HVAC job is the one from a house you have already been to. You know the equipment, the age, and the history, and they know you.',
+          'Most companies in this trade have no way to contact past customers at all. A list of names, addresses, install dates and equipment ages is a marketing asset, and it costs nothing but the discipline of writing it down.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What each channel charges you for',
+      rows: [
+        { label: 'Past customers and referrals', value: 'nothing per job' },
+        { label: 'Google Business Profile', value: 'nothing, an hour to set up' },
+        { label: 'Emergency paid search', value: 'per click, highest in the peak' },
+        { label: 'Lead marketplaces', value: 'per lead, shared with competitors' },
+      ],
+      result: { label: 'The two that cost nothing per job', value: 'the first two' },
+      after:
+        'This is the structure, not the price. What a click costs depends on your city and your season, and anybody quoting a single number for that is guessing. Start with the two that charge nothing.',
+    },
+    takeaway:
+      'Search your own trade plus your town on a phone right now. If you are not in the map results, that is the most valuable unpaid thing you can fix this week.',
+  },
+  {
+    slug: 'hvac-maintenance-plans',
+    track: 'hvac',
+    module: 6,
+    title: 'Maintenance plans are the part that does not depend on the weather',
+    summary:
+      'The follow-up problem in HVAC has a specific answer that other trades do not get: a recurring visit that pays during the quiet months and turns strangers into people who call you first.',
+    image: {
+      src: '/academy/hvac-maintenance-plans.webp',
+      alt: 'A closed circular loop with two houses on it at opposite points',
+    },
+    diagram: 'follow-up',
+    sections: [
+      {
+        heading: 'What a plan actually does for the business',
+        body: [
+          'It fills the quiet season with scheduled work at a time when nothing else is happening.',
+          'It puts you inside the house twice a year, which is how you see the ageing system before it fails and how the customer sees you before they need to search for anyone.',
+          'It converts an emergency customer, who is loyal to whoever answers, into a repeat customer, who is loyal to you.',
+        ],
+      },
+      {
+        heading: 'Why the emergency customer needs converting',
+        body: [
+          'A customer who found you in a panic did not choose you, they chose whoever was available. Next August they will search again, and whoever is available then will get the job.',
+          'The maintenance plan is the mechanism that ends that cycle. It is not an upsell, it is the difference between a business that starts from zero every summer and one that does not.',
+        ],
+      },
+      {
+        heading: 'Selling it at the right moment',
+        body: [
+          'The moment is the end of the repair, when the house is cooling down and the customer is thinking about how much they hated the last two days.',
+          'What convinces is not a discount, it is the specific thing you just saw: the age of the unit, the state of the coil, what is likely to fail next and when. You have that information and nobody else does.',
+        ],
+      },
+      {
+        heading: 'The follow-up that is still missing',
+        body: [
+          'Everything from the general course applies here too: quotes that are never mentioned again are forgotten, not rejected. In HVAC the quotes are large and the deciding takes weeks, which makes the follow-up more valuable and the silence more expensive.',
+          'A replacement quote sent in June and never followed up is a customer who bought from someone else in July.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What plans do to a quiet month',
+      rows: [
+        { label: 'Plan price per year', value: 'say $200' },
+        { label: 'Customers on a plan', value: 'say 150' },
+        { label: 'Visits that produces', value: '300 a year, schedulable' },
+      ],
+      result: { label: 'Revenue that ignores the weather', value: '$30,000 a year' },
+      after:
+        'Put your own numbers in. The revenue is the smaller half of the point: those 150 houses are also 150 systems whose age you know, in a trade where the replacement is worth many times the plan.',
+    },
+    takeaway:
+      'Count how many of last year customers you could contact today if you wanted to. If the answer is none, building that list is worth more than any advertising you could buy this month.',
+  },
 ];
 
 export const findLesson = (slug?: string) =>

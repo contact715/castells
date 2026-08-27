@@ -93,6 +93,42 @@ export const КАРТИНКИ = [
       'Four horizontal rows of large evenly spaced green dots, stacked one under another and together filling the whole frame from top to bottom edge. In every row one dot near the middle is missing, and all dots to the right of that gap get progressively dimmer towards the right edge.',
     alt: 'Four rows of dots, each with one missing near the middle, the dots dimming after the gap',
   },
+  {
+    slug: 'hvac-what-you-need-before-the-first-call',
+    сюжет:
+      'A simple bar chart of twelve bars representing a year, drawn in flat green on a dark background. Two bars near the middle are very tall and the rest are short. Nothing else in the frame, no text, no labels.',
+    alt: 'Twelve bars for a year, two of them far taller than the rest',
+  },
+  {
+    slug: 'hvac-the-van-is-the-billboard',
+    сюжет:
+      'A plain green service van seen from the side, parked in a driveway, drawn as a flat simple shape on a dark background. Faint outlines of three houses stand behind it. No text on the van, no logo, no people.',
+    alt: 'A service van parked in a driveway with houses behind it',
+  },
+  {
+    slug: 'hvac-what-your-site-must-answer',
+    сюжет:
+      'A tall phone-shaped rectangle filling most of the frame height, drawn in flat off-white on a dark background, with five green horizontal bars stacked inside it from top to bottom, the top bar widest. Nothing else in the frame, no text.',
+    alt: 'A phone shape with five stacked bars inside, the top one widest',
+  },
+  {
+    slug: 'hvac-when-to-spend',
+    сюжет:
+      'Two smooth green curves across a dark background, both rising and falling twice like waves. One curve peaks slightly before the other. Nothing else in the frame, no axes, no text.',
+    alt: 'Two wave curves, one peaking slightly before the other',
+  },
+  {
+    slug: 'hvac-how-they-find-you-in-an-emergency',
+    сюжет:
+      'A green map pin at the centre of a dark frame with three concentric rings spreading out from it, and a few small flat house shapes sitting on the outer ring. No text, no labels.',
+    alt: 'A map pin with rings spreading out and houses on the outer ring',
+  },
+  {
+    slug: 'hvac-maintenance-plans',
+    сюжет:
+      'A simple green circular arrow forming a closed loop in the centre of a dark frame, with two small flat house shapes on the loop at opposite points. Nothing else in the frame, no text.',
+    alt: 'A closed circular loop with two houses on it at opposite points',
+  },
 ];
 
 async function ключ() {
