@@ -152,26 +152,31 @@ export const ACADEMY_MODULES: AcademyModule[] = [
   },
   {
     number: 2,
+    name: 'Go to market',
+    about: 'Seven questions to answer before you design, build or advertise anything.',
+  },
+  {
+    number: 3,
     name: 'Brand and identity',
     about: 'What makes people recognize you on the second look.',
   },
   {
-    number: 3,
+    number: 4,
     name: 'The website',
     about: 'Three kinds of site, and which one your business actually needs.',
   },
   {
-    number: 4,
+    number: 5,
     name: 'Marketing basics',
     about: 'Where the money goes and what each part is supposed to do.',
   },
   {
-    number: 5,
+    number: 6,
     name: 'Getting found',
     about: 'How people look for a contractor, in the order it actually happens.',
   },
   {
-    number: 6,
+    number: 7,
     name: 'Sales and follow-up',
     about: 'The work that turns a phone call into a paid job.',
   },
@@ -252,7 +257,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'what-a-brand-is-for-a-contractor',
     track: 'contractors',
-    module: 2,
+    module: 3,
     title: 'What a brand actually is for a contractor',
     summary:
       'A brand is not a logo. For a home service business it is the set of things that make a stranger recognize you on the second encounter and remember you on the third.',
@@ -314,7 +319,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'three-kinds-of-website',
     track: 'contractors',
-    module: 3,
+    module: 4,
     title: 'Three kinds of website, and which you need',
     summary:
       'A one-page card, a landing page built for ads, and a full site built for search. They cost different amounts because they do different jobs, not one being better.',
@@ -384,7 +389,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'where-the-marketing-money-goes',
     track: 'contractors',
-    module: 4,
+    module: 5,
     title: 'Where the marketing money actually goes',
     summary:
       'Two different kinds of cost get called "marketing budget," and confusing them is why owners cannot tell whether it works. Here is the split, and what each part buys.',
@@ -452,7 +457,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'how-people-find-a-contractor',
     track: 'contractors',
-    module: 5,
+    module: 6,
     title: 'How people actually find a contractor',
     summary:
       'The channels in the order they matter for home service work, what each one costs in money and in time, and which to set up first.',
@@ -529,7 +534,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'the-job-you-lose',
     track: 'contractors',
-    module: 6,
+    module: 7,
     title: 'The job you lose is the call nobody returned',
     summary:
       'Most lost work is not lost to a competitor with better prices. It is lost between the phone ringing and someone following up: the part of marketing skipped most.',
@@ -655,7 +660,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'hvac-the-van-is-the-billboard',
     track: 'hvac',
-    module: 2,
+    module: 3,
     title: 'In HVAC the van is the billboard',
     summary:
       'Your van parks in a driveway for hours, in the neighbourhood where you want the next job. No other trade gets an ad surface that well targeted, and most waste it.',
@@ -708,7 +713,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'hvac-what-your-site-must-answer',
     track: 'hvac',
-    module: 3,
+    module: 4,
     title: 'Five questions an HVAC site must answer',
     summary:
       'Someone is standing in a hot house with a dead system. They are not reading your About page. Here is what they need to find, in the order they look for it.',
@@ -774,7 +779,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'hvac-when-to-spend',
     track: 'hvac',
-    module: 4,
+    module: 5,
     title: 'When to spend in a business with two seasons',
     summary:
       'Every HVAC owner asks whether to advertise into the peak season or the quiet months. Here is how to think about it, and what the money actually buys in each case.',
@@ -830,7 +835,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'hvac-how-they-find-you-in-an-emergency',
     track: 'hvac',
-    module: 5,
+    module: 6,
     title: 'How people find HVAC help in an emergency',
     summary:
       'Emergency search behaves differently from every other kind. The decision takes minutes, the map decides most of it, and the reviews do the rest.',
@@ -887,7 +892,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'hvac-maintenance-plans',
     track: 'hvac',
-    module: 6,
+    module: 7,
     title: 'Maintenance plans do not depend on weather',
     summary:
       'The follow-up problem in HVAC has an answer other trades do not get: a recurring visit that pays during the quiet months and turns strangers into repeat callers.',
@@ -1000,7 +1005,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'remodel-the-jobsite-is-the-showroom',
     track: 'remodeling',
-    module: 2,
+    module: 3,
     title: 'The jobsite is your showroom',
     summary:
       'A remodeler has no shop window. What people see instead is the site: the sign out front, the driveway, and the photographs that come out of it afterwards.',
@@ -1055,7 +1060,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'remodel-portfolio-is-the-site',
     track: 'remodeling',
-    module: 3,
+    module: 4,
     title: 'For a remodeler, the portfolio is the website',
     summary:
       'Emergency trades sell availability. Remodelers sell evidence. That changes what the site is for and what has to be on it.',
@@ -1113,7 +1118,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'remodel-the-long-sales-cycle',
     track: 'remodeling',
-    module: 4,
+    module: 5,
     title: 'Marketing for a decision that takes months',
     summary:
       'Someone searching for a kitchen remodel today may sign in the spring. Advertising built for same-day calls fails at this, and the owner concludes it does not work.',
@@ -1169,7 +1174,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'remodel-where-they-look',
     track: 'remodeling',
-    module: 5,
+    module: 6,
     title: 'Where remodel customers actually look',
     summary:
       'The channels differ from an emergency trade, and so does the order. Pictures matter more, urgency matters less, and other professionals send more work than any ad.',
@@ -1226,7 +1231,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'remodel-the-estimate-is-a-document',
     track: 'remodeling',
-    module: 6,
+    module: 7,
     title: 'The estimate is a document, not a number',
     summary:
       'Two contractors quote the same kitchen. One sends a figure in a text, the other sends four pages. The second wins more often, and not because of the price.',
@@ -1346,7 +1351,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'auto-the-lot-is-the-billboard',
     track: 'automotive',
-    module: 2,
+    module: 3,
     title: 'The car in the lot is the billboard',
     summary:
       'Most trades have to describe the result. This one can point at it: a finished car in the lot is the clearest ad a shop has, and most park or photograph it wrong.',
@@ -1409,7 +1414,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'auto-the-photo-is-the-product',
     track: 'automotive',
-    module: 3,
+    module: 4,
     title: 'For a detail shop, the photo is the product',
     summary:
       'A customer cannot feel a coating or run a hand under a wrap edge before buying. What they can do is look at photos of other cars. The site exists to earn that trust.',
@@ -1464,7 +1469,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'auto-where-the-marketing-money-goes',
     track: 'automotive',
-    module: 4,
+    module: 5,
     title: 'Where the marketing money goes for auto shops',
     summary:
       'The same split applies to every trade, with one wrinkle: a bay hour that goes unsold is gone forever. That makes booking, not just leads, the number worth watching.',
@@ -1523,7 +1528,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'auto-how-people-find-a-detail-shop',
     track: 'automotive',
-    module: 5,
+    module: 6,
     title: 'How people find a detailer or wrap shop',
     summary:
       'The channels in the order they usually pay off for this trade, and why the mix leans more on photos and reviews than almost any other business the agency works with.',
@@ -1584,7 +1589,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'auto-the-membership-that-fills-the-week',
     track: 'automotive',
-    module: 6,
+    module: 7,
     title: 'The membership that fills the slow week',
     summary:
       'A finished job is not the end: coatings need maintenance, tints need checking, cars need washing. A plan around that keeps the calendar full when bookings run thin.',
@@ -1696,7 +1701,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'pro-trust-is-the-brand',
     track: 'professional',
-    module: 2,
+    module: 3,
     title: 'What a practice brand is made of',
     summary:
       'Nobody picks a lawyer for the logo. They pick whoever looked competent and reachable at the moment they were worried.',
@@ -1748,7 +1753,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'pro-the-site-answers-the-worry',
     track: 'professional',
-    module: 3,
+    module: 4,
     title: 'Answer the worry, not the service',
     summary:
       'People arrive after a bad week, a renewal notice, or months of thinking. The page that speaks to that moment wins.',
@@ -1812,7 +1817,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'pro-marketing-inside-the-rules',
     track: 'professional',
-    module: 4,
+    module: 5,
     title: 'Marketing a practice inside the rules',
     summary:
       'Every other course here can say whatever is true. A regulated practice cannot, and the limits differ by profession.',
@@ -1867,7 +1872,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'pro-where-clients-come-from',
     track: 'professional',
-    module: 5,
+    module: 6,
     title: 'Where clients actually come from',
     summary:
       'Referral from someone trusted, then reputation you can look up, then search. In that order, and the first one is far larger than practices expect.',
@@ -1924,7 +1929,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
   {
     slug: 'pro-the-first-response-is-the-service',
     track: 'professional',
-    module: 6,
+    module: 7,
     title: 'The first response is the service',
     summary:
       'Somebody worried enough to contact a professional is comparing not expertise but responsiveness, because it is the only thing they can assess before hiring you.',
@@ -1977,6 +1982,350 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     },
     takeaway:
       'Count how many enquiries last month never got a reply within a day. That number is your practice cheapest available growth.',
+  },
+  {
+    slug: 'gtm-seven-questions',
+    track: 'contractors',
+    module: 2,
+    title: 'Seven questions before you build anything',
+    summary:
+      'Who you are for, what you actually sell, what makes you different, what you must not be mistaken for, and how you will know it worked.',
+    image: {
+      src: '/academy/gtm-seven-questions.webp',
+      alt: 'Seven squares in a row, each slightly larger than the last',
+    },
+    diagram: 'six-things',
+    sections: [
+      {
+        heading: 'Why this comes before the logo',
+        body: [
+          'A website, a brand and an advertising budget are all answers. If the questions underneath them have not been answered, you are paying to build the answer to a question nobody asked.',
+          'These seven take an afternoon. Everything after them is faster and cheaper because of it.',
+        ],
+      },
+      {
+        heading: '1. Who is this for',
+        body: [
+          'Not everyone within driving distance. The specific customer you want more of: what kind of house, what kind of budget, what kind of job.',
+          'Write it as a sentence you could read to a stranger and have them picture the same person.',
+        ],
+      },
+      {
+        heading: '2. What are you actually selling',
+        body: [
+          'Almost never the work itself. People do not buy a repair, they buy the problem being gone and not having to think about it again.',
+          'The distinction matters because it decides every word you write afterwards. A page about your equipment sells the work. A page about the customer getting their weekend back sells what they are buying.',
+        ],
+      },
+      {
+        heading: '3. What makes you different',
+        body: [
+          'Three things, concrete enough that a competitor could not put the same three on their own page.',
+          'Not "quality workmanship" and not "customer focused". Something like: you explain what the last three contractors did not, you handle permits where others improvise, you turn down work that will not come out right.',
+          'If you cannot fill all three, that is worth knowing now rather than after the website is built.',
+        ],
+      },
+      {
+        heading: '4. How do you sound',
+        body: [
+          'Pick the three words a happy customer would use describing you to a neighbour. Then check that everything you publish sounds like those three words.',
+          'And pick the words you will not use. Cheap and affordable pull you towards the customer who chooses on price alone, and that customer is usually the one you regret.',
+        ],
+      },
+      {
+        heading: '5. What must you not be mistaken for',
+        body: [
+          'This is the question most people skip and it saves the most time. A remodeler who does not want handyman calls has to say so, on the site, in the profile, in the ads.',
+          'Otherwise you spend the year politely declining work you were never going to take, and paying for the clicks that brought it.',
+        ],
+      },
+      {
+        heading: '6. Where do people find you',
+        body: [
+          'Today, honestly: name the channels and roughly what share each brings. Then the target picture: what you want that list to look like in six months.',
+          'The gap between those two lists is your marketing plan. Most of the time the honest answer is that everything comes from one place, which is the real risk.',
+        ],
+      },
+      {
+        heading: '7. How will you know it worked',
+        body: [
+          'Decide the numbers before you spend, because after you spend you will pick whichever number looks best.',
+          'What a lead costs by channel, what a signed job costs by channel, what share of quotes become jobs, and how many came back after follow-up. Those four beat any advertising report.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'The one-channel test',
+      rows: [
+        { label: 'Jobs last quarter from your biggest source', value: 'say 30 of 40' },
+        { label: 'That is what share', value: '75%' },
+        { label: 'If that source doubled its price tomorrow', value: 'what happens' },
+      ],
+      result: { label: 'Your exposure', value: 'the share above, in one number' },
+      after:
+        'Put your own split in. A single channel above roughly half is the largest risk most service businesses carry and the one nobody has on a page anywhere. The point of question 6 is to see it before it becomes urgent.',
+    },
+    ourWork:
+      'This is the framework we use when we write a strategy for a client, and it is the same seven headings every time. The order matters: each answer constrains the next, which is why the logo is not first.',
+    takeaway:
+      'Answer all seven in writing this week, badly if necessary. A bad written answer can be improved; an unwritten one gets decided by accident.',
+  },
+  {
+    slug: 'gtm-hvac-two-businesses',
+    track: 'hvac',
+    module: 2,
+    title: 'You run two businesses, not one',
+    summary:
+      'Emergency repair and planned replacement share a van and nothing else. Same seven questions, answered twice, because the customer is a different person in each.',
+    image: {
+      src: '/academy/gtm-hvac-two-businesses.webp',
+      alt: 'Two houses side by side, one with a flame and one with a snowflake',
+    },
+    diagram: 'six-things',
+    sections: [
+      {
+        heading: 'The two customers',
+        body: [
+          'The emergency customer has a dead system and a hot house. They decide in minutes, they are not comparing craftsmanship, and they will call whoever answers.',
+          'The replacement customer has a system that still works and is thinking about the four-figure cost. They will take weeks, get three quotes, and talk to a spouse.',
+          'One marketing plan for both produces material that fits neither.',
+        ],
+      },
+      {
+        heading: 'What each is actually buying',
+        body: [
+          'The emergency customer buys speed and relief. Everything they read should answer whether you can come and when.',
+          'The replacement customer buys not being wrong. They are afraid of paying too much, of the wrong size unit, of a contractor who disappears. Everything they read should reduce that fear: what you inspect, how you size it, what the warranty covers, what it costs to run.',
+        ],
+      },
+      {
+        heading: 'What you must not be mistaken for',
+        body: [
+          'The cheapest tune-up in town, if that is not the business you want. Advertising a low-priced seasonal check brings exactly that customer and fills the calendar with it.',
+          'It is a legitimate strategy when the plan is to convert those visits into replacements. It is a trap when it is done because everyone else does it.',
+        ],
+      },
+      {
+        heading: 'How you sound, to two audiences',
+        body: [
+          'To the emergency customer: short, direct, available. Anything decorative reads as delay.',
+          'To the replacement customer: patient and explanatory. This is where the reputation for being the one who explains gets built, and it is what makes the third quote win against two cheaper ones.',
+        ],
+      },
+      {
+        heading: 'Where each one finds you',
+        body: [
+          'Emergency: the map, then paid search, decided by reviews and by who answers.',
+          'Replacement: search over weeks, your own past customers, and the neighbour who had you out last summer. Almost none of it is the same channel.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'Which half of the business is which',
+      rows: [
+        { label: 'Jobs last year: emergency repair', value: 'say 180' },
+        { label: 'Jobs last year: replacement and install', value: 'say 25' },
+        { label: 'Revenue split between them', value: 'count it' },
+      ],
+      result: { label: 'Where the calls are against where the money is', value: 'usually opposite' },
+      after:
+        'Put your own numbers in. In most HVAC businesses the calls come overwhelmingly from one half and the revenue from the other, and the marketing is built for the half that produces calls.',
+    },
+    takeaway:
+      'Answer the seven questions twice, once for emergency and once for replacement. If the two answers look the same, one of them is wrong.',
+  },
+  {
+    slug: 'gtm-remodel-two-streams',
+    track: 'remodeling',
+    module: 2,
+    title: 'Planned work and insurance work',
+    summary:
+      'Someone spending their own savings on a kitchen and someone whose house just flooded are not the same customer and do not decide the same way.',
+    image: {
+      src: '/academy/gtm-remodel-two-streams.webp',
+      alt: 'Two streams from opposite corners joining into one',
+    },
+    diagram: 'six-things',
+    sections: [
+      {
+        heading: 'The planned customer',
+        body: [
+          'Paying out of their own money, for something they want rather than need. They will take months, compare several contractors, and their main fear is being cheated or abandoned halfway.',
+          'What wins them: evidence, clarity, and the sense that you have done this exact thing before. Photographs, a real estimate document, and a contractor who explains rather than reassures.',
+        ],
+      },
+      {
+        heading: 'The insurance customer',
+        body: [
+          'Their house was damaged. The money is coming from an insurer, so there is little haggling over price, and they want one thing: their home back.',
+          'What wins them: speed, and the sense that you know how to deal with the insurer. This is a real and separate skill, and to the customer it is worth more than your tile work.',
+          'The finish expectations are usually lower than a planned remodel and the work is often better paid. Contractors who have both streams frequently say the insurance side is the better business.',
+        ],
+      },
+      {
+        heading: 'The third customer nobody markets to',
+        body: [
+          'Somebody who already has two or three estimates and does not trust any of them. They are looking for a fourth opinion.',
+          'This is the most underrated segment in remodeling. You arrive, explain what is actually going on, and often the honest answer is cheaper and simpler than what the others quoted. That is where the trust that wins the job comes from, and almost nobody puts it in their marketing.',
+        ],
+      },
+      {
+        heading: 'Who you do not want',
+        body: [
+          'Handyman-level work, if you are a remodeler. Say it plainly or spend the year declining it.',
+          'And the customer who is buying on price alone. Letting a job go to somebody half your price is a good outcome; the mistake is finding that out after two site visits instead of on the phone.',
+        ],
+      },
+      {
+        heading: 'Where each stream comes from',
+        body: [
+          'Planned work: search on job plus town, referrals from designers and realtors, and the neighbours who watched your last job.',
+          'Insurance work: relationships with adjusters and restoration networks, plus content that shows you handle the process. Different channel, different message, same company.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'Which stream is which for you',
+      rows: [
+        { label: 'Signed jobs last year: planned', value: 'count it' },
+        { label: 'Signed jobs last year: insurance', value: 'count it' },
+        { label: 'What each left you, on average', value: 'count it' },
+      ],
+      result: { label: 'The one you are better at', value: 'usually not the one you market' },
+      after:
+        'Put your own numbers in. Most remodelers with both streams have never compared them, and the comparison usually reorders the marketing plan on the spot.',
+    },
+    takeaway:
+      'Split last year jobs into planned and insurance, and compare what each left you. Then decide which one your website is actually written for.',
+  },
+  {
+    slug: 'gtm-auto-who-you-are-for',
+    track: 'automotive',
+    module: 2,
+    title: 'Deciding which cars you want in your bay',
+    summary:
+      'The enthusiast with a car they love and the person who wants a cheap wash are both customers, and they cannot be sold to with the same page.',
+    image: {
+      src: '/academy/gtm-auto-who-you-are-for.webp',
+      alt: 'Two cars, one large and detailed and one small and plain',
+    },
+    diagram: 'six-things',
+    sections: [
+      {
+        heading: 'Two audiences, one bay',
+        body: [
+          'The enthusiast researches for weeks, follows shops, reads about products, and will pay well for work done properly on a car that matters to them.',
+          'The commodity customer wants clean and cheap, decides in minutes, and compares on price alone.',
+          'Both are legitimate businesses. Trying to be both, with one price list and one set of photographs, usually means being chosen by the second and priced by the first.',
+        ],
+      },
+      {
+        heading: 'What the enthusiast is buying',
+        body: [
+          'Not a clean car. The knowledge that a person who cares as much as they do handled it, used the right product, and did not cut corners where it does not show.',
+          'That is why process content works so well in this trade: showing the steps is showing the thing they are actually paying for.',
+        ],
+      },
+      {
+        heading: 'What you must not be mistaken for',
+        body: [
+          'If you are a correction and coating shop, being taken for a car wash costs you the whole positioning, and it happens through a single cheap package on the price list.',
+          'Decide which end of the market you want, then look at your own site and see which one it is currently advertising.',
+        ],
+      },
+      {
+        heading: 'How you sound',
+        body: [
+          'To the enthusiast, product names and process steps are not jargon, they are proof. To the commodity customer they are noise.',
+          'You cannot write for both in the same paragraph. Choose, and be consistent everywhere.',
+        ],
+      },
+      {
+        heading: 'Where each one is',
+        body: [
+          'The enthusiast: picture platforms, owners groups, model-specific forums, and search for the specific service.',
+          'The commodity customer: the map, price comparison, and whoever is closest.',
+          'These barely overlap, which is convenient: it means your channel choice follows directly from your positioning choice.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What your bay hours are currently sold to',
+      rows: [
+        { label: 'Bay hours last month on high-value work', value: 'count it' },
+        { label: 'Bay hours on cheap packages', value: 'count it' },
+        { label: 'What each left you per hour', value: 'count it' },
+      ],
+      result: { label: 'Which customer your bay actually serves', value: 'the one with more hours' },
+      after:
+        'Put your own numbers in. If most hours go to the low-value work while the marketing talks about correction and coating, the positioning and the reality have come apart, and the bay is deciding, not you.',
+    },
+    takeaway:
+      'Decide which end of the market you are for, then read your own price list and ask which customer it was written to attract.',
+  },
+  {
+    slug: 'gtm-pro-positioning-inside-the-rules',
+    track: 'professional',
+    module: 2,
+    title: 'Positioning a practice inside the rules',
+    summary:
+      'The same seven questions, with one difference that changes all of them: what you are permitted to say about yourself is decided by somebody else.',
+    image: {
+      src: '/academy/gtm-pro-positioning-inside-the-rules.webp',
+      alt: 'A small circle placed off-centre inside a much larger outline',
+    },
+    diagram: 'six-things',
+    sections: [
+      {
+        heading: 'The constraint that comes first',
+        body: [
+          'In every other trade, positioning is limited only by what is true. In a regulated practice it is limited by what your regulator permits you to claim, and those rules differ by profession and by state.',
+          'Which means the seven questions are answered inside a boundary you have to know before you start. Read the current rules from the source, not from a competitor site that may itself be in breach.',
+        ],
+      },
+      {
+        heading: 'Who this is for, narrowly',
+        body: [
+          'In professional services the win comes from being specific. A lawyer for small construction businesses beats a lawyer for everyone, because the client with a construction dispute recognises themselves in the first and not the second.',
+          'Narrow feels like turning away work. It usually produces more of it, because a referral is far easier to make when the person can be described in one sentence.',
+        ],
+      },
+      {
+        heading: 'What you actually sell',
+        body: [
+          'Not hours of expertise. The removal of a specific worry, on a specific timeline, by someone who has handled it before.',
+          'The client cannot evaluate your judgement. They can evaluate whether you understood their situation in the first conversation, which is why that conversation is the product as much as the work is.',
+        ],
+      },
+      {
+        heading: 'What you must not be mistaken for',
+        body: [
+          'The cheapest option, if you are not. The general practitioner, if you are a specialist. The place that handles the thing next door to what you do, if that thing brings enquiries you cannot serve.',
+          'Say it plainly where people look. In a referral-driven business, being described wrongly by a well-meaning referrer costs more than an advertisement can recover.',
+        ],
+      },
+      {
+        heading: 'How you will know it worked',
+        body: [
+          'Enquiries by source, how many became consultations, how many became clients, and what a client is worth across the whole relationship rather than the first invoice.',
+          'That last number is the one that changes decisions, because in these professions the first engagement is usually a fraction of what a retained client is worth.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'How specific is your description',
+      rows: [
+        { label: 'Can a referrer describe you in one sentence', value: 'yes / no' },
+        { label: 'Does that sentence name a client type', value: 'yes / no' },
+        { label: 'Does it name a situation, not a service', value: 'yes / no' },
+        { label: 'Would a competitor be unable to reuse it', value: 'yes / no' },
+      ],
+      result: { label: 'Your score', value: 'out of 4' },
+      after:
+        'Ask three people who have referred you to write that sentence without help, and compare it with your own. The gap between what you think you are known for and what you are actually known for is the most useful thing you will learn this quarter.',
+    },
+    takeaway:
+      'Read your regulator current advertising rules, then write the one sentence you want referrers to use. Check that the sentence is inside the rules before you publish it anywhere.',
   },
 ];
 

@@ -206,6 +206,36 @@ export const КАРТИНКИ = [
       'Three flat green horizontal bars stacked on a dark background, each shorter than the one above it, with a clear gap between the first and the second. No text.',
     alt: 'Three bars of decreasing length with a gap after the first',
   },
+  {
+    slug: 'gtm-seven-questions',
+    сюжет:
+      'Seven flat green squares of equal size in a single row across a dark frame, each one slightly larger than the previous from left to right. No text, no numbers.',
+    alt: 'Seven squares in a row, each slightly larger than the last',
+  },
+  {
+    slug: 'gtm-hvac-two-businesses',
+    сюжет:
+      'Two flat green house shapes side by side on a dark background, the left one with a small flame shape inside and the right one with a small snowflake shape inside. No text.',
+    alt: 'Two houses side by side, one with a flame and one with a snowflake',
+  },
+  {
+    slug: 'gtm-remodel-two-streams',
+    сюжет:
+      'Two green streams flowing from opposite top corners of a dark frame and joining into one wider stream at the bottom centre. Flat shapes, no text.',
+    alt: 'Two streams from opposite corners joining into one',
+  },
+  {
+    slug: 'gtm-auto-who-you-are-for',
+    сюжет:
+      'Two flat car shapes on a dark background, the left one large and green with fine detail lines, the right one small and plain off-white. No text.',
+    alt: 'Two cars, one large and detailed and one small and plain',
+  },
+  {
+    slug: 'gtm-pro-positioning-inside-the-rules',
+    сюжет:
+      'A small flat green circle placed precisely inside a much larger plain off-white circular outline on a dark background, the small circle off to one side rather than centred. No text.',
+    alt: 'A small circle placed off-centre inside a much larger outline',
+  },
 ];
 
 async function ключ() {
