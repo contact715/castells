@@ -80,7 +80,13 @@ const AnswerPage: React.FC<AnswerPageProps> = ({ slug, onNavigate }) => {
             onNavigate={onNavigate}
           />
 
-          <article className="max-w-3xl">
+          {/*
+            mx-auto добавлен 26 августа: колонка прижималась к левому краю, и
+            справа оставалось больше половины ширины пустой. Замер при окне
+            1615 показал 824 точки пустоты. Ширина колонки не меняется, меняется
+            только положение.
+          */}
+          <article className="max-w-3xl mx-auto">
             {answer.sections.map((section) => (
               <section key={section.heading} className="mb-10">
                 <h2 className="font-display text-xl md:text-2xl font-semibold text-text-primary dark:text-white mb-4">

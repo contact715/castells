@@ -52,7 +52,24 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
       />
 
       <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
+        {/*
+          ОДНА колонка на всю страницу, по центру.
+
+          До 26 августа вечера содержимое прижималось к левому краю широкого
+          контейнера. Замер на живом сайте при окне 1615: колонка текста 672
+          точки, справа 840 точек пустоты — больше половины ширины мертво. То
+          же самое было на статьях блога и на страницах-ответах, то есть это
+          не беда академии, а общая раскладка чтения.
+
+          Ширина 2xl (672) выбрана по длине строки, а не по вкусу: при 17px
+          это около 70 знаков в строке, что и считается удобным для чтения.
+          Шире колонка — глаз теряет начало следующей строки.
+
+          Заголовок, текст и карточки внизу теперь делят ОДИН левый и правый
+          край. Раньше шапка была шире текста, и края не совпадали.
+        */}
         <div className="container mx-auto px-6 pt-4 md:pt-6">
+          <div className="mx-auto w-full max-w-2xl">
           <Breadcrumbs
             className="mb-6"
             items={[
@@ -84,7 +101,7 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
             Рамки нет намеренно: у фона рамка обводит его как картину и
             возвращает ровно то ощущение отдельной плиты, от которого уходим.
           */}
-          <header className="relative w-full max-w-4xl aspect-[16/6] md:aspect-[16/5] rounded-card overflow-hidden mb-10">
+          <header className="relative w-full aspect-[16/6] md:aspect-[16/5] rounded-card overflow-hidden mb-10">
             {урок.image ? (
               <img
                 src={урок.image.src}
@@ -109,14 +126,14 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
             </div>
           </header>
 
-          <p className="max-w-2xl text-text-secondary dark:text-white/70 text-base md:text-[17px] leading-relaxed mb-3">
+          <p className="text-text-secondary dark:text-white/70 text-base md:text-[17px] leading-relaxed mb-3">
             {урок.summary}
           </p>
-          <p className="max-w-2xl text-xs text-text-secondary dark:text-white/45 mb-10">
+          <p className="text-xs text-text-secondary dark:text-white/45 mb-10">
             {readingMinutes(урок)} min read
           </p>
 
-          <article className="max-w-2xl">
+          <article>
 
             {урок.sections.map((раздел, номер) => (
               <section key={раздел.heading} className="mb-10">
@@ -196,11 +213,11 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
             </div>
           </article>
 
-          <section className="border-t border-black/5 dark:border-white/10 pt-10 max-w-4xl">
+          <section className="border-t border-black/5 dark:border-white/10 pt-10">
             <h2 className="font-display text-xl md:text-2xl font-normal text-text-primary dark:text-white mb-6">
               The rest of the course
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {порядок
                 .filter((l) => l.slug !== урок.slug)
                 .map((l) => (
@@ -226,6 +243,7 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
                 ))}
             </div>
           </section>
+          </div>
         </div>
       </div>
     </>

@@ -60,7 +60,13 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
             All notes
           </button>
 
-          <article className="max-w-[43rem]">
+          {/*
+            mx-auto добавлен 26 августа: колонка прижималась к левому краю, и
+            справа оставалось больше половины ширины пустой. Замер при окне
+            1615 показал 824 точки пустоты. Ширина колонки не меняется, меняется
+            только положение.
+          */}
+          <article className="max-w-[43rem] mx-auto">
             <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6">
               <span className="text-[11px] font-semibold tracking-wide text-accent-text">
                 {post.category}
@@ -123,7 +129,7 @@ const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, pos
           </article>
 
           {others.length > 0 && (
-            <section className="max-w-[43rem] mt-16">
+            <section className="max-w-[43rem] mx-auto mt-16">
               <h2 className="font-display text-xl md:text-2xl font-normal text-text-primary dark:text-white mb-6">
                 Read next
               </h2>
