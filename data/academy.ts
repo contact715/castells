@@ -1288,6 +1288,10 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     title: 'What a detail or wrap shop needs to start',
     summary:
       'This trade takes custody of something worth thousands and hands it back changed. That changes what has to be ready before marketing sends anyone through the door.',
+    image: {
+      src: '/academy/auto-what-you-need-before-the-first-car.webp',
+      alt: 'A large empty bay outline with one small car in a corner',
+    },
     diagram: 'six-things',
     sections: [
       {
@@ -1346,6 +1350,10 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     title: 'The car in the lot is the billboard',
     summary:
       'Most trades have to describe the result. This one can point at it: a finished car in the lot is the clearest ad a shop has, and most park or photograph it wrong.',
+    image: {
+      src: '/academy/auto-the-lot-is-the-billboard.webp',
+      alt: 'Five cars arranged in a circle facing a square at the centre',
+    },
     diagram: 'three-encounters',
     sections: [
       {
@@ -1405,6 +1413,10 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     title: 'For a detail shop, the photo is the product',
     summary:
       'A customer cannot feel a coating or run a hand under a wrap edge before buying. What they can do is look at photos of other cars. The site exists to earn that trust.',
+    image: {
+      src: '/academy/auto-the-photo-is-the-product.webp',
+      alt: 'A car split down the middle, dull on one side and bright on the other',
+    },
     diagram: 'three-sites',
     sections: [
       {
@@ -1456,6 +1468,10 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     title: 'Where the marketing money goes for auto shops',
     summary:
       'The same split applies to every trade, with one wrinkle: a bay hour that goes unsold is gone forever. That makes booking, not just leads, the number worth watching.',
+    image: {
+      src: '/academy/auto-where-the-marketing-money-goes.webp',
+      alt: 'Two stacks of the same height, one of many thin blocks and one of three thick ones',
+    },
     diagram: 'two-costs',
     sections: [
       {
@@ -1511,6 +1527,10 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     title: 'How people find a detailer or wrap shop',
     summary:
       'The channels in the order they usually pay off for this trade, and why the mix leans more on photos and reviews than almost any other business the agency works with.',
+    image: {
+      src: '/academy/auto-how-people-find-a-detail-shop.webp',
+      alt: 'A grid of six squares, one of them holding a car outline',
+    },
     diagram: 'channels',
     sections: [
       {
@@ -1568,6 +1588,10 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     title: 'The membership that fills the slow week',
     summary:
       'A finished job is not the end: coatings need maintenance, tints need checking, cars need washing. A plan around that keeps the calendar full when bookings run thin.',
+    image: {
+      src: '/academy/auto-the-membership-that-fills-the-week.webp',
+      alt: 'A car with two arrows looping around it in a closed cycle',
+    },
     diagram: 'follow-up',
     sections: [
       {
@@ -1609,6 +1633,350 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     },
     takeaway:
       'List every ceramic coating or paint correction job from the last six months and check whether the customer was ever offered a maintenance plan. For the ones who were not, that is this week\'s calls.',
+  },
+  {
+    slug: 'pro-what-you-are-actually-selling',
+    track: 'professional',
+    module: 1,
+    title: 'You are selling a decision, not a service',
+    summary:
+      'The client cannot judge the work before buying it, and often not afterwards either. That changes everything about how a practice is marketed.',
+    image: {
+      src: '/academy/pro-what-you-are-actually-selling.webp',
+      alt: 'A closed box beside a question mark',
+    },
+    diagram: 'six-things',
+    sections: [
+      {
+        heading: 'The evaluation problem',
+        body: [
+          'A homeowner can see a finished bathroom. A client cannot see whether your advice was the best available advice. They will judge you on the things they can judge: whether you explained clearly, whether you answered, whether you seemed to have done this before.',
+          'That is not a cynical observation, it is the practical basis for everything a practice does in public. The signals people can read are the ones worth investing in.',
+        ],
+      },
+      {
+        heading: 'Licensing is the entry ticket and the first proof',
+        body: [
+          'Every practice in this group is licensed or certified by somebody: a state bar, an insurance department, a medical board, a certifying body. The requirements differ enormously and change, so check your own regulator directly.',
+          'For marketing the point is constant: the credential is public, checkable, and the first thing a careful client verifies. Publish it clearly.',
+        ],
+      },
+      {
+        heading: 'What you are allowed to say is regulated too',
+        body: [
+          'This is the sharpest difference from every other course here. Advertising rules vary by profession and by state: what claims you may make, whether testimonials are permitted, what disclaimers must appear, how results may be described.',
+          'A medical practice, a law firm and an insurance agency each operate under different limits. Before writing a word of advertising, find out what your regulator permits, from the regulator.',
+          'We are not that authority and neither is any agency. An agency that writes claims for a regulated practice without checking is creating a problem the practice will own, not the agency.',
+        ],
+      },
+      {
+        heading: 'Insurance and the paperwork',
+        body: [
+          'Professional liability, and whatever your profession additionally requires. In practices handling health information there are privacy obligations that reach into marketing itself: what you may store, what you may put in an email, what a booking form may collect.',
+          'That is a compliance conversation to have before building anything, not after.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What a client can actually judge',
+      rows: [
+        { label: 'Credential public and checkable', value: 'yes / no' },
+        { label: 'Someone answers within a day', value: 'yes / no' },
+        { label: 'The first conversation is clear, not jargon', value: 'yes / no' },
+        { label: 'Reviews from people like them', value: 'yes / no' },
+        { label: 'You have handled their situation before', value: 'yes / no' },
+      ],
+      result: { label: 'Your score', value: 'out of 5' },
+      after:
+        'These five are what a prospective client uses instead of judging the work itself. Every one of them is within your control, and none of them is about the quality of your advice.',
+    },
+    takeaway:
+      'Before writing any advertising, read your regulator current rules on it. Everything else in this course assumes you have done that first.',
+  },
+  {
+    slug: 'pro-trust-is-the-brand',
+    track: 'professional',
+    module: 2,
+    title: 'What a practice brand is made of',
+    summary:
+      'Nobody picks a lawyer for the logo. They pick whoever looked competent and reachable at the moment they were worried.',
+    image: {
+      src: '/academy/pro-trust-is-the-brand.webp',
+      alt: 'Five aligned cards with one slightly out of line',
+    },
+    diagram: 'three-encounters',
+    sections: [
+      {
+        heading: 'What competence looks like from outside',
+        body: [
+          'A photograph of an actual person rather than a stock handshake. A name and a face on the page they will call.',
+          'Writing without jargon. In these professions jargon reads as distance, and distance is exactly what a worried client is trying to avoid.',
+          'Consistency across everything: the letterhead, the email signature, the website, the profile on the regulator directory. A mismatch in a profession built on precision reads as carelessness about precision.',
+        ],
+      },
+      {
+        heading: 'The physical space, where there is one',
+        body: [
+          'Clinics and offices are judged in the first ten seconds of the waiting room, and med spas most of all, because the client is comparing your space to what a medical setting should look like.',
+          'This is not decoration spending. It is the same signal as a clean van in a home trade.',
+        ],
+      },
+      {
+        heading: 'Photographs, with the rules attached',
+        body: [
+          'Before-and-after imagery is central to some of these practices and tightly regulated in others. Where it is permitted, the requirements usually cover consent, whether images may be retouched, and what disclaimers must appear.',
+          'Get the consent in writing regardless of what the rules require. A client whose face appears in your advertising without a signature is a problem waiting.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'The consistency count',
+      rows: [
+        { label: 'Website', value: 'match / does not' },
+        { label: 'Email signature and letterhead', value: 'match / does not' },
+        { label: 'Regulator or association directory listing', value: 'match / does not' },
+        { label: 'Google Business Profile', value: 'match / does not' },
+        { label: 'Office or clinic signage', value: 'match / does not' },
+      ],
+      result: { label: 'Your score', value: 'out of 5' },
+      after:
+        'In a profession sold on precision, the directory listing with an old address does more damage than in any other trade on this site. It is also the one nobody checks.',
+    },
+    takeaway:
+      'Look up your own practice in your regulator public directory and check every field against your website. Fix whatever disagrees.',
+  },
+  {
+    slug: 'pro-the-site-answers-the-worry',
+    track: 'professional',
+    module: 3,
+    title: 'Answer the worry, not the service',
+    summary:
+      'People arrive after a bad week, a renewal notice, or months of thinking. The page that speaks to that moment wins.',
+    image: {
+      src: '/academy/pro-the-site-answers-the-worry.webp',
+      alt: 'A page with one thick band near the top and thin lines below',
+    },
+    diagram: 'three-sites',
+    sections: [
+      {
+        heading: 'Start where the visitor is',
+        body: [
+          'Not with your years of experience. With their situation, named plainly: what happened to them, what they are afraid of, and what happens next if they call.',
+          'A visitor who recognises their own circumstance in the first two lines will read the rest. One who meets a paragraph about your commitment to excellence will not.',
+        ],
+      },
+      {
+        heading: 'A page per situation, not per service',
+        body: [
+          'People search their problem, not your service name. A page written for one situation can be found and can speak directly; a single services page cannot do either.',
+          'This is also the honest version of search work in a regulated field: you are answering real questions, which is what people are looking for and what regulators generally have no issue with.',
+        ],
+      },
+      {
+        heading: 'What it costs, or at least how pricing works',
+        body: [
+          'You may not be able to publish a price. You can almost always publish the structure: hourly or fixed, consultation free or paid, contingency, payment plans, what insurance covers.',
+          'Silence on this is read as expensive. Explaining the structure removes the reason people delay calling.',
+        ],
+      },
+      {
+        heading: 'The proof column',
+        body: [
+          'Credential, years, the association memberships that mean something, the situations you handle regularly, and reviews if your profession permits them.',
+          'Where testimonials are restricted, substitute what is allowed: case types handled, publications, teaching, speaking. Do not quietly ignore a restriction because a competitor does.',
+        ],
+      },
+      {
+        heading: 'Reaching a human',
+        body: [
+          'A phone number, a form, and a stated response time you actually meet. In a worried-client profession, the answer speed is the service, and it starts before anyone becomes a client.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What the anxious visitor came for',
+      rows: [
+        { label: 'Their situation named in the first two lines', value: 'yes / no' },
+        { label: 'What happens after they contact you', value: 'yes / no' },
+        { label: 'How pricing works, even without a number', value: 'yes / no' },
+        { label: 'Credential visible', value: 'yes / no' },
+        { label: 'A stated response time you meet', value: 'yes / no' },
+      ],
+      result: { label: 'Your score', value: 'out of 5' },
+      after:
+        'Read your own homepage as somebody having the worst week of their year. Whatever you could not find in ten seconds is what they did not find either.',
+    },
+    takeaway:
+      'Write one page for the single situation clients bring you most often, in their words. It will outperform your services page within a season.',
+  },
+  {
+    slug: 'pro-marketing-inside-the-rules',
+    track: 'professional',
+    module: 4,
+    title: 'Marketing a practice inside the rules',
+    summary:
+      'Every other course here can say whatever is true. A regulated practice cannot, and the limits differ by profession.',
+    image: {
+      src: '/academy/pro-marketing-inside-the-rules.webp',
+      alt: 'A shape held closely inside a rectangular boundary',
+    },
+    diagram: 'two-costs',
+    sections: [
+      {
+        heading: 'Find out before you write, not after',
+        body: [
+          'The rules cover what claims may be made, whether client testimonials are permitted, what results may be described, what disclaimers are required and where, and sometimes whether particular words may be used at all.',
+          'They are set by your regulator and they change. Read the current version from the source. This applies to whoever writes your advertising too, and it is a reasonable thing to ask an agency about before hiring them.',
+        ],
+      },
+      {
+        heading: 'Two costs, and one extra',
+        body: [
+          'The ad budget scales; the work of running it is roughly flat. In a regulated practice there is a third: review, whether by you or by counsel, before anything goes out.',
+          'Budget for it. A campaign pulled after a complaint costs more than the review would have.',
+        ],
+      },
+      {
+        heading: 'What a client is worth changes the arithmetic',
+        body: [
+          'These practices often have high lifetime values and long relationships. That makes an acquisition cost that would be absurd for a service call entirely sensible here.',
+          'Which means the number to compare against is not the first transaction, it is what a client is worth over the relationship. Practices that judge advertising on the first invoice cut budgets that were working.',
+        ],
+      },
+      {
+        heading: 'The account is yours',
+        body: [
+          'In your name, your billing, whoever runs it gets access. Same rule as everywhere, with an extra reason: in a regulated field the advertising history may matter if anyone ever asks what you published and when.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What a client is worth over the relationship',
+      rows: [
+        { label: 'First engagement', value: 'say $1,200' },
+        { label: 'Times they return, or years retained', value: 'say 4' },
+        { label: 'Referrals a satisfied client sends', value: 'say 1' },
+      ],
+      result: { label: 'Relationship value', value: 'roughly $9,600, not $1,200' },
+      after:
+        'Put your own numbers in. Judged against the first invoice, most advertising in these professions looks unaffordable. Judged against the relationship, the same number is often cheap. Which comparison you use decides the budget.',
+    },
+    takeaway:
+      'Work out what a client is worth over the whole relationship, not the first engagement. Then look again at what you can afford to spend to get one.',
+  },
+  {
+    slug: 'pro-where-clients-come-from',
+    track: 'professional',
+    module: 5,
+    title: 'Where clients actually come from',
+    summary:
+      'Referral from someone trusted, then reputation you can look up, then search. In that order, and the first one is far larger than practices expect.',
+    image: {
+      src: '/academy/pro-where-clients-come-from.webp',
+      alt: 'Three arrows of different thickness pointing at one circle',
+    },
+    diagram: 'channels',
+    sections: [
+      {
+        heading: 'Referral is the channel',
+        body: [
+          'From past clients, and from other professionals whose clients need what you do: the accountant who meets a business needing legal work, the realtor whose buyer needs insurance, the doctor whose patient asks about a cosmetic procedure.',
+          'This is the largest source of work in most practices and the one with the least deliberate effort behind it. Building it means being known, being easy to refer to, and closing the loop when someone sends you a client.',
+        ],
+      },
+      {
+        heading: 'Reputation people can look up',
+        body: [
+          'Regulator directories, association listings, review platforms where your profession permits them, and the Google Business Profile.',
+          'Someone given your name will look you up before calling. What they find at that moment either confirms the referral or quietly kills it, and most practices have never checked what that search returns.',
+        ],
+      },
+      {
+        heading: 'Search, for the situation',
+        body: [
+          'People search their problem: what happens if, do I need a lawyer for, how much does it cost to. Pages that answer those questions are found by exactly the people who need them.',
+          'This is slow and it compounds, and in a profession where trust decides, being the source of a clear answer is a better introduction than an advertisement.',
+        ],
+      },
+      {
+        heading: 'Paid, and its limits',
+        body: [
+          'Paid search works for high-intent searches with a place attached. It is expensive in these professions because a client is worth a lot, and in some of them what the ad may say is restricted.',
+          'It is worth it when the pipeline needs filling now, and it will not substitute for the reputation work above.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What each source charges you for',
+      rows: [
+        { label: 'Referrals from clients and professionals', value: 'nothing per client, slow to build' },
+        { label: 'Directory and profile listings', value: 'nothing, hours to set up' },
+        { label: 'Pages answering real questions', value: 'time, then free for years' },
+        { label: 'Paid search', value: 'per click, high in these fields' },
+      ],
+      result: { label: 'The three that cost nothing per client', value: 'the first three' },
+      after:
+        'Structure, not price. Note that all three of the free sources are slow, which is why practices that start marketing when the pipeline empties are always six months late.',
+    },
+    takeaway:
+      'Search your own name and your practice name the way a referred client would, and look at what comes back. Fix whatever is wrong or missing before spending anything on advertising.',
+  },
+  {
+    slug: 'pro-the-first-response-is-the-service',
+    track: 'professional',
+    module: 6,
+    title: 'The first response is the service',
+    summary:
+      'Somebody worried enough to contact a professional is comparing not expertise but responsiveness, because it is the only thing they can assess before hiring you.',
+    image: {
+      src: '/academy/pro-the-first-response-is-the-service.webp',
+      alt: 'Three bars of decreasing length with a gap after the first',
+    },
+    diagram: 'follow-up',
+    sections: [
+      {
+        heading: 'Speed is judged, expertise is not',
+        body: [
+          'A person who left messages with three practices will hear back from one first, and that one starts with an advantage the others rarely overcome.',
+          'They are not measuring your knowledge. They cannot. They are measuring whether you replied, which they read as whether you will reply later, when they are a client and it matters.',
+        ],
+      },
+      {
+        heading: 'What has to happen when you cannot answer',
+        body: [
+          'An acknowledgement within minutes, a human within hours. Whether that is a receptionist, a service, or a message that states a real response time, it beats silence.',
+          'Be careful what an automated reply collects and stores: in practices handling health or financial information, an intake form is subject to the same privacy obligations as the rest of the practice.',
+        ],
+      },
+      {
+        heading: 'One place where every enquiry lives',
+        body: [
+          'Who, what they need, when they contacted you, what was said last, and what happens next with a date. Wherever it lives, it has to be the only place, and it has to meet your professions confidentiality requirements.',
+          'A note in a personal phone is neither.',
+        ],
+      },
+      {
+        heading: 'Following up, and the referral loop',
+        body: [
+          'Consultations that did not become engagements are usually deferred, not refused. A polite check some weeks later recovers work that was never actually lost.',
+          'And when a client finishes: ask, if your profession permits, for the review. Thank whoever referred them, always. A referral thanked is a referral repeated; one that vanishes into silence usually is not.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'The four numbers of a practice pipeline',
+      rows: [
+        { label: 'Enquiries last month', value: 'say 25' },
+        { label: 'Answered within a day', value: 'say 15' },
+        { label: 'Became a consultation', value: 'say 10' },
+        { label: 'Became a client', value: 'say 4' },
+      ],
+      result: { label: 'Lost before anyone spoke to them', value: '25 − 15 = 10' },
+      after:
+        'The largest single loss in most practices happens before any professional judgement is involved. It is also the cheapest to fix, and it requires no marketing budget at all.',
+    },
+    takeaway:
+      'Count how many enquiries last month never got a reply within a day. That number is your practice cheapest available growth.',
   },
 ];
 

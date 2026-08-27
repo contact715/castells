@@ -165,6 +165,47 @@ export const КАРТИНКИ = [
       'Two flat document shapes side by side on a dark background. The left one is off-white and almost empty with a single short green line on it. The right one is off-white and filled with many green horizontal lines from top to bottom. No text.',
     alt: 'Two documents, one nearly empty and one filled with lines',
   },
+  {
+    slug: 'pro-what-you-are-actually-selling',
+    сюжет:
+      'A flat off-white closed box shape filling the centre of a dark frame, with a green question mark shape beside it, both simple and geometric. No text besides the question mark shape itself.',
+    alt: 'A closed box beside a question mark',
+  },
+
+  {
+    slug: 'pro-trust-is-the-brand',
+    сюжет:
+      'Five identical flat green document or card shapes lined up in a row across a dark frame, all perfectly aligned except one which is slightly rotated and off the line. No text.',
+    alt: 'Five aligned cards with one slightly out of line',
+  },
+
+  {
+    slug: 'pro-the-site-answers-the-worry',
+    сюжет:
+      'A tall off-white page shape filling most of the frame height on a dark background, with one thick green band across its upper third and thin green lines below it. No text.',
+    alt: 'A page with one thick band near the top and thin lines below',
+  },
+
+  {
+    slug: 'pro-marketing-inside-the-rules',
+    сюжет:
+      'A flat green shape filling the centre of a dark frame, contained inside a plain off-white rectangular outline that fits it closely on all sides. No text.',
+    alt: 'A shape held closely inside a rectangular boundary',
+  },
+
+  {
+    slug: 'pro-where-clients-come-from',
+    сюжет:
+      'Three flat green arrows of very different thickness pointing at a single small off-white circle at the right of a dark frame, the thickest arrow entering from the top. No text.',
+    alt: 'Three arrows of different thickness pointing at one circle',
+  },
+
+  {
+    slug: 'pro-the-first-response-is-the-service',
+    сюжет:
+      'Three flat green horizontal bars stacked on a dark background, each shorter than the one above it, with a clear gap between the first and the second. No text.',
+    alt: 'Three bars of decreasing length with a gap after the first',
+  },
 ];
 
 async function ключ() {
