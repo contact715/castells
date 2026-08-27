@@ -129,6 +129,42 @@ export const КАРТИНКИ = [
       'A simple green circular arrow forming a closed loop in the centre of a dark frame, with two small flat house shapes on the loop at opposite points. Nothing else in the frame, no text.',
     alt: 'A closed circular loop with two houses on it at opposite points',
   },
+  {
+    slug: 'remodel-money-before-the-first-swing',
+    сюжет:
+      'A green line crossing a dark frame from left to right, rising in three steps then dipping well below its starting level in the middle before rising again. Nothing else in the frame, no axes, no text.',
+    alt: 'A stepped line that dips below its start in the middle before rising again',
+  },
+  {
+    slug: 'remodel-the-jobsite-is-the-showroom',
+    сюжет:
+      'One flat green house shape open on the front like a doll house, standing among four plain off-white outline houses on a dark background. No text, no people.',
+    alt: 'One open house among four closed ones',
+  },
+  {
+    slug: 'remodel-portfolio-is-the-site',
+    сюжет:
+      'Two large flat rectangles side by side filling the frame on a dark background, the left one plain off-white and the right one green with a few simple internal lines. No text, no labels.',
+    alt: 'Two panels side by side, one plain and one detailed',
+  },
+  {
+    slug: 'remodel-the-long-sales-cycle',
+    сюжет:
+      'A long green horizontal arrow spanning the full width of a dark frame, with four small off-white dots spaced far apart along it, the gaps between them growing wider towards the right. No text.',
+    alt: 'A long arrow with four dots spaced increasingly far apart',
+  },
+  {
+    slug: 'remodel-where-they-look',
+    сюжет:
+      'Five green lines of different lengths entering a dark frame from the left edge and converging on a single flat off-white house shape at the right. No text, no labels.',
+    alt: 'Five lines of different lengths converging on one house',
+  },
+  {
+    slug: 'remodel-the-estimate-is-a-document',
+    сюжет:
+      'Two flat document shapes side by side on a dark background. The left one is off-white and almost empty with a single short green line on it. The right one is off-white and filled with many green horizontal lines from top to bottom. No text.',
+    alt: 'Two documents, one nearly empty and one filled with lines',
+  },
 ];
 
 async function ключ() {

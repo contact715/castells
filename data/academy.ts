@@ -941,6 +941,346 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     takeaway:
       'Count how many of last year customers you could contact today if you wanted to. If the answer is none, building that list is worth more than any advertising you could buy this month.',
   },
+  {
+    slug: 'remodel-money-before-the-first-swing',
+    track: 'remodeling',
+    module: 1,
+    title: 'The money structure of a remodel, before you swing a hammer',
+    summary:
+      'Remodeling businesses rarely fail from lack of work. They fail from cash: a deposit spent on the previous job, a change order nobody wrote down, a payment schedule that funds the contractor last.',
+    image: {
+      src: '/academy/remodel-money-before-the-first-swing.webp',
+      alt: 'A stepped line that dips below its start in the middle before rising again',
+    },
+    diagram: 'six-things',
+    sections: [
+      {
+        heading: 'The licence, and the threshold that matters',
+        body: [
+          'Most states license contractors above a job-size threshold, and remodels cross it easily. Check your own state board directly rather than any summary, this one included.',
+          'The licence number belongs on the estimate and on the website. Remodel buyers check it more than emergency buyers do, because they have weeks to think and a large sum to spend.',
+        ],
+      },
+      {
+        heading: 'The payment schedule is the business model',
+        body: [
+          'A remodel is not paid at the end. It is paid in stages, and how those stages are drawn decides whether you are financing the customer project out of your own pocket.',
+          'The failure pattern is simple and common: the deposit from the new job pays for materials on the old one. It works until one job stalls, and then everything behind it stalls too.',
+          'Whatever schedule you use, the test is the same: at every point in the job, has the customer paid for the work already done and the materials already bought.',
+        ],
+      },
+      {
+        heading: 'Change orders in writing, every time',
+        body: [
+          'A remodel changes. The customer sees the space open and wants the doorway moved. That is normal and it is fine, as long as it is written down with a price and a signature before the work happens.',
+          'Undocumented changes are the single largest source of both lost margin and disputes in this trade. The conversation at the end, when the customer remembers a favour and you remember a change order, has no good ending.',
+        ],
+      },
+      {
+        heading: 'Insurance and the paperwork nobody reads until it matters',
+        body: [
+          'General liability and workers comp, and lien rights, which vary by state and have deadlines. This is a lawyer conversation, not a marketing one, and it is worth having before you need it rather than after.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'Where the cash actually sits mid-job',
+      rows: [
+        { label: 'Contract value', value: 'say $60,000' },
+        { label: 'Paid so far, at the halfway point', value: 'say $30,000' },
+        { label: 'Materials bought and labour paid by then', value: 'say $38,000' },
+      ],
+      result: { label: 'You are financing', value: '$8,000, out of your own money' },
+      after:
+        'Put your own numbers in for your last job. If the answer is positive at every stage, the schedule is fine. If it goes negative in the middle, that gap is what a single stalled job turns into a crisis.',
+    },
+    takeaway:
+      'Take your last finished remodel and plot payments against costs by week. The lowest point on that line is what your business has to be able to survive.',
+  },
+  {
+    slug: 'remodel-the-jobsite-is-the-showroom',
+    track: 'remodeling',
+    module: 2,
+    title: 'The jobsite is your showroom',
+    summary:
+      'A remodeler has no shop window. What people see instead is the site: the sign out front, the state of the driveway, and the photographs that come out of it afterwards.',
+    image: {
+      src: '/academy/remodel-the-jobsite-is-the-showroom.webp',
+      alt: 'One open house among four closed ones',
+    },
+    diagram: 'three-encounters',
+    sections: [
+      {
+        heading: 'What the neighbours are watching',
+        body: [
+          'A kitchen remodel takes weeks in a street where several houses were built at the same time and have the same tired kitchen. Those neighbours watch the whole thing: the trucks, the dumpster, whether the crew cleans up, whether the driveway is blocked at school pickup.',
+          'That is a weeks-long advertisement to precisely the households most likely to buy the same job. It is free and most of it is decided by habits, not budget.',
+        ],
+      },
+      {
+        heading: 'The sign, and what goes on it',
+        body: [
+          'Company name, trade, phone number, licence number. Readable from a car moving at twenty miles an hour, which means larger type than feels necessary.',
+          'Ask the customer before putting it up, and take it down when you finish. A sign left standing for months after the job reads as neglect, which is the opposite of the message.',
+        ],
+      },
+      {
+        heading: 'Photographs are the product',
+        body: [
+          'In remodeling, the photographs are not marketing material, they are the only evidence of what you sell. A customer cannot inspect the framing behind a wall. They can look at a finished bathroom.',
+          'Which means: photograph before, photograph during at least once, and photograph after in daylight with the site clean. The before shot is what makes the after shot mean anything, and it is the one everybody forgets to take.',
+        ],
+      },
+      {
+        heading: 'The consistency part',
+        body: [
+          'Same name on the sign, the truck, the estimate, the invoice, the website and the Google profile. A homeowner who watched your crew for three weeks and later searches the name should land on you, not on a similarly named company two towns over.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What one jobsite is worth as advertising',
+      rows: [
+        { label: 'Weeks the job runs', value: 'say 4' },
+        { label: 'Houses that pass it daily', value: 'say 40' },
+        { label: 'Of those, how many have the same tired kitchen', value: 'your guess' },
+      ],
+      result: { label: 'Impressions to the right audience', value: 'weeks of them, at no extra cost' },
+      after:
+        'This is not a statistic, it is arithmetic on your own street. The point is that the surface is already paid for. Whether it works depends on the sign, the tidiness and the photographs, all of which are habits rather than budget.',
+    },
+    takeaway:
+      'On your next job, take the before photographs before anyone touches anything. That one habit changes what you are able to sell for years afterwards.',
+  },
+  {
+    slug: 'remodel-portfolio-is-the-site',
+    track: 'remodeling',
+    module: 3,
+    title: 'For a remodeler, the portfolio is the website',
+    summary:
+      'Emergency trades sell availability. Remodelers sell evidence. That changes what the site is for and what has to be on it.',
+    image: {
+      src: '/academy/remodel-portfolio-is-the-site.webp',
+      alt: 'Two panels side by side, one plain and one detailed',
+    },
+    diagram: 'three-sites',
+    sections: [
+      {
+        heading: 'What the visitor is actually doing',
+        body: [
+          'They are not in a hurry. They have been thinking about this kitchen for two years and they will think for two more months. They are looking for two things: proof you can do it, and a reason to trust you in their house for a month.',
+          'That means the site is not a card with a phone number. It is a portfolio, and everything else supports it.',
+        ],
+      },
+      {
+        heading: 'A page per project, not a gallery of tiles',
+        body: [
+          'A wall of thumbnails proves you did a lot of work and tells nobody anything about any of it. A page per project can carry what the buyer wants: what the house was, what they wanted, what it cost roughly, how long it took, and what was difficult.',
+          'The difficult part is what wins the job. Anyone can show a finished bathroom. Explaining what you found behind the old tile and how you dealt with it is what makes a stranger believe you.',
+        ],
+      },
+      {
+        heading: 'Ranges, not silence, on price',
+        body: [
+          'You cannot quote a remodel from a web page. You can say what a bathroom in your area typically runs, as a range, with what moves it up and down.',
+          'Silence on price does not protect you. It filters out the serious buyer who wants to know they are in the right place, and lets through everyone whose budget is a third of the number.',
+        ],
+      },
+      {
+        heading: 'The trust column',
+        body: [
+          'Licence number, insurance, how long you have worked, the towns you serve, and reviews with names. Plus, if you have them, the designers, architects or suppliers you work with regularly.',
+          'For a job that puts strangers in the house for weeks, this column does as much work as the photographs.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What one project page has to carry',
+      rows: [
+        { label: 'Before photographs', value: 'yes / no' },
+        { label: 'After photographs, daylight, clean site', value: 'yes / no' },
+        { label: 'What the customer wanted, in words', value: 'yes / no' },
+        { label: 'Rough cost range and duration', value: 'yes / no' },
+        { label: 'What was difficult and how it was solved', value: 'yes / no' },
+      ],
+      result: { label: 'Your score, per project', value: 'out of 5' },
+      after:
+        'Score your three best projects. A remodeler with three complete project pages outsells one with thirty thumbnails, because the buyer is looking for evidence, not volume.',
+    },
+    takeaway:
+      'Pick your single best finished job and write its page properly, all five parts. Then do the next one. Three complete pages beat a gallery.',
+  },
+  {
+    slug: 'remodel-the-long-sales-cycle',
+    track: 'remodeling',
+    module: 4,
+    title: 'Marketing for a decision that takes months',
+    summary:
+      'Someone searching for a kitchen remodel today may sign in the spring. Advertising built for same-day calls fails at this, and the owner concludes it does not work.',
+    image: {
+      src: '/academy/remodel-the-long-sales-cycle.webp',
+      alt: 'A long arrow with four dots spaced increasingly far apart',
+    },
+    diagram: 'two-costs',
+    sections: [
+      {
+        heading: 'Why the emergency playbook fails here',
+        body: [
+          'In an emergency trade the click and the job are days apart. In remodeling they can be months apart, and the customer will meet three companies, talk to a spouse, look at financing, and change their mind twice.',
+          'That means a click that does not become a call this week has not failed. But it also means the reporting that says otherwise will lie to you, and the ads will be switched off before they had a chance.',
+        ],
+      },
+      {
+        heading: 'What to measure instead',
+        body: [
+          'Not calls this month. Consultations booked, estimates given, and jobs signed, with the month they started tracked separately from the month they closed.',
+          'A signed remodel in April may trace back to a January click. If nobody records that, January looks like a wasted month and the budget gets cut in the exact season when people start planning.',
+        ],
+      },
+      {
+        heading: 'The two costs, in a slow trade',
+        body: [
+          'The ad budget scales; the work of running it is roughly flat. In remodeling the flat part matters more, because the value comes from patience and from following up, not from switching the budget on and off.',
+          'And as everywhere: the account should be in your name. Two seasons of data about which searches turn into signed contracts is worth more than any month of management, and in a slow trade it takes a year to accumulate one usable cycle.',
+        ],
+      },
+      {
+        heading: 'Seasonality is real here too',
+        body: [
+          'Interior work fills the cold months, exterior fills the warm ones, and the planning happens before both. The advertising should lead the season, not follow it.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What a signed job cost, counted properly',
+      rows: [
+        { label: 'Spent over three months', value: 'say $3,200' },
+        { label: 'Consultations booked from it', value: 'say 12' },
+        { label: 'Estimates given', value: 'say 6' },
+        { label: 'Signed, some of them months later', value: 'say 2' },
+      ],
+      result: { label: 'Cost per signed job', value: '$3,200 ÷ 2 = $1,600' },
+      after:
+        'Compare that with what a remodel leaves you, not with what a click cost. A $1,600 acquisition cost is terrible for a service call and can be excellent for a $60,000 kitchen. Counting by month instead of by cohort is how owners get this backwards.',
+    },
+    takeaway:
+      'Write down, for your last five signed jobs, when the customer first contacted you. If the gap is months, your reporting has to work in months too.',
+  },
+  {
+    slug: 'remodel-where-they-look',
+    track: 'remodeling',
+    module: 5,
+    title: 'Where remodel customers actually look',
+    summary:
+      'The channels are different from an emergency trade, and so is the order. Pictures matter more, urgency matters less, and other professionals send more work than any advertisement.',
+    image: {
+      src: '/academy/remodel-where-they-look.webp',
+      alt: 'Five lines of different lengths converging on one house',
+    },
+    diagram: 'channels',
+    sections: [
+      {
+        heading: 'People who already trust someone else',
+        body: [
+          'Designers, architects, realtors, kitchen and bath showrooms, plumbers and electricians. Each of them meets homeowners who are about to remodel, and each of them needs someone reliable to recommend.',
+          'This is the highest-value channel in the trade and it costs nothing but showing up, doing clean work and being easy to deal with. It is also slow: the first referral from a new relationship can take a year.',
+        ],
+      },
+      {
+        heading: 'Search, and what people type',
+        body: [
+          'Not "remodeling contractor". They search the specific job and the place: bathroom remodel plus their town, kitchen contractor plus their town. Sometimes they search a style or a material.',
+          'Which means a page for each type of job you do, and each area you serve, will be found for things a single homepage never will.',
+        ],
+      },
+      {
+        heading: 'The picture platforms',
+        body: [
+          'Unlike an emergency trade, remodeling has real audiences on the visual platforms, because people collect ideas for months before they call anyone. If you have good photographs, they work here.',
+          'If you do not have good photographs, nothing on these platforms will work, which puts you back in module 2.',
+        ],
+      },
+      {
+        heading: 'The map, still',
+        body: [
+          'The Google Business Profile matters here too, just less decisively than in an emergency trade. Claim it, fill it, and put project photographs in it, because it is often the first place someone checks after hearing your name from a neighbour.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What each channel charges you for',
+      rows: [
+        { label: 'Referrals from designers and trades', value: 'nothing per job, slow to build' },
+        { label: 'Past customers and neighbours', value: 'nothing per job' },
+        { label: 'Google Business Profile', value: 'nothing, an hour to set up' },
+        { label: 'Search ads on job-plus-town', value: 'per click' },
+        { label: 'Picture platforms', value: 'per view, needs photographs first' },
+      ],
+      result: { label: 'The three that cost nothing per job', value: 'the first three' },
+      after:
+        'The structure, not the price: what a click costs depends on your market. Note that the two strongest channels here are both slow. That is why remodelers who start marketing when work goes quiet are always late.',
+    },
+    takeaway:
+      'List every designer, realtor and trade you have worked with in the past year. That list is your cheapest source of the next job, and most of them have not heard from you since.',
+  },
+  {
+    slug: 'remodel-the-estimate-is-a-document',
+    track: 'remodeling',
+    module: 6,
+    title: 'The estimate is a document, not a number',
+    summary:
+      'Two contractors quote the same kitchen. One sends a figure in a text message, the other sends four pages. The second one wins more often, and not because of the price.',
+    image: {
+      src: '/academy/remodel-the-estimate-is-a-document.webp',
+      alt: 'Two documents, one nearly empty and one filled with lines',
+    },
+    diagram: 'follow-up',
+    sections: [
+      {
+        heading: 'What the customer is really comparing',
+        body: [
+          'They cannot judge your framing. They can judge whether you understood what they asked for, whether you thought about the parts they are worried about, and whether you seem likely to finish.',
+          'The estimate is the only evidence of that they have before signing. A bare number gives them nothing to compare except the number, which is exactly the comparison you lose.',
+        ],
+      },
+      {
+        heading: 'What goes in it',
+        body: [
+          'What is included, in plain language, room by room or stage by stage. What is excluded, explicitly, because that is where disputes start. Allowances for the things not chosen yet: tile, fixtures, appliances.',
+          'A schedule with real dates, the payment stages, and how change orders will be handled. Your licence and insurance.',
+          'And one paragraph in your own words about what you noticed in their house and how you plan to handle it. That paragraph is the difference between a bid and a proposal.',
+        ],
+      },
+      {
+        heading: 'Following up over months, not days',
+        body: [
+          'A remodel estimate is not rejected, it is deferred. The spouse, the budget, the spring. The contractor who checks in politely every few weeks is the one who is still in the conversation when the decision finally happens.',
+          'A workable rhythm: a few days after sending, a couple of weeks later, then once a month with something useful rather than a nudge. Stop after a few months and mark it closed.',
+        ],
+      },
+      {
+        heading: 'And after the job',
+        body: [
+          'A finished remodel customer is worth more than a new one. They have the rest of the house, they talk to neighbours who watched the work, and they can be asked for the review that wins the next job.',
+          'Ask at the moment the site is clean and they are happy, not in an email six weeks later.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'The four numbers of a slow pipeline',
+      rows: [
+        { label: 'Enquiries in the last three months', value: 'say 20' },
+        { label: 'Turned into a consultation', value: 'say 10' },
+        { label: 'Turned into a written estimate', value: 'say 6' },
+        { label: 'Signed', value: 'say 2' },
+      ],
+      result: { label: 'Estimates still open, not lost', value: '6 − 2 = 4 to follow up' },
+      after:
+        'In a fast trade an unanswered quote is dead. Here it is usually just waiting. Those four are the cheapest work available to you, and most contractors write them off after a week of silence.',
+    },
+    takeaway:
+      'Find every estimate you sent in the last three months that never got a yes or a no, and contact each one this week. That list is your pipeline.',
+  },
 ];
 
 export const findLesson = (slug?: string) =>
