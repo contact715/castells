@@ -182,9 +182,9 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     slug: 'before-you-spend-on-marketing',
     track: 'contractors',
     module: 1,
-    title: 'What has to be in place before marketing can work',
+    title: 'What has to be true before marketing works',
     summary:
-      'Marketing sends people to your business. If the business is not ready to receive them, the money goes out and nothing comes back. Here is the short list of what has to exist first.',
+      'Marketing sends people to your business. If it is not ready, the money goes out and nothing comes back. Here is the short list of what has to exist first.',
     image: {
       src: '/academy/before-you-spend-on-marketing.webp',
       alt: 'A bare foundation slab with a single marker stake, nothing built on it yet',
@@ -315,9 +315,9 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     slug: 'three-kinds-of-website',
     track: 'contractors',
     module: 3,
-    title: 'Three kinds of website, and which one you need',
+    title: 'Three kinds of website, and which you need',
     summary:
-      'A one-page card, a landing page built for ads, and a full site built to be found in search. They cost different amounts because they do different jobs, not because one is a better version of another.',
+      'A one-page card, a landing page built for ads, and a full site built for search. They cost different amounts because they do different jobs, not one being better.',
     image: {
       src: '/academy/three-kinds-of-website.webp',
       alt: 'Three panels of increasing height and detail, side by side',
@@ -387,7 +387,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     module: 4,
     title: 'Where the marketing money actually goes',
     summary:
-      'Two different kinds of cost get called "marketing budget" and confusing them is why owners cannot tell whether it is working. Here is the split, and what each part is supposed to buy.',
+      'Two different kinds of cost get called "marketing budget," and confusing them is why owners cannot tell whether it works. Here is the split, and what each part buys.',
     image: {
       src: '/academy/where-the-marketing-money-goes.webp',
       alt: 'Two horizontal bars: the upper one widens from left to right, the lower one stays the same thickness',
@@ -530,9 +530,9 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     slug: 'the-job-you-lose',
     track: 'contractors',
     module: 6,
-    title: 'The job you lose is usually the one nobody called back',
+    title: 'The job you lose is the call nobody returned',
     summary:
-      'Most lost work is not lost to a competitor with better prices. It is lost between the phone ringing and someone following up. This is the part of marketing that costs nothing and is skipped most.',
+      'Most lost work is not lost to a competitor with better prices. It is lost between the phone ringing and someone following up: the part of marketing skipped most.',
     image: {
       src: '/academy/the-job-you-lose.webp',
       alt: 'A row of evenly spaced dots with one missing, the row fading after the gap',
@@ -596,9 +596,9 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     slug: 'hvac-what-you-need-before-the-first-call',
     track: 'hvac',
     module: 1,
-    title: 'What an HVAC business needs before the first call',
+    title: 'What HVAC needs before the first call',
     summary:
-      'Two licences, one of them federal, and a cash cycle that punishes anyone who plans for an average month. This is what has to be true before advertising can do anything for you.',
+      'Two licences, one federal, and a cash cycle that punishes anyone who plans for an average month. What has to be true before advertising can help you.',
     image: {
       src: '/academy/hvac-what-you-need-before-the-first-call.webp',
       alt: 'Twelve bars for a year, two of them far taller than the rest',
@@ -658,7 +658,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     module: 2,
     title: 'In HVAC the van is the billboard',
     summary:
-      'Your van parks in a driveway for three hours, in the exact neighbourhood where you want the next job. No other trade gets an advertising surface that well targeted, and most waste it.',
+      'Your van parks in a driveway for hours, in the neighbourhood where you want the next job. No other trade gets an ad surface that well targeted, and most waste it.',
     image: {
       src: '/academy/hvac-the-van-is-the-billboard.webp',
       alt: 'A service van parked in a driveway with houses behind it',
@@ -709,7 +709,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     slug: 'hvac-what-your-site-must-answer',
     track: 'hvac',
     module: 3,
-    title: 'The five questions an HVAC site has to answer in ten seconds',
+    title: 'Five questions an HVAC site must answer',
     summary:
       'Someone is standing in a hot house with a dead system. They are not reading your About page. Here is what they need to find, in the order they look for it.',
     image: {
@@ -777,7 +777,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     module: 4,
     title: 'When to spend in a business with two seasons',
     summary:
-      'Every HVAC owner eventually asks whether to advertise into the peak, when everyone is searching, or during the quiet months, when nobody is competing. Here is how to think about it, and what the money is actually buying in each case.',
+      'Every HVAC owner asks whether to advertise into the peak season or the quiet months. Here is how to think about it, and what the money actually buys in each case.',
     image: {
       src: '/academy/hvac-when-to-spend.webp',
       alt: 'Two wave curves, one peaking slightly before the other',
@@ -831,7 +831,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     slug: 'hvac-how-they-find-you-in-an-emergency',
     track: 'hvac',
     module: 5,
-    title: 'How people find an HVAC company when the system just died',
+    title: 'How people find HVAC help in an emergency',
     summary:
       'Emergency search behaves differently from every other kind. The decision takes minutes, the map decides most of it, and the reviews do the rest.',
     image: {
@@ -888,9 +888,9 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     slug: 'hvac-maintenance-plans',
     track: 'hvac',
     module: 6,
-    title: 'Maintenance plans are the part that does not depend on the weather',
+    title: 'Maintenance plans do not depend on weather',
     summary:
-      'The follow-up problem in HVAC has a specific answer that other trades do not get: a recurring visit that pays during the quiet months and turns strangers into people who call you first.',
+      'The follow-up problem in HVAC has an answer other trades do not get: a recurring visit that pays during the quiet months and turns strangers into repeat callers.',
     image: {
       src: '/academy/hvac-maintenance-plans.webp',
       alt: 'A closed circular loop with two houses on it at opposite points',
@@ -945,9 +945,9 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     slug: 'remodel-money-before-the-first-swing',
     track: 'remodeling',
     module: 1,
-    title: 'The money structure of a remodel, before you swing a hammer',
+    title: 'The money structure of a remodel job',
     summary:
-      'Remodeling businesses rarely fail from lack of work. They fail from cash: a deposit spent on the previous job, a change order nobody wrote down, a payment schedule that funds the contractor last.',
+      'Remodeling rarely fails from lack of work. It fails from cash: a deposit spent on the last job, an unwritten change order, a schedule paying the contractor last.',
     image: {
       src: '/academy/remodel-money-before-the-first-swing.webp',
       alt: 'A stepped line that dips below its start in the middle before rising again',
@@ -1003,7 +1003,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     module: 2,
     title: 'The jobsite is your showroom',
     summary:
-      'A remodeler has no shop window. What people see instead is the site: the sign out front, the state of the driveway, and the photographs that come out of it afterwards.',
+      'A remodeler has no shop window. What people see instead is the site: the sign out front, the driveway, and the photographs that come out of it afterwards.',
     image: {
       src: '/academy/remodel-the-jobsite-is-the-showroom.webp',
       alt: 'One open house among four closed ones',
@@ -1172,7 +1172,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     module: 5,
     title: 'Where remodel customers actually look',
     summary:
-      'The channels are different from an emergency trade, and so is the order. Pictures matter more, urgency matters less, and other professionals send more work than any advertisement.',
+      'The channels differ from an emergency trade, and so does the order. Pictures matter more, urgency matters less, and other professionals send more work than any ad.',
     image: {
       src: '/academy/remodel-where-they-look.webp',
       alt: 'Five lines of different lengths converging on one house',
@@ -1229,7 +1229,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     module: 6,
     title: 'The estimate is a document, not a number',
     summary:
-      'Two contractors quote the same kitchen. One sends a figure in a text message, the other sends four pages. The second one wins more often, and not because of the price.',
+      'Two contractors quote the same kitchen. One sends a figure in a text, the other sends four pages. The second wins more often, and not because of the price.',
     image: {
       src: '/academy/remodel-the-estimate-is-a-document.webp',
       alt: 'Two documents, one nearly empty and one filled with lines',
@@ -1280,6 +1280,335 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     },
     takeaway:
       'Find every estimate you sent in the last three months that never got a yes or a no, and contact each one this week. That list is your pipeline.',
+  },
+  {
+    slug: 'auto-what-you-need-before-the-first-car',
+    track: 'automotive',
+    module: 1,
+    title: 'What a detail or wrap shop needs to start',
+    summary:
+      'This trade takes custody of something worth thousands and hands it back changed. That changes what has to be ready before marketing sends anyone through the door.',
+    diagram: 'six-things',
+    sections: [
+      {
+        heading: 'You are responsible for the car while it is yours',
+        body: [
+          'A missed call costs every trade a job. A scratched panel, a chemical burn on paint, a stripped tint from a window that would not roll down right costs you the job, the repair, and often the review that keeps the next ten customers away.',
+          'That is the fact this module is built around: for the hours a vehicle is in your bay, it is your liability, not the owner\'s.',
+        ],
+      },
+      {
+        heading: 'The license, and what it does not cover',
+        body: [
+          'A general business license is the baseline in most cities, the same as any shop. Window tint has its own layer on top of that in many states: a legal limit on how dark a film can be, sometimes a separate installer registration. Look up the rule in your own state before you install anything, because the fine for an illegal tint job lands on the car owner, and they will remember whose shop sold it to them.',
+          'Wrap and ceramic coating work is not separately licensed in most places, but it is still work performed on someone else\'s property, which is the point of the next section.',
+        ],
+      },
+      {
+        heading: 'Garagekeepers coverage, not just general liability',
+        body: [
+          'General liability covers your shop. It does not automatically cover a customer\'s car while it sits in your care. The policy that does is usually called garagekeepers or bailee\'s customers coverage, and it is a separate line an insurance broker has to be asked for by name.',
+          'Ask what it actually pays for: paint damage, theft from the lot, a fire that reaches parked cars. A shop that has never had to file that claim is the shop that has not been open long enough yet.',
+        ],
+      },
+      {
+        heading: 'A booking system, before a phone number',
+        body: [
+          'Almost none of this work happens on a walk-in basis. A full detail or a wrap ties up a bay for hours, sometimes days, so the business runs on a calendar, not a queue.',
+          'Decide before you advertise: how a slot is held, whether a deposit is required for the larger jobs, and what happens on a no-show. Writing this down once means every future booking follows the same rule instead of being negotiated car by car.',
+        ],
+      },
+      {
+        heading: 'A phone, an email and a bank account that belong to the business',
+        body: [
+          'The same rule as any trade, worth repeating here because the ticket sizes are larger. A ceramic coating job can run into four figures, and a deposit paid to a personal account instead of a business one is a bookkeeping problem the day taxes are due, and a trust problem the day a customer asks for a refund.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What one empty bay costs',
+      rows: [
+        { label: 'Average job value in your bay', value: 'say $250' },
+        { label: 'Bays you run', value: 'say 2' },
+        { label: 'Hours a full detail occupies one', value: 'say 3' },
+      ],
+      result: { label: 'One no-show on a 3-hour job', value: 'a bay earning nothing for that window' },
+      after:
+        'Put your own numbers in. A missed appointment in this trade is not just a lost customer, it is time on a piece of equipment (the bay, the lift, the booth) that cannot be sold again once the hour has passed.',
+    },
+    takeaway:
+      'Call your insurance broker this week and ask, by name, whether your policy includes garagekeepers or bailee\'s customers coverage. If you are not sure, you probably do not have it.',
+  },
+  {
+    slug: 'auto-the-lot-is-the-billboard',
+    track: 'automotive',
+    module: 2,
+    title: 'The car in the lot is the billboard',
+    summary:
+      'Most trades have to describe the result. This one can point at it: a finished car in the lot is the clearest ad a shop has, and most park or photograph it wrong.',
+    diagram: 'three-encounters',
+    sections: [
+      {
+        heading: 'The work is visible in a way most trades envy',
+        body: [
+          'Nobody can see a repaired HVAC system from the street. Everybody can see a wrapped car, a set of tinted windows or a ceramic-coated hood catching light in the sun. That is a real advantage, and it is wasted the moment the finished car is parked around back to make room for the next one.',
+          'Put finished cars where the street sees them, even for twenty minutes before the customer picks up. It is the one piece of marketing that costs nothing and happens automatically if you let it.',
+        ],
+      },
+      {
+        heading: 'Five places, one spelling',
+        body: [
+          'Google Business Profile, the website, the Instagram handle, the sign on the building and the invoice you hand over. If the business is "AAA Detailing" on one and "Triple A Auto Detail" on another, a customer searching later to leave a review or book again may not connect the two.',
+          'Check your own five right now. It takes ten minutes and it is the kind of small mismatch that is invisible until someone else finds it first.',
+        ],
+      },
+      {
+        heading: 'The photo is part of the brand, not an afterthought',
+        body: [
+          'A wrap, a tint or a ceramic coat only reads correctly in the right light. A phone photo taken in a dim bay under fluorescent tube lighting makes a $2,000 wrap look like a $200 one. This is the one trade where the difference between a good and a bad photo of the same work is the difference between a customer sharing it and a customer never mentioning it.',
+          'Shoot outside, or under even light, at the same angle every time. Consistency across a portfolio reads as professionalism even before anyone reads a word of text.',
+        ],
+      },
+      {
+        heading: 'Watermark it, politely',
+        body: [
+          'A small logo in the corner of a finished-car photo is not vanity, it is attribution. Customers repost their own cars. Other shops screenshot competitors\' work for inspiration. A watermark is the only thing that keeps a good photo pointing back at the business that did the work.',
+        ],
+      },
+      {
+        heading: 'The shop vehicle, if you have one',
+        body: [
+          'A van, trailer or truck that goes to shows, picks up cars, or simply sits in the lot is a second sign, parked wherever the business happens to be that day. The same rule as the finished cars applies: name, phone number and what you do, readable from across the lot, not squeezed into a corner.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'The five-places count',
+      rows: [
+        { label: 'Google Business Profile', value: 'check' },
+        { label: 'Website', value: 'check' },
+        { label: 'Instagram handle', value: 'check' },
+        { label: 'Sign on the building', value: 'check' },
+        { label: 'Invoice or receipt', value: 'check' },
+      ],
+      result: { label: 'Places the exact same name has to appear', value: '5' },
+      after:
+        'Anything under five spellings matching means some customers are one search away from not finding you again, or leaving a review under a name that does not match what shows up in a map search.',
+    },
+    takeaway:
+      'Take one finished car outside this week, in daylight, and shoot it the same way you plan to shoot every car after it. That one photo sets the standard for the whole portfolio.',
+  },
+  {
+    slug: 'auto-the-photo-is-the-product',
+    track: 'automotive',
+    module: 3,
+    title: 'For a detail shop, the photo is the product',
+    summary:
+      'A customer cannot feel a coating or run a hand under a wrap edge before buying. What they can do is look at photos of other cars. The site exists to earn that trust.',
+    diagram: 'three-sites',
+    sections: [
+      {
+        heading: 'Three kinds of site, and this trade usually needs the middle one',
+        body: [
+          'A business card site: hours, services, phone number, a handful of photos. Enough if referrals and walk-by traffic already fill the calendar.',
+          'A landing page built around one service: a single page that answers what a package includes, what it costs, and how to book it, aimed at people already searching "ceramic coating" or "car wrap" in their city. This is usually the right size for a shop running paid search, because it matches one ad to one clear offer instead of asking a stranger to explore a whole site.',
+          'A full site with a real portfolio: galleries organized by service, filterable by car type or wrap color, with a booking calendar built in. Worth the cost once the shop has enough finished work to fill it and enough volume to justify the calendar integration.',
+        ],
+      },
+      {
+        heading: 'Before and after is the whole argument',
+        body: [
+          'Not one photo of the finished car: the same angle, the same lighting, before and after, side by side. That pairing does more selling in five seconds than a paragraph of description does in five minutes, because it is proof rather than a claim.',
+          'For paint correction and ceramic coating especially, the "before" photo is uncomfortable to publish and is exactly why it works. It is the evidence that the shine in the "after" is a result, not a marketing photo taken under good light.',
+        ],
+      },
+      {
+        heading: 'The booking calendar belongs on the site, not in a phone tag',
+        body: [
+          'A booking form or embedded calendar that shows real availability turns browsing into a held appointment before the customer has time to call three competitors instead. For jobs that take a bay for hours, this also does the work of setting expectations about how far out the calendar runs.',
+        ],
+      },
+      {
+        heading: 'Package pricing, shown, not hidden behind "call for quote"',
+        body: [
+          'Detailing and coating work is usually sold in tiers: a basic wash and vacuum, a full interior and exterior detail, a paint correction and coating package. Showing what each tier includes and roughly what it costs filters out the calls that were never going to book and gives serious buyers what they need to compare you against the next shop\'s tab.',
+          'Wraps and larger jobs vary too much by vehicle for a fixed price, and that is fine to say directly: show a realistic range and explain what changes it, rather than leaving the page blank.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'How many jobs pay for a site',
+      rows: [
+        { label: 'A landing page for one service', value: `${PRICES.websiteFrom}` },
+        { label: 'Your average job value', value: 'say $350' },
+      ],
+      result: { label: 'Jobs needed to cover the build', value: `${PRICES.websiteFrom} ÷ $350 ≈ 5 jobs` },
+      after:
+        'A page built around one clear offer usually pays for itself within the first month of paid search running against it, because it is doing one job well instead of a whole site doing many jobs loosely.',
+    },
+    takeaway:
+      'Pick your five best finished cars and find the "before" photo for each one. If it does not exist, start shooting a before photo on every car starting today. In six months you will have a portfolio that argues for itself.',
+  },
+  {
+    slug: 'auto-where-the-marketing-money-goes',
+    track: 'automotive',
+    module: 4,
+    title: 'Where the marketing money goes for auto shops',
+    summary:
+      'The same split applies to every trade, with one wrinkle: a bay hour that goes unsold is gone forever. That makes booking, not just leads, the number worth watching.',
+    diagram: 'two-costs',
+    sections: [
+      {
+        heading: 'Two costs, not one',
+        body: [
+          'The ad budget, money handed to Google, Meta or Yelp that turns into clicks and impressions. And the work: building the pages, writing the ads, watching results, changing what is not performing. The second is roughly flat whether the ad budget is small or large, and the two should always be billed as separate line items so a bad month can be traced to the right cause.',
+        ],
+      },
+      {
+        heading: 'The account is yours, always',
+        body: [
+          'Whoever runs the advertising, the account itself sits under your name and your billing. It holds the history: which searches turned into bookings, what a customer cost to acquire over a year, which season needed more spend and which did not. Losing that history by handing the account to an agency is the most expensive mistake in this list, and it is invisible until the day you try to leave.',
+        ],
+      },
+      {
+        heading: 'Found, contacted, booked, in that order',
+        body: [
+          'Get found: show up where someone is already searching for detailing, wraps or tint in their city. Get contacted: make the call, form or booking link obvious. Get booked: a held appointment, not a maybe.',
+          'For this trade, "booked" has an extra step most others skip: confirming the appointment 24 to 48 hours ahead. A held slot on a calendar that nobody confirms is the single most common way a bay sits empty on a day that looked fully booked the week before.',
+        ],
+      },
+      {
+        heading: 'Why lead count is the wrong number here specifically',
+        body: [
+          'A form that asks nothing about the vehicle produces more leads and more time wasted quoting jobs that were never realistic. Asking for the make, model and what service they want before they can submit filters weak leads before they reach the phone, which matters more in a trade where a real quote takes ten minutes to prepare.',
+        ],
+      },
+      {
+        heading: 'What a budget cannot buy',
+        body: [
+          'A booking calendar that fills itself if the confirmation step above is skipped. A fix for a portfolio with no before-and-after photos, no matter how much is spent sending people to look at it. And, same as every trade, a guarantee: anybody promising a specific number of bookings for a specific spend is guessing.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What a booked job actually cost you',
+      rows: [
+        { label: 'Ad budget last month', value: 'say $800' },
+        { label: 'What you paid for the work', value: `our plans start at ${PRICES.monthlyOneChannel}` },
+        { label: 'Jobs booked from it', value: 'say 6' },
+      ],
+      result: { label: 'Cost per booked job', value: `($800 + ${PRICES.monthlyOneChannel}) ÷ 6 ≈ $232` },
+      after:
+        'Compare that against what the average job leaves after materials and labor. If it clears more than the cost per booking, the month worked. Almost nobody runs this comparison, and it is the only one that tells you whether marketing is paying for itself.',
+    },
+    takeaway:
+      'Ask whoever runs your ads for two separate numbers this month: what went to the platforms, and what went to the work. If those two numbers cannot be pulled apart, that is the first thing to fix.',
+  },
+  {
+    slug: 'auto-how-people-find-a-detail-shop',
+    track: 'automotive',
+    module: 5,
+    title: 'How people find a detailer or wrap shop',
+    summary:
+      'The channels in the order they usually pay off for this trade, and why the mix leans more on photos and reviews than almost any other business the agency works with.',
+    diagram: 'channels',
+    sections: [
+      {
+        heading: 'The map, first',
+        body: [
+          'A search for "auto detailing near me" or "ceramic coating [city]" puts the map results above everything else, and a claimed, complete Google Business Profile with real photos of your own finished cars is free to set up and the single highest-value thing on this list.',
+          'Reviews carry unusual weight in this trade because the buyer cannot inspect the work in advance. Ask every satisfied customer, at pickup, while the car is still shining in the lot.',
+        ],
+      },
+      {
+        heading: 'Instagram functions as a second website',
+        body: [
+          'This is one of the few trades where a well-run Instagram account brings in bookings on its own, because the work is inherently visual and the audience is already there looking at cars. A grid of consistent before-and-afters, posted on a schedule, does real work that a static photo gallery on a website cannot: it reaches people who were not searching yet.',
+          'The same rule from module 3 applies here even more: same lighting, same angle, every time. An inconsistent feed reads as an inconsistent shop.',
+        ],
+      },
+      {
+        heading: 'Paid search, for the buyers already deciding',
+        body: [
+          'Someone searching "ceramic coating cost" or "vinyl wrap near me" already knows what they want and is comparing shops. That makes the click expensive and usually worth it, provided it lands on the service-specific page from module 3 rather than a general homepage.',
+        ],
+      },
+      {
+        heading: 'Referral, and the community around cars specifically',
+        body: [
+          'Car meets, local enthusiast groups, and forums built around a specific make or model are a channel most trades do not have. A shop that does good work on a well-known local car gets talked about inside that community in a way no ad can replicate. It costs nothing but showing up.',
+        ],
+      },
+      {
+        heading: 'What to do first',
+        body: [
+          'Claim and complete the Google Business Profile with your own photos, not stock images. Ask your last ten customers for a review. Then commit to posting one consistent before-and-after a week, even before spending a dollar on ads.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What each channel charges you for',
+      rows: [
+        { label: 'Google Business Profile', value: 'nothing, takes an hour to set up' },
+        { label: 'Instagram, posted consistently', value: 'nothing but time' },
+        { label: 'Referral and car communities', value: 'nothing per job' },
+        { label: 'Paid search', value: 'per click, whether or not they book' },
+      ],
+      result: { label: 'Channels that cost nothing per job', value: 'the first three' },
+      after:
+        'This is the structure, not a promise: how much any of these produce depends on your city and how much competition already occupies the map results there. Start with the three that cost nothing and add paid search once the free ones are actually complete.',
+    },
+    takeaway:
+      'Search your main service plus your city on a phone this week. Whatever sits above the regular results, map pack or ads, is where your next customer is looking first. Make sure you are actually there.',
+  },
+  {
+    slug: 'auto-the-membership-that-fills-the-week',
+    track: 'automotive',
+    module: 6,
+    title: 'The membership that fills the slow week',
+    summary:
+      'A finished job is not the end: coatings need maintenance, tints need checking, cars need washing. A plan around that keeps the calendar full when bookings run thin.',
+    diagram: 'follow-up',
+    sections: [
+      {
+        heading: 'A ceramic coat is not "done" once it is applied',
+        body: [
+          'Most coatings are sold with a recommended maintenance interval and a warranty that depends on it being followed. That is a built-in reason to bring the same car back on a schedule, and most shops never mention it after the invoice is paid.',
+          'A membership or maintenance plan, a recurring wash and inspection sold as a package rather than booked one visit at a time, turns that maintenance requirement into predictable, recurring revenue instead of a one-time job.',
+        ],
+      },
+      {
+        heading: 'What a plan actually needs to include',
+        body: [
+          'What is covered, on what schedule, and what is not included and priced separately. Whether it can be paused for a car sold or a customer moving. And what happens if a visit is missed: most plans should roll forward, not simply forfeit the payment, or customers cancel out of frustration rather than genuine dissatisfaction with the work.',
+        ],
+      },
+      {
+        heading: 'The estimate you sent for the bigger job',
+        body: [
+          'A full wrap or a paint correction and coating package is a larger decision than a wash, and it is common for a customer to ask for a quote and go quiet for weeks while they decide. That is not a lost job, it is a deferred one, and a light follow-up (a message a few days after quoting, another a few weeks later) is the cheapest work available and the most commonly skipped.',
+        ],
+      },
+      {
+        heading: 'Track what happens after the quote, not just how many you send',
+        body: [
+          'How many quotes went out, how many turned into a booking, and for the ones that did not, whether they went quiet or went to a competitor. Without that, a slow month looks identical whether the problem was too few quotes or too many unfollowed ones, and the fix for each is completely different.',
+        ],
+      },
+    ],
+    numbers: {
+      title: 'What a maintenance plan does to a slow month',
+      rows: [
+        { label: 'Cars on a maintenance plan', value: 'say 30' },
+        { label: 'Plan price per visit', value: 'say $60' },
+        { label: 'Visits scheduled in a slow month', value: 'say 30' },
+      ],
+      result: { label: 'Booked revenue before a single new customer walks in', value: '30 × $60 = $1,800' },
+      after:
+        'Put your own numbers in. The point is not the total, it is that this revenue is already scheduled before the month starts, in a business where every other job has to be won from nothing each time.',
+    },
+    takeaway:
+      'List every ceramic coating or paint correction job from the last six months and check whether the customer was ever offered a maintenance plan. For the ones who were not, that is this week\'s calls.',
   },
 ];
 

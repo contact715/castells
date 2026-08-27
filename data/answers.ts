@@ -35,9 +35,9 @@ export interface Answer {
 export const ANSWERS: Answer[] = [
   {
     slug: 'website-or-facebook-page',
-    question: 'Do I need a website if I already have a Facebook page?',
+    question: 'Do I need a website if I have a Facebook page?',
     short:
-      'A Facebook page is where people check that you exist. A website is where they decide to call. For a home service business you need the second one, and it does not have to be big.',
+      'A Facebook page is where people check you exist. A website is where they decide to call. For a home service business you need the second, and it need not be big.',
     sections: [
       {
         heading: 'What a Facebook page cannot do',
@@ -68,7 +68,7 @@ export const ANSWERS: Answer[] = [
     slug: 'what-an-agency-does-every-month',
     question: 'What does a marketing agency actually do every month?',
     short:
-      'On a monthly plan the work is the same four things: watch the ads, fix what is losing money, keep the local profiles current, and send you a report you can read without a dictionary.',
+      'On a monthly plan the work is four things: watch the ads, fix what is losing money, keep local profiles current, and send a report you can read without a dictionary.',
     sections: [
       {
         heading: 'The honest answer',
@@ -98,7 +98,7 @@ export const ANSWERS: Answer[] = [
   },
   {
     slug: 'contract-with-a-marketing-agency',
-    question: 'Do I have to sign a long contract with a marketing agency?',
+    question: 'Do I have to sign a long marketing contract?',
     short:
       'No, and you should be careful with anyone who insists. We work month to month. A contract that locks you in for a year protects the agency, not you.',
     sections: [

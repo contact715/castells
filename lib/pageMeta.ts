@@ -112,7 +112,7 @@ export function metaForPath(pathname: string): PageMeta {
     if (найдено?.item) {
       return {
         title: TITLE.industry(найдено.item.name),
-        description: DESCRIPTION.industry(найдено.item.description, найдено.item.name),
+        description: DESCRIPTION.industry(найдено.item.description),
         canonical: адрес,
       };
     }

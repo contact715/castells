@@ -213,21 +213,24 @@ export const HUBS = {
     path: '/learn',
     title: `Questions we get asked | ${МАРКА}`,
     description:
-      'Straight answers to the questions home service business owners ask us: whether a website is needed at all, what an agency does every month, and whether a long contract is normal.',
+      'Straight answers to the questions home service business owners ask us: is a website needed, what an agency does every month, and whether a long contract is normal.',
   },
   academy: {
     path: '/academy',
     title: `Academy for contractors | ${МАРКА}`,
     description:
-      'A free course for home service business owners: registering the business, brand, website, marketing budgets, getting found, and following up on the work you already have.',
+      'A free course for home service business owners: the business itself, brand, website, marketing budgets, getting found, and following up on work you already have.',
   },
 };
 
 export const DESCRIPTION = {
   service: (description) =>
     `${description} ${МАРКА}, Roseville, California, working with contractors across the US.`,
-  industry: (description, name) =>
-    `${description} Websites, Google and Meta ads and follow-up for ${name} businesses. ${МАРКА}, Roseville, California.`,
+  // До 27 августа 2026 здесь стояла фраза «Websites, Google and Meta ads and
+  // follow-up for X businesses» перед адресом — общие слова, которые сами по
+  // себе занимали больше ста символов и толкали 18 из 20 ниш за порог в 165.
+  // Короче и по факту то же самое, что у услуг (DESCRIPTION.service выше).
+  industry: (description) => `${description} ${МАРКА}, Roseville, California, working with contractors across the US.`,
   post: (excerpt) => excerpt,
   answer: (short) => short,
   caseStudy: (description, client, where) => description || `${client}: ${where}.`,

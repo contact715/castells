@@ -167,7 +167,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     location: 'Los Angeles, California',
     year: '2024',
     video: '',
-    description: 'Established Cool Doc as the go-to HVAC service provider in LA through aggressive paid advertising and a reputation management system that generated consistent 5-star reviews.',
+    description: 'Established Cool Doc as the go-to HVAC provider in LA through paid advertising and a reputation system that built consistent 5-star reviews.',
     services: ['Meta Ads', 'Reputation Management', 'Google Ads'],
     color: '#F59E0B',
     category: 'paid-media',
@@ -212,7 +212,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     location: 'Various',
     year: '2024',
     video: '',
-    description: 'Built a digital presence for Radix Flooring, focusing on showcasing premium flooring options and generating qualified leads through strategic SEO and paid advertising.',
+    description: 'Built a digital presence for Radix Flooring: premium flooring options and qualified leads through SEO and paid advertising.',
     services: ['SEO', 'Google Ads', 'Web Design'],
     color: '#2563EB',
     category: 'seo-content',
@@ -227,7 +227,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     location: 'Various',
     year: '2024',
     video: '',
-    description: 'Established Star Dental Implants as a trusted provider in the competitive dental implant market through educational content, patient testimonials, and strategic paid advertising.',
+    description: 'Established Star Dental Implants as a trusted provider in a competitive market through educational content, patient stories, and paid advertising.',
     services: ['Content Marketing', 'Google Ads', 'Reputation Management'],
     color: '#10B981',
     category: 'seo-content',
@@ -242,7 +242,7 @@ export const CASE_STUDIES: CaseStudy[] = [
     location: 'New York, NY',
     year: '2024',
     video: '',
-    description: 'Established Design by Nova as a leading HVAC and mini-split system installation company in New York, capturing market share through strategic local SEO, educational content, and government program promotion.',
+    description: 'Established Design by Nova as a leading HVAC and mini-split installer in New York, growing market share through local SEO, content, and government program promotion.',
     services: ['Local SEO', 'Content Marketing', 'Google Ads'],
     color: '#8B5CF6',
     category: 'seo-content',
@@ -252,7 +252,6 @@ export const CASE_STUDIES: CaseStudy[] = [
   }
 ];
 
-export const MANIFESTO_TEXT = "WE BUILD LEGACIES. ELEGANCE IS NOT OPTIONAL. DATA DRIVES DESIGN. YOUR SUCCESS IS OUR METRIC. DOMINATE YOUR MARKET.";
 /**
  * Сайты, которые построили МЫ. Не «сайты наших клиентов»: у клиента по
  * рекламе тоже есть сайт, и он не наш.

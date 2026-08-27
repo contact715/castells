@@ -40,7 +40,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     id: 1,
     slug: 'what-marketing-costs-home-service-business',
-    title: 'What marketing actually costs for a home service business',
+    title: 'What marketing actually costs a home service business',
     excerpt:
       'Nobody publishes prices, so every call starts with guessing. Here are ours, and what the money is actually spent on.',
     date: 'August 23, 2026',
@@ -92,7 +92,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     id: 2,
     slug: 'who-should-own-your-google-ads-account',
-    title: 'Who should own your Google Ads account, and why it is you',
+    title: 'Why you should own your Google Ads account',
     excerpt:
       'The fastest way to get trapped with an agency you have outgrown is to let them keep the account in their name.',
     date: 'August 23, 2026',
@@ -176,7 +176,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     id: 4,
     slug: 'is-your-site-in-google',
-    title: 'We checked whether our own site was in Google. It was not.',
+    title: 'Was our own site in Google? We checked.',
     excerpt:
       'A five-minute check any owner can run on their own site, and what we found when we ran it on ours: not a single page in the index.',
     date: 'August 24, 2026',
@@ -240,7 +240,7 @@ export const BLOG_POSTS: BlogPost[] = [
   {
     id: 5,
     slug: 'local-services-ads-moving-into-google-ads',
-    title: 'Local Services Ads are moving into Google Ads. Check this first',
+    title: 'Local Services Ads are moving into Google Ads',
     excerpt:
       'Google is folding Local Services Ads into regular Google Ads this month, starting with plumbing, HVAC and roofing. One part of the change is easy to miss.',
     date: 'August 26, 2026',

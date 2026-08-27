@@ -211,7 +211,7 @@ function industryPages(ниши, caseStudies) {
     return {
       path: `/industries/${n.slug}`,
       title: TITLE.industry(n.name),
-      description: DESCRIPTION.industry(n.description, n.name),
+      description: DESCRIPTION.industry(n.description),
       h1: `Marketing for ${n.name}`,
       intro: n.description,
       body: [
@@ -1063,6 +1063,13 @@ async function selfTest() {
   const page = PAGES[0];
   const меню = await readNavigation();
   const out = renderPage(template, page, [], меню);
+  // ВЕСЬ список страниц сайта: услуги, ниши, кейсы, статьи, ответы, академия
+  // и статические страницы вместе. Проверки заголовков и описаний ниже до
+  // 27 августа 2026 смотрели только на статический PAGES — четверть сайта.
+  // Динамические семейства (20 услуг, 21 ниша, 24 урока академии и так
+  // далее) молча оставались непроверенными, а самопроверка всё равно
+  // отчитывалась зелёным.
+  const allPages = await собратьВсеСтраницы();
 
   t('старый заголовок убран', () => !out.includes('<title>Old</title>'));
   t('старое описание убрано', () => !out.includes('content="old"'));
@@ -1085,11 +1092,15 @@ async function selfTest() {
   t('кавычки экранируются', () => !renderPage(template, {
     ...page, title: 'a "b" c', description: 'd', h1: 'e', intro: 'f',
   }).includes('content="a "b" c"'));
-  t('у каждой страницы уникальный адрес', () => new Set(PAGES.map((p) => p.path)).size === PAGES.length);
+  t('у каждой страницы уникальный адрес', () => new Set(allPages.map((p) => p.path)).size === allPages.length);
   t('у каждой страницы есть заголовок и описание', () =>
-    PAGES.every((p) => p.title?.length > 10 && p.description?.length > 30));
-  t('заголовки не длиннее 70 знаков', () => PAGES.every((p) => p.title.length <= 70));
-  t('описания не длиннее 165 знаков', () => PAGES.every((p) => p.description.length <= 165));
+    allPages.every((p) => p.title?.length > 10 && p.description?.length > 30));
+  const длинныеЗаголовки = allPages.filter((p) => p.title.length > 70);
+  t(`заголовки не длиннее 70 знаков (нашлось ${длинныеЗаголовки.length})`, () => длинныеЗаголовки.length === 0);
+  if (длинныеЗаголовки.length) for (const p of длинныеЗаголовки.slice(0, 8)) console.log(`        ${p.path} — ${p.title.length}`);
+  const длинныеОписания = allPages.filter((p) => p.description.length > 165);
+  t(`описания не длиннее 165 знаков (нашлось ${длинныеОписания.length})`, () => длинныеОписания.length === 0);
+  if (длинныеОписания.length) for (const p of длинныеОписания.slice(0, 8)) console.log(`        ${p.path} — ${p.description.length}`);
 
   // ── Одно меню на весь сайт ────────────────────────────────────────────
   // Проверки ниже стерегут конкретный дефект 24 августа 2026: списки разделов
@@ -1106,7 +1117,7 @@ async function selfTest() {
   // Сверяем с ПОЛНЫМ списком страниц, тем же, что собирает сборка. Раньше
   // здесь стоял свой короткий список из двух семейств, и он отставал от
   // сборки при каждом новом семействе страниц.
-  const всеПути = new Set((await собратьВсеСтраницы()).map((p) => p.path));
+  const всеПути = new Set(allPages.map((p) => p.path));
   t('каждый раздел меню — живая страница сайта', () =>
     меню.sections.every((р) => всеПути.has(р.href)));
 
