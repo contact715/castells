@@ -73,7 +73,7 @@ export const КАРТИНКИ = [
       смысл задан размерами, а не метафорой: одна полоса растёт, вторая нет.
     */
     сюжет:
-      'Two horizontal bars on an empty dark field, one above the other, both starting at the left edge. The upper bar is green and grows steadily wider from left to right. The lower bar is off-white and keeps exactly the same thickness along its entire length. Nothing else in the frame.',
+      'Two very thick horizontal bars that together fill most of the frame height, one directly above the other, both spanning the full width. The upper bar is green and grows steadily thicker from left to right, from thin at the left edge to very thick at the right. The lower bar is off-white and keeps exactly the same thickness along its entire length. Nothing else in the frame.',
     alt: 'Two horizontal bars: the upper one widens from left to right, the lower one stays the same thickness',
   },
   {
@@ -84,9 +84,14 @@ export const КАРТИНКИ = [
   },
   {
     slug: 'the-job-you-lose',
+    /*
+      Первая версия была ОДНОЙ тонкой строкой точек: на странице она давала
+      полосу, заполненную на треть, и остальное пустотой. Сюжет тот же, но
+      строк теперь несколько, и они заполняют кадр по высоте.
+    */
     сюжет:
-      'A horizontal line of evenly spaced green dots, with one gap where a dot is missing, and the line fading after the gap.',
-    alt: 'A row of evenly spaced dots with one missing, the row fading after the gap',
+      'Four horizontal rows of large evenly spaced green dots, stacked one under another and together filling the whole frame from top to bottom edge. In every row one dot near the middle is missing, and all dots to the right of that gap get progressively dimmer towards the right edge.',
+    alt: 'Four rows of dots, each with one missing near the middle, the dots dimming after the gap',
   },
 ];
 

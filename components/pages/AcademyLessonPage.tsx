@@ -1,6 +1,6 @@
 import React from 'react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
-import { PageHeader } from '../ui/PageHeader';
+import { Breadcrumbs } from '../ui/Breadcrumbs';
 import AcademyDiagram from '../ui/AcademyDiagram';
 import SEO from '../ui/SEO';
 import {
@@ -53,39 +53,70 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
 
       <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
         <div className="container mx-auto px-6 pt-4 md:pt-6">
-          <PageHeader
-            breadcrumbs={[
+          <Breadcrumbs
+            className="mb-6"
+            items={[
               { label: 'Home', action: () => onNavigate('home') },
               { label: 'Academy', action: () => onNavigate('academy') },
               { label: `Module ${урок.module}` },
             ]}
-            badge={модуль ? `Module ${урок.module} · ${модуль.name}` : 'Academy'}
-            title={урок.title}
-            description={урок.summary}
-            onNavigate={onNavigate}
           />
 
-          {урок.image && (
-            /*
-              Заглавная картинка. width и height проставлены, чтобы страница не
-              прыгала при её загрузке; loading="eager" потому что она первая на
-              экране, и ленивая загрузка тут дала бы мигание, а не экономию.
-            */
-            <img
-              src={урок.image.src}
-              alt={урок.image.alt}
-              width={1376}
-              height={768}
-              loading="eager"
-              decoding="async"
-              className="w-full max-w-3xl rounded-card mb-12 border border-black/5 dark:border-white/10"
-            />
-          )}
+          {/*
+            ШАПКА УРОКА: заголовок ЛЕЖИТ НА картинке, а не под ней.
+
+            Три предыдущие правки этого места были попытками уместить картинку
+            рядом с текстом, и все три давали одно и то же: отдельную плиту,
+            которая забирает первый экран и ничего не объясняет. Сначала 16:9 во
+            всю ширину, потом полоса 5:2 — плита просто становилась ниже.
+
+            Правильный ответ оказался другой: картинка не соседствует с
+            заголовком, она под ним. Тогда она перестаёт быть самостоятельным
+            объектом, который надо разглядывать, и становится фоном — работает
+            на страницу, а не спорит с ней.
+
+            Тёмная заливка снизу обязательна и держит контраст: у картинок есть
+            светлые фигуры (#EEF1F0), и белый заголовок на них без заливки
+            читался бы хуже нормы. Замер худшего случая (белый текст ровно над
+            светлой фигурой): заголовок 17.76 при пороге 3.0, подпись модуля
+            9.15 при пороге 4.5.
+
+            Рамки нет намеренно: у фона рамка обводит его как картину и
+            возвращает ровно то ощущение отдельной плиты, от которого уходим.
+          */}
+          <header className="relative w-full max-w-4xl aspect-[16/6] md:aspect-[16/5] rounded-card overflow-hidden mb-10">
+            {урок.image ? (
+              <img
+                src={урок.image.src}
+                alt=""
+                width={1376}
+                height={768}
+                loading="eager"
+                decoding="async"
+                className="absolute inset-0 w-full h-full object-cover object-center"
+              />
+            ) : (
+              <div className="absolute inset-0 bg-black/90" />
+            )}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/70 to-black/30" />
+            <div className="relative h-full flex flex-col justify-end p-6 md:p-8">
+              <span className="text-[11px] font-semibold tracking-wide text-white/70 mb-2">
+                Module {урок.module}{модуль ? ` · ${модуль.name}` : ''}
+              </span>
+              <h1 className="font-display text-2xl md:text-4xl font-normal text-white leading-tight">
+                {урок.title}
+              </h1>
+            </div>
+          </header>
+
+          <p className="max-w-2xl text-text-secondary dark:text-white/70 text-base md:text-[17px] leading-relaxed mb-3">
+            {урок.summary}
+          </p>
+          <p className="max-w-2xl text-xs text-text-secondary dark:text-white/45 mb-10">
+            {readingMinutes(урок)} min read
+          </p>
 
           <article className="max-w-2xl">
-            <p className="text-xs text-text-secondary dark:text-white/45 mb-10">
-              {readingMinutes(урок)} min read
-            </p>
 
             {урок.sections.map((раздел, номер) => (
               <section key={раздел.heading} className="mb-10">
