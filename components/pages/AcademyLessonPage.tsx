@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { PageHeader } from '../ui/PageHeader';
+import AcademyDiagram from '../ui/AcademyDiagram';
 import SEO from '../ui/SEO';
 import {
   ACADEMY_LESSONS,
@@ -14,9 +15,15 @@ import { NavigationData } from '../../types';
 /*
   Один урок академии, /academy/{урок}. Заведён 26 августа 2026.
 
-  Текст простой, без картинок и видео — так решил владелец. Ограничение по
-  ширине строки стоит намеренно: читать длинный текст во всю ширину экрана
-  тяжело, и это единственная причина, по которой здесь есть max-w.
+  Ограничение по ширине строки стоит намеренно: читать длинный текст во всю
+  ширину экрана тяжело, и это единственная причина, по которой здесь есть
+  max-w. Схема и картинка шире текста сознательно — они читаются взглядом
+  целиком, а не построчно.
+
+  На странице три разных вида вставок, и у каждой своя работа:
+    заглавная картинка — чтобы страница не выглядела стеной букв;
+    схема — то, чего в тексте нет: соотношения, порядок, пропорции;
+    блок «из нашей практики» — проверяемый факт, живой сайт клиента.
 
   Разметку для поиска страница не рисует: она уже в готовом HTML.
 */
@@ -58,12 +65,29 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
             onNavigate={onNavigate}
           />
 
+          {урок.image && (
+            /*
+              Заглавная картинка. width и height проставлены, чтобы страница не
+              прыгала при её загрузке; loading="eager" потому что она первая на
+              экране, и ленивая загрузка тут дала бы мигание, а не экономию.
+            */
+            <img
+              src={урок.image.src}
+              alt={урок.image.alt}
+              width={1376}
+              height={768}
+              loading="eager"
+              decoding="async"
+              className="w-full max-w-3xl rounded-card mb-12 border border-black/5 dark:border-white/10"
+            />
+          )}
+
           <article className="max-w-2xl">
             <p className="text-xs text-text-secondary dark:text-white/45 mb-10">
               {readingMinutes(урок)} min read
             </p>
 
-            {урок.sections.map((раздел) => (
+            {урок.sections.map((раздел, номер) => (
               <section key={раздел.heading} className="mb-10">
                 <h2 className="font-display text-xl md:text-2xl font-semibold text-text-primary dark:text-white mb-4">
                   {раздел.heading}
@@ -76,8 +100,31 @@ const AcademyLessonPage: React.FC<AcademyLessonPageProps> = ({ slug, onNavigate 
                     {абзац}
                   </p>
                 ))}
+                {/*
+                  Схема ставится после ВТОРОГО раздела, а не в начале: к этому
+                  месту человек уже знает, о чём речь, и схема ему подсказка, а
+                  не ребус. В начале страницы она была бы украшением.
+                */}
+                {номер === 1 && урок.diagram && <AcademyDiagram kind={урок.diagram} />}
               </section>
             ))}
+
+            {урок.ourWork && (
+              /*
+                Пример из собственной практики. Стоит ПЕРЕД «что делать
+                дальше»: сначала человек видит, что мы это правда делаем, и
+                только потом получает задание. Обратный порядок читался бы как
+                реклама в конце урока.
+              */
+              <aside className="border-l-2 border-accent pl-5 mb-10">
+                <h2 className="text-[11px] font-semibold tracking-wide text-accent-text mb-2">
+                  From our own work
+                </h2>
+                <p className="text-text-secondary dark:text-white/70 text-base leading-relaxed">
+                  {урок.ourWork}
+                </p>
+              </aside>
+            )}
 
             <aside className="bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-6 md:p-7 mb-12">
               <h2 className="text-[11px] font-semibold tracking-wide text-accent-text mb-3">

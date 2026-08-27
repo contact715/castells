@@ -37,6 +37,25 @@ export interface AcademyLesson {
   /** Короткое описание: идёт на карточку и в описание для поиска. */
   summary: string;
   sections: AcademySection[];
+  /**
+   * Заглавное изображение. Файл в public/academy, рисуется
+   * scripts/make-academy-images.mjs. Подпись обязательна: картинка без
+   * подписи для читалки экрана — пустое место.
+   */
+  image?: { src: string; alt: string };
+  /**
+   * Схема к уроку, из components/ui/AcademyDiagram.tsx. Ставится ТОЛЬКО если
+   * добавляет к тексту то, чего в нём нет. Украшение, которое надо
+   * разглядывать, хуже пустого места.
+   */
+  diagram?: string;
+  /**
+   * Пример из НАШЕЙ практики. Только проверяемое: живой сайт клиента, город,
+   * ремесло. Ни цифр результата, ни «клиент получил рост»: подтверждённых
+   * замеров у нас нет, а на учебной странице выдуманное число опаснее всего.
+   * Оба адреса проверены 26 августа 2026, оба отвечают 200.
+   */
+  ourWork?: string;
   /** Что сделать после чтения. Одно действие, а не список пожеланий. */
   takeaway: string;
 }
@@ -88,6 +107,11 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     title: 'What has to be in place before marketing can work',
     summary:
       'Marketing sends people to your business. If the business is not ready to receive them, the money goes out and nothing comes back. Here is the short list of what has to exist first.',
+    image: {
+      src: '/academy/before-you-spend-on-marketing.webp',
+      alt: 'A bare foundation slab with a single marker stake, nothing built on it yet',
+    },
+    diagram: 'six-things',
     sections: [
       {
         heading: 'Marketing does not fix a business that is not set up',
@@ -142,6 +166,11 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     title: 'What a brand actually is for a contractor',
     summary:
       'A brand is not a logo. For a home service business it is the set of things that make a stranger recognize you on the second encounter and remember you on the third.',
+    image: {
+      src: '/academy/what-a-brand-is-for-a-contractor.webp',
+      alt: 'Three identical shapes at different angles gradually lining up into one',
+    },
+    diagram: 'three-encounters',
     sections: [
       {
         heading: 'The job a brand does',
@@ -174,6 +203,8 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         ],
       },
     ],
+    ourWork:
+      'Open acromanservice.com and fivestarcomfort.com. Both are sites we built, and on both the business name is spelled the same way in the header, the page title and the footer. That sounds too obvious to mention until you check your own five places and find three spellings.',
     takeaway:
       'Open the last five places your business name appears: truck, invoice, Google listing, website, a shirt. If they do not match, that is the first job, before any new design.',
   },
@@ -183,6 +214,11 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     title: 'Three kinds of website, and which one you need',
     summary:
       'A one-page card, a landing page built for ads, and a full site built to be found in search. They cost different amounts because they do different jobs, not because one is a better version of another.',
+    image: {
+      src: '/academy/three-kinds-of-website.webp',
+      alt: 'Three panels of increasing height and detail, side by side',
+    },
+    diagram: 'three-sites',
     sections: [
       {
         heading: 'The one-page card',
@@ -225,6 +261,8 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         ],
       },
     ],
+    ourWork:
+      'Two of ours are live if you want to see the third kind up close: acromanservice.com for Roman Service, an HVAC company in North Port, Florida, and fivestarcomfort.com for a heating and air conditioning business in Bothell, Washington. Both have pages for individual services rather than one page listing everything, which is what makes them findable in search.',
     takeaway:
       'Decide which of the three jobs you need done this quarter, and build only that one. Building all three at once is how a website takes eight months and launches wrong.',
   },
@@ -234,6 +272,11 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     title: 'Where the marketing money actually goes',
     summary:
       'Two different kinds of cost get called "marketing budget" and confusing them is why owners cannot tell whether it is working. Here is the split, and what each part is supposed to buy.',
+    image: {
+      src: '/academy/where-the-marketing-money-goes.webp',
+      alt: 'Two horizontal bars: the upper one widens from left to right, the lower one stays the same thickness',
+    },
+    diagram: 'two-costs',
     sections: [
       {
         heading: 'Two costs, not one',
@@ -285,6 +328,11 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     title: 'How people actually find a contractor',
     summary:
       'The channels in the order they matter for home service work, what each one costs in money and in time, and which to set up first.',
+    image: {
+      src: '/academy/how-people-find-a-contractor.webp',
+      alt: 'Several paths of different lengths converging on a single house shape',
+    },
+    diagram: 'channels',
     sections: [
       {
         heading: 'Someone they know',
@@ -332,6 +380,8 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         ],
       },
     ],
+    ourWork:
+      'Our own clients are spread across HVAC in Florida and Washington, appliance repair and automotive work in California and Oregon, and remodeling in Florida. The mix of channels that works is not the same in a Los Angeles suburb and a small Florida town, and the only way to know which is yours is to search your own service in your own city and look at what comes up.',
     takeaway:
       'Open Google and search your main service plus your city, on a phone, not a computer. Whatever you see above the regular results is where your next customer is looking. Start there.',
   },
@@ -341,6 +391,11 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     title: 'The job you lose is usually the one nobody called back',
     summary:
       'Most lost work is not lost to a competitor with better prices. It is lost between the phone ringing and someone following up. This is the part of marketing that costs nothing and is skipped most.',
+    image: {
+      src: '/academy/the-job-you-lose.webp',
+      alt: 'A row of evenly spaced dots with one missing, the row fading after the gap',
+    },
+    diagram: 'follow-up',
     sections: [
       {
         heading: 'The gap where jobs disappear',
