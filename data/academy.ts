@@ -45,6 +45,12 @@ export interface AcademyTrack {
   name: string;
   /** Кому этот раздел, одной строкой. */
   about: string;
+  /**
+   * Обложка карточки на хабе. Идёт фоном во всю ширину, поэтому подпись для
+   * читалки экрана пустая: смысл несёт заголовок рядом, а описание фона перед
+   * ним только мешало бы.
+   */
+  cover?: string;
 }
 
 export const ACADEMY_TRACKS: AcademyTrack[] = [
@@ -52,26 +58,31 @@ export const ACADEMY_TRACKS: AcademyTrack[] = [
     slug: 'contractors',
     name: 'General contractors',
     about: 'The foundation every trade needs: setting the business up, getting found, and not losing the work you already have.',
+    cover: '/academy/track-contractors.webp',
   },
   {
     slug: 'hvac',
     name: 'HVAC',
     about: 'Heating and air conditioning: seasonal demand, emergency calls, and maintenance plans.',
+    cover: '/academy/track-hvac.webp',
   },
   {
     slug: 'remodeling',
     name: 'Remodeling and construction',
     about: 'Kitchens, bathrooms, additions, roofing: long sales cycles and large tickets.',
+    cover: '/academy/track-remodeling.webp',
   },
   {
     slug: 'automotive',
     name: 'Automotive services',
     about: 'Detailing, wraps, tint, ceramic coating: a shop with a physical location and repeat customers.',
+    cover: '/academy/track-automotive.webp',
   },
   {
     slug: 'professional',
     name: 'Professional services',
     about: 'Insurance, legal, consulting, financial planning, med spas: licensed practices selling trust.',
+    cover: '/academy/track-professional.webp',
   },
 ];
 

@@ -266,6 +266,36 @@ export const КАРТИНКИ = [
       'A flat green envelope shape at the centre of a dark frame, enclosed by a plain off-white circular outline that surrounds it completely. No text.',
     alt: 'An envelope enclosed inside a protective circle',
   },
+  {
+    slug: 'track-contractors',
+    сюжет:
+      'A flat house frame of bare structural beams, drawn in green outline on a dark background, unfinished with no walls. Square composition, subject centred and filling most of the frame. No text, no people.',
+    alt: 'A bare house frame of structural beams',
+  },
+  {
+    slug: 'track-hvac',
+    сюжет:
+      'A flat green outdoor air conditioning condenser unit with a circular fan grille on its front, standing on a dark background. Square composition, subject centred and filling most of the frame. No text.',
+    alt: 'An outdoor air conditioning unit with a fan grille',
+  },
+  {
+    slug: 'track-remodeling',
+    сюжет:
+      'A flat room interior split vertically down the middle: the left half plain off-white and empty, the right half green and fitted with simple cabinet and counter shapes. Square composition, dark background. No text.',
+    alt: 'A room split down the middle, empty on one side and fitted on the other',
+  },
+  {
+    slug: 'track-automotive',
+    сюжет:
+      'A flat green car seen from a three-quarter front angle, drawn as simple geometric shapes on a dark background. Square composition, subject centred and filling most of the frame. No text, no wheels detail.',
+    alt: 'A car seen from a three-quarter front angle',
+  },
+  {
+    slug: 'track-professional',
+    сюжет:
+      'A flat off-white document with a green certification seal or badge shape in its lower corner, standing upright on a dark background. Square composition, subject centred and filling most of the frame. No text.',
+    alt: 'A document with a certification seal in the corner',
+  },
 ];
 
 async function ключ() {

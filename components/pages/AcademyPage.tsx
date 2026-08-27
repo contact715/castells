@@ -7,14 +7,26 @@ import { PageView } from '../../App';
 import { NavigationData } from '../../types';
 
 /*
-  Хаб академии, /academy. С 26 августа 2026 это список РЕМЁСЕЛ, а не список
-  уроков: владелец попросил разделить академию по нишам, чтобы в разделе своего
-  ремесла подрядчик находил всё, что его касается, от и до.
+  Хаб академии, /academy. Список РЕМЁСЕЛ, а не список уроков: владелец попросил
+  разделить академию по нишам, чтобы в разделе своего ремесла подрядчик находил
+  всё, что его касается, от и до.
 
-  Разделы без уроков показываются с пометкой, а не прячутся. Спрятанный раздел
-  создаёт впечатление, что программа перед вами целиком, и человек не узнает,
-  что для его ремесла курс ещё пишется. Сегодня содержание есть у одного
-  раздела из пяти, и число названо прямо на странице.
+  КАРТОЧКИ ВО ВСЮ ШИРИНУ, ПО ОБРАЗЦУ КЕЙСОВ С ГЛАВНОЙ (27 августа 2026).
+  Владелец: «сделай на всю ширину сайта, как кейсы на главной, только без
+  анимации, просто карточка так же красиво».
+
+  Форма СКОПИРОВАНА с components/sections/Work.tsx, а не придумана заново:
+  картинка фоном, тёмная заливка снизу вверх, значок слева сверху, стрелка
+  справа, заголовок и описание внизу. Так карточки академии читаются как часть
+  того же сайта, а не как похожий чужой блок.
+
+  Чего из кейсов НЕ взято и почему: анимация появления — владелец просил без
+  неё; строка метрик — у курса нет чисел результата, а придумывать их нельзя;
+  ссылка на сайт клиента — у курса её нет.
+
+  Оглавление модулей ушло ВНИЗ отдельной секцией. Раньше оно стояло справа
+  колонкой, но полной ширины у карточек при этом быть не может, а владелец
+  просил именно её. Содержание не потеряно, оно под карточками.
 
   Разметку для поиска страница не рисует: она уже в готовом HTML.
 */
@@ -37,25 +49,12 @@ const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
 
       <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
         <div className="container mx-auto px-6 pt-4 md:pt-6">
-          {/*
-            ДВЕ КОЛОНКИ, как на страницах курса и урока.
+          <Breadcrumbs
+            className="mb-6"
+            items={[{ label: 'Home', action: () => onNavigate('home') }, { label: 'Academy' }]}
+          />
 
-            До 27 августа хаб был единственной страницей академии, где правая
-            сторона пустовала: оглавление курса сюда не подходит, а карточки
-            занимают половину ширины. Владелец это заметил.
-
-            Справа поставлен список модулей — он отвечает на вопрос, который
-            карточки не отвечают: что именно внутри ЛЮБОГО из курсов. Не
-            украшение и не повтор: карточки говорят, ДЛЯ КОГО курс, а модули —
-            ИЗ ЧЕГО он состоит.
-          */}
-          <div className="flex gap-10 xl:justify-between">
-            <div className="w-full max-w-3xl min-w-0">
-            <Breadcrumbs
-              className="mb-6"
-              items={[{ label: 'Home', action: () => onNavigate('home') }, { label: 'Academy' }]}
-            />
-
+          <div className="max-w-3xl">
             <span className="text-[11px] font-semibold tracking-wide text-accent-text">Academy</span>
             <h1 className="font-display text-3xl md:text-4xl font-normal text-text-primary dark:text-white mt-2 mb-4 leading-tight">
               Courses by trade
@@ -65,17 +64,9 @@ const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
               numbers we cannot show you the source of, and nothing here is behind a form.
             </p>
             {/*
-              Строка считается, а не пишется под сегодняшнее состояние.
-
-              Первая версия говорила «остальные перечислены ниже, чтобы вы
-              видели, что готовится». Это было верно при двух написанных курсах
-              из пяти и повисло враньём, когда написали все пять: остальных не
-              осталось. Такую строку нельзя чинить переписыванием — через месяц
-              добавится шестой раздел, и она соврёт снова, уже в другую сторону.
-
-              Поэтому: пока есть ненаписанные — называем их число вслух; когда
-              написаны все — говорим, сколько всего уроков. Соврать в обоих
-              случаях нечем.
+              Строка считается, а не пишется под сегодняшнее состояние: пока есть
+              ненаписанные курсы, называем их число вслух; когда написаны все —
+              говорим, сколько всего. Соврать в обоих случаях нечем.
             */}
             <p className="text-text-secondary dark:text-white/50 text-sm mb-10">
               {сУроками.length < ACADEMY_TRACKS.length ? (
@@ -90,75 +81,117 @@ const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
                 </>
               )}
             </p>
+          </div>
 
-            <div className="space-y-4">
-              {ACADEMY_TRACKS.map((раздел) => {
-                const уроки = lessonsOfTrack(раздел.slug);
-                const готов = уроки.length > 0;
+          <div className="space-y-6">
+            {ACADEMY_TRACKS.map((раздел) => {
+              const уроки = lessonsOfTrack(раздел.slug);
+
+              if (уроки.length === 0) {
+                /*
+                  Ненаписанный курс показывается, но не притворяется карточкой:
+                  без обложки, пунктиром, не кликается. Прятать нельзя — человек
+                  решит, что для его ремесла курса не будет вовсе.
+                */
                 return (
-                  <button
+                  <div
                     key={раздел.slug}
-                    type="button"
-                    disabled={!готов}
-                    onClick={() => готов && onNavigate('academy-track', { id: раздел.slug })}
-                    className={
-                      готов
-                        ? 'group w-full text-left bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-6 hover:border-black/20 dark:hover:border-white/30 transition-colors'
-                        : 'w-full text-left border border-dashed border-black/15 dark:border-white/15 rounded-card p-6 cursor-default'
-                    }
+                    className="w-full border border-dashed border-black/15 dark:border-white/15 rounded-card p-6 md:p-8"
                   >
-                    <div className="flex items-start justify-between gap-4 mb-2">
-                      <h2
-                        className={`font-display text-lg md:text-xl font-semibold ${
-                          готов ? 'text-text-primary dark:text-white' : 'text-text-secondary dark:text-white/55'
-                        }`}
-                      >
-                        {раздел.name}
-                      </h2>
-                      {готов && (
-                        <ArrowUpRight
-                          className="w-4 h-4 shrink-0 mt-1 text-text-secondary dark:text-white/50 group-hover:text-accent-text transition-colors"
-                          aria-hidden="true"
-                        />
-                      )}
-                    </div>
-                    <p className="text-text-secondary dark:text-white/65 leading-relaxed mb-3">
+                    <h2 className="font-display text-xl md:text-2xl font-normal text-text-secondary dark:text-white/55 mb-2">
+                      {раздел.name}
+                    </h2>
+                    <p className="text-text-secondary dark:text-white/50 leading-relaxed mb-3 max-w-2xl">
                       {раздел.about}
                     </p>
-                    <span
-                      className={`text-xs ${готов ? 'text-accent-text' : 'text-text-secondary dark:text-white/40'}`}
-                    >
-                      {готов ? `${уроки.length} lessons` : 'Not written yet'}
+                    <span className="text-xs text-text-secondary dark:text-white/40">
+                      Not written yet
                     </span>
-                  </button>
+                  </div>
                 );
-              })}
-            </div>
-            </div>
+              }
 
-            <aside className="hidden xl:block w-72 shrink-0" aria-label="What every course covers">
-              <div className="sticky top-28">
-                <h2 className="text-[11px] font-semibold tracking-wide text-accent-text mb-4">
-                  What every course covers
-                </h2>
-                <ol className="space-y-4">
-                  {ACADEMY_MODULES.map((модуль) => (
-                    <li key={модуль.number}>
-                      <span className="block text-[10px] font-semibold tracking-wide text-text-secondary dark:text-white/40 mb-1">
-                        MODULE {модуль.number}
+              return (
+                <button
+                  key={раздел.slug}
+                  type="button"
+                  onClick={() => onNavigate('academy-track', { id: раздел.slug })}
+                  className="group relative block w-full h-[300px] sm:h-[360px] md:h-[420px] rounded-card overflow-hidden text-left"
+                >
+                  <div className="absolute inset-0 bg-black">
+                    {раздел.cover && (
+                      <img
+                        src={раздел.cover}
+                        alt=""
+                        width={1376}
+                        height={768}
+                        loading="lazy"
+                        decoding="async"
+                        className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-500"
+                      />
+                    )}
+                  </div>
+
+                  {/*
+                    Заливка снизу вверх, как у кейсов. Замер худшего случая —
+                    белый текст ровно над самой светлой фигурой обложки
+                    (#EEF1F0): при 90% черноты внизу фон становится
+                    rgb(24,24,24), контраст заголовка 17.76 при пороге 3.0.
+                  */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/55 to-black/20" />
+
+                  <div className="absolute inset-0 p-6 sm:p-8 md:p-10 flex flex-col justify-between">
+                    <div className="flex justify-between items-start">
+                      <span className="bg-white/15 px-3 py-1.5 rounded-lg text-white text-[10px] sm:text-xs font-semibold tracking-wide">
+                        {уроки.length} lessons · {ACADEMY_MODULES.length} modules
                       </span>
-                      <span className="block text-sm font-medium text-text-primary dark:text-white leading-snug">
-                        {модуль.name}
+                      <span className="w-10 h-10 sm:w-12 sm:h-12 rounded-element bg-white/10 flex items-center justify-center group-hover:bg-white transition-colors">
+                        <ArrowUpRight
+                          className="w-4 h-4 sm:w-5 sm:h-5 text-white/60 group-hover:text-black transition-colors"
+                          aria-hidden="true"
+                        />
                       </span>
-                      <span className="block text-sm text-text-secondary dark:text-white/55 leading-snug mt-0.5">
-                        {модуль.about}
-                      </span>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </aside>
+                    </div>
+
+                    <div>
+                      <h2 className="font-display text-3xl sm:text-4xl md:text-5xl font-normal text-white mb-3 tracking-tight leading-none">
+                        {раздел.name}
+                      </h2>
+                      <p className="text-white/75 text-base sm:text-lg font-light max-w-2xl leading-relaxed">
+                        {раздел.about}
+                      </p>
+                    </div>
+                  </div>
+                </button>
+              );
+            })}
           </div>
+
+          {/*
+            Модули под карточками. Отвечают на вопрос, которого нет в карточках:
+            что именно внутри ЛЮБОГО курса. Карточки говорят, ДЛЯ КОГО курс,
+            модули — ИЗ ЧЕГО он состоит.
+          */}
+          <section className="mt-16 pt-10 border-t border-black/5 dark:border-white/10">
+            <h2 className="font-display text-xl md:text-2xl font-normal text-text-primary dark:text-white mb-8">
+              What every course covers
+            </h2>
+            <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-6">
+              {ACADEMY_MODULES.map((модуль) => (
+                <li key={модуль.number}>
+                  <span className="block text-[10px] font-semibold tracking-wide text-accent-text mb-1">
+                    MODULE {модуль.number}
+                  </span>
+                  <span className="block font-medium text-text-primary dark:text-white leading-snug mb-1">
+                    {модуль.name}
+                  </span>
+                  <span className="block text-sm text-text-secondary dark:text-white/55 leading-snug">
+                    {модуль.about}
+                  </span>
+                </li>
+              ))}
+            </ol>
+          </section>
         </div>
       </div>
     </>
