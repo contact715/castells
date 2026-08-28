@@ -152,7 +152,25 @@ export const AcademyPanel: React.FC<HeaderPanelsProps> = ({ onNavigate, itemClas
             onClick={() => onNavigate('academy-track', { id: курс.slug })}
             className="group text-left rounded-element overflow-hidden border border-black/5 dark:border-white/10 hover:border-black/20 dark:hover:border-white/30 transition-colors"
           >
-            <div className="relative h-20 bg-black">
+            {/*
+              КАРТИНКА ПОЗИЦИОНИРУЕТСЯ, А НЕ ТЯНЕТСЯ ПО ВЫСОТЕ.
+
+              Здесь стояло w-full h-full, и подписи карточек лежали ПОВЕРХ
+              картинок. Замер на живом сайте: полоса ровно 80 точек, как
+              задумано, а сама картинка 141 — она вылезала за контейнер на 61
+              точку и накрывала текст под собой.
+
+              Причина: правило img,video { height: auto } в собранном CSS стоит
+              ВНЕ слоя, а нелояризованное правило бьёт любую утилиту из
+              @layer utilities, сколько бы у неё ни было специфичности. Проверено
+              опытом прямо на странице: h-full на обычном элементе внутри той же
+              полосы даёт 80 точек, на картинке — 111.
+
+              absolute inset-0 задаёт коробку через смещения, а не через высоту,
+              поэтому height:auto её перебить не может. overflow-hidden на полосе
+              — второй рубеж на случай, если содержимое всё же вылезет.
+            */}
+            <div className="relative h-20 bg-black overflow-hidden">
               {курс.cover && (
                 <img
                   src={курс.cover}
@@ -161,7 +179,7 @@ export const AcademyPanel: React.FC<HeaderPanelsProps> = ({ onNavigate, itemClas
                   height={768}
                   loading="lazy"
                   decoding="async"
-                  className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity"
+                  className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity"
                 />
               )}
             </div>

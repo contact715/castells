@@ -124,6 +124,15 @@ const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('academy-track', { id: раздел.slug })}
                   className="group relative block w-full h-[400px] sm:h-[500px] md:h-[600px] rounded-card overflow-hidden text-left"
                 >
+                  {/*
+                    Картинка позиционируется, а не тянется по высоте. Замер на
+                    живом сайте: в контейнере 600 точек она была 688 и вылезала
+                    на 88 — обрезка это прятала, но кадр съезжал. Причина общая
+                    для сайта: правило img,video { height: auto } в собранном CSS
+                    стоит ВНЕ слоя и бьёт любую утилиту из @layer utilities.
+                    absolute inset-0 задаёт коробку смещениями, и height:auto её
+                    перебить не может.
+                  */}
                   <div className="absolute inset-0 bg-black">
                     {раздел.cover && (
                       <img
@@ -133,7 +142,7 @@ const AcademyPage: React.FC<AcademyPageProps> = ({ onNavigate }) => {
                         height={768}
                         loading="lazy"
                         decoding="async"
-                        className="w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-500"
+                        className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-60 transition-opacity duration-500"
                       />
                     )}
                   </div>
