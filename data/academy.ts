@@ -389,15 +389,16 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     ourWork:
       'Two of ours are live if you want to see the third kind up close: acromanservice.com for Roman Service, an HVAC company in North Port, Florida, and fivestarcomfort.com for a heating and air conditioning business in Bothell, Washington. Both have pages for individual services rather than one page listing everything, which is what makes them findable in search.',
     numbers: {
-      title: 'How many jobs pay for a site',
+      title: 'What a service page has to weigh',
       rows: [
-        { label: 'Our published price for a website', value: `from ${PRICES.websiteFrom}, one time` },
-        { label: 'Your average job, before costs', value: 'say $600' },
-        { label: 'What you keep from a job', value: 'say a third, $200' },
+        { label: 'Sections with their own heading', value: 'a strong one runs 15–20' },
+        { label: 'Questions answered on the page', value: 'around 10' },
+        { label: 'Photographs of your own work', value: 'dozens, not three' },
+        { label: 'Jobs needed to cover the site', value: `${PRICES.websiteFrom} ÷ what you keep per job` },
       ],
-      result: { label: 'Jobs needed to cover the site', value: `${PRICES.websiteFrom} ÷ $200 ≈ 9` },
+      result: { label: 'Words on the strongest pages in this market', value: 'past 4,000' },
       after:
-        'Nine jobs across the life of the site, and a site lives for years. The price is on our prices page, so this line can be checked. The other two numbers are yours to fill in.',
+        'The first three are measured off the pages that win these searches, not guessed. A 300-word page is not a smaller version of that, it is a different thing that neither ranks nor convinces. If you cannot fill one page properly, build one instead of six.',
     },
     takeaway:
       'Decide which of the three jobs you need done this quarter, and build only that one. Building all three at once is how a website takes eight months and launches wrong.',
@@ -2067,6 +2068,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         body: [
           'Decide the numbers before you spend, because after you spend you will pick whichever number looks best.',
           'What a lead costs by channel, what a signed job costs by channel, what share of quotes become jobs, and how many came back after follow-up. Those four beat any advertising report.',
+          'For calls specifically, the only reliable way to know the source is a separate number per channel. Ads platforms report clicks; they cannot see who picked up the phone.',
         ],
       },
     ],
@@ -2386,6 +2388,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         heading: 'Fourth: the review gets asked for',
         body: [
           'A request sent at the moment the job is finished, not weeks later, with a link that takes one tap. Reviews decide who gets called next, and asking manually means asking sometimes.',
+          'And one step almost everyone misses: a review sitting on a page is not the same as a review working in search. Marked up properly it can show as stars under your result, which is what makes people click you instead of the company above you. Ask whoever built the site whether your reviews are in the markup; if the answer is a blank look, they are not.',
         ],
       },
       {
@@ -2470,6 +2473,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         heading: 'The review, at the right minute',
         body: [
           'Sent when the job is closed and the house is cooling down. In a trade where the map result decides who gets called, recent reviews are the asset, and asking automatically means asking every time.',
+          'Then make them work twice: a review on the site does nothing for search unless it is in the markup, where it can show as stars under your result. That is a build task, not a marketing one, and it is worth asking for by name.',
         ],
       },
       {
