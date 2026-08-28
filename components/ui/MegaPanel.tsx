@@ -62,6 +62,12 @@ const MegaPanel: React.FC<MegaPanelProps> = ({
   className = '',
 }) => {
   const [открыта, setОткрыта] = useState(false);
+  /*
+    Отступ сверху меряется у САМОГО ПУНКТА в момент открытия, а не задаётся
+    числом: шапка плавающая, её нижний край зависит от прокрутки и от ширины
+    окна. Число здесь разошлось бы с действительностью в первый же день.
+  */
+  const [сверху, setСверху] = useState(0);
   const таймер = useRef<number | null>(null);
   const обёртка = useRef<HTMLDivElement>(null);
   const кнопка = useRef<HTMLAnchorElement>(null);
@@ -74,9 +80,17 @@ const MegaPanel: React.FC<MegaPanelProps> = ({
     }
   };
 
+  const запомнитьНиз = () => {
+    const r = обёртка.current?.getBoundingClientRect();
+    if (r) setСверху(Math.round(r.bottom + 12));
+  };
+
   const открытьПозже = useCallback(() => {
     отменить();
-    таймер.current = window.setTimeout(() => setОткрыта(true), 150);
+    таймер.current = window.setTimeout(() => {
+      запомнитьНиз();
+      setОткрыта(true);
+    }, 150);
   }, []);
 
   const закрытьПозже = useCallback(() => {
@@ -120,7 +134,7 @@ const MegaPanel: React.FC<MegaPanelProps> = ({
       className="relative"
       onMouseEnter={естьПанель ? открытьПозже : undefined}
       onMouseLeave={естьПанель ? закрытьПозже : undefined}
-      onFocusCapture={естьПанель ? () => setОткрыта(true) : undefined}
+      onFocusCapture={естьПанель ? () => { запомнитьНиз(); setОткрыта(true); } : undefined}
     >
       <a
         ref={кнопка}
@@ -140,9 +154,18 @@ const MegaPanel: React.FC<MegaPanelProps> = ({
 
       {естьПанель && открыта && (
         /*
-          Панель прижата к левому краю пункта и не центрируется: центрирование
-          у крайних пунктов выносит её за край экрана. Ширина ограничена, а не
-          растянута на всё окно — панель шире содержимого выглядит поломкой.
+          ПАНЕЛЬ ЦЕНТРИРУЕТСЯ ПО СТРАНИЦЕ, а не открывается от своего пункта.
+
+          Первая версия прижимала её к левому краю пункта, и владелец сразу
+          сказал: «криво раскрывается, а не по центру сайта». Он прав — при
+          восьми пунктах панель шириной 1100 точек, привязанная к крайнему
+          правому пункту, уезжает за край экрана, а привязанная к левому висит
+          в стороне от содержимого страницы.
+
+          Позиционирование fixed, а не absolute, выбрано намеренно: шапка
+          плавающая и лежит внутри контейнеров с закруглением и обрезкой, и
+          absolute-панель обрезалась бы предком. fixed не зависит от предков
+          вовсе.
 
           Появление без анимации намеренно: правило уменьшения движения на сайте
           уже есть (index.css), и панель, которая ему подчиняется, проще той,
@@ -150,11 +173,12 @@ const MegaPanel: React.FC<MegaPanelProps> = ({
         */
         <div
           id={id}
-          className="absolute left-0 top-full pt-3 z-50"
+          style={{ top: сверху }}
+          className="fixed left-1/2 -translate-x-1/2 z-50"
           onMouseEnter={отменить}
           onMouseLeave={закрытьПозже}
         >
-          <div className="w-[min(78vw,900px)] bg-white dark:bg-[#1f1f1f] border border-black/10 dark:border-white/10 rounded-card shadow-2xl overflow-hidden">
+          <div className="w-[min(92vw,1100px)] bg-white dark:bg-[#1f1f1f] border border-black/10 dark:border-white/10 rounded-card shadow-2xl overflow-hidden">
             <div className="grid grid-cols-1 lg:grid-cols-[260px_1fr]">
               {/*
                 Левая полоса. Здесь живёт то, ради чего панель не просто список:
