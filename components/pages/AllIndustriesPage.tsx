@@ -273,7 +273,7 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { icon: Target, title: 'Precise Targeting', desc: 'We know exactly who your ideal customers are and where to find them online.' },
-              { icon: TrendingUp, title: 'Proven Playbooks', desc: 'Battle-tested strategies that have generated millions for businesses like yours.' },
+              { icon: TrendingUp, title: 'Real Playbooks', desc: 'The same setup we run for our own clients: site, ads, follow-up. See the work, not a promise.' },
               { icon: Clock, title: 'Faster Results', desc: 'No learning curve. We hit the ground running with industry-specific campaigns.' },
               { icon: Users, title: 'Competitor Intel', desc: 'Deep knowledge of your competitive landscape and how to outmaneuver them.' },
               { icon: Scale, title: 'Realistic Benchmarks', desc: 'We know what good looks like in your industry and set achievable targets.' },
