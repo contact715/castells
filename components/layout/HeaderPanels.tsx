@@ -217,60 +217,76 @@ export const WorkPanel: React.FC<HeaderPanelsProps> = ({ onNavigate, itemClass }
   );
 };
 
-export const LearnPanel: React.FC<HeaderPanelsProps> = ({ onNavigate, itemClass }) => (
-  <MegaPanel
-    label="Learn"
-    href="/learn"
-    onOpenHub={() => onNavigate('learn')}
-    className={itemClass}
-    rail={{
-      title: 'Questions and notes',
-      count: `${ANSWERS.length} answers, ${BLOG_POSTS.length} notes`,
-      text: 'Straight answers to what business owners ask us, and what we find while working.',
-      cta: 'Read everything',
-    }}
-  >
-    {/*
-      Без картинок намеренно: три ответа и пять заметок. Панель с оформлением
-      была бы больше своего содержания.
-    */}
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-5">
-      <div>
-        <h3 className="text-[10px] font-semibold tracking-wide text-text-secondary dark:text-white/50 mb-2">
-          ANSWERS
-        </h3>
-        <ul className="space-y-1.5">
-          {ANSWERS.map((ответ) => (
-            <li key={ответ.slug}>
-              <button
-                type="button"
-                onClick={() => onNavigate('answer', { id: ответ.slug })}
-                className="text-sm text-text-secondary dark:text-white/65 hover:text-accent-text transition-colors text-left block w-full"
-              >
-                {ответ.question}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div>
-        <h3 className="text-[10px] font-semibold tracking-wide text-text-secondary dark:text-white/50 mb-2">
-          NOTES
-        </h3>
-        <ul className="space-y-1.5">
-          {BLOG_POSTS.slice(0, 5).map((пост) => (
-            <li key={пост.id}>
-              <button
-                type="button"
-                onClick={() => onNavigate('blog-post', { id: пост.id })}
-                className="text-sm text-text-secondary dark:text-white/65 hover:text-accent-text transition-colors text-left block w-full"
-              >
-                {пост.title}
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </div>
-  </MegaPanel>
-);
+export const LearnPanel: React.FC<HeaderPanelsProps> = ({ onNavigate, itemClass }) => {
+  /*
+    ОДИН СПИСОК, А НЕ ДВА. Первая версия делила панель на «ответы» и «заметки»
+    — три и пять. Владелец: «это, мне кажется, надо объединить в одну
+    категорию», и он прав дважды.
+
+    Во-первых, восемь материалов, разделённых на 3 и 5, дают два заголовка ради
+    малого: заголовки занимают столько же места, сколько экономят.
+
+    Во-вторых, человек ищет «что почитать по моему вопросу», а не «ответ это
+    или заметка». Деление отражало НАШЕ устройство данных, а не его задачу.
+
+    Что при этом НЕ поменялось и почему: адреса остались разными
+    (/learn/{вопрос} и /blog/{номер}), разметка для поиска тоже — у ответа она
+    вопрос-ответ, у заметки статья. Это разные типы для робота, и склеивать их
+    в данных было бы враньём. Склеена подача, а не сущность.
+
+    Метка вида стоит справа мелким, чтобы отличить, не разбивая список.
+  */
+  const материалы = [
+    ...ANSWERS.map((a) => ({
+      ключ: `a-${a.slug}`,
+      текст: a.question,
+      вид: 'Answer',
+      идти: () => onNavigate('answer', { id: a.slug }),
+    })),
+    ...[...BLOG_POSTS].reverse().map((p) => ({
+      ключ: `n-${p.id}`,
+      текст: p.title,
+      вид: 'Note',
+      идти: () => onNavigate('blog-post', { id: p.id }),
+    })),
+  ];
+
+  return (
+    <MegaPanel
+      label="Learn"
+      href="/learn"
+      onOpenHub={() => onNavigate('learn')}
+      className={itemClass}
+      rail={{
+        title: 'Questions and notes',
+        count: `${материалы.length} to read`,
+        text: 'Straight answers to what business owners ask us, and what we find while working.',
+        cta: 'Read everything',
+      }}
+    >
+      <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+        {материалы.map((м) => (
+          <li key={м.ключ}>
+            <button
+              type="button"
+              onClick={м.идти}
+              className="group flex items-baseline justify-between gap-3 w-full text-left py-1"
+            >
+              <span className="text-sm text-text-secondary dark:text-white/65 group-hover:text-accent-text transition-colors">
+                {м.текст}
+              </span>
+              {/*
+                Метка вида: белый 50%, а не 40%. При 40% контраст 3.79 при
+                пороге 4.5 — я сделал ровно эту ошибку двумя часами раньше в
+                подписях категорий, и повторил её здесь. При 50% контраст 5.10.
+              */}
+              <span className="text-[10px] font-semibold tracking-wide text-text-secondary dark:text-white/50 shrink-0">
+                {м.вид}
+              </span>
+            </button>
+          </li>
+        ))}
+      </ul>
+    </MegaPanel>
+  );
+};
