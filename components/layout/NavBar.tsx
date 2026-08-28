@@ -3,6 +3,13 @@ import { m as motion } from 'framer-motion';
 import AnimatedThemeToggler from '../ui/AnimatedThemeToggler';
 import { Button } from '../ui/Button';
 import { PageView } from '../../App';
+import {
+  ServicesPanel,
+  IndustriesPanel,
+  AcademyPanel,
+  WorkPanel,
+  LearnPanel,
+} from './HeaderPanels';
 import { NavigationData } from '../../types';
 import { Navbar, NavBody, MobileNav, MobileNavHeader, MobileNavToggle, MobileNavMenu } from '../ui/ResizableNavbar';
 import Search from '../ui/Search';
@@ -110,16 +117,34 @@ const NavBar: React.FC<NavBarProps> = React.memo(({ onNavigate }) => {
 
         <div className="flex items-center gap-6">
           <nav className="flex items-center" aria-label="Основные разделы">
-            {HEADER_SECTIONS.map((раздел) => (
-              <a
-                key={раздел.page}
-                href={раздел.href}
-                onClick={(e) => перейти(e, раздел.page)}
-                className={пунктКласс}
-              >
-                {раздел.label}
-              </a>
-            ))}
+            {/*
+              ПАНЕЛИ ПОЛУЧАЮТ НЕ ВСЕ ПУНКТЫ, а только те, за которыми стоит
+              больше одной страницы. Панель на одну страницу — дверь в пустую
+              комнату, поэтому цены, о нас и контакты остаются ссылками.
+
+              Список пунктов по-прежнему один (data/navigation.ts): панель
+              добавляет пункту глубину, а не заменяет его. Ширина строки не
+              меняется — это главная причина, по которой такое меню подошло при
+              898 занятых точках из 1009.
+            */}
+            {HEADER_SECTIONS.map((раздел) => {
+              const общее = { onNavigate: (p: PageView, d?: NavigationData) => onNavigate?.(p, d), itemClass: пунктКласс };
+              if (раздел.page === 'work') return <WorkPanel key={раздел.page} {...общее} />;
+              if (раздел.page === 'services') return <ServicesPanel key={раздел.page} {...общее} />;
+              if (раздел.page === 'industries') return <IndustriesPanel key={раздел.page} {...общее} />;
+              if (раздел.page === 'learn') return <LearnPanel key={раздел.page} {...общее} />;
+              if (раздел.page === 'academy') return <AcademyPanel key={раздел.page} {...общее} />;
+              return (
+                <a
+                  key={раздел.page}
+                  href={раздел.href}
+                  onClick={(e) => перейти(e, раздел.page)}
+                  className={пунктКласс}
+                >
+                  {раздел.label}
+                </a>
+              );
+            })}
           </nav>
 
           <div className="h-6 w-px bg-black/10 dark:bg-white/10 mx-1" />
