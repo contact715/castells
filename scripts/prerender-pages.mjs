@@ -364,6 +364,22 @@ async function readAcademy() {
     урок.headings = [...кусок.matchAll(new RegExp(String.raw`heading:\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`, 'g'))].map((h) => h[1]);
     const т = кусок.match(new RegExp(String.raw`takeaway:\s*\n?\s*${КАВЫЧКА}${ТЕКСТ}${КАВЫЧКА}`));
     урок.takeaway = т ? подставитьЦены(т[1]) : null;
+
+      /*
+        СЧЁТ УРОКА тоже идёт в готовую страницу. Раньше не шёл: проверка на
+        живом сайте 27 августа показала, что блок с числами, который человек
+        видит на странице, роботу не отдаётся вовсе. Заголовки и вывод
+        отдавались, счёт — нет, хотя он несёт заметную часть смысла урока.
+
+        Заголовок и пояснение берутся ДВУМЯ простыми выражениями, а не одним
+        сложным: сложное я уже написал, оно молча не совпало, а скрипт
+        отчитался об успехе. Два простых видно по отдельности.
+      */
+      const счётЗаголовок = кусок.match(/numbers:[\s\S]{0,140}?title:\s*'([^']+)'/);
+      const счётПосле = кусок.match(/after:\s*\n?\s*'([^']+)'/);
+      урок.numbers = счётЗаголовок && счётПосле
+        ? { title: подставитьЦены(счётЗаголовок[1]), after: подставитьЦены(счётПосле[1]) }
+        : null;
   }
   return { разделы, модули, уроки };
 }
@@ -413,6 +429,7 @@ function academyPages({ разделы, модули, уроки }) {
         body: [
           модуль ? `Module ${u.module} of the Castells Media academy for contractors: ${модуль.name}.` : null,
           ...(u.headings || []),
+            u.numbers ? `${u.numbers.title}. ${u.numbers.after}` : null,
           u.takeaway ? `Do this next: ${u.takeaway}` : null,
           'Written by Castells Media, a marketing agency at 1298 Antelope Creek Drive, Roseville, California, working with home service businesses across the US.',
         ].filter(Boolean),
