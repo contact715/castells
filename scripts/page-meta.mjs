@@ -36,6 +36,7 @@ export const PAGES = [
     intro:
       'We build the website, run the ads and set up the follow-up, so the phone rings and nothing gets lost. Based in Roseville, California, working with contractors across the US.',
     body: [
+      'Working with estimate-driven businesses since June 2017: kitchen and furniture manufacturing first, then HVAC. Five sales departments built from nothing, six furniture showrooms opened.',
       'What we do: websites and branding, paid ads on Google and Meta, local presence on Google and Yelp, and automation that answers and books the job.',
       'Clients whose sites we built: Roman Service (HVAC, North Port, Florida) — acromanservice.com.',
       'Roman, owner of Roman Service LLC: "I honestly didn\'t expect it to work so fast. I was always skeptical about advertising because before it just ate up the budget with no result. But here I see real calls, requests, people who really need HVAC system installation."',
