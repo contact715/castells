@@ -29,8 +29,8 @@ const DEFAULT_BENEFITS: Benefit[] = [
   },
   {
     icon: Zap,
-    title: 'Fast Results',
-    description: 'See initial results within 2-4 weeks, significant improvements in 3-6 months.'
+    title: 'Honest Timelines',
+    description: "We'll tell you a real timeline once we know your business, not a number picked in advance."
   },
   {
     icon: Shield,

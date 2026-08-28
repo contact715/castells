@@ -24,28 +24,24 @@ const DEFAULT_STEPS: ProcessStep[] = [
     number: '01',
     title: 'Discovery & Strategy',
     description: 'We analyze your business, competitors, and market to create a custom growth strategy.',
-    duration: 'Week 1-2',
     icon: Search
   },
   {
     number: '02',
     title: 'Setup & Launch',
     description: 'We set up tracking, create campaigns, and launch your first ads with optimized creatives.',
-    duration: 'Week 3-4',
     icon: Target
   },
   {
     number: '03',
     title: 'Optimization',
     description: 'We continuously test, analyze, and optimize campaigns to improve performance.',
-    duration: 'Week 5-6',
     icon: TrendingUp
   },
   {
     number: '04',
     title: 'Scale & Growth',
-    description: 'Once we find what works, we aggressively scale budget while maintaining ROAS.',
-    duration: 'Month 2+',
+    description: 'Once we find what works, we scale budget while keeping an eye on return.',
     icon: Rocket
   },
 ];

@@ -26,7 +26,7 @@ const FAQS = [
   },
   {
     question: "How fast can we launch?",
-    answer: "Once onboarding is complete (typically 48 hours), our team needs about 7-10 days to build the strategy, set up tracking, and produce creatives. We aim to have ads live within 14 days of signing."
+    answer: "It depends on the scope. We'll tell you a real timeline once we know your business — we don't quote one before that."
   }
 ];
 

@@ -104,7 +104,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
     const seoDescription =
         matched?.item.description ||
         category?.description ||
-        `Dominating the ${displayName.toLowerCase()} market with proven strategies.`;
+        `Marketing for ${displayName.toLowerCase()} businesses.`;
 
     const relatedCases = (() => {
         const norm = (v: string) => v.toLowerCase().trim();
@@ -150,7 +150,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
     })();
 
     const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://castells.studio';
-    const enhancedDescription = `${seoDescription} Specialized marketing strategies for ${displayName.toLowerCase()} businesses in Roseville, Los Angeles, and across the US. Proven results with 3x average ROAS.`;
+    const enhancedDescription = `${seoDescription} Marketing for ${displayName.toLowerCase()} businesses in Roseville, Los Angeles, and across the US.`;
 
     return (
         <div className="min-h-screen bg-ivory dark:bg-[#191919] pt-16 md:pt-20 pb-20">
@@ -161,7 +161,7 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                 keywords={`${displayName.toLowerCase()} marketing, ${displayName.toLowerCase()} advertising, ${displayName.toLowerCase()} SEO, industry marketing, Roseville marketing, Los Angeles marketing services, ${displayName.toLowerCase()} growth strategies`}
                 geoRegion="US-CA"
                 geoPlacename="1298 Antelope Creek Drive, Roseville, California"
-                summary={`Specialized marketing strategies for ${displayName.toLowerCase()} businesses by Castells Media. ${seoDescription} Proven results with 3x average ROAS serving businesses in Roseville, Los Angeles, and nationwide.`}
+                summary={`Marketing for ${displayName.toLowerCase()} businesses by Castells Media. ${seoDescription} Serving Roseville, Los Angeles, and nationwide.`}
                 mainEntity={`${displayName} Marketing`}
             />
             <SchemaMarkup
@@ -416,12 +416,14 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                                 answer: `We do not publish typical numbers, because we do not have a measurement we could show you the source for. What we can say: the work is the site people land on, the ads that bring them, the local profile they find, and the follow-up that answers. Ask us for the account of a ${displayName.toLowerCase()} client and we will show you the real one.`
                             },
                             {
-                                question: `Do you understand the ${displayName} industry?`,
-                                answer: `Yes, we have deep expertise in ${displayName.toLowerCase()} marketing. We understand your industry's challenges, customer behavior, competitive landscape, and what messaging converts best.`
+                                question: `Have you worked with ${displayName.toLowerCase()} businesses before?`,
+                                answer: relatedCases.length > 0
+                                    ? `Yes — see the work below, real sites and campaigns for ${displayName.toLowerCase()} businesses.`
+                                    : `Not a client in this exact niche yet that we can point to. Tell us about your business and we'll say plainly whether we can help.`
                             },
                             {
-                                question: `What's the typical timeline for ${displayName} marketing campaigns?`,
-                                answer: `Initial setup takes 2-3 weeks, with campaigns going live within 14 days. You'll see early results in 2-4 weeks, with significant improvements in 3-6 months as we optimize based on performance data.`
+                                question: `What's the timeline for ${displayName.toLowerCase()} marketing campaigns?`,
+                                answer: `It depends on the scope. We'll tell you a real timeline once we know your business — we don't quote one before that.`
                             }
                         ];
 

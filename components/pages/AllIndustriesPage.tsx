@@ -40,12 +40,12 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
     <div className="min-h-screen bg-ivory dark:bg-[#191919]">
       <SEO
         title="Industries | Castells Media - Industry-Specific Marketing Services"
-        description="Explore the high-ticket industries we specialize in—from construction to professional services. Proven growth strategies for 47+ industries. Serving businesses in Roseville, Los Angeles, and nationwide with industry-specific marketing expertise."
+        description="Industries we work with, from construction to professional services. Serving businesses in Roseville, Los Angeles, and nationwide."
         canonical="/industries"
         keywords="industry marketing, construction marketing, home services marketing, professional services marketing, automotive marketing, retail marketing, healthcare marketing, Roseville marketing, Los Angeles industry marketing"
         geoRegion="US-CA"
         geoPlacename="1298 Antelope Creek Drive, Roseville, California"
-        summary="Industry-specific marketing services by Castells Media. We specialize in 47+ industries including construction, home services, professional services, automotive, retail, and healthcare. Proven growth strategies serving businesses in Roseville, Los Angeles, and nationwide."
+        summary="Industry-specific marketing services by Castells Media, including construction, home services, professional services, and automotive. Serving Roseville, Los Angeles, and nationwide."
         mainEntity="Industry Marketing"
       />
       <SchemaMarkup
