@@ -110,6 +110,51 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
         </div>
 
         {/*
+          ИСТОРИЯ И ОПЫТ. Факты названы владельцем 27 августа 2026: работа с
+          июня 2017 года, основной опыт в нишах со сметой — производство кухонь
+          и мебели, затем HVAC; пять построенных отделов продаж, шесть открытых
+          мебельных салонов.
+
+          ПОЧЕМУ ЭТИ ЧИСЛА ПИСАТЬ МОЖНО, А «450% ROI» БЫЛО НЕЛЬЗЯ. Это факты о
+          СЕБЕ, и владелец им источник. Обещание результата — факт о ЧУЖОМ
+          бизнесе, которого мы не измеряли. Разница не в жанре, а в том, кто
+          может подтвердить.
+
+          Сформулировано как история, а не как достижение: рядом с каждым числом
+          стоит то, что за ним, и нет слов «более» и «свыше».
+
+          Отдельно: 5 августа отсюда и с главной убрали «since 2018» — год был
+          неподтверждённым. Теперь год назван владельцем, и он другой.
+        */}
+        <section className="mb-16">
+          <span className="text-xs font-semibold tracking-wide text-text-secondary">
+            Since June 2017
+          </span>
+          <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary dark:text-white mt-3 mb-4">
+            Where the experience comes from
+          </h2>
+          <div className="max-w-3xl space-y-4">
+            <p className="text-text-secondary dark:text-white/70 leading-relaxed">
+              We have worked in businesses that sell from an estimate since June 2017. That is a
+              particular kind of selling: the customer cannot see a price on a shelf, someone has
+              to come out, measure and quote, and then stay in the conversation for weeks while a
+              family decides.
+            </p>
+            <p className="text-text-secondary dark:text-white/70 leading-relaxed">
+              Most of those years went into kitchen and furniture manufacturing, and after that
+              into HVAC. Both sell from an estimate, both have long decisions and large tickets,
+              which is why the same playbook moves between them. We have worked in other trades
+              too, but those two are where the depth is.
+            </p>
+            <p className="text-text-secondary dark:text-white/70 leading-relaxed">
+              Along the way we built five sales departments from nothing and opened six furniture
+              showrooms. That is where the parts of this business that are not advertising come
+              from: what a sales process looks like on paper, who answers the phone, and what
+              happens to a quote after it is sent.
+            </p>
+          </div>
+        </section>
+        {/*
           Здесь стоял список сайтов клиентов со ссылками. Он повторял кейсы:
           те же клиенты, те же адреса. Владелец на главной уже поймал этот
           дубль («это должно быть в кейсах»), и здесь ровно то же самое.

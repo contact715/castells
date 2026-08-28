@@ -91,6 +91,10 @@ export const PAGES = [
     h1: 'A small agency for businesses that live on the phone ringing',
     intro:
       'Castells Media Inc works out of Roseville, California, with home service businesses across the US: HVAC, appliance repair, plumbing, remodeling. We build the site, run the ads and set up the follow-up, so a job that was going to be lost gets booked instead.',
+    body: [
+      'Working in businesses that sell from an estimate since June 2017. Most of those years went into kitchen and furniture manufacturing, and after that into HVAC. Both sell from an estimate, with long decisions and large tickets, which is why the same playbook moves between them.',
+      'Along the way: five sales departments built from nothing, and six furniture showrooms opened. That is where the parts of this business that are not advertising come from — what a sales process looks like on paper, who answers the phone, and what happens to a quote after it is sent.',
+    ],
   },
   {
     path: '/contact',
