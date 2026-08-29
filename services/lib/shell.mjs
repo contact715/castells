@@ -67,87 +67,118 @@ export const СТИЛИ = `
   .muted{color:var(--neutral);}
   :focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
 
-  /* --- Оболочка --- */
+  /* ------------------------------------------------------------------
+     Сайдбар. Один в один с components/layout/Sidebar.tsx из Mosco-corp/web:
+     ширины 175/72, чёрный фон, отступы, состояния наведения и выбора, размеры
+     значков, оформление заголовков разделов и нижней части. Числа рядом —
+     их классы Tailwind, чтобы при сверке было видно, откуда что взято.
+     ------------------------------------------------------------------ */
   .shell{display:grid; grid-template-columns:var(--сайдбар) 1fr; min-height:100vh;}
 
   .side{
-    background:var(--surface); border-right:1px solid var(--hair);
-    display:flex; flex-direction:column; position:sticky; top:0; height:100vh; overflow-y:auto;
+    background:#000;                       /* bg-black */
+    display:flex; flex-direction:column;
+    position:sticky; top:0; height:100vh; overflow:hidden;
   }
-  .side__brand{
-    height:var(--панель); display:flex; align-items:center; gap:10px;
-    padding:0 18px; border-bottom:1px solid var(--hair); flex:none;
+  /* У них блока с логотипом в сайдбаре нет — навигация начинается сразу.
+     Наш опознавательный знак перенесён в верхнюю панель. */
+  .side__nav{
+    flex:1; min-height:0; overflow-y:auto;
+    padding:8px 6px;                       /* px-1.5 py-2 */
+    display:flex; flex-direction:column; gap:2px;   /* space-y-0.5 */
+    scrollbar-width:none;
   }
-  .side__mark{
-    width:22px; height:22px; border-radius:3px; background:var(--accent); flex:none;
-    display:flex; align-items:center; justify-content:center;
-    color:#fff; font:700 11px/1 ${ШРИФТЫ.заголовки};
-  }
-  .side__name{font:700 14px/1.2 ${ШРИФТЫ.заголовки}; letter-spacing:-0.01em;}
-  .side__nav{padding:10px 8px; display:flex; flex-direction:column; gap:1px; flex:1;}
-  .side__bottom{padding:8px; border-top:1px solid var(--hair); display:flex; flex-direction:column; gap:1px;}
-  .side__group{
-    font-size:10px; text-transform:uppercase; letter-spacing:.09em; color:var(--neutral);
-    padding:14px 8px 6px; font-family:${ШРИФТЫ.заголовки}; font-weight:600;
-  }
+  .side__nav::-webkit-scrollbar{display:none;}      /* no-scrollbar */
+
   .navlink{
-    display:flex; align-items:center; justify-content:space-between; gap:8px;
-    padding:7px 10px; border-radius:var(--радиус); color:var(--ink);
-    text-decoration:none; font-size:14px; border-left:2px solid transparent;
+    display:flex; align-items:center; gap:12px;     /* gap-3 */
+    padding:8px 12px;                               /* px-3 py-2 */
+    border-radius:8px;                              /* rounded-inner */
+    color:#fff; text-decoration:none;
+    font-size:14px; font-weight:500;                /* text-sm font-medium */
+    transition:background-color .2s, color .2s;
     min-width:0;
   }
-  /* Названия клиентов бывают длинными («AAA Brothers Heating & Air
-     Conditioning»). Без обрезки они распирают меню и ломают сетку. */
+  .navlink:hover{background:#2e2e2e;}
+  .navlink[aria-current="page"]{background:rgba(255,255,255,.15);}
   .navlink > span:first-child{
+    display:flex; align-items:center; gap:12px; min-width:0; flex:1;
     overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
-    display:flex; align-items:center; gap:7px; min-width:0;
   }
-  .navlink:hover{background:var(--sunk);}
-  .navlink[aria-current="page"]{background:var(--sunk); border-left-color:var(--accent); font-weight:600;}
+  .navlink__label{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .navlink__icon{width:20px; height:20px; flex:none;}   /* w-5 h-5 */
   .navlink__tag{
-    font-family:${ШРИФТЫ.моно}; font-size:11px; color:var(--neutral);
-    font-variant-numeric:tabular-nums;
+    font-family:${ШРИФТЫ.моно}; font-size:11px;
+    color:rgba(255,255,255,.45); font-variant-numeric:tabular-nums; flex:none;
   }
   .navlink__dot{width:6px; height:6px; border-radius:50%; flex:none;}
-  .navlink__icon{width:16px; height:16px; flex:none; opacity:.75;}
-  .navlink[aria-current="page"] .navlink__icon{opacity:1;}
 
-  /* Раскрывающаяся группа — как у них: заголовок кликабелен, дети с отступом. */
-  .grp{display:flex; flex-direction:column;}
-  .grp__head{
-    display:flex; align-items:center; gap:7px; width:100%;
-    padding:7px 10px; border:0; background:none; cursor:pointer;
-    font:600 10px/1 ${ШРИФТЫ.заголовки}; letter-spacing:.09em; text-transform:uppercase;
-    color:var(--neutral); border-radius:var(--радиус);
+  /* Заголовок раздела: pt-3 pb-1.5 px-3, 10px, 600, uppercase, .15em, white/40 */
+  .side__group{
+    padding:12px 12px 6px;
+    font-size:10px; font-weight:600; text-transform:uppercase;
+    letter-spacing:.15em; color:rgba(255,255,255,.4);
+    font-family:${ШРИФТЫ.текст};
   }
-  .grp__head:hover{background:var(--sunk);}
-  .grp__caret{margin-left:auto; transition:transform .15s; opacity:.6;}
+
+  /* Раскрывающаяся группа: кнопка с той же отбивкой, что и пункт, плюс стрелка. */
+  .grp{display:flex; flex-direction:column; gap:2px;}
+  .grp__head{
+    display:flex; align-items:center; gap:12px; width:100%;
+    padding:8px 12px; border:0; border-radius:8px; background:none; cursor:pointer;
+    color:#fff; font:500 14px/1.4 ${ШРИФТЫ.текст}; text-align:left;
+    transition:background-color .2s;
+  }
+  .grp__head:hover{background:#2e2e2e;}
+  .grp__label{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .grp__caret{width:16px; height:16px; flex:none; color:rgba(255,255,255,.8); transition:transform .2s;}
   .grp[data-open="0"] .grp__caret{transform:rotate(-90deg);}
   .grp[data-open="0"] .grp__kids{display:none;}
-  .grp__kids{display:flex; flex-direction:column; gap:1px; padding-left:6px;}
+  /* pl-6 pr-2 py-1.5 space-y-0.5 */
+  .grp__kids{display:flex; flex-direction:column; gap:2px; padding:6px 8px 6px 24px;}
+  /* Дети чуть тише родителя и с меньшим значком: gap-2.5, w-4 h-4, white/80 */
+  .grp__kids .navlink{gap:10px; color:rgba(255,255,255,.8);}
+  .grp__kids .navlink:hover{color:#fff;}
+  .grp__kids .navlink[aria-current="page"]{background:rgba(255,255,255,.10); color:#fff;}
+  .grp__kids .navlink > span:first-child{gap:10px;}
+  .grp__kids .navlink__icon{width:16px; height:16px;}
 
-  /* Свёрнутая полоса: остаются только значки. Ширина и поведение — из Mosco. */
-  :root[data-rail="1"] .shell{grid-template-columns:var(--свёрнутый) 1fr;}
-  :root[data-rail="1"] .side__name,
-  :root[data-rail="1"] .navlink__tag,
-  :root[data-rail="1"] .navlink__label,
-  :root[data-rail="1"] .grp__head span,
-  :root[data-rail="1"] .grp__caret,
-  :root[data-rail="1"] .side__foot{display:none;}
-  :root[data-rail="1"] .side__brand{justify-content:center; padding:0;}
-  :root[data-rail="1"] .navlink{justify-content:center; padding:9px 0;}
-  :root[data-rail="1"] .grp__head{justify-content:center; padding:6px 0;}
-  :root[data-rail="1"] .grp__kids{padding-left:0;}
-  :root[data-rail="1"] .navlink__dot{position:absolute; margin-left:18px; margin-top:-12px;}
-  :root[data-rail="1"] .navlink > span:first-child{justify-content:center;}
-
-  .rail{
-    display:flex; align-items:center; gap:8px; width:100%;
-    padding:7px 10px; border:0; background:none; cursor:pointer;
-    color:var(--neutral); font:400 12px/1 ${ШРИФТЫ.текст}; border-radius:var(--радиус);
+  /* Низ: border-t border-white/[0.08], px-3 pb-3 pt-2 */
+  .side__bottom{
+    margin-top:auto; flex:none;
+    padding:8px 12px 12px;
+    border-top:1px solid rgba(255,255,255,.08);
+    display:flex; flex-direction:column; gap:2px;
   }
-  .rail:hover{background:var(--sunk); color:var(--ink);}
-  .side__foot{margin-top:auto; padding:14px 18px; border-top:1px solid var(--hair); font-size:11.5px; color:var(--neutral);}
+  /* Нижние пункты приглушены: text-white/50 */
+  .side__bottom .navlink{color:rgba(255,255,255,.5);}
+  .side__bottom .navlink:hover{color:rgba(255,255,255,.8);}
+  .rail{
+    display:flex; align-items:center; gap:12px; width:100%;
+    padding:8px 12px; border:0; border-radius:8px; background:none; cursor:pointer;
+    color:rgba(255,255,255,.5); font:500 14px/1.4 ${ШРИФТЫ.текст};
+    transition:background-color .2s, color .2s;
+  }
+  .rail:hover{background:#2e2e2e; color:rgba(255,255,255,.8);}
+  .rail svg{width:20px; height:20px; flex:none;}
+
+  /* Свёрнутая полоса: justify-center p-2, подписи прячутся. */
+  :root[data-rail="1"] .shell{grid-template-columns:var(--свёрнутый) 1fr;}
+  :root[data-rail="1"] .navlink__label,
+  :root[data-rail="1"] .navlink__tag,
+  :root[data-rail="1"] .grp__label,
+  :root[data-rail="1"] .grp__caret,
+  :root[data-rail="1"] .rail span{display:none;}
+  :root[data-rail="1"] .navlink,
+  :root[data-rail="1"] .grp__head,
+  :root[data-rail="1"] .rail{justify-content:center; padding:8px;}
+  :root[data-rail="1"] .navlink > span:first-child{justify-content:center; flex:none;}
+  :root[data-rail="1"] .grp__kids{padding-left:0; padding-right:0;}
+  /* Вместо подписи раздела — тонкая черта: my-2 mx-3 h-px bg-white/[0.08] */
+  :root[data-rail="1"] .side__group{
+    font-size:0; padding:0; margin:8px 12px;
+    height:1px; background:rgba(255,255,255,.08);
+  }
 
   .main{display:flex; flex-direction:column; min-width:0;}
   .top{
@@ -155,7 +186,12 @@ export const СТИЛИ = `
     background:var(--surface); border-bottom:1px solid var(--hair);
     display:flex; align-items:center; gap:16px; padding:0 24px;
   }
-  .top__title{font:600 15px/1 ${ШРИФТЫ.заголовки};}
+  .top__title{font:700 15px/1 ${ШРИФТЫ.заголовки}; letter-spacing:-.01em;}
+  .side__mark{
+    width:22px; height:22px; border-radius:5px; background:var(--accent); flex:none;
+    display:flex; align-items:center; justify-content:center;
+    color:#fff; font:700 11px/1 ${ШРИФТЫ.заголовки};
+  }
   .top__crumb{font-size:12.5px; color:var(--neutral);}
   .top__right{margin-left:auto; display:flex; align-items:center; gap:14px;}
   .top select{
@@ -358,19 +394,15 @@ export function оболочка({ заголовок, меню, низМеню,
 
 <div class="shell">
   <nav class="side" aria-label="Разделы">
-    <div class="side__brand">
-      <span class="side__mark" aria-hidden="true">C</span>
-      <span class="side__name">Castells</span>
-    </div>
     <div class="side__nav">${меню}</div>
     <div class="side__bottom">
       ${низМеню || ''}
       <button class="rail" type="button" id="rail" aria-label="Свернуть меню">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor"
-             stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
-          <rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="M6.5 3v10"/>
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor"
+             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <rect x="2.5" y="3.5" width="15" height="13" rx="2"/><path d="M8 3.5v13"/>
         </svg>
-        <span class="navlink__label">Свернуть</span>
+        <span>Свернуть</span>
       </button>
     </div>
     <div class="side__foot">
@@ -380,7 +412,8 @@ export function оболочка({ заголовок, меню, низМеню,
 
   <div class="main">
     <header class="top">
-      <span class="top__title">Пульт</span>
+      <span class="side__mark" aria-hidden="true">C</span>
+      <span class="top__title">Castells</span>
       <span class="top__crumb" id="crumb"></span>
       <div class="top__right">
         ${выборПроектов}
@@ -410,10 +443,10 @@ export const пункт = ({ адрес, имя, метка, точка, зна�
 export const группа = ({ ключ, имя, значок, дети, открыта = true }) =>
   `<div class="grp" data-group="${экр(ключ)}" data-open="${открыта ? '1' : '0'}">
     <button class="grp__head" type="button" aria-expanded="${открыта ? 'true' : 'false'}">
-      ${значок || ''}<span>${экр(имя)}</span>
-      <svg class="grp__caret" width="10" height="10" viewBox="0 0 10 10" fill="none"
-           stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
-        <path d="M2.5 4l2.5 2.5L7.5 4"/>
+      ${значок || ''}<span class="grp__label">${экр(имя)}</span>
+      <svg class="grp__caret" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+           stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M4 6l4 4 4-4"/>
       </svg>
     </button>
     <div class="grp__kids">${дети}</div>

@@ -267,8 +267,20 @@ console.log('Самопроверки цикла SEO\n');
   const html = страница(проекты, '2026-08-29 00:00 UTC');
 
   проверка('у пульта есть заголовок страницы', html.includes('<title>'));
-  проверка('пульт красит и светлую, и тёмную тему',
-    html.includes('prefers-color-scheme: dark') && html.includes('[data-theme="dark"]'));
+  /*
+    Тема. У них в ThemeProvider начальное состояние жёстко "dark", и без
+    сохранённого выбора ставится тёмная — независимо от настроек системы.
+    Прежняя проверка требовала зависимости от системы и честно упала: правило
+    изменилось вслед за их кодом, а не подогнано.
+  */
+  проверка('тёмная тема — основа, как у них', html.includes('color-scheme:dark'));
+  проверка('светлая включается только явным выбором',
+    html.includes('[data-theme="light"]') && !html.includes('prefers-color-scheme'));
+  проверка('сайдбар чёрный, как в Mosco web', html.includes('background:#000'));
+  проверка('наведение и выбор — их значения',
+    html.includes('#2e2e2e') && html.includes('rgba(255,255,255,.15)'));
+  проверка('заголовок раздела набран их правилом',
+    html.includes('letter-spacing:.15em') && html.includes('rgba(255,255,255,.4)'));
   проверка('у body задан свой фон', /body\{[^}]*background:var\(--ground\)/.test(html));
   проверка('в пульте нет незаполненных подстановок',
     !html.includes('undefined') && !html.includes('[object Object]') && !html.includes('NaN'));
