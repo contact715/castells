@@ -73,6 +73,13 @@ export const СТИЛИ = `
     display:flex; align-items:center; justify-content:space-between; gap:8px;
     padding:7px 10px; border-radius:var(--радиус); color:var(--ink);
     text-decoration:none; font-size:14px; border-left:2px solid transparent;
+    min-width:0;
+  }
+  /* Названия клиентов бывают длинными («AAA Brothers Heating & Air
+     Conditioning»). Без обрезки они распирают меню и ломают сетку. */
+  .navlink > span:first-child{
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    display:flex; align-items:center; gap:7px; min-width:0;
   }
   .navlink:hover{background:var(--sunk);}
   .navlink[aria-current="page"]{background:var(--sunk); border-left-color:var(--accent); font-weight:600;}
@@ -288,7 +295,7 @@ ${подвал || ''}`;
 /** Пункт бокового меню. */
 export const пункт = ({ адрес, имя, метка, точка }) =>
   `<a class="navlink" href="#/${экр(адрес)}" data-title="${экр(имя)}">
-    <span>${точка ? `<span class="navlink__dot" style="background:${точка}"></span> ` : ''}${экр(имя)}</span>
+    <span title="${экр(имя)}">${точка ? `<span class="navlink__dot" style="background:${точка}"></span>` : ''}${экр(имя)}</span>
     ${метка ? `<span class="navlink__tag">${экр(метка)}</span>` : ''}
   </a>`;
 
