@@ -1,0 +1,15 @@
+{
+  "name": "castells-services",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Пульт агентства: проекты, услуги, доступы, ежемесячные отчёты",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "test": "node self-test.mjs",
+    "dashboard": "node dashboard.mjs"
+  }
+}
