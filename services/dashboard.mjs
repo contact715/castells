@@ -3,8 +3,8 @@
   Пульт: одна страница, на которой видно состояние всех проектов цикла SEO.
 
   Запуск:
-    node services/seo/dashboard.mjs                 # в файл по умолчанию
-    node services/seo/dashboard.mjs путь/к/файлу.html
+    node services/dashboard.mjs                 # в файл по умолчанию
+    node services/dashboard.mjs путь/к/файлу.html
 
   ПОЧЕМУ ЭТО ГЕНЕРАТОР, А НЕ СВЁРСТАННАЯ СТРАНИЦА. Свёрстанная руками
   страница — это вторая копия данных, и она разойдётся с профилями через
@@ -26,6 +26,7 @@ import { проверитьПрофиль, разобратьПрофиль, CMS
 import { СТАДИИ, состояниеСтадии } from './lib/stages.mjs';
 import { ДОСТУПЫ, ГРУППЫ, ХОСТИНГИ, счётДоступов, нехваткаДоступов, ключиГруппы } from './lib/access.mjs';
 import { готовностьОтчёта, следующийОтчёт, ДЕНЬ_ОТЧЁТА } from './lib/report.mjs';
+import { УСЛУГИ, ГРУППЫ_УСЛУГ, ключиГруппыУслуг, услугиПроекта } from './lib/catalog.mjs';
 
 const КОРЕНЬ = dirname(fileURLToPath(import.meta.url));
 const ПАПКА_КЛИЕНТОВ = join(КОРЕНЬ, 'clients');
@@ -56,6 +57,7 @@ async function собратьПроекты() {
       доступы: счётДоступов(профиль),
       нехватка: нехваткаДоступов(профиль),
       отчёт: готовностьОтчёта(профиль),
+      услуги: услугиПроекта(профиль),
     });
   }
   return проекты;
@@ -140,6 +142,20 @@ function карточкаПроекта(п) {
     ? ''
     : `<p class="alarm">Профиль не проходит проверку: ${экр(п.проверка.ошибки.join('; '))}</p>`;
 
+  const услуги = п.услуги.length
+    ? `<ul class="svcs">${п.услуги
+        .map(у => {
+          const хвост = у.нехватка.length ? `не хватает: ${у.нехватка.join(', ')}` : 'доступы есть';
+          const опыт = у.делали ? '' : '<em class="noexp">опыта нет</em>';
+          return `<li class="svc svc--${у.состояние === 'ведём' ? 'run' : у.состояние === 'завершено' ? 'done' : 'talk'}">
+            <span class="svc__name">${экр(у.имя)}${опыт}</span>
+            <span class="svc__state">${экр(у.состояние)}</span>
+            <span class="svc__note">${экр(хвост)}</span>
+          </li>`;
+        })
+        .join('')}</ul>`
+    : '<p class="verdict verdict--no">Ни одна услуга не подключена — непонятно, что мы для клиента делаем.</p>';
+
   return `<article class="project">
     <header class="project__head">
       <div>
@@ -150,7 +166,8 @@ function карточкаПроекта(п) {
         </p>
       </div>
       <dl class="counters">
-        <div><dt>Стадий делаем</dt><dd>${п.стадии.filter(с => с.код === 'сделано').length}<span>/${СТАДИИ.length}</span></dd></div>
+        <div><dt>Услуг ведём</dt><dd>${п.услуги.filter(у => у.состояние === 'ведём').length}<span>/${п.услуги.length}</span></dd></div>
+        <div><dt>Стадий SEO</dt><dd>${п.стадии.filter(с => с.код === 'сделано').length}<span>/${СТАДИИ.length}</span></dd></div>
         <div><dt>Доступов</dt><dd>${п.доступы.открыто}<span>/${п.доступы.всего}</span></dd></div>
         <div><dt>Разделов отчёта</dt><dd>${п.отчёт.наполнятся}<span>/${п.отчёт.всего}</span></dd></div>
       </dl>
@@ -164,7 +181,12 @@ function карточкаПроекта(п) {
     </p>
 
     <section class="block">
-      <h3>Стадии цикла</h3>
+      <h3>Наши услуги на проекте</h3>
+      ${услуги}
+    </section>
+
+    <section class="block">
+      <h3>Стадии цикла SEO${п.услуги.some(у => у.цикл === 'seo') ? '' : '<span class="sub">услуга не подключена — цикл показан для справки</span>'}</h3>
       <ol class="stages">${стадии}</ol>
     </section>
 
@@ -186,7 +208,22 @@ function карточкаПроекта(п) {
   </article>`;
 }
 
-function страница(проекты, когда) {
+/**
+ * Приводит проект к полному виду. Один кривой проект не должен ронять пульт
+ * целиком: по упавшей странице не видно вообще ничего, а это хуже неполной.
+ */
+const дополнить = п => ({
+  стадии: [],
+  услуги: [],
+  нехватка: [],
+  доступы: { открыто: 0, всего: 0 },
+  отчёт: { разделы: [], наполнятся: 0, всего: 0, можноОтправлять: false, почемуНельзя: 'не посчитано' },
+  проверка: { ок: true, ошибки: [] },
+  ...п,
+});
+
+function страница(сырые, когда) {
+  const проекты = сырые.map(дополнить);
   const всегоНехватки = new Map();
   for (const п of проекты) {
     for (const д of п.нехватка) {
@@ -293,6 +330,24 @@ function страница(проекты, когда) {
   .chip--on{color:var(--ink);} .chip--on .chip__dot{background:var(--ok);}
   .chip--off{color:var(--neutral);} .chip--off .chip__dot{background:var(--no); opacity:.65;}
 
+  .svcs{list-style:none; margin:12px 0 0; padding:0; display:grid; gap:4px;}
+  .svc{display:grid; grid-template-columns:1fr auto auto; gap:14px; align-items:baseline; padding:8px 10px; background:var(--sunk); border-left:3px solid var(--hair); font-size:13.5px;}
+  .svc--run{border-left-color:var(--ok);}
+  .svc--done{border-left-color:var(--human);}
+  .svc--talk{border-left-color:var(--wait);}
+  .svc__name{font-weight:600;}
+  .svc__state{font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--neutral);}
+  .svc__note{color:var(--neutral); font-size:12.5px;}
+  .noexp{font-style:normal; font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--no); border:1px solid currentColor; padding:1px 5px; border-radius:2px; margin-left:8px;}
+
+  .catgroup{margin-top:16px;}
+  .cat{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:10px;}
+  .catitem{background:var(--sunk); border:1px solid var(--hair); border-radius:2px; padding:10px 12px; display:flex; flex-direction:column; gap:3px; font-size:13px;}
+  .catitem b{font-family:Archivo,sans-serif;}
+  .catitem span{color:var(--neutral);}
+  .catitem .src{font-size:11.5px; font-style:italic;}
+  .catitem--noexp{border-style:dashed;}
+
   .reps{list-style:none; margin:12px 0 0; padding:0; display:grid; gap:4px;}
   .rep{display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; padding:7px 10px; background:var(--sunk); border-left:3px solid var(--hair); font-size:13.5px;}
   .rep--on{border-left-color:var(--ok);}
@@ -321,7 +376,7 @@ function страница(проекты, когда) {
   <header class="top">
     <h1>Пульт цикла SEO</h1>
     <p>Состояние проектов: какие стадии идут, каких доступов нет и уйдёт ли в этом месяце отчёт клиенту.</p>
-    <p class="stamp">собрано ${экр(когда)} из профилей в services/seo/clients</p>
+    <p class="stamp">собрано ${экр(когда)} из профилей в services/clients</p>
   </header>
 
   <div class="summary">
@@ -331,6 +386,27 @@ function страница(проекты, когда) {
   </div>
 
   ${проекты.map(карточкаПроекта).join('')}
+
+  <section class="block">
+    <h3>Каталог услуг<span class="sub">что мы вообще делаем</span></h3>
+    ${Object.entries(ГРУППЫ_УСЛУГ)
+      .map(
+        ([кг, иг]) => `<div class="catgroup">
+          <h4>${экр(иг)}</h4>
+          <ul class="cat">${ключиГруппыУслуг(кг)
+            .map(к => {
+              const у = УСЛУГИ[к];
+              return `<li class="catitem${у.делали ? '' : ' catitem--noexp'}">
+                <b>${экр(у.имя)}</b>${у.делали ? '' : '<em class="noexp">опыта нет</em>'}
+                <span>${экр(у.что)}</span>
+                <span class="src">${экр(у.источникОпыта)}</span>
+              </li>`;
+            })
+            .join('')}</ul>
+        </div>`,
+      )
+      .join('')}
+  </section>
 
   <section class="block">
     <h3>Что просить, по всем проектам</h3>
@@ -344,8 +420,8 @@ function страница(проекты, когда) {
 
   <footer>
     Пульт собирается из профилей проектов, а не ведётся руками: разойтись с ними
-    ему негде. Чтобы обновить — поправить профиль в <code>services/seo/clients</code>
-    и запустить <code>node services/seo/dashboard.mjs</code>.
+    ему негде. Чтобы обновить — поправить профиль в <code>services/clients</code>
+    и запустить <code>node services/dashboard.mjs</code>.
     Полоски «готовность в процентах» здесь намеренно нет: оставшееся упирается
     в чужие решения, и проценты создавали бы ощущение движения там, где его нет.
   </footer>

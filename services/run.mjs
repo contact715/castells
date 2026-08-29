@@ -3,9 +3,9 @@
   Оркестратор цикла SEO по одному клиенту.
 
   Запуск:
-    node services/seo/run.mjs <id-клиента>
-    node services/seo/run.mjs <id-клиента> --stage pages
-    node services/seo/run.mjs --list
+    node services/run.mjs <id-клиента>
+    node services/run.mjs <id-клиента> --stage pages
+    node services/run.mjs --list
 
   Что делает: читает профиль клиента, проверяет его, проходит семь стадий и
   говорит по каждой — сделано, заблокировано или ждёт человека. Ничего не
@@ -30,6 +30,7 @@ import { dirname, join } from 'node:path';
 
 import { проверитьПрофиль, разобратьПрофиль, CMS } from './lib/profile.mjs';
 import { счётДоступов, нехваткаДоступов, ХОСТИНГИ } from './lib/access.mjs';
+import { услугиПроекта, УСЛУГИ } from './lib/catalog.mjs';
 import { готовностьОтчёта, следующийОтчёт } from './lib/report.mjs';
 import { собратьПлан, путиДляЗамера } from './lib/plan.mjs';
 import { СТАДИИ, состояниеСтадии } from './lib/stages.mjs';
@@ -73,7 +74,7 @@ export const ИСПОЛНИТЕЛИ = {
   async baseline(профиль) {
     const { ключевые, пробники } = путиДляЗамера(профиль);
 
-    const прибор = join(КОРЕНЬ, '..', '..', 'scripts', 'seo-audit.mjs');
+    const прибор = join(КОРЕНЬ, '..', 'scripts', 'seo-audit.mjs');
     const строки = [`смотрим на ${профиль.site}`, `адресов в замере: ${ключевые.length + пробники.length}`];
 
     try {
@@ -155,7 +156,7 @@ async function главная() {
     console.log('─'.repeat(72));
 
     if (!клиенты.length) {
-      console.log('  пока ни одного. Образец профиля: services/seo/clients/_template.mjs');
+      console.log('  пока ни одного. Образец профиля: services/clients/_template.mjs');
       return 0;
     }
 
@@ -163,7 +164,7 @@ async function главная() {
     // кого чего не хватает, без запуска цикла по каждому.
     console.log(
       `  ${'id'.padEnd(12)} ${'название'.padEnd(18)} ${'сайт'.padEnd(6)} ` +
-      `${'доступов'.padEnd(10)} ${'отчёт'.padEnd(11)}`,
+      `${'услуг'.padEnd(7)} ${'доступов'.padEnd(10)} ${'отчёт'.padEnd(11)}`,
     );
     for (const id of клиенты) {
       try {
@@ -175,7 +176,8 @@ async function главная() {
         const метка = ок ? '' : '  ← профиль не проходит проверку';
         console.log(
           `  ${id.padEnd(12)} ${String(профиль.name).slice(0, 18).padEnd(18)} ` +
-          `${сайт.padEnd(6)} ${String(`${открыто} из ${всего}`).padEnd(10)} ` +
+          `${сайт.padEnd(6)} ${String(услугиПроекта(профиль).filter(у => у.состояние === 'ведём').length + '/' + услугиПроекта(профиль).length).padEnd(7)} ` +
+          `${String(`${открыто} из ${всего}`).padEnd(10)} ` +
           `${(отчёт.можноОтправлять ? 'можно' : 'нет данных').padEnd(11)}${метка}`,
         );
       } catch (e) {
@@ -183,7 +185,7 @@ async function главная() {
       }
     }
 
-    console.log('\nЗапуск цикла по проекту: node services/seo/run.mjs <id>');
+    console.log('\nЗапуск цикла по проекту: node services/run.mjs <id>');
     return 0;
   }
 
@@ -220,6 +222,25 @@ async function главная() {
   if (предупреждения.length) {
     console.log('\nПредупреждения:');
     for (const п of предупреждения) console.log(`  • ${п}`);
+  }
+
+  const услуги = услугиПроекта(профиль);
+  console.log('\nНаши услуги на проекте');
+  if (!услуги.length) {
+    console.log('  ни одной не подключено — непонятно, что мы для клиента делаем');
+  }
+  for (const у of услуги) {
+    const хвост = у.нехватка.length
+      ? ` — не хватает: ${у.нехватка.join(', ')}`
+      : '';
+    const опыт = у.делали ? '' : '  [опыта у нас нет]';
+    console.log(`  ${у.состояние.padEnd(10)} ${у.имя}${опыт}${хвост}`);
+  }
+
+  const циклы = услуги.filter(у => у.цикл === 'seo' && у.состояние !== 'обсуждаем');
+  if (!циклы.length) {
+    console.log('\nСтадии цикла SEO не показываются: услуга SEO на этом проекте не подключена.');
+    console.log('Каталог услуг: services/lib/catalog.mjs');
   }
 
   console.log('\nСтадии:');
