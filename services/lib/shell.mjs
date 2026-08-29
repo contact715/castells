@@ -575,44 +575,154 @@ export const СТИЛИ = `
   .verdict--ok{background:color-mix(in srgb, var(--ok) 12%, transparent); color:var(--ok);}
   .verdict--no{background:color-mix(in srgb, var(--no) 10%, transparent); color:var(--no);}
 
-  /* Узкий экран. Сайдбар встаёт СВЕРХУ во всю ширину и остаётся плашкой, а
-     меню — вертикальным списком.
+  /* Кнопка меню и затемнение живут только на узком экране. Объявлены здесь,
+     а не внутри медиаблока, чтобы у них было одно место определения. */
+  .top__menu{
+    display:none; flex:none; align-items:center; justify-content:center;
+    width:36px; height:36px; margin-right:calc(var(--шаг-icon) * -1);
+    border:0; border-radius:var(--r-inner); background:none; cursor:pointer;
+    color:var(--neutral); transition:background-color .2s, color .2s;
+  }
+  .top__menu:hover{background:var(--sunk); color:var(--ink);}
+  .top__menu svg{width:18px; height:18px;}
+  .scrim{
+    display:none; position:fixed; inset:0; z-index:40;
+    background:rgba(0,0,0,.55);
+  }
 
-     Первая попытка раскладывала меню в горизонтальный ряд (flex-wrap), и он
-     разъезжался: у групп внутри свои колонки с детьми, они не переносятся, а
-     пункты обрезались по правому краю плашки. Ряд из вложенных групп — это не
-     «то же меню поуже», это другой компонент, которого у нас нет.
+  /* ══════════════════════════════════════════════════════════════════════
+     ТЕЛЕФОН И ПЛАНШЕТ
 
-     У Mosco ниже lg сайдбар уезжает за край и открывается ящиком по кнопке.
-     Ящика у пульта нет, и делать половину чужого поведения хуже, чем не делать:
-     кнопка была бы, а поведение — наполовину. Поэтому здесь честный простой
-     вариант, который не ломается. */
+     ГЛАВНОЕ, ЧЕГО НЕ ХВАТАЛО, — мета-тега viewport. Без него телефон
+     объявляет страницу шириной 980px и ужимает её целиком: замер на iPhone
+     показал экран 375px, страницу 980px и масштаб 2.61. Медиазапросы при
+     этом не срабатывали ВООБЩЕ — страница считала себя широкой. То есть
+     мобильной версии не было не потому, что правила плохи, а потому, что до
+     них не доходило. Тег добавлен в оболочку.
+
+     САЙДБАР СТАНОВИТСЯ ЯЩИКОМ. На 375px рельс в 208px съедал больше
+     половины ширины. Ящик — то же решение, что у Mosco ниже lg
+     (Sidebar.tsx: fixed inset-y-0 left-0, -translate-x-full, и
+     SidebarMobileOpener как кнопка). Прошлый раз я отказался его делать,
+     потому что кнопки не было и вышла бы половина поведения. Теперь есть и
+     кнопка, и затемнение, и закрытие по Escape.
+     ══════════════════════════════════════════════════════════════════════ */
   @media (max-width:860px){
     .shell{
       height:auto; min-height:100dvh; overflow:visible;
       padding:var(--шаг-tight); gap:var(--шаг-tight);
+      /* Вырез и домашняя полоса iPhone: содержимое не лезет под них. */
+      padding-left:max(var(--шаг-tight), env(safe-area-inset-left));
+      padding-right:max(var(--шаг-tight), env(safe-area-inset-right));
     }
     .shell__row{flex-direction:column; gap:var(--шаг-tight);}
-    .side{width:auto; align-self:stretch;}
-    .side__nav{overflow:visible;}
     .main{overflow:visible;}
     .work{overflow:visible; padding:var(--шаг-inset) 0 var(--шаг-section);}
-    .top__title{font-size:17px;}
-    /* Свёрнутая полоса на узком экране смысла не имеет: места по горизонтали
-       она не экономит, а меню превращает в столбик безымянных значков. */
-    .rail{display:none;}
-    :root[data-rail="1"] .side{width:auto;}
+
+    /* ── Ящик ───────────────────────────────────────────────────────── */
+    .side{
+      position:fixed; top:0; bottom:0; left:0; z-index:50;
+      width:min(84vw, 300px); height:100dvh;
+      border-radius:0 var(--r-card) var(--r-card) 0;
+      border-left:0;
+      transform:translateX(-100%);
+      transition:transform .28s ease;
+      box-shadow:var(--теньБольшая);
+    }
+    :root[data-drawer="1"] .side{transform:none;}
+    :root[data-drawer="1"] .scrim{display:block;}
+    /* Пока ящик открыт, фон не прокручивается: иначе палец листает страницу
+       под ящиком, и закрыв его человек оказывается не там, где был. */
+    :root[data-drawer="1"] body{overflow:hidden;}
+    .top__menu{display:flex;}
+    /* Кнопка «свернуть» и подпись про профили — настольные, в ящике не нужны:
+       ширину рельса на телефоне не выбирают. */
+    .rail, .side__foot{display:none;}
+
+    /* СВЁРНУТЫЙ РЕЛЬС ОТМЕНЯЕТСЯ ЦЕЛИКОМ.
+
+       Состояние «data-rail=1» живёт в памяти браузера. Человек свернул рельс
+       на компьютере — и то же состояние приезжает на телефон, где рельса нет
+       вовсе. Замер поймал это сразу: ящик открывался шириной 52px вместо
+       300px, потому что «:root[data-rail="1"] .side» весит больше простого
+       «.side» и перебивает ширину ящика независимо от порядка правил.
+
+       Поэтому здесь отменяются все следствия свёрнутого рельса, а не только
+       ширина: иначе в ящике остались бы безымянные значки без подписей. */
+    :root[data-rail="1"] .side{width:min(84vw, 300px);}
     :root[data-rail="1"] .navlink__label,
+    :root[data-rail="1"] .navlink__tag,
     :root[data-rail="1"] .grp__label,
-    :root[data-rail="1"] .side__wsp{display:flex;}
+    :root[data-rail="1"] .mode__label,
+    :root[data-rail="1"] .side__wsp{display:block;}
+    :root[data-rail="1"] .grp__caret{display:block;}
+    :root[data-rail="1"] .mode__icon{display:none;}
     :root[data-rail="1"] .navlink,
     :root[data-rail="1"] .grp__head{
-      justify-content:flex-start; width:auto; padding:0 var(--шаг-base);
+      justify-content:flex-start; width:auto; margin:0; padding:0 var(--шаг-base);
     }
+    :root[data-rail="1"] .mode{flex:1; width:auto; height:44px; padding:0 var(--шаг-inset);}
+    :root[data-rail="1"] .navlink > span:first-child{justify-content:flex-start; flex:1; gap:var(--шаг-base);}
+    :root[data-rail="1"] .grp__kids{padding:var(--шаг-tight) var(--шаг-base) var(--шаг-tight) 28px;}
+    :root[data-rail="1"] .side__head{justify-content:flex-start; padding:var(--шаг-inset);}
+    :root[data-rail="1"] .modes{flex-direction:row; padding:var(--шаг-base);}
     :root[data-rail="1"] .side__group{
-      font-size:11px; height:auto; background:none;
-      padding:var(--шаг-base) var(--шаг-base) var(--шаг-icon); margin:0;
+      font-size:11px; height:auto; background:none; margin:0;
+      padding:var(--шаг-base) var(--шаг-base) var(--шаг-icon);
     }
+
+    /* ── Пальцем, а не мышью ─────────────────────────────────────────
+       44px — минимум Apple HIG и WCAG 2.5.5; у Mosco это токен h-touch,
+       который включается вариантом pointer-coarse. */
+    .navlink, .grp__head{height:44px;}
+    .mode{height:44px;}
+    .top__menu{width:44px; height:44px;}
+    .side__wsp select{height:44px;}
+
+    /* ── Верхняя полоса ──────────────────────────────────────────────
+       Отметка времени сборки уходит: на 375px она отнимает треть полосы, а
+       читают её раз в месяц. Имя страницы важнее. */
+    .top{gap:var(--шаг-tight); padding:var(--шаг-icon) var(--шаг-base);}
+    .top__title{font-size:17px; padding-left:0;}
+    .top__island{display:none;}
+
+    /* ── Таблица становится карточками ───────────────────────────────
+       Горизонтальная прокрутка на телефоне не работает: замер показал, что
+       колонка «Проект» ужимается до одного слова в строку, и таблица из
+       пяти колонок читается по букве. Поэтому строка превращается в
+       карточку, а шапка таблицы — в подписи внутри неё (они уже проставлены
+       в разметке как data-label, а не выдуманы стилями). */
+    .tablewrap{overflow:visible; background:none; border:0; border-radius:0;}
+    table, tbody, tr, td{display:block; width:100%;}
+    thead{display:none;}
+    tr{
+      background:var(--surface); border:1px solid var(--hair);
+      border-radius:var(--r-card); margin-bottom:var(--шаг-tight);
+      overflow:hidden;
+    }
+    td{
+      display:flex; align-items:baseline; gap:var(--шаг-inset);
+      justify-content:space-between; text-align:right;
+      padding:var(--шаг-base) var(--шаг-inset); border-top:0;
+    }
+    td + td{border-top:1px solid var(--hairLight);}
+    td::before{
+      content:attr(data-label); flex:none; text-align:left;
+      color:var(--muted); font-size:12px; font-weight:500;
+    }
+    /* Ячейка без подписи (её быть не должно) не притворяется парой. */
+    td:not([data-label])::before{content:none;}
+
+    /* ── Прочие блоки: в одну колонку ────────────────────────────────── */
+    .summary{gap:var(--шаг-card) var(--шаг-section);}
+    .project__head{flex-direction:column; gap:var(--шаг-card);}
+    .counters{flex-wrap:wrap; gap:var(--шаг-card) var(--шаг-roomy);}
+    .counters div{min-width:calc(50% - var(--шаг-roomy));}
+    .accgroups, .cat{grid-template-columns:1fr;}
+    .svc{grid-template-columns:1fr; gap:var(--шаг-icon);}
+    .stage{grid-template-columns:20px 1fr; }
+    .stage__state{grid-column:2; }
+    .project__infra{gap:var(--шаг-base) var(--шаг-card);}
   }
 `;
 
@@ -680,6 +790,42 @@ export const СКРИПТ = `
   if (выбор) {
     выбор.addEventListener('change', function () { location.hash = '#/p/' + выбор.value; });
   }
+
+  /*
+    ЯЩИК НА ТЕЛЕФОНЕ. Сайдбар уезжает за левый край и открывается кнопкой в
+    верхней полосе — то же, что у Mosco ниже lg.
+
+    Закрыть можно четырьмя способами, и это не избыточность: на телефоне
+    человек тянется к тому, что ближе к большому пальцу. Затемнение — самая
+    крупная цель, Escape — для тех, кто открыл с клавиатуры, кнопка —
+    очевидная, выбор пункта — сам собой (иначе ящик остался бы висеть поверх
+    только что открытого экрана).
+  */
+  var ЯЩИК = document.getElementById('drawer');
+  var ЗАВЕСА = document.getElementById('scrim');
+  function ящик(открыт) {
+    document.documentElement.setAttribute('data-drawer', открыт ? '1' : '0');
+    if (ЯЩИК) {
+      ЯЩИК.setAttribute('aria-expanded', открыт ? 'true' : 'false');
+      ЯЩИК.setAttribute('aria-label', открыт ? 'Закрыть меню' : 'Открыть меню');
+    }
+    if (ЗАВЕСА) { ЗАВЕСА.hidden = !открыт; }
+  }
+  function ящикОткрыт() { return document.documentElement.getAttribute('data-drawer') === '1'; }
+  if (ЯЩИК) { ЯЩИК.addEventListener('click', function () { ящик(!ящикОткрыт()); }); }
+  if (ЗАВЕСА) { ЗАВЕСА.addEventListener('click', function () { ящик(false); }); }
+  document.addEventListener('keydown', function (с) {
+    if (с.key === 'Escape' && ящикОткрыт()) { ящик(false); }
+  });
+  /* Ящик закрывается САМ при выборе пункта. Слушаем на сайдбаре целиком, а
+     не на каждой ссылке: пункты перерисовываются, а обработчик остаётся. */
+  var САЙДБАР = document.getElementById('side');
+  if (САЙДБАР) {
+    САЙДБАР.addEventListener('click', function (с) {
+      if (с.target.closest && с.target.closest('.navlink')) { ящик(false); }
+    });
+  }
+  ящик(false);
 
   /*
     ДВА РЕЖИМА САЙДБАРА: меню и проекты (владелец 29 августа).
@@ -762,12 +908,14 @@ export const СКРИПТ = `
  */
 export function оболочка({ заголовок, меню, проекты, низМеню, выборПроектов, экраны, когда, подвал }) {
   return `<title>${экр(заголовок)}</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <link rel="stylesheet" href="${ШРИФТЫ.подключение}">
 <style>${СТИЛИ}</style>
 
 <div class="shell">
   <div class="shell__row">
-    <nav class="side" aria-label="Разделы">
+    <div class="scrim" id="scrim" hidden></div>
+    <nav class="side" id="side" aria-label="Разделы">
       <div class="side__head">
         <span class="side__mark" aria-hidden="true">C</span>
         <div class="side__wsp">${выборПроектов}</div>
@@ -802,6 +950,13 @@ export function оболочка({ заголовок, меню, проекты,
     <div class="main">
       <div class="topbar">
         <header class="top">
+          <button class="top__menu" type="button" id="drawer"
+                  aria-label="Открыть меню" aria-expanded="false" aria-controls="side">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="2" y="2.5" width="12" height="11" rx="2"/><path d="M6.5 2.5v11"/>
+            </svg>
+          </button>
           <h1 class="top__title" id="crumb">Пульт</h1>
         </header>
         <div class="top__island">
