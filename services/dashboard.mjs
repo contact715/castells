@@ -27,17 +27,11 @@ import { СТАДИИ, состояниеСтадии } from './lib/stages.mjs';
 import { ДОСТУПЫ, ГРУППЫ, ХОСТИНГИ, счётДоступов, нехваткаДоступов, ключиГруппы } from './lib/access.mjs';
 import { готовностьОтчёта, следующийОтчёт, ДЕНЬ_ОТЧЁТА } from './lib/report.mjs';
 import { УСЛУГИ, ГРУППЫ_УСЛУГ, ключиГруппыУслуг, услугиПроекта } from './lib/catalog.mjs';
+import { оболочка, экран, пункт, группаМеню, экр } from './lib/shell.mjs';
 
 const КОРЕНЬ = dirname(fileURLToPath(import.meta.url));
 const ПАПКА_КЛИЕНТОВ = join(КОРЕНЬ, 'clients');
 
-/** Экранирование: в профиле лежат названия компаний, а не проверенный HTML. */
-const экр = значение =>
-  String(значение ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
 
 async function собратьПроекты() {
   const файлы = await readdir(ПАПКА_КЛИЕНТОВ);
@@ -156,7 +150,7 @@ function карточкаПроекта(п) {
         .join('')}</ul>`
     : '<p class="verdict verdict--no">Ни одна услуга не подключена — непонятно, что мы для клиента делаем.</p>';
 
-  return `<article class="project" id="p-${экр(п.id)}" data-project="${экр(п.id)}"${п.первый ? '' : ' hidden'}>
+  return `<div class="projbody">
     <header class="project__head">
       <div>
         <h2>${экр(пр.name)}</h2>
@@ -205,7 +199,7 @@ function карточкаПроекта(п) {
       <h3>Что просить</h3>
       ${просить}
     </section>
-  </article>`;
+  </div>`;
 }
 
 /**
@@ -222,17 +216,76 @@ const дополнить = п => ({
   ...п,
 });
 
-function страница(сырые, когда) {
-  const проекты = сырые.map(дополнить).map((п, и) => ({ ...п, первый: и === 0 }));
-  const всегоНехватки = new Map();
+
+/** Цвет точки в меню: по самому больному, что есть у проекта. */
+const цветПроекта = п => {
+  if (!п.проверка.ок) return 'var(--no)';
+  if (п.отчёт.можноОтправлять) return 'var(--ok)';
+  return 'var(--wait)';
+};
+
+function экранОбзора(проекты) {
+  const строки = проекты
+    .map(п => {
+      const ведём = п.услуги.filter(у => у.состояние === 'ведём').length;
+      return `<tr>
+        <td><a href="#/p/${экр(п.id)}">${экр(п.профиль.name)}</a></td>
+        <td>${ведём} из ${п.услуги.length}</td>
+        <td>${п.доступы.открыто} из ${п.доступы.всего}</td>
+        <td>${п.отчёт.наполнятся} из ${п.отчёт.всего}</td>
+        <td>${п.отчёт.можноОтправлять
+          ? '<span style="color:var(--ok)">уйдёт</span>'
+          : '<span style="color:var(--no)">нет данных</span>'}</td>
+      </tr>`;
+    })
+    .join('');
+
+  const уйдёт = проекты.filter(п => п.отчёт.можноОтправлять).length;
+
+  return `
+  <div class="summary">
+    <div><span class="lbl">Проектов</span><span class="val">${проекты.length}</span></div>
+    <div><span class="lbl">Отчёт уйдёт</span><span class="val">${уйдёт}<span style="font-size:14px;color:var(--neutral)">/${проекты.length}</span></span></div>
+    <div><span class="lbl">Ближайший отчёт</span><span class="val" style="font-size:18px">${следующийОтчёт().toISOString().slice(0, 10)}</span></div>
+  </div>
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Проект</th><th>Услуг ведём</th><th>Доступов</th><th>Разделов отчёта</th><th>Отчёт</th></tr></thead>
+      <tbody>${строки}</tbody>
+    </table>
+  </div>`;
+}
+
+function экранКаталога() {
+  return Object.entries(ГРУППЫ_УСЛУГ)
+    .map(
+      ([кг, иг]) => `<div class="catgroup">
+        <h4>${экр(иг)}</h4>
+        <ul class="cat">${ключиГруппыУслуг(кг)
+          .map(к => {
+            const у = УСЛУГИ[к];
+            return `<li class="catitem${у.делали ? '' : ' catitem--noexp'}">
+              <b>${экр(у.имя)}</b>${у.делали ? '' : '<em class="noexp">опыта нет</em>'}
+              <span>${экр(у.что)}</span>
+              <span class="src">${экр(у.источникОпыта)}</span>
+            </li>`;
+          })
+          .join('')}</ul>
+      </div>`,
+    )
+    .join('');
+}
+
+function экранДоступов(проекты) {
+  const всего = new Map();
   for (const п of проекты) {
     for (const д of п.нехватка) {
-      if (!всегоНехватки.has(д.имя)) всегоНехватки.set(д.имя, { ...д, проекты: [] });
-      всегоНехватки.get(д.имя).проекты.push(п.профиль.name);
+      if (!всего.has(д.имя)) всего.set(д.имя, { ...д, проекты: [] });
+      всего.get(д.имя).проекты.push(п.профиль.name);
     }
   }
-  const сводка = [...всегоНехватки.values()]
-    .sort((а, б) => б.блокируетСтадии.length - а.блокируетСтадии.length)
+  const строки = [...всего.values()]
+    .sort((а, б) => б.блокируетСтадии.length - а.блокируетСтадии.length || б.проекты.length - а.проекты.length)
     .map(
       д => `<tr>
         <td>${экр(д.имя)}</td>
@@ -243,244 +296,60 @@ function страница(сырые, когда) {
     )
     .join('');
 
-  const готовыхОтчётов = проекты.filter(п => п.отчёт.можноОтправлять).length;
+  return `<div class="tablewrap">
+    <table>
+      <thead><tr><th>Чего нет</th><th>У кого просить</th><th>Что встаёт</th><th>Проекты</th></tr></thead>
+      <tbody>${строки || '<tr><td colspan="4">Всё открыто.</td></tr>'}</tbody>
+    </table>
+  </div>`;
+}
 
-  return `<title>Пульт цикла SEO</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Sans+3:wght@400;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
-<style>
-  :root{
-    --ground:#FBFBFC; --surface:#FFFFFF; --sunk:#F4F6F7;
-    --ink:#141A21; --neutral:#5C6672; --hair:#E2E6EA;
-    --accent:#0E5E63;
-    --ok:#2C7A57; --no:#B0442E; --wait:#9A7223; --human:#4A5568;
-    --radius:3px;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --ground:#0F1418; --surface:#161D23; --sunk:#111820;
-      --ink:#E8EDF1; --neutral:#93A0AC; --hair:#242E36;
-      --accent:#4FB3B8;
-      --ok:#4FA37B; --no:#D9705A; --wait:#C9A14E; --human:#8996A5;
-    }
-  }
-  :root[data-theme="dark"]{
-    --ground:#0F1418; --surface:#161D23; --sunk:#111820;
-    --ink:#E8EDF1; --neutral:#93A0AC; --hair:#242E36;
-    --accent:#4FB3B8;
-    --ok:#4FA37B; --no:#D9705A; --wait:#C9A14E; --human:#8996A5;
-  }
+function страница(сырые, когда) {
+  const проекты = сырые.map(дополнить);
 
-  *{box-sizing:border-box;}
-  body{
-    background:var(--ground); color:var(--ink);
-    font-family:"Source Sans 3",system-ui,-apple-system,sans-serif;
-    font-size:15px; line-height:1.55; margin:0; padding:40px 24px 72px;
-  }
-  .wrap{max-width:1080px; margin:0 auto;}
-
-  h1,h2,h3,h4{font-family:Archivo,system-ui,sans-serif; text-wrap:balance; margin:0;}
-  h1{font-size:30px; font-weight:700; letter-spacing:-0.01em;}
-  h2{font-size:21px; font-weight:600;}
-  h3{font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.09em; color:var(--neutral);}
-  h4{font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--neutral); margin-bottom:8px;}
-  code,.mono{font-family:"IBM Plex Mono",ui-monospace,monospace; font-size:.86em;}
-  a{color:var(--accent);}
-  .muted{color:var(--neutral);}
-
-  header.top{border-bottom:2px solid var(--ink); padding-bottom:16px; margin-bottom:8px;}
-  header.top p{color:var(--neutral); margin:6px 0 0; max-width:64ch;}
-  .stamp{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--neutral);}
-
-  .picker{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:20px 0 0;}
-  .picker label{font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--neutral);}
-  .picker select{
-    font-family:Archivo,system-ui,sans-serif; font-size:17px; font-weight:600;
-    color:var(--ink); background:var(--surface);
-    border:1px solid var(--hair); border-radius:var(--radius);
-    padding:7px 34px 7px 12px; min-width:260px; cursor:pointer;
-    appearance:none;
-    background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);
-    background-position:calc(100% - 17px) calc(50% + 2px),calc(100% - 12px) calc(50% + 2px);
-    background-size:5px 5px,5px 5px; background-repeat:no-repeat;
-  }
-  .picker select:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
-  .picker__hint{font-size:12.5px; color:var(--neutral);}
-
-  .summary{display:flex; flex-wrap:wrap; gap:28px; padding:16px 0 24px; border-bottom:1px solid var(--hair); margin-bottom:32px;}
-  .summary div{display:flex; flex-direction:column;}
-  .summary dt,.summary .lbl{font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--neutral);}
-  .summary .val{font-family:Archivo,sans-serif; font-size:26px; font-weight:700; font-variant-numeric:tabular-nums;}
-
-  .project{background:var(--surface); border:1px solid var(--hair); border-radius:var(--radius); padding:24px; margin-bottom:28px;}
-  .project__head{display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between; align-items:flex-start; border-bottom:1px solid var(--hair); padding-bottom:16px;}
-  .project__meta{margin:4px 0 0; display:flex; gap:12px; align-items:baseline; font-size:13px;}
-  .counters{display:flex; gap:22px; margin:0;}
-  .counters div{display:flex; flex-direction:column;}
-  .counters dt{font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--neutral);}
-  .counters dd{margin:0; font-family:Archivo,sans-serif; font-weight:700; font-size:22px; font-variant-numeric:tabular-nums;}
-  .counters dd span{font-weight:500; font-size:14px; color:var(--neutral);}
-
-  .project__infra{display:flex; flex-wrap:wrap; gap:24px; font-size:13px; color:var(--neutral); margin:14px 0 0;}
-  .project__infra b{color:var(--ink); font-weight:600;}
-  .alarm{background:color-mix(in srgb, var(--no) 12%, transparent); border-left:3px solid var(--no); padding:10px 12px; margin:14px 0 0; font-size:14px;}
-
-  .block{margin-top:26px;}
-  .block h3 .sub{text-transform:none; letter-spacing:0; font-weight:400; margin-left:10px; color:var(--neutral);}
-
-  .stages{list-style:none; margin:12px 0 0; padding:0; display:grid; gap:1px; background:var(--hair); border:1px solid var(--hair); border-radius:var(--radius); overflow:hidden;}
-  .stage{background:var(--surface); padding:10px 12px; display:grid; grid-template-columns:26px 1fr auto; gap:10px; align-items:baseline; border-left:3px solid transparent;}
-  .stage__n{font-family:"IBM Plex Mono",monospace; color:var(--neutral); font-size:13px;}
-  .stage__name{font-weight:600;}
-  .stage__state{font-size:11px; text-transform:uppercase; letter-spacing:.07em;}
-  .stage__why{grid-column:2 / -1; margin:2px 0 0; font-size:13px; color:var(--neutral);}
-  .stage--ok{border-left-color:var(--ok);} .stage--ok .stage__state{color:var(--ok);}
-  .stage--ext{border-left-color:var(--accent);} .stage--ext .stage__state{color:var(--accent);}
-  .stage--wait{border-left-color:var(--no);} .stage--wait .stage__state{color:var(--no);}
-  .stage--human{border-left-color:var(--human);} .stage--human .stage__state{color:var(--human);}
-
-  .accgroups{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:18px; margin-top:12px;}
-  .chips{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px;}
-  .chip{display:inline-flex; align-items:center; gap:6px; font-size:12.5px; padding:3px 9px; border:1px solid var(--hair); border-radius:2px; background:var(--sunk); cursor:help;}
-  .chip__dot{width:7px; height:7px; border-radius:50%; flex:none;}
-  .chip--on{color:var(--ink);} .chip--on .chip__dot{background:var(--ok);}
-  .chip--off{color:var(--neutral);} .chip--off .chip__dot{background:var(--no); opacity:.65;}
-
-  .svcs{list-style:none; margin:12px 0 0; padding:0; display:grid; gap:4px;}
-  .svc{display:grid; grid-template-columns:1fr auto auto; gap:14px; align-items:baseline; padding:8px 10px; background:var(--sunk); border-left:3px solid var(--hair); font-size:13.5px;}
-  .svc--run{border-left-color:var(--ok);}
-  .svc--done{border-left-color:var(--human);}
-  .svc--talk{border-left-color:var(--wait);}
-  .svc__name{font-weight:600;}
-  .svc__state{font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--neutral);}
-  .svc__note{color:var(--neutral); font-size:12.5px;}
-  .noexp{font-style:normal; font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--no); border:1px solid currentColor; padding:1px 5px; border-radius:2px; margin-left:8px;}
-
-  .catgroup{margin-top:16px;}
-  .cat{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:10px;}
-  .catitem{background:var(--sunk); border:1px solid var(--hair); border-radius:2px; padding:10px 12px; display:flex; flex-direction:column; gap:3px; font-size:13px;}
-  .catitem b{font-family:Archivo,sans-serif;}
-  .catitem span{color:var(--neutral);}
-  .catitem .src{font-size:11.5px; font-style:italic;}
-  .catitem--noexp{border-style:dashed;}
-
-  .reps{list-style:none; margin:12px 0 0; padding:0; display:grid; gap:4px;}
-  .rep{display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; padding:7px 10px; background:var(--sunk); border-left:3px solid var(--hair); font-size:13.5px;}
-  .rep--on{border-left-color:var(--ok);}
-  .rep--off{border-left-color:var(--no);}
-  .rep__name{font-weight:600;}
-  .rep__name em{font-style:normal; font-weight:400; font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--neutral); margin-left:8px;}
-  .rep__note{color:var(--neutral);}
-
-  .verdict{margin:12px 0 0; font-size:14px; padding:9px 12px; border-radius:2px;}
-  .verdict--ok{background:color-mix(in srgb, var(--ok) 12%, transparent); color:var(--ok);}
-  .verdict--no{background:color-mix(in srgb, var(--no) 10%, transparent); color:var(--no);}
-
-  table{border-collapse:collapse; width:100%; margin-top:12px; font-size:13.5px;}
-  .tablewrap{overflow-x:auto;}
-  th{text-align:left; font-family:Archivo,sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--neutral); font-weight:600; padding:6px 10px 6px 0; border-bottom:1px solid var(--hair);}
-  td{padding:7px 10px 7px 0; border-bottom:1px solid var(--hair); vertical-align:top;}
-  tr:last-child td{border-bottom:none;}
-
-  footer{margin-top:40px; padding-top:18px; border-top:1px solid var(--hair); font-size:13px; color:var(--neutral); max-width:70ch;}
-  @media (max-width:640px){
-    .counters{gap:16px;} .project{padding:16px;}
-  }
-</style>
-
-<div class="wrap">
-  <header class="top">
-    <h1>Пульт цикла SEO</h1>
-    <p>Состояние проектов: какие стадии идут, каких доступов нет и уйдёт ли в этом месяце отчёт клиенту.</p>
-    <p class="stamp">собрано ${экр(когда)} из профилей в services/clients</p>
-  </header>
-
-  <div class="picker">
-    <label for="proj">Проект</label>
-    <select id="proj">${проекты
-      .map(п => `<option value="${экр(п.id)}">${экр(п.профиль?.name || п.id)}</option>`)
-      .join('')}</select>
-    <span class="picker__hint">${проекты.length} ${проекты.length === 1 ? 'проект' : 'проекта'} в работе</span>
-  </div>
-
-  <div class="summary">
-    <div><span class="lbl">Проектов</span><span class="val">${проекты.length}</span></div>
-    <div><span class="lbl">Отчёт уйдёт</span><span class="val">${готовыхОтчётов}<span style="font-size:14px;color:var(--neutral)">/${проекты.length}</span></span></div>
-    <div><span class="lbl">Ближайший отчёт</span><span class="val" style="font-size:18px">${следующийОтчёт().toISOString().slice(0, 10)}</span></div>
-  </div>
-
-  ${проекты.map(карточкаПроекта).join('')}
-
-  <section class="block">
-    <h3>Каталог услуг<span class="sub">что мы вообще делаем</span></h3>
-    ${Object.entries(ГРУППЫ_УСЛУГ)
-      .map(
-        ([кг, иг]) => `<div class="catgroup">
-          <h4>${экр(иг)}</h4>
-          <ul class="cat">${ключиГруппыУслуг(кг)
-            .map(к => {
-              const у = УСЛУГИ[к];
-              return `<li class="catitem${у.делали ? '' : ' catitem--noexp'}">
-                <b>${экр(у.имя)}</b>${у.делали ? '' : '<em class="noexp">опыта нет</em>'}
-                <span>${экр(у.что)}</span>
-                <span class="src">${экр(у.источникОпыта)}</span>
-              </li>`;
-            })
-            .join('')}</ul>
-        </div>`,
+  const меню =
+    группаМеню('Обзор') +
+    пункт({ адрес: 'overview', имя: 'Все проекты', метка: String(проекты.length) }) +
+    пункт({ адрес: 'access', имя: 'Чего не хватает' }) +
+    пункт({ адрес: 'catalog', имя: 'Каталог услуг', метка: String(Object.keys(УСЛУГИ).length) }) +
+    группаМеню('Проекты') +
+    проекты
+      .map(п =>
+        пункт({
+          адрес: `p/${п.id}`,
+          имя: п.профиль.name,
+          метка: `${п.доступы.открыто}/${п.доступы.всего}`,
+          точка: цветПроекта(п),
+        }),
       )
-      .join('')}
-  </section>
+      .join('');
 
-  <section class="block">
-    <h3>Что просить, по всем проектам</h3>
-    <div class="tablewrap">
-      <table>
-        <thead><tr><th>Чего нет</th><th>У кого</th><th>Что встаёт</th><th>Проекты</th></tr></thead>
-        <tbody>${сводка || '<tr><td colspan="4">Всё открыто.</td></tr>'}</tbody>
-      </table>
-    </div>
-  </section>
+  const выбор = `<label for="proj" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Проект</label>
+    <select id="proj">${проекты
+      .map(п => `<option value="${экр(п.id)}">${экр(п.профиль.name)}</option>`)
+      .join('')}</select>`;
 
-  <script>
-    // Переключатель проектов. Все карточки лежат в странице, показывается одна:
-    // так переключение мгновенное и работает без сети.
-    (function () {
-      var select = document.getElementById('proj');
-      if (!select) return;
-      var КЛЮЧ = 'castells-services-project';
+  const экраны =
+    экран('overview', 'Все проекты',
+      'Что ведём, каких доступов не хватает и уйдёт ли клиенту отчёт в этом месяце.',
+      экранОбзора(проекты), true) +
+    экран('access', 'Чего не хватает',
+      'Сведено по всем проектам и отсортировано по тому, сколько стадий встаёт без этого доступа.',
+      экранДоступов(проекты)) +
+    экран('catalog', 'Каталог услуг',
+      'Собран по доске «Направления» в Monday. Пунктиром — то, чего мы ещё не делали.',
+      экранКаталога()) +
+    проекты
+      .map(п => экран(`p/${п.id}`, п.профиль.name, null, карточкаПроекта(п)))
+      .join('');
 
-      function показать(id) {
-        var нашлась = false;
-        document.querySelectorAll('[data-project]').forEach(function (карточка) {
-          var своя = карточка.dataset.project === id;
-          карточка.hidden = !своя;
-          if (своя) нашлась = true;
-        });
-        return нашлась;
-      }
-
-      // Запомненный выбор может указывать на проект, которого уже нет:
-      // тогда молча остаёмся на первом, а не показываем пустую страницу.
-      try {
-        var сохранён = localStorage.getItem(КЛЮЧ);
-        if (сохранён && показать(сохранён)) select.value = сохранён;
-      } catch (e) { /* приватное окно или запрет на хранение — не беда */ }
-
-      select.addEventListener('change', function () {
-        показать(select.value);
-        try { localStorage.setItem(КЛЮЧ, select.value); } catch (e) {}
-      });
-    })();
-  </script>
-
-  <footer>
-    Пульт собирается из профилей проектов, а не ведётся руками: разойтись с ними
-    ему негде. Чтобы обновить — поправить профиль в <code>services/clients</code>
-    и запустить <code>node services/dashboard.mjs</code>.
-    Полоски «готовность в процентах» здесь намеренно нет: оставшееся упирается
-    в чужие решения, и проценты создавали бы ощущение движения там, где его нет.
-  </footer>
-</div>`;
+  return оболочка({
+    заголовок: 'Пульт Castells',
+    меню,
+    выборПроектов: выбор,
+    экраны,
+    когда,
+  });
 }
 
 async function главная() {
