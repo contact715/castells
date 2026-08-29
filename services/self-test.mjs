@@ -452,5 +452,56 @@ console.log('Самопроверки цикла SEO\n');
   сервер.close();
 }
 
+// --- вход по паролю ---
+{
+  // Тот же сервер, но с заданным паролем. Пароль намеренно латинский:
+  // при первой проверке был взят кириллический, и Node отверг его в адресе
+  // и в заголовке с ошибкой 400. Настоящий пароль тоже латинский, но
+  // случай стоит помнить — он выглядел как поломка сервера, а был поломкой
+  // проверки.
+  const прежний = process.env.DASHBOARD_TOKEN;
+  process.env.DASHBOARD_TOKEN = 'proba-123';
+  const { поднять: поднятьСПаролем } = await import('./server.mjs?сПаролем=1');
+  const сервер = await поднятьСПаролем(0);
+  const порт = сервер.address().port;
+  const взять = (путь, заголовки = {}) =>
+    fetch(`http://127.0.0.1:${порт}${путь}`, { headers: заголовки, redirect: 'manual' });
+
+  const форма = await взять('/', { accept: 'text/html' });
+  const телоФормы = await форма.text();
+  проверка('без пароля человек видит форму входа, а не голый отказ',
+    форма.status === 401 && телоФормы.includes('<form'));
+  проверка('в форме поле пароля скрыто', телоФормы.includes('type="password"'));
+
+  const программе = await взять('/api/projects', { accept: 'application/json' });
+  проверка('без пароля программа получает отказ', программе.status === 401);
+
+  const поСсылке = await взять('/?token=proba-123', { accept: 'text/html' });
+  проверка('вход по ссылке уводит на чистый адрес', поСсылке.status === 302);
+  const печенье = поСсылке.headers.get('set-cookie') || '';
+  проверка('пароль кладётся в печенье', печенье.includes('castells_dash='));
+  проверка('печенье закрыто от скриптов и от чужих сайтов',
+    печенье.includes('HttpOnly') && печенье.includes('SameSite=Lax') && печенье.includes('Secure'));
+  проверка('пароль не остаётся в адресе', (поСсылке.headers.get('location') || '') === '/');
+
+  const сПеченьем = await взять('/', { accept: 'text/html', cookie: 'castells_dash=proba-123' });
+  проверка('с печеньем пульт открывается', сПеченьем.status === 200);
+  проверка('с паролем предупреждение об открытом доступе пропадает',
+    !(await сПеченьем.text()).includes('Пульт открыт всем'));
+
+  const чужое = await взять('/api/projects', { cookie: 'castells_dash=wrong-one' });
+  проверка('чужое печенье не пускает', чужое.status === 401);
+
+  const заголовком = await взять('/api/projects', { authorization: 'Bearer proba-123' });
+  проверка('программа входит заголовком', заголовком.status === 200);
+
+  const живость = await взять('/health');
+  проверка('проверка живости доступна без пароля', живость.status === 200);
+
+  сервер.close();
+  if (прежний === undefined) delete process.env.DASHBOARD_TOKEN;
+  else process.env.DASHBOARD_TOKEN = прежний;
+}
+
 console.log(`\n${всего - упало}/${всего} проверок пройдено`);
 process.exit(упало ? 1 : 0);

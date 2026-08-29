@@ -43,13 +43,67 @@ const ПОРТ = Number(process.env.PORT) || 3000;
 */
 const ПАРОЛЬ = process.env.DASHBOARD_TOKEN || '';
 
+/** Имя печенья, в котором держится вход. */
+const ПЕЧЕНЬЕ = 'castells_dash';
+
+const разобратьПеченье = строка =>
+  Object.fromEntries(
+    String(строка || '')
+      .split(';')
+      .map(кусок => кусок.trim().split('='))
+      .filter(пара => пара.length === 2)
+      .map(([имя, значение]) => [имя, decodeURIComponent(значение)]),
+  );
+
+/**
+ * Пускать ли. Три способа, в порядке убывания удобства:
+ *   печенье      — обычный человек, уже вошедший;
+ *   заголовок    — программа, которая ходит в /api/projects;
+ *   ?token=      — первый вход по ссылке, дальше он меняется на печенье.
+ *
+ * Почему появилось печенье. Сначала вход был только через ?token= в адресе.
+ * Так пульт открывался, но пароль оставался в истории браузера и в адресной
+ * строке, а при каждом переходе его надо было тащить за собой. Инструментом,
+ * которым неудобно пользоваться, не пользуются.
+ */
 const пропустить = запрос => {
   if (!ПАРОЛЬ) return true;
-  const заголовок = запрос.headers.authorization || '';
-  if (заголовок === `Bearer ${ПАРОЛЬ}`) return true;
-  const адрес = new URL(запрос.url, 'http://localhost');
-  return адрес.searchParams.get('token') === ПАРОЛЬ;
+  if ((запрос.headers.authorization || '') === `Bearer ${ПАРОЛЬ}`) return true;
+  if (разобратьПеченье(запрос.headers.cookie)[ПЕЧЕНЬЕ] === ПАРОЛЬ) return true;
+  return new URL(запрос.url, 'http://localhost').searchParams.get('token') === ПАРОЛЬ;
 };
+
+/** Пришёл ли пароль именно строкой запроса — тогда его надо убрать из адреса. */
+const парольИзАдреса = запрос =>
+  new URL(запрос.url, 'http://localhost').searchParams.get('token') === ПАРОЛЬ;
+
+/**
+ * Страница входа. Простая форма вместо голого «401»: по голому коду человек
+ * не понимает, что делать, и пишет «у меня не открывается».
+ */
+const СТРАНИЦА_ВХОДА = `<!doctype html><meta charset="utf-8">
+<title>Пульт Castells</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root{color-scheme:light dark;--bg:#F1F4F7;--surface:#fff;--ink:#051F2F;--second:#647285;--line:rgba(0,0,0,.10);--accent:#18181B;}
+  @media (prefers-color-scheme:dark){:root{--bg:#171717;--surface:#212121;--ink:#fff;--second:#D6D6D6;--line:rgba(255,255,255,.10);--accent:#08A2FF;}}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);
+       font:15px/1.5 "DM Sans",system-ui,-apple-system,sans-serif;padding:24px;}
+  form{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:28px;width:100%;max-width:360px;}
+  h1{font-size:19px;margin:0 0 6px;}
+  p{color:var(--second);margin:0 0 18px;font-size:13.5px;}
+  label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--second);margin-bottom:6px;}
+  input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit;}
+  button{margin-top:14px;width:100%;padding:10px;border:0;border-radius:6px;background:var(--accent);color:#fff;font:600 14px "DM Sans",system-ui,sans-serif;cursor:pointer;}
+  input:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
+</style>
+<form method="get" action="/">
+  <h1>Пульт Castells</h1>
+  <p>Введите пароль доступа. Он запомнится в этом браузере.</p>
+  <label for="t">Пароль</label>
+  <input id="t" name="token" type="password" autofocus autocomplete="current-password">
+  <button type="submit">Войти</button>
+</form>`;
 
 const ПРЕДУПРЕЖДЕНИЕ = `<div style="background:#B0442E;color:#fff;padding:10px 16px;font:600 13px/1.4 system-ui;">
   Пульт открыт всем, кто знает адрес: пароль не задан.
@@ -109,7 +163,25 @@ export async function обработать(запрос, ответ) {
   }
 
   if (!пропустить(запрос)) {
-    return отдать(ответ, 401, 'text/plain; charset=utf-8', 'Нужен пароль: ?token=… или заголовок Authorization');
+    // Для программ — понятный текст, для людей — форма. Различаем по тому,
+    // просит ли клиент HTML.
+    const этоЧеловек = (запрос.headers.accept || '').includes('text/html');
+    return этоЧеловек
+      ? отдать(ответ, 401, 'text/html; charset=utf-8', СТРАНИЦА_ВХОДА)
+      : отдать(ответ, 401, 'text/plain; charset=utf-8', 'Нужен пароль: заголовок Authorization: Bearer …');
+  }
+
+  /*
+    Пароль пришёл строкой запроса — кладём его в печенье и уводим на чистый
+    адрес. Так он не остаётся ни в адресной строке, ни в истории, ни в
+    журналах посредников, а человеку больше не нужно таскать его за собой.
+  */
+  if (парольИзАдреса(запрос) && путь === '/') {
+    ответ.writeHead(302, {
+      Location: '/',
+      'Set-Cookie': `${ПЕЧЕНЬЕ}=${encodeURIComponent(ПАРОЛЬ)}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=2592000`,
+    });
+    return ответ.end();
   }
 
   try {
