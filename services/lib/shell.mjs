@@ -29,6 +29,26 @@ export const экр = значение =>
     .replace(/>/g, '&gt;')
     .replace(/"/g, '&quot;');
 
+/*
+  Значки. Рисуем сами, простыми линиями, и красим через currentColor — тогда
+  они работают в обеих темах и в свёрнутом сайдбаре без второго набора.
+
+  Взять значки Mosco не удалось: агент отдаёт текст исходника, а их значки —
+  это библиотека компонентов, которую так не вытащишь. Поэтому здесь НАШИ
+  значки в их размере (16px, линия 1.5). Это помечено, а не выдано за чужое.
+*/
+const зн = путь =>
+  `<svg class="navlink__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" ` +
+  `stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${путь}</svg>`;
+
+export const ЗНАЧКИ = {
+  сводка: зн('<rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/>'),
+  доступы: зн('<circle cx="5.5" cy="8" r="2.5"/><path d="M8 8h6M12 8v2.5"/>'),
+  каталог: зн('<path d="M2 4h12M2 8h12M2 12h8"/>'),
+  проект: зн('<path d="M2 4.5A1.5 1.5 0 0 1 3.5 3h2.2l1.2 1.6h5.6A1.5 1.5 0 0 1 14 6.1v5.4A1.5 1.5 0 0 1 12.5 13h-9A1.5 1.5 0 0 1 2 11.5z"/>'),
+  настройки: зн('<circle cx="8" cy="8" r="2"/><path d="M8 1.5v2M8 12.5v2M14.5 8h-2M3.5 8h-2M12.6 3.4l-1.4 1.4M4.8 11.2l-1.4 1.4M12.6 12.6l-1.4-1.4M4.8 4.8L3.4 3.4"/>'),
+};
+
 export const СТИЛИ = `
   ${темы()}
 
@@ -64,7 +84,8 @@ export const СТИЛИ = `
     color:#fff; font:700 11px/1 ${ШРИФТЫ.заголовки};
   }
   .side__name{font:700 14px/1.2 ${ШРИФТЫ.заголовки}; letter-spacing:-0.01em;}
-  .side__nav{padding:14px 10px; display:flex; flex-direction:column; gap:2px;}
+  .side__nav{padding:10px 8px; display:flex; flex-direction:column; gap:1px; flex:1;}
+  .side__bottom{padding:8px; border-top:1px solid var(--hair); display:flex; flex-direction:column; gap:1px;}
   .side__group{
     font-size:10px; text-transform:uppercase; letter-spacing:.09em; color:var(--neutral);
     padding:14px 8px 6px; font-family:${ШРИФТЫ.заголовки}; font-weight:600;
@@ -87,7 +108,45 @@ export const СТИЛИ = `
     font-family:${ШРИФТЫ.моно}; font-size:11px; color:var(--neutral);
     font-variant-numeric:tabular-nums;
   }
-  .navlink__dot{width:7px; height:7px; border-radius:50%; flex:none;}
+  .navlink__dot{width:6px; height:6px; border-radius:50%; flex:none;}
+  .navlink__icon{width:16px; height:16px; flex:none; opacity:.75;}
+  .navlink[aria-current="page"] .navlink__icon{opacity:1;}
+
+  /* Раскрывающаяся группа — как у них: заголовок кликабелен, дети с отступом. */
+  .grp{display:flex; flex-direction:column;}
+  .grp__head{
+    display:flex; align-items:center; gap:7px; width:100%;
+    padding:7px 10px; border:0; background:none; cursor:pointer;
+    font:600 10px/1 ${ШРИФТЫ.заголовки}; letter-spacing:.09em; text-transform:uppercase;
+    color:var(--neutral); border-radius:var(--радиус);
+  }
+  .grp__head:hover{background:var(--sunk);}
+  .grp__caret{margin-left:auto; transition:transform .15s; opacity:.6;}
+  .grp[data-open="0"] .grp__caret{transform:rotate(-90deg);}
+  .grp[data-open="0"] .grp__kids{display:none;}
+  .grp__kids{display:flex; flex-direction:column; gap:1px; padding-left:6px;}
+
+  /* Свёрнутая полоса: остаются только значки. Ширина и поведение — из Mosco. */
+  :root[data-rail="1"] .shell{grid-template-columns:var(--свёрнутый) 1fr;}
+  :root[data-rail="1"] .side__name,
+  :root[data-rail="1"] .navlink__tag,
+  :root[data-rail="1"] .navlink__label,
+  :root[data-rail="1"] .grp__head span,
+  :root[data-rail="1"] .grp__caret,
+  :root[data-rail="1"] .side__foot{display:none;}
+  :root[data-rail="1"] .side__brand{justify-content:center; padding:0;}
+  :root[data-rail="1"] .navlink{justify-content:center; padding:9px 0;}
+  :root[data-rail="1"] .grp__head{justify-content:center; padding:6px 0;}
+  :root[data-rail="1"] .grp__kids{padding-left:0;}
+  :root[data-rail="1"] .navlink__dot{position:absolute; margin-left:18px; margin-top:-12px;}
+  :root[data-rail="1"] .navlink > span:first-child{justify-content:center;}
+
+  .rail{
+    display:flex; align-items:center; gap:8px; width:100%;
+    padding:7px 10px; border:0; background:none; cursor:pointer;
+    color:var(--neutral); font:400 12px/1 ${ШРИФТЫ.текст}; border-radius:var(--радиус);
+  }
+  .rail:hover{background:var(--sunk); color:var(--ink);}
   .side__foot{margin-top:auto; padding:14px 18px; border-top:1px solid var(--hair); font-size:11.5px; color:var(--neutral);}
 
   .main{display:flex; flex-direction:column; min-width:0;}
@@ -247,6 +306,40 @@ export const СКРИПТ = `
     выбор.addEventListener('change', function () { location.hash = '#/p/' + выбор.value; });
   }
 
+  /* Раскрывающиеся группы: состояние помнится, иначе при каждом переходе
+     сайдбар схлопывался бы и ходить по нему стало бы неудобно. */
+  Array.prototype.forEach.call(document.querySelectorAll('.grp'), function (гр) {
+    var ключ = 'castells-grp-' + гр.dataset.group;
+    try {
+      var было = localStorage.getItem(ключ);
+      if (было !== null) {
+        гр.dataset.open = было;
+        гр.querySelector('.grp__head').setAttribute('aria-expanded', было === '1' ? 'true' : 'false');
+      }
+    } catch (e) {}
+    гр.querySelector('.grp__head').addEventListener('click', function () {
+      var стало = гр.dataset.open === '1' ? '0' : '1';
+      гр.dataset.open = стало;
+      this.setAttribute('aria-expanded', стало === '1' ? 'true' : 'false');
+      try { localStorage.setItem(ключ, стало); } catch (e) {}
+    });
+  });
+
+  /* Свёрнутая полоса. Ширина и само поведение взяты из Project X. */
+  var кнопкаПолосы = document.getElementById('rail');
+  if (кнопкаПолосы) {
+    var КЛЮЧ_ПОЛОСЫ = 'castells-rail';
+    function полоса(вкл) {
+      document.documentElement.setAttribute('data-rail', вкл ? '1' : '0');
+      кнопкаПолосы.setAttribute('aria-label', вкл ? 'Развернуть меню' : 'Свернуть меню');
+      try { localStorage.setItem(КЛЮЧ_ПОЛОСЫ, вкл ? '1' : '0'); } catch (e) {}
+    }
+    try { if (localStorage.getItem(КЛЮЧ_ПОЛОСЫ) === '1') полоса(true); } catch (e) {}
+    кнопкаПолосы.addEventListener('click', function () {
+      полоса(document.documentElement.getAttribute('data-rail') !== '1');
+    });
+  }
+
   var начальный = изАдреса();
   if (!начальный) { try { начальный = localStorage.getItem(КЛЮЧ); } catch (e) {} }
   показать(начальный || '', false);
@@ -258,7 +351,7 @@ export const СКРИПТ = `
  *
  * @param {object} части — { заголовок, разделыМеню, проекты, экраны, когда, подвал }
  */
-export function оболочка({ заголовок, меню, выборПроектов, экраны, когда, подвал }) {
+export function оболочка({ заголовок, меню, низМеню, выборПроектов, экраны, когда, подвал }) {
   return `<title>${экр(заголовок)}</title>
 <link rel="stylesheet" href="${ШРИФТЫ.подключение}">
 <style>${СТИЛИ}</style>
@@ -270,6 +363,16 @@ export function оболочка({ заголовок, меню, выборПр�
       <span class="side__name">Castells</span>
     </div>
     <div class="side__nav">${меню}</div>
+    <div class="side__bottom">
+      ${низМеню || ''}
+      <button class="rail" type="button" id="rail" aria-label="Свернуть меню">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor"
+             stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+          <rect x="2" y="3" width="12" height="10" rx="1.5"/><path d="M6.5 3v10"/>
+        </svg>
+        <span class="navlink__label">Свернуть</span>
+      </button>
+    </div>
     <div class="side__foot">
       Собрано из профилей<br>в <code>services/clients</code>
     </div>
@@ -293,13 +396,30 @@ ${подвал || ''}`;
 }
 
 /** Пункт бокового меню. */
-export const пункт = ({ адрес, имя, метка, точка }) =>
-  `<a class="navlink" href="#/${экр(адрес)}" data-title="${экр(имя)}">
-    <span title="${экр(имя)}">${точка ? `<span class="navlink__dot" style="background:${точка}"></span>` : ''}${экр(имя)}</span>
+export const пункт = ({ адрес, имя, метка, точка, значок }) =>
+  `<a class="navlink" href="#/${экр(адрес)}" data-title="${экр(имя)}" title="${экр(имя)}">
+    <span>${значок || ''}${точка ? `<span class="navlink__dot" style="background:${точка}"></span>` : ''}<span class="navlink__label">${экр(имя)}</span></span>
     ${метка ? `<span class="navlink__tag">${экр(метка)}</span>` : ''}
   </a>`;
 
-/** Заголовок группы в боковом меню. */
+/**
+ * Раскрывающаяся группа — как в сайдбаре Project X: заголовок кликабелен,
+ * дети прячутся. Состояние запоминается, иначе при каждом переходе всё
+ * схлопывалось бы обратно и по сайдбару стало бы неудобно ходить.
+ */
+export const группа = ({ ключ, имя, значок, дети, открыта = true }) =>
+  `<div class="grp" data-group="${экр(ключ)}" data-open="${открыта ? '1' : '0'}">
+    <button class="grp__head" type="button" aria-expanded="${открыта ? 'true' : 'false'}">
+      ${значок || ''}<span>${экр(имя)}</span>
+      <svg class="grp__caret" width="10" height="10" viewBox="0 0 10 10" fill="none"
+           stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+        <path d="M2.5 4l2.5 2.5L7.5 4"/>
+      </svg>
+    </button>
+    <div class="grp__kids">${дети}</div>
+  </div>`;
+
+/** Простой заголовок раздела, без сворачивания. */
 export const группаМеню = имя => `<div class="side__group">${экр(имя)}</div>`;
 
 /**
