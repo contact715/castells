@@ -405,11 +405,11 @@ const IndustryPage: React.FC<IndustryPageProps> = ({ onBack, onNavigate, industr
                         const faqs = [
                             {
                                 question: `What marketing strategies work best for ${displayName}?`,
-                                answer: `For ${displayName.toLowerCase()} businesses, we focus on local SEO, geo-targeted advertising, industry-specific messaging, and conversion-optimized landing pages. Our strategies are tailored to your industry's unique customer journey.`
+                                answer: `For ${displayName.toLowerCase()} businesses it's usually the same four pieces: the site people land on, the ads that bring them, the local profile they find you through, and the follow-up that turns a lead into a booked job. Which one matters most depends on where your business is losing people right now.`
                             },
                             {
                                 question: `How do you target customers in the ${displayName} industry?`,
-                                answer: `We use data-driven targeting including location-based campaigns, industry-specific keywords, competitor analysis, and customer behavior insights to reach your ideal customers at the right time.`
+                                answer: `Mostly by location and by what people actually search for: Google and Meta ads narrowed to your service area, plus the keywords people type when they need a ${displayName.toLowerCase()} business. Nothing more exotic than that.`
                             },
                             {
                                 question: `What results can I expect for my ${displayName} business?`,

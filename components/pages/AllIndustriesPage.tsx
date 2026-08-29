@@ -272,12 +272,12 @@ const AllIndustriesPage: React.FC<AllIndustriesPageProps> = ({ onBack, onNavigat
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: Target, title: 'Precise Targeting', desc: 'We know exactly who your ideal customers are and where to find them online.' },
+              { icon: Target, title: 'Precise Targeting', desc: "We've built campaigns in your industry before, so we're not guessing where your customers spend time online." },
               { icon: TrendingUp, title: 'Real Playbooks', desc: 'The same setup we run for our own clients: site, ads, follow-up. See the work, not a promise.' },
-              { icon: Clock, title: 'Faster Results', desc: 'No learning curve. We hit the ground running with industry-specific campaigns.' },
-              { icon: Users, title: 'Competitor Intel', desc: 'Deep knowledge of your competitive landscape and how to outmaneuver them.' },
-              { icon: Scale, title: 'Realistic Benchmarks', desc: 'We know what good looks like in your industry and set achievable targets.' },
-              { icon: Sparkles, title: 'Industry Networks', desc: 'Connections with vendors, partners, and media specific to your vertical.' },
+              { icon: Clock, title: 'No Ramp-Up Time', desc: "No time spent learning your industry from scratch. We start from campaigns already built for it." },
+              { icon: Users, title: 'Competitor Awareness', desc: "We look at what other businesses in your industry are doing, so your campaign isn't built blind." },
+              { icon: Scale, title: 'Realistic Benchmarks', desc: "We set goals based on what we've seen work for similar businesses, not a number pulled from nowhere." },
+              { icon: Sparkles, title: 'Industry Networks', desc: "Where we've got vendor or partner contacts in your industry, we'll use them. Where we don't, we'll say so." },
             ].map((item, index) => {
               const ItemIcon = item.icon;
               return (
