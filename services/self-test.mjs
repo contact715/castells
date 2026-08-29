@@ -14,19 +14,35 @@
        отдельный список.
 */
 
-import { readFile } from 'node:fs/promises';
-import { slugify, проверитьПрофиль, числаБезИсточника } from './lib/profile.mjs';
-import { собратьПлан, путиДляЗамера, ПРЕДЕЛ_ЗАГОЛОВКА, ПРЕДЕЛ_ОПИСАНИЯ, ПОРОГ_ТОНКИХ } from './lib/plan.mjs';
-import { СТАДИИ, преградыСтадии } from './lib/stages.mjs';
-import { ДОСТУПЫ, ХОСТИНГИ, счётДоступов, нехваткаДоступов } from './lib/access.mjs';
-import { готовностьОтчёта, следующийОтчёт, РАЗДЕЛЫ, ДЕНЬ_ОТЧЁТА } from './lib/report.mjs';
+import { readFile, readdir } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { fileURLToPath } from 'node:url';
+import { ПАПКА_КЛИЕНТОВ } from './store/clients.mjs';
+
+/** Все .mjs внутри папки, включая вложенные (нужно проверке границ слоёв). */
+async function собратьФайлы(папка) {
+  const записи = await readdir(fileURLToPath(папка), { withFileTypes: true });
+  const файлы = [];
+  for (const з of записи) {
+    const путь = fileURLToPath(new URL(з.name + (з.isDirectory() ? '/' : ''), папка));
+    if (з.isDirectory()) файлы.push(...await собратьФайлы(new URL(з.name + '/', папка)));
+    else if (з.name.endsWith('.mjs')) файлы.push(путь);
+  }
+  return файлы;
+}
+import { slugify, проверитьПрофиль, числаБезИсточника } from './core/profile.mjs';
+import { собратьПлан, путиДляЗамера, ПРЕДЕЛ_ЗАГОЛОВКА, ПРЕДЕЛ_ОПИСАНИЯ, ПОРОГ_ТОНКИХ } from './core/plan.mjs';
+import { СТАДИИ, преградыСтадии } from './core/stages.mjs';
+import { ДОСТУПЫ, ХОСТИНГИ, счётДоступов, нехваткаДоступов } from './core/access.mjs';
+import { готовностьОтчёта, следующийОтчёт, РАЗДЕЛЫ, ДЕНЬ_ОТЧЁТА } from './core/report.mjs';
 import castells from './clients/castells.mjs';
 import { ИСПОЛНИТЕЛИ } from './run.mjs';
-import { УСЛУГИ, ГРУППЫ_УСЛУГ, СОСТОЯНИЯ, услугиПроекта, разделыОтУслуг } from './lib/catalog.mjs';
-import { собратьПроекты, страница } from './dashboard.mjs';
-import { поднять } from './server.mjs';
-import { ТЁМНАЯ, ШРИФТЫ, РАЗМЕРЫ, РАДИУСЫ, ВЫСОТЫ } from './lib/theme.mjs';
-import { забрать, вытащитьКомпании, вЗаготовку, файлПрофиля } from './import-mosco.mjs';
+import { УСЛУГИ, ГРУППЫ_УСЛУГ, СОСТОЯНИЯ, услугиПроекта, разделыОтУслуг } from './core/catalog.mjs';
+import { собратьПроекты } from './app/state.mjs';
+import { страница } from './web/render.mjs';
+import { поднять } from './web/http.mjs';
+import { ТЁМНАЯ, ШРИФТЫ, РАЗМЕРЫ, РАДИУСЫ, ВЫСОТЫ } from './web/view/theme.mjs';
+import { забрать, вытащитьКомпании, вЗаготовку, файлПрофиля } from './tools/import-mosco.mjs';
 import образец from './clients/_template.mjs';
 
 let всего = 0;
@@ -386,13 +402,58 @@ console.log('Самопроверки цикла SEO\n');
     Цитаты чужих классов в комментариях набираются ёлочками.
   */
   {
-    const исходник = await readFile(new URL('./lib/shell.mjs', import.meta.url), 'utf8');
+    const исходник = await readFile(new URL('./web/view/shell.mjs', import.meta.url), 'utf8');
     const тело = исходник.slice(исходник.indexOf('export const СТИЛИ = `') + 22);
     const стили = тело.slice(0, тело.indexOf('\n`;'));
     const битые = стили.split('\n').filter(с => с.includes('`') && !с.includes('ШРИФТЫ.'));
     проверка('в CSS нет обратных апострофов — они рвут шаблонную строку',
       битые.length === 0, битые[0] ? `первая: ${битые[0].trim().slice(0, 60)}` : '');
   }
+
+  /*
+    ГРАНИЦЫ СЛОЁВ ПРОВЕРЯЕТ МАШИНА, А НЕ СОВЕСТЬ.
+
+    Правило «зависимости идут только внутрь» (STACK.md §4) без проверки живёт
+    ровно до первого спешного импорта. Ломается оно всегда одинаково: в ядро
+    прилетает чтение файла «на минуточку», и через месяц ядро уже нельзя
+    запустить без диска.
+
+    Разрешено: web → всё, app → store и core, store → core, core → только core.
+    Проверяется чтением исходников как ТЕКСТА: сломанный слой мог бы не
+    импортироваться вовсе, и тогда проверка молчала бы вместо того, чтобы
+    краснеть.
+  */
+  {
+    const РАЗРЕШЕНО = {
+      core: ['core'],
+      store: ['core', 'store'],
+      app: ['core', 'store', 'app'],
+      web: ['core', 'store', 'app', 'web'],
+    };
+    const нарушения = [];
+    for (const слой of Object.keys(РАЗРЕШЕНО)) {
+      const файлы = await собратьФайлы(new URL(`./${слой}/`, import.meta.url));
+      for (const файл of файлы) {
+        const текст = await readFile(файл, 'utf8');
+        for (const [, путь] of текст.matchAll(/from\s+'([^']+)'/g)) {
+          if (!путь.startsWith('.')) continue;               // node: и внешние — не про слои
+          const куда = путь.replace(/^\.\.?\//, '').split('/')[0];
+          const целевой = РАЗРЕШЕНО[куда] ? куда : слой;      // './сосед.mjs' = свой слой
+          if (!РАЗРЕШЕНО[слой].includes(целевой)) {
+            нарушения.push(`${слой}/${файл.split('/').pop()} → ${целевой}`);
+          }
+        }
+      }
+    }
+    проверка('слои не смотрят наружу: зависимости идут только внутрь',
+      нарушения.length === 0, нарушения.join('; '));
+  }
+
+  /* Путь к профилям объявлен ОДИН раз. Инструмент переноса считал его от
+     своего места, и при переезде в tools/ стал бы писать в несуществующую
+     папку services/tools/clients — молча, потому что запись на диск здесь не
+     проверяется. Теперь путь берут у хранилища, и он должен существовать. */
+  проверка('папка клиентов одна и она существует', existsSync(ПАПКА_КЛИЕНТОВ), ПАПКА_КЛИЕНТОВ);
 
   проверка('свёрнутый рельс не перебивает ширину ящика на телефоне',
     html.includes(':root[data-rail="1"] .side{width:min(84vw, 300px);}'));
@@ -593,7 +654,7 @@ console.log('Самопроверки цикла SEO\n');
   // проверки.
   const прежний = process.env.DASHBOARD_TOKEN;
   process.env.DASHBOARD_TOKEN = 'proba-123';
-  const { поднять: поднятьСПаролем } = await import('./server.mjs?сПаролем=1');
+  const { поднять: поднятьСПаролем } = await import('./web/http.mjs?сПаролем=1');
   const сервер = await поднятьСПаролем(0);
   const порт = сервер.address().port;
   const взять = (путь, заголовки = {}) =>

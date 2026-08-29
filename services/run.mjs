@@ -28,12 +28,12 @@ import { promisify } from 'node:util';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
-import { проверитьПрофиль, разобратьПрофиль, CMS } from './lib/profile.mjs';
-import { счётДоступов, нехваткаДоступов, ХОСТИНГИ } from './lib/access.mjs';
-import { услугиПроекта, УСЛУГИ } from './lib/catalog.mjs';
-import { готовностьОтчёта, следующийОтчёт } from './lib/report.mjs';
-import { собратьПлан, путиДляЗамера } from './lib/plan.mjs';
-import { СТАДИИ, состояниеСтадии } from './lib/stages.mjs';
+import { проверитьПрофиль, разобратьПрофиль, CMS } from './core/profile.mjs';
+import { счётДоступов, нехваткаДоступов, ХОСТИНГИ } from './core/access.mjs';
+import { услугиПроекта, УСЛУГИ } from './core/catalog.mjs';
+import { готовностьОтчёта, следующийОтчёт } from './core/report.mjs';
+import { собратьПлан, путиДляЗамера } from './core/plan.mjs';
+import { СТАДИИ, состояниеСтадии } from './core/stages.mjs';
 
 const выполнить = promisify(execFile);
 
@@ -240,7 +240,7 @@ async function главная() {
   const циклы = услуги.filter(у => у.цикл === 'seo' && у.состояние !== 'обсуждаем');
   if (!циклы.length) {
     console.log('\nСтадии цикла SEO не показываются: услуга SEO на этом проекте не подключена.');
-    console.log('Каталог услуг: services/lib/catalog.mjs');
+    console.log('Каталог услуг: services/core/catalog.mjs');
   }
 
   console.log('\nСтадии:');

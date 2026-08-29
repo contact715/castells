@@ -16,7 +16,7 @@
     MOSCO_API=https://mosco-api-production.up.railway.app \
     MOSCO_USER=<ADMIN_USERNAME> \
     MOSCO_PASS=<ADMIN_PASSWORD> \
-    node services/import-mosco.mjs
+    node services/tools/import-mosco.mjs
 
     Добавить --write, чтобы записать файлы. Без него только показывает, что
     получилось бы: посмотреть глазами дешевле, чем откатывать.
@@ -29,13 +29,24 @@
 */
 
 import { writeFile, readdir } from 'node:fs/promises';
-import { fileURLToPath } from 'node:url';
-import { dirname, join } from 'node:path';
+import { join } from 'node:path';
+import { fileURLToPath } from 'node:url';   // нужен сторожу запуска в конце файла
 
-import { slugify } from './lib/profile.mjs';
+import { slugify } from '../core/profile.mjs';
+import { ПАПКА_КЛИЕНТОВ as ПАПКА } from '../store/clients.mjs';
 
-const КОРЕНЬ = dirname(fileURLToPath(import.meta.url));
-const ПАПКА = join(КОРЕНЬ, 'clients');
+/*
+  ПУТЬ К ПРОФИЛЯМ БЕРЁТСЯ У ХРАНИЛИЩА, а не считается здесь заново.
+
+  Раньше он собирался от места самого файла: `join(dirname(этот файл),
+  'clients')`. Пока инструмент лежал в корне services, это давало верный
+  путь. При переносе в tools/ он стал бы указывать на services/tools/clients
+  — папку, которой нет, — и инструмент писал бы профили мимо. Самопроверки
+  этого не поймали: запись на диск в них не проверяется.
+
+  Причина ошибки не в переносе, а в том, что один и тот же путь был вычислен
+  в двух местах. Теперь он объявлен один раз, в store/clients.mjs.
+*/
 
 /**
  * Достаёт список компаний.

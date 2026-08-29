@@ -104,7 +104,7 @@ export default {
     Какие НАШИ услуги подключены на этом проекте и в каком состоянии:
     'ведём' | 'завершено' | 'обсуждаем'.
 
-    Ключи — из каталога lib/catalog.mjs: website, brand, seo, local, googleAds,
+    Ключи — из каталога core/catalog.mjs: website, brand, seo, local, googleAds,
     googleLsa, metaAds, yelpAds, tiktokAds, chatgptAds, crm.
 
     Не путать с полем services выше: там услуги САМОГО клиента, из которых
