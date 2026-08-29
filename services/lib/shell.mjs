@@ -65,12 +65,24 @@ const зн = путь =>
   `<svg class="navlink__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" ` +
   `stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${путь}</svg>`;
 
+/* Значок переключателя режимов: у них он 18px (w-[18px] h-[18px]) против
+   16px у строк меню — ряд режимов стоит выше по иерархии, чем пункт. */
+const зн18 = путь =>
+  `<svg class="mode__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" ` +
+  `stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${путь}</svg>`;
+
 export const ЗНАЧКИ = {
   сводка: зн('<rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/>'),
   доступы: зн('<circle cx="5.5" cy="8" r="2.5"/><path d="M8 8h6M12 8v2.5"/>'),
   каталог: зн('<path d="M2 4h12M2 8h12M2 12h8"/>'),
   проект: зн('<path d="M2 4.5A1.5 1.5 0 0 1 3.5 3h2.2l1.2 1.6h5.6A1.5 1.5 0 0 1 14 6.1v5.4A1.5 1.5 0 0 1 12.5 13h-9A1.5 1.5 0 0 1 2 11.5z"/>'),
   настройки: зн('<circle cx="8" cy="8" r="2"/><path d="M8 1.5v2M8 12.5v2M14.5 8h-2M3.5 8h-2M12.6 3.4l-1.4 1.4M4.8 11.2l-1.4 1.4M12.6 12.6l-1.4-1.4M4.8 4.8L3.4 3.4"/>'),
+};
+
+/** Значки двух режимов сайдбара. */
+export const ЗНАЧКИ_РЕЖИМОВ = {
+  меню: зн18('<rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/>'),
+  проекты: зн18('<path d="M2 4.5A1.5 1.5 0 0 1 3.5 3h2.2l1.2 1.6h5.6A1.5 1.5 0 0 1 14 6.1v5.4A1.5 1.5 0 0 1 12.5 13h-9A1.5 1.5 0 0 1 2 11.5z"/>'),
 };
 
 export const СТИЛИ = `
@@ -155,6 +167,61 @@ export const СТИЛИ = `
   }
   .side__wsp select:hover{background-color:var(--sunk);}
   .side__wsp select option{background:var(--surface); color:var(--ink);}
+
+  /* ── ПЕРЕКЛЮЧАТЕЛЬ РЕЖИМОВ ──────────────────────────────────────────
+     SidebarModeSwitcher.tsx. У них три режима (меню, входящие, ассистент),
+     у нас два: МЕНЮ и ПРОЕКТЫ. Ряд стоит сразу под шапкой сайдбара, до
+     списка — у них там же.
+
+     Оформление их, до значения: ряд «px-base py-base flex items-center
+     gap-icon«; кнопка »h-9 rounded-pill«, с подписью — »gap-icon px-inset
+     flex-1«; активная — »bg-[--surface-tertiary] text-[--text-primary]
+     ring-1 ring-[--border-default]«; спящая — »text-[--text-muted]« с
+     наведением на вторичную поверхность. Значок 18px, а не 16px.
+
+     Почему обе кнопки с подписями. У них подпись показывается только
+     активному режиму и только если рельс шире 280px — потому что режимов
+     три и они не влезают. У нас их два, места хватает обоим, а два
+     безымянных значка пришлось бы разгадывать. */
+  .modes{
+    flex:none; display:flex; align-items:center; gap:var(--шаг-icon);
+    padding:var(--шаг-base);
+  }
+  .mode{
+    flex:1; min-width:0;
+    display:flex; align-items:center; justify-content:center; gap:var(--шаг-icon);
+    height:36px; padding:0 var(--шаг-inset);
+    border:1px solid transparent; border-radius:var(--r-pill);
+    background:none; cursor:pointer;
+    color:var(--muted); font:500 13px/1 ${ШРИФТЫ.текст};
+    transition:background-color .2s, color .2s, border-color .2s;
+  }
+  .mode:hover{background:var(--sunk); color:var(--ink);}
+  .mode[aria-selected="true"]{
+    background:var(--raised); color:var(--ink);
+    border-color:var(--hair); box-shadow:var(--теньМалая);
+  }
+  /* Значок ПРЯЧЕТСЯ, пока рельс развёрнут, — и это осознанное отступление.
+
+     Замер на нашей ширине: рельс 208px, кнопка 91px, внутри отступы 24px,
+     значок 18px и промежуток 4px. Подписи остаётся 43px, а «Проекты» просит
+     57px — слово обрезалось на четверть.
+
+     У них выбор ровно обратный: остаётся значок, а подпись показывается
+     только активному режиму и только если рельс шире 280px. Так можно, когда
+     режимов три и каждый со своим узнаваемым значком: почта, орб, сетка.
+     У нас их два, оба нарисованы одной линией, и два безымянных квадратика
+     пришлось бы разгадывать. Слово читается сразу.
+
+     На свёрнутом рельсе всё наоборот: подписи нет места, и значок
+     возвращается — там он единственный опознавательный знак. */
+  .mode__icon{display:none;}
+  .mode__label{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  /* Список показывается тот, чей режим выбран. Второй не «прячется
+     прозрачностью», а не рисуется вовсе: скрытый, но существующий список
+     ловил бы клавиатуру. */
+  :root[data-mode="menu"] .side__nav[data-mode="projects"],
+  :root[data-mode="projects"] .side__nav[data-mode="menu"]{display:none;}
 
   /* Sidebar.tsx: <nav class="flex-1 px-base py-icon space-y-0 overflow-y-auto
      no-scrollbar min-h-0"> */
@@ -284,6 +351,18 @@ export const СТИЛИ = `
   :root[data-rail="1"] .navlink > span:first-child{justify-content:center; flex:none; gap:0;}
   :root[data-rail="1"] .grp__kids{padding-left:0; padding-right:0;}
   :root[data-rail="1"] .side__head{justify-content:center; padding:var(--шаг-base) var(--шаг-tight);}
+  /* Свёрнутый переключатель — их вариант collapsed: колонка кнопок 32px,
+     подписи прячутся, активный красится акцентом 15% (а не поверхностью:
+     на рельсе нет рамки, которая отделяла бы выбранное). */
+  :root[data-rail="1"] .modes{flex-direction:column; padding:var(--шаг-tight) var(--шаг-icon);}
+  :root[data-rail="1"] .mode{
+    flex:none; width:32px; height:var(--h-control); padding:0; border-color:transparent;
+  }
+  :root[data-rail="1"] .mode__icon{display:block; width:18px; height:18px; flex:none;}
+  :root[data-rail="1"] .mode__label{display:none;}
+  :root[data-rail="1"] .mode[aria-selected="true"]{
+    background:var(--accentSoft); color:var(--accent); box-shadow:none;
+  }
   /* Вместо подписи раздела — тонкая черта: у них
      «my-base mx-inset h-px bg-[color:var(--surface-secondary)]» */
   :root[data-rail="1"] .side__group{
@@ -580,6 +659,12 @@ export const СКРИПТ = `
       if (активная) { shapkaSet(шапка, активная.dataset.title || активная.textContent.trim()); }
     }
 
+    /* Режим подстраивается под открытый экран. Вызов защищён проверкой:
+       показать() работает и до того, как переключатель нашёлся в разметке. */
+    if (typeof режим === 'function') {
+      режим(имя.indexOf('p/') === 0 ? 'projects' : 'menu', true);
+    }
+
     if (запомнить !== false) { try { localStorage.setItem(КЛЮЧ, имя); } catch (e) {} }
     return имя;
   }
@@ -595,6 +680,32 @@ export const СКРИПТ = `
   if (выбор) {
     выбор.addEventListener('change', function () { location.hash = '#/p/' + выбор.value; });
   }
+
+  /*
+    ДВА РЕЖИМА САЙДБАРА: меню и проекты (владелец 29 августа).
+
+    Режим следует за содержимым: открыт экран проекта — показан список
+    проектов, открыт общий экран — меню. Это поведение их сайдбара, где
+    панель выбирается маршрутом (lib/navigation/sidebarPanelForRoute.ts), а
+    не только кнопкой. Причина там описана прямо: у них календарь не
+    переключался, потому что требовал И маршрута, И режима сразу.
+
+    Ручной выбор при этом остаётся: нажатие переключает список и
+    запоминается. Следующий переход по экранам снова подстроит режим под
+    место — так список под рукой всегда тот, что нужен.
+  */
+  var КЛЮЧ_РЕЖИМА = 'castells-side-mode';
+  function режим(имя, запомнить) {
+    if (имя !== 'projects') { имя = 'menu'; }
+    document.documentElement.setAttribute('data-mode', имя);
+    Array.prototype.forEach.call(document.querySelectorAll('.mode'), function (к) {
+      к.setAttribute('aria-selected', к.dataset.mode === имя ? 'true' : 'false');
+    });
+    if (запомнить !== false) { try { localStorage.setItem(КЛЮЧ_РЕЖИМА, имя); } catch (e) {} }
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.mode'), function (к) {
+    к.addEventListener('click', function () { режим(к.dataset.mode, true); });
+  });
 
   /* Раскрывающиеся группы: состояние помнится, иначе при каждом переходе
      сайдбар схлопывался бы и ходить по нему стало бы неудобно. */
@@ -630,6 +741,8 @@ export const СКРИПТ = `
     });
   }
 
+  try { режим(localStorage.getItem(КЛЮЧ_РЕЖИМА) || 'menu', false); } catch (e) { режим('menu', false); }
+
   var начальный = изАдреса();
   if (!начальный) { try { начальный = localStorage.getItem(КЛЮЧ); } catch (e) {} }
   показать(начальный || '', false);
@@ -647,7 +760,7 @@ export const СКРИПТ = `
  *
  * @param {object} части — { заголовок, меню, низМеню, выборПроектов, экраны, когда, подвал }
  */
-export function оболочка({ заголовок, меню, низМеню, выборПроектов, экраны, когда, подвал }) {
+export function оболочка({ заголовок, меню, проекты, низМеню, выборПроектов, экраны, когда, подвал }) {
   return `<title>${экр(заголовок)}</title>
 <link rel="stylesheet" href="${ШРИФТЫ.подключение}">
 <style>${СТИЛИ}</style>
@@ -659,7 +772,18 @@ export function оболочка({ заголовок, меню, низМеню,
         <span class="side__mark" aria-hidden="true">C</span>
         <div class="side__wsp">${выборПроектов}</div>
       </div>
-      <div class="side__nav">${меню}</div>
+      <div class="modes" role="tablist" aria-label="Режим меню">
+        <button class="mode" type="button" role="tab" id="mode-menu"
+                data-mode="menu" aria-selected="true" title="Меню">
+          ${ЗНАЧКИ_РЕЖИМОВ.меню}<span class="mode__label">Меню</span>
+        </button>
+        <button class="mode" type="button" role="tab" id="mode-projects"
+                data-mode="projects" aria-selected="false" title="Проекты">
+          ${ЗНАЧКИ_РЕЖИМОВ.проекты}<span class="mode__label">Проекты</span>
+        </button>
+      </div>
+      <div class="side__nav" data-mode="menu">${меню}</div>
+      <div class="side__nav" data-mode="projects">${проекты}</div>
       <div class="side__bottom">
         ${низМеню || ''}
         <button class="rail" type="button" id="rail" aria-label="Свернуть меню">
