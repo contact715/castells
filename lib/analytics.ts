@@ -18,13 +18,34 @@ declare global {
   }
 }
 
-// Google Analytics Measurement ID (используется в GTM)
-export const GA_MEASUREMENT_ID = 'G-LEQVB6KG6Y';
+/*
+  Идентификаторы счётчиков берутся из окружения и НЕ вписываются сюда числом.
 
-// GTM Container ID (замените на ваш реальный ID)
-export const GTM_ID = typeof window !== 'undefined' && window.GTM_ID 
-  ? window.GTM_ID 
-  : 'GTM-XXXXXXX'; // TODO: Замените на ваш GTM Container ID
+  Почему так, а не как было. Здесь стоял зашитый в код идентификатор GA4
+  «G-LEQVB6KG6Y», и он уезжал в сборку на каждой странице. Откуда он взялся, в
+  репозитории не записано нигде: ни в журнале, ни в состоянии сессии, ни в
+  разборах. Сайт собран из шаблона, из которого мы уже вычистили чужую и
+  выдуманную начинку — несуществующую команду, «500+ проектов», «$50M+
+  выручки», заголовок «Dominate Your Market». Похоже, что и этот
+  идентификатор оттуда же, но доказать это нельзя, и в том и дело.
+
+  Данные никуда не утекали: ни gtag.js, ни контейнер GTM на сайт не
+  подключены, поэтому вызовы складывались в dataLayer в памяти вкладки и
+  наружу не уходили. Опасность была отложенная: в тот день, когда кто-нибудь
+  раскомментировал бы блок GTM в index.html, посетители сайта поехали бы
+  считаться в чужое хозяйство.
+
+  Теперь: нет переменной окружения — нет счётчика, и это честное состояние
+  вместо тихого. Когда появится наш собственный идентификатор, он придёт
+  через VITE_GA_MEASUREMENT_ID, а не через правку этой строки.
+*/
+export const GA_MEASUREMENT_ID: string =
+  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GA_MEASUREMENT_ID) || '';
+
+export const GTM_ID: string =
+  (typeof window !== 'undefined' && window.GTM_ID) ||
+  (typeof import.meta !== 'undefined' && import.meta.env?.VITE_GTM_ID) ||
+  '';
 
 /**
  * Initialize Google Analytics / Google Tag Manager
@@ -34,9 +55,14 @@ export const GTM_ID = typeof window !== 'undefined' && window.GTM_ID
 export const initGA = () => {
   if (typeof window === 'undefined') return;
 
+  // Не настроен ни один счётчик — не делаем ничего. Раньше здесь всё равно
+  // создавался dataLayer и выполнялся config с зашитым чужим идентификатором:
+  // работы это не делало, но выглядело как работающая аналитика.
+  if (!GA_MEASUREMENT_ID && !GTM_ID) return;
+
   // Инициализируем dataLayer для GTM
   window.dataLayer = window.dataLayer || [];
-  
+
   // Если используется прямой gtag.js (fallback)
   if (!window.gtag && !window.GTM_ID) {
     window.gtag = function() {
