@@ -86,14 +86,14 @@ const СТРАНИЦА_ВХОДА = `<!doctype html><meta charset="utf-8">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600&display=swap">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  /* Значения те же, что в lib/theme.mjs — из Mosco web. Здесь они вписаны
-     руками намеренно: страница входа отдаётся до сборки пульта и не должна
-     тянуть за собой его модули. */
-  :root{color-scheme:light dark;--bg:#EDEAE3;--surface:#fff;--ink:#1A1A1A;--second:#333;--line:rgba(0,0,0,.10);--accent:#2D6B4A;}
-  @media (prefers-color-scheme:dark){:root{--bg:#000;--surface:#111;--ink:#fff;--second:rgba(255,255,255,.80);--line:rgba(255,255,255,.06);--accent:#3B82F6;}}
-  body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);
+  /* Значения из app/globals.css репозитория Mosco-corp/web. Вписаны руками
+     намеренно: страница входа отдаётся до сборки пульта и не должна тянуть
+     его модули. Тема только тёмная — у их панели светлой нет. */
+  :root{color-scheme:dark;--bg:#000;--surface:#111;--ink:#fff;
+        --second:rgba(255,255,255,.80);--line:rgba(255,255,255,.06);--accent:#3B82F6;}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;
        font:15px/1.5 "Plus Jakarta Sans",Inter,system-ui,-apple-system,sans-serif;padding:24px;}
-  form{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:28px;width:100%;max-width:360px;}
+  form{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:28px;width:100%;max-width:360px;}
   h1{font-size:19px;margin:0 0 6px;}
   p{color:var(--second);margin:0 0 18px;font-size:13.5px;}
   label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--second);margin-bottom:6px;}

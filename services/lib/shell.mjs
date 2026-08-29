@@ -93,7 +93,7 @@ export const СТИЛИ = `
   .navlink{
     display:flex; align-items:center; gap:12px;     /* gap-3 */
     padding:8px 12px;                               /* px-3 py-2 */
-    border-radius:8px;                              /* rounded-inner */
+    border-radius:var(--радиусПункта);              /* rounded-inner */
     color:#fff; text-decoration:none;
     font-size:14px; font-weight:500;                /* text-sm font-medium */
     transition:background-color .2s, color .2s;
@@ -125,7 +125,7 @@ export const СТИЛИ = `
   .grp{display:flex; flex-direction:column; gap:2px;}
   .grp__head{
     display:flex; align-items:center; gap:12px; width:100%;
-    padding:8px 12px; border:0; border-radius:8px; background:none; cursor:pointer;
+    padding:8px 12px; border:0; border-radius:var(--радиусПункта); background:none; cursor:pointer;
     color:#fff; font:500 14px/1.4 ${ШРИФТЫ.текст}; text-align:left;
     transition:background-color .2s;
   }
@@ -155,7 +155,7 @@ export const СТИЛИ = `
   .side__bottom .navlink:hover{color:rgba(255,255,255,.8);}
   .rail{
     display:flex; align-items:center; gap:12px; width:100%;
-    padding:8px 12px; border:0; border-radius:8px; background:none; cursor:pointer;
+    padding:8px 12px; border:0; border-radius:var(--радиусПункта); background:none; cursor:pointer;
     color:rgba(255,255,255,.5); font:500 14px/1.4 ${ШРИФТЫ.текст};
     transition:background-color .2s, color .2s;
   }
