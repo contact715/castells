@@ -28,8 +28,8 @@ import { promisify } from 'node:util';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
-import { проверитьПрофиль, разобратьПрофиль, CMS } from './lib/profile.mjs';
-import { собратьПлан } from './lib/plan.mjs';
+import { проверитьПрофиль, разобратьПрофиль, CMS, ДОСТУПЫ } from './lib/profile.mjs';
+import { собратьПлан, путиДляЗамера } from './lib/plan.mjs';
 import { СТАДИИ, преградыСтадии, РЕЖИМ } from './lib/stages.mjs';
 
 const выполнить = promisify(execFile);
@@ -69,12 +69,7 @@ const ИСПОЛНИТЕЛИ = {
    * быть.
    */
   async baseline(профиль) {
-    const план = собратьПлан(профиль);
-    const ключевые = план.страницы.slice(0, 7).map(с => с.путь);
-    const пробники = план.страницы
-      .filter(с => с.путь.startsWith('/services/') || с.путь.startsWith('/areas/'))
-      .slice(0, 6)
-      .map(с => с.путь);
+    const { ключевые, пробники } = путиДляЗамера(профиль);
 
     const прибор = join(КОРЕНЬ, '..', '..', 'scripts', 'seo-audit.mjs');
     const строки = [`смотрим на ${профиль.site}`, `адресов в замере: ${ключевые.length + пробники.length}`];
@@ -155,12 +150,35 @@ async function главная() {
 
   if (аргументы.includes('--list') || аргументы.length === 0) {
     const клиенты = await перечислитьКлиентов();
-    console.log('Клиенты в проекте:');
+    console.log('\nПроекты в цикле SEO');
+    console.log('─'.repeat(72));
+
     if (!клиенты.length) {
       console.log('  пока ни одного. Образец профиля: services/seo/clients/_template.mjs');
+      return 0;
     }
-    for (const к of клиенты) console.log(`  ${к}`);
-    console.log('\nЗапуск: node services/seo/run.mjs <id-клиента>');
+
+    // Показываем не имена файлов, а состояние: по списку должно быть видно, у
+    // кого чего не хватает, без запуска цикла по каждому.
+    console.log(`  ${'id'.padEnd(12)} ${'название'.padEnd(18)} ${'сайт'.padEnd(9)} доступов`);
+    for (const id of клиенты) {
+      try {
+        const профиль = await загрузитьПрофиль(id);
+        const { ок } = проверитьПрофиль(профиль);
+        const доступы = профиль.access || {};
+        const открыто = ДОСТУПЫ.filter(д => доступы[д]).length;
+        const сайт = профиль.site ? 'есть' : 'нет';
+        const метка = ок ? '' : '  ← профиль не проходит проверку';
+        console.log(
+          `  ${id.padEnd(12)} ${String(профиль.name).slice(0, 18).padEnd(18)} ` +
+          `${сайт.padEnd(9)} ${открыто} из ${ДОСТУПЫ.length}${метка}`,
+        );
+      } catch (e) {
+        console.log(`  ${id.padEnd(12)} не читается: ${e.message}`);
+      }
+    }
+
+    console.log('\nЗапуск цикла по проекту: node services/seo/run.mjs <id>');
     return 0;
   }
 
