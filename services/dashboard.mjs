@@ -156,7 +156,7 @@ function карточкаПроекта(п) {
         .join('')}</ul>`
     : '<p class="verdict verdict--no">Ни одна услуга не подключена — непонятно, что мы для клиента делаем.</p>';
 
-  return `<article class="project">
+  return `<article class="project" id="p-${экр(п.id)}" data-project="${экр(п.id)}"${п.первый ? '' : ' hidden'}>
     <header class="project__head">
       <div>
         <h2>${экр(пр.name)}</h2>
@@ -223,7 +223,7 @@ const дополнить = п => ({
 });
 
 function страница(сырые, когда) {
-  const проекты = сырые.map(дополнить);
+  const проекты = сырые.map(дополнить).map((п, и) => ({ ...п, первый: и === 0 }));
   const всегоНехватки = new Map();
   for (const п of проекты) {
     for (const д of п.нехватка) {
@@ -290,6 +290,21 @@ function страница(сырые, когда) {
   header.top{border-bottom:2px solid var(--ink); padding-bottom:16px; margin-bottom:8px;}
   header.top p{color:var(--neutral); margin:6px 0 0; max-width:64ch;}
   .stamp{font-family:"IBM Plex Mono",monospace; font-size:12px; color:var(--neutral);}
+
+  .picker{display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:20px 0 0;}
+  .picker label{font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--neutral);}
+  .picker select{
+    font-family:Archivo,system-ui,sans-serif; font-size:17px; font-weight:600;
+    color:var(--ink); background:var(--surface);
+    border:1px solid var(--hair); border-radius:var(--radius);
+    padding:7px 34px 7px 12px; min-width:260px; cursor:pointer;
+    appearance:none;
+    background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);
+    background-position:calc(100% - 17px) calc(50% + 2px),calc(100% - 12px) calc(50% + 2px);
+    background-size:5px 5px,5px 5px; background-repeat:no-repeat;
+  }
+  .picker select:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+  .picker__hint{font-size:12.5px; color:var(--neutral);}
 
   .summary{display:flex; flex-wrap:wrap; gap:28px; padding:16px 0 24px; border-bottom:1px solid var(--hair); margin-bottom:32px;}
   .summary div{display:flex; flex-direction:column;}
@@ -379,6 +394,14 @@ function страница(сырые, когда) {
     <p class="stamp">собрано ${экр(когда)} из профилей в services/clients</p>
   </header>
 
+  <div class="picker">
+    <label for="proj">Проект</label>
+    <select id="proj">${проекты
+      .map(п => `<option value="${экр(п.id)}">${экр(п.профиль?.name || п.id)}</option>`)
+      .join('')}</select>
+    <span class="picker__hint">${проекты.length} ${проекты.length === 1 ? 'проект' : 'проекта'} в работе</span>
+  </div>
+
   <div class="summary">
     <div><span class="lbl">Проектов</span><span class="val">${проекты.length}</span></div>
     <div><span class="lbl">Отчёт уйдёт</span><span class="val">${готовыхОтчётов}<span style="font-size:14px;color:var(--neutral)">/${проекты.length}</span></span></div>
@@ -417,6 +440,38 @@ function страница(сырые, когда) {
       </table>
     </div>
   </section>
+
+  <script>
+    // Переключатель проектов. Все карточки лежат в странице, показывается одна:
+    // так переключение мгновенное и работает без сети.
+    (function () {
+      var select = document.getElementById('proj');
+      if (!select) return;
+      var КЛЮЧ = 'castells-services-project';
+
+      function показать(id) {
+        var нашлась = false;
+        document.querySelectorAll('[data-project]').forEach(function (карточка) {
+          var своя = карточка.dataset.project === id;
+          карточка.hidden = !своя;
+          if (своя) нашлась = true;
+        });
+        return нашлась;
+      }
+
+      // Запомненный выбор может указывать на проект, которого уже нет:
+      // тогда молча остаёмся на первом, а не показываем пустую страницу.
+      try {
+        var сохранён = localStorage.getItem(КЛЮЧ);
+        if (сохранён && показать(сохранён)) select.value = сохранён;
+      } catch (e) { /* приватное окно или запрет на хранение — не беда */ }
+
+      select.addEventListener('change', function () {
+        показать(select.value);
+        try { localStorage.setItem(КЛЮЧ, select.value); } catch (e) {}
+      });
+    })();
+  </script>
 
   <footer>
     Пульт собирается из профилей проектов, а не ведётся руками: разойтись с ними
