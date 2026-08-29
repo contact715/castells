@@ -83,18 +83,22 @@ const парольИзАдреса = запрос =>
  */
 const СТРАНИЦА_ВХОДА = `<!doctype html><meta charset="utf-8">
 <title>Пульт Castells</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600&display=swap">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-  :root{color-scheme:light dark;--bg:#F1F4F7;--surface:#fff;--ink:#051F2F;--second:#647285;--line:rgba(0,0,0,.10);--accent:#18181B;}
-  @media (prefers-color-scheme:dark){:root{--bg:#171717;--surface:#212121;--ink:#fff;--second:#D6D6D6;--line:rgba(255,255,255,.10);--accent:#08A2FF;}}
+  /* Значения те же, что в lib/theme.mjs — из Mosco web. Здесь они вписаны
+     руками намеренно: страница входа отдаётся до сборки пульта и не должна
+     тянуть за собой его модули. */
+  :root{color-scheme:light dark;--bg:#EDEAE3;--surface:#fff;--ink:#1A1A1A;--second:#333;--line:rgba(0,0,0,.10);--accent:#2D6B4A;}
+  @media (prefers-color-scheme:dark){:root{--bg:#000;--surface:#111;--ink:#fff;--second:rgba(255,255,255,.80);--line:rgba(255,255,255,.06);--accent:#3B82F6;}}
   body{margin:0;min-height:100vh;display:grid;place-items:center;background:var(--bg);color:var(--ink);
-       font:15px/1.5 "DM Sans",system-ui,-apple-system,sans-serif;padding:24px;}
+       font:15px/1.5 "Plus Jakarta Sans",Inter,system-ui,-apple-system,sans-serif;padding:24px;}
   form{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:28px;width:100%;max-width:360px;}
   h1{font-size:19px;margin:0 0 6px;}
   p{color:var(--second);margin:0 0 18px;font-size:13.5px;}
   label{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--second);margin-bottom:6px;}
   input{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);font:inherit;}
-  button{margin-top:14px;width:100%;padding:10px;border:0;border-radius:6px;background:var(--accent);color:#fff;font:600 14px "DM Sans",system-ui,sans-serif;cursor:pointer;}
+  button{margin-top:14px;width:100%;padding:10px;border:0;border-radius:6px;background:var(--accent);color:#fff;font:600 14px "Plus Jakarta Sans",Inter,system-ui,sans-serif;cursor:pointer;}
   input:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;}
 </style>
 <form method="get" action="/">
