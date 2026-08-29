@@ -1,17 +1,40 @@
 /*
-  Оболочка пульта: сайдбар слева, верхняя панель сверху, экран в середине.
+  Оболочка пульта: сайдбар слева, полоса рабочей области сверху, экран под ней.
 
-  ПОЧЕМУ ИМЕННО ТАК. Владелец попросил взять устройство из нашей же консоли
-  Mosco — сайдбар и верхняя панель, — чтобы не выдумывать своё. Прочитать
-  консоль из рабочего окружения не удалось (репозиторий Mosco-corp этой
-  сессии недоступен, сеть к живой консоли закрыта), поэтому взято описанное
-  устройство, а всё оформление вынесено в lib/theme.mjs — подменить на
-  московское можно правкой одного файла.
+  ОТКУДА УСТРОЙСТВО. Из живого кабинета Mosco — рабочее дерево `~/projectx-app`
+  (Mosco-corp/console-next, ветка redesign-mosco), прочитанное напрямую
+  29 августа 2026. Адреса, по которым сверялась каждая величина:
+
+    app/(dashboard)/layout.tsx            — рама кабинета
+    components/layout/sidebar/Sidebar.tsx — плашка сайдбара, порядок частей
+    components/layout/sidebar/parts/SidebarNavGroup.tsx     — группа и её дети
+    components/layout/sidebar/parts/SidebarAccordionItem.tsx — строка меню
+    components/layout/sidebar/parts/SidebarHeader.tsx        — шапка сайдбара
+    components/layout/DashboardPageHeader.tsx — полоса рабочей области и островок
+    lib/styles.ts                         — SIDEBAR_ROW, SIDEBAR_GROUP_LABEL
+    lib/store/sidebarPrefsStore.ts        — ширины 208 / 52
+
+  ЧТО БЫЛО НЕ ТАК ДО ЭТОЙ ПРАВКИ. Прошлая версия писала честно: «прочитать
+  консоль из рабочего окружения не удалось», и устройство было восстановлено
+  ПО ОПИСАНИЮ. Отсюда четыре расхождения, каждое видно глазом:
+
+    было (по описанию)                стало (из кода)
+    сайдбар — чёрный блок вплотную    плашка: фон #212121, рамка, радиус 20px
+    панели стыкуются без зазора       рама 12px по краям, зазор 8px
+    активный пункт — белая подложка   акцент #08A2FF 15% + текст акцентом
+    заголовок группы — КАПС .15em     11px обычным регистром, без разрядки
+    строка меню 36px, значок 20px     32px, значок 16px
+
+  Главное здесь не цвет, а СЛОЙ: у Mosco плашка — это сайдбар и шапка, а
+  рабочая область под ними ПЛОСКАЯ, прямо на холсте. В layout.tsx это назвали
+  «shell inversion»: «the panel treatment moved to the sidebar; the content
+  area is now a flat canvas where the interface lives». Пульт делал наоборот —
+  панель была у рабочей области, а сайдбар сливался с фоном.
 
   РАЗДЕЛЕНИЕ ОБЯЗАННОСТЕЙ. Здесь только оболочка и переходы между экранами.
   Что показывать внутри — дело dashboard.mjs. Иначе через месяц оболочка
-  начнёт знать про доступы и отчёты, и её нельзя будет переодеть, не
-  задев данные.
+  начнёт знать про доступы и отчёты, и её нельзя будет переодеть, не задев
+  данные. Всё оформление живёт в lib/theme.mjs одним набором переменных.
 
   ПЕРЕХОДЫ ЧЕРЕЗ РЕШЁТКУ (#/…), а не через адреса сервера. Причина простая:
   у пульта два потребителя — сервер на Railway и одиночный файл, который
@@ -31,11 +54,12 @@ export const экр = значение =>
 
 /*
   Значки. Рисуем сами, простыми линиями, и красим через currentColor — тогда
-  они работают в обеих темах и в свёрнутом сайдбаре без второго набора.
+  они работают в свёрнутом сайдбаре без второго набора.
 
-  Взять значки Mosco не удалось: агент отдаёт текст исходника, а их значки —
-  это библиотека компонентов, которую так не вытащишь. Поэтому здесь НАШИ
-  значки в их размере (16px, линия 1.5). Это помечено, а не выдано за чужое.
+  Взять значки Mosco нельзя: у них lucide-react, это библиотека компонентов, а
+  не файлы. Поэтому здесь НАШИ значки в их размере и их толщине линии (16px,
+  stroke 1.5 — SidebarAccordionItem.tsx: `<item.icon className="w-4 h-4" />`).
+  Это помечено, а не выдано за чужое.
 */
 const зн = путь =>
   `<svg class="navlink__icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" ` +
@@ -55,241 +79,461 @@ export const СТИЛИ = `
   *{box-sizing:border-box;}
   body{
     background:var(--ground); color:var(--ink);
-    font-family:${ШРИФТЫ.текст}; font-size:15px; line-height:1.55; margin:0;
+    font-family:${ШРИФТЫ.текст}; font-size:14px; line-height:var(--lh); margin:0;
   }
   h1,h2,h3,h4{font-family:${ШРИФТЫ.заголовки}; text-wrap:balance; margin:0;}
-  h1{font-size:24px; font-weight:700; letter-spacing:-0.01em;}
-  h2{font-size:19px; font-weight:600;}
-  h3{font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.09em; color:var(--neutral);}
-  h4{font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.08em; color:var(--neutral); margin-bottom:8px;}
+  h1{font-size:20px; font-weight:700; letter-spacing:-0.01em;}   /* text-xl font-bold */
+  h2{font-size:17px; font-weight:600;}
+  /* Заголовок блока — тот же «эйбрау», что у групп меню: 11px, обычный
+     регистр, без разрядки (lib/styles.ts, SIDEBAR_GROUP_LABEL). Капс с
+     разрядкой был приёмом «корпоративной панели» и перекрикивал содержимое. */
+  h3{font-size:11px; font-weight:500; color:var(--muted); letter-spacing:normal;}
+  h4{font-size:11px; font-weight:500; color:var(--muted); margin-bottom:var(--шаг-tight);}
   code,.mono{font-family:${ШРИФТЫ.моно}; font-size:.86em;}
   a{color:var(--accent);}
-  .muted{color:var(--neutral);}
-  :focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
-
-  /* ------------------------------------------------------------------
-     Сайдбар. Один в один с components/layout/Sidebar.tsx из Mosco-corp/web:
-     ширины 175/72, чёрный фон, отступы, состояния наведения и выбора, размеры
-     значков, оформление заголовков разделов и нижней части. Числа рядом —
-     их классы Tailwind, чтобы при сверке было видно, откуда что взято.
-     ------------------------------------------------------------------ */
-  .shell{display:grid; grid-template-columns:var(--сайдбар) 1fr; min-height:100vh;}
-
-  .side{
-    background:#000;                       /* bg-black */
-    display:flex; flex-direction:column;
-    position:sticky; top:0; height:100vh; overflow:hidden;
+  .muted{color:var(--muted);}
+  /* lib/styles.ts FOCUS_RING: кольцо акцента 60% с отбивкой от поверхности */
+  :focus-visible{
+    outline:none;
+    box-shadow:0 0 0 2px var(--surface), 0 0 0 4px rgba(8,162,255,.6);
   }
-  /* У них блока с логотипом в сайдбаре нет — навигация начинается сразу.
-     Наш опознавательный знак перенесён в верхнюю панель. */
+
+  /* ══════════════════════════════════════════════════════════════════════
+     РАМА КАБИНЕТА — app/(dashboard)/layout.tsx:
+
+       <div class="flex flex-col h-[100dvh] p-base lg:p-inset gap-base lg:gap-inset">
+         <div class="flex-1 flex min-h-0 gap-icon lg:gap-tight"> сайдбар + main
+
+     То есть: 12px по краям экрана и 8px между сайдбаром и рабочей областью.
+     Именно эти зазоры и делают из сайдбара плашку — без них он сливается с
+     холстом, и весь приём пропадает.
+     ══════════════════════════════════════════════════════════════════════ */
+  .shell{
+    height:100dvh; padding:var(--шаг-inset); display:flex; flex-direction:column;
+    gap:var(--шаг-inset); overflow:hidden;
+  }
+  .shell__row{flex:1; min-height:0; display:flex; gap:var(--шаг-tight);}
+
+  /* ── САЙДБАР ─────────────────────────────────────────────────────────
+     Sidebar.tsx: <div class="sidebar-shell flex flex-col h-full overflow-hidden
+     rounded-card bg-[var(--surface)] border border-[color:var(--border-default)]">
+     Ширина 208px (SIDEBAR_DEFAULT_WIDTH), свёрнутая полоса 52px. */
+  .side{
+    width:var(--сайдбар); flex:none;
+    display:flex; flex-direction:column; overflow:hidden;
+    background:var(--surface);
+    border:1px solid var(--hair);
+    border-radius:var(--r-card);
+    transition:width .3s;                 /* duration-300 у них на <aside> */
+  }
+
+  /* Шапка сайдбара: SidebarHeader.tsx — px-inset py-inset, логотип 32px и
+     переключатель рабочего пространства рядом. У Mosco в шапке сайдбара
+     стоит именно выбор места работы, поэтому выбор проекта живёт здесь же,
+     а не в верхней полосе. */
+  .side__head{
+    flex:none; padding:var(--шаг-inset);
+    display:flex; align-items:center; gap:var(--шаг-base);
+  }
+  .side__mark{
+    width:32px; height:32px; flex:none; border-radius:var(--r-pill);
+    background:var(--accent); color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    font:700 13px/1 ${ШРИФТЫ.заголовки};
+  }
+  .side__wsp{min-width:0; flex:1;}
+  .side__wsp select{
+    width:100%; max-width:100%;
+    font-family:${ШРИФТЫ.текст}; font-size:13px; font-weight:500;
+    color:var(--ink); background:transparent;
+    border:0; border-radius:var(--r-element);
+    padding:6px 22px 6px 6px; cursor:pointer; appearance:none;
+    background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);
+    background-position:calc(100% - 10px) calc(50% + 1px),calc(100% - 6px) calc(50% + 1px);
+    background-size:4px 4px,4px 4px; background-repeat:no-repeat;
+    text-overflow:ellipsis;
+  }
+  .side__wsp select:hover{background-color:var(--sunk);}
+  .side__wsp select option{background:var(--surface); color:var(--ink);}
+
+  /* Sidebar.tsx: <nav class="flex-1 px-base py-icon space-y-0 overflow-y-auto
+     no-scrollbar min-h-0"> */
   .side__nav{
     flex:1; min-height:0; overflow-y:auto;
-    padding:8px 6px;                       /* px-1.5 py-2 */
-    display:flex; flex-direction:column; gap:2px;   /* space-y-0.5 */
+    padding:var(--шаг-icon) var(--шаг-base);
+    display:flex; flex-direction:column; gap:var(--шаг-hair);
     scrollbar-width:none;
   }
-  .side__nav::-webkit-scrollbar{display:none;}      /* no-scrollbar */
+  .side__nav::-webkit-scrollbar{display:none;}
 
+  /* ── СТРОКА МЕНЮ ────────────────────────────────────────────────────
+     lib/styles.ts, SIDEBAR_ROW — один канон на все три компонента, которые
+     её рисуют. Дословно:
+       flex items-center gap-base px-base h-control rounded-inner text-sm
+     то есть gap 10px, отступ 10px, высота 32px, радиус 14px, кегль 14px.
+     До этой правки было 36px/8px/20px значок — три расхождения в одной строке. */
   .navlink{
-    display:flex; align-items:center; gap:12px;     /* gap-3 */
-    padding:8px 12px;                               /* px-3 py-2 */
-    border-radius:var(--радиусПункта);              /* rounded-inner */
-    color:#fff; text-decoration:none;
-    font-size:14px; font-weight:500;                /* text-sm font-medium */
+    display:flex; align-items:center; gap:var(--шаг-base);
+    padding:0 var(--шаг-base); height:var(--h-control);
+    border-radius:var(--r-inner);
+    color:var(--ink); text-decoration:none;
+    font-size:14px; font-weight:400;
     transition:background-color .2s, color .2s;
     min-width:0;
   }
-  .navlink:hover{background:#2e2e2e;}
-  .navlink[aria-current="page"]{background:rgba(255,255,255,.15);}
+  .navlink:hover{background:var(--sunk); color:var(--ink);}
+  /* Активный пункт — вторичная кнопка из макета: заливка акцентом 15%, текст
+     акцентом (SidebarAccordionItem.tsx). Белая подложка, стоявшая здесь
+     раньше, не отличала активный пункт ничем, кроме яркости фона. */
+  .navlink[aria-current="page"]{
+    background:var(--accentSoft); color:var(--accent); font-weight:500;
+  }
   .navlink > span:first-child{
-    display:flex; align-items:center; gap:12px; min-width:0; flex:1;
-    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    display:flex; align-items:center; gap:var(--шаг-base); min-width:0; flex:1;
+    overflow:hidden;
   }
   .navlink__label{overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-  .navlink__icon{width:20px; height:20px; flex:none;}   /* w-5 h-5 */
+  .navlink__icon{width:16px; height:16px; flex:none;}   /* w-4 h-4 */
   .navlink__tag{
     font-family:${ШРИФТЫ.моно}; font-size:11px;
-    color:rgba(255,255,255,.45); font-variant-numeric:tabular-nums; flex:none;
+    color:var(--muted); font-variant-numeric:tabular-nums; flex:none;
   }
-  .navlink__dot{width:6px; height:6px; border-radius:50%; flex:none;}
+  .navlink__dot{width:6px; height:6px; border-radius:var(--r-pill); flex:none;}
 
-  /* Заголовок раздела: pt-3 pb-1.5 px-3, 10px, 600, uppercase, .15em, white/40 */
+  /* Заголовок раздела — САМЫЙ ТИХИЙ элемент рейла (lib/styles.ts прямо так и
+     говорит). SIDEBAR_GROUP_LABEL: normal-case tracking-normal font-medium
+     text-[11px], цвет --text-muted; обёртка pt-base pb-icon px-base. */
   .side__group{
-    padding:12px 12px 6px;
-    font-size:10px; font-weight:600; text-transform:uppercase;
-    letter-spacing:.15em; color:rgba(255,255,255,.4);
+    padding:var(--шаг-base) var(--шаг-base) var(--шаг-icon);
+    font-size:11px; font-weight:500; color:var(--muted);
+    text-transform:none; letter-spacing:normal;
     font-family:${ШРИФТЫ.текст};
   }
 
-  /* Раскрывающаяся группа: кнопка с той же отбивкой, что и пункт, плюс стрелка. */
-  .grp{display:flex; flex-direction:column; gap:2px;}
+  /* Раскрывающаяся группа: SidebarNavGroup.tsx — та же строка, что у пункта,
+     плюс стрелка справа. Стрелка появляется по наведению (у них
+     «opacity-0 group-hover/row:opacity-100»), поэтому в покое ряд чистый. */
+  .grp{display:flex; flex-direction:column; gap:var(--шаг-hair);}
   .grp__head{
-    display:flex; align-items:center; gap:12px; width:100%;
-    padding:8px 12px; border:0; border-radius:var(--радиусПункта); background:none; cursor:pointer;
-    color:#fff; font:500 14px/1.4 ${ШРИФТЫ.текст}; text-align:left;
-    transition:background-color .2s;
-  }
-  .grp__head:hover{background:#2e2e2e;}
-  .grp__label{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-  .grp__caret{width:16px; height:16px; flex:none; color:rgba(255,255,255,.8); transition:transform .2s;}
-  .grp[data-open="0"] .grp__caret{transform:rotate(-90deg);}
-  .grp[data-open="0"] .grp__kids{display:none;}
-  /* pl-6 pr-2 py-1.5 space-y-0.5 */
-  .grp__kids{display:flex; flex-direction:column; gap:2px; padding:6px 8px 6px 24px;}
-  /* Дети чуть тише родителя и с меньшим значком: gap-2.5, w-4 h-4, white/80 */
-  .grp__kids .navlink{gap:10px; color:rgba(255,255,255,.8);}
-  .grp__kids .navlink:hover{color:#fff;}
-  .grp__kids .navlink[aria-current="page"]{background:rgba(255,255,255,.10); color:#fff;}
-  .grp__kids .navlink > span:first-child{gap:10px;}
-  .grp__kids .navlink__icon{width:16px; height:16px;}
-
-  /* Низ: border-t border-white/[0.08], px-3 pb-3 pt-2 */
-  .side__bottom{
-    margin-top:auto; flex:none;
-    padding:8px 12px 12px;
-    border-top:1px solid rgba(255,255,255,.08);
-    display:flex; flex-direction:column; gap:2px;
-  }
-  /* Нижние пункты приглушены: text-white/50 */
-  .side__bottom .navlink{color:rgba(255,255,255,.5);}
-  .side__bottom .navlink:hover{color:rgba(255,255,255,.8);}
-  .rail{
-    display:flex; align-items:center; gap:12px; width:100%;
-    padding:8px 12px; border:0; border-radius:var(--радиусПункта); background:none; cursor:pointer;
-    color:rgba(255,255,255,.5); font:500 14px/1.4 ${ШРИФТЫ.текст};
+    display:flex; align-items:center; gap:var(--шаг-base); width:100%;
+    padding:0 var(--шаг-base); height:var(--h-control);
+    border:0; border-radius:var(--r-inner); background:none; cursor:pointer;
+    color:var(--ink); font:400 14px/var(--lh) ${ШРИФТЫ.текст}; text-align:left;
     transition:background-color .2s, color .2s;
   }
-  .rail:hover{background:#2e2e2e; color:rgba(255,255,255,.8);}
-  .rail svg{width:20px; height:20px; flex:none;}
+  .grp__head:hover{background:var(--sunk);}
+  .grp__label{flex:1; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+  .grp__caret{
+    width:16px; height:16px; flex:none; color:var(--muted);
+    opacity:0; transition:transform .2s, opacity .2s;
+  }
+  .grp:hover .grp__caret,
+  .grp__head:focus-visible .grp__caret,
+  .grp[data-open="1"] .grp__caret{opacity:1;}
+  .grp[data-open="0"] .grp__caret{transform:rotate(-90deg);}
+  .grp[data-open="0"] .grp__kids{display:none;}
+  /* SidebarNavGroup.tsx: <div class="pl-7 pr-base py-tight space-y-0.5"> */
+  .grp__kids{
+    display:flex; flex-direction:column; gap:var(--шаг-hair);
+    padding:var(--шаг-tight) var(--шаг-base) var(--шаг-tight) 28px;
+  }
+  /* Дети тише родителя: text-secondary, при наведении — text-primary. */
+  .grp__kids .navlink{color:var(--neutral);}
+  .grp__kids .navlink:hover{color:var(--ink);}
+  .grp__kids .navlink[aria-current="page"]{background:var(--accentSoft); color:var(--accent);}
 
-  /* Свёрнутая полоса: justify-center p-2, подписи прячутся. */
-  :root[data-rail="1"] .shell{grid-template-columns:var(--свёрнутый) 1fr;}
+  /* Низ сайдбара. Sidebar.tsx: px-base pb-base pt-icon shrink-0
+     border-t border-[color:var(--border-default)] */
+  .side__bottom{
+    margin-top:auto; flex:none;
+    padding:var(--шаг-icon) var(--шаг-base) var(--шаг-base);
+    border-top:1px solid var(--hair);
+    display:flex; flex-direction:column; gap:var(--шаг-hair);
+  }
+  .side__bottom .navlink{color:var(--muted);}
+  .side__bottom .navlink:hover{color:var(--ink);}
+  .rail{
+    display:flex; align-items:center; gap:var(--шаг-base); width:100%;
+    padding:0 var(--шаг-base); height:var(--h-control);
+    border:0; border-radius:var(--r-inner); background:none; cursor:pointer;
+    color:var(--muted); font:400 14px/var(--lh) ${ШРИФТЫ.текст};
+    transition:background-color .2s, color .2s;
+  }
+  .rail:hover{background:var(--sunk); color:var(--ink);}
+  .rail svg{width:16px; height:16px; flex:none;}
+
+  .side__foot{
+    flex:none; padding:0 var(--шаг-base) var(--шаг-base);
+    font-size:11px; color:var(--muted);
+  }
+  .side__foot code{font-size:10.5px;}
+
+  /* Свёрнутая полоса — 52px (SIDEBAR_RAIL_WIDTH). Sidebar.tsx в этом режиме
+     ставит строки в justify-center p-tight и прячет подписи. */
+  :root[data-rail="1"] .side{width:var(--свёрнутый);}
   :root[data-rail="1"] .navlink__label,
   :root[data-rail="1"] .navlink__tag,
   :root[data-rail="1"] .grp__label,
   :root[data-rail="1"] .grp__caret,
+  :root[data-rail="1"] .side__wsp,
+  :root[data-rail="1"] .side__foot,
   :root[data-rail="1"] .rail span{display:none;}
   :root[data-rail="1"] .navlink,
   :root[data-rail="1"] .grp__head,
-  :root[data-rail="1"] .rail{justify-content:center; padding:8px;}
-  :root[data-rail="1"] .navlink > span:first-child{justify-content:center; flex:none;}
+  :root[data-rail="1"] .rail{justify-content:center; padding:0; width:36px; margin:0 auto;}
+  :root[data-rail="1"] .navlink > span:first-child{justify-content:center; flex:none; gap:0;}
   :root[data-rail="1"] .grp__kids{padding-left:0; padding-right:0;}
-  /* Вместо подписи раздела — тонкая черта: my-2 mx-3 h-px bg-white/[0.08] */
+  :root[data-rail="1"] .side__head{justify-content:center; padding:var(--шаг-base) var(--шаг-tight);}
+  /* Вместо подписи раздела — тонкая черта: у них
+     «my-base mx-inset h-px bg-[color:var(--surface-secondary)]» */
   :root[data-rail="1"] .side__group{
-    font-size:0; padding:0; margin:8px 12px;
-    height:1px; background:rgba(255,255,255,.08);
+    font-size:0; padding:0; margin:var(--шаг-base) var(--шаг-inset);
+    height:1px; background:var(--sunk);
   }
 
-  .main{display:flex; flex-direction:column; min-width:0;}
+  /* ── РАБОЧАЯ ОБЛАСТЬ ────────────────────────────────────────────────
+     layout.tsx: <main class="flex-1 min-w-0 overflow-hidden relative"> —
+     ПЛОСКИЙ холст, без плашки и рамки. Плашка досталась сайдбару и шапке.  */
+  .main{
+    flex:1; min-width:0; display:flex; flex-direction:column;
+    gap:var(--шаг-tight); overflow:hidden;
+  }
+
+  /* Полоса рабочей области. DashboardPageHeader.tsx:
+       <div class="flex shrink-0 items-stretch gap-icon lg:gap-tight">
+         <header class="relative flex flex-1 min-w-0 items-center gap-inset
+                        rounded-card border bg-[color:var(--surface)]
+                        min-h-[44px] px-tight py-icon">
+     Радиус и поверхность у неё те же, что у сайдбара — «чтобы две панели
+     читались как одна семья» (их комментарий). */
+  .topbar{flex:none; display:flex; align-items:stretch; gap:var(--шаг-tight);}
   .top{
-    height:var(--панель); flex:none; position:sticky; top:0; z-index:5;
-    background:var(--surface); border-bottom:1px solid var(--hair);
-    display:flex; align-items:center; gap:16px; padding:0 24px;
+    flex:1; min-width:0; display:flex; align-items:center; gap:var(--шаг-inset);
+    min-height:var(--панель); padding:var(--шаг-icon) var(--шаг-tight);
+    background:var(--surface); border:1px solid var(--hair);
+    border-radius:var(--r-card);
   }
-  .top__title{font:700 15px/1 ${ШРИФТЫ.заголовки}; letter-spacing:-.01em;}
-  .side__mark{
-    width:22px; height:22px; border-radius:5px; background:var(--accent); flex:none;
-    display:flex; align-items:center; justify-content:center;
-    color:#fff; font:700 11px/1 ${ШРИФТЫ.заголовки};
+  /* Имя страницы: у них «text-xl font-bold tracking-tight truncate». Это
+     указатель места, а не заголовок: свой h1 экран приносит сам. */
+  .top__title{
+    font:700 20px/1.2 ${ШРИФТЫ.заголовки}; letter-spacing:-.01em;
+    padding-left:var(--шаг-icon);
+    overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
   }
-  .top__crumb{font-size:12.5px; color:var(--neutral);}
-  .top__right{margin-left:auto; display:flex; align-items:center; gap:14px;}
-  .top select{
-    font-family:${ШРИФТЫ.заголовки}; font-size:13px; font-weight:600;
-    color:var(--ink); background:var(--ground);
-    border:1px solid var(--hair); border-radius:var(--радиус);
-    padding:6px 28px 6px 10px; cursor:pointer; appearance:none;
-    background-image:linear-gradient(45deg,transparent 50%,currentColor 50%),linear-gradient(135deg,currentColor 50%,transparent 50%);
-    background-position:calc(100% - 14px) calc(50% + 2px),calc(100% - 9px) calc(50% + 2px);
-    background-size:5px 5px,5px 5px; background-repeat:no-repeat;
-  }
-  .stamp{font-family:${ШРИФТЫ.моно}; font-size:11.5px; color:var(--neutral);}
+  .top__right{margin-left:auto; display:flex; align-items:center; gap:var(--шаг-tight);}
 
-  .screen{padding:26px 24px 64px; max-width:1080px;}
+  /* Островок справа. DashboardPageHeader.tsx: отдельный круг той же
+     поверхности и рамки — «часть той же семьи, но отдельным кругом».
+     h-11 px-icon rounded-pill border bg-[color:var(--surface)] */
+  .top__island{
+    flex:none; align-self:flex-start;
+    display:flex; align-items:center; justify-content:center; gap:var(--шаг-tight);
+    height:var(--панель); padding:0 var(--шаг-inset);
+    border:1px solid var(--hair); border-radius:var(--r-pill);
+    background:var(--surface);
+  }
+  .stamp{font-family:${ШРИФТЫ.моно}; font-size:11.5px; color:var(--muted);}
+
+  /* Область прокрутки. layout.tsx: py-card lg:py-section, БОКОВЫХ ОТСТУПОВ
+     НЕТ — «ширина должна быть такой же, как верхняя полоса» (владелец Mosco
+     2026-08-01). Свои поля карточки задают сами. */
+  .work{
+    flex:1; min-height:0; overflow-y:auto; overflow-x:hidden;
+    padding:var(--шаг-card) 0 64px;
+  }
+  .screen{max-width:1080px;}
   .screen[hidden]{display:none;}
-  .screen__head{margin-bottom:20px;}
-  .screen__head p{color:var(--neutral); margin:6px 0 0; max-width:66ch;}
+  .screen__head{margin-bottom:var(--шаг-card);}
+  .screen__head p{color:var(--neutral); margin:0; max-width:66ch;}
 
-  /* --- Составные части экранов --- */
-  .summary{display:flex; flex-wrap:wrap; gap:28px; padding:0 0 22px; border-bottom:1px solid var(--hair); margin-bottom:22px;}
+  /* ── Составные части экранов ────────────────────────────────────────
+     Поверхности по правилу Mosco (globals.css, «правило поверхностей»):
+     слоёв ровно три — холст --ground, поверхность --surface (карточки, с
+     рамкой), вложенный блок --sunk ТОЛЬКО внутри поверхности. Радиусы из
+     шкалы кабинета, а не 2px, как было. */
+  .summary{
+    display:flex; flex-wrap:wrap; gap:var(--шаг-section);
+    padding:var(--шаг-card); margin-bottom:var(--шаг-roomy);
+    background:var(--surface); border:1px solid var(--hair);
+    border-radius:var(--r-card);
+  }
   .summary div{display:flex; flex-direction:column;}
-  .summary .lbl{font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--neutral);}
-  .summary .val{font-family:${ШРИФТЫ.заголовки}; font-size:26px; font-weight:700; font-variant-numeric:tabular-nums;}
+  .summary .lbl{font-size:11px; font-weight:500; color:var(--muted);}
+  .summary .val{
+    font-family:${ШРИФТЫ.заголовки}; font-size:24px; font-weight:700;
+    font-variant-numeric:tabular-nums; letter-spacing:-.01em;
+  }
 
+  .tablewrap{
+    overflow-x:auto; background:var(--surface);
+    border:1px solid var(--hair); border-radius:var(--r-card);
+  }
   table{border-collapse:collapse; width:100%; font-size:13.5px;}
-  .tablewrap{overflow-x:auto;}
-  th{text-align:left; font-family:${ШРИФТЫ.заголовки}; font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--neutral); font-weight:600; padding:6px 12px 6px 0; border-bottom:1px solid var(--hair); white-space:nowrap;}
-  td{padding:8px 12px 8px 0; border-bottom:1px solid var(--hair); vertical-align:top;}
-  tr:last-child td{border-bottom:none;}
+  table.ask{width:100%;}
+  /* Полоса заголовка таблицы: в тёмной теме она ЧУТЬ СВЕТЛЕЕ карточки —
+     ступень вверх (globals.css: --surface-header #303030). */
+  th{
+    text-align:left; font-size:11px; font-weight:500; color:var(--theadInk);
+    background:var(--thead); letter-spacing:normal;
+    padding:9px var(--шаг-inset); white-space:nowrap;
+  }
+  th:first-child{border-top-left-radius:var(--r-card);}
+  th:last-child{border-top-right-radius:var(--r-card);}
+  td{padding:10px var(--шаг-inset); border-top:1px solid var(--hairLight); vertical-align:top;}
 
-  .project__head{display:flex; flex-wrap:wrap; gap:20px; justify-content:space-between; align-items:flex-start; border-bottom:1px solid var(--hair); padding-bottom:16px;}
-  .project__meta{margin:4px 0 0; display:flex; gap:12px; align-items:baseline; font-size:13px;}
-  .counters{display:flex; gap:22px; margin:0;}
+  .projbody{display:flex; flex-direction:column;}
+  .project__head{
+    display:flex; flex-wrap:wrap; gap:var(--шаг-roomy);
+    justify-content:space-between; align-items:flex-start;
+    padding:var(--шаг-card); background:var(--surface);
+    border:1px solid var(--hair); border-radius:var(--r-card);
+  }
+  .project__meta{margin:4px 0 0; display:flex; gap:var(--шаг-inset); align-items:baseline; font-size:13px; color:var(--muted);}
+  .counters{display:flex; gap:var(--шаг-section); margin:0;}
   .counters div{display:flex; flex-direction:column;}
-  .counters dt{font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--neutral);}
+  .counters dt{font-size:11px; font-weight:500; color:var(--muted);}
   .counters dd{margin:0; font-family:${ШРИФТЫ.заголовки}; font-weight:700; font-size:22px; font-variant-numeric:tabular-nums;}
-  .counters dd span{font-weight:500; font-size:14px; color:var(--neutral);}
-  .project__infra{display:flex; flex-wrap:wrap; gap:24px; font-size:13px; color:var(--neutral); margin:14px 0 0;}
-  .project__infra b{color:var(--ink); font-weight:600;}
-  .alarm{background:color-mix(in srgb, var(--no) 12%, transparent); border-left:3px solid var(--no); padding:10px 12px; margin:14px 0 0; font-size:14px;}
+  .counters dd span{font-weight:400; font-size:14px; color:var(--muted);}
+  .project__infra{display:flex; flex-wrap:wrap; gap:var(--шаг-section); font-size:13px; color:var(--muted); margin:var(--шаг-card) 0 0;}
+  .project__infra b{color:var(--ink); font-weight:500;}
+  .alarm{
+    background:color-mix(in srgb, var(--no) 12%, transparent);
+    border:1px solid color-mix(in srgb, var(--no) 35%, transparent);
+    border-radius:var(--r-inner); padding:var(--шаг-base) var(--шаг-inset);
+    margin:var(--шаг-card) 0 0; font-size:14px;
+  }
 
-  .block{margin-top:26px;}
-  .block h3 .sub{text-transform:none; letter-spacing:0; font-weight:400; margin-left:10px; color:var(--neutral);}
+  .block{margin-top:var(--шаг-section);}
+  .block h3 .sub{font-weight:400; margin-left:var(--шаг-base); color:var(--muted);}
 
-  .stages{list-style:none; margin:12px 0 0; padding:0; display:grid; gap:1px; background:var(--hair); border:1px solid var(--hair); border-radius:var(--радиус); overflow:hidden;}
-  .stage{background:var(--surface); padding:10px 12px; display:grid; grid-template-columns:26px 1fr auto; gap:10px; align-items:baseline; border-left:3px solid transparent;}
-  .stage__n{font-family:${ШРИФТЫ.моно}; color:var(--neutral); font-size:13px;}
-  .stage__name{font-weight:600;}
-  .stage__state{font-size:11px; text-transform:uppercase; letter-spacing:.07em;}
-  .stage__why{grid-column:2 / -1; margin:2px 0 0; font-size:13px; color:var(--neutral);}
+  .stages{
+    list-style:none; margin:var(--шаг-inset) 0 0; padding:0;
+    display:flex; flex-direction:column;
+    background:var(--surface); border:1px solid var(--hair);
+    border-radius:var(--r-card); overflow:hidden;
+  }
+  .stage{
+    padding:var(--шаг-inset); display:grid; grid-template-columns:26px 1fr auto;
+    gap:var(--шаг-base); align-items:baseline;
+    border-left:3px solid transparent; border-top:1px solid var(--hairLight);
+  }
+  .stage:first-child{border-top:0;}
+  .stage__n{font-family:${ШРИФТЫ.моно}; color:var(--muted); font-size:13px;}
+  .stage__name{font-weight:500;}
+  .stage__state{font-size:11px; font-weight:500;}
+  .stage__why{grid-column:2 / -1; margin:2px 0 0; font-size:13px; color:var(--muted);}
   .stage--ok{border-left-color:var(--ok);} .stage--ok .stage__state{color:var(--ok);}
   .stage--ext{border-left-color:var(--accent);} .stage--ext .stage__state{color:var(--accent);}
   .stage--wait{border-left-color:var(--no);} .stage--wait .stage__state{color:var(--no);}
   .stage--human{border-left-color:var(--human);} .stage--human .stage__state{color:var(--human);}
 
-  .accgroups{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:18px; margin-top:12px;}
+  .accgroups{display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:var(--шаг-card);}
+  .accgroup{
+    padding:var(--шаг-inset); background:var(--surface);
+    border:1px solid var(--hair); border-radius:var(--r-card);
+  }
   .chips{list-style:none; margin:0; padding:0; display:flex; flex-wrap:wrap; gap:6px;}
-  .chip{display:inline-flex; align-items:center; gap:6px; font-size:12.5px; padding:3px 9px; border:1px solid var(--hair); border-radius:2px; background:var(--sunk); cursor:help;}
-  .chip__dot{width:7px; height:7px; border-radius:50%; flex:none;}
+  /* Чип по шкале кабинета: высота 28px (h-chip), радиус 10px (r-element).
+     Раньше стоял radius 2px — в макете Mosco таких углов нет вообще. */
+  .chip{
+    display:inline-flex; align-items:center; gap:6px; font-size:12.5px;
+    height:var(--h-chip); padding:0 var(--шаг-base);
+    border:1px solid var(--hair); border-radius:var(--r-element);
+    background:var(--sunk); cursor:help;
+  }
+  .chip__dot{width:7px; height:7px; border-radius:var(--r-pill); flex:none;}
   .chip--on{color:var(--ink);} .chip--on .chip__dot{background:var(--ok);}
-  .chip--off{color:var(--neutral);} .chip--off .chip__dot{background:var(--no); opacity:.65;}
+  .chip--off{color:var(--muted);} .chip--off .chip__dot{background:var(--no); opacity:.65;}
 
-  .svcs{list-style:none; margin:12px 0 0; padding:0; display:grid; gap:4px;}
-  .svc{display:grid; grid-template-columns:1fr auto auto; gap:14px; align-items:baseline; padding:8px 10px; background:var(--sunk); border-left:3px solid var(--hair); font-size:13.5px;}
+  .svcs{list-style:none; margin:var(--шаг-inset) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--шаг-icon);}
+  .svc{
+    display:grid; grid-template-columns:1fr auto auto; gap:var(--шаг-card);
+    align-items:baseline; padding:var(--шаг-base) var(--шаг-inset);
+    background:var(--surface); border:1px solid var(--hair);
+    border-left:3px solid var(--hair); border-radius:var(--r-inner); font-size:13.5px;
+  }
   .svc--run{border-left-color:var(--ok);}
   .svc--done{border-left-color:var(--human);}
   .svc--talk{border-left-color:var(--wait);}
-  .svc__name{font-weight:600;}
-  .svc__state{font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--neutral);}
-  .svc__note{color:var(--neutral); font-size:12.5px;}
-  .noexp{font-style:normal; font-size:10px; text-transform:uppercase; letter-spacing:.06em; color:var(--no); border:1px solid currentColor; padding:1px 5px; border-radius:2px; margin-left:8px;}
+  .svc__name{font-weight:500;}
+  .svc__state{font-size:11px; font-weight:500; color:var(--muted);}
+  .svc__note{color:var(--muted); font-size:12.5px;}
+  .noexp{
+    font-style:normal; font-size:10px; font-weight:500; color:var(--no);
+    border:1px solid currentColor; padding:1px 6px;
+    border-radius:var(--r-element); margin-left:var(--шаг-tight);
+  }
 
-  .catgroup{margin-top:18px;}
-  .cat{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:10px;}
-  .catitem{background:var(--sunk); border:1px solid var(--hair); border-radius:2px; padding:10px 12px; display:flex; flex-direction:column; gap:3px; font-size:13px;}
-  .catitem b{font-family:${ШРИФТЫ.заголовки};}
-  .catitem span{color:var(--neutral);}
+  .catgroup{margin-top:var(--шаг-card);}
+  .cat{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:var(--шаг-base);}
+  .catitem{
+    background:var(--surface); border:1px solid var(--hair);
+    border-radius:var(--r-inner); padding:var(--шаг-inset);
+    display:flex; flex-direction:column; gap:3px; font-size:13px;
+  }
+  .catitem b{font-family:${ШРИФТЫ.заголовки}; font-weight:500;}
+  .catitem span{color:var(--muted);}
   .catitem .src{font-size:11.5px; font-style:italic;}
   .catitem--noexp{border-style:dashed;}
 
-  .reps{list-style:none; margin:12px 0 0; padding:0; display:grid; gap:4px;}
-  .rep{display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; padding:7px 10px; background:var(--sunk); border-left:3px solid var(--hair); font-size:13.5px;}
+  .reps{list-style:none; margin:var(--шаг-inset) 0 0; padding:0; display:flex; flex-direction:column; gap:var(--шаг-icon);}
+  .rep{
+    display:flex; flex-wrap:wrap; gap:var(--шаг-base); justify-content:space-between;
+    padding:var(--шаг-base) var(--шаг-inset);
+    background:var(--surface); border:1px solid var(--hair);
+    border-left:3px solid var(--hair); border-radius:var(--r-inner); font-size:13.5px;
+  }
   .rep--on{border-left-color:var(--ok);}
   .rep--off{border-left-color:var(--no);}
-  .rep__name{font-weight:600;}
-  .rep__name em{font-style:normal; font-weight:400; font-size:11px; text-transform:uppercase; letter-spacing:.07em; color:var(--neutral); margin-left:8px;}
-  .rep__note{color:var(--neutral);}
+  .rep__name{font-weight:500;}
+  .rep__name em{font-style:normal; font-weight:400; font-size:11px; color:var(--muted); margin-left:var(--шаг-tight);}
+  .rep__note{color:var(--muted);}
 
-  .verdict{margin:12px 0 0; font-size:14px; padding:9px 12px; border-radius:2px;}
+  .verdict{
+    margin:var(--шаг-inset) 0 0; font-size:14px;
+    padding:var(--шаг-base) var(--шаг-inset); border-radius:var(--r-inner);
+  }
   .verdict--ok{background:color-mix(in srgb, var(--ok) 12%, transparent); color:var(--ok);}
   .verdict--no{background:color-mix(in srgb, var(--no) 10%, transparent); color:var(--no);}
 
+  /* Узкий экран. Сайдбар встаёт СВЕРХУ во всю ширину и остаётся плашкой, а
+     меню — вертикальным списком.
+
+     Первая попытка раскладывала меню в горизонтальный ряд (flex-wrap), и он
+     разъезжался: у групп внутри свои колонки с детьми, они не переносятся, а
+     пункты обрезались по правому краю плашки. Ряд из вложенных групп — это не
+     «то же меню поуже», это другой компонент, которого у нас нет.
+
+     У Mosco ниже lg сайдбар уезжает за край и открывается ящиком по кнопке.
+     Ящика у пульта нет, и делать половину чужого поведения хуже, чем не делать:
+     кнопка была бы, а поведение — наполовину. Поэтому здесь честный простой
+     вариант, который не ломается. */
   @media (max-width:860px){
-    .shell{grid-template-columns:1fr;}
-    .side{position:static; height:auto; border-right:none; border-bottom:1px solid var(--hair);}
-    .side__nav{flex-direction:row; flex-wrap:wrap; padding:10px;}
-    .side__group{display:none;}
-    .side__foot{display:none;}
+    .shell{
+      height:auto; min-height:100dvh; overflow:visible;
+      padding:var(--шаг-tight); gap:var(--шаг-tight);
+    }
+    .shell__row{flex-direction:column; gap:var(--шаг-tight);}
+    .side{width:auto; align-self:stretch;}
+    .side__nav{overflow:visible;}
+    .main{overflow:visible;}
+    .work{overflow:visible; padding:var(--шаг-inset) 0 var(--шаг-section);}
+    .top__title{font-size:17px;}
+    /* Свёрнутая полоса на узком экране смысла не имеет: места по горизонтали
+       она не экономит, а меню превращает в столбик безымянных значков. */
+    .rail{display:none;}
+    :root[data-rail="1"] .side{width:auto;}
+    :root[data-rail="1"] .navlink__label,
+    :root[data-rail="1"] .grp__label,
+    :root[data-rail="1"] .side__wsp{display:flex;}
+    :root[data-rail="1"] .navlink,
+    :root[data-rail="1"] .grp__head{
+      justify-content:flex-start; width:auto; padding:0 var(--шаг-base);
+    }
+    :root[data-rail="1"] .side__group{
+      font-size:11px; height:auto; background:none;
+      padding:var(--шаг-base) var(--шаг-base) var(--шаг-icon); margin:0;
+    }
   }
 `;
 
@@ -305,6 +549,11 @@ export const СКРИПТ = `
   var КЛЮЧ = 'castells-services-screen';
 
   function экраны() { return Array.prototype.slice.call(document.querySelectorAll('[data-screen]')); }
+  /* Имя страницы живёт в ОДНОМ месте — верхней полосе (как у Mosco: полоса и
+     есть указатель места, а экран приносит только содержимое). Раньше оно
+     стояло и в полосе, и заголовком строкой ниже — один и тот же текст
+     дважды подряд. */
+  function shapkaSet(узел, текст) { узел.textContent = текст; document.title = текст + ' · Пульт Castells'; }
   function ссылки() { return Array.prototype.slice.call(document.querySelectorAll('.navlink')); }
 
   function показать(имя, запомнить) {
@@ -323,8 +572,13 @@ export const СКРИПТ = `
     if (выбор && имя.indexOf('p/') === 0) { выбор.value = имя.slice(2); }
 
     var шапка = document.getElementById('crumb');
-    var активная = ссылки().filter(function (с) { return с.getAttribute('aria-current'); })[0];
-    if (шапка && активная) { шапка.textContent = активная.dataset.title || активная.textContent.trim(); }
+    var текущий = список.filter(function (э) { return !э.hidden; })[0];
+    if (шапка && текущий && текущий.dataset.title) {
+      shapkaSet(шапка, текущий.dataset.title);
+    } else if (шапка) {
+      var активная = ссылки().filter(function (с) { return с.getAttribute('aria-current'); })[0];
+      if (активная) { shapkaSet(шапка, активная.dataset.title || активная.textContent.trim()); }
+    }
 
     if (запомнить !== false) { try { localStorage.setItem(КЛЮЧ, имя); } catch (e) {} }
     return имя;
@@ -361,7 +615,7 @@ export const СКРИПТ = `
     });
   });
 
-  /* Свёрнутая полоса. Ширина и само поведение взяты из Project X. */
+  /* Свёрнутая полоса — 52px, как SIDEBAR_RAIL_WIDTH у Mosco. */
   var кнопкаПолосы = document.getElementById('rail');
   if (кнопкаПолосы) {
     var КЛЮЧ_ПОЛОСЫ = 'castells-rail';
@@ -385,7 +639,13 @@ export const СКРИПТ = `
 /**
  * Собирает страницу целиком.
  *
- * @param {object} части — { заголовок, разделыМеню, проекты, экраны, когда, подвал }
+ * ПОРЯДОК ЧАСТЕЙ ВЗЯТ У НИХ. Логотип и выбор места работы — в ШАПКЕ САЙДБАРА
+ * (SidebarHeader.tsx), а не в верхней полосе: у Mosco верхняя полоса
+ * принадлежит СТРАНИЦЕ (её имя, её инструменты, её главное действие), а
+ * сайдбар — рабочему пространству целиком. Выбор проекта — это выбор
+ * пространства, поэтому он переехал влево.
+ *
+ * @param {object} части — { заголовок, меню, низМеню, выборПроектов, экраны, когда, подвал }
  */
 export function оболочка({ заголовок, меню, низМеню, выборПроектов, экраны, когда, подвал }) {
   return `<title>${экр(заголовок)}</title>
@@ -393,34 +653,41 @@ export function оболочка({ заголовок, меню, низМеню,
 <style>${СТИЛИ}</style>
 
 <div class="shell">
-  <nav class="side" aria-label="Разделы">
-    <div class="side__nav">${меню}</div>
-    <div class="side__bottom">
-      ${низМеню || ''}
-      <button class="rail" type="button" id="rail" aria-label="Свернуть меню">
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor"
-             stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="2.5" y="3.5" width="15" height="13" rx="2"/><path d="M8 3.5v13"/>
-        </svg>
-        <span>Свернуть</span>
-      </button>
-    </div>
-    <div class="side__foot">
-      Собрано из профилей<br>в <code>services/clients</code>
-    </div>
-  </nav>
-
-  <div class="main">
-    <header class="top">
-      <span class="side__mark" aria-hidden="true">C</span>
-      <span class="top__title">Castells</span>
-      <span class="top__crumb" id="crumb"></span>
-      <div class="top__right">
-        ${выборПроектов}
-        <span class="stamp">${экр(когда)}</span>
+  <div class="shell__row">
+    <nav class="side" aria-label="Разделы">
+      <div class="side__head">
+        <span class="side__mark" aria-hidden="true">C</span>
+        <div class="side__wsp">${выборПроектов}</div>
       </div>
-    </header>
-    ${экраны}
+      <div class="side__nav">${меню}</div>
+      <div class="side__bottom">
+        ${низМеню || ''}
+        <button class="rail" type="button" id="rail" aria-label="Свернуть меню">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+               stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2.5" width="12" height="11" rx="2"/><path d="M6.5 2.5v11"/>
+          </svg>
+          <span>Свернуть</span>
+        </button>
+      </div>
+      <div class="side__foot">
+        Собрано из профилей<br>в <code>services/clients</code>
+      </div>
+    </nav>
+
+    <div class="main">
+      <div class="topbar">
+        <header class="top">
+          <h1 class="top__title" id="crumb">Пульт</h1>
+        </header>
+        <div class="top__island">
+          <span class="stamp">${экр(когда)}</span>
+        </div>
+      </div>
+      <div class="work">
+        ${экраны}
+      </div>
+    </div>
   </div>
 </div>
 
@@ -436,9 +703,9 @@ export const пункт = ({ адрес, имя, метка, точка, зна�
   </a>`;
 
 /**
- * Раскрывающаяся группа — как в сайдбаре Project X: заголовок кликабелен,
- * дети прячутся. Состояние запоминается, иначе при каждом переходе всё
- * схлопывалось бы обратно и по сайдбару стало бы неудобно ходить.
+ * Раскрывающаяся группа — SidebarNavGroup.tsx: заголовок кликабелен, дети
+ * прячутся, стрелка проявляется по наведению. Состояние запоминается, иначе
+ * при каждом переходе всё схлопывалось бы обратно.
  */
 export const группа = ({ ключ, имя, значок, дети, открыта = true }) =>
   `<div class="grp" data-group="${экр(ключ)}" data-open="${открыта ? '1' : '0'}">
@@ -464,10 +731,7 @@ export const группаМеню = имя => `<div class="side__group">${экр
  * данные уже пришли.
  */
 export const экран = (имя, заголовок, описание, содержимое, видим = false) =>
-  `<section class="screen" data-screen="${экр(имя)}"${видим ? '' : ' hidden'}>
-    <div class="screen__head">
-      <h1>${экр(заголовок)}</h1>
-      ${описание ? `<p>${экр(описание)}</p>` : ''}
-    </div>
+  `<section class="screen" data-screen="${экр(имя)}" data-title="${экр(заголовок)}"${видим ? '' : ' hidden'}>
+    ${описание ? `<div class="screen__head"><p>${экр(описание)}</p></div>` : ''}
     ${содержимое}
   </section>`;

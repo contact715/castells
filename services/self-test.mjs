@@ -24,7 +24,7 @@ import { ИСПОЛНИТЕЛИ } from './run.mjs';
 import { УСЛУГИ, ГРУППЫ_УСЛУГ, СОСТОЯНИЯ, услугиПроекта, разделыОтУслуг } from './lib/catalog.mjs';
 import { собратьПроекты, страница } from './dashboard.mjs';
 import { поднять } from './server.mjs';
-import { ТЁМНАЯ, ШРИФТЫ, РАЗМЕРЫ } from './lib/theme.mjs';
+import { ТЁМНАЯ, ШРИФТЫ, РАЗМЕРЫ, РАДИУСЫ, ВЫСОТЫ } from './lib/theme.mjs';
 import { забрать, вытащитьКомпании, вЗаготовку, файлПрофиля } from './import-mosco.mjs';
 import образец from './clients/_template.mjs';
 
@@ -276,11 +276,29 @@ console.log('Самопроверки цикла SEO\n');
   проверка('тёмная тема — основа, как у них', html.includes('color-scheme:dark'));
   проверка('светлой темы нет вовсе — у их панели её тоже нет',
     !html.includes('prefers-color-scheme') && !html.includes('data-theme'));
-  проверка('сайдбар чёрный, как в Mosco web', html.includes('background:#000'));
-  проверка('наведение и выбор — их значения',
-    html.includes('#2e2e2e') && html.includes('rgba(255,255,255,.15)'));
-  проверка('заголовок раздела набран их правилом',
-    html.includes('letter-spacing:.15em') && html.includes('rgba(255,255,255,.4)'));
+  /*
+    САЙДБАР — ПЛАШКА, А НЕ ЧЁРНЫЙ БЛОК. Это главное, чем живой кабинет
+    отличается от того, что стояло здесь раньше. Sidebar.tsx: у него
+    `rounded-card bg-[var(--surface)] border`, а рабочая область — плоский
+    холст. Прежняя проверка требовала background:#000 и держала на месте
+    ровно ту ошибку, ради которой её писали.
+  */
+  проверка('сайдбар — плашка: своя поверхность, рамка и радиус',
+    /\.side\{[^}]*background:var\(--surface\)/.test(html)
+    && /\.side\{[^}]*border-radius:var\(--r-card\)/.test(html));
+  проверка('рама кабинета даёт зазор, иначе плашки не видно',
+    /\.shell\{[^}]*padding:var\(--шаг-inset\)/.test(html)
+    && /\.shell__row\{[^}]*gap:var\(--шаг-tight\)/.test(html));
+  проверка('наведение — вторичная поверхность, выбор — акцент 15%',
+    html.includes('.navlink:hover{background:var(--sunk)')
+    && html.includes('background:var(--accentSoft); color:var(--accent)'));
+  проверка('заголовок раздела набран их правилом: 11px, без капса и разрядки',
+    /\.side__group\{[^}]*text-transform:none/.test(html)
+    && /\.side__group\{[^}]*letter-spacing:normal/.test(html)
+    && /\.side__group\{[^}]*font-size:11px/.test(html));
+  проверка('строка меню — канон SIDEBAR_ROW: высота 32px, радиус 14px',
+    ВЫСОТЫ.control === '32px' && РАДИУСЫ.inner === '14px'
+    && /\.navlink\{[^}]*height:var\(--h-control\)/.test(html));
   проверка('у body задан свой фон', /body\{[^}]*background:var\(--ground\)/.test(html));
   проверка('в пульте нет незаполненных подстановок',
     !html.includes('undefined') && !html.includes('[object Object]') && !html.includes('NaN'));
@@ -310,13 +328,17 @@ console.log('Самопроверки цикла SEO\n');
   проверка('есть нижняя секция меню', html.includes('side__bottom'));
   проверка('меню сворачивается в узкую полосу',
     html.includes('id="rail"') && html.includes('data-rail'));
-  проверка('ширина свёрнутой полосы — из Project X', html.includes('--свёрнутый:72px'));
+  проверка('ширина свёрнутой полосы — SIDEBAR_RAIL_WIDTH = 52', html.includes('--свёрнутый:52px'));
   проверка('длинные названия в меню обрезаются, а не распирают его',
     html.includes('text-overflow:ellipsis'));
   проверка('есть верхняя панель', html.includes('class="top"'));
 
   const экранов = (html.match(/data-screen=/g) || []).length;
-  const скрытых = (html.match(/data-screen="[^"]*" hidden/g) || []).length;
+  /* Считаем по ВСЕМУ тегу секции, а не по паре соседних атрибутов: прежняя
+     проверка требовала, чтобы hidden стоял сразу после data-screen, и упала
+     от добавления третьего атрибута — при том что видимый экран по-прежнему
+     ровно один. Тест мерил порядок атрибутов вместо поведения. */
+  const скрытых = (html.match(/<section [^>]*data-screen=[^>]*\bhidden\b[^>]*>/g) || []).length;
   проверка('экранов столько же, сколько проектов плюс три общих',
     экранов === проекты.length + 3, `экранов ${экранов}`);
   проверка('один экран видим без скриптов', экранов - скрытых === 1,
@@ -340,19 +362,22 @@ console.log('Самопроверки цикла SEO\n');
     месте: поправит кто-то «на глаз» — проверка упадёт и напомнит, что число
     не наше.
   */
-  проверка('поверхности — из их globals.css',
-    ТЁМНАЯ.ground === '#000000' && ТЁМНАЯ.surface === '#111111' && ТЁМНАЯ.sunk === '#1a1a1a');
-  проверка('текст и линии — из их globals.css',
-    ТЁМНАЯ.neutral === 'rgba(255,255,255,.80)' && ТЁМНАЯ.hair === 'rgba(255,255,255,.06)');
-  проверка('акцент — их --accent 59 130 246', ТЁМНАЯ.accent === '#3B82F6');
+  проверка('поверхности — из globals.css живого кабинета, блок .dark',
+    ТЁМНАЯ.ground === '#171717' && ТЁМНАЯ.surface === '#212121' && ТЁМНАЯ.sunk === '#2a2a2a');
+  проверка('текст и линии — из globals.css живого кабинета',
+    ТЁМНАЯ.neutral === '#d6d6d6' && ТЁМНАЯ.hair === 'rgba(255,255,255,.14)');
+  проверка('акцент — их --accent 8 162 255 из макета Figma',
+    ТЁМНАЯ.accent === '#08A2FF' && ТЁМНАЯ.accentSoft === 'rgba(8,162,255,.15)');
   проверка('цвета состояний тоже их, а не мои',
     ТЁМНАЯ.ok === '#10B981' && ТЁМНАЯ.no === '#EF4444' && ТЁМНАЯ.wait === '#F59E0B');
-  проверка('радиус — их --radius 0.75rem', РАЗМЕРЫ.радиус === '12px');
-  проверка('полоса прокрутки как у них', html.includes('rgba(59,130,246,.5)'));
+  проверка('радиусы — шкала кабинета, а не одно значение на всё',
+    РАДИУСЫ.element === '10px' && РАДИУСЫ.inner === '14px'
+    && РАДИУСЫ.card === '20px' && РАДИУСЫ.container === '24px');
+  проверка('полоса прокрутки как у них', html.includes('rgba(8,162,255,.5)'));
   проверка('сглаживание шрифта как у них', html.includes('font-smoothing:antialiased'));
-  проверка('шрифт Mosco подключён и объявлен',
-    html.includes('Plus+Jakarta+Sans') && ШРИФТЫ.текст.includes('Plus Jakarta Sans'));
-  проверка('ширина сайдбара — из Mosco web', РАЗМЕРЫ.сайдбар === '175px');
+  проверка('шрифт кабинета подключён и объявлен — DM Sans по макету Figma',
+    html.includes('DM+Sans') && ШРИФТЫ.текст.includes('DM Sans'));
+  проверка('ширина сайдбара — SIDEBAR_DEFAULT_WIDTH = 208', РАЗМЕРЫ.сайдбар === '208px');
   проверка('в теме нет пустых значений',
     Object.values(ТЁМНАЯ).every(з => typeof з === 'string' && з.length > 2));
 
