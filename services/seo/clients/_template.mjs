@@ -39,6 +39,14 @@ export default {
    */
   cms: 'none',
 
+  /*
+    Хостинг: vercel | railway | hostinger | netlify | cpanel | wordpressHost |
+    other | unknown | none. От него зависит, что просить у клиента: «доступ к
+    хостингу» звучит одинаково, а на Railway это приглашение в проект, а на
+    Hostinger — панель hPanel и файловый доступ.
+  */
+  hosting: 'none',
+
   /** Короткая строка о бизнесе. Без чисел — для чисел есть facts. */
   tagline: 'Heating and cooling for homes',
 
@@ -97,9 +105,17 @@ export default {
    * останавливаются и говорят, чего им не хватает.
    */
   access: {
-    searchConsole: false,
-    analytics: false,
-    googleBusiness: false,
     siteAdmin: false,
+    hosting: false,
+    domainDns: false,
+    searchConsole: false,
+    bingWebmaster: false,
+    googleBusiness: false,
+    analytics: false,
+    callTracking: false,
+    googleAds: false,
+    metaAds: false,
+    emailSending: false,
+    crm: false,
   },
 };

@@ -28,6 +28,9 @@ export default {
   /* Сайт наш, лежит в этом же репозитории — публикация полностью в наших руках. */
   cms: 'ours',
 
+  /* Выкладывается на Vercel, проект castells, команда «Dmitrii's projects». */
+  hosting: 'vercel',
+
   /* Заголовок первого экрана живого сайта. Без чисел. */
   tagline: 'Marketing for home service businesses',
 
@@ -92,16 +95,34 @@ export default {
   /*
     Доступы на 29 августа 2026.
 
-    siteAdmin — единственный, который у нас есть: сайт лежит в этом
-    репозитории, выкатываем сами. Остальные три открыты в ТЗ браузерному
-    агенту (docs/TZ_BROWSER_AGENT_2026-08-29.md) и пока false. Как только
-    Search Console подтвердится и появится счётчик — правим здесь, и стадии
-    1 и 6 перестают быть заблокированными.
+    Открыты только те, где мы сами себе хозяева: сайт в нашем репозитории и
+    выкладка на Vercel. Всё остальное закрыто, и это честная картина, а не
+    недоделка: ключевые из недостающих открываются по ТЗ браузерному агенту
+    (docs/TZ_BROWSER_AGENT_2026-08-29.md). Как Search Console подтвердится и
+    появится счётчик — правим здесь, и стадии 1 и 6 перестают быть
+    заблокированными.
   */
   access: {
-    searchConsole: false,
-    analytics: false,
-    googleBusiness: false,
+    // Инфраструктура — здесь мы хозяева, сайт в нашем репозитории.
     siteAdmin: true,
+    hosting: true,
+    domainDns: false,      // запись в DNS ставит владелец; без неё встаёт Search Console
+
+    // Поиск
+    searchConsole: false,
+    bingWebmaster: false,
+    googleBusiness: false,
+
+    // Измерение
+    analytics: false,      // счётчика нет вовсе, тариф Vercel без веб-аналитики
+    callTracking: false,
+
+    // Реклама — кабинеты есть у владельца, доступа у цикла нет
+    googleAds: false,
+    metaAds: false,
+
+    // Заявки
+    emailSending: false,   // форма честно отвечает «напишите в WhatsApp»
+    crm: false,
   },
 };
