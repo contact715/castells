@@ -91,7 +91,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
       subtitle: 'We\'ve received your message and will get back to you shortly.',
       icon: <Mail className="w-8 h-8" />,
       features: [
-        { icon: <Clock className="w-5 h-5" />, text: 'Response within 24 hours' },
+        { icon: <Clock className="w-5 h-5" />, text: 'We reply personally' },
         { icon: <Phone className="w-5 h-5" />, text: 'Direct call if urgent' },
         { icon: <Star className="w-5 h-5" />, text: 'Priority support' },
       ],
@@ -287,29 +287,16 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
             </Button>
           </motion.div>
 
-          {/* Social Proof */}
+          {/* Closing note */}
           <motion.div
             className="mt-16 pt-8 border-t border-black/5 dark:border-white/10"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.1 }}
           >
-            <p className="text-sm text-text-secondary mb-4">
+            <p className="text-sm text-text-secondary">
               Thanks — we'll be in touch shortly
             </p>
-            <div className="flex items-center justify-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.2 + i * 0.1 }}
-                >
-                  <Star className="w-5 h-5 text-accent-text fill-accent" />
-                </motion.div>
-              ))}
-              <span className="ml-2 text-sm font-semibold text-text-primary">5.0</span>
-            </div>
           </motion.div>
 
         </div>
