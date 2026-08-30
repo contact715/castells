@@ -17,6 +17,10 @@ export default {
   id: 'romans-service',
   name: "Roman's Service Cooling & Heating",
   site: 'https://www.acromanservice.com/',
+  /* Адрес карточки на Yelp. Лежит здесь, а не в закладке сбора: по нему
+     сервер сам понимает, чей снимок пришёл, и одна закладка работает на
+     всех клиентов. Проверено браузером 30 августа. */
+  yelp: 'https://www.yelp.com/biz/romans-service-cooling-and-heating-north-port',
 
   trade: 'hvac',
 

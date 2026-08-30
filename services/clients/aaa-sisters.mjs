@@ -31,6 +31,10 @@ export default {
   /* Проверено 29 августа: DNS отвечает, сайт отдаёт 200, заголовок страницы
      «HVAC Installation & Replacement in PA, NJ, NY & DE | AAA Sisters Climate». */
   site: 'https://aaasistersclimate.com/',
+  /* Адрес карточки на Yelp. Лежит здесь, а не в закладке сбора: по нему
+     сервер сам понимает, чей снимок пришёл, и одна закладка работает на
+     всех клиентов. Проверено браузером 30 августа. */
+  yelp: 'https://www.yelp.com/biz/aaa-sisters-climate-langhorne',
 
   trade: 'hvac',
 
