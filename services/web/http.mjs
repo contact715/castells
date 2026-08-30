@@ -32,10 +32,11 @@
 import { createServer } from 'node:http';
 import { createHmac, timingSafeEqual } from 'node:crypto';
 
-import { собратьПроекты, сПосещениями } from '../app/state.mjs';
+import { собратьПроекты, сПосещениями, сДаннымиYelp } from '../app/state.mjs';
 import { ответОПроектах } from '../app/contract.mjs';
 import { БАЗА_ЗАДАНА, применитьСхему, база } from '../store/db.mjs';
 import { принятьПосещение, доменыПроектов } from '../app/counter.mjs';
+import { записатьСнимокYelp } from '../store/yelp.mjs';
 import { СКРИПТ_СЧЁТЧИКА } from './counter-script.mjs';
 import { страница } from './render.mjs';
 import { СТАДИИ } from '../core/stages.mjs';
@@ -427,6 +428,38 @@ export async function обработать(запрос, ответ) {
   }
 
   try {
+    /*
+      ПРИЁМ СНИМКА YELP. За паролем, в отличие от счётчика: сюда пишет НАШ
+      инструмент сбора, а не браузер постороннего человека.
+
+      Почему приём отдельным маршрутом, а не запись прямо из инструмента:
+      база живёт во внутренней сети Railway и снаружи недоступна. Пускать её
+      наружу ради редкой записи значило бы открыть базу в интернет — дорого
+      платить за удобство раз в месяц.
+    */
+    if (путь === '/api/yelp-snapshot' && запрос.method === 'POST') {
+      let тело = '';
+      try { тело = await прочитатьТело(запрос); }
+      catch { return отдать(ответ, 413, 'text/plain; charset=utf-8', 'Слишком длинный запрос'); }
+
+      let снимок = null;
+      try { снимок = JSON.parse(тело); } catch {
+        return отдать(ответ, 400, 'application/json; charset=utf-8',
+          JSON.stringify({ принято: false, причина: 'тело не разобралось как JSON' }));
+      }
+
+      /* Снимок без проекта или без адреса карточки не принимается: строка,
+         про которую неизвестно, чья она и откуда, хуже отсутствующей. */
+      if (!снимок?.проект || !снимок?.адресYelp) {
+        return отдать(ответ, 400, 'application/json; charset=utf-8',
+          JSON.stringify({ принято: false, причина: 'нужны поля «проект» и «адресYelp»' }));
+      }
+
+      const записано = await записатьСнимокYelp(снимок);
+      return отдать(ответ, записано ? 201 : 503, 'application/json; charset=utf-8',
+        JSON.stringify({ принято: записано, проект: снимок.проект }));
+    }
+
     if (путь === '/api/projects') {
       const проекты = await собратьПроекты();
       /* Форма ответа описана в app/contract.mjs, а не здесь: сервер решает,
@@ -438,7 +471,7 @@ export async function обработать(запрос, ответ) {
     if (путь === '/' || путь === '/index.html') {
       /* Данные счётчика досыпаются ТОЛЬКО для страницы: командной строке и
          JSON они не нужны, а поход в базу стоит времени. */
-      const проекты = await сПосещениями(await собратьПроекты());
+      const проекты = await сДаннымиYelp(await сПосещениями(await собратьПроекты()));
       const когда = new Date().toISOString().slice(0, 16).replace('T', ' ') + ' UTC';
       const html = страница(проекты, когда);
       return отдать(ответ, 200, 'text/html; charset=utf-8', html);

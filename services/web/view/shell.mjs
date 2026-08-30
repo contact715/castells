@@ -394,6 +394,10 @@ export const СТИЛИ = `
   }
   /* Имя страницы: у них «text-xl font-bold tracking-tight truncate». Это
      указатель места, а не заголовок: свой h1 экран приносит сам. */
+  /* Пустой заголовок не занимает место: на экране проекта имя компании в
+     полосу не пишется — оно уже стоит в шапке сайдбара и подсвечено в списке
+     клиентов (владелец 30 августа: «не надо место занимать лишним»). */
+  .top__title:empty{display:none;}
   .top__title{
     font:700 20px/1.2 ${ШРИФТЫ.заголовки}; letter-spacing:-.01em;
     padding-left:var(--шаг-icon);
@@ -443,6 +447,22 @@ export const СТИЛИ = `
   .tab__dot--run{background:var(--ok);}
   .tab__dot--done{background:var(--human);}
   .tab__dot--talk{background:var(--wait);}
+
+  /* Цифры карточки Yelp: тот же приём, что у счётчиков проекта наверху —
+     подпись мелкая и тихая, число крупное. Читают именно числа. */
+  .yelp{display:flex; flex-wrap:wrap; gap:var(--шаг-section); margin:var(--шаг-card) 0;}
+  .yelp div{display:flex; flex-direction:column;}
+  .yelp dt{font-size:11px; font-weight:500; color:var(--muted);}
+  .yelp dd{
+    margin:0; font-family:${ШРИФТЫ.заголовки}; font-weight:700; font-size:22px;
+    font-variant-numeric:tabular-nums; display:flex; align-items:baseline; gap:6px;
+  }
+  /* «Нет» вместо числа — тихим, чтобы не читалось как ноль: у карточки без
+     рекомендованных отзывов рейтинга не существует, это не значение «0». */
+  .yelp__none{font-size:15px; font-weight:400; color:var(--muted);}
+  .yelp__move{font-size:12px; font-weight:500;}
+  .yelp__move--up{color:var(--ok);}
+  .yelp__move--down{color:var(--no);}
 
   /* Панель одной услуги — открывается вместо обзора проекта. */
   .svcpanel[hidden]{display:none;}
@@ -825,11 +845,7 @@ export const СКРИПТ = `
   var КЛЮЧ = 'castells-services-screen';
 
   function экраны() { return Array.prototype.slice.call(document.querySelectorAll('[data-screen]')); }
-  /* Имя страницы живёт в ОДНОМ месте — верхней полосе (как у Mosco: полоса и
-     есть указатель места, а экран приносит только содержимое). Раньше оно
-     стояло и в полосе, и заголовком строкой ниже — один и тот же текст
-     дважды подряд. */
-  function shapkaSet(узел, текст) { узел.textContent = текст; document.title = текст + ' · Пульт Castells'; }
+
   function ссылки() { return Array.prototype.slice.call(document.querySelectorAll('.navlink')); }
 
   /*
@@ -894,14 +910,30 @@ export const СКРИПТ = `
     var выбор = document.getElementById('proj');
     if (выбор && имя.indexOf('p/') === 0) { выбор.value = имя.slice(2); }
 
+    /*
+      ИМЯ КОМПАНИИ В ПОЛОСУ НЕ ПИШЕТСЯ (владелец 30 августа: «тут удали
+      название компании, не надо место занимать лишним, слева в сайдбаре уже
+      есть название компании»).
+
+      На экране проекта оно стояло ТРЕТИЙ раз подряд: в шапке сайдбара, в
+      подсвеченной строке списка клиентов и здесь. Освободившееся место
+      забирают вкладки услуг — им его как раз не хватало.
+
+      На общих экранах («Все проекты», «Чего не хватает», каталог) имя
+      остаётся: там оно ничего не дублирует и служит единственным указателем
+      места. Заголовок страницы в браузере ставится всегда — по нему вкладку
+      находят среди других.
+    */
     var шапка = document.getElementById('crumb');
     var текущий = список.filter(function (э) { return !э.hidden; })[0];
-    if (шапка && текущий && текущий.dataset.title) {
-      shapkaSet(шапка, текущий.dataset.title);
-    } else if (шапка) {
+    var этоПроект = имя.indexOf('p/') === 0;
+    var имяЭкрана = (текущий && текущий.dataset.title) || '';
+    if (!имяЭкрана) {
       var активная = ссылки().filter(function (с) { return с.getAttribute('aria-current'); })[0];
-      if (активная) { shapkaSet(шапка, активная.dataset.title || активная.textContent.trim()); }
+      имяЭкрана = активная ? (активная.dataset.title || активная.textContent.trim()) : '';
     }
+    if (шапка) { шапка.textContent = этоПроект ? '' : имяЭкрана; }
+    if (имяЭкрана) { document.title = имяЭкрана + ' · Пульт Castells'; }
 
     /* Режим подстраивается под открытый экран. Вызов защищён проверкой:
        показать() работает и до того, как переключатель нашёлся в разметке. */
