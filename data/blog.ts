@@ -285,6 +285,61 @@ export const BLOG_POSTS: BlogPost[] = [
       },
     ],
   },
+  {
+    id: 6,
+    slug: 'fake-rating-on-our-own-site',
+    title: 'We had a fake five-star rating on our own site',
+    excerpt:
+      'Every visitor who submitted our contact form saw five stars and a 5.0 score. We have zero published reviews. Here is what happened and what we fixed.',
+    date: 'August 30, 2026',
+    readingMinutes: 4,
+    category: 'How we work',
+    author: 'Dmitrii Z.',
+    authorRole: 'Founder, Castells Media',
+    sections: [
+      {
+        heading: 'What every visitor saw',
+        body: [
+          'Fill out the contact form on our site and the page that loaded next used to show five filled-in stars and the number 5.0, next to a line promising a response within 24 hours. It looked exactly like a review score.',
+          'We do not have a single published review on this site. Not one. Asking real clients for a quote is still an open item on our own list. The stars and the score were never connected to anything real.',
+        ],
+      },
+      {
+        heading: 'Where it came from',
+        body: [
+          'This site started from a commercial template, the kind a lot of small agencies and contractors buy to launch quickly. Templates ship with placeholder trust signals built in: star ratings, client counts, years in business, testimonials with stock photos. We found and removed a batch of that weeks ago, on the pages a search engine actually crawls.',
+          'This block was not on one of those pages. It was on the thank you page, the one that only appears after someone submits a form, so it never showed up in that pass.',
+        ],
+      },
+      {
+        heading: 'The part worth remembering',
+        body: [
+          'A rating on a homepage gets checked because it is visible and public. A rating on a thank you page is seen only by the people who just trusted you with their contact details, and it gets checked by almost nobody, including, for a while, us.',
+          'Right next to the stars sat a second problem: "Response within 24 hours," a specific promise with no process behind it that would make it reliably true. It came out too, replaced with "we reply personally," which is what actually happens.',
+        ],
+      },
+      {
+        heading: 'Why it matters more on a small site',
+        body: [
+          'A company with thousands of real reviews can round a 4.87 up to a 4.9 and call it rounding. We have zero reviews. There is no rounding version of zero. It is either honest or it is not, and for a while, on one page, it was not.',
+          'We have a rule for this site: no number goes up without a source we can point to. It held on every page we had checked. It did not hold on a page we had not checked, which in practice is the same as not having the rule at all.',
+        ],
+      },
+      {
+        heading: 'Check the pages nobody checks',
+        body: [
+          'If you run your own site or paid someone to build it, the pages worth a second look are not the ones you show people, they are the ones your own customers land on without you watching: order confirmations, thank you pages, booking confirmations, receipt emails. Anything built from a template inherits whatever was in the template, stars included.',
+          'Submit your own form. Book your own slot. Read what comes back as if you were the customer, not the owner. If a number or a rating appears, ask where it came from. If you cannot answer that in one sentence, it should not be there.',
+        ],
+      },
+      {
+        heading: 'Where we actually stand',
+        body: [
+          'We have real clients and have not yet asked most of them for a written review, so until we have some, this site says nothing about ratings. When we do have reviews, they will be actual quotes with the actual client\'s name, not five stars generated on page load.',
+        ],
+      },
+    ],
+  },
 ];
 
 export const findPostBySlug = (slug: string) => BLOG_POSTS.find((p) => p.slug === slug);
