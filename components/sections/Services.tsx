@@ -37,7 +37,7 @@ const Services: React.FC = React.memo(() => {
             <span className="text-text-secondary">Modern Growth</span>
           </AnimatedHeading>
           <p className="text-lg text-text-secondary leading-relaxed mb-8">
-            From lead generation to conversion optimization, we build the infrastructure your business needs to dominate.
+            From lead generation to conversion optimization, we build the infrastructure your business needs to grow.
           </p>
 
           {/* Styled Tabs */}

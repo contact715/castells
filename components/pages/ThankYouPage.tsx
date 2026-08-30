@@ -122,7 +122,7 @@ const ThankYouPage: React.FC<ThankYouPageProps> = ({ onNavigate, type = 'general
       icon: <Sparkles className="w-8 h-8" />,
       features: [
         { icon: <Check className="w-5 h-5" />, text: 'Submission received' },
-        { icon: <Clock className="w-5 h-5" />, text: 'Quick response guaranteed' },
+        { icon: <Clock className="w-5 h-5" />, text: 'We\'ll get back to you soon' },
         { icon: <Heart className="w-5 h-5" />, text: 'We value your trust' },
       ],
     },
