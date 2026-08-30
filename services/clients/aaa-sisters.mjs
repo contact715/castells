@@ -143,7 +143,7 @@ export default {
     searchConsole: false,
     bingWebmaster: false,
     googleBusiness: false, // заготовки постов есть, сам профиль не подтверждён
-    analytics: false,
+    analytics: true,       // счётчик Castells стоит на сайте с 30.08.2026, данные идут
     callTracking: false,
     googleAds: false,
     metaAds: false,

@@ -124,7 +124,7 @@ export default {
     googleBusiness: false,
 
     // Измерение
-    analytics: false,      // счётчика нет вовсе, тариф Vercel без веб-аналитики
+    analytics: true,       // счётчик Castells стоит на сайте с 30.08.2026, данные идут
     callTracking: false,
 
     // Реклама — кабинеты есть у владельца, доступа у цикла нет
