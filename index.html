@@ -114,6 +114,12 @@
       })(window,document,'script','dataLayer','GTM-XXXXXXX');
     </script>
     -->
+    <!-- Счётчик посещений Castells (services/web/counter-script.mjs).
+         Не ставит cookie и не хранит адрес посетителя: сервер считает
+         суточный отпечаток, который нельзя связать со вчерашним. Поэтому
+         баннер про cookie не нужен. Попадает во все страницы: пререндер
+         берёт шаблоном dist/index.html, собранный из этого файла. -->
+    <script defer src="https://services-dashboard-production.up.railway.app/c.js"></script>
   </head>
   <body>
     <!-- GTM noscript — uncomment when GTM is active -->
