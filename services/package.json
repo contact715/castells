@@ -11,5 +11,8 @@
     "start": "node server.mjs",
     "test": "node self-test.mjs",
     "dashboard": "node dashboard.mjs"
+  },
+  "dependencies": {
+    "postgres": "^3.4.9"
   }
 }

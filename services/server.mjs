@@ -10,9 +10,15 @@
 */
 
 import { fileURLToPath } from 'node:url';
-import { поднять, ПАРОЛЬ_ЗАДАН } from './web/http.mjs';
+import { поднять, подготовитьБазу, ПАРОЛЬ_ЗАДАН } from './web/http.mjs';
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  подготовитьБазу().then(итог => {
+    if (итог.применено?.length) console.log(`Схема базы: применено ${итог.применено.join(', ')}`);
+    else if (итог.причина) console.log(`База не готовится: ${итог.причина}`);
+    else console.log('Схема базы: уже на месте');
+  });
+
   поднять().then(сервер => {
     const { port } = сервер.address();
     console.log(`Пульт слушает порт ${port}`);
