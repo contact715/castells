@@ -87,11 +87,15 @@ export default {
     { name: 'Langhorne', state: 'PA' },
   ],
 
-  /* С их живого сайта: телефон в ссылке tel:+14453099995, почта в подвале. */
+  /*
+    Телефон с их сайта (ссылка tel:+14453099995) и он же на странице Yelp —
+    два источника сошлись. Адрес уточнён до дома по странице Yelp: на сайте
+    указан только город.
+  */
   contact: {
     phone: '445-309-9995',
-    address: 'Langhorne, PA',
-    hours: '',
+    address: '2304 Brownsville Rd, Langhorne, PA 19053',
+    hours: 'по будням 9:00–15:00 (со страницы Yelp)',
   },
 
   facts: [
@@ -106,6 +110,18 @@ export default {
     {
       claim: 'Based in Langhorne, Pennsylvania',
       source: 'мета-описание их сайта: «engineer-led HVAC installation and replacement based in Langhorne, PA»',
+    },
+    {
+      claim: 'Yelp business page is claimed and license-verified by Yelp',
+      source: 'страница yelp.com/biz/aaa-sisters-climate-langhorne, открыта браузером 30 августа 2026: метка Claimed, блок «Verified License — Yelp confirmed a business or employee license»',
+    },
+    {
+      claim: 'Yelp response rate 100%, typical response time 20 minutes',
+      source: 'их страница Yelp, блок «Get pricing & availability», 30 августа 2026',
+    },
+    {
+      claim: 'Business runs Yelp posts and is covered by Yelp Guaranteed',
+      source: 'их страница Yelp: «Updates From This Business» (Same-Day HVAC Service, Free Estimate + Systems from $6,990) и блок «Covered by Yelp Guaranteed»',
     },
     {
       claim: 'Women-owned; the owners run the in-home estimate themselves',
@@ -124,6 +140,13 @@ export default {
   */
   engaged: {
     website: 'ведём',
+    /*
+      Владелец 30 августа: «у ааа систерс елп ещё подключен». Проверено, а не
+      принято на слово: их страница на Yelp заявлена (Claimed), лицензия
+      подтверждена самим Yelp, идут публикации от бизнеса, отклик 100% за
+      20 минут в среднем. То есть канал живой, а не просто существует.
+    */
+    yelpAds: 'ведём',
   },
 
   /*
@@ -149,5 +172,18 @@ export default {
     metaAds: false,
     emailSending: false,
     crm: false,
+    /*
+      ЧТО ИМЕННО ЗДЕСЬ TRUE, чтобы не обмануть самих себя. Владелец 30 августа:
+      «у нас есть апи доступ к елпу». Проверено: в проде бэкенда Mosco заданы
+      YELP_CLIENT_ID и YELP_CLIENT_SECRET, и код интеграции лежит в
+      app/routers/yelp_leads_webhook.py — то есть доступ к API Yelp у нас
+      действительно есть, и страница клиента заявлена.
+
+      Чего НЕ проверено: кабинет платного размещения Yelp Ads. Интеграция в
+      Mosco — про ЛИДЫ (Partner API), а не про управление рекламой. Если
+      отчёт должен показывать расход и показы по Yelp, доступ в кабинет надо
+      подтвердить отдельно.
+    */
+    yelpAds: true,
   },
 };
