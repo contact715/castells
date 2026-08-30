@@ -398,8 +398,74 @@ export const СТИЛИ = `
     font:700 20px/1.2 ${ШРИФТЫ.заголовки}; letter-spacing:-.01em;
     padding-left:var(--шаг-icon);
     overflow:hidden; text-overflow:ellipsis; white-space:nowrap;
+    /* Потолок ширины — их значение (DashboardPageHeader.tsx: truncate
+       max-w-[220px]). Без него имя и вкладки делят место поровну, и при
+       длинном названии клиента от имени остаётся «Castells M…», а от
+       последней вкладки половина слова. Имени хватает 220px, остальное —
+       вкладкам. */
+    flex:none; max-width:220px;
   }
   .top__right{margin-left:auto; display:flex; align-items:center; gap:var(--шаг-tight);}
+
+  /* ── ВКЛАДКИ УСЛУГ В ПОЛОСЕ ──────────────────────────────────────────
+     У них инструменты страницы живут в шапке рабочей области и приезжают
+     туда порталом (DashboardPageHeader.tsx, «header-toolbar-center»). Здесь
+     то же самое, только переносом узла: страница держит свои вкладки при
+     себе, а полоса показывает вкладки того экрана, который открыт.
+
+     Оформление — канон их сегментированного переключателя: капсула h-9,
+     активная на «поднятой» поверхности с рамкой, спящая тихая, с наведением
+     на вторичную поверхность. */
+  .top__tools{
+    flex:1; min-width:0;
+    display:flex; align-items:center; gap:var(--шаг-icon);
+    overflow-x:auto; scrollbar-width:none;
+  }
+  .top__tools::-webkit-scrollbar{display:none;}
+  .top__tools:empty{display:none;}
+  .tab{
+    flex:none; display:flex; align-items:center; gap:var(--шаг-tight);
+    height:36px; padding:0 var(--шаг-inset);
+    border:1px solid transparent; border-radius:var(--r-pill);
+    background:none; cursor:pointer;
+    color:var(--muted); font:500 13px/1 ${ШРИФТЫ.текст};
+    transition:background-color .2s, color .2s, border-color .2s;
+    white-space:nowrap;
+  }
+  .tab:hover{background:var(--sunk); color:var(--ink);}
+  .tab[aria-selected="true"]{
+    background:var(--raised); color:var(--ink);
+    border-color:var(--hair); box-shadow:var(--теньМалая);
+  }
+  /* Точка состояния услуги: тот же язык, что у точек проектов в меню —
+     зелёная работа, серая завершённая, жёлтая в разговоре. */
+  .tab__dot{width:6px; height:6px; border-radius:var(--r-pill); flex:none;}
+  .tab__dot--run{background:var(--ok);}
+  .tab__dot--done{background:var(--human);}
+  .tab__dot--talk{background:var(--wait);}
+
+  /* Панель одной услуги — открывается вместо обзора проекта. */
+  .svcpanel[hidden]{display:none;}
+  .svcpanel{
+    background:var(--surface); border:1px solid var(--hair);
+    border-radius:var(--r-card); padding:var(--шаг-card);
+  }
+  .svcp__head{display:flex; align-items:baseline; gap:var(--шаг-inset); margin-bottom:var(--шаг-inset);}
+  .svcp__state{font-size:11px; font-weight:500;}
+  .svcp__state--run{color:var(--ok);}
+  .svcp__state--done{color:var(--human);}
+  .svcp__state--talk{color:var(--wait);}
+  .svcp__what{color:var(--neutral); margin:var(--шаг-inset) 0; max-width:66ch;}
+  .svcp__row{margin:var(--шаг-tight) 0; font-size:13.5px;}
+  .svcp__row b{font-weight:500;}
+  .svcp__note{
+    margin:var(--шаг-card) 0 0; padding:var(--шаг-base) var(--шаг-inset);
+    background:var(--sunk); border-radius:var(--r-inner);
+    font-size:13px; color:var(--muted); max-width:72ch;
+  }
+  /* Набор вкладок живёт внутри экрана и в самом экране не показывается:
+     полоса забирает его к себе. */
+  .screen__tools{display:none;}
 
   /* Островок справа. DashboardPageHeader.tsx: отдельный круг той же
      поверхности и рамки — «часть той же семьи, но отдельным кругом».
@@ -686,6 +752,27 @@ export const СТИЛИ = `
     .top__title{font-size:17px; padding-left:0;}
     .top__island{display:none;}
 
+    /* ВКЛАДКИ УСЛУГ УХОДЯТ НА ВТОРУЮ СТРОКУ.
+
+       Замер на 375px: имени достаётся 119px, вкладкам 162px — в них
+       помещается «Обзор» и половина следующего слова, остальное только
+       прокруткой вслепую. Человек не видит, что там есть ещё, и не узнает.
+
+       Поэтому полоса на телефоне становится в две строки: сверху кнопка меню
+       и имя, снизу вкладки во всю ширину. Прокрутка остаётся, но теперь ей
+       есть что показывать — видно две-три вкладки сразу, и понятно, что ряд
+       продолжается. */
+    .top{flex-wrap:wrap;}
+    .top__title{flex:1; max-width:none;}
+    .top__tools{
+      flex:0 0 100%; order:3;
+      padding-top:var(--шаг-icon);
+      border-top:1px solid var(--hairLight);
+    }
+    .top__tools:empty{display:none;}
+    /* Палец, а не мышь: те же 44px, что у остальных целей на телефоне. */
+    .tab{height:44px;}
+
     /* ── Таблица становится карточками ───────────────────────────────
        Горизонтальная прокрутка на телефоне не работает: замер показал, что
        колонка «Проект» ужимается до одного слова в строку, и таблица из
@@ -745,6 +832,47 @@ export const СКРИПТ = `
   function shapkaSet(узел, текст) { узел.textContent = текст; document.title = текст + ' · Пульт Castells'; }
   function ссылки() { return Array.prototype.slice.call(document.querySelectorAll('.navlink')); }
 
+  /*
+    ВКЛАДКИ УСЛУГ. Набор кнопок лежит внутри экрана проекта, а показывается в
+    верхней полосе: полоса прибита сверху и не уезжает при прокрутке, поэтому
+    по услугам можно ходить, не возвращаясь наверх.
+
+    Узел ПЕРЕНОСИТСЯ, а не копируется: копия развела бы состояние на две —
+    нажатая вкладка в полосе и ненажатая в экране, — и второй переход на тот
+    же экран показал бы старое.
+  */
+  var МЕСТО = document.getElementById('tools');
+
+  function выбратьУслугу(ключ) {
+    var экран = экраны().filter(function (э) { return !э.hidden; })[0];
+    if (!экран) return;
+    Array.prototype.forEach.call(экран.querySelectorAll('.svcpanel'), function (п) {
+      п.hidden = п.dataset.услуга !== ключ;
+    });
+    var обзор = экран.querySelector('.обзор');
+    if (обзор) { обзор.hidden = Boolean(ключ); }
+    if (МЕСТО) {
+      Array.prototype.forEach.call(МЕСТО.querySelectorAll('.tab'), function (к) {
+        к.setAttribute('aria-selected', (к.dataset.услуга || '') === ключ ? 'true' : 'false');
+      });
+    }
+  }
+
+  function поставитьВкладки(экран) {
+    if (!МЕСТО) return;
+    МЕСТО.textContent = '';
+    var набор = экран && экран.querySelector('.screen__tools');
+    if (!набор) return;
+    Array.prototype.forEach.call(набор.children, function (к) {
+      var копия = к;
+      МЕСТО.appendChild(копия.cloneNode(true));
+    });
+    Array.prototype.forEach.call(МЕСТО.querySelectorAll('.tab'), function (к) {
+      к.setAttribute('role', 'tab');
+      к.addEventListener('click', function () { выбратьУслугу(к.dataset.услуга || ''); });
+    });
+  }
+
   function показать(имя, запомнить) {
     var список = экраны();
     var нашёлся = список.some(function (э) { return э.dataset.screen === имя; });
@@ -752,6 +880,12 @@ export const СКРИПТ = `
     if (!имя) return;
 
     список.forEach(function (э) { э.hidden = э.dataset.screen !== имя; });
+
+    /* Новый экран — новые вкладки и всегда обзор: оставить выбранной услугу
+       предыдущего проекта значило бы открыть чужой экран наполовину пустым. */
+    var открытый = список.filter(function (э) { return !э.hidden; })[0];
+    поставитьВкладки(открытый);
+    выбратьУслугу('');
     ссылки().forEach(function (с) {
       var своя = с.getAttribute('href') === '#/' + имя;
       if (своя) { с.setAttribute('aria-current', 'page'); } else { с.removeAttribute('aria-current'); }
@@ -958,6 +1092,7 @@ export function оболочка({ заголовок, меню, проекты,
             </svg>
           </button>
           <h1 class="top__title" id="crumb">Пульт</h1>
+          <div class="top__tools" id="tools" role="tablist" aria-label="Услуги проекта"></div>
         </header>
         <div class="top__island">
           <span class="stamp">${экр(когда)}</span>
