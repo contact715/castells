@@ -33,7 +33,7 @@ export const routeFromPathname = (pathname: string): { page: PageView; data?: Na
     const idPart = decodeURIComponent(clean.replace('/blog/', ''));
     const id = Number(idPart);
     if (!Number.isNaN(id) && id > 0) return { page: 'blog-post', data: { id } };
-    return { page: 'blog-post', data: { id: 1 } };
+    return { page: 'blog' };
   }
 
   if (clean.startsWith('/case-studies/')) {

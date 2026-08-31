@@ -6,6 +6,7 @@ import { PageView } from '../../App';
 import { NavigationData } from '../../types';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
+import { Button } from '../ui/Button';
 
 /*
   Страница статьи, переписана 23 августа 2026 вместе со списком.
@@ -25,7 +26,32 @@ interface BlogPostDetailProps {
 }
 
 const BlogPostDetail: React.FC<BlogPostDetailProps> = ({ onBack, onNavigate, postId = 1 }) => {
-  const post = findPostById(Number(postId)) ?? BLOG_POSTS[0];
+  const post = findPostById(Number(postId));
+
+  if (!post) {
+    return (
+      <div className="bg-ivory dark:bg-[#191919] min-h-screen pt-16 md:pt-20 pb-20 flex items-center justify-center">
+        <SEO
+          title="Post not found | Castells Media"
+          description="This blog post does not exist."
+          canonical="/blog"
+          robots="noindex, follow"
+        />
+        <div className="container mx-auto px-6 text-center max-w-xl">
+          <h1 className="font-display text-3xl md:text-4xl font-normal text-text-primary mb-4">
+            This post does not exist
+          </h1>
+          <p className="text-text-secondary mb-8">
+            It may have been taken down. The current notes are on the blog page.
+          </p>
+          <Button onClick={() => (onNavigate ? onNavigate('blog') : onBack())} size="lg">
+            View the blog
+          </Button>
+        </div>
+      </div>
+    );
+  }
+
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://www.castells.media';
   const others = BLOG_POSTS.filter((p) => p.id !== post.id);
 
