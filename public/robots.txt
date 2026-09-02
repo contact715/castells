@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://castells.studio/sitemap.xml
+Sitemap: https://www.castells.media/sitemap.xml
