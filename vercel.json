@@ -169,6 +169,14 @@
       "destination": "/api/lead-form.js"
     },
     {
+      "source": "/api/contact",
+      "destination": "/api/contact.js"
+    },
+    {
+      "source": "/api/quiz",
+      "destination": "/api/quiz.js"
+    },
+    {
       "source": "/api/whatsapp-webhook",
       "destination": "/api/whatsapp-webhook.js"
     },

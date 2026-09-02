@@ -1,28 +1,24 @@
 /**
  * Отправка форм сайта.
  *
- * Что было не так до 23 августа 2026. Формы шли на /api/contact и /api/quiz,
- * а таких обработчиков в проекте нет и маршрутов в vercel.json тоже — прод
- * отвечал 404 на оба. Запасной путь через Resend не работал: ключа в сборке
- * нет. То есть заявки со страницы контактов и из опросника не доходили
- * никуда, человек видел ошибку.
+ * История. До 23 августа 2026 формы шли на /api/contact и /api/quiz, а
+ * обработчиков не существовало — прод отвечал 404. Починка 23-24 августа
+ * переключила обе формы на formsubmit.co (сторонний пересыльщик почты).
  *
- * При этом рабочий путь был рядом: статическая страница public/contact.html
- * уже слала заявки через formsubmit.co на почту contact@castells.media.
- * Теперь тот же путь используют все формы сайта.
+ * 2 сентября 2026 обнаружено на боевой отправке: formsubmit.co требовал
+ * одноразовой активации по ссылке в письме, и до её нажатия ни одна заявка
+ * не доходила — а посетитель вместо «спасибо» видел сырой английский текст
+ * ошибки от чужого сервиса прямо на странице. Заодно здесь же читался
+ * VITE_RESEND_API_KEY — это публичная переменная сборки Vite, она
+ * встраивается в JS-бандл браузера как есть, то есть ключ Resend оказался
+ * бы виден в devtools любому посетителю сайта. Ключ ни разу не был задан,
+ * поэтому утечки не случилось, но путь был опасен сам по себе.
  *
- * Поправка от 24 августа: «все формы» было неправдой. Ветка опросника
- * содержала запасное значение '/api/quiz', из-за которого путь через
- * formsubmit оказался недостижим, и запросы шли на несуществующий адрес.
- * Аудит это нашёл, ветка исправлена.
- *
- * Порядок попыток: свой обработчик, если он появится (VITE_FORM_API_ENDPOINT),
- * затем formsubmit. Ошибка отправки по-прежнему показывается человеку, а не
- * прячется за ложным «спасибо».
+ * Теперь оба пути закрыты. Обе формы шлют JSON на свои серверные
+ * обработчики (/api/contact, /api/quiz — см. api/contact.js, api/quiz.js),
+ * которые сами доставляют заявку в Telegram и на почту через Resend.
+ * Секретные ключи живут только на сервере.
  */
-
-/** Почта, на которую приходят заявки. Тот же адрес, что и в подвале сайта. */
-const INBOX = 'contact@castells.media';
 
 export interface FormSubmissionResult {
   success: boolean;
@@ -30,270 +26,27 @@ export interface FormSubmissionResult {
   error?: string;
 }
 
-/**
- * Submit contact form
- * Uses Resend API (or can be configured for other services)
- */
-export const submitContactForm = async (data: {
-  name: string;
-  email: string;
-  phone?: string;
-  topic: string;
-  message: string;
-}): Promise<FormSubmissionResult> => {
-  try {
-    // Option 1: Use Resend API (recommended)
-    // You need to set VITE_RESEND_API_KEY in .env
-    const resendApiKey = import.meta.env.VITE_RESEND_API_KEY;
-    
-    if (resendApiKey) {
-      return await submitViaResend(data, resendApiKey);
-    }
-
-    // Свой обработчик, если его когда-нибудь поднимут
-    const apiEndpoint = import.meta.env.VITE_FORM_API_ENDPOINT;
-    if (apiEndpoint) {
-      return await submitViaAPI(data, apiEndpoint);
-    }
-
-    return await submitViaFormsubmit(data, 'New request from the contact form');
-
-    // Option 3: Fallback - log to console (for development)
-    console.log('Form submission (development mode):', data);
-    return {
-      success: true,
-      message: 'Form submitted successfully (development mode)',
-    };
-  } catch (error) {
-    console.error('Form submission error:', error);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Failed to submit form',
-    };
-  }
-};
-
-/**
- * Submit via Resend API
- */
-const submitViaResend = async (
-  data: {
-    name: string;
-    email: string;
-    phone?: string;
-    topic: string;
-    message: string;
-  },
-  apiKey: string
-): Promise<FormSubmissionResult> => {
-  try {
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        from: 'Castells Media <noreply@castells.media>',
-        to: ['contact@castells.media'], // Your email
-        reply_to: data.email,
-        subject: `New Contact Form Submission: ${data.topic}`,
-        html: `
-          <h2>New Contact Form Submission</h2>
-          <p><strong>Name:</strong> ${data.name}</p>
-          <p><strong>Email:</strong> ${data.email}</p>
-          ${data.phone ? `<p><strong>Phone:</strong> ${data.phone}</p>` : ''}
-          <p><strong>Topic:</strong> ${data.topic}</p>
-          <p><strong>Message:</strong></p>
-          <p>${data.message.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/\n/g, '<br>')}</p>
-        `,
-      }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Failed to send email');
-    }
-
-    return {
-      success: true,
-      message: 'Thank you! We will get back to you soon.',
-    };
-  } catch (error) {
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Failed to send email',
-    };
-  }
-};
-
-/**
- * Submit via custom API endpoint
- */
-const submitViaAPI = async (
-  data: {
-    name: string;
-    email: string;
-    phone?: string;
-    topic: string;
-    message: string;
-  },
-  endpoint: string
+const submitToEndpoint = async (
+  endpoint: string,
+  data: Record<string, unknown>
 ): Promise<FormSubmissionResult> => {
   try {
     const response = await fetch(endpoint, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data),
     });
 
-    if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
-      throw new Error(errorData.message || `Server error: ${response.status}`);
-    }
-
-    const result = await response.json();
-    return {
-      success: true,
-      message: result.message || 'Form submitted successfully',
-    };
-  } catch (error) {
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Failed to submit form',
-    };
-  }
-};
-
-/**
- * Submit quiz/growth audit form
- */
-export const submitQuizForm = async (data: {
-  name: string;
-  email: string;
-  website?: string;
-  goal?: string;
-  budget?: string;
-  industry?: string;
-}): Promise<FormSubmissionResult> => {
-  try {
-    const resendApiKey = import.meta.env.VITE_RESEND_API_KEY;
-    
-    if (resendApiKey) {
-      return await submitQuizViaResend(data, resendApiKey);
-    }
-
-    /*
-     * Здесь стояло `VITE_FORM_API_ENDPOINT || '/api/quiz'`, и из-за запасного
-     * значения условие ниже было истинным ВСЕГДА. Значит отправка через
-     * formsubmit была недостижима, а запросы уходили на /api/quiz, которого
-     * не существует: прод отвечает 404. Контактную форму я 23 августа починил,
-     * а эту ветку пропустил — комментарий в шапке файла утверждал, что
-     * починены обе. Найдено аудитом 24 августа.
-     */
-    const apiEndpoint = import.meta.env.VITE_FORM_API_ENDPOINT;
-    if (apiEndpoint) {
-      return await submitViaAPI(data as never, apiEndpoint);
-    }
-
-    return await submitViaFormsubmit(
-      data as unknown as Record<string, unknown>,
-      'New request from the quiz'
-    );
-  } catch (error) {
-    console.error('Quiz form submission error:', error);
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Failed to submit form',
-    };
-  }
-};
-
-/**
- * Submit quiz via Resend
- */
-const submitQuizViaResend = async (
-  data: {
-    name: string;
-    email: string;
-    website?: string;
-    goal?: string;
-    budget?: string;
-    industry?: string;
-  },
-  apiKey: string
-): Promise<FormSubmissionResult> => {
-  try {
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        from: 'Castells Media <noreply@castells.media>',
-        to: ['contact@castells.media'],
-        reply_to: data.email,
-        subject: 'New Growth Audit Request',
-        html: `
-          <h2>New Growth Audit Request</h2>
-          <p><strong>Name:</strong> ${(data.name || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
-          <p><strong>Email:</strong> ${(data.email || '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>
-          ${data.website ? `<p><strong>Website:</strong> ${data.website.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>` : ''}
-          ${data.goal ? `<p><strong>Goal:</strong> ${data.goal.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>` : ''}
-          ${data.budget ? `<p><strong>Budget:</strong> ${data.budget.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>` : ''}
-          ${data.industry ? `<p><strong>Industry:</strong> ${data.industry.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}</p>` : ''}
-        `,
-      }),
-    });
+    const result = await response.json().catch(() => ({}));
 
     if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Failed to send email');
+      return {
+        success: false,
+        error: result?.error || `Could not send the message (${response.status}). Please write to us on WhatsApp.`,
+      };
     }
 
-    return {
-      success: true,
-      message: 'Thank you! We will send your growth roadmap soon.',
-    };
-  } catch (error) {
-    return {
-      success: false,
-      error: error instanceof Error ? error.message : 'Failed to send email',
-    };
-  }
-};
-
-
-
-/**
- * Отправка через formsubmit.co: сервис пересылает содержимое формы письмом
- * на нашу почту. Ключей и своего сервера не требует, и этим путём уже
- * пользуется статическая страница контактов.
- */
-const submitViaFormsubmit = async (
-  data: Record<string, unknown>,
-  subject: string
-): Promise<FormSubmissionResult> => {
-  try {
-    const response = await fetch(`https://formsubmit.co/ajax/${INBOX}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-      body: JSON.stringify({ ...data, _subject: subject, _template: 'table' }),
-    });
-
-    if (!response.ok) {
-      return { success: false, error: `Could not send the message (${response.status}). Please write to us on WhatsApp.` };
-    }
-
-    const result = await response.json();
-    // сервис отвечает строкой 'true' при успехе
-    if (String(result?.success) === 'true') {
-      return { success: true, message: 'Sent' };
-    }
-    return { success: false, error: result?.message || 'Could not send the message. Please write to us on WhatsApp.' };
+    return { success: true, message: result?.message || 'Sent' };
   } catch (error) {
     return {
       success: false,
@@ -301,3 +54,22 @@ const submitViaFormsubmit = async (
     };
   }
 };
+
+/** Submit contact form */
+export const submitContactForm = async (data: {
+  name: string;
+  email: string;
+  phone?: string;
+  topic: string;
+  message: string;
+}): Promise<FormSubmissionResult> => submitToEndpoint('/api/contact', data);
+
+/** Submit quiz/growth audit form */
+export const submitQuizForm = async (data: {
+  name: string;
+  email: string;
+  website?: string;
+  goal?: string;
+  budget?: string;
+  industry?: string;
+}): Promise<FormSubmissionResult> => submitToEndpoint('/api/quiz', data);
