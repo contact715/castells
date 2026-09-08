@@ -149,14 +149,12 @@ export const MobileNavMenu = ({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
-          exit={{ height: 0, opacity: 0 }}
-          transition={{ duration: 0.3, ease: "easeInOut" }}
-          className={cn(
-            "overflow-hidden mt-2",
-            className
-          )}
+          initial={{ opacity: 0, scaleY: 0.95 }}
+          animate={{ opacity: 1, scaleY: 1 }}
+          exit={{ opacity: 0, scaleY: 0.95 }}
+          transition={{ duration: 0.2, ease: "easeInOut" }}
+          style={{ transformOrigin: "top" }}
+          className={cn("mt-2", className)}
         >
           <div className="py-4 flex flex-col gap-4">
             {children}
