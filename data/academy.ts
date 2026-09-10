@@ -2071,6 +2071,21 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
           'For calls specifically, the only reliable way to know the source is a separate number per channel. Ads platforms report clicks; they cannot see who picked up the phone.',
         ],
       },
+      {
+        heading: 'Answering the seven questions is not the same as being right about them',
+        body: [
+          'Everything above is a hypothesis until customers agree with it. Product-market fit, without the jargon, is the point where your answers turn out to be true in the field: the customer you named keeps showing up, jobs close without cutting the price to win them, and some jobs arrive because someone else recommended you without being asked.',
+          'Before that point, no marketing spend fixes a wrong answer. A bigger budget behind an unproven answer to question one just loses money at a larger scale.',
+        ],
+      },
+      {
+        heading: 'Which marketing fits which stage',
+        body: [
+          'No fit yet: the calendar depends on your own network, favours and general contractors who pass you work. This is not a marketing problem to solve with ads. It is the stage where you are still finding out whether your seven answers hold up against real customers, and direct outreach teaches you that faster than any campaign does.',
+          'Early fit: a repeatable type of job starts showing up, and some jobs close without a discount. Now a single tracked channel earns its keep, usually a Google Business Profile kept current plus one paid channel tested at a small budget, both aimed at exactly the customer named in question one. Not five channels at once and not a brand campaign.',
+          'Strong fit: referrals arrive without you asking, the calendar stays full without discounting, and raising the price does not empty it. This is where broader spend pays off. More channels and a real brand come next, and usually more capacity comes before more marketing, because the limit has moved from finding jobs to doing them.',
+        ],
+      },
     ],
     numbers: {
       title: 'The one-channel test',
@@ -2137,6 +2152,21 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
           'Replacement: search over weeks, your own past customers, and the neighbour who had you out last summer. Almost none of it is the same channel.',
         ],
       },
+      {
+        heading: 'Fit is separate for each half',
+        body: [
+          'Because these are two businesses sharing a van, fit has to be checked twice. On the emergency side, fit means calls turn into paid jobs at a decent rate without racing competitors on price. That side lives or dies on speed and reviews, not persuasion. On the replacement side, fit means quotes turn into signed jobs without cutting the number, and some replacement customers come back for the next system or send a neighbour.',
+          'A business can have fit on one half and not the other. Marketing spend should follow whichever half is proven, not whichever half sounds better.',
+        ],
+      },
+      {
+        heading: 'Which marketing fits which stage',
+        body: [
+          'No fit yet on either half: the fix is usually operational before it is promotional, meaning every call answered and every quote followed up. Spending on ads into a pipeline that already leaks calls is the most common way HVAC businesses waste a marketing budget.',
+          'Early fit: for emergency, that means a map listing kept accurate and reviews arriving steadily. It is cheap, and it is what the emergency customer looks at in the few seconds they spend deciding. For replacement, a single tracked channel with explanatory content, aimed at the fear described earlier in this lesson.',
+          'Strong fit: emergency calls regularly outrun the crew, and replacement quotes close without discounting. At that point the constraint is capacity, not leads, and hiring or extending hours is often the better next spend rather than a bigger ad budget.',
+        ],
+      },
     ],
     numbers: {
       title: 'Which half of the business is which',
@@ -2199,6 +2229,21 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         body: [
           'Planned work: search on job plus town, referrals from designers and realtors, and the neighbours who watched your last job.',
           'Insurance work: relationships with adjusters and restoration networks, plus content that shows you handle the process. Different channel, different message, same company.',
+        ],
+      },
+      {
+        heading: 'Fit looks different on each stream',
+        body: [
+          'On planned work, fit means estimates turn into signed jobs without being the cheapest bid on the table, and some clients come from a past customer or a referral from a designer or realtor. On insurance work, fit means adjusters and restoration companies send you jobs repeatedly, not once.',
+          'Fit on one stream does not carry over to the other. They are different relationships, sold differently, and a contractor can be proven on one and unproven on the other at the same time.',
+        ],
+      },
+      {
+        heading: 'Which marketing fits which stage',
+        body: [
+          'No fit yet: on planned work, that usually means relying on past clients and word of mouth while you find out what actually wins a bid against a cheaper competitor. On insurance work, it means building adjuster and restoration relationships directly, which is not something advertising buys.',
+          'Early fit: for planned work, a tracked channel such as search for the job plus the town, paired with content that shows the exact kind of project, matched to the customer described earlier. For insurance, content that demonstrates you handle the claims process, aimed at the relationships you are already building.',
+          'Strong fit: referrals carry a real share of planned work, and restoration partners send jobs without being chased. That is when a bigger marketing budget adds jobs rather than just adding leads that were coming anyway.',
         ],
       },
     ],
@@ -2266,6 +2311,21 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
           'These barely overlap, which is convenient: it means your channel choice follows directly from your positioning choice.',
         ],
       },
+      {
+        heading: 'What fit looks like in the bay',
+        body: [
+          'For the enthusiast segment, fit means customers pay the full price for correction and coating work without negotiating, return for the next car or the next service, and some arrive because another owner sent them. For the commodity segment, fit is simpler: steady volume at a price that still covers the bay hour.',
+          'A shop can be doing well on commodity volume and still have no fit on the enthusiast side it markets to. The price list will show which one is actually happening.',
+        ],
+      },
+      {
+        heading: 'Which marketing fits which stage',
+        body: [
+          'No fit yet: if enthusiast bookings are rare and mostly one-off, spend the time on the work itself and on the communities where owners already gather, rather than on ads. A shop with no track record in that world is not what paid reach fixes.',
+          'Early fit: a small, specific channel such as process content on the platforms enthusiasts actually use, aimed at the exact car and service named earlier, plus map presence for the commodity side. Not a general detailing campaign that pulls in the customer you are trying not to be mistaken for.',
+          'Strong fit: enthusiast customers book ahead, return and refer, and the bay is close to full on high-value work. At that point broader spend, and even a price increase, are worth testing, because demand is proven rather than assumed.',
+        ],
+      },
     ],
     numbers: {
       title: 'What your bay hours are currently sold to',
@@ -2327,6 +2387,21 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         body: [
           'Enquiries by source, how many became consultations, how many became clients, and what a client is worth across the whole relationship rather than the first invoice.',
           'That last number is the one that changes decisions, because in these professions the first engagement is usually a fraction of what a retained client is worth.',
+        ],
+      },
+      {
+        heading: 'What fit means inside a regulated practice',
+        body: [
+          'Fit here means the one sentence a referrer uses to describe you actually produces clients who convert without much negotiation, and that some clients arrive because a past client or another professional sent them, not only because you paid for the enquiry.',
+          'Because advertising claims are limited by the regulator, fit in this trade is proven mostly through referral behaviour and conversation, not through a campaign metric.',
+        ],
+      },
+      {
+        heading: 'Which marketing fits which stage',
+        body: [
+          'No fit yet: enquiries are inconsistent and mostly come from people you already know. This stage is largely about relationships, meaning other professionals who refer within the rules and past clients, rather than advertising spend, and it doubles as the fastest way to find out whether your one sentence actually lands.',
+          'Early fit: a narrow, compliant channel such as a specific page or listing aimed at the client type named earlier, checked against your regulator rules before anything is published, rather than broad advertising that a regulated practice often cannot run anyway.',
+          'Strong fit: referrals from other professionals and past clients account for a real share of new work, and consultations convert without discounting the fee. That is when the value of a retained client, not the first invoice, becomes the number worth building marketing around.',
         ],
       },
     ],
