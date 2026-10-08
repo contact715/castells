@@ -1,6 +1,6 @@
 import React from 'react';
 import { m as motion } from 'framer-motion';
-import { ArrowRight, ArrowUpRight, Check, Clock } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, Clock } from 'lucide-react';
 import { Button } from '../ui/Button';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
@@ -13,9 +13,15 @@ import { buildAuthorPath, buildCaseStudyPath } from '../../lib/routes';
 import OptimizedImage from '../ui/OptimizedImage';
 
 /*
-  Страница кейса, переписана 8 октября 2026 по образцу страницы статьи
-  (BlogPostDetail): одна колонка текста по левому краю, заголовок Literata,
-  подписи и даты мелким текстом, тонкие линии вместо карточек.
+  Страница кейса, переписана 8 октября 2026 в редакционном стиле статей
+  (BlogPostDetail): заголовок Literata, подписи и даты мелким текстом,
+  тонкие линии между разделами.
+
+  Колонка статьи (43rem по левому краю) на кейсе оставляла пустой правую
+  половину экрана — владелец, в тот же день: «почему кейс на пол экрана?».
+  Поэтому кейс во всю ширину: шапка с фактами справа, снимок во всю ширину,
+  разделы строкой «заголовок слева — текст справа». Сам текст держится в
+  46rem, чтобы строка оставалась удобной для чтения.
 
   Что было и почему убрано:
   - Название и описание клиента лежали поверх снимка его сайта, под
@@ -29,11 +35,11 @@ import OptimizedImage from '../ui/OptimizedImage';
   - Брендбук показывался во встроенном окне высотой 1200 точек, но PDF на
     сайт не выкладывается (.vercelignore исключает *.pdf), и сайт запрещает
     показывать себя во встроенных окнах (X-Frame-Options: DENY). Посетитель
-    видел огромный белый пустой квадрат. Ссылка на брендбук показывается,
-    только когда файл реально лежит в public/ — то есть не сейчас.
+    видел огромный белый пустой квадрат. Брендбук не показывается вовсе;
+    когда файл появится в public/ — добавить ссылку на него в факты шапки.
   - Боковая панель с кнопками-пилюлями по разделам на странице из четырёх
     абзацев была интерфейсом приложения, а не издания. Автор теперь в
-    шапке, связь — кнопкой в конце, как в статье.
+    фактах шапки, связь — строкой в конце.
 */
 
 interface CaseStudyDetailProps {
@@ -137,6 +143,13 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onNavigate, project }
     transition: { duration: 0.35 },
   };
 
+  /* Строка раздела: заголовок слева, текст справа. Так страница занимает
+     всю ширину, а строка текста остаётся удобной для чтения. */
+  const row = 'grid lg:grid-cols-12 gap-x-12 gap-y-4 py-10 md:py-12 border-t border-black/10 dark:border-white/10';
+  const sideHead = 'lg:col-span-4 font-display text-2xl md:text-3xl font-normal leading-tight text-text-primary dark:text-white';
+  const body = 'lg:col-span-8 max-w-[46rem]';
+  const bodyText = 'text-text-secondary dark:text-white/75 text-[17px] md:text-lg leading-[1.7]';
+
   return (
     <>
       <SEO title={`${data.client} — ${data.industry} | Castells Media`} description={data.description} canonical={path} />
@@ -162,27 +175,28 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onNavigate, project }
             ]}
           />
 
-          {/* По левому краю, как статьи: решение владельца 26 августа 2026 */}
           <article>
-            <header className="max-w-[43rem]">
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6">
-                <span className="text-[11px] font-semibold tracking-wide text-accent-text">Case study · {data.industry}</span>
-                <span className="text-sm text-text-secondary dark:text-white/55">{data.year}</span>
-                <span className="inline-flex items-center gap-1.5 text-sm text-text-secondary dark:text-white/55">
-                  <Clock className="w-3.5 h-3.5" aria-hidden="true" />
-                  {readingMinutes} min read
-                </span>
+            <header className="grid lg:grid-cols-12 gap-x-12 gap-y-10 pb-12">
+              <div className="lg:col-span-8">
+                <div className="flex flex-wrap items-center gap-x-5 gap-y-2 mb-6">
+                  <span className="text-[11px] font-semibold tracking-wide text-accent-text">Case study · {data.industry}</span>
+                  <span className="text-sm text-text-secondary dark:text-white/55">{data.year}</span>
+                  <span className="inline-flex items-center gap-1.5 text-sm text-text-secondary dark:text-white/55">
+                    <Clock className="w-3.5 h-3.5" aria-hidden="true" />
+                    {readingMinutes} min read
+                  </span>
+                </div>
+
+                <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-normal leading-[1.05] tracking-tight text-text-primary dark:text-white mb-6">
+                  {data.client}
+                </h1>
+
+                <p className="text-lg md:text-xl lg:text-2xl text-text-secondary dark:text-white/65 leading-relaxed max-w-[44rem]">
+                  {data.description}
+                </p>
               </div>
 
-              <h1 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary dark:text-white mb-6">
-                {data.client}
-              </h1>
-
-              <p className="text-lg md:text-xl text-text-secondary dark:text-white/65 leading-relaxed mb-8">
-                {data.description}
-              </p>
-
-              <dl className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-5 py-6 border-y border-black/10 dark:border-white/10">
+              <dl className="lg:col-span-4 lg:self-end grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-x-8 gap-y-5 pt-6 lg:pt-0 lg:pl-8 border-t lg:border-t-0 lg:border-l border-black/10 dark:border-white/10">
                 {facts.map((f) => (
                   <div key={f.label}>
                     <dt className="text-[11px] font-semibold tracking-wide text-text-secondary dark:text-white/50 mb-1">
@@ -199,9 +213,9 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onNavigate, project }
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.45 }}
-                className="max-w-[60rem] mt-12 mb-14"
+                className="mb-14 md:mb-16"
               >
-                <div className="aspect-[16/10] rounded-card overflow-hidden bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10">
+                <div className="aspect-[16/10] md:aspect-[2/1] rounded-card overflow-hidden bg-black/5 dark:bg-white/5 border border-black/5 dark:border-white/10">
                   <OptimizedImage
                     src={data.image}
                     alt={`Home page of the ${data.client} website built by Castells Media`}
@@ -209,7 +223,7 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onNavigate, project }
                     loading="eager"
                     width={1600}
                     height={1000}
-                    sizes="(min-width: 1024px) 960px, 100vw"
+                    sizes="(min-width: 1536px) 1488px, 100vw"
                   />
                 </div>
                 <figcaption className="mt-3 text-sm text-text-secondary dark:text-white/55">
@@ -219,85 +233,83 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onNavigate, project }
               </motion.figure>
             )}
 
-            <div className={`max-w-[43rem] ${data.image ? '' : 'mt-12'}`}>
-              {results.length > 0 && (
-                <motion.section {...reveal} aria-labelledby="results" className="mb-12">
-                  <h2 id="results" className="font-display text-xl md:text-2xl font-semibold text-text-primary dark:text-white mb-6">
-                    Results
-                  </h2>
-                  <dl className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-0 sm:divide-x divide-black/10 dark:divide-white/10">
-                    {results.map((r) => (
-                      <div key={r.label} className="flex flex-col sm:px-6 first:sm:pl-0">
-                        <dt className="order-2 text-sm text-text-secondary dark:text-white/60">{r.label}</dt>
-                        <dd className="order-1 font-display text-4xl text-text-primary dark:text-white mb-2">{r.value}</dd>
-                        {r.growth && <dd className="order-3 text-sm font-semibold text-accent-text mt-1">{r.growth}</dd>}
-                      </div>
-                    ))}
-                  </dl>
-                </motion.section>
-              )}
+            {results.length > 0 && (
+              <motion.section {...reveal} aria-labelledby="results" className={row}>
+                <h2 id="results" className={sideHead}>Results</h2>
+                <dl className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-0 sm:divide-x divide-black/10 dark:divide-white/10">
+                  {results.map((r) => (
+                    <div key={r.label} className="flex flex-col sm:px-6 first:sm:pl-0">
+                      <dt className="order-2 text-sm text-text-secondary dark:text-white/60">{r.label}</dt>
+                      <dd className="order-1 font-display text-4xl md:text-5xl text-text-primary dark:text-white mb-2">{r.value}</dd>
+                      {r.growth && <dd className="order-3 text-sm font-semibold text-accent-text mt-1">{r.growth}</dd>}
+                    </div>
+                  ))}
+                </dl>
+              </motion.section>
+            )}
 
-              {data.challenge && (
-                <motion.section {...reveal} aria-labelledby="challenge" className="mb-10">
-                  <h2 id="challenge" className="font-display text-xl md:text-2xl font-semibold text-text-primary dark:text-white mb-4">
-                    The challenge
-                  </h2>
-                  <p className="text-text-secondary dark:text-white/75 text-[17px] md:text-lg leading-[1.65]">
-                    {data.challenge}
-                  </p>
-                </motion.section>
-              )}
+            {data.challenge && (
+              <motion.section {...reveal} aria-labelledby="challenge" className={row}>
+                <h2 id="challenge" className={sideHead}>The challenge</h2>
+                <div className={body}>
+                  <p className={bodyText}>{data.challenge}</p>
+                </div>
+              </motion.section>
+            )}
 
-              {data.solution && (
-                <motion.section {...reveal} aria-labelledby="solution" className="mb-10">
-                  <h2 id="solution" className="font-display text-xl md:text-2xl font-semibold text-text-primary dark:text-white mb-4">
-                    What we did
-                  </h2>
-                  <p className="text-text-secondary dark:text-white/75 text-[17px] md:text-lg leading-[1.65]">
-                    {data.solution}
-                  </p>
-                </motion.section>
-              )}
+            {data.solution && (
+              <motion.section {...reveal} aria-labelledby="solution" className={row}>
+                <h2 id="solution" className={sideHead}>What we did</h2>
+                <div className={body}>
+                  <p className={bodyText}>{data.solution}</p>
+                </div>
+              </motion.section>
+            )}
 
-              {data.keyFeatures && data.keyFeatures.length > 0 && (
-                <motion.section {...reveal} aria-labelledby="delivered" className="mb-12">
-                  <h2 id="delivered" className="font-display text-xl md:text-2xl font-semibold text-text-primary dark:text-white mb-4">
-                    What we delivered
-                  </h2>
-                  <ul className="border-t border-black/10 dark:border-white/10">
-                    {data.keyFeatures.map((item) => (
-                      <li
-                        key={item}
-                        className="flex items-start gap-3 py-3.5 border-b border-black/10 dark:border-white/10 text-[17px] text-text-primary dark:text-white"
-                      >
-                        <Check className="w-5 h-5 mt-0.5 shrink-0 text-accent-text" aria-hidden="true" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </motion.section>
-              )}
+            {data.keyFeatures && data.keyFeatures.length > 0 && (
+              <motion.section {...reveal} aria-labelledby="delivered" className={row}>
+                <h2 id="delivered" className={sideHead}>What we delivered</h2>
+                <ol className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                  {data.keyFeatures.map((item, i) => (
+                    <li
+                      key={item}
+                      className="bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-5"
+                    >
+                      <span className="block font-display text-sm text-accent-text mb-3" aria-hidden="true">
+                        {String(i + 1).padStart(2, '0')}
+                      </span>
+                      <span className="block text-[17px] leading-snug text-text-primary dark:text-white">{item}</span>
+                    </li>
+                  ))}
+                </ol>
+              </motion.section>
+            )}
 
-              {data.testimonial && (
-                <motion.figure {...reveal} className="my-14 border-l-2 border-accent pl-6 md:pl-8">
-                  <blockquote className="font-display text-xl md:text-2xl leading-[1.5] text-text-primary dark:text-white mb-5">
+            {data.testimonial && (
+              <motion.section {...reveal} aria-labelledby="client-words" className={row}>
+                <h2 id="client-words" className={sideHead}>In the owner’s words</h2>
+                <figure className="lg:col-span-8 border-l-2 border-accent pl-6 md:pl-8">
+                  <blockquote className="font-display text-xl md:text-2xl lg:text-[1.75rem] leading-[1.45] text-text-primary dark:text-white mb-5">
                     <p>“{data.testimonial.quote}”</p>
                   </blockquote>
                   <figcaption className="text-sm text-text-secondary dark:text-white/60">
                     <span className="font-semibold text-text-primary dark:text-white">{data.testimonial.author}</span>
                     , {data.testimonial.role}
                   </figcaption>
-                </motion.figure>
-              )}
+                </figure>
+              </motion.section>
+            )}
 
-              <div className="flex flex-col sm:flex-row sm:items-center gap-4 justify-between border-t border-black/10 dark:border-white/10 pt-8">
-                <p className="text-text-secondary dark:text-white/60 leading-relaxed">
-                  Want the same for your business? Write to us, we answer plainly.
-                </p>
+            <div className={`${row} lg:items-center`}>
+              <p className="lg:col-span-8 font-display text-2xl md:text-3xl leading-snug text-text-primary dark:text-white">
+                Want the same for your business?{' '}
+                <span className="text-text-secondary dark:text-white/60">Write to us, we answer plainly.</span>
+              </p>
+              <div className="lg:col-span-4 lg:flex lg:justify-end">
                 <a
                   href="/contact"
                   onClick={appLink(() => onNavigate('contact'))}
-                  className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-button bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-button bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent"
                 >
                   Talk to us
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
@@ -307,33 +319,41 @@ const CaseStudyDetail: React.FC<CaseStudyDetailProps> = ({ onNavigate, project }
           </article>
 
           {others.length > 0 && (
-            <section aria-labelledby="more-work" className="max-w-[43rem] mt-16">
-              <h2 id="more-work" className="font-display text-xl md:text-2xl font-normal text-text-primary dark:text-white mb-6">
-                More work
-              </h2>
-              <ul className="flex flex-col gap-3">
+            <section aria-labelledby="more-work" className="pt-10 md:pt-12 border-t border-black/10 dark:border-white/10">
+              <div className="flex items-baseline justify-between gap-4 mb-6">
+                <h2 id="more-work" className="font-display text-2xl md:text-3xl font-normal text-text-primary dark:text-white">
+                  More work
+                </h2>
+                <a
+                  href="/work"
+                  onClick={appLink(() => onNavigate('work'))}
+                  className="inline-flex items-center gap-1.5 text-sm text-text-secondary dark:text-white/60 hover:text-accent-text transition-colors"
+                >
+                  All work
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </a>
+              </div>
+              <ul className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 {others.map((other) => (
                   <li key={other.id}>
                     <a
                       href={buildCaseStudyPath(other.id)}
                       onClick={appLink(() => onNavigate('case-study', { id: other.id }))}
-                      className="group flex items-start justify-between gap-6 bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-5 md:p-6 hover:border-black/20 dark:hover:border-white/30 transition-colors"
+                      className="group h-full flex flex-col bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-5 md:p-6 hover:border-black/20 dark:hover:border-white/30 transition-colors"
                     >
-                      <span>
-                        <span className="block text-[11px] font-semibold tracking-wide text-text-secondary dark:text-white/50 mb-1.5">
-                          {other.industry}
-                        </span>
-                        <span className="block font-display text-lg md:text-xl text-text-primary dark:text-white mb-1">
-                          {other.client}
-                        </span>
-                        <span className="block text-sm text-text-secondary dark:text-white/60 leading-relaxed">
-                          {other.description}
-                        </span>
+                      <span className="block text-[11px] font-semibold tracking-wide text-text-secondary dark:text-white/50 mb-2">
+                        {other.industry}
                       </span>
-                      <ArrowRight
-                        className="w-4 h-4 mt-1.5 shrink-0 text-text-secondary group-hover:text-text-primary dark:group-hover:text-white transition-colors"
-                        aria-hidden="true"
-                      />
+                      <span className="block font-display text-xl text-text-primary dark:text-white mb-2">
+                        {other.client}
+                      </span>
+                      <span className="block text-sm text-text-secondary dark:text-white/60 leading-relaxed grow">
+                        {other.description}
+                      </span>
+                      <span className="inline-flex items-center gap-1.5 mt-5 text-sm font-semibold text-text-primary dark:text-white group-hover:text-accent-text transition-colors">
+                        Read case
+                        <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                      </span>
                     </a>
                   </li>
                 ))}
