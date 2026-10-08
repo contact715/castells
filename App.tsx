@@ -85,10 +85,12 @@ function App() {
   useScrollTracking();
   useTimeOnPage();
 
-  // Scroll to top on page change
+  // Scroll to top on page change. selectedProject тоже: переход с кейса на
+  // кейс (или со статьи на статью) не меняет currentPage, и новая страница
+  // открывалась прокрученной до середины.
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [currentPage]);
+  }, [currentPage, selectedProject]);
 
   /*
     Голова документа при переходе внутри сайта. До 24 августа 2026 она не
