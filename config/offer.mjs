@@ -47,6 +47,7 @@ export const OFFER_PARTS = [
     id: 'found',
     slugs: ['web-development', 'landing-pages', 'seo-content', 'brand-identity'],
     title: 'People find you',
+    short: 'Website and local profiles',
     promise:
       'We build your website and your Google and Yelp profiles, then keep them current, so a search in your city leads to you.',
     includes: [
@@ -61,6 +62,7 @@ export const OFFER_PARTS = [
     id: 'ads',
     slugs: ['google-ads-ppc', 'meta-ads'],
     title: 'Ads bring calls',
+    short: 'Google, Meta and Yelp ads',
     promise:
       'Google, Meta and Yelp ads for your service area, built by us and checked every week, not launched once and left alone.',
     includes: [
@@ -75,6 +77,7 @@ export const OFFER_PARTS = [
     id: 'follow-up',
     slugs: ['crm-pipelines', 'workflow-automation', 'field-ops'],
     title: 'No request gets lost',
+    short: 'CRM and follow-up',
     promise:
       'Calls, forms and messages land in one place, and every one of them gets an answer and a follow-up.',
     includes: [
@@ -89,6 +92,7 @@ export const OFFER_PARTS = [
     id: 'numbers',
     slugs: ['advanced-tracking'],
     title: 'You see what it brings',
+    short: 'Tracking and a weekly report',
     promise:
       'One report covers every channel, so you see where the calls came from without logging in anywhere.',
     includes: [

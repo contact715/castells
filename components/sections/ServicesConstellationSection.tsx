@@ -2,6 +2,7 @@ import React from 'react';
 import { Globe, Megaphone, Workflow, BarChart3, ArrowUpRight, ArrowRight } from 'lucide-react';
 import type { NavigateFn } from '../../types';
 import { OFFER_PARTS, OFFER_TERMS } from '../../config/offer.mjs';
+import { SectionMark } from '../ui/SectionMark';
 
 /*
   История блока коротко. Сначала здесь была схема-созвездие на 576 строк с
@@ -46,17 +47,14 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
   };
 
   return (
-    <section className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory dark:bg-[#191919] relative">
+    <section className="py-16 md:py-24 bg-ivory dark:bg-[#191919] relative">
       <div className="container mx-auto px-6 relative z-content">
         <div className="mb-12 md:mb-16 max-w-2xl">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="w-2 h-2 rounded-full bg-accent-gradient shrink-0" aria-hidden="true" />
-            <span className="text-xs font-semibold tracking-wide text-text-secondary dark:text-white/50">What we take over</span>
-          </div>
+          <SectionMark>What we take over</SectionMark>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary dark:text-white">
             Four parts,
             <br />
-            <span className="text-text-secondary dark:text-white/50">one team, one monthly fee</span>
+            <span className="text-accent-text italic font-semibold">one team, one monthly fee</span>
           </h2>
           <p className="text-lg text-text-secondary dark:text-white/60 leading-relaxed mt-4">
             These are not four products to pick from. You get all four, because each one stops working
@@ -83,7 +81,7 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
                       {part.title}
                     </h3>
                   </div>
-                  <span className="text-[11px] tracking-wide text-text-secondary dark:text-white/55">
+                  <span className="inline-block text-[11px] font-semibold tracking-wide text-accent-text bg-accent-gradient-subtle rounded-pill px-3 py-1">
                     Part {index + 1} of {OFFER_PARTS.length}, included
                   </span>
                 </div>
@@ -122,11 +120,11 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
           Цену теперь называют на созвоне, но условия человек должен знать до
           него: иначе разговор о деньгах начинается с недоверия.
         */}
-        <div className="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-6 md:p-8">
+        <div className="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 bg-forest text-white rounded-card p-6 md:p-8">
           {OFFER_TERMS.map((term) => (
             <div key={term.title}>
-              <h3 className="font-display text-lg font-semibold text-text-primary dark:text-white mb-2">{term.title}</h3>
-              <p className="text-sm text-text-secondary dark:text-white/60 leading-relaxed">{term.text}</p>
+              <h3 className="font-display text-lg font-semibold text-lime mb-2">{term.title}</h3>
+              <p className="text-sm text-white/75 leading-relaxed">{term.text}</p>
             </div>
           ))}
         </div>

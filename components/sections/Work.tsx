@@ -101,7 +101,7 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
           onClick={handleViewArchive}
           size="md"
         >
-          View Full Archive
+          See all work
         </Button>
       </div>
     </section>

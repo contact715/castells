@@ -88,6 +88,17 @@
   --color-accent-text: #06794F;
   --color-accent-from: #1F7A59;
   --color-accent-to: #59C09A;
+  /*
+    Три цвета для ритма разделов, добавлены 14 ноября 2026. До этого вся
+    главная шла одним серым фоном, и разделы сливались в одну ленту. Тон всех
+    трёх взят у акцента: forest — тёмная полоса под доказательства и призыв,
+    mint — светлая полоса под блоки-списки, lime — подсветка на тёмном.
+    Контраст: белый на forest 12.4, lime на forest 9.6, forest на mint 9.9.
+  */
+  --color-forest: #0C3B2E;
+  --color-forest-deep: #082A21;
+  --color-mint: #DCEBE4;
+  --color-lime: #BDF0D2;
   --color-surface: #ffffff;
   --color-surface-dark: #2a2a2a;
   --color-text-primary: #000000;
@@ -541,4 +552,25 @@ html body {
 }
 html.dark body {
   background-color: #191919;
+}
+
+/*
+  Фирменный приём: двойная косая черта из логотипа «Caste//s». Она же метка
+  раздела и полосатая подложка под фотографиями. Один приём на весь сайт,
+  чтобы страницу узнавали не только по цвету.
+*/
+@utility slash-stripes {
+  background-image: repeating-linear-gradient(
+    115deg,
+    color-mix(in srgb, var(--color-accent) 55%, transparent) 0 3px,
+    transparent 3px 14px
+  );
+}
+
+@utility slash-stripes-light {
+  background-image: repeating-linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.14) 0 3px,
+    transparent 3px 14px
+  );
 }

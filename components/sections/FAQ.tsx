@@ -4,7 +4,7 @@ import { Highlighter } from '../ui/Highlighter';
 import { ArrowRight, Plus, Minus } from 'lucide-react';
 import { SectionHeader } from '../ui/Section';
 import { Button } from '../ui/Button';
-import { Badge } from '../ui/Badge';
+import { SectionMark } from '../ui/SectionMark';
 import SchemaMarkup from '../ui/SchemaMarkup';
 
 /*
@@ -48,7 +48,7 @@ const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = React.useState<number | null>(0);
 
   return (
-    <section className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory relative">
+    <section className="py-16 md:py-24 bg-mint dark:bg-[#12241d] relative">
       <SchemaMarkup 
         type="FAQPage" 
         data={{
@@ -64,10 +64,10 @@ const FAQ: React.FC = () => {
           {/* Left Column: Header & CTA */}
           <div className="lg:sticky lg:top-32 h-fit">
             <div className="mb-8">
-              <Badge className="mb-3">FAQ</Badge>
+              <SectionMark>FAQ</SectionMark>
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight mb-4">
                 Questions{' '}<br />
-                <span className="text-text-secondary">owners ask</span>
+                <span className="text-accent-text italic font-semibold">owners ask</span>
               </h2>
               <p className="text-lg text-text-secondary leading-relaxed">
                 The ones that come up on almost every first call, answered before you have to ask.

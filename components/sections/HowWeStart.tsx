@@ -2,6 +2,7 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import type { NavigateFn } from '../../types';
 import { OFFER_STEPS } from '../../config/offer.mjs';
+import { SectionMark } from '../ui/SectionMark';
 
 /*
   Блок «как начинаем», добавлен 14 ноября 2026.
@@ -27,17 +28,14 @@ const HowWeStart: React.FC<HowWeStartProps> = ({ onNavigate }) => {
   };
 
   return (
-    <section className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory dark:bg-[#191919] relative">
+    <section className="py-16 md:py-24 bg-mint dark:bg-[#12241d] relative">
       <div className="container mx-auto px-6">
         <div className="mb-10 md:mb-12 max-w-2xl">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="w-2 h-2 rounded-full bg-accent-gradient shrink-0" aria-hidden="true" />
-            <span className="text-xs font-semibold tracking-wide text-text-secondary dark:text-white/50">How we start</span>
-          </div>
+          <SectionMark>How we start</SectionMark>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary dark:text-white">
             From nothing
             <br />
-            <span className="text-text-secondary dark:text-white/50">to marketing that runs every month</span>
+            <span className="text-accent-text italic font-semibold">to marketing that runs every month</span>
           </h2>
         </div>
 
@@ -45,9 +43,9 @@ const HowWeStart: React.FC<HowWeStartProps> = ({ onNavigate }) => {
           {OFFER_STEPS.map((step, index) => (
             <li
               key={step.title}
-              className="bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-6 md:p-8"
+              className="relative bg-white dark:bg-white/[0.04] border border-forest/15 dark:border-white/10 rounded-card p-6 md:p-8"
             >
-              <span className="font-display text-3xl text-accent-text leading-none">{index + 1}</span>
+              <span className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-forest text-lime font-display text-xl leading-none">{index + 1}</span>
               <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white mt-4 mb-2">
                 {step.title}
               </h3>
