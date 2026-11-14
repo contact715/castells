@@ -149,6 +149,41 @@
       "source": "/academy/the-job-you-lose",
       "destination": "/academy/contractors/the-job-you-lose",
       "permanent": true
+    },
+    {
+      "source": "/services/mobile-apps",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/services/e-commerce",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/services/web-applications",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/services/business-intelligence",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/services/youtube-ads",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/services/tiktok-social",
+      "destination": "/services",
+      "permanent": true
+    },
+    {
+      "source": "/services/enterprise-solutions",
+      "destination": "/services",
+      "permanent": true
     }
   ],
   "rewrites": [

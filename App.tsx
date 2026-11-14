@@ -39,6 +39,8 @@ const TrustSection = lazyWithRetry(() => import('./components/sections/TrustSect
 const CTA = lazyWithRetry(() => import('./components/sections/CTA'));
 const CasesGrid = lazyWithRetry(() => import('./components/sections/CasesGrid'));
 const FAQ = lazyWithRetry(() => import('./components/sections/FAQ'));
+const Problems = lazyWithRetry(() => import('./components/sections/Problems'));
+const HowWeStart = lazyWithRetry(() => import('./components/sections/HowWeStart'));
 
 const CaseStudyDetail = lazyWithRetry(() => import('./components/pages/CaseStudyDetail'));
 const WorkPage = lazyWithRetry(() => import('./components/pages/WorkPage'));
@@ -191,14 +193,30 @@ function App() {
                       <TrustSection />
                     </Suspense>
                   </LazySection>
+                  {/*
+                    Порядок с 14 ноября 2026: проблема, затем что мы берём на
+                    себя, затем как начинаем, и только потом ниши. Раньше ниши
+                    стояли выше услуг, и человек читал список отраслей раньше,
+                    чем узнавал, что ему предлагают.
+                  */}
                   <LazySection rootMargin="300px">
                     <Suspense fallback={null}>
-                      <Industries />
+                      <Problems />
                     </Suspense>
                   </LazySection>
                   <LazySection rootMargin="300px">
                     <Suspense fallback={null}>
                       <ServicesConstellation onNavigate={navigateTo} />
+                    </Suspense>
+                  </LazySection>
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <HowWeStart onNavigate={navigateTo} />
+                    </Suspense>
+                  </LazySection>
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <Industries />
                     </Suspense>
                   </LazySection>
 

@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '../ui/Button';
 import { ContactButtons } from '../ui/ContactButtons';
 import type { NavigateFn } from '../../types';
+import { OFFER } from '../../config/offer.mjs';
 
 /*
   Первый экран, переписан 22 августа 2026.
@@ -34,6 +35,13 @@ import type { NavigateFn } from '../../types';
 
   Живые сайты клиентов сначала стояли отдельной строкой здесь, но их место
   в кейсах: те же клиенты идут блоком ниже. Ссылки переехали на карточки.
+
+  14 ноября 2026: смена позиционирования. Прежний заголовок «Marketing for
+  home service businesses» называл нишу, но не говорил, что именно мы
+  продаём, а подзаголовок перечислял три отдельные работы. Теперь продаём
+  одно: полное ведение маркетинга каждый месяц. Заголовок говорит это прямо,
+  текст под ним берётся из config/offer.mjs, чтобы первый экран, описание
+  для поиска и страница услуг говорили одно и то же.
 */
 
 interface HeroProps {
@@ -57,16 +65,15 @@ const Hero: React.FC<HeroProps> = ({ onNavigate }) => {
               <span className="tracking-wide">Castells Media · Roseville, California</span>
             </div>
             <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-normal leading-[1.05] tracking-tight text-text-primary mb-0">
-              Marketing for
+              All your marketing,
               <br />
-              <span className="text-accent-text italic font-semibold">home service businesses</span>
+              <span className="text-accent-text italic font-semibold">run for you every month</span>
             </h1>
           </div>
 
           <div className="flex flex-col justify-end">
             <p className="text-lg md:text-xl text-text-secondary leading-relaxed mb-8">
-              We build the site, run the ads on Google and Meta, and set up the follow-up, so the
-              phone rings and no job gets lost. HVAC, plumbing, appliance repair, remodeling.
+              {OFFER.summary} For {OFFER.audience}.
             </p>
             <div className="flex flex-wrap gap-4 items-center">
               <Button

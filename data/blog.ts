@@ -1,4 +1,3 @@
-import { PRICES } from '../config/pricing.mjs';
 /**
  * Статьи блога.
  *
@@ -42,26 +41,31 @@ export const BLOG_POSTS: BlogPost[] = [
     slug: 'what-marketing-costs-home-service-business',
     title: 'What marketing actually costs a home service business',
     excerpt:
-      'Nobody publishes prices, so every call starts with guessing. Here are ours, and what the money is actually spent on.',
+      'There are two bills, not one: the fee for the work and the ad budget. Here is what each one pays for, and what to ask before you agree to either.',
     date: 'August 23, 2026',
     readingMinutes: 4,
     category: 'Money',
     author: 'Dmitrii Z.',
     authorRole: 'Founder, Castells Media',
     sections: [
+      /*
+        14 ноября 2026: первые два раздела переписаны. Статья открывалась
+        словами о том, что агентства прячут цену ради звонка, и публиковала
+        наши тарифы. Владелец решил называть цену на созвоне и продавать одно
+        полное ведение, так что прежний текст спорил бы с собственным сайтом.
+      */
       {
-        heading: 'Why nobody tells you the price',
+        heading: 'Two bills, not one',
         body: [
-          'Look up ten marketing agencies and you will find ten contact forms and no numbers. The reasoning is always the same: every business is different, so we need a call first. Some of that is fair. Most of it is a sales tactic, because once you are on the call it is harder to walk away.',
-          'The cost of that tactic is your time. You sit through four calls to learn that two of them were never in your range.',
+          'Marketing for a home service business costs two separate things, and mixing them up is where most of the confusion starts. The first is the fee for the work: someone builds the site, the campaigns and the follow-up, and then runs them. The second is the ad budget: what Google, Meta and Yelp charge for showing your ads.',
+          'They should arrive as two bills from two different places. If they arrive as one, you cannot tell how much went to the work and how much went to the ads.',
         ],
       },
       {
-        heading: 'What we charge',
+        heading: 'How our fee works',
         body: [
-          `Running one channel for you, whether that is Google, Meta or Yelp, is ${PRICES.monthlyOneChannel} a month. That covers building the campaigns, launching them, checking them every week and sending you a report you can read without a glossary.`,
-          `Running several channels together, plus your Google Business Profile and reviews, is ${PRICES.monthlySeveralChannels} a month.`,
-          `A website is one-time work, from ${PRICES.websiteFrom}, depending on how many pages you need and whether we also write the text and handle photos. Setting up a CRM so calls and forms stop getting lost is from ${PRICES.crmSetupFrom}.`,
+          'We charge one monthly fee for all of the work: the website, the local profiles, the ads, the follow-up and the weekly report. We do not sell these separately, and there is no setup fee. What has to be built is built inside the monthly fee.',
+          'The number depends on three things: how much has to be built first, how many channels your trade and city need, and how many services and cities you cover. We name it on the first call, before you pay anything.',
         ],
       },
       {
@@ -83,7 +87,7 @@ export const BLOG_POSTS: BlogPost[] = [
         body: [
           'Is there a contract or a minimum term? Ours is month to month, and you can stop in any month.',
           'Whose name is on the ad account? It should be yours, on day one.',
-          'Is there a setup fee on top of the monthly price? Sometimes there is, when there is a lot to build first, but you should hear the number before you pay anything.',
+          'Is there a setup fee on top of the monthly price? Ours has none: the build is inside the monthly fee. Whatever the answer is, you should hear it before you pay anything.',
           'What happens if we stop working together? Everything built for you, the accounts, the site, the CRM, the data, should stay with you.',
         ],
       },
@@ -232,7 +236,7 @@ export const BLOG_POSTS: BlogPost[] = [
         heading: 'If you run the check on your own site',
         body: [
           'Three things worth looking at, in order: does site:yourdomain.com return your pages, do two different pages have two different titles, and does your site load on one address instead of two.',
-          'None of that requires an agency. If the answers come back badly and you want a hand, our prices are on this site and the phone number is at the bottom of every page.',
+          'None of that requires an agency. If the answers come back badly and you want a hand, our terms are on this site and the phone number is at the bottom of every page.',
         ],
       },
     ],

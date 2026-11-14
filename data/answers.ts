@@ -1,4 +1,8 @@
-import { PRICES } from '../config/pricing.mjs';
+/*
+  14 ноября 2026: из ответов убраны наши цены и «тарифы». Цену теперь называют
+  на созвоне, а продаём одно полное ведение. Ответы по-прежнему опираются
+  только на наши собственные условия, опубликованные на /pricing.
+*/
 /**
  * Страницы-ответы: /learn/{вопрос}.
  *
@@ -54,34 +58,34 @@ export const ANSWERS: Answer[] = [
         ],
       },
       {
-        heading: 'What it costs',
+        heading: 'How we build one',
         body: [
-          `Ours start at ${PRICES.websiteFrom} as a one-time project, depending on how many pages you need. Month to month after that, no contract. It is the same number published on our prices page, not something invented for this article.`,
+          'We do not sell a website as a separate project. When a business we take on has no site, we build it as part of the monthly work, in the owner’s name, and then keep it current. A site that nobody maintains and nobody sends traffic to does not bring calls, however good it looked on launch day.',
         ],
       },
     ],
     ourEvidence:
       'Two sites we built are live right now and you can open them: acromanservice.com (Roman Service, HVAC, North Port, Florida) and fivestarcomfort.com (heating and air conditioning, Bothell, Washington). Both are the kind of site described above.',
-    next: { label: 'See what a website costs', page: 'pricing' },
+    next: { label: 'See how pricing works', page: 'pricing' },
   },
   {
     slug: 'what-an-agency-does-every-month',
     question: 'What does a marketing agency actually do every month?',
     short:
-      'On a monthly plan the work is four things: watch the ads, fix what is losing money, keep local profiles current, and send a report you can read without a dictionary.',
+      'Month to month the work is four things: watch the ads, fix what loses money, keep the site and profiles current, and send a report you can read without a dictionary.',
     sections: [
       {
         heading: 'The honest answer',
         body: [
           'Most of the month is not creative work. It is checking which searches brought calls and which burned budget, turning off the second kind, and moving money to the first. On a small account that is a few hours a week done properly, not forty.',
-          `Anyone promising daily heroics on a ${PRICES.monthlyOneChannel} plan is either not doing them or not doing them on your account.`,
+          'Anyone promising daily heroics on a small account is either not doing them or not doing them on your account.',
         ],
       },
       {
-        heading: 'What is in our monthly plans',
+        heading: 'What is in our monthly work',
         body: [
-          `The ${PRICES.monthlyOneChannel} plan is one channel, Google or Meta or Yelp, built, launched, checked weekly and adjusted. The ${PRICES.monthlySeveralChannels} plan is several channels at once, plus the local presence: Google Business Profile, Yelp, and getting and answering reviews.`,
-          'Both are month to month with no contract, and the ad budget goes straight to Google, Meta and Yelp from your own account. We never take a cut of it, so we have no reason to talk you into spending more.',
+          'We run all of it, not one channel: the website, the Google and Yelp profiles, ads on Google, Meta and Yelp, follow-up on every request, reviews, and a weekly report. If something is missing when we start, we build it as part of the same monthly fee.',
+          'It is month to month with no contract, and the ad budget goes straight to Google, Meta and Yelp from your own account. We never take a cut of it, so we have no reason to talk you into spending more.',
         ],
       },
       {
@@ -93,8 +97,8 @@ export const ANSWERS: Answer[] = [
       },
     ],
     ourEvidence:
-      `Our plans and what is inside them are published on the prices page: ${PRICES.monthlyOneChannel} for one channel, ${PRICES.monthlySeveralChannels} for several channels with local presence, month to month, ad budget paid directly by you. Nothing on this page is a number invented for the article.`,
-    next: { label: 'See the plans', page: 'pricing' },
+      'What is inside our monthly work and the terms it comes on are published on this site: one monthly fee, no setup fee, month to month, ad budget paid directly by you. Nothing on this page is a number invented for the article.',
+    next: { label: 'See how pricing works', page: 'pricing' },
   },
   {
     slug: 'contract-with-a-marketing-agency',
@@ -120,14 +124,14 @@ export const ANSWERS: Answer[] = [
       {
         heading: 'How we work',
         body: [
-          'Month to month, no contract, no setup fee for the monthly plans. The accounts are yours. The ad budget is billed to you by the platforms directly.',
+          'Month to month, no contract, no setup fee. The accounts are yours. The ad budget is billed to you by the platforms directly.',
           'If we are not earning the money, stopping should be easy. That is the point of not having one.',
         ],
       },
     ],
     ourEvidence:
-      'These are our published terms, on the prices page of this site: month to month, no contract, and the ad budget goes straight to Google, Meta and Yelp from your own account with no cut taken by us.',
-    next: { label: 'See our terms and prices', page: 'pricing' },
+      'These are our published terms, on the pricing page of this site: month to month, no contract, and the ad budget goes straight to Google, Meta and Yelp from your own account with no cut taken by us.',
+    next: { label: 'See our terms', page: 'pricing' },
   },
 ];
 

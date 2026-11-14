@@ -1,30 +1,28 @@
 import React from 'react';
 import { m as motion } from 'framer-motion';
-import { ArrowRight, Globe, Megaphone, MapPin, Workflow } from 'lucide-react';
+import { ArrowRight, Globe, Megaphone, Workflow, BarChart3 } from 'lucide-react';
 import { PageHeader } from '../ui/PageHeader';
-import { SERVICE_CATEGORIES, type ServiceCategoryId } from '../../data/services';
+import { findServiceBySlug } from '../../data/services';
 import { PageView } from '../../App';
 import { NavigationData } from '../../types';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
-import { PRICES } from '../../config/pricing.mjs';
+import { OFFER_PARTS, OFFER_STEPS, OFFER_TERMS } from '../../config/offer.mjs';
 
 /*
-  Страница услуг, переписана 23 августа 2026.
+  Страница услуг.
 
-  Что было. Заголовок «Everything you need to dominate», подзаголовок про
-  «инфраструктуру, которая превращает местный бизнес в лидера рынка», кнопка
-  «Watch Showreel», которая не делала ничего (ни ссылки, ни обработчика), и
-  тот самый шестишаговый процесс с выдуманными сроками — «Day 1», «Week 1»,
-  «Week 5-6», — который владелец попросил убрать с главной. Страница на
-  7767 пикселей, девять секций, и ни одной цены. При этом в заголовке
-  страницы для поисковиков уже было написано «Services and prices».
+  23 августа 2026 она была переписана из «Everything you need to dominate» в
+  четыре направления с ценами: бери одно или все четыре.
 
-  Что стало. Четыре направления, у каждого сказано, что человек получит, что
-  входит и сколько это стоит. Ниже — цены отдельным блоком, включая строку
-  про рекламный бюджет. Цены только те, что подтвердил владелец 22 августа:
-  два месячных тарифа, сайты от $1,750, настройка автоматизации от $1,500.
-  Там, где подтверждённой цены нет, честно сказано, как считаем.
+  14 ноября 2026 владелец сменил модель: «мы теперь не продаём услуги по
+  настройке, а предлагаем полностью комплексное ведение ежемесячно, от нуля
+  до единицы». Поэтому страница больше не каталог и не прайс. Она отвечает
+  на один вопрос: что именно входит в ведение.
+
+  Четыре части, шаги и условия читаются из config/offer.mjs, те же самые
+  стоят на главной и на странице /pricing. Под каждой частью ссылки на
+  страницы, где она разобрана подробно. Цен нет: их называют на созвоне.
 */
 
 interface AllServicesPageProps {
@@ -32,47 +30,12 @@ interface AllServicesPageProps {
   onNavigate: (page: PageView, data?: NavigationData) => void;
 }
 
-const DIRECTIONS: {
-  id: ServiceCategoryId;
-  icon: React.ComponentType<{ className?: string }>;
-  title: string;
-  promise: string;
-  price: string;
-  priceNote: string;
-}[] = [
-  {
-    id: 'development',
-    icon: Globe,
-    title: 'Website that gets you called',
-    promise: 'A site where a visitor sees what you do, where you work, and calls you in two taps.',
-    price: PRICES.websiteFrom,
-    priceNote: 'one-time, from',
-  },
-  {
-    id: 'advertising',
-    icon: Megaphone,
-    title: 'Ads that bring calls',
-    promise: 'Google, Meta and Yelp running for your service area, checked every week.',
-    price: PRICES.monthlyOneChannel,
-    priceNote: 'monthly, from',
-  },
-  {
-    id: 'branding',
-    icon: MapPin,
-    title: 'Brand people remember',
-    promise: 'Logo, colours and templates, so your truck, your site and your invoice look like one company.',
-    price: 'Quoted per project',
-    priceNote: 'usually with a website',
-  },
-  {
-    id: 'automation',
-    icon: Workflow,
-    title: 'Nothing gets lost',
-    promise: 'Calls, forms and messages land in one place, and no request sits unanswered.',
-    price: PRICES.crmSetupFrom,
-    priceNote: 'setup, from',
-  },
-];
+const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  found: Globe,
+  ads: Megaphone,
+  'follow-up': Workflow,
+  numbers: BarChart3,
+};
 
 const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
   const siteUrl = typeof window !== 'undefined' ? window.location.origin : 'https://www.castells.media';
@@ -80,13 +43,13 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
   return (
     <>
       <SEO
-        title="Services and prices | Castells Media"
-        description={`Websites, Google and Meta ads, local presence, automation and CRM for home service businesses. Monthly plans from ${PRICES.monthlyOneChannel}, websites from ${PRICES.websiteFrom}.`}
+        title="What is included | Castells Media"
+        description="Full-service marketing for home service businesses: website and local profiles, Google and Meta ads, CRM and follow-up, tracking and weekly reporting. One monthly fee."
         canonical="/services"
-        keywords="marketing services for contractors, HVAC marketing, Google Ads management, Meta Ads management, local SEO, CRM setup"
+        keywords="full-service marketing for contractors, HVAC marketing, Google Ads management, Meta Ads management, local SEO, CRM"
         geoRegion="US-CA"
         geoPlacename="1298 Antelope Creek Drive, Roseville, California"
-        summary={`Services by Castells Media: websites and branding, paid media on Google and Meta, local presence on Google and Yelp, automation and CRM. Monthly plans from ${PRICES.monthlyOneChannel}, project work from ${PRICES.websiteFrom}.`}
+        summary="Castells Media runs all marketing for a home service business every month: website and local profiles, ads on Google, Meta and Yelp, CRM and follow-up, tracking and weekly reporting. One monthly fee, no setup fee, no contract."
         mainEntity="Marketing Services"
       />
       <SchemaMarkup
@@ -107,22 +70,21 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
               { label: 'Services', active: true },
             ]}
             badge="Services"
-            title="What we do and what it costs"
-            description="Take one direction or all four. Prices are on this page, you do not need a call to hear them."
+            title="Everything we run for you, every month"
+            description="We do not sell these one by one. You get all four parts for one monthly fee: we build what is missing and then run all of it."
             onNavigate={onNavigate}
           />
 
-          <div className="flex flex-col gap-4 md:gap-6 mb-16">
-            {DIRECTIONS.map((direction, index) => {
-              const category = SERVICE_CATEGORIES.find((c) => c.id === direction.id);
-              const Icon = direction.icon;
-              /* «Enterprise Solutions» повторяется в каждой категории — общий
-                 пункт-заглушка, в списке услуг он только шумит. */
-              const items = (category?.items ?? []).filter((i) => i.slug !== 'enterprise-solutions');
+          <div className="flex flex-col gap-4 md:gap-6 mb-6">
+            {OFFER_PARTS.map((part, index) => {
+              const Icon = ICONS[part.id] ?? Globe;
+              const pages = part.slugs
+                .map((slug) => findServiceBySlug(slug)?.item)
+                .filter((item): item is NonNullable<typeof item> => Boolean(item));
 
               return (
                 <motion.section
-                  key={direction.id}
+                  key={part.id}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, margin: '-60px' }}
@@ -135,102 +97,91 @@ const AllServicesPage: React.FC<AllServicesPageProps> = ({ onNavigate }) => {
                         <Icon className="w-6 h-6 text-accent-text" aria-hidden="true" />
                       </div>
                       <h2 className="font-display text-xl md:text-2xl font-semibold text-text-primary dark:text-white">
-                        {direction.title}
+                        {part.title}
                       </h2>
                     </div>
-                    <div className="flex items-baseline gap-2">
-                      <span className="font-display text-2xl md:text-3xl text-text-primary dark:text-white leading-tight">
-                        {direction.price}
-                      </span>
-                      <span className="text-[11px] tracking-wide text-text-secondary dark:text-white/55">
-                        {direction.priceNote}
-                      </span>
-                    </div>
+                    <span className="text-[11px] tracking-wide text-text-secondary dark:text-white/55">
+                      Part {index + 1} of {OFFER_PARTS.length}, included
+                    </span>
                   </div>
 
                   <div className="min-w-0">
                     <p className="text-text-secondary dark:text-white/65 text-base leading-relaxed mb-5">
-                      {direction.promise}
+                      {part.promise}
                     </p>
 
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2.5">
-                      {items.map((item) => (
-                        <li key={item.slug}>
-                          <button
-                            type="button"
-                            onClick={() => onNavigate('service', { id: item.slug, name: item.name })}
-                            className="group flex items-start gap-3 text-left text-text-secondary dark:text-white/60 hover:text-text-primary dark:hover:text-white transition-colors cursor-pointer"
-                          >
-                            <span
-                              className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 mt-2"
-                              aria-hidden="true"
-                            />
-                            <span className="text-sm md:text-base">
-                              {item.name}
-                              <span className="block text-xs text-text-secondary/70 dark:text-white/40 mt-0.5">
-                                {item.description}
-                              </span>
-                            </span>
-                          </button>
+                    <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 mb-5">
+                      {part.includes.map((item) => (
+                        <li key={item} className="flex items-start gap-3 text-text-secondary dark:text-white/60 text-sm md:text-base">
+                          <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 mt-2" aria-hidden="true" />
+                          {item}
                         </li>
                       ))}
                     </ul>
+
+                    {pages.length > 0 && (
+                      <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-4 border-t border-black/5 dark:border-white/10">
+                        <span className="text-xs font-semibold tracking-wide text-text-secondary dark:text-white/50">
+                          In detail
+                        </span>
+                        {pages.map((item) => (
+                          <button
+                            key={item.slug}
+                            type="button"
+                            onClick={() => onNavigate('service', { id: item.slug, name: item.name })}
+                            className="inline-flex items-center gap-1 text-sm text-text-primary dark:text-white/80 hover:text-accent-text transition-colors cursor-pointer"
+                          >
+                            {item.name}
+                            <ArrowRight className="w-3.5 h-3.5" aria-hidden="true" />
+                          </button>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </motion.section>
               );
             })}
           </div>
 
-          {/* Цены отдельным блоком: их спрашивают первым делом */}
+          {/* Как начинаем: те же четыре шага, что на главной */}
+          <section className="bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-6 md:p-10 mb-6">
+            <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary dark:text-white mb-8">
+              How we start
+            </h2>
+            <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+              {OFFER_STEPS.map((step, index) => (
+                <li key={step.title}>
+                  <span className="font-display text-3xl text-accent-text leading-none">{index + 1}</span>
+                  <h3 className="font-display text-xl font-semibold text-text-primary dark:text-white mt-3 mb-2">
+                    {step.title}
+                  </h3>
+                  <p className="text-sm text-text-secondary dark:text-white/60 leading-relaxed">{step.text}</p>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          {/* Условия вместо прайса */}
           <section className="bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-6 md:p-10 mb-12">
             <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary dark:text-white mb-8">
-              Prices, in plain numbers
+              The terms, in plain words
             </h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 mb-8">
-              <div>
-                <div className="text-[11px] font-semibold tracking-wide text-accent-text mb-3">
-                  Monthly
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
+              {OFFER_TERMS.map((term) => (
+                <div key={term.title}>
+                  <h3 className="font-display text-lg font-semibold text-text-primary dark:text-white mb-2">
+                    {term.title}
+                  </h3>
+                  <p className="text-sm text-text-secondary dark:text-white/60 leading-relaxed">{term.text}</p>
                 </div>
-                <p className="font-display text-2xl text-text-primary dark:text-white mb-1">{PRICES.monthlyOneChannel} / month</p>
-                <p className="text-sm text-text-secondary dark:text-white/60 mb-4">
-                  One channel, run and reported weekly.
-                </p>
-                <p className="font-display text-2xl text-text-primary dark:text-white mb-1">{PRICES.monthlySeveralChannels} / month</p>
-                <p className="text-sm text-text-secondary dark:text-white/60">
-                  Several channels at once, with local presence and reviews.
-                </p>
-              </div>
-
-              <div>
-                <div className="text-[11px] font-semibold tracking-wide text-accent-text mb-3">
-                  One-time work
-                </div>
-                <p className="font-display text-2xl text-text-primary dark:text-white mb-1">From {PRICES.websiteFrom}</p>
-                <p className="text-sm text-text-secondary dark:text-white/60 mb-4">
-                  Website or landing page, depending on how many pages you need.
-                </p>
-                <p className="font-display text-2xl text-text-primary dark:text-white mb-1">From {PRICES.crmSetupFrom}</p>
-                <p className="text-sm text-text-secondary dark:text-white/60">
-                  CRM and follow-up set up on our own platform, Mosco.
-                </p>
-              </div>
-
-              <div>
-                <div className="text-[11px] font-semibold tracking-wide text-accent-text mb-3">
-                  What is not included
-                </div>
-                <p className="text-sm text-text-secondary dark:text-white/60 leading-relaxed">
-                  The ad budget itself. It goes straight to Google, Meta and Yelp from your own account, and
-                  you see every dollar of it. We never take a cut of it.
-                </p>
-              </div>
+              ))}
             </div>
 
             <div className="flex flex-col sm:flex-row sm:items-center gap-4 pt-6 border-t border-black/5 dark:border-white/10">
               <p className="text-sm text-text-secondary dark:text-white/60 grow">
-                Not sure which one you need? Tell us what your business does and where, and we will say
-                plainly what we would start with.
+                Tell us what your business does and where. On the first call we will say plainly what
+                we would build, what we would run, and what the monthly fee is.
               </p>
               <button
                 type="button"

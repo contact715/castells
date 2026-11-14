@@ -164,7 +164,7 @@ async function readCatalog() {
  * Две страницы про одно и то же не выигрывают вдвое, они делят вес пополам.
  * В поиск идёт та, которую чаще ищут; вторая остаётся доступной на сайте.
  */
-const ДУБЛИРУЮТ_СОСЕДА = new Set(['web-applications', 'brand-guidelines']);
+const ДУБЛИРУЮТ_СОСЕДА = new Set(['brand-guidelines']);
 
 function servicePages(услуги, caseStudies) {
   return услуги.map((u) => {
@@ -186,7 +186,7 @@ function servicePages(услуги, caseStudies) {
       intro: u.description,
       body: [
         строкаКейсов,
-        'Prices are on the pricing page. Month to month, no contract.',
+        'This is one part of full-service marketing: we build what is missing and run all of it every month. One monthly fee, no setup fee, no contract.',
       ].filter(Boolean),
       // Правило из разбора архитектуры: страница идёт в поиск, только если у неё
       // есть собственный проверяемый актив. Без наших работ в этой услуге текст
@@ -297,7 +297,7 @@ function answerPages(ответы) {
     ...HUBS.learn,
     h1: 'Questions we get asked',
     intro:
-      'Written from what we actually do, with our own prices and our own clients inside. Nothing goes up here unless we have something of our own to say about it.',
+      'Written from what we actually do, with our own terms and our own clients inside. Nothing goes up here unless we have something of our own to say about it.',
     body: [
       ...ответы.map((о) => `${о.question} ${о.short}`),
       'The journal is here too: what we ran into and what we did about it, with dates.',
@@ -315,7 +315,7 @@ function answerPages(ответы) {
       faq: { question: о.question, answer: о.short },
       body: [
         'Answered by Castells Media, a marketing agency at 1298 Antelope Creek Drive, Roseville, California, working with home service businesses across the US.',
-        'Every number in this answer is one of our published prices, so it can be checked on this same site.',
+        'The terms named in this answer are our own and are published on the pricing page of this same site.',
       ],
     })),
   ];
@@ -577,7 +577,7 @@ function buildSchema(page) {
     // полей. Значения нигде не противоречили, но поиск видел две записи об
     // одной конторе. Поля перенесены сюда, блок остался один.
     description:
-      'We build websites, run ads and set up follow-up automation for home service businesses.',
+      'Full-service marketing for home service businesses: one team builds and runs the website, the ads and the follow-up every month.',
     contactPoint: {
       '@type': 'ContactPoint',
       email: 'contact@castells.media',
@@ -751,7 +751,7 @@ function relatedLinks(page, все) {
 
   // Страница услуги или ниши ведёт обратно на свой хаб и на соседей
   if (page.path.startsWith('/services/')) {
-    добавить('/services', 'All services and prices');
+    добавить('/services', 'Everything that is included');
     дети('/services/').slice(0, 6).forEach((p) => добавить(p.path, p.h1));
   }
   if (page.path.startsWith('/industries/')) {
@@ -760,7 +760,7 @@ function relatedLinks(page, все) {
   }
   if (page.path.startsWith('/case-studies/')) {
     добавить('/work', 'All our work');
-    добавить('/services', 'What we do and what it costs');
+    добавить('/services', 'Everything we run for you, every month');
   }
   if (page.path.startsWith('/learn/')) {
     добавить('/learn', 'Other questions we get');
@@ -978,6 +978,30 @@ async function проверитьМаршруты(allPages) {
 
 /* --- самопроверка: гоняется без сборки и ничего не пишет в dist --- */
 /**
+ * Кто импортирует config/pricing.mjs. После 14 ноября 2026 это вправе делать
+ * только сам генератор: ему числа нужны, чтобы искать их в текстах. Обход
+ * только по исходникам сайта; папка services/ — отдельный проект.
+ */
+async function найтиЧитателейЦен() {
+  const { readdir } = await import('node:fs/promises');
+  const пропустить = new Set(['node_modules', 'dist', '.git', '.vercel', 'config', 'services', 'scripts']);
+  const найдено = [];
+  const обойти = async (папка, отн = '') => {
+    for (const e of await readdir(папка, { withFileTypes: true })) {
+      if (пропустить.has(e.name)) continue;
+      const п = path.join(папка, e.name);
+      const о = отн ? `${отн}/${e.name}` : e.name;
+      if (e.isDirectory()) { await обойти(п, о); continue; }
+      if (!/\.(ts|tsx|mjs|js)$/.test(e.name)) continue;
+      const текст = await readFile(п, 'utf8');
+      if (/from\s+['"][^'"]*config\/pricing\.mjs['"]/.test(текст)) найдено.push(о);
+    }
+  };
+  await обойти(ROOT);
+  return найдено;
+}
+
+/**
  * Ищет цены, вписанные в код руками. Источник — config/pricing.mjs, всё
  * остальное обязано брать их оттуда.
  *
@@ -1187,6 +1211,20 @@ async function selfTest() {
     подставитьЦены('от ${PRICES.websiteFrom}') === `от ${PRICES.websiteFrom}`);
   t('неизвестное имя цены остаётся как есть, а не становится пустым', () =>
     подставитьЦены('${PRICES.нетТакого}') === '${PRICES.нетТакого}');
+  // 14 ноября 2026: цены с сайта сняты, их называют на созвоне. Источник цен
+  // остался только ради сторожа ниже, и читать его вправе один этот скрипт.
+  // Страница, которая снова импортирует цены, вернёт на сайт число, которого
+  // там быть не должно, а сторож голых цен этого не заметит: подстановка из
+  // переменной для него законна.
+  const читаютЦены = await найтиЧитателейЦен();
+  t(`цены не читает ни одна страница (читают: ${читаютЦены.join(', ') || 'никто'})`, () => читаютЦены.length === 0);
+  const оффер = await import('../config/offer.mjs');
+  t('оффер на месте: четыре части, условия и шаги', () =>
+    оффер.OFFER_PARTS.length === 4 && оффер.OFFER_TERMS.length >= 4 && оффер.OFFER_STEPS.length >= 3
+    && оффер.OFFER_PARTS.every((ч) => ч.title && ч.promise && ч.includes.length > 0 && ч.slugs.length > 0));
+  const каталогУслуг = await readFile(path.join(ROOT, 'data/services.ts'), 'utf8');
+  t('каждая страница, на которую ссылается оффер, есть в каталоге услуг', () =>
+    оффер.OFFER_PARTS.every((ч) => ч.slugs.every((slug) => каталогУслуг.includes(`slug: '${slug}'`))));
   // Сторож против возврата: голая цена в коде — это вторая копия правды.
   // Ищем по ВСЕМУ дереву исходников, кроме самого источника, и не считаем
   // упоминания внутри комментариев: там цены называются в объяснении того,
