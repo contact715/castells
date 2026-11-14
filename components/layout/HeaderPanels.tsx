@@ -43,10 +43,12 @@ export const ServicesPanel: React.FC<HeaderPanelsProps> = ({ onNavigate, itemCla
       onOpenHub={() => onNavigate('services')}
       className={itemClass}
       rail={{
-        title: 'What we do',
-        count: `${всего} services in ${SERVICE_CATEGORIES.length} groups`,
-        text: 'Websites, ads, local presence and automation. Prices are published — no call needed to hear them.',
-        cta: 'All services and prices',
+        // 14 ноября 2026: это не каталог, а состав одного ведения. Счётчик
+        // «N услуг в M группах» читался как меню, из которого выбирают.
+        title: 'What we run for you',
+        count: `${всего} parts of one monthly service`,
+        text: 'Website, ads, local search, follow-up and tracking. One team runs all of it for one monthly fee.',
+        cta: 'Everything that is included',
       }}
     >
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-5">

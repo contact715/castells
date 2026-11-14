@@ -15,7 +15,10 @@
  * вычистили полсайта.
  */
 
-import { PRICES, PRICING_SENTENCE } from '../config/pricing.mjs';
+// 14 ноября 2026: цены на сайте больше не публикуются, владелец называет их
+// на созвоне. Вместо цен описания страниц берут условия и состав ведения из
+// config/offer.mjs — тот же источник, что у главной и страницы услуг.
+import { OFFER, TERMS_SENTENCE, PARTS_SENTENCE } from '../config/offer.mjs';
 
 export const SITE = {
   origin: 'https://www.castells.media',
@@ -29,15 +32,16 @@ export const SITE = {
 export const PAGES = [
   {
     path: '/',
-    title: 'Castells Media | Marketing agency for home service businesses',
+    title: 'Castells Media | Full-service marketing for home service businesses',
     description:
-      'We build websites, run ads and set up automation for HVAC, plumbing and other home service companies. Roseville, CA. Real clients, real sites you can open.',
-    h1: 'Marketing for home service businesses',
+      'One team runs all of your marketing every month: website, Google and Meta ads, local profiles and follow-up. For home service companies. Roseville, CA.',
+    h1: 'All your marketing, run for you every month',
     intro:
-      'We build the website, run the ads and set up the follow-up, so the phone rings and nothing gets lost. Based in Roseville, California, working with contractors across the US.',
+      `${OFFER.summary} For ${OFFER.audience}. Based in Roseville, California, working with contractors across the US.`,
     body: [
       'Working with estimate-driven businesses since June 2017: kitchen and furniture manufacturing first, then HVAC. Five sales departments built from nothing, six furniture showrooms opened.',
-      'What we do: websites and branding, paid ads on Google and Meta, local presence on Google and Yelp, and automation that answers and books the job.',
+      `What we run for you every month: ${PARTS_SENTENCE}. We do not sell these one by one or as one-time setups.`,
+      TERMS_SENTENCE,
       'Clients whose sites we built: Roman Service (HVAC, North Port, Florida) — acromanservice.com.',
       'Roman, owner of Roman Service LLC: "I honestly didn\'t expect it to work so fast. I was always skeptical about advertising because before it just ate up the budget with no result. But here I see real calls, requests, people who really need HVAC system installation."',
     ],
@@ -53,35 +57,35 @@ export const PAGES = [
   },
   {
     path: '/services',
-    title: 'Services and prices | Castells Media',
+    title: 'What is included | Castells Media',
     description:
-      `Websites and branding, Google and Meta ads, local presence, automation and CRM. Monthly plans from ${PRICES.monthlyOneChannel}. Project work from ${PRICES.websiteFrom}.`,
-    h1: 'What we do and what it costs',
+      'Full-service marketing, run every month: website and local profiles, Google and Meta ads, CRM and follow-up, tracking and a weekly report. One monthly fee.',
+    h1: 'Everything we run for you, every month',
     intro:
-      'Take one direction or all four. Prices are on this page, you do not need a call to hear them.',
+      'We do not sell these one by one. You get all four parts for one monthly fee: we build what is missing and then run all of it.',
   },
   {
     path: '/pricing',
-    title: 'Prices | Castells Media',
+    title: 'Pricing | Castells Media',
     description:
-      `Monthly plans at ${PRICES.monthlyOneChannel} and ${PRICES.monthlySeveralChannels}, websites from ${PRICES.websiteFrom}, CRM setup from ${PRICES.crmSetupFrom}. Month to month, no contract. The ad budget goes straight to Google, Meta and Yelp.`,
-    h1: 'What this costs',
+      'One monthly fee for all of your marketing, named on the first call. No setup fee, no contract. The ad budget goes straight to Google, Meta and Yelp.',
+    h1: 'One monthly fee for all of it',
     intro:
-      'Month to month, no contract. The ad budget is yours and goes straight to Google, Meta and Yelp — we never take a cut of it.',
+      'No setup fee, no contract. You hear the number on the first call, before you pay anything. The ad budget is yours and goes straight to Google, Meta and Yelp.',
   },
   {
     path: '/roseville-marketing-agency',
     title: 'Marketing agency in Roseville, California | Castells Media',
     description:
-      `Marketing agency in Roseville, California: websites, Google and Meta ads, local presence and follow-up for home service businesses. Monthly plans from ${PRICES.monthlyOneChannel}.`,
+      'Marketing agency in Roseville, California. We run all marketing for home service businesses every month: website, ads, local profiles and follow-up.',
     h1: 'Marketing agency in Roseville',
     intro:
-      'We work out of Roseville and run websites, ads and follow-up for home service businesses. You can walk in, call, or write — all three reach the same people.',
+      'We work out of Roseville and run all of the marketing for home service businesses, every month. You can walk in, call, or write — all three reach the same people.',
     body: [
       'Castells Media Inc, 1298 Antelope Creek Drive, Roseville, California. Phone +1 (916) 619-6006, email contact@castells.media. The fastest answer is WhatsApp or Telegram on the same number.',
       'Who we work with: heating and air conditioning, plumbing, appliance repair, remodeling, auto detailing — companies where the money arrives as a phone call.',
       'Our clients in California: Cool Doc (HVAC, Los Angeles); Appliance Repair Clinic (home services, Los Angeles); Drive Car Studio (automotive, Los Angeles). None of them are in Roseville itself, and we are not going to pretend otherwise.',
-      `Prices: monthly plans from ${PRICES.monthlyOneChannel}, websites from ${PRICES.websiteFrom}, automation setup from ${PRICES.crmSetupFrom}. Month to month, no contract. The ad budget goes straight to Google, Meta and Yelp from your own account.`,
+      `Pricing: ${TERMS_SENTENCE}`,
     ],
   },
   {
@@ -91,7 +95,7 @@ export const PAGES = [
       'Castells Media Inc, a marketing agency in Roseville, California, working with home service businesses across the United States.',
     h1: 'A small agency for businesses that live on the phone ringing',
     intro:
-      'Castells Media Inc works out of Roseville, California, with home service businesses across the US: HVAC, appliance repair, plumbing, remodeling. We build the site, run the ads and set up the follow-up, so a job that was going to be lost gets booked instead.',
+      'Castells Media Inc works out of Roseville, California, with home service businesses across the US: HVAC, appliance repair, plumbing, remodeling. One team builds the site, runs the ads and handles the follow-up every month, so a job that was going to be lost gets booked instead.',
     body: [
       'Working in businesses that sell from an estimate since June 2017. Most of those years went into kitchen and furniture manufacturing, and after that into HVAC. Both sell from an estimate, with long decisions and large tickets, which is why the same playbook moves between them.',
       'Along the way: five sales departments built from nothing, and six furniture showrooms opened. That is where the parts of this business that are not advertising come from — what a sales process looks like on paper, who answers the phone, and what happens to a quote after it is sent.',

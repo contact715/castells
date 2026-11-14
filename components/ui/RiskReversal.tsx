@@ -50,8 +50,8 @@ const DEFAULT_GUARANTEES: Guarantee[] = [
   },
   {
     icon: Clock,
-    title: 'Prices are published',
-    description: 'They are on our prices page, so you know the number before the first call.'
+    title: 'One fee, no setup fee',
+    description: 'One monthly fee covers the build and the running. You hear the number on the first call, before you pay anything.'
   },
   {
     icon: Headphones,
@@ -63,8 +63,8 @@ const DEFAULT_GUARANTEES: Guarantee[] = [
 const RiskReversal: React.FC<RiskReversalProps> = React.memo(({
   guarantees = DEFAULT_GUARANTEES,
   title = 'How we work',
-    subtitle = "We're confident in our ability to deliver results. Here's how we reduce your risk.",
-  ctaText = 'Start Your Free Consultation',
+    subtitle = 'The terms are the same for every client, and you know them before the first call.',
+  ctaText = 'Talk to us',
   onCtaClick,
   className = ''
 }) => {

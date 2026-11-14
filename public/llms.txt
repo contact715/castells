@@ -1,26 +1,34 @@
 # Castells Media
 
-Marketing agency for home service businesses in the United States. We build the
-website, run the ads on Google, Meta and Yelp, set up the local profiles and the
-follow-up, so the phone rings and no request is left unanswered.
+Full-service marketing agency for home service businesses in the United States.
+One team runs all of a client's marketing every month: we build the website,
+the Google and Yelp profiles, the ad accounts and the CRM when they are missing,
+and then run all of it, so the phone rings and no request is left unanswered.
+
+We do not sell single services or one-time setups.
 
 Castells Media Inc, 1298 Antelope Creek Drive, Roseville, California.
 Phone +1 (916) 619-6006. Email contact@castells.media.
 
-## Prices
+## What is included
 
-Published on the site, no call needed to hear them:
+- People find you: website and landing pages, Google Business Profile, Yelp profile, local search pages
+- Ads bring calls: Google Ads, Meta Ads, Yelp Ads, ad texts and creative
+- No request gets lost: CRM on our own platform (Mosco), one inbox for calls, forms and messages, follow-up, reviews
+- You see what it brings: call and form tracking, a weekly report in plain numbers
 
-- Monthly plans from ${PRICES.monthlyOneChannel} for one channel, ${PRICES.monthlySeveralChannels} for several channels with local presence
-- Websites from ${PRICES.websiteFrom} as a one-time project
-- CRM and follow-up setup from ${PRICES.crmSetupFrom}
+## Pricing and terms
+
+- One monthly fee for all of the work, named on the first call
+- No setup fee: the website, ad accounts and CRM are built as part of the monthly work
 - Month to month, no contract
+- The website, domain, ad accounts and customer list are in the client's name from day one
 - The ad budget is billed by Google, Meta and Yelp directly to the client, and we take no cut of it
 
-## What we do
+## Pages
 
-- [Services and prices](https://www.castells.media/services): websites and branding, Google and Meta ads, local presence on Google and Yelp, automation and CRM
-- [Prices](https://www.castells.media/pricing): the plans and one-time work in full
+- [What is included](https://www.castells.media/services): the four parts of the monthly work in detail
+- [Pricing](https://www.castells.media/pricing): how the monthly fee works and what it depends on
 - [Our work](https://www.castells.media/work): named clients with live sites you can open
 - [Industries](https://www.castells.media/industries): HVAC, plumbing, appliance repair, remodeling, automotive services
 
@@ -56,5 +64,5 @@ Published on the site, no call needed to hear them:
 
 ## What is not on this site
 
-No review counts, star ratings or campaign statistics. Every number published
-here is one of our own prices, and it can be checked on the prices page.
+No review counts, star ratings, campaign statistics or prices. The monthly fee
+is named on the first call; the terms it comes on are on the pricing page.

@@ -76,7 +76,7 @@ const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               </span>
             </div>
             <p className="text-sm text-text-secondary dark:text-white/60 max-w-xs leading-relaxed">
-              Websites, ads and automation for home service businesses across the US.
+              All of your marketing, built and run every month, for home service businesses across the US.
             </p>
           </div>
 

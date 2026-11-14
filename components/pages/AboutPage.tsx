@@ -5,7 +5,6 @@ import { PageHeader } from '../ui/PageHeader';
 import type { NavigateFn } from '../../types';
 import SEO from '../ui/SEO';
 import SchemaMarkup from '../ui/SchemaMarkup';
-import { PRICES } from '../../config/pricing.mjs';
 
 /*
   Что здесь стояло до 22 августа 2026 и почему это убрано.
@@ -188,17 +187,17 @@ const AboutPage: React.FC<AboutPageProps> = React.memo(({ onNavigate }) => {
             className="group text-left bg-white dark:bg-surface p-8 rounded-card border border-black/5 dark:border-white/10 hover:border-accent/50 transition-colors cursor-pointer"
           >
             <span className="text-xs font-semibold tracking-wide text-text-secondary">
-              Services and prices
+              What we do
             </span>
             <h2 className="font-display text-2xl md:text-3xl font-normal text-text-primary dark:text-white mt-3 mb-3">
-              What we do and what it costs
+              All your marketing, run every month
             </h2>
             <p className="text-text-secondary dark:text-white/65 leading-relaxed mb-5">
-              Websites, ads on Google and Meta, local presence, and follow-up that catches every request.
-              Prices are on the page: monthly from {PRICES.monthlyOneChannel}, websites from {PRICES.websiteFrom}.
+              Website, ads on Google and Meta, local profiles, and follow-up that catches every request.
+              We build what is missing and run all of it for one monthly fee.
             </p>
             <span className="inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-text-primary dark:text-white group-hover:text-accent-text transition-colors">
-              See prices
+              See what is included
               <ArrowRight className="w-4 h-4" aria-hidden="true" />
             </span>
           </button>

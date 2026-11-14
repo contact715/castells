@@ -46,7 +46,7 @@ export const SECTIONS: Раздел[] = [
   { label: 'Work', page: 'work', href: '/work', header: true },
   { label: 'Services', page: 'services', href: '/services', header: true },
   { label: 'Industries', page: 'industries', href: '/industries', header: true },
-  { label: 'Prices', page: 'pricing', href: '/pricing', header: true },
+  { label: 'Pricing', page: 'pricing', href: '/pricing', header: true },
   { label: 'Learn', page: 'learn', href: '/learn', header: true },
   { label: 'About', page: 'about', href: '/about', header: true },
   { label: 'Contact', page: 'contact', href: '/contact', header: true },

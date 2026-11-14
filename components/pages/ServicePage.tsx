@@ -197,7 +197,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                     ]}
                     badge="Services"
                     title={displayName}
-                    description={`${displayName} for home service businesses.`}
+                    description={`${displayName} for home service businesses. One part of the marketing we build and run for you every month.`}
                     onNavigate={onNavigate}
                 />
             </div>
@@ -261,10 +261,10 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                         className="font-display text-2xl md:text-3xl font-normal mb-3 text-text-primary"
                         delay={0.1}
                     >
-                        Ready to get started with {displayName}?
+                        {displayName} is one part of the whole
                     </AnimatedHeading>
                     <p className="text-text-secondary mb-6 max-w-xl mx-auto">
-                        Schedule a free strategy session to discuss how we can help you achieve your goals.
+                        We do not sell it on its own. One team builds what is missing and runs all of your marketing every month, for one monthly fee.
                     </p>
                     <Button
                         onClick={() => onNavigate?.('contact')}
@@ -272,7 +272,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                         variant="primary"
                         className="group"
                     >
-                        Schedule Free Consultation
+                        Talk to us
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
                 </motion.div>
@@ -388,10 +388,10 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                         className="font-display text-3xl md:text-4xl font-normal mb-4 text-white"
                         delay={0.1}
                     >
-                        Let's discuss your {displayName.toLowerCase()} needs
+                        Tell us where you are starting from
                     </AnimatedHeading>
                     <p className="text-white/90 mb-8 max-w-2xl mx-auto text-lg">
-                        Get a free strategy session and discover how we can help you achieve your business goals.
+                        On the first call we say plainly what we would build, what we would run, and what the monthly fee is.
                     </p>
                     <Button
                         onClick={() => onNavigate?.('contact')}
@@ -399,7 +399,7 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                         variant="secondary"
                         className="group"
                     >
-                        Get Started Today
+                        Talk to us
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                     </Button>
                 </motion.div>
@@ -411,23 +411,23 @@ const ServicePage: React.FC<ServicePageProps> = ({ onBack, onNavigate, serviceId
                         const faqs = [
                             {
                                 question: `What is ${displayName}?`,
-                                answer: `${displayName} is one of the services we run for home service businesses: websites and branding, paid ads on Google and Meta, local presence, and automation that answers and books the job.`
+                                answer: `${displayName} is one part of what we run for home service businesses every month. The whole service is the website and local profiles, ads on Google and Meta, follow-up on every request, and a weekly report.`
                             },
                             {
-                                question: `How long does ${displayName} take to set up?`,
+                                question: `How long does it take to get ${displayName} running?`,
                                 answer: `It depends on the scope. We'll tell you a real timeline once we know your business — we don't quote one before that.`
                             },
                             {
-                                question: `What's included in ${displayName}?`,
-                                answer: `What's included and what it costs are both on the pricing page — no call needed to see them.`
+                                question: `Can I buy ${displayName} on its own?`,
+                                answer: `No. We do not sell single services or one-time setups. ${displayName} comes as part of full-service marketing: one team builds what is missing and runs all of it every month, for one monthly fee.`
                             },
                             {
                                 question: `Do you work with businesses in my industry?`,
                                 answer: `We work with home service businesses: HVAC, plumbing, appliance repair, remodeling, auto detailing and similar trades. Tell us what your business does and we'll say plainly whether we can help.`
                             },
                             {
-                                question: `What's the budget for ${displayName}?`,
-                                answer: `Plans and prices are on the pricing page. The ad budget is separate and goes straight to Google, Meta or Yelp from your own account — we never take a cut of it.`
+                                question: `What does it cost?`,
+                                answer: `It is one monthly fee for all of the work, with no setup fee and no contract. We name it on the first call, once we know your trade and your city. The ad budget is separate and goes straight to Google, Meta or Yelp from your own account. We never take a cut of it.`
                             }
                         ];
 

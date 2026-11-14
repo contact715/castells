@@ -1,4 +1,3 @@
-import { PRICES } from '../config/pricing.mjs';
 
 /*
   Академия для подрядчиков. Заведена 26 августа 2026 по решению владельца:
@@ -12,9 +11,10 @@ import { PRICES } from '../config/pricing.mjs';
   ЧЕГО ЗДЕСЬ НЕТ И НЕ БУДЕТ. Цифр результата: ни процентов роста, ни средних
   по рынку, ни «клиенты обычно получают». Подтверждённых замеров у нас нет, а
   выдуманное число на учебной странице хуже отсутствующего — по нему человек
-  примет решение о своих деньгах. Проверяемые числа тут только одного рода:
-  наши собственные опубликованные цены, и они берутся из config/pricing.mjs,
-  а не переписываются сюда.
+  примет решение о своих деньгах. До 14 ноября 2026 в примерах расчёта стояли
+  наши опубликованные цены из config/pricing.mjs. Цены с сайта сняты, поэтому в
+  примерах теперь условные суммы с пометкой «say»: это учебная арифметика, а
+  не наш прайс и не обещание.
 
   Юридических советов тоже нет. Про регистрацию и лицензии написано, КАКОЕ
   решение предстоит принять и на что оно влияет, а не «делайте так»: правила
@@ -394,7 +394,7 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
         { label: 'Sections with their own heading', value: 'a strong one runs 15–20' },
         { label: 'Questions answered on the page', value: 'around 10' },
         { label: 'Photographs of your own work', value: 'dozens, not three' },
-        { label: 'Jobs needed to cover the site', value: `${PRICES.websiteFrom} ÷ what you keep per job` },
+        { label: 'Jobs needed to cover the site', value: 'what the site cost ÷ what you keep per job' },
       ],
       result: { label: 'Words on the strongest pages in this market', value: 'past 4,000' },
       after:
@@ -461,10 +461,10 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
       title: 'What a booked job actually cost you',
       rows: [
         { label: 'Ad budget last month', value: 'say $1,000' },
-        { label: 'What you paid for the work', value: `our plans start at ${PRICES.monthlyOneChannel}` },
+        { label: 'What you paid for the work', value: 'say $1,200' },
         { label: 'Jobs booked from it', value: 'say 4' },
       ],
-      result: { label: 'Cost per booked job', value: `($1,000 + ${PRICES.monthlyOneChannel}) ÷ 4 ≈ $398` },
+      result: { label: 'Cost per booked job', value: '($1,000 + $1,200) ÷ 4 = $550' },
       after:
         'Compare that with what you keep from a job. If a job leaves you $200, this month lost money; if it leaves you $900, it made money. That single comparison decides the budget, and almost nobody runs it.',
     },
@@ -1473,10 +1473,10 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
     numbers: {
       title: 'How many jobs pay for a site',
       rows: [
-        { label: 'A landing page for one service', value: `${PRICES.websiteFrom}` },
+        { label: 'What the page cost you to build', value: 'say $2,000' },
         { label: 'Your average job value', value: 'say $350' },
       ],
-      result: { label: 'Jobs needed to cover the build', value: `${PRICES.websiteFrom} ÷ $350 ≈ 5 jobs` },
+      result: { label: 'Jobs needed to cover the build', value: '$2,000 ÷ $350 ≈ 6 jobs' },
       after:
         'A page built around one clear offer usually pays for itself within the first month of paid search running against it, because it is doing one job well instead of a whole site doing many jobs loosely.',
     },
@@ -1532,10 +1532,10 @@ export const ACADEMY_LESSONS: AcademyLesson[] = [
       title: 'What a booked job actually cost you',
       rows: [
         { label: 'Ad budget last month', value: 'say $800' },
-        { label: 'What you paid for the work', value: `our plans start at ${PRICES.monthlyOneChannel}` },
+        { label: 'What you paid for the work', value: 'say $1,200' },
         { label: 'Jobs booked from it', value: 'say 6' },
       ],
-      result: { label: 'Cost per booked job', value: `($800 + ${PRICES.monthlyOneChannel}) ÷ 6 ≈ $232` },
+      result: { label: 'Cost per booked job', value: '($800 + $1,200) ÷ 6 ≈ $333' },
       after:
         'Compare that against what the average job leaves after materials and labor. If it clears more than the cost per booking, the month worked. Almost nobody runs this comparison, and it is the only one that tells you whether marketing is paying for itself.',
     },

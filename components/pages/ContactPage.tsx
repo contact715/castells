@@ -22,7 +22,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
         name: '',
         email: '',
         phone: '',
-        topic: 'web-design',
+        topic: 'starting-from-zero',
         message: '',
         smsConsent: false
     });
@@ -68,7 +68,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
 
             if (result.success) {
                 setIsSuccess(true);
-                setFormState({ name: '', email: '', phone: '', topic: 'web-design', message: '', smsConsent: false });
+                setFormState({ name: '', email: '', phone: '', topic: 'starting-from-zero', message: '', smsConsent: false });
 
                 // Navigate to thank you page after successful submission
                 if (onNavigate) {
@@ -223,7 +223,7 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                     </div>
 
                                     <div className="space-y-1.5">
-                                        <label htmlFor="topic" className="text-xs font-bold tracking-wider text-text-secondary ml-1">Service</label>
+                                        <label htmlFor="topic" className="text-xs font-bold tracking-wider text-text-secondary ml-1">Where are you starting from</label>
                                         <div className="relative">
                                             <select
                                                 id="topic"
@@ -231,11 +231,17 @@ const ContactPage: React.FC<ContactPageProps> = React.memo(({ onNavigate }) => {
                                                 value={formState.topic}
                                                 onChange={e => setFormState({ ...formState, topic: e.target.value })}
                                             >
-                                                <option value="web-design">Web Design & Development</option>
-                                                <option value="marketing">Digital Marketing</option>
-                                                <option value="branding">Branding & Identity</option>
-                                                <option value="automation">Automation & Analytics</option>
-                                                <option value="other">Other</option>
+                                                {/*
+                                                  14 ноября 2026: здесь был выбор из четырёх услуг.
+                                                  Отдельные услуги больше не продаются, поэтому вопрос
+                                                  теперь о том, с чего человек начинает. От этого
+                                                  зависит объём первой работы и месячная плата.
+                                                */}
+                                                <option value="starting-from-zero">No website and no ads yet</option>
+                                                <option value="site-no-ads">I have a website, no ads running</option>
+                                                <option value="ads-running">Ads are running, results are weak</option>
+                                                <option value="switching-agency">Leaving another agency</option>
+                                                <option value="other">Something else</option>
                                             </select>
                                             <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-text-secondary/50">
                                                 <ArrowRight className="w-4 h-4 rotate-90" />

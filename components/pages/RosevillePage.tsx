@@ -8,7 +8,6 @@ import { BUSINESS } from '../../config/business';
 import { CASE_STUDIES } from '../../constants';
 import { PageView } from '../../App';
 import { NavigationData } from '../../types';
-import { PRICES } from '../../config/pricing.mjs';
 
 /*
   Локальная страница, 23 августа 2026.
@@ -68,7 +67,7 @@ const RosevillePage: React.FC<RosevillePageProps> = ({ onNavigate }) => {
     <>
       <SEO
         title="Marketing agency in Roseville, California | Castells Media"
-        description={`Castells Media is a marketing agency at ${адрес}. Websites, Google and Meta ads, local presence and follow-up for home service businesses. Monthly plans from ${PRICES.monthlyOneChannel}.`}
+        description={`Castells Media is a marketing agency at ${адрес}. Full-service marketing for home service businesses: website, Google and Meta ads, local profiles and follow-up, run every month.`}
         canonical="/roseville-marketing-agency"
         keywords="marketing agency Roseville, Roseville CA marketing, HVAC marketing Roseville, Google Ads Roseville, local SEO Roseville"
         geoRegion="US-CA"
@@ -247,7 +246,7 @@ const RosevillePage: React.FC<RosevillePageProps> = ({ onNavigate }) => {
                   What it costs
                 </h2>
                 <p className="text-text-secondary dark:text-white/65 text-base leading-relaxed max-w-2xl">
-                  Monthly plans start at {PRICES.monthlyOneChannel}, websites at {PRICES.websiteFrom}, automation setup at {PRICES.crmSetupFrom}. Month to
+                  One monthly fee for all of the work, named on the first call. No setup fee. Month to
                   month, no contract. The ad budget goes straight to Google, Meta and Yelp from your own
                   account and we never take a cut of it.
                 </p>
@@ -258,7 +257,7 @@ const RosevillePage: React.FC<RosevillePageProps> = ({ onNavigate }) => {
                   onClick={() => onNavigate('pricing')}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-button bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity"
                 >
-                  See prices
+                  How pricing works
                   <ArrowRight className="w-4 h-4" aria-hidden="true" />
                 </button>
                 <button

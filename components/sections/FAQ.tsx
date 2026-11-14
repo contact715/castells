@@ -4,29 +4,43 @@ import { Highlighter } from '../ui/Highlighter';
 import { ArrowRight, Plus, Minus } from 'lucide-react';
 import { SectionHeader } from '../ui/Section';
 import { Button } from '../ui/Button';
-import { Badge } from '../ui/Badge';
+import { SectionMark } from '../ui/SectionMark';
 import SchemaMarkup from '../ui/SchemaMarkup';
 
+/*
+  Вопросы переписаны 14 ноября 2026 под полное ежемесячное ведение. Прежние
+  ответы отсылали к странице цен и к «двум тарифам». Цену теперь называют на
+  созвоне, отдельные настройки не продаются, и FAQ должен говорить это теми
+  же словами, что config/offer.mjs.
+*/
 const FAQS = [
   {
+    question: "What exactly do you take over?",
+    answer: "All of it: the website, your Google and Yelp profiles, ads on Google, Meta and Yelp, the CRM and follow-up, reviews, tracking and the weekly report. If something is missing, we build it. After that we run it every month. You keep doing the jobs and answering the customers we bring."
+  },
+  {
+    question: "How much does it cost?",
+    answer: "It is one monthly fee for all of the work. The number depends on your trade, your city and how much has to be built first, so we name it on the first call, before you pay anything. The ad budget is separate: you pay it straight to Google, Meta or Yelp, and we never take a cut of it."
+  },
+  {
+    question: "Is there a setup fee or a contract?",
+    answer: "Neither. The website, the ad accounts and the CRM are built as part of the monthly work, not billed as separate projects. It is month to month: no minimum term, no notice period, no cancellation fee."
+  },
+  {
+    question: "Can I buy just a website or just an ad setup?",
+    answer: "No. We used to sell them separately and stopped. A site with no traffic and a campaign nobody watches both look like marketing and bring nothing. We take a business on when we can run the whole path, from the search to the booked job."
+  },
+  {
+    question: "Who owns the site and the ad accounts?",
+    answer: "You do. The website, the domain, the ad accounts and the customer list are in your name from day one. If we stop working together, all of it stays with you."
+  },
+  {
     question: "Do you guarantee results?",
-    answer: "We do not promise a number, because nobody can promise what a market will do. What we do instead: month to month, no contract, so if a month goes badly you stop and owe nothing further. The ad accounts stay in your name, so leaving costs you nothing but the notice."
+    answer: "We do not promise a number, because nobody can promise what a market will do. What we do instead: month to month, no contract, so if a month goes badly you stop and owe nothing further."
   },
   {
-    question: "What is your minimum engagement?",
-    answer: "None. It is month to month, and that is the same answer on our prices page. We ask for nothing up front beyond the first month, and there is no notice period and no cancellation fee. Two or three months is usually what it takes to see whether a channel works, but that is our advice, not a term you sign."
-  },
-  {
-    question: "How much budget do I need?",
-    answer: "It depends on your city and your trade, and anyone who names a number before asking those two things is guessing. What we can say: the budget is paid by you straight to Google, Meta or Yelp, we never take a cut of it, and we will tell you before we start whether your budget is enough for the area you want to cover."
-  },
-  {
-    question: "Do you handle the creative work?",
-    answer: "Yes. We are a full-stack agency. We handle copywriting, graphic design, and video editing for ads. We may ask for raw assets (photos/videos) from you, but we polish them into high-converting ads."
-  },
-  {
-    question: "How fast can we launch?",
-    answer: "It depends on the scope. We'll tell you a real timeline once we know your business — we don't quote one before that."
+    question: "What do you need from me?",
+    answer: "Photos and short videos from real jobs, a phone is enough. Someone who answers the requests we bring. And a few minutes a week to read the report and tell us what turned into paid work."
   }
 ];
 
@@ -34,7 +48,7 @@ const FAQ: React.FC = () => {
   const [openIndex, setOpenIndex] = React.useState<number | null>(0);
 
   return (
-    <section className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory relative">
+    <section className="py-16 md:py-24 bg-mint dark:bg-[#12241d] relative">
       <SchemaMarkup 
         type="FAQPage" 
         data={{
@@ -50,13 +64,13 @@ const FAQ: React.FC = () => {
           {/* Left Column: Header & CTA */}
           <div className="lg:sticky lg:top-32 h-fit">
             <div className="mb-8">
-              <Badge className="mb-3">FAQ</Badge>
+              <SectionMark>FAQ</SectionMark>
               <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight mb-4">
-                Common{' '}<br />
-                <span className="text-text-secondary">Queries</span>
+                Questions{' '}<br />
+                <span className="text-accent-text italic font-semibold">owners ask</span>
               </h2>
               <p className="text-lg text-text-secondary leading-relaxed">
-                Transparency is key to our partnership. Here are the answers to the questions you're likely thinking about.
+                The ones that come up on almost every first call, answered before you have to ask.
               </p>
             </div>
 
@@ -65,11 +79,11 @@ const FAQ: React.FC = () => {
                 Have another question?
               </p>
               <Button
-                href="#contact"
+                href="/contact"
                 size="md"
                 className="inline-flex items-center gap-2 group"
               >
-                Contact Us <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                Talk to us <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Button>
             </div>
           </div>

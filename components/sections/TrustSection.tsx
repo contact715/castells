@@ -1,89 +1,48 @@
 import React from 'react';
-import { m as motion } from 'framer-motion';
 import { CASE_STUDIES } from '../../constants';
 
 /*
-  Здесь стояли пять случайных лиц с чужого сервиса i.pravatar.cc, выданных за
-  клиентов агентства. Две причины убрать: у посетителей с расширениями браузера
-  эти картинки не грузились (сервис не отдаёт разрешение на чтение), и главное —
-  показывать выдуманные лица как своих клиентов нечестно.
+  Полоса фактов под первым экраном.
 
-  Теперь это инициалы реальных клиентов из наших же кейсов. Ноль внешних
-  запросов, и за каждым кружком стоит настоящая работа.
+  История. Сначала здесь стояли пять случайных лиц с чужого сервиса и «Trusted
+  by 100+ Owners» со звёздами: лиц таких не было, ста отзывов тоже. Потом
+  строка «since June 2017» и кружки с инициалами клиентов.
+
+  14 ноября 2026 полоса стала тёмной и с четырьмя фактами. Каждый из них уже
+  опубликован на странице «о нас» со слов владельца (27 августа 2026): июнь
+  2017, пять отделов продаж, шесть салонов. Четвёртое число считается из
+  списка кейсов, а не вписано руками. Здесь нет ни одного показателя
+  результата: ни заявок, ни процентов, ни выручки. Таких замеров у нас нет.
+
+  Юрлицо Castells Media Inc зарегистрировано в феврале 2025. Опыт старше
+  компании, поэтому формулировка «работаем с такими бизнесами с 2017», а не
+  «мы на рынке с 2017».
 */
-const CLIENT_INITIALS = CASE_STUDIES.slice(0, 5).map((cs) => ({
-  name: cs.client,
-  initials: cs.client
-    .split(' ')
-    .filter((w) => /^[A-Za-z]/.test(w))
-    .slice(0, 2)
-    .map((w) => w[0].toUpperCase())
-    .join(''),
-}));
+const FACTS = [
+  { value: '2017', label: 'working with businesses that sell from an estimate, since June' },
+  { value: '5', label: 'sales departments built from nothing' },
+  { value: '6', label: 'furniture showrooms opened' },
+  { value: String(CASE_STUDIES.length), label: 'clients named on this site, with their cities' },
+];
 
-const TrustSection: React.FC = React.memo(() => {
-  return (
-    <section className="bg-ivory dark:bg-[#191919] py-8 md:py-10">
-      <div className="container mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="flex flex-col md:flex-row items-center justify-between gap-4 md:gap-6 py-4"
-        >
-          <div className="flex items-center gap-4">
-            <span className="text-sm md:text-base text-text-secondary">
-                {/*
-                  ГОД ВЕРНУЛСЯ, И ОН ДРУГОЙ. Здесь стояло «since 2018», год был
-                  неподтверждённым, и аудит 24 августа его снял. 27 августа
-                  владелец назвал настоящий: июнь 2017. Значит удаление было
-                  верным решением, а не перестраховкой — стоял неверный год.
-
-                  Формулировка не «мы на рынке с 2017», а «работаем с бизнесами,
-                  которые продают со сметы, с июня 2017»: это то, что сказал
-                  владелец, и это точнее. Юрлицо Castells Media Inc
-                  зарегистрировано в феврале 2025 — опыт старше компании, и
-                  путать их нельзя.
-
-                  Развёрнуто на странице «о нас»: ниши со сметой, кухни и мебель,
-                  затем HVAC, пять отделов продаж, шесть салонов.
-                */}
-                Working with estimate-driven businesses since June 2017.
-            </span>
+const TrustSection: React.FC = React.memo(() => (
+  <section className="bg-forest text-white relative overflow-hidden">
+    <div className="absolute inset-y-0 right-0 w-1/3 slash-stripes-light opacity-60 pointer-events-none" aria-hidden="true" />
+    <div className="container mx-auto px-6 py-10 md:py-12 relative">
+      <dl className="grid grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-8">
+        {FACTS.map((fact) => (
+          <div key={fact.label} className="lg:border-l lg:border-white/15 lg:pl-8 first:lg:border-l-0 first:lg:pl-0">
+            <dt className="sr-only">{fact.label}</dt>
+            <dd>
+              <span className="block font-display text-4xl md:text-5xl text-lime leading-none mb-3">{fact.value}</span>
+              <span className="block text-sm text-white/75 leading-relaxed max-w-[15rem]">{fact.label}</span>
+            </dd>
           </div>
-          <div className="flex items-center gap-4">
-            {/*
-              Клиенты из кейсов: инициалы вместо фото, ноль внешних запросов.
-              Наложение меньше, чем было у фотографий: буквы стоят по центру,
-              и при сдвиге в 12px соседний кружок срезал вторую букву.
-            */}
-            <div className="flex -space-x-1.5">
-              {CLIENT_INITIALS.map((client) => (
-                <div
-                  key={client.name}
-                  title={client.name}
-                  aria-label={client.name}
-                  className="w-10 h-10 rounded-full bg-accent-gradient ring-2 ring-ivory dark:ring-[#191919] flex items-center justify-center text-[11px] font-bold text-white select-none"
-                >
-                  {client.initials}
-                </div>
-              ))}
-            </div>
-            {/*
-              Здесь стояли пять звёзд и надпись «Trusted by 100+ Owners».
-              Ста отзывов не существует, звёзды не опирались ни на один
-              собранный отзыв. Осталась подпись к кружкам: кто эти люди.
-            */}
-            <span className="text-xs font-bold text-text-primary">
-              Real clients from our case studies
-            </span>
-          </div>
-        </motion.div>
-      </div>
-    </section>
-  );
-});
+        ))}
+      </dl>
+    </div>
+  </section>
+));
 
 TrustSection.displayName = 'TrustSection';
 

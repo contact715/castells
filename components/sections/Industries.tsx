@@ -1,4 +1,5 @@
 
+import { SectionMark } from '../ui/SectionMark';
 import React, { useState, useCallback, useMemo } from 'react';
 import { m as motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
@@ -26,19 +27,14 @@ const Industries: React.FC = React.memo(() => {
 
         {/* Header Section */}
         <div className="max-w-3xl mb-8">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="w-2 h-2 rounded-full bg-accent-gradient animate-pulse shrink-0" aria-hidden="true" />
-            <span className="text-xs font-semibold tracking-wide text-text-secondary">
-              Sector Expertise
-            </span>
-          </div>
+          <SectionMark>Who we work with</SectionMark>
           <AnimatedHeading
             as="h2"
             className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight mb-6"
             delay={0.1}
           >
-            Industries We{' '}<br />
-            <span className="text-text-secondary">Work With</span>
+            Trades we{' '}<br />
+            <span className="text-accent-text italic font-semibold">run marketing for</span>
           </AnimatedHeading>
           <p className="text-lg text-text-secondary leading-relaxed">
             High-ticket service industries where a single job is worth the marketing that brought it.

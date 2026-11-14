@@ -39,6 +39,11 @@ const TrustSection = lazyWithRetry(() => import('./components/sections/TrustSect
 const CTA = lazyWithRetry(() => import('./components/sections/CTA'));
 const CasesGrid = lazyWithRetry(() => import('./components/sections/CasesGrid'));
 const FAQ = lazyWithRetry(() => import('./components/sections/FAQ'));
+const Problems = lazyWithRetry(() => import('./components/sections/Problems'));
+const HowWeStart = lazyWithRetry(() => import('./components/sections/HowWeStart'));
+const WorkShowcase = lazyWithRetry(() => import('./components/sections/WorkShowcase'));
+const Compare = lazyWithRetry(() => import('./components/sections/Compare'));
+const FinalCTA = lazyWithRetry(() => import('./components/sections/FinalCTA'));
 
 const CaseStudyDetail = lazyWithRetry(() => import('./components/pages/CaseStudyDetail'));
 const WorkPage = lazyWithRetry(() => import('./components/pages/WorkPage'));
@@ -183,12 +188,46 @@ function App() {
                     <Hero onNavigate={navigateTo} />
                   </Suspense>
 
-                  <Suspense fallback={<PageLoader />}>
-                    <Work onNavigate={navigateTo} />
-                  </Suspense>
+                  {/*
+                    Порядок с 14 ноября 2026, второй заход того же дня: первый
+                    экран, факты, проблема, сравнение, что берём на себя, как
+                    начинаем, кейсы, команда, ниши, вопросы, призыв. Фоны
+                    чередуются (светлый, тёмный, мятный), чтобы разделы не
+                    сливались в одну ленту.
+                  */}
                   <LazySection rootMargin="300px">
                     <Suspense fallback={null}>
                       <TrustSection />
+                    </Suspense>
+                  </LazySection>
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <Problems />
+                    </Suspense>
+                  </LazySection>
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <Compare />
+                    </Suspense>
+                  </LazySection>
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <ServicesConstellation onNavigate={navigateTo} />
+                    </Suspense>
+                  </LazySection>
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <HowWeStart onNavigate={navigateTo} />
+                    </Suspense>
+                  </LazySection>
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <WorkShowcase onNavigate={navigateTo} />
+                    </Suspense>
+                  </LazySection>
+                  <LazySection rootMargin="300px">
+                    <Suspense fallback={null}>
+                      <Team onNavigate={navigateTo} />
                     </Suspense>
                   </LazySection>
                   <LazySection rootMargin="300px">
@@ -198,20 +237,12 @@ function App() {
                   </LazySection>
                   <LazySection rootMargin="300px">
                     <Suspense fallback={null}>
-                      <ServicesConstellation onNavigate={navigateTo} />
+                      <FAQ />
                     </Suspense>
                   </LazySection>
-
-                  {/* HIDDEN: Team section — uncomment when ready */}
-                  {/* <LazySection rootMargin="300px">
-                    <Suspense fallback={null}>
-                      <Team onNavigate={navigateTo} />
-                    </Suspense>
-                  </LazySection> */}
-
                   <LazySection rootMargin="300px">
                     <Suspense fallback={null}>
-                      <FAQ />
+                      <FinalCTA onNavigate={navigateTo} />
                     </Suspense>
                   </LazySection>
 

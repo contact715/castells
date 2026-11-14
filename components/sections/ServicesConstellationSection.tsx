@@ -1,93 +1,44 @@
 import React from 'react';
-import { Globe, Megaphone, MapPin, Workflow, ArrowUpRight, ArrowRight } from 'lucide-react';
+import { Globe, Megaphone, Workflow, BarChart3, ArrowUpRight, ArrowRight } from 'lucide-react';
 import type { NavigateFn } from '../../types';
-import { PRICES } from '../../config/pricing.mjs';
+import { OFFER_PARTS, OFFER_TERMS } from '../../config/offer.mjs';
+import { SectionMark } from '../ui/SectionMark';
 
 /*
-  Здесь была схема-созвездие: SVG на 1000x800 с центром, четырьмя лучами,
-  двадцатью подписями по кругу, отдельной веткой на Mosco AI с модулями
-  (AI Lead Profiler, Smart Forms, AI Chat, Speed-Dialer), кривыми Безье,
-  анимацией прорисовки и 576 строками кода.
+  История блока коротко. Сначала здесь была схема-созвездие на 576 строк с
+  двадцатью подписями по кругу; владелец попросил сделать просто и понятно.
+  Потом четыре карточки с ценами: сайт «от», реклама «в месяц, от»,
+  настройка CRM «от». Карточка на всю ширину, а не сетка два на два, тоже
+  решение владельца («в ряд 1 блок, а не два»). Цвета парами «светлая тема /
+  тёмная»: когда-то секция была чёрным прямоугольником в светлой теме.
 
-  Владелец: «переделай её, чтобы она была простой и понятной».
+  14 ноября 2026: смена позиционирования. Владелец: «мы теперь не продаём
+  услуги по настройке, а предлагаем полностью комплексное ведение
+  ежемесячно». Поэтому:
 
-  Человек, который открыл сайт с телефона, хочет за пять секунд понять:
-  что вы делаете, что я получу и сколько это стоит. Схема отвечала на
-  первый вопрос через двадцать подписей мелким шрифтом и не отвечала на
-  два других.
+  1. Четыре карточки больше не четыре товара. Это четыре части одного
+     ведения, клиент получает все. Заголовок и вводная строка говорят это
+     прямо, фраза «Take one of them or all four» убрана.
+  2. Цен в карточках нет. Владелец решил называть цену на созвоне. Вместо
+     цены внизу стоят условия: одна месячная плата, без платы за запуск,
+     без договора, всё оформлено на клиента, рекламный бюджет отдельно.
+  3. Состав читается из config/offer.mjs. Тот же список стоит на странице
+     услуг и в описаниях для поиска, и расходиться ему нельзя.
 
-  Второй заход, по просьбе владельца «проработай по умному». Что изменилось
-  и почему:
-
-  1. Цена переехала наверх, к заголовку. Это первый вопрос человека, а она
-     лежала последней строкой карточки — то есть ответ приходил после того,
-     как он дочитал список работ.
-  2. Появилась строка «это про вас, если…». Список работ отвечает на вопрос
-     «что вы делаете», но не на «мне-то это зачем». Названа ситуация, в
-     которой человек себя узнаёт, а не обещание результата: обещания на
-     этом сайте мы сегодня как раз вычищали.
-  3. Метка «разово» или «в месяц» стоит рядом с ценой. Без неё $1,750 и
-     $590 читаются как один тип чека, и разговор о деньгах начинается с
-     недоразумения.
-  4. Карточка стала ссылкой на страницу услуг: раньше человек, которому
-     стало интересно, упирался в тупик — нажимать было некуда.
-
-  Третий заход, владелец: «в ряд 1 блок, а не два». Карточки шли сеткой
-  два на два, и каждая была узкой: список входящего вытягивался в одну
-  длинную колонку, а цена жалась к названию. Теперь одна карточка на всю
-  ширину, а внутри три зоны — название с ценой, содержимое двумя
-  колонками, переход. Список стал таблицей, а не лентой.
-
-  Четвёртый заход, 23 августа: секция была тёмной в ОБЕИХ темах. В светлой
-  теме она стояла чёрным прямоугольником посреди светлой страницы, как чужой
-  блок. Владелец: «также не адаптировано под светлую версию». Все цвета
-  переведены на пары «светлая тема / тёмная», как в остальных секциях.
-
-  Цены подтверждены владельцем 22 августа 2026.
+  Строка «это про вас, если…» осталась: она называет ситуацию, в которой
+  человек себя узнаёт, а не обещает результат.
 */
 
 interface ServicesProps {
   onNavigate?: NavigateFn;
 }
 
-const SERVICES = [
-  {
-    icon: Globe,
-    title: 'Website and branding',
-    promise: 'A site where a visitor can see what you do and call you in two taps.',
-    includes: ['Website or landing page', 'Brand identity and logo', 'Brand guidelines', 'Photo and copy for the pages'],
-    price: PRICES.websiteFrom,
-    priceNote: 'one-time, from',
-    forYou: 'people find you on Facebook or Yelp and there is nowhere to send them',
-  },
-  {
-    icon: Megaphone,
-    title: 'Ads that bring calls',
-    promise: 'Google and Meta running for your service area, watched every week.',
-    includes: ['Google Ads', 'Meta Ads (Facebook, Instagram)', 'Yelp Ads', 'Weekly reports in plain numbers'],
-    price: PRICES.monthlyOneChannel,
-    priceNote: 'monthly, from',
-    forYou: 'the phone goes quiet out of season and you just wait it out',
-  },
-  {
-    icon: MapPin,
-    title: 'Found nearby',
-    promise: 'People searching for your service in your city find you, not a competitor.',
-    includes: ['Google Business Profile', 'Yelp profile', 'Local search pages', 'Getting and answering reviews'],
-    price: PRICES.monthlyOneChannel,
-    priceNote: 'monthly, from',
-    forYou: 'someone two blocks away searches for your service and finds someone else',
-  },
-  {
-    icon: Workflow,
-    title: 'Nothing gets lost',
-    promise: 'Calls, forms and messages land in one place, and no request sits unanswered.',
-    includes: ['CRM setup', 'Calls and forms in one inbox', 'Follow-up reminders', 'Set up on our own platform, Mosco'],
-    price: PRICES.crmSetupFrom,
-    priceNote: 'setup, from',
-    forYou: 'a missed call means a lost job and nobody calls back',
-  },
-];
+const ICONS: Record<string, React.ComponentType<{ className?: string }>> = {
+  found: Globe,
+  ads: Megaphone,
+  'follow-up': Workflow,
+  numbers: BarChart3,
+};
 
 const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) => {
   const goToServices = (event: React.MouseEvent) => {
@@ -96,64 +47,50 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
   };
 
   return (
-    <section className="pt-12 md:pt-16 pb-24 md:pb-32 bg-ivory dark:bg-[#191919] relative">
+    <section className="py-16 md:py-24 bg-ivory dark:bg-[#191919] relative">
       <div className="container mx-auto px-6 relative z-content">
         <div className="mb-12 md:mb-16 max-w-2xl">
-          <div className="flex items-center gap-2 mb-4">
-            <span className="w-2 h-2 rounded-full bg-accent-gradient shrink-0" aria-hidden="true" />
-            <span className="text-xs font-semibold tracking-wide text-text-secondary dark:text-white/50">What we do</span>
-          </div>
+          <SectionMark>What we take over</SectionMark>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight text-text-primary dark:text-white">
-            Four things a service business
+            Four parts,
             <br />
-            <span className="text-text-secondary dark:text-white/50">needs to get booked</span>
+            <span className="text-accent-text italic font-semibold">one team, one monthly fee</span>
           </h2>
           <p className="text-lg text-text-secondary dark:text-white/60 leading-relaxed mt-4">
-            Take one of them or all four. Prices are right here, you do not need a call to hear them.
+            These are not four products to pick from. You get all four, because each one stops working
+            when the one next to it is missing.
           </p>
         </div>
 
-        {/*
-          Одна карточка в ряд, а не две. На всю ширину помещается разбор
-          услуги: слева название и цена, в середине что входит — двумя
-          колонками, а не одной длинной лентой, справа переход.
-        */}
         <div className="flex flex-col gap-4">
-          {SERVICES.map((service) => {
-            const Icon = service.icon;
+          {OFFER_PARTS.map((part, index) => {
+            const Icon = ICONS[part.id] ?? Globe;
             return (
               <a
-                key={service.title}
+                key={part.id}
                 href="/services"
                 onClick={goToServices}
                 className="group grid grid-cols-1 lg:grid-cols-[220px_1fr_auto] gap-6 lg:gap-10 items-start bg-white dark:bg-white/[0.03] border border-black/5 dark:border-white/10 rounded-card p-6 md:p-8 hover:border-black/20 dark:hover:border-white/30 transition-colors duration-300"
               >
-                {/* Название и цена: то, ради чего человек скользит взглядом по списку */}
                 <div>
                   <div className="flex items-center gap-4 mb-4">
                     <div className="w-12 h-12 rounded-element bg-accent-gradient-subtle flex items-center justify-center shrink-0">
                       <Icon className="w-6 h-6 text-accent-text" aria-hidden="true" />
                     </div>
                     <h3 className="font-display text-xl md:text-2xl font-semibold text-text-primary dark:text-white">
-                      {service.title}
+                      {part.title}
                     </h3>
                   </div>
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-display text-2xl md:text-3xl text-text-primary dark:text-white leading-tight">
-                      {service.price}
-                    </span>
-                    <span className="text-[11px] tracking-wide text-text-secondary dark:text-white/55">
-                      {service.priceNote}
-                    </span>
-                  </div>
+                  <span className="inline-block text-[11px] font-semibold tracking-wide text-accent-text bg-accent-gradient-subtle rounded-pill px-3 py-1">
+                    Part {index + 1} of {OFFER_PARTS.length}, included
+                  </span>
                 </div>
 
-                {/* Что это даёт и что входит */}
                 <div className="min-w-0">
-                  <p className="text-text-secondary dark:text-white/65 text-base leading-relaxed mb-5">{service.promise}</p>
+                  <p className="text-text-secondary dark:text-white/65 text-base leading-relaxed mb-5">{part.promise}</p>
 
                   <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2 mb-5">
-                    {service.includes.map((item) => (
+                    {part.includes.map((item) => (
                       <li key={item} className="flex items-start gap-3 text-text-secondary dark:text-white/60 text-sm md:text-base">
                         <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0 mt-2" aria-hidden="true" />
                         {item}
@@ -161,13 +98,9 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
                     ))}
                   </ul>
 
-                  {/*
-                    Строка про ситуацию, а не про результат. Человек должен узнать
-                    здесь себя; обещать ему цифры мы не будем.
-                  */}
                   <p className="text-text-secondary dark:text-white/50 text-sm leading-relaxed pt-4 border-t border-black/5 dark:border-white/10">
-                    <span className="text-text-secondary dark:text-white/50">This is for you if </span>
-                    <span className="font-display italic text-text-primary dark:text-white/70 text-base">{service.forYou}</span>
+                    <span className="text-text-secondary dark:text-white/50">You know this one if </span>
+                    <span className="font-display italic text-text-primary dark:text-white/70 text-base">{part.forYou}</span>
                   </p>
                 </div>
 
@@ -183,21 +116,30 @@ const ServicesConstellationSection: React.FC<ServicesProps> = ({ onNavigate }) =
         </div>
 
         {/*
-          Без этой строки цена читается как полная, и разговор о деньгах
-          начинается со спора. Пусть человек узнает про рекламный бюджет
-          здесь, а не на звонке.
+          Условия вместо цены. Раньше здесь стояла строка с двумя тарифами.
+          Цену теперь называют на созвоне, но условия человек должен знать до
+          него: иначе разговор о деньгах начинается с недоверия.
         */}
-        <div className="mt-8 md:mt-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+        <div className="mt-8 md:mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 bg-forest text-white rounded-card p-6 md:p-8">
+          {OFFER_TERMS.map((term) => (
+            <div key={term.title}>
+              <h3 className="font-display text-lg font-semibold text-lime mb-2">{term.title}</h3>
+              <p className="text-sm text-white/75 leading-relaxed">{term.text}</p>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
           <p className="text-text-secondary dark:text-white/50 text-sm leading-relaxed max-w-xl">
-            Monthly plans are {PRICES.monthlyOneChannel} and {PRICES.monthlySeveralChannels} depending on how many channels we run. Ad budget goes
-            straight to Google, Meta and Yelp and is not part of this.
+            We do not sell a website on its own or a one-time ad setup. A setup with nobody running it
+            afterwards is how most marketing budgets get wasted.
           </p>
           <button
             type="button"
             onClick={() => onNavigate?.('services')}
             className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 px-6 py-3 rounded-button bg-black text-white dark:bg-white dark:text-black font-medium text-[15px] hover:opacity-90 transition-opacity"
           >
-            All services and prices
+            Everything that is included
             <ArrowRight className="w-4 h-4" aria-hidden="true" />
           </button>
         </div>

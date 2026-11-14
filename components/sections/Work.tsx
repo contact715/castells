@@ -39,28 +39,34 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
 
           {/* Left: Badge + Title (Sticky) */}
           <div className="lg:sticky lg:top-32 h-fit">
-            <Badge className="mb-3">Selected Works 2023-2025</Badge>
+            {/*
+              14 ноября 2026: здесь стояло «Proven Dominance» и «a ledger of
+              market conquests». «Dominate» в списке запрещённых слов, а
+              «track every click, call, and conversion» обещало цифры, которых
+              в кейсах нет. Текст взят со страницы /work, где он уже проверен.
+            */}
+            <Badge className="mb-3">Our work</Badge>
             <AnimatedHeading
               as="h2"
               className="font-display text-3xl md:text-4xl lg:text-5xl font-normal leading-tight tracking-tight"
               delay={0.1}
             >
-              Proven{' '}<br />
-              <span className="text-text-secondary">Dominance.</span>
+              Clients you{' '}<br />
+              <span className="text-text-secondary">can look up</span>
             </AnimatedHeading>
           </div>
 
           {/* Right: Description + CTA Button */}
           <div className="flex flex-col justify-start">
             <p className="text-lg text-text-secondary leading-relaxed mb-6">
-              We track every click, call, and conversion. Our portfolio isn't just a gallery of pretty pictures — it's a ledger of market conquests.
+              Every company here is real. Where we built the site, the link opens it, so you can check the work yourself before you talk to us.
             </p>
             <Button
               onClick={handleViewArchive}
               size="md"
               className="self-start"
             >
-              View Full Archive
+              See all work
             </Button>
             <div className="flex items-center gap-2 mt-6 text-xs font-semibold tracking-wide text-text-secondary">
               <Layers className="w-4 h-4" />
@@ -95,7 +101,7 @@ const Work: React.FC<WorkProps> = ({ onNavigate }) => {
           onClick={handleViewArchive}
           size="md"
         >
-          View Full Archive
+          See all work
         </Button>
       </div>
     </section>
